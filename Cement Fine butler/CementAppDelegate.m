@@ -13,12 +13,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //set log framework
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    //set baidu map
     self.mapManager = [[BMKMapManager alloc] init];
     BOOL ret = [self.mapManager start:@"D021080d90470be3572b734a2b974a60"  generalDelegate:nil];
     if (!ret) {
-        NSLog(@"manager start failed!");
+        DDLogError(@"baidu map manager start failed!");
     }
-
     return YES;
 }
 							

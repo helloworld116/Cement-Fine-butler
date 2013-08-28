@@ -1,9 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="obP-3s-OEZ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Center View Controller-->
+        <scene sceneID="wvu-Xq-pLH">
+            <objects>
+                <viewController storyboardIdentifier="" id="obP-3s-OEZ" customClass="CenterViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fJM-0h-G4d">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Gc-NG-Vsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-264" y="16"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="SQM-DX-xqi">
+            <objects>
+                <viewController storyboardIdentifier="centerViewController" id="iox-Yk-i22" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WRA-hf-6u0">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yRh-Yk-6tj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="111" y="700"/>
+        </scene>
+        <!--Right View Controller-->
+        <scene sceneID="qkl-XY-Tay">
+            <objects>
+                <viewController storyboardIdentifier="rightViewController" id="Gks-Ve-Dbd" customClass="RightViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JaF-0g-AdY">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.45894449980000002" green="0.82279550209999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5tb-eo-5d1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="522" y="700"/>
+        </scene>
+        <!--Left View Controller-->
+        <scene sceneID="bjh-Tp-KF4">
+            <objects>
+                <viewController storyboardIdentifier="leftViewController" id="NAb-HC-6vW" customClass="LeftViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="www-vy-RT1">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWI-8P-J1h">
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EWI-8P-J1h" firstAttribute="trailing" secondItem="www-vy-RT1" secondAttribute="trailing" type="default" id="0dg-39-t2i"/>
+                            <constraint firstItem="EWI-8P-J1h" firstAttribute="bottom" secondItem="www-vy-RT1" secondAttribute="bottom" type="default" id="68E-ML-5dJ"/>
+                            <constraint firstItem="EWI-8P-J1h" firstAttribute="top" secondItem="www-vy-RT1" secondAttribute="top" type="default" id="P37-4G-Kcq"/>
+                            <constraint firstItem="EWI-8P-J1h" firstAttribute="leading" secondItem="www-vy-RT1" secondAttribute="leading" type="default" id="jVn-GN-Fbw"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Imd-bv-pjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-295" y="700"/>
+        </scene>
         <!--Cement View Controller-->
         <scene sceneID="5">
             <objects>
@@ -19,6 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="151" y="25"/>
         </scene>
     </scenes>
     <classes>
@@ -30,6 +98,21 @@
             <relationships>
                 <relationship kind="outlet" name="mapView" candidateClass="BMKMapView"/>
             </relationships>
+        </class>
+        <class className="CenterViewController" superclassName="JASidePanelController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CenterViewController.h"/>
+        </class>
+        <class className="JASidePanelController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/JASidePanelController.h"/>
+        </class>
+        <class className="LeftViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LeftViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="RightViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

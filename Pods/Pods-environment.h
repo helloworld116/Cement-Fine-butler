@@ -30,6 +30,12 @@
 #define COCOAPODS_VERSION_MINOR_ASIHTTPRequest_S3 8
 #define COCOAPODS_VERSION_PATCH_ASIHTTPRequest_S3 1
 
+// CocoaLumberjack
+#define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
+#define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 1
+#define COCOAPODS_VERSION_MINOR_CocoaLumberjack 6
+#define COCOAPODS_VERSION_PATCH_CocoaLumberjack 2
+
 // EGOTableViewPullRefresh
 #define COCOAPODS_POD_AVAILABLE_EGOTableViewPullRefresh
 #define COCOAPODS_VERSION_MAJOR_EGOTableViewPullRefresh 0
