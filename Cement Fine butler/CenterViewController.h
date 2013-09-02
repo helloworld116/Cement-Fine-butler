@@ -8,6 +8,6 @@
 
 #import "JASidePanelController.h"
 
-@interface CenterViewController : JASidePanelController
+@interface CenterViewController : UIViewController
 
 @end

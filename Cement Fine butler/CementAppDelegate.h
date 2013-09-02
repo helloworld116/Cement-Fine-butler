@@ -13,4 +13,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BMKMapManager* mapManager; 
 
+@property (strong, nonatomic) UIStoryboard *storyboard;
+
+@property (copy, nonatomic) NSString *accessToken;
+@property (copy, nonatomic) NSString *factoryId;
 @end

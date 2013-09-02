@@ -15,6 +15,41 @@
     #import <CocoaLumberjack/DDLog.h>
     #import <CocoaLumberjack/DDTTYLogger.h>
     #import <JASidePanels/JASidePanelController.h>
+    #import <ASIHTTPRequest/ASIHTTPRequest.h>
+    #import <ASIHTTPRequest/ASIFormDataRequest.h>
+    #import <MBProgressHUD/MBProgressHUD.h>
+    #import <SVProgressHUD/SVProgressHUD.h>
+    #import "InsetsTextField.h"
+    #import "Tool.h"
+
+    #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+    #define IS_Pad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    #define IS_RETINA [UIScreen mainScreen].scale==2?YES:NO
+    #define kNavBarHeight 44
+    #define kTabBarHeight 49
+    #define kStatusBarHeight 20
+    #define REFRESHINGVIEW_HEIGHT 88
+    #define kLoadmoreFooterHeight 44
+    #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
+    #define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+    #define kPageSize 5
+    #define kDateFormatFull @"yyyy-MM-dd HH:mm:ss"
+    #define kDateFormatDay @"MM-dd"
+    #define colorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
+    #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
+
+    //接口地址
+    #define kServerURL @"http://www.fengboyun.com/mobile/"
+    //#define kServerURL @"http://192.168.1.90:8080/dynamicmeasurement/"
+    #define kLoginURL [kServerURL stringByAppendingString:@"login"]
+    #define kEquipmentList [kServerURL stringByAppendingString:@"equipment/list"]
+    #define kEquipmentStopRecord [kServerURL stringByAppendingString:@"equipment/stoprecord"]
+    #define kProductRecommendPrice [kServerURL stringByAppendingString:@"pricing"]
+    #define kProductOverview [kServerURL stringByAppendingString:@"overview"]
+    #define kProductDetail [kServerURL stringByAppendingString:@"product/detail"]
+
+    //检测网络是否存在使用网址
+    #define kCheckNetworkWebsite @"www.baidu.com"
 #endif
 
 #ifdef DEBUG
