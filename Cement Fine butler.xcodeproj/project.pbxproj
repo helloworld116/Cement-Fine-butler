@@ -110,6 +110,9 @@
 		0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E72472C17CD9CFC0048DFFB /* LeftViewController.m */; };
 		0E72473017CD9D080048DFFB /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E72472F17CD9D080048DFFB /* RightViewController.m */; };
 		0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E72473217CD9D160048DFFB /* CenterViewController.m */; };
+		0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */; };
+		0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */; };
+		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32DF17CC3C05007E567B /* UIKit.framework */; };
 		472F32E217CC3C05007E567B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E117CC3C05007E567B /* Foundation.framework */; };
 		472F32E417CC3C05007E567B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E317CC3C05007E567B /* CoreGraphics.framework */; };
@@ -246,6 +249,10 @@
 		0E72472F17CD9D080048DFFB /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
 		0E72473117CD9D160048DFFB /* CenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterViewController.h; sourceTree = "<group>"; };
 		0E72473217CD9D160048DFFB /* CenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterViewController.m; sourceTree = "<group>"; };
+		0E7D6A6117D57C3200B0B1AA /* ProductColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductColumnViewController.h; sourceTree = "<group>"; };
+		0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductColumnViewController.m; sourceTree = "<group>"; };
+		0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn.html; sourceTree = "<group>"; };
+		0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.1.min.js; sourceTree = "<group>"; };
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		472F32DC17CC3C05007E567B /* Cement Fine butler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cement Fine butler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F32DF17CC3C05007E567B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -351,6 +358,8 @@
 			children = (
 				0E3841F517D44059004B3C87 /* RealtimeReportsViewController.h */,
 				0E3841F617D44059004B3C87 /* RealtimeReportsViewController.m */,
+				0E7D6A6117D57C3200B0B1AA /* ProductColumnViewController.h */,
+				0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */,
 			);
 			name = "Real-time reports";
 			sourceTree = "<group>";
@@ -473,6 +482,8 @@
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
+				0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */,
+				0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */,
 				0E3841F117D4200B004B3C87 /* SearchDate.h */,
 				0E3841F217D4200B004B3C87 /* SearchDate.m */,
 				472F332717CC3D02007E567B /* BaiduMap */,
@@ -653,6 +664,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */,
 				472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */,
 				472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */,
 				472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */,
@@ -751,6 +763,7 @@
 				0E3841E017D41D3E004B3C87 /* Default.png in Resources */,
 				0E3841E117D41D3E004B3C87 /* Default@2x~iPad.png in Resources */,
 				0E3841E217D41D3E004B3C87 /* Default~iPad.png in Resources */,
+				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +823,7 @@
 				0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */,
 				0E3841F717D44059004B3C87 /* RealtimeReportsViewController.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
+				0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "ProductColumnViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController ()
@@ -141,6 +142,8 @@
 //        [self.navigationController setNavigationBarHidden:YES animated:NO];
 //        [self.navigationController pushViewController:tab animated:NO];
 //        [self.navigationController.view.layer addAnimation:animation forKey:nil];
+        ProductColumnViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+        [self.navigationController pushViewController:viewController animated:YES];
     }else{
         self.password.text = nil;
         NSString *msg = [dict objectForKey:@"description"];
@@ -161,7 +164,7 @@
         [UIView beginAnimations:@"DownKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         CGRect rect = self.continerView.frame;
-        rect.origin.y += 80;
+        rect.origin.y += 65;
         self.continerView.frame = rect;
         [UIView commitAnimations];
     }
@@ -173,7 +176,7 @@
         [UIView beginAnimations:@"UpKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         CGRect rect = self.continerView.frame;
-        rect.origin.y -= 80;
+        rect.origin.y -= 65;
         self.continerView.frame = rect;
         [UIView commitAnimations];
         self.keyboardWasShow = YES;

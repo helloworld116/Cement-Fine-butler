@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+        </title>
+        <!--
+        <style type="text/css">
+            body{ padding:0px; margin:0px; overflow:hidden; text-align: center; background-color:#f9f9f9;
+            }
+            ,{
+                                which:'v',
+                                textAlign:'bottom',
+                                label:{
+                                    fontsize: 12*ratio*ratio
+                                },  
+                            }
+        </style>
+         -->
+        <script type="text/javascript" src="ichart.1.1.min.js">
+        </script>
+        <script type="text/javascript">
+            function callBackground(type, expand, id) {
+                var url = type + ":" + expand + ":" + id;
+                document.location = url;
+            }
+            function drawColumn(data, title) {
+                var ratio = window.devicePixelRatio; //retina屏幕支持
+                data = eval('(' + data + ')');
+                var chart = new iChart.ColumnMulti2D({
+                        render : 'canvasDiv',
+                        data: data,
+                        labels:["一月","二月","三月","四月","五月","六月"],
+                        label:{
+                            text:"ccc"
+                        },
+                        title : {
+                            text : '2013年产量2013年产量',
+                            fontsize : 12*ratio*ratio,
+                            textAlign : 'left'
+                        },
+                        border : {
+                            enable : false
+                        },
+                        // subtitle : '',
+                        column_width : 20*ratio*ratio,
+                        width : 640*ratio*ratio,
+                        height : 310*ratio*ratio,
+                        animation : true,
+                        turn_off_touchmove : true,
+                        background_color : '#ffffff',
+                        sub_option:{
+                            label:{
+                               fontsize: 12*ratio*ratio 
+                            }
+                        },
+                        legend:{
+                            enable:true,
+                            background_color : null,
+                            valign : 'top',
+                            align : 'center',
+                            fontsize : 12*ratio*ratio,
+                            border : {
+                                enable : false
+                            }
+                        },
+                        coordinate:{
+                            background_color : '#f1f1f1',
+                            scale:[{
+                                 which:'h',
+                                 position:'left',
+                                 label:{
+                                    fontsize: 12*ratio*ratio
+                                 },   
+                                 start_scale:0,
+                                 end_scale:140,
+                                 scale_space:20
+                            }],
+                            border : {
+                                enable : false
+                            },
+                            width:540*ratio*ratio,
+                            height:220*ratio*ratio
+                        }
+                });
+                chart.draw();
+            }
+        </script>
+    </head>
+    <!--
+    -->
+    <body onload=drawColumn("[{'name':'DPS01A','value':[45,52,54,74,90,84],'color':'#1385a5'},{'name':'DPS01B','value':[60,80,105,125,108,120],'color':'#c56966'}]")>
+        <div id='canvasDiv'>
+        </div>
+    </body>
+
+</html>

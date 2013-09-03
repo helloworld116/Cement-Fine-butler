@@ -61,7 +61,7 @@
 
 
 + (NSDictionary *)stringToDictionary:(NSString *)str{
-//    debugLog(@"response str is \n%@",str);
+    DDLogVerbose(@"response str is \n%@",str);
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     __autoreleasing NSError* error = nil;
     id result = [NSJSONSerialization JSONObjectWithData:data
