@@ -26,33 +26,33 @@
                 document.location = url;
             }
             function drawColumn(data, title) {
-                var ratio = window.devicePixelRatio; //retina屏幕支持
+                var ratio = window.devicePixelRatio*window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
                 data = eval('(' + data + ')');
                 var chart = new iChart.ColumnMulti2D({
                         render : 'canvasDiv',
                         data: data,
-                        labels:["一月","二月","三月","四月","五月","六月"],
+                        // labels:["一月","二月","三月","四月","五月","六月"],
                         label:{
                             text:"ccc"
                         },
                         title : {
                             text : '2013年产量2013年产量',
-                            fontsize : 12*ratio*ratio,
+                            fontsize : 12*ratio,
                             textAlign : 'left'
                         },
                         border : {
                             enable : false
                         },
                         // subtitle : '',
-                        column_width : 20*ratio*ratio,
-                        width : 640*ratio*ratio,
-                        height : 310*ratio*ratio,
+                        column_width : 20*ratio,
+                        width : 640*ratio,
+                        height : 310*ratio,
                         animation : true,
                         turn_off_touchmove : true,
                         background_color : '#ffffff',
                         sub_option:{
                             label:{
-                               fontsize: 12*ratio*ratio 
+                               fontsize: 12*ratio 
                             }
                         },
                         legend:{
@@ -60,7 +60,8 @@
                             background_color : null,
                             valign : 'top',
                             align : 'center',
-                            fontsize : 12*ratio*ratio,
+                            sign_size:10*ratio,//默认大小为10
+                            fontsize : 12*ratio,
                             border : {
                                 enable : false
                             }
@@ -71,17 +72,25 @@
                                  which:'h',
                                  position:'left',
                                  label:{
-                                    fontsize: 12*ratio*ratio
-                                 },   
+                                    fontsize: 12*ratio
+                                 },
+                                 text_space:6*ratio,//默认为6   
                                  start_scale:0,
                                  end_scale:140,
                                  scale_space:20
+                            },{
+                                position:'bottom',
+                                label:{
+                                    fontsize:12*ratio
+                                },
+                                text_space:6*ratio,
+                                labels:["一月","二月","三月","四月","五月","六月"]
                             }],
                             border : {
                                 enable : false
                             },
-                            width:540*ratio*ratio,
-                            height:220*ratio*ratio
+                            width:'90%',
+                            height:'80%'
                         }
                 });
                 chart.draw();
