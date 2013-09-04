@@ -5,12 +5,11 @@
         <meta charset="UTF-8" />
         <title>
         </title>
-        <!--
         <style type="text/css">
-            body{ padding:0px; margin:0px; overflow:hidden; text-align: center; background-color:#f9f9f9;
-            }
+        *{
+            -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+        }
         </style>
-         -->
         <script type="text/javascript" src="ichart.1.1.min.js">
         </script>
         <script type="text/javascript">
@@ -18,28 +17,26 @@
                 var url = type + ":" + expand + ":" + id;
                 document.location = url;
             }
+            var ratio = window.devicePixelRatio*window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
             function drawColumn(data, title) {
-                var ratio = window.devicePixelRatio*window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
                 data = eval('(' + data + ')');
+                console.log(data[0]['value'].length);
                 var chart = new iChart.ColumnMulti2D({
                         render : 'canvasDiv',
                         data: data,
                         // labels:["一月","二月","三月","四月","五月","六月"],
-                        label:{
-                            text:"ccc"
-                        },
-                        title : {
-                            text : '2013年产量2013年产量',
-                            fontsize : 12*ratio,
-                            textAlign : 'left'
-                        },
+                        // title : {
+                        //     text : '2013年产量2013年产量',
+                        //     fontsize : 12*ratio,
+                        //     textAlign : 'left'
+                        // },
                         border : {
-                            enable : false
+                            enable : true
                         },
                         // subtitle : '',
-                        column_width : 20*ratio,
-                        width : 640*ratio,
-                        height : 310*ratio,
+                        column_width : 25*ratio,
+                        width : 650*ratio,
+                        height : 290*ratio,
                         animation : true,
                         turn_off_touchmove : true,
                         background_color : '#ffffff',
@@ -48,25 +45,31 @@
                                fontsize: 12*ratio 
                             }
                         },
-                        legend:{
-                            enable:true,
-                            background_color : null,
-                            valign : 'top',
-                            align : 'center',
-                            sign_size:10*ratio,//默认大小为10
-                            fontsize : 12*ratio,
-                            border : {
-                                enable : false
-                            }
-                        },
+                        // legend:{
+                        //     enable:true,
+                        //     background_color : null,
+                        //     valign : 'top',
+                        //     align : 'left',
+                        //     legend_space:10*ratio,//同一行上图例之间的距离，默认为5
+                        //     sign_size:10*ratio,//默认大小为10
+                        //     fontsize: 12*ratio,
+                        //     column:'max',
+                        //     row:1,
+                        //     border : {
+                        //         enable : false
+                        //     }
+                        // },
                         coordinate:{
                             background_color : '#f1f1f1',
+                            // scale2grid:false,//是否显示网格
                             scale:[{
                                  which:'h',
                                  position:'left',
                                  label:{
                                     fontsize: 12*ratio
                                  },
+                                 scale_size:1*ratio,//刻度线的粗细,默认为1
+                                 scale_width:4*ratio,//刻度的长短,默认为4
                                  text_space:6*ratio,//默认为6   
                                  start_scale:0,
                                  end_scale:140,
@@ -76,16 +79,50 @@
                                 label:{
                                     fontsize:12*ratio
                                 },
-                                text_space:6*ratio,
+                                scale_size:1*ratio,//刻度线的粗细,默认为1
+                                scale_width:4*ratio,//刻度的长短,默认为4
+                                text_space:6*ratio,//默认为6
                                 labels:["一月","二月","三月","四月","五月","六月"]
                             }],
                             border : {
-                                enable : false
+                                enable : true
                             },
-                            width:'90%',
-                            height:'80%'
+                            // valid_width:600,
+                            // axis:{
+                            //     color:'#9f9f9f',
+                            //     width:[0,0,2,2]
+                            // },
+                            // grids:{
+                            //     vertical:{
+                            //         way:'share_alike',
+                            //         value:12
+                            //     }
+                            // },
+                            // offsety:-10*ratio,
+                            offsetx:-8*ratio,
+                            width:'87%',
+                            height:'85%'
                         }
                 });
+                //利用自定义组件构造左侧说明文本
+                chart.plugin(new iChart.Custom({
+                    drawFn:function(){
+                        var textInfo = ratio==1?'600 12px Verdana':'600 48px Verdana';
+                        //计算位置
+                        var coo = chart.getCoordinate(),
+                            x = coo.get('originx'),
+                            y = coo.get('originy'),
+                            w = coo.width,
+                            h = coo.height;
+                        //在左上侧的位置，渲染一个单位的文字
+                        chart.target.textAlign('start')
+                        .textBaseline('bottom')
+                        .textFont(textInfo)
+                        .fillText('产量(吨)',x-30*ratio,y-10*ratio,false,'#6d869f')
+                        .textBaseline('top')
+                        .fillText('(时间)',x+w+15*ratio,y+h+6*ratio,false,'#6d869f');
+                    }
+                }));
                 chart.draw();
             }
         </script>
