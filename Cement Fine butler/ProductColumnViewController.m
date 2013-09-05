@@ -30,10 +30,10 @@
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
     self.bottomWebiew.scalesPageToFit = IS_RETINA;
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ProductColumn" ofType:@"html"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ProductColumn_2" ofType:@"html"];
     [self.bottomWebiew loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
-    sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
+    sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
 //    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
 }
@@ -90,7 +90,7 @@
 //    }
 //    
 //    NSString *js = [@"drawLineChart(" stringByAppendingFormat:@"'%@','%@','%@','%@'%@",todayPrice,dates,advicePrice,realPrice,@")"];
-    NSString *js = [[@"drawColumn(\"" stringByAppendingFormat:@"[{'name':'DPS01A','value':[45,52,54,74,90,84],'color':'#1385a5'},{'name':'DPS01B','value':[60,80,105,125,108,120],'color':'#c56966'}]"] stringByAppendingFormat:@"\")"];
+    NSString *js = [[@"drawColumn(\"" stringByAppendingFormat:@"[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'},{'name':'Other','value':0.73,'color':'#6f83a5'}]"] stringByAppendingFormat:@"\")"];
     DDLogVerbose(@"dates is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];
 }

@@ -164,7 +164,7 @@
         [UIView beginAnimations:@"DownKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         CGRect rect = self.continerView.frame;
-        rect.origin.y += 65;
+        rect.origin.y += 90;
         self.continerView.frame = rect;
         [UIView commitAnimations];
     }
@@ -176,7 +176,7 @@
         [UIView beginAnimations:@"UpKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         CGRect rect = self.continerView.frame;
-        rect.origin.y -= 65;
+        rect.origin.y -= 90;
         self.continerView.frame = rect;
         [UIView commitAnimations];
         self.keyboardWasShow = YES;

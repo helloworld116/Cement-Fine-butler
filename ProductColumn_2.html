@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+        </title>
+        <style type="text/css">
+            *{ -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+            }
+        </style>
+        <script type="text/javascript" src="ichart.1.1.min.js">
+        </script>
+        <script type="text/javascript">
+            function callBackground(type, expand, id) {
+                var url = type + ":" + expand + ":" + id;
+                document.location = url;
+            }
+            var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
+            function drawColumn(data, title) {
+                data = eval('(' + data + ')');
+                var chart = new iChart.Column2D({
+                    render: 'canvasDiv',
+                    data: data,
+                    label:{
+                        fontsize: 12*ratio
+                    },
+                    title: {
+                        text:'Top 5 Browsers from 1 to 29 Feb 2012',
+                        fontsize : 12*ratio
+                    },
+                    showpercent: true,
+                    decimalsnum: 2,
+                    width: 320*ratio,
+                    height: 290*ratio,
+                    animation : true,
+                    turn_off_touchmove : true,
+                    sub_option:{
+                        label:{
+                           fontsize: 12*ratio 
+                        }
+                    },
+                    coordinate: {
+                        background_color: '#fefefe',
+                        fontsize: 12*ratio,
+                        scale: [{
+                            position: 'left',
+                            label:{
+                                fontsize: 12*ratio
+                            },
+                            scale_size:1*ratio,//刻度线的粗细,默认为1
+                            scale_width:4*ratio,//刻度的长短,默认为4
+                            text_space:6*ratio,//默认为6 
+                            start_scale: 0,
+                            end_scale: 40,
+                            scale_space: 8
+                        }],
+                        width:'87%',
+                        height:'85%'
+                    }
+                });
+                //利用自定义组件构造左侧说明文本
+                chart.plugin(new iChart.Custom({
+                    drawFn:function(){
+                        var textInfo = ratio==1?'600 12px Verdana':'600 48px Verdana';//字体在retina下放大4倍
+                        //计算位置
+                        var coo = chart.getCoordinate(),
+                            x = coo.get('originx'),
+                            y = coo.get('originy'),
+                            w = coo.width,
+                            h = coo.height;
+                        //在左上侧的位置，渲染一个单位的文字
+                        chart.target.textAlign('start')
+                        .textBaseline('bottom')
+                        .textFont(textInfo)
+                        .fillText('产量(吨)',x-20*ratio,y-10*ratio,false,'#6d869f');
+                    }
+                }));
+                chart.draw();
+            }
+        </script>
+    </head>
+    <!--
+
+     -->
+    <body onload=drawColumn("[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]")>
+        <div id='canvasDiv'>
+        </div>
+    </body>
+
+</html>

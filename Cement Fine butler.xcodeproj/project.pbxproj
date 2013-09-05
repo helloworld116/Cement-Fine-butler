@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E22B15E17D8191F009695FF /* ProductColumn_2.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* ProductColumn_2.html */; };
 		0E38418E17D41D3E004B3C87 /* navigationBarBackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E38413917D41D3E004B3C87 /* navigationBarBackButton.png */; };
 		0E38418F17D41D3E004B3C87 /* navigationBarBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E38413A17D41D3E004B3C87 /* navigationBarBackButton@2x.png */; };
 		0E38419017D41D3E004B3C87 /* tmall_bg_main.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E38413B17D41D3E004B3C87 /* tmall_bg_main.png */; };
@@ -136,6 +137,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E22B15D17D8191F009695FF /* ProductColumn_2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn_2.html; sourceTree = "<group>"; };
 		0E38413917D41D3E004B3C87 /* navigationBarBackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBarBackButton.png; sourceTree = "<group>"; };
 		0E38413A17D41D3E004B3C87 /* navigationBarBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBarBackButton@2x.png"; sourceTree = "<group>"; };
 		0E38413B17D41D3E004B3C87 /* tmall_bg_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmall_bg_main.png; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
+				0E22B15D17D8191F009695FF /* ProductColumn_2.html */,
 				0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */,
 				0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */,
 				0E3841F117D4200B004B3C87 /* SearchDate.h */,
@@ -764,6 +767,7 @@
 				0E3841E117D41D3E004B3C87 /* Default@2x~iPad.png in Resources */,
 				0E3841E217D41D3E004B3C87 /* Default~iPad.png in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
+				0E22B15E17D8191F009695FF /* ProductColumn_2.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
