@@ -90,7 +90,10 @@
 //    }
 //    
 //    NSString *js = [@"drawLineChart(" stringByAppendingFormat:@"'%@','%@','%@','%@'%@",todayPrice,dates,advicePrice,realPrice,@")"];
-    NSString *js = [[@"drawColumn(\"" stringByAppendingFormat:@"[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'},{'name':'Other','value':0.73,'color':'#6f83a5'}]"] stringByAppendingFormat:@"\")"];
+    NSString *data = @"[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]";
+    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013年产量','tagName':'产量(吨)','height':%f,'width':%f}",self.bottomWebiew.frame.size.height,self.bottomWebiew.frame.size.width];
+//    NSString *js = [[ stringByAppendingString:data] stringByAppendingFormat:@""];
+    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
     DDLogVerbose(@"dates is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];
 }

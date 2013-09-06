@@ -6,17 +6,17 @@
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "CementViewController.h"
+#import "EquipmentMapViewController.h"
 #import "CalloutMapAnnotation.h"
 #import "CallOutAnnotationView.h"
 #import "Cell.h"
 
-@interface CementViewController ()
+@interface EquipmentMapViewController ()
 @property (nonatomic,retain) CalloutMapAnnotation *calloutAnnotation;
 @property (nonatomic,retain) NSMutableArray *annotationList;
 @end
 
-@implementation CementViewController
+@implementation EquipmentMapViewController
 
 - (void)mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
 	if ([view.annotation isKindOfClass:[BMKPointAnnotation class]]) {
@@ -32,7 +32,6 @@
                               initWithLatitude:view.annotation.coordinate.latitude
                               andLongitude:view.annotation.coordinate.longitude];
         [mapView addAnnotation:_calloutAnnotation];
-        
         [mapView setCenterCoordinate:_calloutAnnotation.coordinate animated:YES];
 	}
     else{
@@ -99,48 +98,54 @@
 
 - (void)resetAnnitations:(NSArray *)data
 {
-    [_annotationList removeAllObjects];
-    [_annotationList addObjectsFromArray:data];
+//    [_annotationList removeAllObjects];
+//    [_annotationList addObjectsFromArray:data];
     [self setAnnotionsWithList:_annotationList];
 }
 
 - (NSArray *)testData{
-    NSDictionary *dict1 =@{@"longitude": @"116.404",@"latitude":@"39.915"};
+//    NSDictionary *dict1 =@{@"longitude": @"116.404",@"latitude":@"39.915"};
     NSDictionary *dict2 =@{@"longitude": @"113.958871",@"latitude":@"22.542872"};
     NSDictionary *dict3 =@{@"longitude": @"113.957971",@"latitude":@"22.548972"};
     NSDictionary *dict4 =@{@"longitude": @"113.954671",@"latitude":@"22.543672"};
     NSDictionary *dict5 =@{@"longitude": @"113.955671",@"latitude":@"22.542672"};
-    NSArray *arr = @[dict1,dict2,dict3,dict4,dict5];
-    //    NSArray *arr = @[dict1];
+    NSArray *arr = @[dict2,dict3,dict4,dict5];
     return arr;
 }
 
 - (void)viewDidLoad
 {
-    NSLog(@"viewDidLoad");
     _annotationList = [[NSMutableArray alloc] init];
-    self.mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
-    //    self.view = self.mapView;
+    [_annotationList addObjectsFromArray:[self testData]];
     //设置地图缩放级别
     [_mapView setZoomLevel:11];
+    
+    //  给view中心定位
+    BMKCoordinateRegion region;
+    region.center.latitude  = [[[self.annotationList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
+    region.center.longitude = [[[self.annotationList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
+    region.span.latitudeDelta  = 0.01;
+    region.span.longitudeDelta = 0.01;
+    self.mapView.region = region;
+
     [super viewDidLoad];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"viewWillAppear");
     [self.mapView viewWillAppear];
     self.mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    NSLog(@"viewDidAppear");
-    [self resetAnnitations:[self testData]];
+    [self resetAnnitations:self.annotationList];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@"viewWillDisappear");
+    [self.mapView removeAnnotation:_calloutAnnotation];
+    _calloutAnnotation = nil;
+    
     [self.mapView viewWillDisappear];
     self.mapView.delegate = nil; // 不用时，置nil
 }

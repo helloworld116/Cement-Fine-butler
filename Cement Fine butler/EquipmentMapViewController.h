@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CementViewController : UIViewController<BMKMapViewDelegate>
+@interface EquipmentMapViewController : UIViewController<BMKMapViewDelegate>
 
 @property (strong,nonatomic) IBOutlet BMKMapView* mapView;
 

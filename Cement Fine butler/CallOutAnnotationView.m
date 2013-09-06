@@ -25,8 +25,8 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.canShowCallout = NO;
-        self.centerOffset = CGPointMake(0, -70);
-        self.frame = CGRectMake(0, 0, 280, 80);
+        self.centerOffset = CGPointMake(0, -110);
+        self.frame = CGRectMake(0, 0, 280, 165);
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - Arror_height)];
         view.backgroundColor   = [UIColor clearColor];

@@ -8,6 +8,9 @@
         <style type="text/css">
             *{ -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
             }
+            body{
+                margin: 0
+            }
         </style>
         <script type="text/javascript" src="ichart.1.1.min.js">
         </script>
@@ -17,22 +20,28 @@
                 document.location = url;
             }
             var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
-            function drawColumn(data, title) {
+            function drawColumn(data, columnConfig) {
                 data = eval('(' + data + ')');
+                columnConfig = eval('(' + columnConfig + ')');
                 var chart = new iChart.Column2D({
                     render: 'canvasDiv',
                     data: data,
                     label:{
                         fontsize: 12*ratio
                     },
-                    title: {
-                        text:'Top 5 Browsers from 1 to 29 Feb 2012',
-                        fontsize : 12*ratio
+                    border : {
+                        enable : true
                     },
-                    showpercent: true,
+                    title: {
+                        text:columnConfig.title,
+                        fontsize:12*ratio,
+                        offsety:-8*ratio
+                    },
+                    padding:10*ratio,//默认为10
+                    showpercent: false,
                     decimalsnum: 2,
-                    width: 320*ratio,
-                    height: 290*ratio,
+                    width: columnConfig.width*ratio,
+                    height: columnConfig.height*ratio,
                     animation : true,
                     turn_off_touchmove : true,
                     sub_option:{
@@ -52,10 +61,11 @@
                             scale_width:4*ratio,//刻度的长短,默认为4
                             text_space:6*ratio,//默认为6 
                             start_scale: 0,
-                            end_scale: 40,
-                            scale_space: 8
+                            end_scale: 100,
+                            scale_space: 10
                         }],
-                        width:'87%',
+                        offsetx:15*ratio,
+                        width:'90%',
                         height:'85%'
                     }
                 });
@@ -73,7 +83,7 @@
                         chart.target.textAlign('start')
                         .textBaseline('bottom')
                         .textFont(textInfo)
-                        .fillText('产量(吨)',x-20*ratio,y-10*ratio,false,'#6d869f');
+                        .fillText(columnConfig.tagName,x-30*ratio,y-10*ratio,false,'#6d869f');
                     }
                 }));
                 chart.draw();
@@ -81,9 +91,9 @@
         </script>
     </head>
     <!--
-
+     
      -->
-    <body onload=drawColumn("[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]")>
+    <body onload=drawColumn("[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]","{'title':'2013年产量','tagName':'产量(吨)','height':200,'width':320}")>
         <div id='canvasDiv'>
         </div>
     </body>

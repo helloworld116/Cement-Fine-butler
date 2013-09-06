@@ -16,6 +16,7 @@ PODS:
   - MBProgressHUD (0.7)
   - Reachability (3.1.1)
   - SVProgressHUD (0.9)
+  - ViewDeck (2.2.11)
 
 DEPENDENCIES:
   - ASIHTTPRequest
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - JASidePanels
   - MBProgressHUD
   - SVProgressHUD
+  - ViewDeck (~> 2.2.11)
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: a411b8d0f006ed8fc24248be6a0c4ad2abc9b101
@@ -33,5 +35,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
+  ViewDeck: b5eddc8559b0e47259ab7addbf2de6768061f139
 
 COCOAPODS: 0.23.0

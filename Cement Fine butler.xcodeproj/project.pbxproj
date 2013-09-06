@@ -122,7 +122,7 @@
 		472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F32EF17CC3C05007E567B /* CementAppDelegate.m */; };
 		472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F32F717CC3C05007E567B /* MainStoryboard_iPhone.storyboard */; };
 		472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F32FA17CC3C05007E567B /* MainStoryboard_iPad.storyboard */; };
-		472F32FF17CC3C05007E567B /* CementViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 472F32FE17CC3C05007E567B /* CementViewController.mm */; };
+		472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */; };
 		472F332517CC3CF8007E567B /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332317CC3CF8007E567B /* libbaidumapapi.a */; };
 		472F332617CC3CF8007E567B /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 472F332417CC3CF8007E567B /* mapapi.bundle */; };
 		472F332917CC3D34007E567B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332817CC3D34007E567B /* SystemConfiguration.framework */; };
@@ -268,8 +268,8 @@
 		472F32EF17CC3C05007E567B /* CementAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CementAppDelegate.m; sourceTree = "<group>"; };
 		472F32F817CC3C05007E567B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		472F32FB17CC3C05007E567B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		472F32FD17CC3C05007E567B /* CementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CementViewController.h; sourceTree = "<group>"; };
-		472F32FE17CC3C05007E567B /* CementViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CementViewController.mm; sourceTree = "<group>"; };
+		472F32FD17CC3C05007E567B /* EquipmentMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquipmentMapViewController.h; sourceTree = "<group>"; };
+		472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EquipmentMapViewController.mm; sourceTree = "<group>"; };
 		472F330617CC3CF8007E567B /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
 		472F330717CC3CF8007E567B /* BMKAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKAnnotation.h; sourceTree = "<group>"; };
 		472F330817CC3CF8007E567B /* BMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKAnnotationView.h; sourceTree = "<group>"; };
@@ -364,6 +364,15 @@
 				0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */,
 			);
 			name = "Real-time reports";
+			sourceTree = "<group>";
+		};
+		0E3C000317D9C5F2000D22EF /* Equipment */ = {
+			isa = PBXGroup;
+			children = (
+				472F32FD17CC3C05007E567B /* EquipmentMapViewController.h */,
+				472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */,
+			);
+			name = Equipment;
 			sourceTree = "<group>";
 		};
 		0E72471317CD92EF0048DFFB /* images */ = {
@@ -519,6 +528,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0E3C000317D9C5F2000D22EF /* Equipment */,
 				0E3841F417D44027004B3C87 /* Real-time reports */,
 				0E3841EA17D41DCE004B3C87 /* CustomerView */,
 				0E3841E317D41D63004B3C87 /* User */,
@@ -529,8 +539,6 @@
 				472F32EF17CC3C05007E567B /* CementAppDelegate.m */,
 				472F32F717CC3C05007E567B /* MainStoryboard_iPhone.storyboard */,
 				472F32FA17CC3C05007E567B /* MainStoryboard_iPad.storyboard */,
-				472F32FD17CC3C05007E567B /* CementViewController.h */,
-				472F32FE17CC3C05007E567B /* CementViewController.mm */,
 				0E3841EE17D41FDE004B3C87 /* Tool.h */,
 				0E3841EF17D41FDE004B3C87 /* Tool.m */,
 				472F32E617CC3C05007E567B /* Supporting Files */,
@@ -813,7 +821,7 @@
 			files = (
 				472F32EC17CC3C05007E567B /* main.m in Sources */,
 				472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */,
-				472F32FF17CC3C05007E567B /* CementViewController.mm in Sources */,
+				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,

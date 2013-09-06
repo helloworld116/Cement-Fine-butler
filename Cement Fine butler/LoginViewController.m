@@ -142,7 +142,10 @@
 //        [self.navigationController setNavigationBarHidden:YES animated:NO];
 //        [self.navigationController pushViewController:tab animated:NO];
 //        [self.navigationController.view.layer addAnimation:animation forKey:nil];
-        ProductColumnViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+        
+        
+//        ProductColumnViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+        UITabBarController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
         [self.navigationController pushViewController:viewController animated:YES];
     }else{
         self.password.text = nil;
