@@ -219,7 +219,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Yky-HT-ez0">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.023529414089999999" green="0.96470594409999999" blue="0.180392161" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="shA-Eb-aRB" kind="relationship" relationship="viewControllers" id="pG2-Zr-8yX"/>
@@ -291,12 +292,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="K88-w4-jHR">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <webView contentMode="scaleToFill" id="yKu-bd-9N5">
-                                        <rect key="frame" x="0.0" y="149" width="320" height="217"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="366"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </webView>

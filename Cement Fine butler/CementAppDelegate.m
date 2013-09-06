@@ -8,6 +8,15 @@
 
 #import "CementAppDelegate.h"
 
+@interface UINavigationBar (CustomImage)
+@end
+@implementation UINavigationBar (CustomImage)
+- (void) drawRect:(CGRect)rect {
+	UIImage *barImage = [UIImage imageNamed:@"navigationBar"];
+	[barImage drawInRect:rect];
+}
+@end
+
 @implementation CementAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

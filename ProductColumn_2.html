@@ -19,6 +19,7 @@
                 var url = type + ":" + expand + ":" + id;
                 document.location = url;
             }
+            var colors = ['#FF0080','#8600FF','#F9F900','#4A4AFF','','','','','','','','','','','','','','','','','','','','','','','','',];
             var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
             function drawColumn(data, columnConfig) {
                 data = eval('(' + data + ')');
@@ -30,12 +31,12 @@
                         fontsize: 12*ratio
                     },
                     border : {
-                        enable : true
+                        enable : false
                     },
                     title: {
                         text:columnConfig.title,
-                        fontsize:12*ratio,
-                        offsety:-8*ratio
+                        fontsize:15*ratio,
+                        offsety:-6*ratio
                     },
                     padding:10*ratio,//默认为10
                     showpercent: false,
