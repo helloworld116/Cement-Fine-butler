@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RightViewController : UIViewController
+@interface RightViewController : UITableViewController
 
+@property (retain,nonatomic) NSDictionary *conditionDict;//{"":[],"":[]}结构是这样
+@property (retain,nonatomic) NSArray *conditions;
 @end
