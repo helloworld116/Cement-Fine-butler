@@ -26,6 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect frame = self.tableView.bounds;
+    frame.origin.x = 40.0f;
+    frame.size.width -= 40.0f;
+    self.tableView.frame = frame;
+    
     NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"自定义"];
     NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
     NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
@@ -81,6 +86,7 @@
 //    NSString *key =  ;
     DDLogCVerbose(@"keys is %@",[self.conditionDict allKeys]);
 //    [self.conditionDict objectForKey:];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [NSString stringWithFormat:@"section:%d,row:%d",indexPath.section,indexPath.row];
     return cell;
 }

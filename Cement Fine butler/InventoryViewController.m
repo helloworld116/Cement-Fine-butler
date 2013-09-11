@@ -44,6 +44,7 @@
     UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryNavigationController"];
     self.centerController = nav;
     self.leftController = nil;
+//    self.rightSize = 100;
     self.rightController = rightController;
 }
 
