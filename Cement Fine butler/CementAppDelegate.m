@@ -19,10 +19,8 @@
 
 @implementation CementAppDelegate
 
-#define url_queryDistrictByCname [[@"http://www.ucai.com" stringByAppendingFormat:@"/city/cityarea.html?cname=%@",@"深圳"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"url is %@",url_queryDistrictByCname);
     // Override point for customization after application launch.
     //set log framework
     [DDLog addLogger:[DDTTYLogger sharedInstance]];

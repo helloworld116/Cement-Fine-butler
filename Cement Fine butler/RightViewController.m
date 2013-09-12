@@ -6,7 +6,18 @@
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
+//tag 从10000开始
 #import "RightViewController.h"
+#import "ConditionCell.h"
+
+//tableview cell高度为40
+#define kTableViewCellHeight 40.f
+//tableview header高度为cell高度一半
+#define kTableViewHeaderViewHeight kTableViewCellHeight/2
+//tableview开始标记序号
+#define kTableViewTag 10000
+//勾选标记大小
+#define kImageViewSize 30
 
 @interface RightViewController ()
 
@@ -26,18 +37,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect frame = self.tableView.bounds;
-    frame.origin.x = 40.0f;
-    frame.size.width -= 40.0f;
-    self.tableView.frame = frame;
-    
-    NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"自定义"];
-    NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
-    NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
-    self.conditions = @[@"times",@"lines",@"products"];
-    self.conditionDict = @{@"times":timeArray,@"lines":lineArray,@"products":productArray};
-    
 	// Do any additional setup after loading the view.
+    CGFloat beginOrign = 50.f;
+    CGFloat totalHeight = 50.f;
+    //设置tableview，每一个筛选条件就是一个tableview
+    for (int i=0; i<self.conditions.count; i++) {
+        NSString *key =[[[self.conditions objectAtIndex:i] allKeys] objectAtIndex:0];
+        int cellCount = [[[self.conditions objectAtIndex:i] objectForKey:key] count];
+        CGFloat tableViewHeight = cellCount*kTableViewCellHeight+kTableViewHeaderViewHeight;
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, beginOrign, self.scrollView.frame.size.width, tableViewHeight) style:UITableViewStylePlain];
+        tableView.bounces = NO;
+        tableView.tag = kTableViewTag+i;
+        tableView.dataSource = self;
+        tableView.delegate = self;
+        [self.scrollView addSubview:tableView];
+        beginOrign += tableViewHeight;
+        totalHeight += tableViewHeight;
+    }
+    //设置scrollView高度
+    self.scrollView.frame = CGRectMake(kOrignX, self.scrollView.frame.origin.y, self.scrollView.frame.size.width-kOrignX, self.scrollView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, totalHeight);
+    self.scrollView.bounces = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,43 +72,47 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-//    return [self.conditionDict allKeys].count + 1;
-    return self.conditions.count;
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kTableViewHeaderViewHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return kTableViewCellHeight;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section==0) {
-        return 0;
-    }else {
-        return [[self.conditionDict objectForKey:[self.conditions objectAtIndex:section]] count];
-    }
+    int index = tableView.tag-kTableViewTag;
+    NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
+    return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section==0) {
-        return @"条件筛选";
-    }else {
-        return [self.conditions objectAtIndex:section];
-//        NSString *key = [[self.conditionDict allKeys] objectAtIndex:(section-1)];
-//        return [self.conditionDict objectForKey:key];
-    }
+    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ConditionCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
     }
     // Configure the cell...
-//    NSString *key =  ;
-    DDLogCVerbose(@"keys is %@",[self.conditionDict allKeys]);
-//    [self.conditionDict objectForKey:];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = [NSString stringWithFormat:@"section:%d,row:%d",indexPath.section,indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    int index = tableView.tag-kTableViewTag;
+    NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
+    cell.label.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:@"right"];
+    cell.imageView.hidden = YES;
+    if (indexPath.row==0) {
+        cell.imageView.hidden = NO;
+    }
     return cell;
 }
 
@@ -133,5 +158,16 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    for (int i=0; i<[[tableView visibleCells] count]; i++) {
+        ConditionCell *cell = (ConditionCell *)[[tableView visibleCells] objectAtIndex:i];
+        cell.imageView.hidden = YES;
+    }
+    ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.imageView.hidden = NO;
+}
+
+- (void)viewDidUnload {
+    [self setScrollView:nil];
+    [super viewDidUnload];
 }
 @end

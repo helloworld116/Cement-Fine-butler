@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#define kOrignX 60
 
-@interface RightViewController : UITableViewController
+@interface RightViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (retain,nonatomic) NSDictionary *conditionDict;//{"":[],"":[]}结构是这样
 @property (retain,nonatomic) NSArray *conditions;
 @end

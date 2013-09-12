@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>60E69666-E003-4216-9BE0-DC546B8A0088</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Cement Fine butler</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BD861368-740A-4976-B4FE-C4BAF0FC18CB</key>
+		<string>https://github.com/helloworld116/Cement-Fine-butler.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Cement Fine butler.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BD861368-740A-4976-B4FE-C4BAF0FC18CB</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/helloworld116/Cement-Fine-butler.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BD861368-740A-4976-B4FE-C4BAF0FC18CB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BD861368-740A-4976-B4FE-C4BAF0FC18CB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Cement-Fine-butler</string>
+		</dict>
+	</array>
+</dict>
+</plist>

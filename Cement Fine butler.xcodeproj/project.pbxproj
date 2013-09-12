@@ -118,6 +118,8 @@
 		0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */; };
 		0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */; };
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
+		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
+		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
 		472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32DF17CC3C05007E567B /* UIKit.framework */; };
 		472F32E217CC3C05007E567B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E117CC3C05007E567B /* Foundation.framework */; };
 		472F32E417CC3C05007E567B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E317CC3C05007E567B /* CoreGraphics.framework */; };
@@ -266,6 +268,9 @@
 		0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductColumnViewController.m; sourceTree = "<group>"; };
 		0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn.html; sourceTree = "<group>"; };
 		0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.1.min.js; sourceTree = "<group>"; };
+		0EDFFBF617E1B045009B4671 /* ConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionCell.h; sourceTree = "<group>"; };
+		0EDFFBF717E1B045009B4671 /* ConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionCell.m; sourceTree = "<group>"; };
+		0EDFFBF917E1B055009B4671 /* ConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConditionCell.xib; sourceTree = "<group>"; };
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		472F32DC17CC3C05007E567B /* Cement Fine butler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cement Fine butler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F32DF17CC3C05007E567B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -504,6 +509,9 @@
 				0E72473217CD9D160048DFFB /* CenterViewController.m */,
 				0E3841F817D4782F004B3C87 /* SidePanelViewController.h */,
 				0E3841F917D47830004B3C87 /* SidePanelViewController.m */,
+				0EDFFBF617E1B045009B4671 /* ConditionCell.h */,
+				0EDFFBF717E1B045009B4671 /* ConditionCell.m */,
+				0EDFFBF917E1B055009B4671 /* ConditionCell.xib */,
 			);
 			name = Nav;
 			sourceTree = "<group>";
@@ -795,6 +803,7 @@
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0E22B15E17D8191F009695FF /* ProductColumn_2.html in Resources */,
 				0E346F1017DAB98800C20BF1 /* LoadingView.xib in Resources */,
+				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +867,7 @@
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0E346F1317DAD66E00C20BF1 /* InventoryViewController.m in Sources */,
+				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

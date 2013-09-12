@@ -41,10 +41,16 @@
 	// Do any additional setup after loading the view.
     LeftViewController* leftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
     RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    NSArray *type = @[@"产品库存",@"原材料库存"];
+    NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"自定义"];
+    NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
+    NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
+    rightController.conditions = @[@{@"库存类型":type},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    
     UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryNavigationController"];
     self.centerController = nav;
-    self.leftController = nil;
-//    self.rightSize = 100;
+    self.leftController = leftController;
+    self.rightSize = kOrignX;
     self.rightController = rightController;
 }
 
