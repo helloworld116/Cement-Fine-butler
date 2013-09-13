@@ -11,6 +11,7 @@
 
 @interface RightViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *topView;
 
 @property (retain,nonatomic) NSArray *conditions;
 @end

@@ -38,8 +38,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    CGFloat beginOrign = 50.f;
-    CGFloat totalHeight = 50.f;
+    CGFloat beginOrign = self.topView.frame.size.height;
+    CGFloat totalHeight = self.topView.frame.size.height;
     //设置tableview，每一个筛选条件就是一个tableview
     for (int i=0; i<self.conditions.count; i++) {
         NSString *key =[[[self.conditions objectAtIndex:i] allKeys] objectAtIndex:0];
@@ -50,13 +50,16 @@
         tableView.tag = kTableViewTag+i;
         tableView.dataSource = self;
         tableView.delegate = self;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.scrollView addSubview:tableView];
         beginOrign += tableViewHeight;
         totalHeight += tableViewHeight;
     }
     //设置scrollView高度
     self.scrollView.frame = CGRectMake(kOrignX, self.scrollView.frame.origin.y, self.scrollView.frame.size.width-kOrignX, self.scrollView.frame.size.height);
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, totalHeight);
+    if (totalHeight>self.scrollView.contentSize.height) {
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, totalHeight);
+    }
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
 }
@@ -168,6 +171,7 @@
 
 - (void)viewDidUnload {
     [self setScrollView:nil];
+    [self setTopView:nil];
     [super viewDidUnload];
 }
 @end
