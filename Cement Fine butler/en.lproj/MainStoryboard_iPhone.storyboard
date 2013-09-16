@@ -51,6 +51,48 @@
             </objects>
             <point key="canvasLocation" x="-411" y="-336"/>
         </scene>
+        <!--Messge View Controller - Root View Controller-->
+        <scene sceneID="QBr-QN-r0f">
+            <objects>
+                <tableViewController storyboardIdentifier="messageViewController" id="ajP-oC-VWj" customClass="MessgeViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VaX-on-hSD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cum-Ph-KgI">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="esA-VV-uJY"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a8n-pe-EVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="126" y="278"/>
+        </scene>
+        <!--Navigation Controller - 消息-->
+        <scene sceneID="HeC-x0-kwF">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="eph-mR-QcE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="消息" id="QyQ-iC-F2s"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l89-MP-FaF">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ajP-oC-VWj" kind="relationship" relationship="rootViewController" id="C14-y3-HTz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pV1-yY-FPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-406" y="278"/>
+        </scene>
         <!--Center View Controller-->
         <scene sceneID="wvu-Xq-pLH">
             <objects>
@@ -63,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gc-NG-Vsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="106" y="39"/>
+            <point key="canvasLocation" x="-78" y="887"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="SQM-DX-xqi">
@@ -77,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRh-Yk-6tj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111" y="700"/>
+            <point key="canvasLocation" x="-25" y="1444"/>
         </scene>
         <!--Right View Controller-->
         <scene sceneID="tqj-1H-6Vi">
@@ -129,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bVR-bB-Bae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="504" y="700"/>
+            <point key="canvasLocation" x="368" y="1444"/>
         </scene>
         <!--Navigation Controller - 成本计算器-->
         <scene sceneID="AoT-oQ-jAr">
@@ -142,7 +184,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdt-Ru-ruV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-411" y="230"/>
+            <point key="canvasLocation" x="-547" y="974"/>
         </scene>
         <!--Navigation Controller - 库存预警-->
         <scene sceneID="JO2-hE-8xa">
@@ -155,7 +197,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJW-EQ-O8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-781" y="619"/>
+            <point key="canvasLocation" x="-917" y="1363"/>
         </scene>
         <!--Left View Controller-->
         <scene sceneID="bjh-Tp-KF4">
@@ -178,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Imd-bv-pjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="803"/>
+            <point key="canvasLocation" x="-362" y="1547"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="q2J-FA-Uag">
@@ -285,6 +327,7 @@
                         <segue destination="shA-Eb-aRB" kind="relationship" relationship="viewControllers" id="pG2-Zr-8yX"/>
                         <segue destination="jhe-UX-oQP" kind="relationship" relationship="viewControllers" id="J9Y-23-e65"/>
                         <segue destination="6bL-JH-tNY" kind="relationship" relationship="viewControllers" id="FLa-5M-D9q"/>
+                        <segue destination="eph-mR-QcE" kind="relationship" relationship="viewControllers" id="LwV-Nf-dZJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rrn-2W-YpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -402,7 +445,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MP9-He-8e6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1154" y="344"/>
+            <point key="canvasLocation" x="-1290" y="1088"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wlb-aI-bhG">
@@ -417,7 +460,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHp-Hd-vxs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1565" y="344"/>
+            <point key="canvasLocation" x="-1701" y="1088"/>
         </scene>
         <!--Inventory Column View Controller-->
         <scene sceneID="T8B-uq-1s4">
@@ -517,6 +560,9 @@
                 <relationship kind="outlet" name="titleImgView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="username" candidateClass="InsetsTextField"/>
             </relationships>
+        </class>
+        <class className="MessgeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MessgeViewController.h"/>
         </class>
         <class className="ProductColumnViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProductColumnViewController.h"/>

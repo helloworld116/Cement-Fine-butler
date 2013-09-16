@@ -104,6 +104,7 @@
 		0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F217D4200B004B3C87 /* SearchDate.m */; };
 		0E3841F717D44059004B3C87 /* RealtimeReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F617D44059004B3C87 /* RealtimeReportsViewController.m */; };
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
+		0E493C3B17E70BFC00D0AD0D /* MessgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */; };
 		0E72471C17CD93060048DFFB /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72471417CD93060048DFFB /* Icon-72.png */; };
 		0E72471D17CD93060048DFFB /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72471517CD93060048DFFB /* Icon-72@2x.png */; };
 		0E72471E17CD93060048DFFB /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72471617CD93060048DFFB /* Icon-Small-50.png */; };
@@ -250,6 +251,8 @@
 		0E3841F617D44059004B3C87 /* RealtimeReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeReportsViewController.m; sourceTree = "<group>"; };
 		0E3841F817D4782F004B3C87 /* SidePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidePanelViewController.h; sourceTree = "<group>"; };
 		0E3841F917D47830004B3C87 /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
+		0E493C3917E70BFC00D0AD0D /* MessgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessgeViewController.h; sourceTree = "<group>"; };
+		0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessgeViewController.m; sourceTree = "<group>"; };
 		0E72471417CD93060048DFFB /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		0E72471517CD93060048DFFB /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		0E72471617CD93060048DFFB /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -396,6 +399,15 @@
 				472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */,
 			);
 			name = Equipment;
+			sourceTree = "<group>";
+		};
+		0E493C3817E70BCF00D0AD0D /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				0E493C3917E70BFC00D0AD0D /* MessgeViewController.h */,
+				0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */,
+			);
+			name = Message;
 			sourceTree = "<group>";
 		};
 		0E72471317CD92EF0048DFFB /* images */ = {
@@ -554,6 +566,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0E493C3817E70BCF00D0AD0D /* Message */,
 				0E3C000317D9C5F2000D22EF /* Equipment */,
 				0E3841F417D44027004B3C87 /* Real-time reports */,
 				0E3841EA17D41DCE004B3C87 /* CustomerView */,
@@ -868,6 +881,7 @@
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0E346F1317DAD66E00C20BF1 /* InventoryViewController.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
+				0E493C3B17E70BFC00D0AD0D /* MessgeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
