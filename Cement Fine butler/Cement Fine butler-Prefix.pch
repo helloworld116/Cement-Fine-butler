@@ -19,6 +19,9 @@
     #import <ASIHTTPRequest/ASIFormDataRequest.h>
     #import <MBProgressHUD/MBProgressHUD.h>
     #import <SVProgressHUD/SVProgressHUD.h>
+    #import <ViewDeck/IIViewDeckController.h>
+    #import "LeftViewController.h"
+    #import "RightViewController.h"
     #import "InsetsTextField.h"
     #import "Tool.h"
 

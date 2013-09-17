@@ -77,6 +77,52 @@
             </objects>
             <point key="canvasLocation" x="126" y="278"/>
         </scene>
+        <!--Raw Materials Cost Manager View Controller - 成本管理-->
+        <scene sceneID="j94-tB-PlN">
+            <objects>
+                <viewController id="trd-8o-dTh" customClass="RawMaterialsCostManagerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aMY-Mq-iGi">
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="成本管理" id="aai-me-lja"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XIH-nG-zvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-390" y="886"/>
+        </scene>
+        <!--Navigation Controller - 成本管理-->
+        <scene sceneID="4oL-Kc-E4g">
+            <objects>
+                <navigationController storyboardIdentifier="costManagerNavigationController" definesPresentationContext="YES" id="jab-Dk-0NY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="成本管理" id="miZ-dz-dFh"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z9i-hN-ibt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xkp-O5-k5u" kind="relationship" relationship="rootViewController" id="DD4-Bt-cQD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Li7-57-2Mg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="79" y="896"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7gA-Ww-nwU">
+            <objects>
+                <viewController id="xkp-O5-k5u" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="22Y-cq-Orb">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ONU-r2-agV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H50-Ej-api" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="500" y="896"/>
+        </scene>
         <!--Navigation Controller - 消息-->
         <scene sceneID="HeC-x0-kwF">
             <objects>
@@ -105,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gc-NG-Vsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-78" y="887"/>
+            <point key="canvasLocation" x="34" y="1495"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="SQM-DX-xqi">
@@ -119,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRh-Yk-6tj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-25" y="1444"/>
+            <point key="canvasLocation" x="87" y="2052"/>
         </scene>
         <!--Right View Controller-->
         <scene sceneID="tqj-1H-6Vi">
@@ -171,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bVR-bB-Bae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="368" y="1444"/>
+            <point key="canvasLocation" x="480" y="2052"/>
         </scene>
         <!--Navigation Controller - 成本计算器-->
         <scene sceneID="AoT-oQ-jAr">
@@ -184,7 +230,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdt-Ru-ruV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-547" y="974"/>
+            <point key="canvasLocation" x="-435" y="1582"/>
         </scene>
         <!--Navigation Controller - 库存预警-->
         <scene sceneID="JO2-hE-8xa">
@@ -197,7 +243,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJW-EQ-O8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-917" y="1363"/>
+            <point key="canvasLocation" x="-805" y="1971"/>
         </scene>
         <!--Left View Controller-->
         <scene sceneID="bjh-Tp-KF4">
@@ -220,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Imd-bv-pjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-362" y="1547"/>
+            <point key="canvasLocation" x="-250" y="2155"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="q2J-FA-Uag">
@@ -328,6 +374,7 @@
                         <segue destination="jhe-UX-oQP" kind="relationship" relationship="viewControllers" id="J9Y-23-e65"/>
                         <segue destination="6bL-JH-tNY" kind="relationship" relationship="viewControllers" id="FLa-5M-D9q"/>
                         <segue destination="eph-mR-QcE" kind="relationship" relationship="viewControllers" id="LwV-Nf-dZJ"/>
+                        <segue destination="trd-8o-dTh" kind="relationship" relationship="viewControllers" id="XJf-fO-fkA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rrn-2W-YpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -445,7 +492,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MP9-He-8e6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1290" y="1088"/>
+            <point key="canvasLocation" x="-1178" y="1696"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wlb-aI-bhG">
@@ -460,7 +507,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHp-Hd-vxs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1701" y="1088"/>
+            <point key="canvasLocation" x="-1589" y="1696"/>
         </scene>
         <!--Inventory Column View Controller-->
         <scene sceneID="T8B-uq-1s4">
@@ -571,6 +618,9 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
             </relationships>
+        </class>
+        <class className="RawMaterialsCostManagerViewController" superclassName="IIViewDeckController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsCostManagerViewController.h"/>
         </class>
         <class className="RealtimeReportsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RealtimeReportsViewController.h"/>

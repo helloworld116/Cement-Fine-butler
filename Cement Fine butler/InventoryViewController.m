@@ -7,8 +7,6 @@
 //
 
 #import "InventoryViewController.h"
-#import "LeftViewController.h"
-#import "RightViewController.h"
 
 @interface InventoryViewController ()
 
