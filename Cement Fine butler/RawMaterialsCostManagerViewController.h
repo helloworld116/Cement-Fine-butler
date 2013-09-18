@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RawMaterialsCostManagerViewController : IIViewDeckController
+@interface RawMaterialsCostManagerViewController : UIViewController<UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 
 @end
