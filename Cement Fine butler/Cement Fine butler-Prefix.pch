@@ -20,6 +20,7 @@
     #import <MBProgressHUD/MBProgressHUD.h>
     #import <SVProgressHUD/SVProgressHUD.h>
     #import <ViewDeck/IIViewDeckController.h>
+    #import <RTLabel/RTLabel.h>
     #import "LeftViewController.h"
     #import "RightViewController.h"
     #import "InsetsTextField.h"

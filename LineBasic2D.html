@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+        </title>
+        <style type="text/css">
+            *{ -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+            }
+            body{
+                margin: 0
+            }
+        </style>
+        <script type="text/javascript" src="ichart.1.1.min.js">
+        </script>
+        <script type="text/javascript">
+            function callBackground(type, expand, id) {
+                var url = type + ":" + expand + ":" + id;
+                document.location = url;
+            }
+            var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
+            function drawLineBasic2D(data, pie2DConfig) {
+                // data = eval('(' + data + ')');
+                var pv=[],ip=[],t;
+                for(var i=0;i<11;i++){
+                    t = Math.floor(Math.random()*(30+((i%12)*5)))+10;
+                    pv.push(t);
+                    t = Math.floor(t*0.5);
+                    t = t-Math.floor((Math.random()*t)/2);
+                    ip.push(t);
+                }
+                var data = [
+                    {
+                        name : 'PV',
+                        value:pv,
+                        color:'#0d8ecf',
+                        line_width:2
+                    },
+                    {
+                        name : 'IP',
+                        value:ip,
+                        color:'#ef7707',
+                        line_width:2
+                    }
+                 ];
+                var labels = ["2012-08-01","2012-08-02","2012-08-03","2012-08-04","2012-08-05","2012-08-06"];
+                pie2DConfig = eval('(' + pie2DConfig + ')');
+                var line = new iChart.LineBasic2D({
+                    render : 'canvasDiv',
+                    data: data,
+                    align:'center',
+                    title : '2013-01-01至2013-12-31原材料单位成本趋势',
+                    width : 800,
+                    height : 400,
+                    tip:{
+                        enable:true,
+                        shadow:true
+                    },
+                    legend : {
+                        enable : true,
+                        row:1,//设置在一行上显示，与column配合使用
+                        column : 'max',
+                        valign:'top',
+                        sign:'bar',
+                        background_color:null,//设置透明背景
+                        offsetx:-80,//设置x轴偏移，满足位置需要
+                        border : true
+                    },
+                    crosshair:{
+                        enable:true,
+                        line_color:'#62bce9'
+                    },
+                    sub_option : {
+                        label:false,
+                        point_hollow : false
+                    },
+                    coordinate:{
+                        width:640,
+                        height:240,
+                        axis:{
+                            color:'#9f9f9f',
+                            width:[0,0,2,2]
+                        },
+                        grids:{
+                            vertical:{
+                                way:'share_alike',
+                                value:5
+                            }
+                        },
+                        scale:[{
+                             position:'left',   
+                             start_scale:0,
+                             end_scale:100,
+                             scale_space:10,
+                             scale_size:2,
+                             scale_color:'#9f9f9f'
+                        },{
+                             position:'bottom', 
+                             labels:labels
+                        }]
+                    }
+                });
+                line.draw();
+            }
+        </script>
+    </head>
+    <!--
+       
+     -->
+    <body onload=drawLineBasic2D("[{'name':'熟料','value':56.95,'color':'#a5c2d5'},{'name':'粉煤灰','value':27.05,'color':'#cbab4f'},{'name':'矿渣','value':14.55,'color':'#76a871'},{'name':'石膏','value':1.45,'color':'#9f7961'}]","{'title':'2013-09-01至2013-09-30直接材料成本','height':320.000000,'width':320.000000}")>
+        <div id='canvasDiv'>
+        </div>
+    </body>
+
+</html>

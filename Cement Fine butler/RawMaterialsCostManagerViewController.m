@@ -8,6 +8,8 @@
 
 #import "RawMaterialsCostManagerViewController.h"
 
+#define kLabelHeight 30//底部字段描述label高度
+
 @interface RawMaterialsCostManagerViewController ()
 
 @end
@@ -25,7 +27,8 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad]; [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    [super viewDidLoad];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.title = @"原材料成本管理";
     //
     [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
@@ -38,6 +41,54 @@
     sc.showsHorizontalScrollIndicator = NO;
     sc.showsVerticalScrollIndicator = NO;
     //    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
+
+    self.scrollView.bounces = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    [self setBottomViewOfSubView];
+}
+
+- (void) setBottomViewOfSubView {
+    NSString *preStr = @"<font size=20 color='red'>";
+    NSString *sufStr = @"</font>";
+    
+    RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, 0, 300, kLabelHeight)];
+    NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"355640",sufStr,@"元"];
+    [lblTotalCost setText:strTotalCost];
+    [self.bottomView addSubview:lblTotalCost];
+    
+    RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight, 300, kLabelHeight)];
+    NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"109.32",sufStr,@"元/吨"];
+    [lblFinanceUitCost setText:strFinanceUnitCost];
+    [self.bottomView addSubview:lblFinanceUitCost];
+    
+    RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*2, 300, kLabelHeight)];
+    NSString *strCurrentUnitCost = [@"当前单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"114.93",sufStr,@"元/吨"];
+    [lblCurrentUitCost setText:strCurrentUnitCost];
+    [self.bottomView addSubview:lblCurrentUitCost];
+    
+    RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*3, 300, kLabelHeight)];
+    NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"105.78",sufStr,@"元/吨"];
+    [lblPlanUitCost setText:strPlanUnitCost];
+    [self.bottomView addSubview:lblPlanUitCost];
+    
+    RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*4, 300, kLabelHeight)];
+    NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"12.45%",sufStr];
+    [lblTongbi setText:strTongbi];
+    [self.bottomView addSubview:lblTongbi];
+    
+    RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*5, 300, kLabelHeight)];
+    NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"19.87%",sufStr];
+    [lblHuanbi setText:strHuanbi];
+    [self.bottomView addSubview:lblHuanbi];
+    
+    //底部view实际高度
+    CGFloat bottomViewHeight = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight-self.bottomView.frame.origin.y;
+    //底部view需要的高度，距离上下都是10
+    CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count + 10;
+    //减去10是为了减少在两者差距很小的情况下，避免可拖动
+    if (bottomViewHeight<bottomViewNeedHeight-10) {
+       self.scrollView.contentSize = CGSizeMake(kScreenWidth,kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight+bottomViewNeedHeight-bottomViewHeight);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +101,7 @@
     [self setWebView:nil];
     [self setScrollView:nil];
     [self setWebView:nil];
+    [self setBottomView:nil];
     [super viewDidUnload];
 }
 
@@ -93,13 +145,13 @@
     //
     //    NSString *js = [@"drawLineChart(" stringByAppendingFormat:@"'%@','%@','%@','%@'%@",todayPrice,dates,advicePrice,realPrice,@")"];
     NSString *data = @"[{'name':'熟料','value':56.95,'color':'#a5c2d5'},{'name':'粉煤灰','value':27.05,'color':'#cbab4f'},{'name':'矿渣','value':14.55,'color':'#76a871'},{'name':'石膏','value':1.45,'color':'#9f7961'}]";
-    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height+25,self.webView.frame.size.width];
+    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height,self.webView.frame.size.width];
     //    NSString *js = [[ stringByAppendingString:data] stringByAppendingFormat:@""];
     NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
     DDLogVerbose(@"dates is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];
-    UIScrollView *sc = (UIScrollView *)[[webView subviews] objectAtIndex:0];
-    sc.contentSize = CGSizeMake(webView.frame.size.width, webView.frame.size.height-25);
+//    UIScrollView *sc = (UIScrollView *)[[webView subviews] objectAtIndex:0];
+//    sc.contentSize = CGSizeMake(webView.frame.size.width, webView.frame.size.height-25);
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{

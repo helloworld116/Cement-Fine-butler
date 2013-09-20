@@ -104,6 +104,7 @@
 		0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F217D4200B004B3C87 /* SearchDate.m */; };
 		0E3841F717D44059004B3C87 /* RealtimeReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F617D44059004B3C87 /* RealtimeReportsViewController.m */; };
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
+		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
 		0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */; };
 		0E493C3B17E70BFC00D0AD0D /* MessgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
@@ -254,6 +255,7 @@
 		0E3841F617D44059004B3C87 /* RealtimeReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeReportsViewController.m; sourceTree = "<group>"; };
 		0E3841F817D4782F004B3C87 /* SidePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidePanelViewController.h; sourceTree = "<group>"; };
 		0E3841F917D47830004B3C87 /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
+		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
 		0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCostManagerViewController.h; sourceTree = "<group>"; };
 		0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCostManagerViewController.m; sourceTree = "<group>"; };
 		0E493C3917E70BFC00D0AD0D /* MessgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessgeViewController.h; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
+				0E4291E917EC51F50031ECB6 /* LineBasic2D.html */,
 				0E58AFDD17E93A18008A2DF2 /* Pie2D.html */,
 				0E22B15D17D8191F009695FF /* ProductColumn_2.html */,
 				0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */,
@@ -839,6 +842,7 @@
 				0E346F1017DAB98800C20BF1 /* LoadingView.xib in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 				0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */,
+				0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
