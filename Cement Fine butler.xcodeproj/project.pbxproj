@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E22B15E17D8191F009695FF /* ProductColumn_2.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* ProductColumn_2.html */; };
+		0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E017ED7AC600385E59 /* LoginAction.m */; };
+		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
 		0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0D17DAB97300C20BF1 /* LoadingView.m */; };
 		0E346F1017DAB98800C20BF1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E346F0F17DAB98800C20BF1 /* LoadingView.xib */; };
@@ -149,6 +151,10 @@
 
 /* Begin PBXFileReference section */
 		0E22B15D17D8191F009695FF /* ProductColumn_2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn_2.html; sourceTree = "<group>"; };
+		0E2786DF17ED7AC600385E59 /* LoginAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAction.h; sourceTree = "<group>"; };
+		0E2786E017ED7AC600385E59 /* LoginAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAction.m; sourceTree = "<group>"; };
+		0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistroyTrendsViewController.h; sourceTree = "<group>"; };
+		0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistroyTrendsViewController.m; sourceTree = "<group>"; };
 		0E346F0917DAB4E900C20BF1 /* InventoryColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryColumnViewController.h; sourceTree = "<group>"; };
 		0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryColumnViewController.m; sourceTree = "<group>"; };
 		0E346F0C17DAB97300C20BF1 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
@@ -371,6 +377,8 @@
 				0E3841E517D41D71004B3C87 /* LoginViewController.m */,
 				0E3841E617D41D71004B3C87 /* UpdatePasswordViewController.h */,
 				0E3841E717D41D71004B3C87 /* UpdatePasswordViewController.m */,
+				0E2786DF17ED7AC600385E59 /* LoginAction.h */,
+				0E2786E017ED7AC600385E59 /* LoginAction.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -418,6 +426,8 @@
 				0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */,
 				0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */,
 				0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */,
+				0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */,
+				0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */,
 			);
 			name = CostManager;
 			sourceTree = "<group>";
@@ -910,6 +920,8 @@
 				0E493C3B17E70BFC00D0AD0D /* MessgeViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
+				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
+				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

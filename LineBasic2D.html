@@ -20,72 +20,83 @@
                 document.location = url;
             }
             var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
-            function drawLineBasic2D(data, pie2DConfig) {
-                // data = eval('(' + data + ')');
-                var pv=[],ip=[],t;
-                for(var i=0;i<11;i++){
-                    t = Math.floor(Math.random()*(30+((i%12)*5)))+10;
-                    pv.push(t);
-                    t = Math.floor(t*0.5);
-                    t = t-Math.floor((Math.random()*t)/2);
-                    ip.push(t);
-                }
-                var data = [
-                    {
-                        name : 'PV',
-                        value:pv,
-                        color:'#0d8ecf',
-                        line_width:2
-                    },
-                    {
-                        name : 'IP',
-                        value:ip,
-                        color:'#ef7707',
-                        line_width:2
-                    }
-                 ];
-                var labels = ["2012-08-01","2012-08-02","2012-08-03","2012-08-04","2012-08-05","2012-08-06"];
-                pie2DConfig = eval('(' + pie2DConfig + ')');
+            function drawLineBasic2D(data,labels,lineBasic2DConfig) {
+                data = eval('(' + data + ')');
+                labels = eval('(' + labels + ')');
+                lineBasic2DConfig = eval('(' + lineBasic2DConfig + ')');
                 var line = new iChart.LineBasic2D({
                     render : 'canvasDiv',
                     data: data,
                     align:'center',
-                    title : '2013-01-01至2013-12-31原材料单位成本趋势',
-                    width : 800,
-                    height : 400,
+                    animation:true,
+                    width : 60*(labels.length-1)*ratio,//相邻两个之间间隔为60
+                    height : lineBasic2DConfig.height*ratio,
+                    padding:0,
+                    turn_off_touchmove:true,
+                    border:{
+                        enable:true
+                    },
                     tip:{
-                        enable:true,
+                        enable:false,
                         shadow:true
+                    },
+                    // offsety:-15*ratio,//不放标题的情况下使用
+                    title : {
+                        text:lineBasic2DConfig.title,
+                        fontsize:15*ratio,
+                        offsety:10*ratio,
+                        offsetx:30*ratio,
+                        textAlign:'left'
                     },
                     legend : {
                         enable : true,
                         row:1,//设置在一行上显示，与column配合使用
                         column : 'max',
+                        align:'left',
                         valign:'top',
                         sign:'bar',
+                        padding:0,
                         background_color:null,//设置透明背景
-                        offsetx:-80,//设置x轴偏移，满足位置需要
-                        border : true
+                        offsetx:150*ratio,//设置x轴偏移，满足位置需要
+                        offsety:15*ratio,
+                        border:false,
+                        fontsize:12*ratio,//文本大小
+                        sign_size:10*ratio,//小图标大小
+                        line_height:16*ratio,//设置行高
+                        sign_space:2*ratio//小图标与文本间距
                     },
                     crosshair:{
-                        enable:true,
+                        enable:false,
                         line_color:'#62bce9'
                     },
                     sub_option : {
-                        label:false,
-                        point_hollow : false
+                        // brushsize:1*ratio,//线段的粗细，组件中context的linewidth属性的大小。(默认为1)
+                        hollow:true,//指定两个线段结合处的圆点是否为空心。(默认为true)
+                        // hollow_color:'black',//指定空心的背景色。
+                        point_size:6*ratio,//结合点处的大小。单位px。(默认为6)
+                        intersection:true,//线段是否在的结合点处突出显示(默认为true)
+                        gradient:true,
+                        smooth:true,//是否渲染为平滑曲线
+                        label:{
+                            enable:true,
+                            fontsize: 12*ratio
+                        },
+                        point_hollow:false,
+                        padding:0
                     },
                     coordinate:{
-                        width:640,
-                        height:240,
+                        width:'90%',
+                        height:'80%',//不放标题的情况下为88%，放标题的情况下为80%
+                        grid_line_width:1*ratio,//网格的宽度值。(默认为1)
+                        padding:0,
                         axis:{
                             color:'#9f9f9f',
-                            width:[0,0,2,2]
+                            width:[0,0,2*ratio,2*ratio]
                         },
                         grids:{
                             vertical:{
                                 way:'share_alike',
-                                value:5
+                                value:labels.length-1
                             }
                         },
                         scale:[{
@@ -93,10 +104,22 @@
                              start_scale:0,
                              end_scale:100,
                              scale_space:10,
-                             scale_size:2,
-                             scale_color:'#9f9f9f'
+                             scale_size:2*ratio,//刻度线的粗细。单位px。(默认为1)
+                             scale_width:4*ratio,//刻度的长短。单位px。(默认为4)
+                             text_space:2*ratio,//文本与坐标轴之间的距离。单位px。(默认为6)
+                             scale_color:'#9f9f9f',
+                             label:{
+                                fontsize: 12*ratio
+                             }
                         },{
                              position:'bottom', 
+                             scale_size:2*ratio,//刻度线的粗细。单位px。(默认为1)
+                             scale_width:4*ratio,//刻度的长短。单位px。(默认为4)
+                             text_space:10*ratio,//文本与坐标轴之间的距离。单位px。(默认为6)
+                             label:{
+                                fontsize: 12*ratio,
+                                rotate:-45
+                             },
                              labels:labels
                         }]
                     }
@@ -108,7 +131,7 @@
     <!--
        
      -->
-    <body onload=drawLineBasic2D("[{'name':'熟料','value':56.95,'color':'#a5c2d5'},{'name':'粉煤灰','value':27.05,'color':'#cbab4f'},{'name':'矿渣','value':14.55,'color':'#76a871'},{'name':'石膏','value':1.45,'color':'#9f7961'}]","{'title':'2013-09-01至2013-09-30直接材料成本','height':320.000000,'width':320.000000}")>
+    <body onload=drawLineBasic2D("[{name:'PV',value:[32,43,36,49,39,45,61,16,79,15,89,91],color:'#0d8ecf',line_width:1*ratio},{name:'IP',value:[23,43,30,36,33,36,60,16,75,11,85,51],color:'#ef7707',line_width:1*ratio},{name:'OS',value:[34,44,46,44,55,39,71,17,90,13,92,56],color:'#0fecee',line_width:1*ratio}]","['08-01','08-02','08-03','08-04','08-05','08-06','08-07','08-08','08-09','08-10','08-11','08-12']","{'title':'2013年9月原材料单位成本趋势','height':360.000000}")>
         <div id='canvasDiv'>
         </div>
     </body>

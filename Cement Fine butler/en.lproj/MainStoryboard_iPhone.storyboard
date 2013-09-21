@@ -92,35 +92,16 @@
             </objects>
             <point key="canvasLocation" x="-390" y="886"/>
         </scene>
-        <!--Navigation Controller - 成本管理-->
-        <scene sceneID="4oL-Kc-E4g">
-            <objects>
-                <navigationController storyboardIdentifier="costManagerNavigationController" definesPresentationContext="YES" id="jab-Dk-0NY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="成本管理" id="miZ-dz-dFh"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z9i-hN-ibt">
-                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="xkp-O5-k5u" kind="relationship" relationship="rootViewController" id="DD4-Bt-cQD"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Li7-57-2Mg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="79" y="896"/>
-        </scene>
         <!--Raw Materials Cost Manager View Controller-->
         <scene sceneID="7gA-Ww-nwU">
             <objects>
-                <viewController id="xkp-O5-k5u" customClass="RawMaterialsCostManagerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rawMaterialsCostManagerViewController" id="xkp-O5-k5u" customClass="RawMaterialsCostManagerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="22Y-cq-Orb">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="X2J-T0-o9b">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="43" width="320" height="411"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <webView contentMode="scaleToFill" id="LYr-tK-pge">
@@ -129,27 +110,41 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </webView>
                                     <view contentMode="scaleToFill" id="lFl-3W-NSR">
-                                        <rect key="frame" x="0.0" y="269" width="320" height="98"/>
+                                        <rect key="frame" x="0.0" y="269" width="320" height="142"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" id="fPS-CU-diH">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="ibr-Rf-dYp">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="j6K-Xd-rva">
+                                            <color key="tintColor" red="0.0" green="0.40000003576278687" blue="0.59215688705444336" alpha="1" colorSpace="deviceRGB"/>
+                                            <connections>
+                                                <action selector="showSearch:" destination="xkp-O5-k5u" id="8u1-iL-Sb7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ONU-r2-agV"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomView" destination="lFl-3W-NSR" id="D4v-SH-u8r"/>
+                        <outlet property="navigationBar" destination="fPS-CU-diH" id="9nD-wE-Jn8"/>
                         <outlet property="scrollView" destination="X2J-T0-o9b" id="IGO-rb-VbL"/>
                         <outlet property="webView" destination="LYr-tK-pge" id="RkA-JZ-ncK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H50-Ej-api" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="500" y="896"/>
+            <point key="canvasLocation" x="-2" y="886"/>
         </scene>
         <!--Navigation Controller - 消息-->
         <scene sceneID="HeC-x0-kwF">
@@ -208,18 +203,18 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="gio-wj-zZw">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="筛选条件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CQG-NQ-vBD">
-                                                <rect key="frame" x="10" y="10" width="112" height="30"/>
+                                                <rect key="frame" x="10" y="0.0" width="112" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bEe-vp-Jah">
-                                                <rect key="frame" x="186" y="10" width="70" height="30"/>
+                                                <rect key="frame" x="186" y="2" width="70" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <state key="normal" title="确定">
@@ -229,6 +224,9 @@
                                                 <state key="highlighted">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="search:" destination="E77-F7-4Et" eventType="touchUpInside" id="4rU-k4-1mO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -586,7 +584,7 @@
         <class className="CenterViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CenterViewController.h"/>
         </class>
-        <class className="CostManagerCenterViewController" superclassName="IIViewDeckController">
+        <class className="CostManagerCenterViewController" superclassName="JASidePanelController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CostManagerCenterViewController.h"/>
         </class>
         <class className="EquipmentMapViewController" superclassName="UIViewController">
@@ -619,6 +617,9 @@
         </class>
         <class className="InventoryViewController" superclassName="IIViewDeckController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InventoryViewController.h"/>
+        </class>
+        <class className="JASidePanelController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/JASidePanelController.h"/>
         </class>
         <class className="LeftViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LeftViewController.h"/>
@@ -653,7 +654,9 @@
         <class className="RawMaterialsCostManagerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsCostManagerViewController.h"/>
             <relationships>
+                <relationship kind="action" name="showSearch:"/>
                 <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

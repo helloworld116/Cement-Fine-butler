@@ -167,11 +167,32 @@
     }
     ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.imageView.hidden = NO;
+    //修改搜索条件
+    UITableViewHeaderFooterView *header = [tableView headerViewForSection:0];
+    NSString *headerTitle = header.textLabel.text;
+    if ([@"库存类型" isEqualToString:headerTitle]) {
+        
+    }else if ([@"时间段" isEqualToString:headerTitle]) {
+        
+    }else if ([@"产线" isEqualToString:headerTitle]){
+        
+    }else if ([@"产品" isEqualToString:headerTitle]){
+        
+    }
 }
 
 - (void)viewDidUnload {
     [self setScrollView:nil];
     [self setTopView:nil];
     [super viewDidUnload];
+}
+- (IBAction)search:(id)sender {
+    
+    for (UIView *view in self.scrollView.subviews) {
+        if ([view isKindOfClass:[UITableView class]]) {
+            UITableView *tableView = (UITableView *)view;
+                    }
+    }
+    [self.sidePanelController showCenterPanelAnimated:YES];
 }
 @end

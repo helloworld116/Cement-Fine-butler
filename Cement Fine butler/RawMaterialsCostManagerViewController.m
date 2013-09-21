@@ -28,8 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.title = @"原材料成本管理";
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationItem.title = @"原材料成本管理";
+    
+
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationBar.topItem.title = @"原材料成本管理";
+    
     //
     [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.webView.delegate = self;
@@ -102,6 +107,7 @@
     [self setScrollView:nil];
     [self setWebView:nil];
     [self setBottomView:nil];
+    [self setNavigationBar:nil];
     [super viewDidUnload];
 }
 
@@ -159,4 +165,7 @@
 }
 #pragma mark end webviewDelegate
 
+- (IBAction)showSearch:(id)sender {
+    [self.sidePanelController showRightPanelAnimated:YES];
+}
 @end

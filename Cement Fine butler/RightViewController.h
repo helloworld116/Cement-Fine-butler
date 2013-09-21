@@ -14,4 +14,5 @@
 @property (strong, nonatomic) IBOutlet UIView *topView;
 
 @property (retain,nonatomic) NSArray *conditions;
+- (IBAction)search:(id)sender;
 @end

@@ -15,6 +15,7 @@
     #import <CocoaLumberjack/DDLog.h>
     #import <CocoaLumberjack/DDTTYLogger.h>
     #import <JASidePanels/JASidePanelController.h>
+    #import <JASidePanels/UIViewController+JASidePanel.h>
     #import <ASIHTTPRequest/ASIHTTPRequest.h>
     #import <ASIHTTPRequest/ASIFormDataRequest.h>
     #import <MBProgressHUD/MBProgressHUD.h>
