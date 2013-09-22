@@ -142,6 +142,8 @@
 		472F332B17CC3D3A007E567B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332A17CC3D3A007E567B /* OpenGLES.framework */; };
 		472F332D17CC3D40007E567B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332C17CC3D40007E567B /* QuartzCore.framework */; };
 		472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332E17CC3D48007E567B /* CoreLocation.framework */; };
+		4759C36417EEDB08008B8128 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759C36317EEDB08008B8128 /* Line.m */; };
+		4759C36717EEDCA2008B8128 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759C36617EEDCA2008B8128 /* Product.m */; };
 		476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 476FC86917CC41F200EA5251 /* CalloutMapAnnotation.m */; };
 		476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476FC86B17CC41F200EA5251 /* CallOutAnnotationView.m */; };
 		476FC87117CC41F200EA5251 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FC86C17CC41F200EA5251 /* Cell.xib */; };
@@ -340,6 +342,10 @@
 		472F332A17CC3D3A007E567B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		472F332C17CC3D40007E567B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		472F332E17CC3D48007E567B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4759C36217EEDB08008B8128 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		4759C36317EEDB08008B8128 /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
+		4759C36517EEDCA2008B8128 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		4759C36617EEDCA2008B8128 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		476FC86817CC41F200EA5251 /* CalloutMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalloutMapAnnotation.h; sourceTree = "<group>"; };
 		476FC86917CC41F200EA5251 /* CalloutMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalloutMapAnnotation.m; sourceTree = "<group>"; };
 		476FC86A17CC41F200EA5251 /* CallOutAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallOutAnnotationView.h; sourceTree = "<group>"; };
@@ -373,6 +379,7 @@
 		0E3841E317D41D63004B3C87 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				4759C36117EEDAEE008B8128 /* Model */,
 				0E3841E417D41D71004B3C87 /* LoginViewController.h */,
 				0E3841E517D41D71004B3C87 /* LoginViewController.m */,
 				0E3841E617D41D71004B3C87 /* UpdatePasswordViewController.h */,
@@ -680,6 +687,17 @@
 			name = BaiduMap;
 			sourceTree = "<group>";
 		};
+		4759C36117EEDAEE008B8128 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4759C36217EEDB08008B8128 /* Line.h */,
+				4759C36317EEDB08008B8128 /* Line.m */,
+				4759C36517EEDCA2008B8128 /* Product.h */,
+				4759C36617EEDCA2008B8128 /* Product.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		476FC86717CC41E200EA5251 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -922,6 +940,8 @@
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
+				4759C36417EEDB08008B8128 /* Line.m in Sources */,
+				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -170,13 +170,13 @@
     //修改搜索条件
     UITableViewHeaderFooterView *header = [tableView headerViewForSection:0];
     NSString *headerTitle = header.textLabel.text;
-    if ([@"库存类型" isEqualToString:headerTitle]) {
+    if ([kCondition_InventoryType isEqualToString:headerTitle]) {
         
-    }else if ([@"时间段" isEqualToString:headerTitle]) {
+    }else if ([kCondition_Time isEqualToString:headerTitle]) {
         
-    }else if ([@"产线" isEqualToString:headerTitle]){
+    }else if ([kCondition_Lines isEqualToString:headerTitle]){
         
-    }else if ([@"产品" isEqualToString:headerTitle]){
+    }else if ([kCondition_Products isEqualToString:headerTitle]){
         
     }
 }

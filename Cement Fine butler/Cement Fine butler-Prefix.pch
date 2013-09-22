@@ -55,6 +55,11 @@
 
     //检测网络是否存在使用网址
     #define kCheckNetworkWebsite @"www.baidu.com"
+
+    #define kCondition_InventoryType @"库存类型"
+    #define kCondition_Time @"时间段"
+    #define kCondition_Lines @"产线"
+    #define kCondition_Products @"产品"
 #endif
 
 #ifdef DEBUG

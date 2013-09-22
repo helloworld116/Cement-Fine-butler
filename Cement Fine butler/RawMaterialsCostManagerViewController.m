@@ -89,10 +89,11 @@
     //底部view实际高度
     CGFloat bottomViewHeight = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight-self.bottomView.frame.origin.y;
     //底部view需要的高度，距离上下都是10
-    CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count + 10;
+    CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count + 10*2;
+    DDLogCInfo(@"real height is %f and need height is %f and the subview count is %d",bottomViewHeight,bottomViewNeedHeight,self.bottomView.subviews.count);
     //减去10是为了减少在两者差距很小的情况下，避免可拖动
     if (bottomViewHeight<bottomViewNeedHeight-10) {
-       self.scrollView.contentSize = CGSizeMake(kScreenWidth,kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight+bottomViewNeedHeight-bottomViewHeight);
+       self.scrollView.contentSize = CGSizeMake(kScreenWidth,kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight+bottomViewNeedHeight-bottomViewHeight+30);
     }
 }
 

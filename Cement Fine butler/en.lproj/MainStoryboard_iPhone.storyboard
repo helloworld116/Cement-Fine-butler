@@ -667,6 +667,7 @@
         <class className="RightViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>
             <relationships>
+                <relationship kind="action" name="search:"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="topView" candidateClass="UIView"/>
             </relationships>
