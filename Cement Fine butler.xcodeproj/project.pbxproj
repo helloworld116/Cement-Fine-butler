@@ -128,6 +128,12 @@
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
 		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
+		470FA09217F077A900C79B00 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09017F077A900C79B00 /* check.png */; };
+		470FA09317F077A900C79B00 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09117F077A900C79B00 /* check@2x.png */; };
+		470FA09817F078E800C79B00 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09417F078E800C79B00 /* check_icon.png */; };
+		470FA09917F078E800C79B00 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09517F078E800C79B00 /* check_icon@2x.png */; };
+		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
+		470FA09B17F078E800C79B00 /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09717F078E800C79B00 /* search_icon@2x.png */; };
 		472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32DF17CC3C05007E567B /* UIKit.framework */; };
 		472F32E217CC3C05007E567B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E117CC3C05007E567B /* Foundation.framework */; };
 		472F32E417CC3C05007E567B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E317CC3C05007E567B /* CoreGraphics.framework */; };
@@ -296,6 +302,12 @@
 		0EDFFBF717E1B045009B4671 /* ConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionCell.m; sourceTree = "<group>"; };
 		0EDFFBF917E1B055009B4671 /* ConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConditionCell.xib; sourceTree = "<group>"; };
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		470FA09017F077A900C79B00 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		470FA09117F077A900C79B00 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
+		470FA09417F078E800C79B00 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
+		470FA09517F078E800C79B00 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
+		470FA09617F078E800C79B00 /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon.png; sourceTree = "<group>"; };
+		470FA09717F078E800C79B00 /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon@2x.png"; sourceTree = "<group>"; };
 		472F32DC17CC3C05007E567B /* Cement Fine butler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cement Fine butler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F32DF17CC3C05007E567B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		472F32E117CC3C05007E567B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -454,6 +466,12 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				470FA09417F078E800C79B00 /* check_icon.png */,
+				470FA09517F078E800C79B00 /* check_icon@2x.png */,
+				470FA09617F078E800C79B00 /* search_icon.png */,
+				470FA09717F078E800C79B00 /* search_icon@2x.png */,
+				470FA09017F077A900C79B00 /* check.png */,
+				470FA09117F077A900C79B00 /* check@2x.png */,
 				0E38413917D41D3E004B3C87 /* navigationBarBackButton.png */,
 				0E38413A17D41D3E004B3C87 /* navigationBarBackButton@2x.png */,
 				0E38413B17D41D3E004B3C87 /* tmall_bg_main.png */,
@@ -556,8 +574,6 @@
 			children = (
 				0E72472B17CD9CFC0048DFFB /* LeftViewController.h */,
 				0E72472C17CD9CFC0048DFFB /* LeftViewController.m */,
-				0E72472E17CD9D080048DFFB /* RightViewController.h */,
-				0E72472F17CD9D080048DFFB /* RightViewController.m */,
 				0E72473117CD9D160048DFFB /* CenterViewController.h */,
 				0E72473217CD9D160048DFFB /* CenterViewController.m */,
 				0E3841F817D4782F004B3C87 /* SidePanelViewController.h */,
@@ -565,6 +581,8 @@
 				0EDFFBF617E1B045009B4671 /* ConditionCell.h */,
 				0EDFFBF717E1B045009B4671 /* ConditionCell.m */,
 				0EDFFBF917E1B055009B4671 /* ConditionCell.xib */,
+				0E72472E17CD9D080048DFFB /* RightViewController.h */,
+				0E72472F17CD9D080048DFFB /* RightViewController.m */,
 				0E0AB77217EFD27F00A3255E /* SearchCondition.h */,
 				0E0AB77317EFD27F00A3255E /* SearchCondition.m */,
 			);
@@ -876,6 +894,12 @@
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 				0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */,
 				0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */,
+				470FA09217F077A900C79B00 /* check.png in Resources */,
+				470FA09317F077A900C79B00 /* check@2x.png in Resources */,
+				470FA09817F078E800C79B00 /* check_icon.png in Resources */,
+				470FA09917F078E800C79B00 /* check_icon@2x.png in Resources */,
+				470FA09A17F078E800C79B00 /* search_icon.png in Resources */,
+				470FA09B17F078E800C79B00 /* search_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

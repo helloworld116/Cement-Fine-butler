@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistroyTrendsViewController : UIViewController
+@interface HistroyTrendsViewController : UIViewController<UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+- (IBAction)back:(id)sender;
 
+- (IBAction)showSearch:(id)sender;
 @end

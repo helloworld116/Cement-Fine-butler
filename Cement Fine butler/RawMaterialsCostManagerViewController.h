@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 - (IBAction)showSearch:(id)sender;
+- (IBAction)moreAction:(id)sender;
 
 @end

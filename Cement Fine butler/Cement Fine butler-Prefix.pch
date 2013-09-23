@@ -23,6 +23,7 @@
     #import <SVProgressHUD/SVProgressHUD.h>
     #import <ViewDeck/IIViewDeckController.h>
     #import <RTLabel/RTLabel.h>
+    #import <KxMenu/KxMenu.h>
     #import "LeftViewController.h"
     #import "RightViewController.h"
     #import "InsetsTextField.h"

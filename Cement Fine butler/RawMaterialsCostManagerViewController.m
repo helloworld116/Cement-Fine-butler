@@ -7,6 +7,7 @@
 //
 
 #import "RawMaterialsCostManagerViewController.h"
+#import "HistroyTrendsViewController.h"
 
 #define kLabelHeight 30//底部字段描述label高度
 
@@ -182,10 +183,85 @@
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 
+- (IBAction)moreAction:(id)sender {
+    NSArray *menuItems =
+    @[
+      
+      [KxMenuItem menuItem:@"成本还原"
+                     image:nil
+                    target:self
+                    action:@selector(costReduction:)],
+      
+      [KxMenuItem menuItem:@"取消还原"
+                     image:nil
+                    target:self
+                    action:@selector(cancelReduction:)],
+      
+      [KxMenuItem menuItem:@"上期"
+                     image:nil
+                    target:self
+                    action:@selector(yearCompareYear:)],
+      
+      [KxMenuItem menuItem:@"同期"
+                     image:nil
+                    target:self
+                    action:@selector(monthCompareMonth:)],
+      
+      [KxMenuItem menuItem:@"历史趋势"
+                     image:nil
+                    target:self
+                    action:@selector(historyTrends:)],
+      ];
+    [KxMenu showMenuInView:self.view
+                  fromRect:CGRectMake(10, 5, 30, 40)
+                 menuItems:menuItems];
+}
+
+- (void) pushMenuItem:(id)sender
+{
+    NSLog(@"%@", sender);
+}
+
 #pragma mark observe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
         DDLogCVerbose(@"search condtion change");
     }
+}
+
+#pragma mark 成本还原
+-(void)costReduction:(id)sender{
+
+}
+
+#pragma mark 取消还原
+-(void)cancelReduction:(id)sender{
+
+}
+
+#pragma mark 同比
+-(void)yearCompareYear:(id)sender{
+
+}
+
+#pragma mark 环比
+-(void)monthCompareMonth:(id)sender{
+
+}
+
+#pragma mark 历史趋势
+-(void)historyTrends:(id)sender{
+    JASidePanelController *sidePanelController = [[JASidePanelController alloc] init];
+    HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
+    [sidePanelController setCenterPanel:historyTrendsViewController];
+    RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"今天"];
+    NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
+    NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
+    rightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    [sidePanelController setRightPanel:rightController];
+    sidePanelController.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    sidePanelController.modalTransitionStyle = 2;
+    [self presentViewController:sidePanelController animated:YES completion:nil];
 }
 @end

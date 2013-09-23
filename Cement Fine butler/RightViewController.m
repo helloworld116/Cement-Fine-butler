@@ -12,9 +12,9 @@
 #import "SearchCondition.h"
 
 //tableview cell高度为40
-#define kTableViewCellHeight 30.f
+#define kTableViewCellHeight 40.f
 //tableview header高度为cell高度一半
-#define kTableViewHeaderViewHeight kTableViewCellHeight/2
+#define kTableViewHeaderViewHeight 30
 //tableview开始标记序号
 #define kTableViewTag 10000
 //勾选标记大小
@@ -108,16 +108,16 @@
     return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-//}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+}
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
     view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:12];
+    label.font = [UIFont systemFontOfSize:13.f];
     label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
     label.backgroundColor = [UIColor clearColor];
     [view addSubview:label];
@@ -139,7 +139,7 @@
     cell.label.font = [UIFont systemFontOfSize:14];
     cell.label.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];
     cell.label.textColor = [UIColor whiteColor];
-    cell.imageView.image = [UIImage imageNamed:@"right"];
+    cell.imageView.image = [UIImage imageNamed:@"check_icon"];
     cell.imageView.hidden = YES;
     if (indexPath.row==0) {
         cell.imageView.hidden = NO;
@@ -197,6 +197,8 @@ int inventoryType=0,timeType=0,lineID=0,productID=0;
     }
     ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.imageView.hidden = NO;
+    UILabel *label = (UILabel *)[[[tableView headerViewForSection:0] subviews] objectAtIndex:0];
+    DDLogCInfo(@"text is %@",label.text);
     //修改搜索条件
     UITableViewHeaderFooterView *header = [tableView headerViewForSection:0];
     NSString *headerTitle = header.textLabel.text;
