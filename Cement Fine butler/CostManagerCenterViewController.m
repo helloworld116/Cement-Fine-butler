@@ -7,6 +7,7 @@
 //
 
 #import "CostManagerCenterViewController.h"
+#import "RawMaterialsCostManagerViewController.h"
 
 @interface CostManagerCenterViewController ()
 
@@ -53,7 +54,8 @@
 -(void) awakeFromNib
 {
     [self setLeftPanel:nil];
-    [self setCenterPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"]];
+    RawMaterialsCostManagerViewController *rawMaterialCostMangerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
+    [self setCenterPanel:rawMaterialCostMangerViewController];
     RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"今天"];
     NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];

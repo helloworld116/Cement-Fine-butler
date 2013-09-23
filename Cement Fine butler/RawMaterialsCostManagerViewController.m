@@ -52,6 +52,18 @@
     [self setBottomViewOfSubView];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //观察查询条件修改
+    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld context:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    //移除观察条件
+    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+}
+
 - (void) setBottomViewOfSubView {
     NSString *preStr = @"<font size=20 color='red'>";
     NSString *sufStr = @"</font>";
@@ -168,5 +180,12 @@
 
 - (IBAction)showSearch:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+#pragma mark observe
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"searchCondition"]) {
+        DDLogCVerbose(@"search condtion change");
+    }
 }
 @end

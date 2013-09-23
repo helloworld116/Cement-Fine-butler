@@ -9,9 +9,10 @@
 //tag 从10000开始
 #import "RightViewController.h"
 #import "ConditionCell.h"
+#import "SearchCondition.h"
 
 //tableview cell高度为40
-#define kTableViewCellHeight 40.f
+#define kTableViewCellHeight 30.f
 //tableview header高度为cell高度一半
 #define kTableViewHeaderViewHeight kTableViewCellHeight/2
 //tableview开始标记序号
@@ -20,7 +21,7 @@
 #define kImageViewSize 30
 
 @interface RightViewController ()
-
+@property (nonatomic,retain) SearchCondition *searchCondition;
 @end
 
 @implementation RightViewController
@@ -38,6 +39,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.backgroundColor =[UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
+    
     CGFloat beginOrign = self.topView.frame.size.height;
     CGFloat totalHeight = self.topView.frame.size.height;
     //设置tableview，每一个筛选条件就是一个tableview
@@ -50,7 +53,16 @@
         tableView.tag = kTableViewTag+i;
         tableView.dataSource = self;
         tableView.delegate = self;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.backgroundColor = [UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
+        tableView.separatorColor = [UIColor colorWithPatternImage:self.separatorImage];
+//        tableView.highlightedBackgroundColor = [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1];
+//        tableView.highlightedSeparatorColor = [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1];
+//        //设置tableview样式
+//        tableView.layer.cornerRadius = 4;
+//        tableView.layer.shadowColor = [UIColor blackColor].CGColor;
+//        tableView.layer.shadowOffset = CGSizeMake(0, 1);
+//        tableView.layer.shadowOpacity = 1;
+//        tableView.imageOffset = CGSizeMake(5, -1);
         [self.scrollView addSubview:tableView];
         beginOrign += tableViewHeight;
         totalHeight += tableViewHeight;
@@ -62,6 +74,8 @@
     }
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    //初始化搜索条件
+    self.searchCondition = [[SearchCondition alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,8 +108,20 @@
     return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
+    view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:12];
+    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+    label.backgroundColor = [UIColor clearColor];
+    [view addSubview:label];
+    return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,12 +136,16 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     int index = tableView.tag-kTableViewTag;
     NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
+    cell.label.font = [UIFont systemFontOfSize:14];
     cell.label.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];
+    cell.label.textColor = [UIColor whiteColor];
     cell.imageView.image = [UIImage imageNamed:@"right"];
     cell.imageView.hidden = YES;
     if (indexPath.row==0) {
         cell.imageView.hidden = NO;
     }
+    //设置标识，以便选中时知道选中的是哪个
+    cell.cellID = indexPath.row;
     return cell;
 }
 
@@ -159,7 +189,7 @@
  */
 
 #pragma mark - Table view delegate
-
+int inventoryType=0,timeType=0,lineID=0,productID=0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     for (int i=0; i<[[tableView visibleCells] count]; i++) {
         ConditionCell *cell = (ConditionCell *)[[tableView visibleCells] objectAtIndex:i];
@@ -171,13 +201,13 @@
     UITableViewHeaderFooterView *header = [tableView headerViewForSection:0];
     NSString *headerTitle = header.textLabel.text;
     if ([kCondition_InventoryType isEqualToString:headerTitle]) {
-        
+        inventoryType = cell.cellID;
     }else if ([kCondition_Time isEqualToString:headerTitle]) {
-        
+        timeType = cell.cellID;
     }else if ([kCondition_Lines isEqualToString:headerTitle]){
-        
+        lineID = cell.cellID;
     }else if ([kCondition_Products isEqualToString:headerTitle]){
-        
+        productID = cell.cellID;
     }
 }
 
@@ -186,13 +216,30 @@
     [self setTopView:nil];
     [super viewDidUnload];
 }
-- (IBAction)search:(id)sender {
-    
-    for (UIView *view in self.scrollView.subviews) {
-        if ([view isKindOfClass:[UITableView class]]) {
-            UITableView *tableView = (UITableView *)view;
-                    }
-    }
+- (IBAction)search:(id)sender {    
+//    for (UIView *view in self.scrollView.subviews) {
+//        if ([view isKindOfClass:[UITableView class]]) {
+//            UITableView *tableView = (UITableView *)view;
+//                    }
+//    }
+    self.searchCondition = [[SearchCondition alloc] initWithInventoryType:inventoryType timeType:timeType lineID:lineID productID:productID];
     [self.sidePanelController showCenterPanelAnimated:YES];
+}
+
+#pragma mark Setting style
+
+- (UIImage *)separatorImage
+{
+    UIGraphicsBeginImageContext(CGSizeMake(1, 4));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIGraphicsPushContext(context);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1].CGColor);
+    CGContextFillRect(context, CGRectMake(0, 0, 1, 2));
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:79/255.0 green:79/255.0 blue:77/255.0 alpha:1].CGColor);
+    CGContextFillRect(context, CGRectMake(0, 3, 1, 2));
+    UIGraphicsPopContext();
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [UIImage imageWithCGImage:outputImage.CGImage scale:2.0 orientation:UIImageOrientationUp];
 }
 @end

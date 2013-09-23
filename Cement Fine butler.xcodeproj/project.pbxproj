@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AB77317EFD27F00A3255E /* SearchCondition.m */; };
 		0E22B15E17D8191F009695FF /* ProductColumn_2.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* ProductColumn_2.html */; };
 		0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E017ED7AC600385E59 /* LoginAction.m */; };
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
@@ -152,6 +153,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0AB77217EFD27F00A3255E /* SearchCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCondition.h; sourceTree = "<group>"; };
+		0E0AB77317EFD27F00A3255E /* SearchCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCondition.m; sourceTree = "<group>"; };
 		0E22B15D17D8191F009695FF /* ProductColumn_2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn_2.html; sourceTree = "<group>"; };
 		0E2786DF17ED7AC600385E59 /* LoginAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAction.h; sourceTree = "<group>"; };
 		0E2786E017ED7AC600385E59 /* LoginAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAction.m; sourceTree = "<group>"; };
@@ -562,6 +565,8 @@
 				0EDFFBF617E1B045009B4671 /* ConditionCell.h */,
 				0EDFFBF717E1B045009B4671 /* ConditionCell.m */,
 				0EDFFBF917E1B055009B4671 /* ConditionCell.xib */,
+				0E0AB77217EFD27F00A3255E /* SearchCondition.h */,
+				0E0AB77317EFD27F00A3255E /* SearchCondition.m */,
 			);
 			name = Nav;
 			sourceTree = "<group>";
@@ -942,6 +947,7 @@
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
+				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
