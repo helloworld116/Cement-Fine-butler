@@ -120,4 +120,11 @@
     
 }
 #pragma mark end webviewDelegate
+- (IBAction)showNav:(id)sender {
+    [self.sidePanelController showLeftPanelAnimated:YES];
+}
+
+- (IBAction)showSearchCondition:(id)sender {
+    [self.sidePanelController showRightPanelAnimated:YES];
+}
 @end

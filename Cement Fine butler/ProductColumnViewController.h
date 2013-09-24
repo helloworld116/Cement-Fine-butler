@@ -12,5 +12,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *topContainerView;
 @property (strong, nonatomic) IBOutlet UIWebView *bottomWebiew;
+- (IBAction)showNav:(id)sender;
 
+- (IBAction)showSearchCondition:(id)sender;
 @end

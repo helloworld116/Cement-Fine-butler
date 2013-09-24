@@ -30,6 +30,10 @@
     if (!ret) {
         DDLogError(@"baidu map manager start failed!");
     }
+    //从用户默认数据中获取用户登录信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *password = [defaults objectForKey:@"password"];
     return YES;
 }
 							
