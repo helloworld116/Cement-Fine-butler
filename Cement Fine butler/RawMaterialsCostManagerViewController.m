@@ -255,10 +255,11 @@
     HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
     [sidePanelController setCenterPanel:historyTrendsViewController];
     RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    NSArray *unitCostArray = @[@"原材料单位成本",@"直接材料单位成本"];
     NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"今天"];
     NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
     NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
-    rightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    rightController.conditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     [sidePanelController setRightPanel:rightController];
     sidePanelController.modalPresentationStyle = UIModalPresentationCurrentContext;
 //    sidePanelController.modalTransitionStyle = 2;

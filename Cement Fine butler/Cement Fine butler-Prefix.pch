@@ -20,7 +20,7 @@
     #import <ASIHTTPRequest/ASIHTTPRequest.h>
     #import <ASIHTTPRequest/ASIFormDataRequest.h>
     #import <MBProgressHUD/MBProgressHUD.h>
-    #import <SVProgressHUD/SVProgressHUD.h>
+//    #import <SVProgressHUD/SVProgressHUD.h>
     #import <ViewDeck/IIViewDeckController.h>
     #import <RTLabel/RTLabel.h>
     #import <KxMenu/KxMenu.h>
@@ -62,6 +62,7 @@
     #define kCondition_Time @"时间段"
     #define kCondition_Lines @"产线"
     #define kCondition_Products @"产品"
+    #define kCondition_UnitCostType @"单位成本类型"
 #endif
 
 #ifdef DEBUG

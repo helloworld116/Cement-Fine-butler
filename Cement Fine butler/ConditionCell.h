@@ -10,7 +10,7 @@
 
 @interface ConditionCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *label;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedImgView;
 
 @property long cellID;//标识，产品，产线ID等
 @end

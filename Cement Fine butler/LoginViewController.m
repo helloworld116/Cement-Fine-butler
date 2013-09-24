@@ -10,7 +10,8 @@
 #import "ProductColumnViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface LoginViewController ()
+@interface LoginViewController ()<MBProgressHUDDelegate>
+@property (nonatomic,retain) MBProgressHUD *HUD;
 @property (nonatomic,copy) NSString *uname;
 @property (nonatomic,copy) NSString *pword;
 @property BOOL keyboardWasShow;
@@ -34,6 +35,7 @@
     self.titleImgView.image = [UIImage imageNamed:@"title.png"];
     self.username.background = [UIImage imageNamed:@"username.png"];
     self.password.background = [UIImage imageNamed:@"password.png"];
+    [self.btnLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad
@@ -41,7 +43,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setBackground];
-    self.navigationController.navigationBarHidden = YES;
     self.username.delegate = self;
     self.password.delegate = self;
     self.username.text = @"fengbo";
@@ -70,15 +71,14 @@
 
 - (IBAction)doLogin:(id)sender {
     if([self validate]){
-        self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoginURL]];
-        [self.request setUseCookiePersistence:YES];
-        [self.request setPostValue:self.uname forKey:@"username"];
-        [self.request setPostValue:self.pword forKey:@"password"];
-        [self.request setDelegate:self];
-        [self.request setDidFailSelector:@selector(requestFailed:)];
-        [self.request setDidFinishSelector:@selector(requestLogin:)];
-        [self.request startAsynchronous];
-        [SVProgressHUD showWithStatus:@"正在登录..." maskType:SVProgressHUDMaskTypeGradient];
+        //        [SVProgressHUD showWithStatus:@"正在登录..." maskType:SVProgressHUDMaskTypeGradient];
+        self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:self.HUD];
+        self.HUD.delegate = self;
+        self.HUD.minShowTime = 3;//最少显示时间为3秒
+        self.HUD.dimBackground = YES;//
+        self.HUD.labelText = @"正在登录...";
+        [self.HUD showWhileExecuting:@selector(sendRequest) onTarget:self withObject:nil animated:YES];
     }
 }
 
@@ -93,23 +93,25 @@
     self.pword = [self.password.text stringByTrimmingCharactersInSet:
     [NSCharacterSet whitespaceCharacterSet]];
     if (self.uname == nil || [@"" isEqualToString:self.uname]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"用户名不能为空";
-        hud.margin = 10.f;
-        hud.yOffset = 180.f;
-        hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES afterDelay:2];
+        self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.HUD.mode = MBProgressHUDModeText;
+        self.HUD.labelText = @"用户名不能为空";
+        self.HUD.labelFont = [UIFont systemFontOfSize:13.f];
+        self.HUD.margin = 5.f;
+        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
+        self.HUD.removeFromSuperViewOnHide = YES;
+        [self.HUD hide:YES afterDelay:2];
         return NO;
     }
     if (self.pword ==nil || [@"" isEqualToString:self.pword]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"密码不能为空";
-        hud.margin = 10.f;
-        hud.yOffset = 180.f;
-        hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES afterDelay:2];
+        self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.HUD.mode = MBProgressHUDModeText;
+        self.HUD.labelText = @"密码不能为空";
+        self.HUD.labelFont = [UIFont systemFontOfSize:13.f];
+        self.HUD.margin = 5.f;
+        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
+        self.HUD.removeFromSuperViewOnHide = YES;
+        [self.HUD hide:YES afterDelay:2];
         return NO;
     }
     return YES;
@@ -121,15 +123,28 @@
     [self.password resignFirstResponder];
 }
 
+#pragma mark 发送网络请求
+-(void) sendRequest {
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoginURL]];
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:self.uname forKey:@"username"];
+    [self.request setPostValue:self.pword forKey:@"password"];
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+    [self.request startAsynchronous];
+}
+
+#pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    [SVProgressHUD showErrorWithStatus:@"网络请求出错"];
+//    [SVProgressHUD showErrorWithStatus:@"网络请求出错"];
     self.password.text = nil;
 }
 
--(void)requestLogin:(ASIHTTPRequest *)request{
+-(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     if ([[dict objectForKey:@"error"] intValue]==0) {
-        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+//        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
 //        kSharedApp.accessToken = [[dict objectForKey:@"data"] objectForKey:@"accessToken"];
 //        kSharedApp.factoryId = [[dict objectForKey:@"data"] objectForKey:@"factoryId"];
 //        UITabBarController *tab = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"tab"];
@@ -146,14 +161,16 @@
         
 //        ProductColumnViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
         UITabBarController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-        [self.navigationController pushViewController:viewController animated:YES];
+        viewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:viewController animated:YES completion:nil];
     }else{
         self.password.text = nil;
         NSString *msg = [dict objectForKey:@"description"];
-        [SVProgressHUD showErrorWithStatus:msg];
+//        [SVProgressHUD showErrorWithStatus:msg];
     }
 }
 
+#pragma mark textfield代理
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     self.keyboardWasShow = NO;
     [textField resignFirstResponder];
@@ -184,5 +201,12 @@
         [UIView commitAnimations];
         self.keyboardWasShow = YES;
     }
+}
+
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+	// Remove HUD from screen when the HUD was hidded
+	[self.HUD removeFromSuperview];
+	self.HUD = nil;
 }
 @end

@@ -139,10 +139,10 @@
     cell.label.font = [UIFont systemFontOfSize:14];
     cell.label.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];
     cell.label.textColor = [UIColor whiteColor];
-    cell.imageView.image = [UIImage imageNamed:@"check_icon"];
-    cell.imageView.hidden = YES;
+    cell.selectedImgView.image = [UIImage imageNamed:@"check_icon"];
+    cell.selectedImgView.hidden = YES;
     if (indexPath.row==0) {
-        cell.imageView.hidden = NO;
+        cell.selectedImgView.hidden = NO;
     }
     //设置标识，以便选中时知道选中的是哪个
     cell.cellID = indexPath.row;
@@ -193,10 +193,10 @@ int inventoryType=0,timeType=0,lineID=0,productID=0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     for (int i=0; i<[[tableView visibleCells] count]; i++) {
         ConditionCell *cell = (ConditionCell *)[[tableView visibleCells] objectAtIndex:i];
-        cell.imageView.hidden = YES;
+        cell.selectedImgView.hidden = YES;
     }
     ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
-    cell.imageView.hidden = NO;
+    cell.selectedImgView.hidden = NO;
     UILabel *label = (UILabel *)[[[tableView headerViewForSection:0] subviews] objectAtIndex:0];
     DDLogCInfo(@"text is %@",label.text);
     //修改搜索条件
