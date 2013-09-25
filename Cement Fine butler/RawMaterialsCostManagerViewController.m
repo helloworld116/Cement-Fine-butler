@@ -56,7 +56,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //观察查询条件修改
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld context:nil];
+    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -217,15 +217,11 @@
                  menuItems:menuItems];
 }
 
-- (void) pushMenuItem:(id)sender
-{
-    NSLog(@"%@", sender);
-}
-
 #pragma mark observe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
-        DDLogCVerbose(@"search condtion change");
+        SearchCondition *condition = [change objectForKey:@"new"];
+        DDLogCVerbose(@"line is %ld",condition.productID);
     }
 }
 
@@ -255,14 +251,30 @@
     HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
     [sidePanelController setCenterPanel:historyTrendsViewController];
     RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    NSArray *unitCostArray = @[@"原材料单位成本",@"直接材料单位成本"];
-    NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"今天"];
-    NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
-    NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
+    NSArray *unitCostArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
+    NSArray *timeArray = kCondition_Time_Array;
+    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+    for (NSDictionary *line in lines) {
+        NSString *name = [line objectForKey:@"name"];
+        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+        NSDictionary *dict = @{@"_id":_id,@"name":name};
+        [lineArray addObject:dict];
+    }
+    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+    for (NSDictionary *product in products) {
+        NSString *name = [product objectForKey:@"name"];
+        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+        NSDictionary *dict = @{@"_id":_id,@"name":name};
+        [productArray addObject:dict];
+    }
     rightController.conditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     [sidePanelController setRightPanel:rightController];
     sidePanelController.modalPresentationStyle = UIModalPresentationCurrentContext;
 //    sidePanelController.modalTransitionStyle = 2;
     [self presentViewController:sidePanelController animated:YES completion:nil];
+//    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
+//    @[@{@"库存类型":stockType},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
 }
 @end

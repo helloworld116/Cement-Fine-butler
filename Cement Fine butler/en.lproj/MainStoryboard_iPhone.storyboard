@@ -453,11 +453,13 @@
                                 <items>
                                     <navigationItem id="Ibf-Ux-dIh">
                                         <barButtonItem key="leftBarButtonItem" title="left" id="XEE-kz-ehG">
+                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="showNav:" destination="REM-73-e9s" id="Cbx-hq-Rxn"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="right" id="RsC-Wk-H4u">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="RsC-Wk-H4u">
+                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="showSearchCondition:" destination="REM-73-e9s" id="M00-TG-qLP"/>
                                             </connections>
@@ -486,6 +488,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomWebiew" destination="ngq-QP-YgT" id="3yM-pa-r8I"/>
+                        <outlet property="navigationBar" destination="ZKm-YH-pBj" id="Al3-16-zsq"/>
                         <outlet property="scrollView" destination="0OI-X3-duE" id="UxB-dn-MqY"/>
                         <outlet property="topContainerView" destination="41q-62-1sb" id="Zam-49-Wxy"/>
                     </connections>
@@ -508,11 +511,13 @@
                                 <items>
                                     <navigationItem id="BMn-nG-gYj">
                                         <barButtonItem key="leftBarButtonItem" title="left" id="eVm-jM-cgd">
+                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="showNav:" destination="BFp-W7-3UZ" id="tdJ-US-vAU"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="right" id="pa4-Gl-TGE">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="pa4-Gl-TGE">
+                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="showSearchCondition:" destination="BFp-W7-3UZ" id="zrg-cW-IHJ"/>
                                             </connections>
@@ -541,6 +546,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomWebiew" destination="89D-1a-1s7" id="m1l-oQ-xnH"/>
+                        <outlet property="navigationBar" destination="D4f-Zm-Dpc" id="nfx-6j-jpZ"/>
                         <outlet property="scrollView" destination="B1c-eU-Z8u" id="wiW-PS-ExP"/>
                         <outlet property="topContainerView" destination="I7q-aA-YvI" id="MED-tC-Xfy"/>
                     </connections>
@@ -580,6 +586,7 @@
                 <relationship kind="action" name="showNav:"/>
                 <relationship kind="action" name="showSearchCondition:"/>
                 <relationship kind="outlet" name="bottomWebiew" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
             </relationships>
@@ -612,6 +619,7 @@
                 <relationship kind="action" name="showNav:"/>
                 <relationship kind="action" name="showSearchCondition:"/>
                 <relationship kind="outlet" name="bottomWebiew" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
             </relationships>
@@ -626,9 +634,6 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
-        </class>
-        <class className="RealtimeReportsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RealtimeReportsViewController.h"/>
         </class>
         <class className="RightViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>

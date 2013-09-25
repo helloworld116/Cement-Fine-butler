@@ -7,6 +7,8 @@
 //
 
 #import "LeftViewController.h"
+#import "InventoryColumnViewController.h"
+#import "ProductColumnViewController.h"
 
 //tableview cell高度为40
 #define kTableViewCellHeight 40.f
@@ -150,7 +152,36 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    if (indexPath.row==0) {
+        NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+        NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+        for (NSDictionary *line in lines) {
+            NSString *name = [line objectForKey:@"name"];
+            NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+            NSDictionary *dict = @{@"_id":_id,@"name":name};
+            [lineArray addObject:dict];
+        }
+        NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+        NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+        for (NSDictionary *product in products) {
+            NSString *name = [product objectForKey:@"name"];
+            NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+            NSDictionary *dict = @{@"_id":_id,@"name":name};
+            [productArray addObject:dict];
+        }
+        NSArray *timeArray = kCondition_Time_Array;
+        ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+        realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+        [self.sidePanelController setCenterPanel:productColumnViewController];
+        [self.sidePanelController setRightPanel:realTimeReportsRightController];
+    }else if (indexPath.row==1){
+        InventoryColumnViewController *inventoryColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
+        NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
+        realTimeReportsRightController.conditions = @[@{@"库存类型":stockType}];
+        [self.sidePanelController setCenterPanel:inventoryColumnViewController];
+        [self.sidePanelController setRightPanel:realTimeReportsRightController];
+    }
 }
 
 - (void)viewDidUnload {

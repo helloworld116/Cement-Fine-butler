@@ -15,7 +15,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnLogin;
 @property (strong, nonatomic) IBOutlet InsetsTextField *username;
 @property (strong, nonatomic) IBOutlet InsetsTextField *password;
-@property (retain, nonatomic) ASIFormDataRequest *request;
 - (IBAction)doLogin:(id)sender;
 - (IBAction)backgroundTouch:(id)sender;
 

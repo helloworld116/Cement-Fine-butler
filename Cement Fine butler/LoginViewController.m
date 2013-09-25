@@ -11,7 +11,10 @@
 #import "RawMaterialsCostManagerViewController.h"
 #import "InventoryColumnViewController.h"
 
+#define kViewTag 12000
+
 @interface LoginViewController ()<MBProgressHUDDelegate>
+@property (retain, nonatomic) ASIFormDataRequest *request;
 @property (nonatomic,retain) MBProgressHUD *HUD;
 @property (nonatomic,copy) NSString *uname;
 @property (nonatomic,copy) NSString *pword;
@@ -46,8 +49,8 @@
     [self setBackground];
     self.username.delegate = self;
     self.password.delegate = self;
-    self.username.text = @"fengbo";
-    self.password.text = @"123456";
+    self.username.text = @"fbadmin";
+    self.password.text = @"654321";
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,36 +128,53 @@
 }
 
 -(UITabBarController *) showViewControllers{
-    NSArray *timeArray = @[@"本年",@"本季度",@"本月",@"今天"];
-    NSArray *lineArray = @[@"全部",@"1号线",@"2号线"];
-    NSArray *productArray = @[@"全部",@"PC32.5",@"PC42.5"];
+    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+    for (NSDictionary *line in lines) {
+        NSString *name = [line objectForKey:@"name"];
+        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+        NSDictionary *dict = @{@"_id":_id,@"name":name};
+        [lineArray addObject:dict];
+    }
+    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+    for (NSDictionary *product in products) {
+        NSString *name = [product objectForKey:@"name"];
+        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+        NSDictionary *dict = @{@"_id":_id,@"name":name};
+        [productArray addObject:dict];
+    }
+    NSArray *timeArray = kCondition_Time_Array;
     //根据权限选择需要展现的视图
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     //原材料成本管理模块
     JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
+    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:nil tag:kViewTag+1];
     RawMaterialsCostManagerViewController *rawMaterialsCostManagerViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
     [costManagerController setCenterPanel:rawMaterialsCostManagerViewController];
     RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
     [costManagerController setRightPanel:costManagerRightController];
-    //实时报表
+    //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
-    InventoryColumnViewController *inventoryColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
+    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:nil tag:kViewTag+2];
+    ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
     LeftViewController *realTimeReportsLeftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
     NSArray *reportType = @[@"产量报表",@"库存报表"];
     realTimeReportsLeftController.conditions = @[@{@"实时报表":reportType}];
     RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    NSArray *type = @[@"产品库存",@"原材料库存"];
-    realTimeReportsRightController.conditions = @[@{@"库存类型":type},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    [realTimeReportsController setCenterPanel:inventoryColumnViewController];
+//    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
+    realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    [realTimeReportsController setCenterPanel:productColumnViewController];
     [realTimeReportsController setLeftPanel:realTimeReportsLeftController];
     [realTimeReportsController setRightPanel:realTimeReportsRightController];
     //设备管理
     UINavigationController *equipmentController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
+    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:nil tag:kViewTag+3];
     //消息
     UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
+    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:nil tag:kViewTag+4];
     tabBarController.viewControllers = @[costManagerController,realTimeReportsController,equipmentController,messageController];
-//    tabBarController.tabBar.
     return tabBarController;
 }
 
@@ -179,12 +199,14 @@
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     if ([[dict objectForKey:@"error"] intValue]==0) {
+        NSDictionary *data = [dict objectForKey:@"data"];
+        kSharedApp.accessToken = [data objectForKey:@"accessToken"];
+        kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
+        kSharedApp.factory = [data objectForKey:@"factory"];
         //保存用户名和密码
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:self.uname forKey:@"username"];
         [userDefaults setObject:self.pword forKey:@"password"];
-        
-        
 //        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
 //        kSharedApp.accessToken = [[dict objectForKey:@"data"] objectForKey:@"accessToken"];
 //        kSharedApp.factoryId = [[dict objectForKey:@"data"] objectForKey:@"factoryId"];

@@ -30,11 +30,10 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-//    self.loadingView = [[LoadingView alloc] initWithFrame:self.view.bounds];
+//    self.loadingView = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
 //    [self.loadingView startLoading];
 //    [self.view insertSubview:self.loadingView aboveSubview:self.bottomWebiew];
 //    [self.view bringSubviewToFront:self.loadingView];
-    
 //    DDLogVerbose(@"self view subview is %@",[self.view subviews]);
 }
 
@@ -42,13 +41,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.title = @"库存";
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationBar.topItem.title = @"库存报表";
     //
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
     self.bottomWebiew.scalesPageToFit = IS_RETINA;
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ProductColumn_2" ofType:@"html"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
     [self.bottomWebiew loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
@@ -66,6 +65,7 @@
     [self setTopContainerView:nil];
     [self setBottomWebiew:nil];
     [self setScrollView:nil];
+    [self setNavigationBar:nil];
     [super viewDidUnload];
 }
 

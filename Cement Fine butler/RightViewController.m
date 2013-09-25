@@ -63,6 +63,18 @@
 //        tableView.layer.shadowOffset = CGSizeMake(0, 1);
 //        tableView.layer.shadowOpacity = 1;
 //        tableView.imageOffset = CGSizeMake(5, -1);
+        
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
+        view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:13.f];
+        label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+        label.backgroundColor = [UIColor clearColor];
+        [view addSubview:label];
+        tableView.tableHeaderView = view;
+        
         [self.scrollView addSubview:tableView];
         beginOrign += tableViewHeight;
         totalHeight += tableViewHeight;
@@ -86,15 +98,15 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kTableViewHeaderViewHeight;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    // Return the number of sections.
+//    return 1;
+//}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return kTableViewHeaderViewHeight;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return kTableViewCellHeight;
@@ -108,28 +120,27 @@
     return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//}
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
-    view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:13.f];
-    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-    label.backgroundColor = [UIColor clearColor];
-    [view addSubview:label];
-    return view;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
+//    view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
+//    label.textColor = [UIColor whiteColor];
+//    label.font = [UIFont systemFontOfSize:13.f];
+//    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//    label.backgroundColor = [UIColor clearColor];
+//    [view addSubview:label];
+//    return view;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ConditionCell";
     ConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
     }
     // Configure the cell...
@@ -137,7 +148,7 @@
     int index = tableView.tag-kTableViewTag;
     NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
     cell.label.font = [UIFont systemFontOfSize:14];
-    cell.label.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];
+    cell.label.text = [[[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row] objectForKey:@"name"];
     cell.label.textColor = [UIColor whiteColor];
     cell.selectedImgView.image = [UIImage imageNamed:@"check_icon"];
     cell.selectedImgView.hidden = YES;
@@ -145,7 +156,7 @@
         cell.selectedImgView.hidden = NO;
     }
     //设置标识，以便选中时知道选中的是哪个
-    cell.cellID = indexPath.row;
+    cell.cellID = [[[[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row] objectForKey:@"_id"] longValue];
     return cell;
 }
 
@@ -197,11 +208,9 @@ int inventoryType=0,timeType=0,lineID=0,productID=0;
     }
     ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.selectedImgView.hidden = NO;
-    UILabel *label = (UILabel *)[[[tableView headerViewForSection:0] subviews] objectAtIndex:0];
-    DDLogCInfo(@"text is %@",label.text);
     //修改搜索条件
-    UITableViewHeaderFooterView *header = [tableView headerViewForSection:0];
-    NSString *headerTitle = header.textLabel.text;
+    UILabel *label = (UILabel *)[[tableView.tableHeaderView subviews] objectAtIndex:0];
+    NSString *headerTitle = label.text;
     if ([kCondition_InventoryType isEqualToString:headerTitle]) {
         inventoryType = cell.cellID;
     }else if ([kCondition_Time isEqualToString:headerTitle]) {
