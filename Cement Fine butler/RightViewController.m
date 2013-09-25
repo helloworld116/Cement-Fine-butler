@@ -200,7 +200,7 @@
  */
 
 #pragma mark - Table view delegate
-int inventoryType=0,timeType=0,lineID=0,productID=0;
+int stockType=0,timeType=0,lineID=0,productID=0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     for (int i=0; i<[[tableView visibleCells] count]; i++) {
         ConditionCell *cell = (ConditionCell *)[[tableView visibleCells] objectAtIndex:i];
@@ -211,8 +211,8 @@ int inventoryType=0,timeType=0,lineID=0,productID=0;
     //修改搜索条件
     UILabel *label = (UILabel *)[[tableView.tableHeaderView subviews] objectAtIndex:0];
     NSString *headerTitle = label.text;
-    if ([kCondition_InventoryType isEqualToString:headerTitle]) {
-        inventoryType = cell.cellID;
+    if ([kCondition_StockType isEqualToString:headerTitle]) {
+        stockType = cell.cellID;
     }else if ([kCondition_Time isEqualToString:headerTitle]) {
         timeType = cell.cellID;
     }else if ([kCondition_Lines isEqualToString:headerTitle]){
@@ -228,12 +228,7 @@ int inventoryType=0,timeType=0,lineID=0,productID=0;
     [super viewDidUnload];
 }
 - (IBAction)search:(id)sender {    
-//    for (UIView *view in self.scrollView.subviews) {
-//        if ([view isKindOfClass:[UITableView class]]) {
-//            UITableView *tableView = (UITableView *)view;
-//                    }
-//    }
-    self.searchCondition = [[SearchCondition alloc] initWithInventoryType:inventoryType timeType:timeType lineID:lineID productID:productID];
+    self.searchCondition = [[SearchCondition alloc] initWithStockType:stockType timeType:timeType lineID:lineID productID:productID];
     [self.sidePanelController showCenterPanelAnimated:YES];
 }
 

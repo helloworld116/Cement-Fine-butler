@@ -44,6 +44,18 @@
 //    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //观察查询条件修改
+    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    //移除观察条件
+    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -79,28 +91,28 @@
 //    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
 //    DDLogVerbose(@"dates is %@",js);
 //    [webView stringByEvaluatingJavaScriptFromString:js];
-    
-    NSArray *stockArray = [self.data objectForKey:@"materials"];
-    NSMutableArray *stocksForSort = [NSMutableArray array];
-    NSMutableArray *stocks = [NSMutableArray array];
-    for (int i=0;i<stockArray.count;i++) {
-        NSDictionary *stock = [stockArray objectAtIndex:i];
-        double value = [[stock objectForKey:@"stock"] doubleValue];
-        NSString *name = [stock objectForKey:@"name"];
-        NSString *color = [kColorList objectAtIndex:i];
-        NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
-        [stocks addObject:reportDict];
-        [stocksForSort addObject:[NSNumber numberWithDouble:value]];
+    if (self.data) {
+        NSArray *stockArray = [self.data objectForKey:@"materials"];
+        NSMutableArray *stocksForSort = [NSMutableArray array];
+        NSMutableArray *stocks = [NSMutableArray array];
+        for (int i=0;i<stockArray.count;i++) {
+            NSDictionary *stock = [stockArray objectAtIndex:i];
+            double value = [[stock objectForKey:@"stock"] doubleValue];
+            NSString *name = [stock objectForKey:@"name"];
+            NSString *color = [kColorList objectAtIndex:i];
+            NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
+            [stocks addObject:reportDict];
+            [stocksForSort addObject:[NSNumber numberWithDouble:value]];
+        }
+        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+        NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+        double max = [[sortedNumbers objectAtIndex:0] doubleValue];
+        NSDictionary *configDict = @{@"title":@"原材料库存",@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+        NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
+        [webView stringByEvaluatingJavaScriptFromString:js];
     }
-    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
-    NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    double max = [[sortedNumbers objectAtIndex:0] doubleValue];
-    NSDictionary *configDict = @{@"title":@"原材料库存",@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
-    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",[Tool objectToString:stocks],[Tool objectToString:configDict]];
-    DDLogVerbose(@"dates is %@",js);
-    [webView stringByEvaluatingJavaScriptFromString:js];
 }
-
+   
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
     
 }
@@ -130,6 +142,14 @@
         [self.bottomWebiew reload];
     }else{
 
+    }
+}
+
+#pragma mark 观察条件变化
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"searchCondition"]) {
+        SearchCondition *condition = [change objectForKey:@"new"];
+        DDLogCVerbose(@"line is %ld",condition.productID);
     }
 }
 

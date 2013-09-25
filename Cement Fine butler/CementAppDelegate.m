@@ -34,7 +34,37 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
+    
+    
+    NSDate *curDate = [NSDate date];
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSRange daysRange =
+    [currentCalendar
+     rangeOfUnit:NSDayCalendarUnit
+     inUnit:NSMonthCalendarUnit
+     forDate:curDate];
+    
+    // daysRange.length will contain the number of the last day
+    // of the month containing curDate
+    
+    NSLog(@"%i", daysRange.length);
+    NSDate *odate = [self stringToDate:@"yyyy-MM-dd" dateString:@"2013-9-25"];
+    NSLog(@"timeinv is %f",[odate timeIntervalSince1970]);
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSQuarterCalendarUnit fromDate:[NSDate date]];
+    NSInteger day = [components day];
+    NSInteger month = [components month];
+    NSInteger year = [components year];
+    NSInteger quater = [components quarter];
+    NSLog(@"year is %d, quater is %d,month is %d, day is %d",year,quater, month,day);
+    
     return YES;
+}
+
+-(NSDate *)stringToDate:(NSString *)formatter dateString:(NSString *)dateString{
+    NSDateFormatter *dateFormatter= [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatter];
+    return [dateFormatter dateFromString:dateString];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
