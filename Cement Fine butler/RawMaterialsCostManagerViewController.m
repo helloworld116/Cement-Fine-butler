@@ -73,49 +73,66 @@
         [subView removeFromSuperview];
     }
     NSDictionary *overView = [self.data objectForKey:@"overView"];
+    NSString *totalCost,*unitCost,*currentUnitCost,*budgetedUnitCost,*costHuanbiRate,*costTongbiRate;
     if (overView&&(NSNull *)overView!=[NSNull null]) {
-        if ([Tool isNullOrNil:[overView objectForKey:@"budgetedUnitCost"]]) {
+        //成本环比增长率
+        if (![Tool isNullOrNil:[overView objectForKey:@"costHuanbiRate"]]) {
+            costHuanbiRate = [NSString stringWithFormat:@"%.2f%@",[[overView objectForKey:@"costHuanbiRate"] doubleValue]*100,@"%"];
+        }else{
+            costHuanbiRate = @"---";
         }
-        if ([Tool isNullOrNil:[overView objectForKey:@"costHuanbiRate"]]) {
+        //成本同比增长率
+        if (![Tool isNullOrNil:[overView objectForKey:@"costTongbiRate"]]) {
+            costTongbiRate = [NSString stringWithFormat:@"%.2f%@",[[overView objectForKey:@"costTongbiRate"] doubleValue]*100,@"%"];
+        }else{
+            costTongbiRate = @"---";
         }
-        if ([Tool isNullOrNil:[overView objectForKey:@"costTongbiRate"]]) {
+        //当前单位成本
+        if (![Tool isNullOrNil:[overView objectForKey:@"currentUnitCost"]]) {
+            currentUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"currentUnitCost"] doubleValue]];
         }
-        if ([Tool isNullOrNil:[overView objectForKey:@"currentUnitCost"]]) {
+        //计划单位成本
+        if (![Tool isNullOrNil:[overView objectForKey:@"budgetedUnitCost"]]) {
+            budgetedUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"budgetedUnitCost"] doubleValue]];
         }
-        if ([Tool isNullOrNil:[overView objectForKey:@"totalCost"]]) {
+        //财务单位成本
+        if (![Tool isNullOrNil:[overView objectForKey:@"unitCost"]]) {
+            unitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"unitCost"] doubleValue]];
         }
-        if ([Tool isNullOrNil:[overView objectForKey:@"unitCost"]]) {
+        //总成本
+        if (![Tool isNullOrNil:[overView objectForKey:@"totalCost"]]) {
+            totalCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"totalCost"] doubleValue]];
         }
         NSString *preStr = @"<font size=20 color='red'>";
         NSString *sufStr = @"</font>";
         
         RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, 0, 300, kLabelHeight)];
-        NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"355640",sufStr,@"元"];
+        NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,totalCost,sufStr,@"元"];
         [lblTotalCost setText:strTotalCost];
         [self.bottomView addSubview:lblTotalCost];
         
         RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight, 300, kLabelHeight)];
-        NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"109.32",sufStr,@"元/吨"];
+        NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,unitCost,sufStr,@"元/吨"];
         [lblFinanceUitCost setText:strFinanceUnitCost];
         [self.bottomView addSubview:lblFinanceUitCost];
         
         RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*2, 300, kLabelHeight)];
-        NSString *strCurrentUnitCost = [@"当前单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"114.93",sufStr,@"元/吨"];
+        NSString *strCurrentUnitCost = [@"当期单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,currentUnitCost,sufStr,@"元/吨"];
         [lblCurrentUitCost setText:strCurrentUnitCost];
         [self.bottomView addSubview:lblCurrentUitCost];
         
         RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*3, 300, kLabelHeight)];
-        NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"105.78",sufStr,@"元/吨"];
+        NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,budgetedUnitCost,sufStr,@"元/吨"];
         [lblPlanUitCost setText:strPlanUnitCost];
         [self.bottomView addSubview:lblPlanUitCost];
         
         RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*4, 300, kLabelHeight)];
-        NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"12.45%",sufStr];
+        NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,costTongbiRate,sufStr];
         [lblTongbi setText:strTongbi];
         [self.bottomView addSubview:lblTongbi];
         
         RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*5, 300, kLabelHeight)];
-        NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"19.87%",sufStr];
+        NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,costHuanbiRate,sufStr];
         [lblHuanbi setText:strHuanbi];
         [self.bottomView addSubview:lblHuanbi];
         

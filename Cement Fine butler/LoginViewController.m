@@ -147,9 +147,10 @@
     NSArray *timeArray = kCondition_Time_Array;
     //根据权限选择需要展现的视图
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     //原材料成本管理模块
     JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
-    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:nil tag:kViewTag+1];
+    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"productOverview"] tag:kViewTag+1];
     RawMaterialsCostManagerViewController *rawMaterialsCostManagerViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
     [costManagerController setCenterPanel:rawMaterialsCostManagerViewController];
     RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
@@ -157,7 +158,7 @@
     [costManagerController setRightPanel:costManagerRightController];
     //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
-    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:nil tag:kViewTag+2];
+    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+2];
     ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
     LeftViewController *realTimeReportsLeftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
     NSArray *reportType = @[@"产量报表",@"库存报表"];
@@ -170,10 +171,11 @@
     [realTimeReportsController setRightPanel:realTimeReportsRightController];
     //设备管理
     UINavigationController *equipmentController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
-    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:nil tag:kViewTag+3];
+    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"priceAssaint"] tag:kViewTag+3];
     //消息
     UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
     messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:nil tag:kViewTag+4];
+    
     tabBarController.viewControllers = @[costManagerController,realTimeReportsController,equipmentController,messageController];
     return tabBarController;
 }
