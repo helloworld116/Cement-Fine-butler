@@ -153,6 +153,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    self.sidePanelController.rightPanel = nil;
 //    RightViewController* realTimeReportsRightController = (RightViewController *)self.sidePanelController.rightPanel;
     if (indexPath.row==0) {
         NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];

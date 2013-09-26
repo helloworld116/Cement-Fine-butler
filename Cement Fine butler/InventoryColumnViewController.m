@@ -119,6 +119,7 @@
         NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
         NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
+        max = [Tool max:max];
         NSDictionary *configDict = @{@"title":@"原材料库存",@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
         [webView stringByEvaluatingJavaScriptFromString:js];
@@ -169,9 +170,12 @@
 #pragma mark 观察条件变化
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
-        DDLogCVerbose(@"new is %@ and old is %@",[change objectForKey:@"new"],[change objectForKey:@"old"]);
-        SearchCondition *condition = [change objectForKey:@"new"];
-        [self sendRequest:condition.stockType];
+        if ([change objectForKey:@"old"]) {
+            DDLogCVerbose(@"old is %@",[change objectForKey:@"old"]);
+            DDLogCVerbose(@"条件发生变化");
+            SearchCondition *condition = [change objectForKey:@"new"];
+            [self sendRequest:condition.stockType];
+        }
     }
 }
 @end

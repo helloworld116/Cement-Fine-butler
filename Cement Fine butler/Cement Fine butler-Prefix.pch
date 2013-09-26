@@ -52,6 +52,8 @@
     //#define kServerURL @"http://192.168.1.90:8080/dynamicmeasurement/"
     #define kLoginURL [kServerURL stringByAppendingString:@"login"]
     #define kStockReportURL [kServerURL stringByAppendingString:@"stock"]
+    #define kOutputReportURL [kServerURL stringByAppendingString:@"output"]
+    #define kMaterialCostURL [kServerURL stringByAppendingString:@"cost/material"]
     #define kEquipmentList [kServerURL stringByAppendingString:@"equipment/list"]
     #define kEquipmentStopRecord [kServerURL stringByAppendingString:@"equipment/stoprecord"]
     #define kProductRecommendPrice [kServerURL stringByAppendingString:@"pricing"]

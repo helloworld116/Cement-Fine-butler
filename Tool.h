@@ -26,4 +26,10 @@
 + (NSString *)objectToString:(NSObject *)object;
 
 + (double)objectToDouble:(id)d;
+
++ (double)max:(double)max;
+
++(double)min:(double)min;
+
++(BOOL)isNullOrNil:(id)object;
 @end

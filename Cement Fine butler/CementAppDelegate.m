@@ -46,18 +46,28 @@
     
     // daysRange.length will contain the number of the last day
     // of the month containing curDate
-    
     NSLog(@"%i", daysRange.length);
-    NSDate *odate = [self stringToDate:@"yyyy-MM-dd" dateString:@"2013-9-25"];
+    NSDate *odate = [self stringToDate:@"yyyy-MM-dd HH:mm:s" dateString:@"2013-9-25 23:59:59"];
     NSLog(@"timeinv is %f",[odate timeIntervalSince1970]);
-    
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSQuarterCalendarUnit fromDate:[NSDate date]];
+//    1380124799
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
     NSInteger day = [components day];
     NSInteger month = [components month];
     NSInteger year = [components year];
-    NSInteger quater = [components quarter];
-    NSLog(@"year is %d, quater is %d,month is %d, day is %d",year,quater, month,day);
+    NSLog(@"year is %d,month is %d, day is %d",year,month,day);
     
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+//    [comps setDay:6];
+    [comps setMonth:9];
+    [comps setYear:2013];
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *date = [gregorian dateFromComponents:comps];
+    NSDateComponents *weekdayComponents =
+    [gregorian components:NSDayCalendarUnit fromDate:date];
+    int weekday = [weekdayComponents day];
+    NSLog(@"day is %d",weekday);
     return YES;
 }
 
@@ -66,6 +76,7 @@
     [dateFormatter setDateFormat:formatter];
     return [dateFormatter dateFromString:dateString];
 }
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

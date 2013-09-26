@@ -29,7 +29,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //最开始异步请求数据
-    [self sendRequest:0];//默认查询原材料库存
+    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0]};
+    [self sendRequest:condition];//默认查询原材料库存
     //设置view相关
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.topItem.title = @"产量报表";
@@ -91,24 +92,25 @@
 //    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
 //    DDLogVerbose(@"dates is %@",js);
 //    [webView stringByEvaluatingJavaScriptFromString:js];
-    if (self.data) {
-        NSArray *stockArray = [self.data objectForKey:@"materials"];
-        NSMutableArray *stocksForSort = [NSMutableArray array];
-        NSMutableArray *stocks = [NSMutableArray array];
-        for (int i=0;i<stockArray.count;i++) {
-            NSDictionary *stock = [stockArray objectAtIndex:i];
-            double value = [[stock objectForKey:@"stock"] doubleValue];
-            NSString *name = [stock objectForKey:@"name"];
+    if (self.data&&(NSNull *)self.data!=[NSNull null]) {
+        NSArray *productArray = [self.data objectForKey:@"products"];
+        NSMutableArray *productsForSort = [NSMutableArray array];
+        NSMutableArray *products = [NSMutableArray array];
+        for (int i=0;i<productArray.count;i++) {
+            NSDictionary *product = [productArray objectAtIndex:i];
+            double value = [[product objectForKey:@"output"] doubleValue];
+            NSString *name = [product objectForKey:@"name"];
             NSString *color = [kColorList objectAtIndex:i];
             NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
-            [stocks addObject:reportDict];
-            [stocksForSort addObject:[NSNumber numberWithDouble:value]];
+            [products addObject:reportDict];
+            [productsForSort addObject:[NSNumber numberWithDouble:value]];
         }
         NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
-        NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+        NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
-        NSDictionary *configDict = @{@"title":@"原材料库存",@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
-        NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
+        max = [Tool max:max];
+        NSDictionary *configDict = @{@"title":@"产量报表",@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+        NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
         [webView stringByEvaluatingJavaScriptFromString:js];
     }
 }
@@ -119,11 +121,14 @@
 #pragma mark end webviewDelegate
 
 #pragma mark 发送网络请求
--(void) sendRequest:(int)stockType{
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
+-(void) sendRequest:(NSDictionary *)condition{
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:stockType] forKey:@"type"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1377964800000] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1380470400000] forKey:@"endTime"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -148,8 +153,9 @@
 #pragma mark 观察条件变化
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
-        SearchCondition *condition = [change objectForKey:@"new"];
-        DDLogCVerbose(@"line is %ld",condition.productID);
+        SearchCondition *searchCondition = [change objectForKey:@"new"];
+        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID]};
+        [self sendRequest:condition];
     }
 }
 

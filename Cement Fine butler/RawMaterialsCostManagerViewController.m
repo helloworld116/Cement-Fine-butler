@@ -12,7 +12,8 @@
 #define kLabelHeight 30//底部字段描述label高度
 
 @interface RawMaterialsCostManagerViewController ()
-
+@property (retain, nonatomic) ASIFormDataRequest *request;
+@property (retain, nonatomic) NSDictionary *data;
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -31,7 +32,9 @@
     [super viewDidLoad];
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
 //    self.navigationItem.title = @"原材料成本管理";
-    
+    //最开始异步请求数据
+    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0]};
+    [self sendRequest:condition];
 
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.topItem.title = @"原材料成本管理";
@@ -66,47 +69,64 @@
 }
 
 - (void) setBottomViewOfSubView {
-    NSString *preStr = @"<font size=20 color='red'>";
-    NSString *sufStr = @"</font>";
-    
-    RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, 0, 300, kLabelHeight)];
-    NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"355640",sufStr,@"元"];
-    [lblTotalCost setText:strTotalCost];
-    [self.bottomView addSubview:lblTotalCost];
-    
-    RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight, 300, kLabelHeight)];
-    NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"109.32",sufStr,@"元/吨"];
-    [lblFinanceUitCost setText:strFinanceUnitCost];
-    [self.bottomView addSubview:lblFinanceUitCost];
-    
-    RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*2, 300, kLabelHeight)];
-    NSString *strCurrentUnitCost = [@"当前单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"114.93",sufStr,@"元/吨"];
-    [lblCurrentUitCost setText:strCurrentUnitCost];
-    [self.bottomView addSubview:lblCurrentUitCost];
-    
-    RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*3, 300, kLabelHeight)];
-    NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"105.78",sufStr,@"元/吨"];
-    [lblPlanUitCost setText:strPlanUnitCost];
-    [self.bottomView addSubview:lblPlanUitCost];
-    
-    RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*4, 300, kLabelHeight)];
-    NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"12.45%",sufStr];
-    [lblTongbi setText:strTongbi];
-    [self.bottomView addSubview:lblTongbi];
-    
-    RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*5, 300, kLabelHeight)];
-    NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"19.87%",sufStr];
-    [lblHuanbi setText:strHuanbi];
-    [self.bottomView addSubview:lblHuanbi];
-    
-    //底部view实际高度
-    CGFloat bottomViewHeight = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight-self.bottomView.frame.origin.y;
-    //底部view需要的高度，距离上下都是10
-    CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count + 10*2;
-    DDLogCInfo(@"real height is %f and need height is %f and the subview count is %d",bottomViewHeight,bottomViewNeedHeight,self.bottomView.subviews.count);
-    //减去10是为了减少在两者差距很小的情况下，避免可拖动
-    if (bottomViewHeight<bottomViewNeedHeight-10) {
-       self.scrollView.contentSize = CGSizeMake(kScreenWidth,kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight+bottomViewNeedHeight-bottomViewHeight+30);
+    for (UIView *subView in [self.bottomView subviews]) {
+        [subView removeFromSuperview];
+    }
+    NSDictionary *overView = [self.data objectForKey:@"overView"];
+    if (overView&&(NSNull *)overView!=[NSNull null]) {
+        if ([Tool isNullOrNil:[overView objectForKey:@"budgetedUnitCost"]]) {
+        }
+        if ([Tool isNullOrNil:[overView objectForKey:@"costHuanbiRate"]]) {
+        }
+        if ([Tool isNullOrNil:[overView objectForKey:@"costTongbiRate"]]) {
+        }
+        if ([Tool isNullOrNil:[overView objectForKey:@"currentUnitCost"]]) {
+        }
+        if ([Tool isNullOrNil:[overView objectForKey:@"totalCost"]]) {
+        }
+        if ([Tool isNullOrNil:[overView objectForKey:@"unitCost"]]) {
+        }
+        NSString *preStr = @"<font size=20 color='red'>";
+        NSString *sufStr = @"</font>";
+        
+        RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, 0, 300, kLabelHeight)];
+        NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"355640",sufStr,@"元"];
+        [lblTotalCost setText:strTotalCost];
+        [self.bottomView addSubview:lblTotalCost];
+        
+        RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight, 300, kLabelHeight)];
+        NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"109.32",sufStr,@"元/吨"];
+        [lblFinanceUitCost setText:strFinanceUnitCost];
+        [self.bottomView addSubview:lblFinanceUitCost];
+        
+        RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*2, 300, kLabelHeight)];
+        NSString *strCurrentUnitCost = [@"当前单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"114.93",sufStr,@"元/吨"];
+        [lblCurrentUitCost setText:strCurrentUnitCost];
+        [self.bottomView addSubview:lblCurrentUitCost];
+        
+        RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*3, 300, kLabelHeight)];
+        NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,@"105.78",sufStr,@"元/吨"];
+        [lblPlanUitCost setText:strPlanUnitCost];
+        [self.bottomView addSubview:lblPlanUitCost];
+        
+        RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*4, 300, kLabelHeight)];
+        NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"12.45%",sufStr];
+        [lblTongbi setText:strTongbi];
+        [self.bottomView addSubview:lblTongbi];
+        
+        RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*5, 300, kLabelHeight)];
+        NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,@"19.87%",sufStr];
+        [lblHuanbi setText:strHuanbi];
+        [self.bottomView addSubview:lblHuanbi];
+        
+        //底部view实际高度
+        CGFloat bottomViewHeight = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight-self.bottomView.frame.origin.y;
+        //底部view需要的高度，距离上下都是10
+        CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count + 10*2;
+        //减去10是为了减少在两者差距很小的情况下，避免可拖动
+        if (bottomViewHeight<bottomViewNeedHeight-10) {
+            self.scrollView.contentSize = CGSizeMake(kScreenWidth,kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight+bottomViewNeedHeight-bottomViewHeight+30);
+        }
     }
 }
 
@@ -127,11 +147,6 @@
 
 #pragma mark begin webviewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    //    NSString *requestString = [[request URL] absoluteString];
-    //    NSArray *components = [requestString componentsSeparatedByString:@":"];
-    //    if(([[components objectAtIndex:0] isEqualToString:@"sector"]&&[[components objectAtIndex:1] isEqualToString:@"false"])||([[components objectAtIndex:0] isEqualToString:@"legend"])){
-    //        return NO;
-    //    }
     return YES;
 }
 
@@ -140,38 +155,15 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    //    NSString *data = @"[{ids:1,name:\"UC浏览器\",value:40.0,color:\"#4572a7\"},{ids:2,name:\"QQ浏览器\",value:37.1,color:\"#aa4643\"},{ids:3,name:\"欧朋浏览器\",value:13.8,color:\"#89a54e\"},{ids:4,name:\"百度浏览器\",value:1.6,color:\"#80699b\"},{ids:5,name:\"海豚浏览器\",value:1.4,color:\"#92a8cd\"},{ids:6,name:\"天天浏览器\",value:1.2,color:\"#db843d\"},{ids:7,name:\"其他\",value:4.9,color:\"#a47d7c\"}]";
-    //    function drawLineChart(todayPrice,dates,advicePrices,realPrices)
-    //    NSString *todayPrice = nil;
-    //    if (![self.currentProduct objectForKey:@"advicePrice"]) {
-    //        todayPrice = [NSString stringWithFormat:@"%.1f",[[self.currentProduct objectForKey:@"advicePrice"] doubleValue]];//今日推荐售价
-    //    }
-    //    NSArray *prices = [self.currentProduct objectForKey:@"chardata"];
-    //    NSMutableString *advicePrice = [NSMutableString string];
-    //    NSMutableString *realPrice = [NSMutableString string];
-    //    NSMutableString *dates = [NSMutableString string];
-    //    NSDictionary *dict = nil;
-    //    for (int i=0; i<prices.count; i++) {
-    //        dict = [prices objectAtIndex:i];
-    //        [advicePrice appendFormat:@"%.1f",[[dict objectForKey:@"advicePrice"] doubleValue]];
-    //        [realPrice appendFormat:@"%.1f",[[dict objectForKey:@"price"] doubleValue]];
-    //        [dates appendString:[Tool timeIntervalToString:[[dict objectForKey:@"time"] doubleValue] dateformat:kDateFormatDay]];
-    //        if (i!=prices.count-1) {
-    //            [advicePrice appendString:@","];
-    //            [realPrice appendString:@","];
-    //            [dates appendString:@","];
-    //        }
-    //    }
-    //
-    //    NSString *js = [@"drawLineChart(" stringByAppendingFormat:@"'%@','%@','%@','%@'%@",todayPrice,dates,advicePrice,realPrice,@")"];
-    NSString *data = @"[{'name':'熟料','value':56.95,'color':'#a5c2d5'},{'name':'粉煤灰','value':27.05,'color':'#cbab4f'},{'name':'矿渣','value':14.55,'color':'#76a871'},{'name':'石膏','value':1.45,'color':'#9f7961'}]";
-    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height,self.webView.frame.size.width];
-    //    NSString *js = [[ stringByAppendingString:data] stringByAppendingFormat:@""];
-    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
-    DDLogVerbose(@"dates is %@",js);
-    [webView stringByEvaluatingJavaScriptFromString:js];
-//    UIScrollView *sc = (UIScrollView *)[[webView subviews] objectAtIndex:0];
-//    sc.contentSize = CGSizeMake(webView.frame.size.width, webView.frame.size.height-25);
+//    NSString *data = @"[{'name':'熟料','value':56.95,'color':'#a5c2d5'},{'name':'粉煤灰','value':27.05,'color':'#cbab4f'},{'name':'矿渣','value':14.55,'color':'#76a871'},{'name':'石膏','value':1.45,'color':'#9f7961'}]";
+//    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height,self.webView.frame.size.width];
+//    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
+//    DDLogVerbose(@"dates is %@",js);
+//    [webView stringByEvaluatingJavaScriptFromString:js];
+    
+    if (self.data&&(NSNull *)self.data!=[NSNull null]) {
+        
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -277,4 +269,37 @@
 //    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
 //    @[@{@"库存类型":stockType},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
 }
+
+#pragma mark 发送网络请求
+-(void) sendRequest:(NSDictionary *)condition{
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1377964800000] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1380470400000] forKey:@"endTime"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
+    [self.request setPostValue:[NSNumber numberWithInt:0] forKey:@"period"];//0:当期   1:上期   2:同期
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+    [self.request startAsynchronous];
+}
+
+#pragma mark 网络请求
+-(void) requestFailed:(ASIHTTPRequest *)request{
+    
+}
+
+-(void)requestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    if ([[dict objectForKey:@"error"] intValue]==0) {
+        self.data = [dict objectForKey:@"data"];
+        [self.webView reload];
+        [self setBottomViewOfSubView];
+    }else{
+        
+    }
+}
+
 @end

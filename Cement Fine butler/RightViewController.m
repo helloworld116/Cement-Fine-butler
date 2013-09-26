@@ -86,8 +86,8 @@
     }
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-    //初始化搜索条件
-    self.searchCondition = [[SearchCondition alloc] init];
+//    //初始化搜索条件
+//    self.searchCondition = [[SearchCondition alloc] init];
 }
 
 - (void)didReceiveMemoryWarning

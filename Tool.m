@@ -96,4 +96,43 @@
     }
     return [d doubleValue];
 }
+
+//12800经过运算后得到13000
++(double)max:(double)max{
+    double newMax=max;
+    long multiple = 1;
+    while(newMax/10>1){
+        newMax/=10;
+        multiple*=10;
+    }
+//    newMax = [[[NSString stringWithFormat:@"%.1f", newMax] substringToIndex:3] doubleValue];
+    newMax = [[[NSString stringWithFormat:@"%f",newMax] substringToIndex:3] doubleValue];
+    if (newMax*multiple!=max) {
+        if (newMax>1.0) {
+            newMax+=0.1;
+        }
+        newMax*=multiple;
+    }else{
+        newMax = max;
+    }
+    return newMax;
+}
+
+//12800经过运算后得到10000
++(double)min:(double)min{
+    double newMin=min;
+    long multiple = 1;
+    while(newMin/10>1){
+        newMin/=10;
+        multiple*=10;
+    }
+    newMin = [[NSString stringWithFormat:@"%.0f", newMin] doubleValue];
+    return newMin;
+}
+
++(BOOL)isNullOrNil:(id)object{
+    return !object||(NSNull *)object==[NSNull null];
+}
+
+
 @end
