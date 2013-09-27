@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RawMaterialsCostManagerViewController : UIViewController<UIWebViewDelegate>
-@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;

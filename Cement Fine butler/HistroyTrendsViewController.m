@@ -27,8 +27,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.title = @"产量";
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationItem.title = @"产量";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(back:)];
+    
     [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.webView.delegate = self;
     self.webView.scalesPageToFit = IS_RETINA;
@@ -77,11 +81,14 @@
     [self setWebView:nil];
     [super viewDidUnload];
 }
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+- (void)back:(id)sender {
+    RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
+    [rightViewController resetConditions:self.oldCondition];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (IBAction)showSearch:(id)sender {
+- (void)showSearch:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 @end

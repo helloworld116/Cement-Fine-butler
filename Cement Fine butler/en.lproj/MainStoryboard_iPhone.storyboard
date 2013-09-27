@@ -45,16 +45,31 @@
             </objects>
             <point key="canvasLocation" x="62" y="-290"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LiU-cC-u9D">
+            <objects>
+                <navigationController storyboardIdentifier="rawMaterialsCostManagerNavController" definesPresentationContext="YES" id="6vs-if-Bhq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8yR-ax-lmd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xkp-O5-k5u" kind="relationship" relationship="rootViewController" id="dcD-ax-Ay0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kif-Va-aJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-682" y="284"/>
+        </scene>
         <!--Raw Materials Cost Manager View Controller-->
         <scene sceneID="7gA-Ww-nwU">
             <objects>
                 <viewController storyboardIdentifier="rawMaterialsCostManagerViewController" id="xkp-O5-k5u" customClass="RawMaterialsCostManagerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="22Y-cq-Orb">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="X2J-T0-o9b">
-                                <rect key="frame" x="0.0" y="43" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <webView contentMode="scaleToFill" id="LYr-tK-pge">
@@ -63,46 +78,38 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </webView>
                                     <view contentMode="scaleToFill" id="lFl-3W-NSR">
-                                        <rect key="frame" x="0.0" y="269" width="320" height="191"/>
+                                        <rect key="frame" x="0.0" y="269" width="320" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" id="fPS-CU-diH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="ibr-Rf-dYp">
-                                        <barButtonItem key="leftBarButtonItem" title="..." id="iH2-5A-O4h">
-                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
-                                            <connections>
-                                                <action selector="moreAction:" destination="xkp-O5-k5u" id="P6H-nh-vHd"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="j6K-Xd-rva">
-                                            <color key="tintColor" red="0.0" green="0.40000003576278687" blue="0.59215688705444336" alpha="1" colorSpace="deviceRGB"/>
-                                            <connections>
-                                                <action selector="showSearch:" destination="xkp-O5-k5u" id="8u1-iL-Sb7"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ONU-r2-agV"/>
+                    <navigationItem key="navigationItem" id="gYu-LC-pos">
+                        <barButtonItem key="leftBarButtonItem" title="..." id="bFo-nj-RHd">
+                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="moreAction:" destination="xkp-O5-k5u" id="CR6-bZ-h30"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="0cw-Wm-4yM">
+                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="showSearch:" destination="xkp-O5-k5u" id="pLT-SA-uTk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bottomView" destination="lFl-3W-NSR" id="D4v-SH-u8r"/>
-                        <outlet property="navigationBar" destination="fPS-CU-diH" id="9nD-wE-Jn8"/>
                         <outlet property="scrollView" destination="X2J-T0-o9b" id="IGO-rb-VbL"/>
                         <outlet property="webView" destination="LYr-tK-pge" id="RkA-JZ-ncK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H50-Ej-api" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="284"/>
+            <point key="canvasLocation" x="-318" y="284"/>
         </scene>
         <!--Histroy Trends View Controller-->
         <scene sceneID="1A8-lr-iBf">
@@ -112,28 +119,8 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="1Zr-OD-j3Z">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="c4e-qV-Dl9">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="add" id="c7X-6W-xYW">
-                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
-                                            <connections>
-                                                <action selector="back:" destination="NCX-MF-46G" id="Lko-Vl-HIE"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="0IH-IL-RNg">
-                                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
-                                            <connections>
-                                                <action selector="showSearch:" destination="NCX-MF-46G" id="KtH-to-BLH"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <webView contentMode="scaleToFill" id="vuB-M7-rtz">
-                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -630,7 +617,6 @@
                 <relationship kind="action" name="moreAction:"/>
                 <relationship kind="action" name="showSearch:"/>
                 <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

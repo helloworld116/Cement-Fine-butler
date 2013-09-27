@@ -15,4 +15,5 @@
 
 @property (retain,nonatomic) NSArray *conditions;
 - (IBAction)search:(id)sender;
+- (void)resetConditions:(NSArray *)conditions;
 @end

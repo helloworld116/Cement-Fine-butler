@@ -7,31 +7,38 @@
 //
 
 #import "LoginAction.h"
+@interface LoginAction()
+@property (retain, nonatomic) ASIFormDataRequest *request;
+@end
 
 @implementation LoginAction
 
 //后台检查登录
 -(BOOL)backstageLogin{
-    //清空登录信息
-//    self.uid = nil;
-//    self.username = nil;
-//    self.email = nil;
-//    self.ticket = nil;
-//    self.password = nil;
-//    //从用户默认数据中获取用户登录信息
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    self.email = [defaults objectForKey:@"email"];
-//    self.password = [defaults objectForKey:@"password"];
-//    //执行登录操作
-//    NSDictionary *result = [NSDictionary dictionaryWithContentsOfJSONURLString:kUrlOfLogin];
-//    if (1==[[result objectForKey:@"status"] intValue]) {
-//        self.uid = [result objectForKey:@"uid"];
-//        self.username = [result objectForKey:@"uname"];
-//        self.email = [result objectForKey:@"email"];
-//        self.ticket = [result objectForKey:@"ticket"];
-//        return YES;
-//    }else {
-//        return NO;
-//    }
+    //从用户默认数据中获取用户登录信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *password = [defaults objectForKey:@"password"];
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoginURL]];
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:username forKey:@"username"];
+    [self.request setPostValue:password forKey:@"password"];
+    [self.request startSynchronous];
+    NSError *error = [self.request error];
+    if (!error) {
+        NSString *response = [self.request responseString];
+        NSDictionary *dict = [Tool stringToDictionary:response];
+        if ([[dict objectForKey:@"error"] intValue]==0) {
+            NSDictionary *data = [dict objectForKey:@"data"];
+            kSharedApp.accessToken = [data objectForKey:@"accessToken"];
+            kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
+            kSharedApp.factory = [data objectForKey:@"factory"];
+            return YES;
+        }else{
+//            NSString *msg = [dict objectForKey:@"description"];
+            return YES;
+        }
+        return NO;
+    }
 }
 @end

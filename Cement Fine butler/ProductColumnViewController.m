@@ -11,6 +11,7 @@
 @interface ProductColumnViewController ()
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
+@property (retain, nonatomic) LoadingView *loadingView;
 @end
 
 @implementation ProductColumnViewController
@@ -34,6 +35,7 @@
     //设置view相关
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.topItem.title = @"产量报表";
+    
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
     self.bottomWebiew.scalesPageToFit = IS_RETINA;
@@ -122,6 +124,10 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
+    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    [self.view addSubview:self.loadingView];
+    [self.loadingView startLoading];
+    
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
@@ -142,9 +148,15 @@
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    if ([[dict objectForKey:@"error"] intValue]==0) {
+    int responseCode = [[dict objectForKey:@"error"] intValue];
+    if (responseCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.bottomWebiew reload];
+        
+        [self.loadingView successEndLoading];
+    }else if(responseCode==-1){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
     }else{
 
     }

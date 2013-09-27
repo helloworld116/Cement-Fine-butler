@@ -10,10 +10,12 @@
 #import "HistroyTrendsViewController.h"
 
 #define kLabelHeight 30//底部字段描述label高度
+#define kLabelOrignX 10//label距离父容器左边距离
 
 @interface RawMaterialsCostManagerViewController ()
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
+@property (retain, nonatomic) LoadingView *loadingView;
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -30,27 +32,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationItem.title = @"原材料成本管理";
     //最开始异步请求数据
     NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0]};
     [self sendRequest:condition];
-
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.topItem.title = @"原材料成本管理";
     
-    //
-    [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.title = @"原材料成本管理";
     self.webView.delegate = self;
     self.webView.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
-//    sc.contentSize = CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
     sc.showsVerticalScrollIndicator = NO;
-    //    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
-
+    sc.bounces = NO;//禁用上下拖拽
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     [self setBottomViewOfSubView];
@@ -106,32 +101,32 @@
         NSString *preStr = @"<font size=20 color='red'>";
         NSString *sufStr = @"</font>";
         
-        RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, 0, 300, kLabelHeight)];
+        RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, 0, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
         NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,totalCost,sufStr,@"元"];
         [lblTotalCost setText:strTotalCost];
         [self.bottomView addSubview:lblTotalCost];
         
-        RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight, 300, kLabelHeight)];
+        RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
         NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,unitCost,sufStr,@"元/吨"];
         [lblFinanceUitCost setText:strFinanceUnitCost];
         [self.bottomView addSubview:lblFinanceUitCost];
         
-        RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*2, 300, kLabelHeight)];
+        RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*2, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
         NSString *strCurrentUnitCost = [@"当期单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,currentUnitCost,sufStr,@"元/吨"];
         [lblCurrentUitCost setText:strCurrentUnitCost];
         [self.bottomView addSubview:lblCurrentUitCost];
         
-        RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*3, 300, kLabelHeight)];
+        RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*3, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
         NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,budgetedUnitCost,sufStr,@"元/吨"];
         [lblPlanUitCost setText:strPlanUnitCost];
         [self.bottomView addSubview:lblPlanUitCost];
         
-        RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*4, 300, kLabelHeight)];
+        RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*4, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
         NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,costTongbiRate,sufStr];
         [lblTongbi setText:strTongbi];
         [self.bottomView addSubview:lblTongbi];
         
-        RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(10, kLabelHeight*5, 300, kLabelHeight)];
+        RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*5, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
         NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,costHuanbiRate,sufStr];
         [lblHuanbi setText:strHuanbi];
         [self.bottomView addSubview:lblHuanbi];
@@ -158,7 +153,6 @@
     [self setScrollView:nil];
     [self setWebView:nil];
     [self setBottomView:nil];
-    [self setNavigationBar:nil];
     [super viewDidUnload];
 }
 
@@ -256,10 +250,40 @@
 
 #pragma mark 历史趋势
 -(void)historyTrends:(id)sender{
-    JASidePanelController *sidePanelController = [[JASidePanelController alloc] init];
-    HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
-    [sidePanelController setCenterPanel:historyTrendsViewController];
-    RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    JASidePanelController *sidePanelController = [[JASidePanelController alloc] init];
+//    HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
+//    [sidePanelController setCenterPanel:historyTrendsViewController];
+//    RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    NSArray *unitCostArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
+//    NSArray *timeArray = kCondition_Time_Array;
+//    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+//    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+//    for (NSDictionary *line in lines) {
+//        NSString *name = [line objectForKey:@"name"];
+//        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+//        NSDictionary *dict = @{@"_id":_id,@"name":name};
+//        [lineArray addObject:dict];
+//    }
+//    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+//    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+//    for (NSDictionary *product in products) {
+//        NSString *name = [product objectForKey:@"name"];
+//        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+//        NSDictionary *dict = @{@"_id":_id,@"name":name};
+//        [productArray addObject:dict];
+//    }
+//    rightController.conditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+//    [sidePanelController setRightPanel:rightController];
+    
+    
+    
+//    sidePanelController.modalPresentationStyle = UIModalPresentationCurrentContext;
+////    sidePanelController.modalTransitionStyle = 2;
+//    [self presentViewController:sidePanelController animated:YES completion:nil];
+////    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
+////    @[@{@"库存类型":stockType},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    
+    
     NSArray *unitCostArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
     NSArray *timeArray = kCondition_Time_Array;
     NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
@@ -278,17 +302,20 @@
         NSDictionary *dict = @{@"_id":_id,@"name":name};
         [productArray addObject:dict];
     }
-    rightController.conditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
-    [sidePanelController setRightPanel:rightController];
-    sidePanelController.modalPresentationStyle = UIModalPresentationCurrentContext;
-//    sidePanelController.modalTransitionStyle = 2;
-    [self presentViewController:sidePanelController animated:YES completion:nil];
-//    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
-//    @[@{@"库存类型":stockType},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
+    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
+    historyTrendsViewController.oldCondition = rightController.conditions;
+    NSArray *newConditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+    [rightController resetConditions:newConditions];
+    [self.navigationController pushViewController:historyTrendsViewController animated:YES];
 }
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
+    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    [self.view addSubview:self.loadingView];
+    [self.loadingView startLoading];
+    
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
@@ -310,13 +337,16 @@
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    if ([[dict objectForKey:@"error"] intValue]==0) {
+    int responseCode = [[dict objectForKey:@"error"] intValue];
+    if (responseCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.webView reload];
         [self setBottomViewOfSubView];
-    }else{
-        
+    }else if(responseCode==-1){
+       LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
     }
+    [self.loadingView successEndLoading];
 }
 
 @end

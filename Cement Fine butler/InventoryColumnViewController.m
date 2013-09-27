@@ -133,6 +133,10 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(int)stockType{
+    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    [self.view addSubview:self.loadingView];
+    [self.loadingView startLoading];
+    
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
@@ -150,9 +154,14 @@
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    if ([[dict objectForKey:@"error"] intValue]==0) {
+    int responseCode = [[dict objectForKey:@"error"] intValue];
+    if (responseCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.bottomWebiew reload];
+        [self.loadingView successEndLoading];
+    }else if(responseCode==-1){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
     }else{
         
     }

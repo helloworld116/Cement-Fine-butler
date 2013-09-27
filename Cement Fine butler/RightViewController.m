@@ -39,55 +39,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.view.backgroundColor =[UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
-    
-    CGFloat beginOrign = self.topView.frame.size.height;
-    CGFloat totalHeight = self.topView.frame.size.height;
-    //设置tableview，每一个筛选条件就是一个tableview
-    for (int i=0; i<self.conditions.count; i++) {
-        NSString *key =[[[self.conditions objectAtIndex:i] allKeys] objectAtIndex:0];
-        int cellCount = [[[self.conditions objectAtIndex:i] objectForKey:key] count];
-        CGFloat tableViewHeight = cellCount*kTableViewCellHeight+kTableViewHeaderViewHeight;
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, beginOrign, self.scrollView.frame.size.width, tableViewHeight) style:UITableViewStylePlain];
-        tableView.bounces = NO;
-        tableView.tag = kTableViewTag+i;
-        tableView.dataSource = self;
-        tableView.delegate = self;
-        tableView.backgroundColor = [UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
-        tableView.separatorColor = [UIColor colorWithPatternImage:self.separatorImage];
-//        tableView.highlightedBackgroundColor = [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1];
-//        tableView.highlightedSeparatorColor = [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1];
-//        //设置tableview样式
-//        tableView.layer.cornerRadius = 4;
-//        tableView.layer.shadowColor = [UIColor blackColor].CGColor;
-//        tableView.layer.shadowOffset = CGSizeMake(0, 1);
-//        tableView.layer.shadowOpacity = 1;
-//        tableView.imageOffset = CGSizeMake(5, -1);
-        
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
-        view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
-        label.textColor = [UIColor whiteColor];
-        label.font = [UIFont systemFontOfSize:13.f];
-        label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-        label.backgroundColor = [UIColor clearColor];
-        [view addSubview:label];
-        tableView.tableHeaderView = view;
-        
-        [self.scrollView addSubview:tableView];
-        beginOrign += tableViewHeight;
-        totalHeight += tableViewHeight;
-    }
-    //设置scrollView高度
+//    self.view.backgroundColor =[UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
+    //重新设置scrollView高度
     self.scrollView.frame = CGRectMake(kOrignX, self.scrollView.frame.origin.y, self.scrollView.frame.size.width-kOrignX, self.scrollView.frame.size.height);
-    if (totalHeight>self.scrollView.contentSize.height) {
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, totalHeight);
-    }
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-//    //初始化搜索条件
-//    self.searchCondition = [[SearchCondition alloc] init];
+    [self setTableviews];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,16 +54,6 @@
 }
 
 #pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    // Return the number of sections.
-//    return 1;
-//}
-//
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return kTableViewHeaderViewHeight;
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return kTableViewCellHeight;
@@ -119,22 +66,6 @@
     NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
     return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-//}
-
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
-//    view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
-//    label.textColor = [UIColor whiteColor];
-//    label.font = [UIFont systemFontOfSize:13.f];
-//    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-//    label.backgroundColor = [UIColor clearColor];
-//    [view addSubview:label];
-//    return view;
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,54 +81,24 @@
     cell.label.font = [UIFont systemFontOfSize:14];
     cell.label.text = [[[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row] objectForKey:@"name"];
     cell.label.textColor = [UIColor whiteColor];
-    cell.selectedImgView.image = [UIImage imageNamed:@"check_icon"];
+    cell.selectedImgView.image = [UIImage imageNamed:@"checked"];
     cell.selectedImgView.hidden = YES;
-    if (indexPath.row==0) {
-        cell.selectedImgView.hidden = NO;
+    UILabel *label = (UILabel *)[[tableView.tableHeaderView subviews] objectAtIndex:0];
+    NSString *headerTitle = label.text;
+    if ([kCondition_Time isEqualToString:headerTitle]) {
+        //默认选中本月
+        if (indexPath.row==2) {
+            cell.selectedImgView.hidden = NO;
+        }
+    }else{
+        if (indexPath.row==0) {
+            cell.selectedImgView.hidden = NO;
+        }
     }
     //设置标识，以便选中时知道选中的是哪个
     cell.cellID = [[[[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row] objectForKey:@"_id"] longValue];
     return cell;
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 int stockType=0,timeType=0,lineID=0,productID=0;
@@ -232,7 +133,7 @@ int stockType=0,timeType=0,lineID=0,productID=0;
     [self.sidePanelController showCenterPanelAnimated:YES];
 }
 
-#pragma mark Setting style
+#pragma mark风格线样式
 
 - (UIImage *)separatorImage
 {
@@ -247,5 +148,60 @@ int stockType=0,timeType=0,lineID=0,productID=0;
     UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return [UIImage imageWithCGImage:outputImage.CGImage scale:2.0 orientation:UIImageOrientationUp];
+}
+
+- (void)resetConditions:(NSArray *)conditions{
+    self.conditions = conditions;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    for (UIView *view in [self.scrollView subviews]) {
+        if ([view isKindOfClass:[UITableView class]]) {
+            [view removeFromSuperview];   
+        }
+    }
+    [self setTableviews];
+}
+
+-(void)setTableviews{
+    CGFloat beginOrign = self.topView.frame.size.height;
+    CGFloat totalHeight = self.topView.frame.size.height;
+    //设置tableview，每一个筛选条件就是一个tableview
+    for (int i=0; i<self.conditions.count; i++) {
+        NSString *key =[[[self.conditions objectAtIndex:i] allKeys] objectAtIndex:0];
+        int cellCount = [[[self.conditions objectAtIndex:i] objectForKey:key] count];
+        CGFloat tableViewHeight = cellCount*kTableViewCellHeight+kTableViewHeaderViewHeight;
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, beginOrign, self.scrollView.frame.size.width, tableViewHeight) style:UITableViewStylePlain];
+        tableView.bounces = NO;
+        tableView.tag = kTableViewTag+i;
+        tableView.dataSource = self;
+        tableView.delegate = self;
+        tableView.backgroundColor = [UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
+        tableView.separatorColor = [UIColor colorWithPatternImage:self.separatorImage];
+        //        tableView.highlightedBackgroundColor = [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1];
+        //        tableView.highlightedSeparatorColor = [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1];
+        //        //设置tableview样式
+        //        tableView.layer.cornerRadius = 4;
+        //        tableView.layer.shadowColor = [UIColor blackColor].CGColor;
+        //        tableView.layer.shadowOffset = CGSizeMake(0, 1);
+        //        tableView.layer.shadowOpacity = 1;
+        //        tableView.imageOffset = CGSizeMake(5, -1);
+        
+        //table的headerview，用于放置条件说明
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
+        view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:13.f];
+        label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+        label.backgroundColor = [UIColor clearColor];
+        [view addSubview:label];
+        tableView.tableHeaderView = view;
+        
+        [self.scrollView addSubview:tableView];
+        beginOrign += tableViewHeight;
+        totalHeight += tableViewHeight;
+    }
+    if (totalHeight>self.scrollView.contentSize.height) {
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, totalHeight);
+    }
 }
 @end

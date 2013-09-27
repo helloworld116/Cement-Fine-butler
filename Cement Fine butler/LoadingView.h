@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LoadingView : UIView
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
-@property (strong, nonatomic) IBOutlet UILabel *lable;
 
 -(void)startLoading;
 -(void)successEndLoading;

@@ -29,6 +29,8 @@
     #import "RightViewController.h"
     #import "InsetsTextField.h"
     #import "SearchCondition.h"
+    #import "LoadingView.h"
+    #import "LoginViewController.h"
     #import "Tool.h"
 
     #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )

@@ -7,11 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "ProductColumnViewController.h"
-#import "RawMaterialsCostManagerViewController.h"
-#import "InventoryColumnViewController.h"
 
-#define kViewTag 12000
 
 @interface LoginViewController ()<MBProgressHUDDelegate>
 @property (retain, nonatomic) ASIFormDataRequest *request;
@@ -49,8 +45,6 @@
     [self setBackground];
     self.username.delegate = self;
     self.password.delegate = self;
-    self.username.text = @"fbadmin";
-    self.password.text = @"654321";
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,59 +121,6 @@
     [self.password resignFirstResponder];
 }
 
--(UITabBarController *) showViewControllers{
-    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
-    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-    for (NSDictionary *line in lines) {
-        NSString *name = [line objectForKey:@"name"];
-        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
-        NSDictionary *dict = @{@"_id":_id,@"name":name};
-        [lineArray addObject:dict];
-    }
-    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
-    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-    for (NSDictionary *product in products) {
-        NSString *name = [product objectForKey:@"name"];
-        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
-        NSDictionary *dict = @{@"_id":_id,@"name":name};
-        [productArray addObject:dict];
-    }
-    NSArray *timeArray = kCondition_Time_Array;
-    //根据权限选择需要展现的视图
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
-    //原材料成本管理模块
-    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
-    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"productOverview"] tag:kViewTag+1];
-    RawMaterialsCostManagerViewController *rawMaterialsCostManagerViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
-    [costManagerController setCenterPanel:rawMaterialsCostManagerViewController];
-    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    [costManagerController setRightPanel:costManagerRightController];
-    //实时报表（默认产量报表）
-    JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
-    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+2];
-    ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
-    LeftViewController *realTimeReportsLeftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
-    NSArray *reportType = @[@"产量报表",@"库存报表"];
-    realTimeReportsLeftController.conditions = @[@{@"实时报表":reportType}];
-    RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-//    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
-    realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    [realTimeReportsController setCenterPanel:productColumnViewController];
-    [realTimeReportsController setLeftPanel:realTimeReportsLeftController];
-    [realTimeReportsController setRightPanel:realTimeReportsRightController];
-    //设备管理
-    UINavigationController *equipmentController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
-    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"priceAssaint"] tag:kViewTag+3];
-    //消息
-    UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
-    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:nil tag:kViewTag+4];
-    
-    tabBarController.viewControllers = @[costManagerController,realTimeReportsController,equipmentController,messageController];
-    return tabBarController;
-}
-
 #pragma mark 发送网络请求
 -(void) sendRequest {
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoginURL]];
@@ -226,7 +167,7 @@
         
 //        ProductColumnViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
 //        UITabBarController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-        UITabBarController *tabBarController = [self showViewControllers];
+        UITabBarController *tabBarController = [kSharedApp showViewControllers];
         tabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:tabBarController animated:YES completion:nil];
     }else{

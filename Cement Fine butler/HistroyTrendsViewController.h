@@ -10,7 +10,9 @@
 
 @interface HistroyTrendsViewController : UIViewController<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
-- (IBAction)back:(id)sender;
+//- (IBAction)back:(id)sender;
 
-- (IBAction)showSearch:(id)sender;
+- (void)showSearch:(id)sender;
+
+@property (nonatomic,retain) NSArray *oldCondition;
 @end
