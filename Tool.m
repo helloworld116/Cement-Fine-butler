@@ -126,7 +126,15 @@
         newMin/=10;
         multiple*=10;
     }
-    newMin = [[NSString stringWithFormat:@"%.0f", newMin] doubleValue];
+    newMin = [[[NSString stringWithFormat:@"%f",newMin] substringToIndex:3] doubleValue];
+    if (newMin*multiple!=min) {
+        if (newMin>1.0) {
+            newMin-=0.1;
+        }
+        newMin*=multiple;
+    }else{
+        newMin = min;
+    }
     return newMin;
 }
 
@@ -134,5 +142,51 @@
     return !object||(NSNull *)object==[NSNull null];
 }
 
+/**
+ 格式化时间
+ timeSeconds 为0时表示当前时间,可以传入你定义的时间戳
+ timeFormatStr为空返回当当时间戳,不为空返回你写的时间格式(yyyy-MM-dd HH:ii:ss)
+ setTimeZome ([NSTimeZone systemTimeZone]获得当前时区字符串)
+ 用法：
+ NSString *a =[self setTimeInt:1317914496 setTimeFormat:@"yy.MM.dd HH:mm:ss" setTimeZome:nil];
+ NSString *b =[self setTimeInt:0 setTimeFormat:@"yy.MM.dd HH:mm:ss" setTimeZome:nil];
+ NSString *c =[self setTimeInt:0 setTimeFormat:nil setTimeZome:nil];
+ NSString *d =[self setTimeInt:0 setTimeFormat:@"yy.MM.dd HH:mm:ss" setTimeZome:@"GMT"];
+ */
++(NSString *)setTimeInt:(NSTimeInterval)timeSeconds setTimeFormat:(NSString *)timeFormatStr setTimeZome:(NSString *)timeZoneStr{
+    NSString *date_string;
+    NSDate *time_str;
+    if( timeSeconds>0){
+        time_str =[NSDate dateWithTimeIntervalSince1970:timeSeconds];
+    }else{
+        time_str=[[NSDate alloc] init];
+    }
+    if( timeFormatStr==nil){
+        date_string =[NSString stringWithFormat:@"%ld",(long)[time_str timeIntervalSince1970]];
+    }else{
+        NSDateFormatter *date_format_str =[[NSDateFormatter alloc] init];
+        [date_format_str setDateFormat:timeFormatStr];
+        if( timeZoneStr!=nil){
+            [date_format_str setTimeZone:[NSTimeZone timeZoneWithName:timeZoneStr]];
+        }
+        date_string =[date_format_str stringFromDate:time_str];
+    }
+    return date_string;
+}
 
++(double)getMaxValueInNumberValueArray:(NSArray *)array{
+    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+    NSArray *sortedNumbers = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    double max = [[sortedNumbers objectAtIndex:0] doubleValue];
+    max = [self max:max];
+    return max;
+}
+
++(double)getMinValueInNumberValueArray:(NSArray *)array{
+    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+    NSArray *sortedNumbers = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    double min = [[sortedNumbers objectAtIndex:(array.count-1)] doubleValue];
+    min = [self min:min];
+    return min;
+}
 @end

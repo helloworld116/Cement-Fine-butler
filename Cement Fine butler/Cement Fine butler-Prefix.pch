@@ -56,6 +56,7 @@
     #define kStockReportURL [kServerURL stringByAppendingString:@"stock"]
     #define kOutputReportURL [kServerURL stringByAppendingString:@"output"]
     #define kMaterialCostURL [kServerURL stringByAppendingString:@"cost/material"]
+    #define kMaterialCostHistoryURL [kServerURL stringByAppendingString:@"cost/material/history"]
     #define kEquipmentList [kServerURL stringByAppendingString:@"equipment/list"]
     #define kEquipmentStopRecord [kServerURL stringByAppendingString:@"equipment/stoprecord"]
     #define kProductRecommendPrice [kServerURL stringByAppendingString:@"pricing"]
@@ -70,6 +71,9 @@
     #define kCondition_Lines @"产线"
     #define kCondition_Products @"产品"
     #define kCondition_UnitCostType @"单位成本类型"
+    #define kUnitCostType_UnitCost @"财务单位成本"
+    #define kUnitCostType_CurrentUnitCost @"当前单位成本"
+    #define kUnitCostType_BudgetedUnitCost @"计划单位成本"
     #define kCondition_Time_Array @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"本年"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"本季度"},@{@"_id":[NSNumber numberWithInt:2],@"name":@"本月"},@{@"_id":[NSNumber numberWithInt:4],@"name":@"今天"}]
 #endif
 

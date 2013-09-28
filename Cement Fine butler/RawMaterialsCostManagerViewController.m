@@ -131,13 +131,12 @@
         [lblHuanbi setText:strHuanbi];
         [self.bottomView addSubview:lblHuanbi];
         
-        //底部view实际高度
-        CGFloat bottomViewHeight = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight-self.bottomView.frame.origin.y;
+        CGFloat bottomViewHeight = self.bottomView.frame.size.height;
         //底部view需要的高度，距离上下都是10
-        CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count + 10*2;
+        CGFloat bottomViewNeedHeight = kLabelHeight*self.bottomView.subviews.count;
         //减去10是为了减少在两者差距很小的情况下，避免可拖动
-        if (bottomViewHeight<bottomViewNeedHeight-10) {
-            self.scrollView.contentSize = CGSizeMake(kScreenWidth,kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight+bottomViewNeedHeight-bottomViewHeight+30);
+        if (bottomViewHeight<bottomViewNeedHeight) {
+            self.scrollView.contentSize = CGSizeMake(kScreenWidth,bottomViewNeedHeight+self.bottomView.frame.origin.y);
         }
     }
 }
@@ -166,14 +165,25 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-//    NSString *data = @"[{'name':'熟料','value':56.95,'color':'#a5c2d5'},{'name':'粉煤灰','value':27.05,'color':'#cbab4f'},{'name':'矿渣','value':14.55,'color':'#76a871'},{'name':'石膏','value':1.45,'color':'#9f7961'}]";
-//    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height,self.webView.frame.size.width];
-//    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
-//    DDLogVerbose(@"dates is %@",js);
-//    [webView stringByEvaluatingJavaScriptFromString:js];
-    
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
-        
+        NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+        double unitCost = [[[self.data objectForKey:@"overView"] objectForKey:@"unitCost"] doubleValue];
+        if (self.data&&(NSNull *)self.data!=[NSNull null]) {
+            NSArray *materials = [self.data objectForKey:@"materials"];
+            for (int i=0; i<materials.count; i++) {
+                NSDictionary *material = [materials objectAtIndex:i];
+                NSString *color = [kColorList objectAtIndex:i];
+                NSString *name = [NSString stringWithFormat:@"%@ %@元/吨",[material objectForKey:@"name"],[material objectForKey:@"unitCost"]];
+                NSString *value = [NSString stringWithFormat:@"%.2f",[[material objectForKey:@"unitCost"] doubleValue]/unitCost*100];
+                NSDictionary *data = @{@"name":name,@"value":value,@"color":color};
+                [dataArray addObject:data];
+            }
+            NSString *pieData = [Tool objectToString:dataArray];
+            NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height,self.webView.frame.size.width];
+            NSString *js = [NSString stringWithFormat:@"drawPie2D('%@',\"%@\")",pieData,columnConfig];
+            DDLogVerbose(@"dates is %@",js);
+            [webView stringByEvaluatingJavaScriptFromString:js];
+        }
     }
 }
 
@@ -215,8 +225,8 @@
                     target:self
                     action:@selector(historyTrends:)],
       ];
-    [KxMenu showMenuInView:self.view
-                  fromRect:CGRectMake(10, 5, 30, 40)
+    [KxMenu showMenuInView:self.scrollView
+                  fromRect:CGRectMake(10, 0, 30, 0)
                  menuItems:menuItems];
 }
 
@@ -312,8 +322,8 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
-    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-    [self.view addSubview:self.loadingView];
+    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    [self.scrollView addSubview:self.loadingView];
     [self.loadingView startLoading];
     
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];

@@ -9,7 +9,9 @@
 #import "HistroyTrendsViewController.h"
 
 @interface HistroyTrendsViewController ()
-
+@property (retain, nonatomic) ASIFormDataRequest *request;
+@property (retain, nonatomic) NSDictionary *data;
+@property (retain, nonatomic) LoadingView *loadingView;
 @end
 
 @implementation HistroyTrendsViewController
@@ -31,7 +33,8 @@
 //    self.navigationItem.title = @"产量";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(back:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
+//    self.navigationItem.leftBarButtonItem.title = @"返回";
     
     [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.webView.delegate = self;
@@ -41,6 +44,9 @@
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
     sc.contentSize = CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
+    
+    NSDictionary *condition = @{@"lineId":[NSNumber numberWithInt:0],@"productId":[NSNumber numberWithInt:0],@"type":[NSNumber numberWithInt:0]};
+    [self sendRequest:condition];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,12 +70,64 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    //    NSString *data = @"[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]";
-    //    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013年产量','tagName':'产量(吨)','height':%f,'width':%f,'start_scale':%f,'end_scale':%f,'scale_space':%f}",self.bottomWebiew.frame.size.height,self.bottomWebiew.frame.size.width,0.0,40.0,8.0];
-    ////    NSString *js = [[ stringByAppendingString:data] stringByAppendingFormat:@""];
-    //    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
-    //    DDLogVerbose(@"dates is %@",js);
-    //    [webView stringByEvaluatingJavaScriptFromString:js];
+    int ratio = 1;
+    if (IS_RETINA) {
+        ratio = 4;
+    }
+    if (self.data&&(NSNull *)self.data!=[NSNull null]) {
+        int periodUnit = [[self.data objectForKey:@"periodUnit"] intValue];//时间单位，0:天1:月2:年
+        NSString *dateFormate;
+        switch (periodUnit) {
+            case 0:
+                dateFormate = @"MM-dd";
+                break;
+            case 1:
+                dateFormate = @"yyyy-MM";
+                break;
+            case 2:
+                dateFormate = @"yyyy";
+                break;
+        }
+
+        NSArray *unitCosts = [self.data objectForKey:@"unitCost"];
+        NSArray *currentUnitCosts = [self.data objectForKey:@"currentUnitCost"];
+        NSArray *budgetedUnitCosts = [self.data objectForKey:@"budgetedUnitCost"];
+        NSMutableArray *unitCostValues = [[NSMutableArray alloc] init];
+        NSMutableArray *currentUnitCostValues = [[NSMutableArray alloc] init];
+        NSMutableArray *budgetedUnitCostValues = [[NSMutableArray alloc] init];
+        NSMutableArray *timeLabels = [[NSMutableArray alloc] init];
+        for (int i=0; i<unitCosts.count; i++) {
+            NSDictionary *unitCost = [unitCosts objectAtIndex:i];
+            NSDictionary *currentUnitCost = [currentUnitCosts objectAtIndex:i];
+            NSDictionary *budgetedUnitCost = [budgetedUnitCosts objectAtIndex:i];
+            [unitCostValues addObject:[unitCost objectForKey:@"value"]];
+            [currentUnitCostValues addObject:[currentUnitCost objectForKey:@"value"]];
+            [budgetedUnitCostValues addObject:[budgetedUnitCost objectForKey:@"value"]];
+            long long time = [[unitCost objectForKey:@"time"] longLongValue]/1000;//毫秒
+            NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
+            [timeLabels addObject:timeLabel];
+        }
+        NSMutableArray *maxValueArray = [[NSMutableArray alloc] init];
+        [maxValueArray addObjectsFromArray:unitCostValues];
+        [maxValueArray addObjectsFromArray:currentUnitCostValues];
+        [maxValueArray addObjectsFromArray:budgetedUnitCostValues];
+        double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
+        double min = [Tool getMinValueInNumberValueArray:maxValueArray];
+        
+        NSDictionary *unitCostDict = @{@"name":kUnitCostType_UnitCost,@"value":unitCostValues,@"line_width":[NSNumber numberWithInt:ratio],@"color":[kColorList objectAtIndex:0]};
+        NSDictionary *currentCostDict = @{@"name":kUnitCostType_CurrentUnitCost,@"value":currentUnitCostValues,@"line_width":[NSNumber numberWithInt:ratio],@"color":[kColorList objectAtIndex:1]};
+        NSDictionary *budgetedCostDict = @{@"name":kUnitCostType_BudgetedUnitCost,@"value":budgetedUnitCostValues,@"line_width":[NSNumber numberWithInt:ratio],@"color":[kColorList objectAtIndex:2]};
+        NSArray *lineArray = @[unitCostDict,currentCostDict,budgetedCostDict];
+        NSDictionary *lineConfigDict = @{@"title":@"2013年9月原材料单位成本趋势",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
+        
+        NSString *lineData = [Tool objectToString:lineArray];
+        NSString *labelData = [Tool objectToString:timeLabels];
+        NSString *lineConfigData = [Tool objectToString:lineConfigDict];
+        
+        NSString *js = [NSString stringWithFormat:@"drawLineBasic2D('%@','%@','%@')",lineData,labelData,lineConfigData];
+        DDLogVerbose(@"dates is %@",js);
+        [webView stringByEvaluatingJavaScriptFromString:js];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -90,5 +148,43 @@
 
 - (void)showSearch:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+#pragma mark 发送网络请求
+-(void) sendRequest:(NSDictionary *)condition{
+    self.loadingView = [[LoadingView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.loadingView];
+    [self.loadingView startLoading];
+    
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostHistoryURL]];
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1377964800000] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1380470400000] forKey:@"endTime"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
+    [self.request setPostValue:[NSNumber numberWithInt:0] forKey:@"type"];//0:代表查询直接材料1:代表查询原材料
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+    [self.request startAsynchronous];
+}
+
+#pragma mark 网络请求
+-(void) requestFailed:(ASIHTTPRequest *)request{
+    
+}
+
+-(void)requestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int responseCode = [[dict objectForKey:@"error"] intValue];
+    if (responseCode==0) {
+        self.data = [dict objectForKey:@"data"];
+        [self.webView reload];
+    }else if(responseCode==-1){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }
+    [self.loadingView successEndLoading];
 }
 @end

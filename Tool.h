@@ -32,4 +32,10 @@
 +(double)min:(double)min;
 
 +(BOOL)isNullOrNil:(id)object;
+
++(NSString *)setTimeInt:(NSTimeInterval)timeSeconds setTimeFormat:(NSString *)timeFormatStr setTimeZome:(NSString *)timeZoneStr;
+
++(double)getMaxValueInNumberValueArray:(NSArray *)array;
+
++(double)getMinValueInNumberValueArray:(NSArray *)array;
 @end

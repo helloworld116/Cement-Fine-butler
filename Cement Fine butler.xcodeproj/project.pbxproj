@@ -105,11 +105,13 @@
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
 		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
 		0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */; };
-		0E493C3B17E70BFC00D0AD0D /* MessgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */; };
+		0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
 		0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */; };
 		0E62E85617F1252C00D4681E /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85417F1252C00D4681E /* check_icon@2x.png */; };
 		0E62E85717F1252C00D4681E /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85517F1252C00D4681E /* check_icon.png */; };
+		0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6A896317F6B0BA0065043F /* MessageCell.xib */; };
+		0E6A896717F6B11E0065043F /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A896617F6B11E0065043F /* MessageCell.m */; };
 		0E72041417F55B50001E943F /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041217F55B50001E943F /* message.png */; };
 		0E72041517F55B50001E943F /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041317F55B50001E943F /* message@2x.png */; };
 		0E72041817F55C96001E943F /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041617F55C95001E943F /* checked.png */; };
@@ -266,13 +268,16 @@
 		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
 		0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCostManagerViewController.h; sourceTree = "<group>"; };
 		0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCostManagerViewController.m; sourceTree = "<group>"; };
-		0E493C3917E70BFC00D0AD0D /* MessgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessgeViewController.h; sourceTree = "<group>"; };
-		0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessgeViewController.m; sourceTree = "<group>"; };
+		0E493C3917E70BFC00D0AD0D /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		0E58AFDD17E93A18008A2DF2 /* Pie2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pie2D.html; sourceTree = "<group>"; };
 		0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostManagerCenterViewController.h; sourceTree = "<group>"; };
 		0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostManagerCenterViewController.m; sourceTree = "<group>"; };
 		0E62E85417F1252C00D4681E /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		0E62E85517F1252C00D4681E /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
+		0E6A896317F6B0BA0065043F /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		0E6A896517F6B11E0065043F /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		0E6A896617F6B11E0065043F /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		0E72041217F55B50001E943F /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		0E72041317F55B50001E943F /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@2x.png"; sourceTree = "<group>"; };
 		0E72041617F55C95001E943F /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
@@ -443,8 +448,11 @@
 		0E493C3817E70BCF00D0AD0D /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				0E493C3917E70BFC00D0AD0D /* MessgeViewController.h */,
-				0E493C3A17E70BFC00D0AD0D /* MessgeViewController.m */,
+				0E493C3917E70BFC00D0AD0D /* MessageViewController.h */,
+				0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */,
+				0E6A896317F6B0BA0065043F /* MessageCell.xib */,
+				0E6A896517F6B11E0065043F /* MessageCell.h */,
+				0E6A896617F6B11E0065043F /* MessageCell.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -889,6 +897,7 @@
 				0E72041517F55B50001E943F /* message@2x.png in Resources */,
 				0E72041817F55C96001E943F /* checked.png in Resources */,
 				0E72041917F55C96001E943F /* checked@2x.png in Resources */,
+				0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,7 +959,7 @@
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
-				0E493C3B17E70BFC00D0AD0D /* MessgeViewController.m in Sources */,
+				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
@@ -958,6 +967,7 @@
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
+				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
