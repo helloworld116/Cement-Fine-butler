@@ -45,6 +45,9 @@
     [self setBackground];
     self.username.delegate = self;
     self.password.delegate = self;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [userDefaults objectForKey:@"username"];
+    self.username.text = username;
 }
 
 - (void)didReceiveMemoryWarning
@@ -172,7 +175,7 @@
         [self presentViewController:tabBarController animated:YES completion:nil];
     }else{
         self.password.text = nil;
-        NSString *msg = [dict objectForKey:@"description"];
+        NSString *msg = [dict objectForKey:@"message"];
 //        [SVProgressHUD showErrorWithStatus:msg];
     }
 }

@@ -68,16 +68,10 @@
     // daysRange.length will contain the number of the last day
     // of the month containing curDate
     NSLog(@"%i", daysRange.length);
-    NSDate *odate = [self stringToDate:@"yyyy-MM-dd HH:mm:s" dateString:@"2013-9-25 23:59:59"];
+    NSDate *odate = [self stringToDate:@"yyyy-MM-dd HH:mm:s" dateString:@"2013-09-25 00:00:00"];
     NSLog(@"timeinv is %f",[odate timeIntervalSince1970]);
 //    1380124799
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
-    NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSInteger year = [components year];
-    NSLog(@"year is %d,month is %d, day is %d",year,month,day);
-    
-    
+
     NSDateComponents *comps = [[NSDateComponents alloc] init];
 //    [comps setDay:6];
     [comps setMonth:9];
@@ -89,6 +83,11 @@
     [gregorian components:NSDayCalendarUnit fromDate:date];
     int weekday = [weekdayComponents day];
     NSLog(@"day is %d",weekday);
+    
+    NSLog(@"TimeEndInterval年 is %lld",[Tool timeEndIntervalByType:0]);
+    NSLog(@"TimeEndInterval季 is %lld",[Tool timeEndIntervalByType:1]);
+    NSLog(@"TimeEndInterval月 is %lld",[Tool timeEndIntervalByType:2]);
+    NSLog(@"TimeEndInterval日 is %lld",[Tool timeEndIntervalByType:3]);
     [self.window makeKeyAndVisible];
     return YES;
 }

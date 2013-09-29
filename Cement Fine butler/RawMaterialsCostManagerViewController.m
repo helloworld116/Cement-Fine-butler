@@ -16,6 +16,8 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) LoadingView *loadingView;
+
+@property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -33,7 +35,7 @@
 {
     [super viewDidLoad];
     //最开始异步请求数据
-    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0]};
+    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:condition];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
@@ -179,8 +181,9 @@
                 [dataArray addObject:data];
             }
             NSString *pieData = [Tool objectToString:dataArray];
-            NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013-09-01至2013-09-30直接材料成本','height':%f,'width':%f}",self.webView.frame.size.height,self.webView.frame.size.width];
-            NSString *js = [NSString stringWithFormat:@"drawPie2D('%@',\"%@\")",pieData,columnConfig];
+            NSString *title = [self.reportTitlePre stringByAppendingString:@"直接材料成本"];
+            NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
+            NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
             DDLogVerbose(@"dates is %@",js);
             [webView stringByEvaluatingJavaScriptFromString:js];
         }
@@ -233,8 +236,9 @@
 #pragma mark observe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
-        SearchCondition *condition = [change objectForKey:@"new"];
-        DDLogCVerbose(@"line is %ld",condition.productID);
+        SearchCondition *searchCondition = [change objectForKey:@"new"];
+        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
+        [self sendRequest:condition];
     }
 }
 
@@ -260,40 +264,6 @@
 
 #pragma mark 历史趋势
 -(void)historyTrends:(id)sender{
-//    JASidePanelController *sidePanelController = [[JASidePanelController alloc] init];
-//    HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
-//    [sidePanelController setCenterPanel:historyTrendsViewController];
-//    RightViewController* rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-//    NSArray *unitCostArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
-//    NSArray *timeArray = kCondition_Time_Array;
-//    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
-//    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-//    for (NSDictionary *line in lines) {
-//        NSString *name = [line objectForKey:@"name"];
-//        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
-//        NSDictionary *dict = @{@"_id":_id,@"name":name};
-//        [lineArray addObject:dict];
-//    }
-//    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
-//    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-//    for (NSDictionary *product in products) {
-//        NSString *name = [product objectForKey:@"name"];
-//        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
-//        NSDictionary *dict = @{@"_id":_id,@"name":name};
-//        [productArray addObject:dict];
-//    }
-//    rightController.conditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
-//    [sidePanelController setRightPanel:rightController];
-    
-    
-    
-//    sidePanelController.modalPresentationStyle = UIModalPresentationCurrentContext;
-////    sidePanelController.modalTransitionStyle = 2;
-//    [self presentViewController:sidePanelController animated:YES completion:nil];
-////    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
-////    @[@{@"库存类型":stockType},@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    
-    
     NSArray *unitCostArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
     NSArray *timeArray = kCondition_Time_Array;
     NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
@@ -317,6 +287,7 @@
     historyTrendsViewController.oldCondition = rightController.conditions;
     NSArray *newConditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     [rightController resetConditions:newConditions];
+    historyTrendsViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:historyTrendsViewController animated:YES];
 }
 
@@ -326,11 +297,14 @@
     [self.scrollView addSubview:self.loadingView];
     [self.loadingView startLoading];
     
+    int timeType = [[condition objectForKey:@"timeType"] intValue];
+    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
+    self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:1377964800000] forKey:@"startTime"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:1380470400000] forKey:@"endTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
     [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
     [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
     [self.request setPostValue:[NSNumber numberWithInt:0] forKey:@"period"];//0:当期   1:上期   2:同期

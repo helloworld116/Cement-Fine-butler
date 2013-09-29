@@ -38,4 +38,10 @@
 +(double)getMaxValueInNumberValueArray:(NSArray *)array;
 
 +(double)getMinValueInNumberValueArray:(NSArray *)array;
+
++(long long)timeBeginIntervalByType:(int)type;
+
++(long long)timeEndIntervalByType:(int)type;
+
++(NSDictionary *)getTimeInfo:(int)timeType;
 @end

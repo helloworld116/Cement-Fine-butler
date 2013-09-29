@@ -12,6 +12,8 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) LoadingView *loadingView;
+
+@property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 @end
 
 @implementation ProductColumnViewController
@@ -30,7 +32,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //最开始异步请求数据
-    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0]};
+    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:condition];//默认查询原材料库存
     //设置view相关
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
@@ -44,7 +46,6 @@
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
-//    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -75,11 +76,6 @@
 
 #pragma mark begin webviewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    //    NSString *requestString = [[request URL] absoluteString];
-    //    NSArray *components = [requestString componentsSeparatedByString:@":"];
-    //    if(([[components objectAtIndex:0] isEqualToString:@"sector"]&&[[components objectAtIndex:1] isEqualToString:@"false"])||([[components objectAtIndex:0] isEqualToString:@"legend"])){
-    //        return NO;
-    //    }
     return YES;
 }
 
@@ -88,12 +84,6 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-//    NSString *data = @"[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]";
-//    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013年库存','tagName':'库存(吨)','height':%f,'width':%f,'start_scale':%f,'end_scale':%f,'scale_space':%f}",self.bottomWebiew.frame.size.height,self.bottomWebiew.frame.size.width,0.0,40.0,8.0];
-//    //    NSString *js = [[ stringByAppendingString:data] stringByAppendingFormat:@""];
-//    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
-//    DDLogVerbose(@"dates is %@",js);
-//    [webView stringByEvaluatingJavaScriptFromString:js];
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
         NSArray *productArray = [self.data objectForKey:@"products"];
         NSMutableArray *productsForSort = [NSMutableArray array];
@@ -111,9 +101,13 @@
         NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
         max = [Tool max:max];
-        NSDictionary *configDict = @{@"title":@"产量报表",@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+        NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
+        NSDictionary *configDict = @{@"title":title,@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
         [webView stringByEvaluatingJavaScriptFromString:js];
+    }else if([Tool isNullOrNil:self.data]){
+        //没有满足条件的数据
+        
     }
 }
    
@@ -127,12 +121,14 @@
     self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
     [self.view addSubview:self.loadingView];
     [self.loadingView startLoading];
-    
+    int timeType = [[condition objectForKey:@"timeType"] intValue];
+    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
+    self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:1377964800000] forKey:@"startTime"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:1380470400000] forKey:@"endTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
     [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
     [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
     [self.request setDelegate:self];
@@ -166,7 +162,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
         SearchCondition *searchCondition = [change objectForKey:@"new"];
-        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID]};
+        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
         [self sendRequest:condition];
     }
 }
