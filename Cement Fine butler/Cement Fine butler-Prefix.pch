@@ -74,8 +74,9 @@
     #define kUnitCostType_UnitCost @"财务单位成本"
     #define kUnitCostType_CurrentUnitCost @"当前单位成本"
     #define kUnitCostType_BudgetedUnitCost @"计划单位成本"
-    #define kCondition_Time_Array @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"本年"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"本季度"},@{@"_id":[NSNumber numberWithInt:2],@"name":@"本月"},@{@"_id":[NSNumber numberWithInt:3],@"name":@"今天"}]
+    #define kCondition_Time_Array @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"本年"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"本季度"},@{@"_id":[NSNumber numberWithInt:2],@"name":@"本月"},@{@"_id":[NSNumber numberWithInt:3],@"name":@"今天"},@{@"_id":[NSNumber numberWithInt:4],@"name":@"自定义"}]
 #endif
+
 
 #ifdef DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;

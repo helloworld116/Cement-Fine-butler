@@ -137,6 +137,7 @@
     [self.view addSubview:self.loadingView];
     [self.loadingView startLoading];
     
+    DDLogCInfo(@"******  Request URL is:%@  ******",kStockReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];

@@ -20,6 +20,7 @@
     NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoginURL]];
+    DDLogCInfo(@"******  Request URL is:%@  ******",kLoginURL);
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:username forKey:@"username"];
     [self.request setPostValue:password forKey:@"password"];

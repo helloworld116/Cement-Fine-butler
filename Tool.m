@@ -191,17 +191,21 @@
 }
 
 
-//0本年，1本季，2本月，3本日
-+(long long)timeBeginIntervalByType:(int)type{
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
-    NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSInteger year = [components year];
+//0本年，1本季，2本月，3本日，4自定义时间段
++(long long)timeBeginIntervalByType:(int)type year:(int)year month:(int)month day:(int)day{
+    if (type!=4) {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
+        day = [components day];
+        month = [components month];
+        year = [components year];
+    }
     switch (type) {
+        //年
         case 0:
             day=1;
             month=1;
             break;
+        //季度
         case 1:
             day=1;
             if (month<=3) {
@@ -214,6 +218,7 @@
                 month=10;
             }
             break;
+        //月
         case 2:
             day=1;
             break;
@@ -224,11 +229,13 @@
 
 }
 
-+(long long)timeEndIntervalByType:(int)type{
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
-    NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSInteger year = [components year];
++(long long)timeEndIntervalByType:(int)type year:(int)year month:(int)month day:(int)day{
+    if (type!=4) {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
+        day = [components day];
+        month = [components month];
+        year = [components year];
+    }
     NSCalendar *gregorian = [[NSCalendar alloc]
                              initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -301,8 +308,8 @@
         case 3:
             timeDesc = [NSString stringWithFormat:@"%d年%d月%d日",year,month,day];
     }
-    long long startTime = [self timeBeginIntervalByType:timeType];
-    long long endTime = [self timeEndIntervalByType:timeType];
+    long long startTime = [self timeBeginIntervalByType:timeType year:0 month:0 day:0];
+    long long endTime = [self timeEndIntervalByType:timeType year:0 month:0 day:0];
     return @{@"timeDesc":timeDesc,@"startTime":[NSNumber numberWithLongLong:startTime],@"endTime":[NSNumber numberWithLongLong:endTime]};
 }
 

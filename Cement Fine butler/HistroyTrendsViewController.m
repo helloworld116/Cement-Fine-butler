@@ -156,6 +156,7 @@
     [self.view addSubview:self.loadingView];
     [self.loadingView startLoading];
     
+    DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostHistoryURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostHistoryURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];

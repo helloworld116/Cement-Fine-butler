@@ -126,6 +126,7 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest {
+    DDLogCInfo(@"******  Request URL is:%@  ******",kLoginURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoginURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:self.uname forKey:@"username"];

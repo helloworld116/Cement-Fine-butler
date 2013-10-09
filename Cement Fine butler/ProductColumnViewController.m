@@ -124,6 +124,8 @@
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
+    
+    DDLogCInfo(@"******  Request URL is:%@  ******",kOutputReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];

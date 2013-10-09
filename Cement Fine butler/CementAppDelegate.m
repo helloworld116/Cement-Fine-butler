@@ -55,39 +55,6 @@
         [loginAction backstageLogin];
         self.window.rootViewController = [self showViewControllers];
     }
-
-    //测试日期
-    NSDate *curDate = [NSDate date];
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-    NSRange daysRange =
-    [currentCalendar
-     rangeOfUnit:NSDayCalendarUnit
-     inUnit:NSMonthCalendarUnit
-     forDate:curDate];
-    
-    // daysRange.length will contain the number of the last day
-    // of the month containing curDate
-    NSLog(@"%i", daysRange.length);
-    NSDate *odate = [self stringToDate:@"yyyy-MM-dd HH:mm:s" dateString:@"2013-09-25 00:00:00"];
-    NSLog(@"timeinv is %f",[odate timeIntervalSince1970]);
-//    1380124799
-
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-//    [comps setDay:6];
-    [comps setMonth:9];
-    [comps setYear:2013];
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *date = [gregorian dateFromComponents:comps];
-    NSDateComponents *weekdayComponents =
-    [gregorian components:NSDayCalendarUnit fromDate:date];
-    int weekday = [weekdayComponents day];
-    NSLog(@"day is %d",weekday);
-    
-    NSLog(@"TimeEndInterval年 is %lld",[Tool timeEndIntervalByType:0]);
-    NSLog(@"TimeEndInterval季 is %lld",[Tool timeEndIntervalByType:1]);
-    NSLog(@"TimeEndInterval月 is %lld",[Tool timeEndIntervalByType:2]);
-    NSLog(@"TimeEndInterval日 is %lld",[Tool timeEndIntervalByType:3]);
     [self.window makeKeyAndVisible];
     return YES;
 }
