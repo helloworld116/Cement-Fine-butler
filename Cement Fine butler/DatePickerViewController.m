@@ -27,6 +27,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateAndTime =  [dateFormatter stringFromDate:currentDate];
+    self.lblStartDate.text = dateAndTime;
+    self.lblEndDate.text = dateAndTime;
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,20 +42,50 @@
 }
 
 - (void)viewDidUnload {
-    [self setBtnStartDate:nil];
-    [self setBtnEndDate:nil];
-    [self setDatePicker:nil];
+    [self setDatePickerOfStart:nil];
+    [self setDatePickerOfEnd:nil];
+    [self setLblStartDate:nil];
+    [self setLblEndDate:nil];
     [super viewDidUnload];
 }
+
 - (IBAction)back:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)sureDate:(id)sender {
+    self.datePickerOfStart.hidden = YES;
+    self.datePickerOfEnd.hidden = YES;
+}
+
+- (IBAction)backgroundTouch:(id)sender {
+    self.datePickerOfStart.hidden = YES;
+    self.datePickerOfEnd.hidden = YES;
 }
 
 - (IBAction)choiceStartDate:(id)sender {
+    self.datePickerOfStart.hidden = NO;
+    self.datePickerOfEnd.hidden = YES;
 }
 
 - (IBAction)choiceEndDate:(id)sender {
+    self.datePickerOfEnd.hidden = NO;
+    self.datePickerOfStart.hidden = YES;
+}
+
+- (IBAction)updateStartDate:(id)sender {
+    NSDate *select = [self.datePickerOfStart date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateAndTime =  [dateFormatter stringFromDate:select];
+    self.lblStartDate.text = dateAndTime;
+}
+
+- (IBAction)updateEndDate:(id)sender {
+    NSDate *select = [self.datePickerOfEnd date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateAndTime =  [dateFormatter stringFromDate:select];
+    self.lblEndDate.text = dateAndTime;
 }
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="pN5-QY-8OO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="pN5-QY-8OO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -218,30 +218,62 @@
         <!--Date Picker View Controller-->
         <scene sceneID="ftz-EF-dpE">
             <objects>
-                <viewController id="aXW-RJ-Pnf" customClass="DatePickerViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="urT-86-yNV">
+                <viewController storyboardIdentifier="datePickerViewController" id="aXW-RJ-Pnf" customClass="DatePickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="urT-86-yNV" customClass="UIControl">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" id="4Zt-La-kh3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="iAd-aE-5KP">
+                                        <barButtonItem key="leftBarButtonItem" title="返回" id="SGw-fh-UHK">
+                                            <connections>
+                                                <action selector="back:" destination="aXW-RJ-Pnf" id="wPy-C3-jFg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="确定" id="5AD-e8-azm">
+                                            <connections>
+                                                <action selector="sureDate:" destination="aXW-RJ-Pnf" id="L27-TL-bB1"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="开始日期：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gjb-J8-nkU">
-                                <rect key="frame" x="20" y="59" width="72" height="21"/>
+                                <rect key="frame" x="20" y="59" width="78" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="结束日期：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WLx-3O-kaL">
-                                <rect key="frame" x="20" y="93" width="72" height="21"/>
+                                <rect key="frame" x="20" y="93" width="78" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="evK-H9-Dfn">
-                                <rect key="frame" x="101" y="59" width="199" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2013-12-31" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LMc-s2-vda">
+                                <rect key="frame" x="112" y="59" width="159" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2013-12-31" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p8o-Wq-ouV">
+                                <rect key="frame" x="112" y="93" width="159" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vyu-6X-8HF">
+                                <rect key="frame" x="112" y="59" width="159" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="2013-12-31">
+                                <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -249,14 +281,14 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="choiceStartDate:" destination="aXW-RJ-Pnf" eventType="touchUpInside" id="VSf-mY-4SP"/>
+                                    <action selector="choiceStartDate:" destination="aXW-RJ-Pnf" eventType="touchUpInside" id="gCz-dI-I5x"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wS0-QA-MUc">
-                                <rect key="frame" x="101" y="93" width="199" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="d5y-KX-fLE">
+                                <rect key="frame" x="112" y="93" width="159" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="2013-12-31">
+                                <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -264,10 +296,42 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="choiceEndDate:" destination="aXW-RJ-Pnf" eventType="touchUpInside" id="oS8-iv-wFh"/>
+                                    <action selector="choiceEndDate:" destination="aXW-RJ-Pnf" eventType="touchUpInside" id="AC9-sH-CLI"/>
                                 </connections>
                             </button>
                             <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="Jjl-WV-bBX">
+                                <rect key="frame" x="0.0" y="244" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="402991585.902165">
+                                    <!--2013-10-09 06:06:25 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="zh_CN"/>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <data key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</data>
+                                </timeZone>
+                                <connections>
+                                    <action selector="updateStartDate:" destination="aXW-RJ-Pnf" eventType="valueChanged" id="f8O-dQ-ARc"/>
+                                </connections>
+                            </datePicker>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="33g-XN-wue">
                                 <rect key="frame" x="0.0" y="244" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="402991585.902165">
@@ -295,32 +359,21 @@ AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </mutableData>
                                 </timeZone>
+                                <connections>
+                                    <action selector="updateEndDate:" destination="aXW-RJ-Pnf" eventType="valueChanged" id="GZG-6G-5J7"/>
+                                </connections>
                             </datePicker>
-                            <navigationBar contentMode="scaleToFill" id="4Zt-La-kh3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="iAd-aE-5KP">
-                                        <barButtonItem key="leftBarButtonItem" title="返回" id="SGw-fh-UHK">
-                                            <connections>
-                                                <action selector="back:" destination="aXW-RJ-Pnf" id="wPy-C3-jFg"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="确定" id="5AD-e8-azm">
-                                            <connections>
-                                                <action selector="sureDate:" destination="aXW-RJ-Pnf" id="L27-TL-bB1"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="backgroundTouch:" destination="aXW-RJ-Pnf" eventType="touchUpInside" id="eZK-dj-UZ0"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="btnEndDate" destination="wS0-QA-MUc" id="BDl-bc-yLw"/>
-                        <outlet property="btnStartDate" destination="evK-H9-Dfn" id="G3I-iR-rgD"/>
-                        <outlet property="datePicker" destination="Jjl-WV-bBX" id="rFc-2k-JN1"/>
+                        <outlet property="datePickerOfEnd" destination="33g-XN-wue" id="JyF-sB-LaK"/>
+                        <outlet property="datePickerOfStart" destination="Jjl-WV-bBX" id="YPM-DY-DSF"/>
+                        <outlet property="lblEndDate" destination="p8o-Wq-ouV" id="uz2-MW-DYP"/>
+                        <outlet property="lblStartDate" destination="LMc-s2-vda" id="XKv-a1-JWf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUd-ta-uUF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -655,6 +708,107 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="-39" y="-927"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="BMKMapView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BMKMapView.h"/>
+        </class>
+        <class className="CenterViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CenterViewController.h"/>
+        </class>
+        <class className="DatePickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DatePickerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="back:"/>
+                <relationship kind="action" name="backgroundTouch:"/>
+                <relationship kind="action" name="choiceEndDate:"/>
+                <relationship kind="action" name="choiceStartDate:"/>
+                <relationship kind="action" name="sureDate:"/>
+                <relationship kind="action" name="updateEndDate:"/>
+                <relationship kind="action" name="updateStartDate:"/>
+                <relationship kind="outlet" name="datePickerOfEnd" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="datePickerOfStart" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="lblEndDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblStartDate" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="EquipmentMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="BMKMapView"/>
+            </relationships>
+        </class>
+        <class className="HistroyTrendsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistroyTrendsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="InsetsTextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InsetsTextField.h"/>
+        </class>
+        <class className="InventoryColumnViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InventoryColumnViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="showNav:"/>
+                <relationship kind="action" name="showSearchCondition:"/>
+                <relationship kind="outlet" name="bottomWebiew" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="LeftViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LeftViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backgroundTouch:"/>
+                <relationship kind="action" name="doLogin:"/>
+                <relationship kind="outlet" name="backgroundImgView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="btnLogin" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="continerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="password" candidateClass="InsetsTextField"/>
+                <relationship kind="outlet" name="titleImgView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="username" candidateClass="InsetsTextField"/>
+            </relationships>
+        </class>
+        <class className="MessageViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MessageViewController.h"/>
+        </class>
+        <class className="ProductColumnViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProductColumnViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="showNav:"/>
+                <relationship kind="action" name="showSearchCondition:"/>
+                <relationship kind="outlet" name="bottomWebiew" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="RawMaterialsCostManagerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsCostManagerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="moreAction:"/>
+                <relationship kind="action" name="showSearch:"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="RightViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="search:"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="topView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

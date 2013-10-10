@@ -10,6 +10,7 @@
 #import "RightViewController.h"
 #import "ConditionCell.h"
 #import "SearchCondition.h"
+#import "DatePickerViewController.h"
 
 //tableview cell高度为40
 #define kTableViewCellHeight 40.f
@@ -116,6 +117,10 @@ int stockType=0,timeType=0,lineID=0,productID=0;
         stockType = cell.cellID;
     }else if ([kCondition_Time isEqualToString:headerTitle]) {
         timeType = cell.cellID;
+        if (timeType==4) {//选中的是自定义时间
+            DatePickerViewController *datePickerViewController = (DatePickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController"];
+            [self presentModalViewController:datePickerViewController animated:YES];
+        }
     }else if ([kCondition_Lines isEqualToString:headerTitle]){
         lineID = cell.cellID;
     }else if ([kCondition_Products isEqualToString:headerTitle]){

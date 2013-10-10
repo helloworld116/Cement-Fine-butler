@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface DatePickerViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIButton *btnStartDate;
-@property (strong, nonatomic) IBOutlet UIButton *btnEndDate;
-@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UILabel *lblStartDate;
+@property (strong, nonatomic) IBOutlet UILabel *lblEndDate;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePickerOfStart;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePickerOfEnd;
 - (IBAction)back:(id)sender;
-
 - (IBAction)sureDate:(id)sender;
+
+- (IBAction)backgroundTouch:(id)sender;
 - (IBAction)choiceStartDate:(id)sender;
 - (IBAction)choiceEndDate:(id)sender;
+- (IBAction)updateStartDate:(id)sender;
+- (IBAction)updateEndDate:(id)sender;
 @end
