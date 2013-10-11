@@ -11,6 +11,6 @@
 @interface LoginAction : NSObject
 
 
--(BOOL)backstageLogin;
+-(BOOL)backstageLoginWithSync:(BOOL)sync;
 
 @end

@@ -50,12 +50,18 @@
 }
 
 - (IBAction)back:(id)sender {
+    NSLog(@"before controller is %@",self.presentingViewController);
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)sureDate:(id)sender {
     self.datePickerOfStart.hidden = YES;
     self.datePickerOfEnd.hidden = YES;
+    NSLog(@"before presentingViewController  is %@",self.presentingViewController );
+    NSLog(@"before presentedViewController  is %@",self.presentedViewController);
+    NSLog(@"before parentViewController is %@",self.parentViewController);
+    NSLog(@"before splitViewController is %@",self.splitViewController);
+    NSLog(@"before searchDisplayController is %@",self.searchDisplayController);
 }
 
 - (IBAction)backgroundTouch:(id)sender {

@@ -58,6 +58,7 @@
     [super viewDidDisappear:animated];
     //移除观察条件
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+    [self.sidePanelController showCenterPanelAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning

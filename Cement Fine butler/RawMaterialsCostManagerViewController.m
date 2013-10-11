@@ -63,6 +63,8 @@
     [super viewDidDisappear:animated];
     //移除观察条件
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+    [self.sidePanelController showCenterPanelAnimated:NO];
+    [KxMenu dismissMenu];
 }
 
 - (void) setBottomViewOfSubView {
@@ -200,35 +202,13 @@
 }
 
 - (IBAction)moreAction:(id)sender {
-    NSArray *menuItems =
-    @[
-      
-      [KxMenuItem menuItem:@"成本还原"
-                     image:nil
-                    target:self
-                    action:@selector(costReduction:)],
-      
-      [KxMenuItem menuItem:@"取消还原"
-                     image:nil
-                    target:self
-                    action:@selector(cancelReduction:)],
-      
-      [KxMenuItem menuItem:@"上期"
-                     image:nil
-                    target:self
-                    action:@selector(yearCompareYear:)],
-      
-      [KxMenuItem menuItem:@"同期"
-                     image:nil
-                    target:self
-                    action:@selector(monthCompareMonth:)],
-      
-      [KxMenuItem menuItem:@"历史趋势"
-                     image:nil
-                    target:self
-                    action:@selector(historyTrends:)],
-      ];
-    [KxMenu showMenuInView:self.scrollView
+    KxMenuItem *menuItem1 = [KxMenuItem menuItem:@"成本还原" image:nil target:self action:@selector(costReduction:)];
+    KxMenuItem *menuItem2 = [KxMenuItem menuItem:@"取消还原" image:nil target:self action:@selector(cancelReduction:)];
+    KxMenuItem *menuItem3 = [KxMenuItem menuItem:@"上期" image:nil target:self action:@selector(yearCompareYear:)];
+    KxMenuItem *menuItem4 = [KxMenuItem menuItem:@"同期" image:nil target:self action:@selector(monthCompareMonth:)];
+    KxMenuItem *menuItem5 = [KxMenuItem menuItem:@"历史趋势" image:nil target:self action:@selector(historyTrends:)];
+    NSArray *menuItems = @[menuItem1,menuItem2,menuItem3,menuItem4,menuItem5];
+    [KxMenu showMenuInView:self.view
                   fromRect:CGRectMake(10, 0, 30, 0)
                  menuItems:menuItems];
 }

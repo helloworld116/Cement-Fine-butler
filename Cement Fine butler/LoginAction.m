@@ -14,7 +14,8 @@
 @implementation LoginAction
 
 //后台检查登录
--(BOOL)backstageLogin{
+-(BOOL)backstageLoginWithSync:(BOOL)sync{
+    BOOL loginResult = NO;
     //从用户默认数据中获取用户登录信息
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
@@ -34,12 +35,19 @@
             kSharedApp.accessToken = [data objectForKey:@"accessToken"];
             kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
             kSharedApp.factory = [data objectForKey:@"factory"];
-            return YES;
+            loginResult = YES;
+            DDLogCInfo(@"登录成功");
         }else{
 //            NSString *msg = [dict objectForKey:@"description"];
-            return YES;
+            DDLogCError(@"登录失败，%@",@"用户名或密码错误");
         }
-        return NO;
+    }else{
+        DDLogCError(@"登录失败，%@",[error localizedDescription]);
     }
+    return loginResult;
+}
+
+-(void)checkLogin{
+    [NSTimer scheduledTimerWithTimeInterval:kSharedApp.expiresIn-10 target:self selector:@selector(updateSession) userInfo:nil repeats:YES];
 }
 @end

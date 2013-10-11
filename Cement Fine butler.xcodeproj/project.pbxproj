@@ -111,6 +111,9 @@
 		0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */; };
 		0E62E85617F1252C00D4681E /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85417F1252C00D4681E /* check_icon@2x.png */; };
 		0E62E85717F1252C00D4681E /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85517F1252C00D4681E /* check_icon.png */; };
+		0E693ABB1807CE810061A3F8 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */; };
+		0E693ABE1807EA040061A3F8 /* Donut2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E693ABD1807EA040061A3F8 /* Donut2D.html */; };
+		0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */; };
 		0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6A896317F6B0BA0065043F /* MessageCell.xib */; };
 		0E6A896717F6B11E0065043F /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A896617F6B11E0065043F /* MessageCell.m */; };
 		0E72041417F55B50001E943F /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041217F55B50001E943F /* message.png */; };
@@ -144,7 +147,6 @@
 		472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F32F717CC3C05007E567B /* MainStoryboard_iPhone.storyboard */; };
 		472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F32FA17CC3C05007E567B /* MainStoryboard_iPad.storyboard */; };
 		472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */; };
-		472F332517CC3CF8007E567B /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332317CC3CF8007E567B /* libbaidumapapi.a */; };
 		472F332617CC3CF8007E567B /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 472F332417CC3CF8007E567B /* mapapi.bundle */; };
 		472F332917CC3D34007E567B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332817CC3D34007E567B /* SystemConfiguration.framework */; };
 		472F332B17CC3D3A007E567B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332A17CC3D3A007E567B /* OpenGLES.framework */; };
@@ -278,6 +280,10 @@
 		0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostManagerCenterViewController.m; sourceTree = "<group>"; };
 		0E62E85417F1252C00D4681E /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		0E62E85517F1252C00D4681E /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
+		0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		0E693ABD1807EA040061A3F8 /* Donut2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Donut2D.html; sourceTree = "<group>"; };
+		0E693ABF1807FA290061A3F8 /* LossOverViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossOverViewViewController.h; sourceTree = "<group>"; };
+		0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossOverViewViewController.m; sourceTree = "<group>"; };
 		0E6A896317F6B0BA0065043F /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		0E6A896517F6B11E0065043F /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		0E6A896617F6B11E0065043F /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
@@ -352,7 +358,6 @@
 		472F332017CC3CF8007E567B /* BMKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKTypes.h; sourceTree = "<group>"; };
 		472F332117CC3CF8007E567B /* BMKUserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocation.h; sourceTree = "<group>"; };
 		472F332217CC3CF8007E567B /* BMKVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKVersion.h; sourceTree = "<group>"; };
-		472F332317CC3CF8007E567B /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		472F332417CC3CF8007E567B /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		472F332817CC3D34007E567B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		472F332A17CC3D3A007E567B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -377,6 +382,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E693ABB1807CE810061A3F8 /* libbaidumapapi.a in Frameworks */,
 				472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */,
 				472F332D17CC3D40007E567B /* QuartzCore.framework in Frameworks */,
 				472F332B17CC3D3A007E567B /* OpenGLES.framework in Frameworks */,
@@ -384,7 +390,6 @@
 				472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */,
 				472F32E217CC3C05007E567B /* Foundation.framework in Frameworks */,
 				472F32E417CC3C05007E567B /* CoreGraphics.framework in Frameworks */,
-				472F332517CC3CF8007E567B /* libbaidumapapi.a in Frameworks */,
 				4D09E885E1064B069A1C072C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +463,15 @@
 				0E6A896617F6B11E0065043F /* MessageCell.m */,
 			);
 			name = Message;
+			sourceTree = "<group>";
+		};
+		0E693ABC1807E65A0061A3F8 /* Loss */ = {
+			isa = PBXGroup;
+			children = (
+				0E693ABF1807FA290061A3F8 /* LossOverViewViewController.h */,
+				0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */,
+			);
+			name = Loss;
 			sourceTree = "<group>";
 		};
 		0E72471317CD92EF0048DFFB /* images */ = {
@@ -593,6 +607,7 @@
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
+				0E693ABD1807EA040061A3F8 /* Donut2D.html */,
 				0E4291E917EC51F50031ECB6 /* LineBasic2D.html */,
 				0E58AFDD17E93A18008A2DF2 /* Pie2D.html */,
 				0E22B15D17D8191F009695FF /* Column2D.html */,
@@ -630,6 +645,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0E693ABC1807E65A0061A3F8 /* Loss */,
 				0E43339517E833460047A438 /* CostManager */,
 				0E493C3817E70BCF00D0AD0D /* Message */,
 				0E3C000317D9C5F2000D22EF /* Equipment */,
@@ -700,12 +716,12 @@
 		472F332717CC3D02007E567B /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
+				0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */,
 				472F332E17CC3D48007E567B /* CoreLocation.framework */,
 				472F332C17CC3D40007E567B /* QuartzCore.framework */,
 				472F332A17CC3D3A007E567B /* OpenGLES.framework */,
 				472F332817CC3D34007E567B /* SystemConfiguration.framework */,
 				472F330517CC3CF8007E567B /* inc */,
-				472F332317CC3CF8007E567B /* libbaidumapapi.a */,
 				472F332417CC3CF8007E567B /* mapapi.bundle */,
 			);
 			name = BaiduMap;
@@ -743,8 +759,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 472F330217CC3C05007E567B /* Build configuration list for PBXNativeTarget "Cement Fine butler" */;
 			buildPhases = (
-				EAF40324CB20498DBB8B0624 /* Check Pods Manifest.lock */,
 				472F32D817CC3C05007E567B /* Sources */,
+				EAF40324CB20498DBB8B0624 /* Check Pods Manifest.lock */,
 				472F32D917CC3C05007E567B /* Frameworks */,
 				472F32DA17CC3C05007E567B /* Resources */,
 				02F8C588926E4F94A911AFB7 /* Copy Pods Resources */,
@@ -903,6 +919,7 @@
 				0E72041817F55C96001E943F /* checked.png in Resources */,
 				0E72041917F55C96001E943F /* checked@2x.png in Resources */,
 				0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */,
+				0E693ABE1807EA040061A3F8 /* Donut2D.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -974,6 +991,7 @@
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
+				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

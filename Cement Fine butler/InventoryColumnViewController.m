@@ -39,6 +39,7 @@
 //    DDLogVerbose(@"self view subview is %@",[self.view subviews]);
     //观察查询条件修改
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    [self.sidePanelController showCenterPanelAnimated:NO];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

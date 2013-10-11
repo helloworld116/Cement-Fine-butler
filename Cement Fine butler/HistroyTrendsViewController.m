@@ -49,6 +49,11 @@
     [self sendRequest:condition];
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.sidePanelController showCenterPanelAnimated:NO];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

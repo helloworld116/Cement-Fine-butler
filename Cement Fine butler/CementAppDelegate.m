@@ -10,6 +10,7 @@
 #import "ProductColumnViewController.h"
 #import "RawMaterialsCostManagerViewController.h"
 #import "InventoryColumnViewController.h"
+#import "LossOverViewViewController.h"
 #import "LoginAction.h"
 
 #define kViewTag 12000
@@ -52,7 +53,7 @@
         self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     }else{
         LoginAction *loginAction = [[LoginAction alloc] init];
-        [loginAction backstageLogin];
+        [loginAction backstageLoginWithSync:YES];
         self.window.rootViewController = [self showViewControllers];
     }
     [self.window makeKeyAndVisible];
@@ -109,6 +110,9 @@
     [realTimeReportsController setCenterPanel:productColumnViewController];
     [realTimeReportsController setLeftPanel:realTimeReportsLeftController];
     [realTimeReportsController setRightPanel:realTimeReportsRightController];
+    //损耗定位
+    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
+    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
     //设备管理
     UINavigationController *equipmentController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
     equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"priceAssaint"] tag:kViewTag+3];
@@ -116,7 +120,7 @@
     UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
     messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+4];
     
-    tabBarController.viewControllers = @[costManagerController,realTimeReportsController,equipmentController,messageController];
+    tabBarController.viewControllers = @[costManagerController,lossNavController,realTimeReportsController,equipmentController,messageController];
     return tabBarController;
 }
 							
