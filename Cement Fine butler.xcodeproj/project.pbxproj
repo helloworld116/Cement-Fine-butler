@@ -134,6 +134,8 @@
 		0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */; };
 		0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */; };
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
+		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
+		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
 		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
 		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
@@ -309,6 +311,9 @@
 		0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductColumnViewController.m; sourceTree = "<group>"; };
 		0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn.html; sourceTree = "<group>"; };
 		0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.1.min.js; sourceTree = "<group>"; };
+		0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.2.1.src.js; sourceTree = "<group>"; };
+		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
+		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
 		0EDFFBF617E1B045009B4671 /* ConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionCell.h; sourceTree = "<group>"; };
 		0EDFFBF717E1B045009B4671 /* ConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionCell.m; sourceTree = "<group>"; };
 		0EDFFBF917E1B055009B4671 /* ConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConditionCell.xib; sourceTree = "<group>"; };
@@ -470,6 +475,8 @@
 			children = (
 				0E693ABF1807FA290061A3F8 /* LossOverViewViewController.h */,
 				0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */,
+				0E87BAE8180926AD008F1E13 /* LossReportViewController.h */,
+				0E87BAE9180926AD008F1E13 /* LossReportViewController.m */,
 			);
 			name = Loss;
 			sourceTree = "<group>";
@@ -607,6 +614,7 @@
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
+				0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */,
 				0E693ABD1807EA040061A3F8 /* Donut2D.html */,
 				0E4291E917EC51F50031ECB6 /* LineBasic2D.html */,
 				0E58AFDD17E93A18008A2DF2 /* Pie2D.html */,
@@ -806,6 +814,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */,
 				0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */,
 				472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */,
 				472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -992,6 +1001,7 @@
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
+				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

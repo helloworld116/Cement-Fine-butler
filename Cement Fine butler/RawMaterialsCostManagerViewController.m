@@ -64,6 +64,8 @@
     //移除观察条件
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
     [self.sidePanelController showCenterPanelAnimated:NO];
+    JASidePanelController *side = (JASidePanelController *)self.tabBarController.selectedViewController;
+    DDLogCVerbose(@"tab bar controller is %@",[side centerPanel]);
     [KxMenu dismissMenu];
 }
 

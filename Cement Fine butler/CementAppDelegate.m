@@ -97,9 +97,18 @@
     RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
     [costManagerController setRightPanel:costManagerRightController];
+    //损耗定位
+    JASidePanelController *lossController = [[JASidePanelController alloc] init];
+    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+2];
+    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
+    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
+    RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    lossRightController.conditions = @[@{@"时间段":timeArray}];
+    [lossController setCenterPanel:lossNavController];
+    [lossController setRightPanel:lossRightController];
     //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
-    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+2];
+    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+3];
     ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
     LeftViewController *realTimeReportsLeftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
     NSArray *reportType = @[@"产量报表",@"库存报表"];
@@ -107,20 +116,18 @@
     RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     //    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
     realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    [realTimeReportsController setLeftFixedWidth:140.f];
     [realTimeReportsController setCenterPanel:productColumnViewController];
     [realTimeReportsController setLeftPanel:realTimeReportsLeftController];
     [realTimeReportsController setRightPanel:realTimeReportsRightController];
-    //损耗定位
-    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
-    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
     //设备管理
     UINavigationController *equipmentController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
-    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"priceAssaint"] tag:kViewTag+3];
+    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"priceAssaint"] tag:kViewTag+4];
     //消息
     UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
-    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+4];
+    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+5];
     
-    tabBarController.viewControllers = @[costManagerController,lossNavController,realTimeReportsController,equipmentController,messageController];
+    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,messageController];
     return tabBarController;
 }
 							

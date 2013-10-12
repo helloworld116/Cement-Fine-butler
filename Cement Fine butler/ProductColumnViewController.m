@@ -105,6 +105,7 @@
         NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
         NSDictionary *configDict = @{@"title":title,@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
+        DDLogCVerbose(@"js is %@",js);
         [webView stringByEvaluatingJavaScriptFromString:js];
     }else if([Tool isNullOrNil:self.data]){
         //没有满足条件的数据

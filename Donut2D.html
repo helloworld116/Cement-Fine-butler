@@ -8,16 +8,15 @@
         <style type="text/css">
             *{ -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
             }
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
             body{
                 margin: 0
             }
         </style>
-        <script type="text/javascript" src="ichart.1.1.min.js">
+        <script type="text/javascript" src="ichart.1.2.1.src.js">
         </script>
         <script type="text/javascript">
-            function callBackground(type, expand, id) {
-                var url = type + ":" + expand + ":" + id;
+            function callBackground(type, expand, index) {
+                var url = type + ":" + expand + ":" + index;
                 document.location = url;
             }
             var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
@@ -27,15 +26,19 @@
                 var chart = new iChart.Donut2D({
                     render: 'canvasDiv',
                     data: data,
+                    mutex: true,//只允许弹出一个扇形区域
+                    border:true,
+                    padding:0,
+                    animation:true,
                     title : {
                       text : config.title,
                       color : '#3e576f',
-                      fontsize : 15*ratio
+                      fontsize : 20
                     },
                     center : {
                       text:'总损耗：\n'+config.totalLoss+config.unit,
                       color:'#3e576f',
-                      fontsize : 15*ratio
+                      fontsize : 15
                     },
                     sub_option : {
                       label : {
@@ -48,13 +51,18 @@
                           enable:false,
                           color:'#666666'
                         },
-                        fontsize:11*ratio,
+                        fontsize:11,
                         fontweight:600,
                         color : '#4572a7'
                       },
                       listeners:{
                         parseText:function(d, t){
                           return d.get('name')+'：\n'+d.get('value')+"吨";
+                        },
+                        click: function(d, e, p) {
+                          callBackground('sector', d.expanded, d.get('id'));
+                          // console.log(d.get('id'));
+                          // d.rebound(d.get('id'));
                         }
                       }
                     },
@@ -62,16 +70,18 @@
                     showpercent:false,
                     offset_angle:-90,//逆时针偏移120度
                     decimalsnum:2,
-                    width : config.width*ratio,
-                    height : config.height*ratio,
-                    radius:100*ratio
+                    width : config.width,
+                    height : config.height,
+                    radius:100
                   });
               chart.draw();
             }
         </script>
     </head>
     <!--
-       onload=drawColumn("[{'name':'原材料损耗','value':600,'color':'#a5c2d5'},{'name':'半成品损耗','value':1000,'color':'#cbab4f'},{'name':'成品损耗','value':600,'color':'#76a871'}]","{'title':'2013年库存','tagName':'库存(吨)','height':366.000000,'width':320.000000,'start_scale':0.000000,'end_scale':40.000000,'scale_space':8.000000}")
+       onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
+
+        onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
      -->
     <body>
         <div id='canvasDiv'>
