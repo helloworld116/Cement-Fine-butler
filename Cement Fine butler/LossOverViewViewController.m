@@ -31,8 +31,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.title = @"损耗总览";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     
     NSString *testData = @"{\"error\":\"0\",\"message\":\"1\",\"data\":{\"overView\":{\"totalLoss\":2200.0,\"rawMaterialsLoss\":600.0,\"semifinishedProductLoss\":1000.0,\"endProductLoss\":600.0},\"rawMaterials\":[{\"name\":\"熟料\",\"value\":100.0},{\"name\":\"石膏\",\"value\":200.0}],\"semifinishedProduct\":[{\"name\":\"熟料粉\",\"value\":1000.0}],\"endProduct\":[{\"name\":\"P.O42.5\",\"value\":100.0},{\"name\":\"P.O52.5\",\"value\":500.0}]}}";
     self.responseData = [Tool stringToDictionary:testData];
@@ -62,6 +62,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)showSearch:(id)sender{
+    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 #pragma mark begin webviewDelegate

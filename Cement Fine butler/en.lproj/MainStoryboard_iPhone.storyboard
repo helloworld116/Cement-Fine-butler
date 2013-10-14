@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="pN5-QY-8OO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="pN5-QY-8OO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -89,13 +89,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="gYu-LC-pos">
                         <barButtonItem key="leftBarButtonItem" title="..." id="bFo-nj-RHd">
-                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="moreAction:" destination="xkp-O5-k5u" id="CR6-bZ-h30"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="0cw-Wm-4yM">
-                            <color key="tintColor" red="0.0" green="0.40000003579999999" blue="0.59215688710000003" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="showSearch:" destination="xkp-O5-k5u" id="pLT-SA-uTk"/>
                             </connections>
