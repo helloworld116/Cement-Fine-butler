@@ -38,7 +38,7 @@
     NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:condition];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.title = @"原材料成本管理";
     self.webView.delegate = self;
     self.webView.scalesPageToFit = IS_RETINA;
@@ -64,8 +64,8 @@
     //移除观察条件
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
     [self.sidePanelController showCenterPanelAnimated:NO];
-    JASidePanelController *side = (JASidePanelController *)self.tabBarController.selectedViewController;
-    DDLogCVerbose(@"tab bar controller is %@",[side centerPanel]);
+//    JASidePanelController *side = (JASidePanelController *)self.tabBarController.selectedViewController;
+//    DDLogCVerbose(@"tab bar controller is %@",[side centerPanel]);
     [KxMenu dismissMenu];
 }
 

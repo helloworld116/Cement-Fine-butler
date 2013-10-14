@@ -109,6 +109,15 @@
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
 		0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */; };
+		0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */; };
+		0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */; };
+		0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */; };
+		0E5C5061180C1B80000B4904 /* NavBarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C505D180C1B80000B4904 /* NavBarButton.png */; };
+		0E5C5062180C1B80000B4904 /* NavBarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C505E180C1B80000B4904 /* NavBarButton@2x.png */; };
+		0E5C5063180C1B80000B4904 /* NavBarButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C505F180C1B80000B4904 /* NavBarButtonPressed.png */; };
+		0E5C5064180C1B80000B4904 /* NavBarButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5060180C1B80000B4904 /* NavBarButtonPressed@2x.png */; };
+		0E5C5067180C1D72000B4904 /* nav-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5065180C1D72000B4904 /* nav-menu.png */; };
+		0E5C5068180C1D72000B4904 /* nav-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5066180C1D72000B4904 /* nav-menu@2x.png */; };
 		0E62E85617F1252C00D4681E /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85417F1252C00D4681E /* check_icon@2x.png */; };
 		0E62E85717F1252C00D4681E /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85517F1252C00D4681E /* check_icon.png */; };
 		0E693ABB1807CE810061A3F8 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */; };
@@ -280,6 +289,17 @@
 		0E58AFDD17E93A18008A2DF2 /* Pie2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pie2D.html; sourceTree = "<group>"; };
 		0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostManagerCenterViewController.h; sourceTree = "<group>"; };
 		0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostManagerCenterViewController.m; sourceTree = "<group>"; };
+		0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RawMaterialsCalCell.xib; sourceTree = "<group>"; };
+		0E5C5057180BF315000B4904 /* RawMaterialsCalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalCell.h; sourceTree = "<group>"; };
+		0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalCell.m; sourceTree = "<group>"; };
+		0E5C505A180BF345000B4904 /* RawMaterialsCalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalViewController.h; sourceTree = "<group>"; };
+		0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalViewController.m; sourceTree = "<group>"; };
+		0E5C505D180C1B80000B4904 /* NavBarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarButton.png; sourceTree = "<group>"; };
+		0E5C505E180C1B80000B4904 /* NavBarButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarButton@2x.png"; sourceTree = "<group>"; };
+		0E5C505F180C1B80000B4904 /* NavBarButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarButtonPressed.png; sourceTree = "<group>"; };
+		0E5C5060180C1B80000B4904 /* NavBarButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarButtonPressed@2x.png"; sourceTree = "<group>"; };
+		0E5C5065180C1D72000B4904 /* nav-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-menu.png"; sourceTree = "<group>"; };
+		0E5C5066180C1D72000B4904 /* nav-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-menu@2x.png"; sourceTree = "<group>"; };
 		0E62E85417F1252C00D4681E /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		0E62E85517F1252C00D4681E /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
@@ -454,6 +474,11 @@
 				0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */,
 				0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */,
 				0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */,
+				0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */,
+				0E5C5057180BF315000B4904 /* RawMaterialsCalCell.h */,
+				0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */,
+				0E5C505A180BF345000B4904 /* RawMaterialsCalViewController.h */,
+				0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */,
 			);
 			name = CostManager;
 			sourceTree = "<group>";
@@ -484,7 +509,13 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0E5C5065180C1D72000B4904 /* nav-menu.png */,
+				0E5C5066180C1D72000B4904 /* nav-menu@2x.png */,
 				0E72041617F55C95001E943F /* checked.png */,
+				0E5C505D180C1B80000B4904 /* NavBarButton.png */,
+				0E5C505E180C1B80000B4904 /* NavBarButton@2x.png */,
+				0E5C505F180C1B80000B4904 /* NavBarButtonPressed.png */,
+				0E5C5060180C1B80000B4904 /* NavBarButtonPressed@2x.png */,
 				0E72041717F55C95001E943F /* checked@2x.png */,
 				0E72041217F55B50001E943F /* message.png */,
 				0E72041317F55B50001E943F /* message@2x.png */,
@@ -929,6 +960,13 @@
 				0E72041917F55C96001E943F /* checked@2x.png in Resources */,
 				0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */,
 				0E693ABE1807EA040061A3F8 /* Donut2D.html in Resources */,
+				0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */,
+				0E5C5061180C1B80000B4904 /* NavBarButton.png in Resources */,
+				0E5C5062180C1B80000B4904 /* NavBarButton@2x.png in Resources */,
+				0E5C5063180C1B80000B4904 /* NavBarButtonPressed.png in Resources */,
+				0E5C5064180C1B80000B4904 /* NavBarButtonPressed@2x.png in Resources */,
+				0E5C5067180C1D72000B4904 /* nav-menu.png in Resources */,
+				0E5C5068180C1D72000B4904 /* nav-menu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,6 +1040,8 @@
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
+				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
+				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

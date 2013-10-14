@@ -36,7 +36,7 @@
                       fontsize : 20
                     },
                     center : {
-                      text:'总损耗：\n'+config.totalLoss+config.unit,
+                      text:'总损耗:\n'+config.totalLoss+config.unit,
                       color:'#3e576f',
                       fontsize : 15
                     },
@@ -57,7 +57,7 @@
                       },
                       listeners:{
                         parseText:function(d, t){
-                          return d.get('name')+'：\n'+d.get('value')+"吨";
+                          return d.get('name')+':\n'+d.get('value')+"吨";
                         },
                         click: function(d, e, p) {
                           callBackground('sector', d.expanded, d.get('id'));
