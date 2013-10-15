@@ -45,6 +45,10 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;
+    //设置uitableviewcell长按事件
+    UILongPressGestureRecognizer *longPressReger = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    longPressReger.minimumPressDuration = 1.0;
+    [self.tableView addGestureRecognizer:longPressReger];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +66,25 @@
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    CGPoint point = [gestureRecognizer locationInView:self.tableView];
+    if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        NSLog(@"begin");
+    }else if(gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        NSLog(@"end");
+    }else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
+        NSLog(@"change");
+    }
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+    if (indexPath == nil){
+        [self.tableView cellForRowAtIndexPath:indexPath];
+        NSLog(@"long press on table view but not on a row"); 
+    }else{
+        NSLog(@"long press on table view at row %d", indexPath.row); 
+    }
 }
 
 #pragma mark - Table view data source

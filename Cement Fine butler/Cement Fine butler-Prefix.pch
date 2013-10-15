@@ -47,7 +47,7 @@
     #define kPageSize 5
     #define kDateFormatFull @"yyyy-MM-dd HH:mm:ss"
     #define kDateFormatDay @"MM-dd"
-    #define kColorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
+    #define kColorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
 
     //接口地址

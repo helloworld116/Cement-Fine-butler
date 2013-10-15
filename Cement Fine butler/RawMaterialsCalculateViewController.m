@@ -34,6 +34,17 @@
       @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56",@"planPrice":@"56"},
       @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60",@"planPrice":@"70"},
       @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20",@"planPrice":@"18"}
+      
+//      @{@"name":@"熟料",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"石膏",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"矿渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"煤煤灰",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"炉渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"熟料",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"石膏",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"矿渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"煤煤灰",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"炉渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"}
       ];
     CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight);
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];

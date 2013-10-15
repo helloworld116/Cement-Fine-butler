@@ -27,13 +27,17 @@
                     data: data,
                     mutex: true,//只允许弹出一个扇形区域
                     border:true,
-                    padding:0,
+                    padding:'0 10',
                     animation:true,
+                    bound_event:'',//禁止弹出
                     title : '',
+                    offsety: -60,
+                    layout_distance:1,
                     center : {
-                      text:'单位成本:\n'+config.unitPrice+config.unit+'\n计划单位成本:\n'+config.unitPlanPrice+config.unit,
-                      color:'#3e576f',
-                      fontsize : 10
+                      text:'单位成本:\n'+config.unitPrice+config.unit+'\n\n计划单位成本:\n'+config.unitPlanPrice+config.unit,
+                      color:'#ff0000',
+                      fontsize:14,
+                      line_height:13
                     },
                     sub_option : {
                       label : {
@@ -46,7 +50,7 @@
                           enable:false,
                           color:'#666666'
                         },
-                        fontsize:11,
+                        fontsize:8,
                         fontweight:600,
                         color : '#4572a7'
                       },
@@ -59,10 +63,11 @@
                           // console.log(d.get('id'));
                           // d.rebound(d.get('id'));
                         }
+                        // click:null
                       }
                     },
                     legend:{
-                      enable:true,
+                      enable:false,
                       // padding:60,
                       // offsetx:-86,
                       // color:'#3e576f',
@@ -70,17 +75,27 @@
                       // sign_size:20,//小图标大小
                       // line_height:24,//设置行高
                       // sign_space:10,//小图标与文本间距
+                      padding:'0,5',
+                      offsety:-60,
                       border:false,
                       valign:'bottom',
-                      background_color:null//透明背景
+                      align:'left',
+                      background_color:null,//透明背景
+                      listeners:{
+                        parse:function(l,t,i){
+                          return {
+                            text:data[i]['name']+'  '+data[i]['value']+'%  财务价格:'+data[i]['financePrice']+config.unit+'  计划价格:'+data[i]['planPrice']+config.unit
+                          }
+                        }
+                      }
                     },
                     background_color:'#fefefe',
                     showpercent:false,
-                    offset_angle:-90,//逆时针偏移120度
+                    offset_angle:0,//逆时针偏移120度
                     decimalsnum:2,
                     width : config.width,
                     height : config.height,
-                    radius:100
+                    radius:80
                   });
               chart.draw();
             }
@@ -91,7 +106,7 @@
 
         onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
      -->
-    <body>
+    <body onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')>
         <div id='canvasDiv'>
         </div>
     </body>
