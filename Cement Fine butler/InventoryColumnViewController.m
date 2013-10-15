@@ -59,7 +59,7 @@
     //
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
-    self.bottomWebiew.scalesPageToFit = IS_RETINA;
+//    self.bottomWebiew.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
     [self.bottomWebiew loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];

@@ -36,8 +36,15 @@
                 ];
     
 	// Do any additional setup after loading the view.
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.navigationItem.rightBarButtonItem = calBarButtonItem;
+    self.title = @"原材料成本计算器";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,6 +58,10 @@
     [self setPlanUnitCost:nil];
     [self setTableView:nil];
     [super viewDidUnload];
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source

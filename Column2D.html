@@ -12,60 +12,42 @@
                 margin: 0
             }
         </style>
-        <script type="text/javascript" src="ichart.1.1.min.js">
+        <script type="text/javascript" src="ichart.1.2.1.src.js">
         </script>
         <script type="text/javascript">
             function callBackground(type, expand, id) {
                 var url = type + ":" + expand + ":" + id;
                 document.location = url;
             }
-            var colors = ['#FF0080','#8600FF','#F9F900','#4A4AFF','','','','','','','','','','','','','','','','','','','','','','','','',];
-            var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
             function drawColumn(data, columnConfig) {
                 data = eval('(' + data + ')');
                 columnConfig = eval('(' + columnConfig + ')');
                 var chart = new iChart.Column2D({
                     render: 'canvasDiv',
                     data: data,
-                    label:{
-                        fontsize: 12*ratio
-                    },
                     border : {
                         enable : false
                     },
                     title: {
-                        text:columnConfig.title,
-                        fontsize:15*ratio,
-                        offsety:-2*ratio
+                        text:columnConfig.title
+//                        fontsize:13,
                     },
-                    padding:10*ratio,//默认为10
                     showpercent: false,
                     decimalsnum: 2,
-                    width: columnConfig.width*ratio,
-                    height: columnConfig.height*ratio,
+                    padding:'0 10',//默认为10
+                    width: columnConfig.width,
+                    height: columnConfig.height,
                     animation : true,
                     turn_off_touchmove : true,
-                    sub_option:{
-                        label:{
-                           fontsize: 12*ratio 
-                        }
-                    },
                     coordinate: {
                         background_color: '#fefefe',
-                        fontsize: 12*ratio,
                         scale: [{
                             position: 'left',
-                            label:{
-                                fontsize: 12*ratio
-                            },
-                            scale_size:1*ratio,//刻度线的粗细,默认为1
-                            scale_width:4*ratio,//刻度的长短,默认为4
-                            text_space:6*ratio,//默认为6 
                             start_scale: columnConfig.start_scale,
                             end_scale: columnConfig.end_scale,
                             scale_space: columnConfig.scale_space
                         }],
-                        offsetx:15*ratio,
+                        offsetx:15,
                         width:'85%',
                         height:'85%'
                     }
@@ -73,7 +55,7 @@
                 //利用自定义组件构造左侧说明文本
                 chart.plugin(new iChart.Custom({
                     drawFn:function(){
-                        var textInfo = ratio==1?'600 12px Verdana':'600 48px Verdana';//字体在retina下放大4倍
+                        var textInfo = '600 12px Verdana';
                         //计算位置
                         var coo = chart.getCoordinate(),
                             x = coo.get('originx'),
@@ -84,7 +66,7 @@
                         chart.target.textAlign('start')
                         .textBaseline('bottom')
                         .textFont(textInfo)
-                        .fillText(columnConfig.tagName,x-30*ratio,y-10*ratio,false,'#6d869f');
+                        .fillText(columnConfig.tagName,x-30,y-10,false,'#6d869f');
                     }
                 }));
                 chart.draw();

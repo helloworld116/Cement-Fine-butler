@@ -90,10 +90,14 @@
         //默认选中本月
         if (indexPath.row==2) {
             cell.selectedImgView.hidden = NO;
+            cell.label.font = [UIFont boldSystemFontOfSize:14];
+            cell.label.textColor = [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1];
         }
     }else{
         if (indexPath.row==0) {
             cell.selectedImgView.hidden = NO;
+            cell.label.font = [UIFont boldSystemFontOfSize:14];
+            cell.label.textColor = [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1];
         }
     }
     //设置标识，以便选中时知道选中的是哪个
@@ -107,9 +111,13 @@ int stockType=0,timeType=0,lineID=0,productID=0;
     for (int i=0; i<[[tableView visibleCells] count]; i++) {
         ConditionCell *cell = (ConditionCell *)[[tableView visibleCells] objectAtIndex:i];
         cell.selectedImgView.hidden = YES;
+        cell.label.font = [UIFont systemFontOfSize:14];
+        cell.label.textColor = [UIColor whiteColor];
     }
     ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.selectedImgView.hidden = NO;
+    cell.label.font = [UIFont boldSystemFontOfSize:14];
+    cell.label.textColor= [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1];
     //修改搜索条件
     UILabel *label = (UILabel *)[[tableView.tableHeaderView subviews] objectAtIndex:0];
     NSString *headerTitle = label.text;

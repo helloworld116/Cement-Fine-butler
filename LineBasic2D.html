@@ -12,14 +12,9 @@
                 margin: 0
             }
         </style>
-        <script type="text/javascript" src="ichart.1.1.min.js">
+        <script type="text/javascript" src="ichart.1.2.1.src.js">
         </script>
         <script type="text/javascript">
-            function callBackground(type, expand, id) {
-                var url = type + ":" + expand + ":" + id;
-                document.location = url;
-            }
-            var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
             function drawLineBasic2D(data,labels,lineBasic2DConfig) {
                 data = eval('(' + data + ')');
                 labels = eval('(' + labels + ')');
@@ -28,10 +23,10 @@
                     render : 'canvasDiv',
                     data: data,
                     align:'center',
-                    animation:false,
-                    width : 60*(labels.length-1)*ratio,//相邻两个之间间隔为60
-                    height : lineBasic2DConfig.height*ratio,
-                    padding:0,
+                    animation:true,
+                    width : 60*(labels.length-1),//相邻两个之间间隔为60
+                    height : lineBasic2DConfig.height,
+                    padding:'0 10',
                     turn_off_touchmove:true,
                     border:{
                         enable:true
@@ -43,9 +38,7 @@
                     // offsety:-15*ratio,//不放标题的情况下使用
                     title : {
                         text:lineBasic2DConfig.title,
-                        fontsize:15*ratio,
-                        offsety:10*ratio,
-                        offsetx:30*ratio,
+                        offsetx:30,
                         textAlign:'left'
                     },
                     legend : {
@@ -57,29 +50,22 @@
                         sign:'bar',
                         padding:0,
                         background_color:null,//设置透明背景
-                        offsetx:150*ratio,//设置x轴偏移，满足位置需要
-                        offsety:15*ratio,
+                        offsetx:150,//设置x轴偏移，满足位置需要
+                        offsety:15,
                         border:false,
-                        fontsize:12*ratio,//文本大小
-                        sign_size:10*ratio,//小图标大小
-                        line_height:16*ratio,//设置行高
-                        sign_space:2*ratio//小图标与文本间距
                     },
                     crosshair:{
                         enable:false,
                         line_color:'#62bce9'
                     },
                     sub_option : {
-                        // brushsize:1*ratio,//线段的粗细，组件中context的linewidth属性的大小。(默认为1)
                         hollow:true,//指定两个线段结合处的圆点是否为空心。(默认为true)
                         // hollow_color:'black',//指定空心的背景色。
-                        point_size:6*ratio,//结合点处的大小。单位px。(默认为6)
                         intersection:true,//线段是否在的结合点处突出显示(默认为true)
                         gradient:true,
                         smooth:true,//是否渲染为平滑曲线
                         label:{
-                            enable:true,
-                            fontsize: 12*ratio
+                            enable:true
                         },
                         point_hollow:false,
                         padding:0
@@ -87,11 +73,11 @@
                     coordinate:{
                         width:'90%',
                         height:'80%',//不放标题的情况下为88%，放标题的情况下为80%
-                        grid_line_width:1*ratio,//网格的宽度值。(默认为1)
                         padding:0,
+                        offsetx:10,
                         axis:{
                             color:'#9f9f9f',
-                            width:[0,0,2*ratio,2*ratio]
+                            width:[0,0,2,2]
                         },
                         grids:{
                             vertical:{
@@ -104,20 +90,10 @@
                              start_scale:lineBasic2DConfig.start_scale,
                              end_scale:lineBasic2DConfig.end_scale,
                              scale_space:lineBasic2DConfig.scale_space,
-                             scale_size:2*ratio,//刻度线的粗细。单位px。(默认为1)
-                             scale_width:4*ratio,//刻度的长短。单位px。(默认为4)
-                             text_space:2*ratio,//文本与坐标轴之间的距离。单位px。(默认为6)
-                             scale_color:'#9f9f9f',
-                             label:{
-                                fontsize: 12*ratio
-                             }
+                             scale_color:'#9f9f9f'
                         },{
                              position:'bottom', 
-                             scale_size:2*ratio,//刻度线的粗细。单位px。(默认为1)
-                             scale_width:4*ratio,//刻度的长短。单位px。(默认为4)
-                             text_space:10*ratio,//文本与坐标轴之间的距离。单位px。(默认为6)
                              label:{
-                                fontsize: 12*ratio,
                                 rotate:-45
                              },
                              labels:labels

@@ -12,50 +12,35 @@
                 margin: 0
             }
         </style>
-        <script type="text/javascript" src="ichart.1.1.min.js">
+        <script type="text/javascript" src="ichart.1.2.1.src.js">
         </script>
         <script type="text/javascript">
-            function callBackground(type, expand, id) {
-                var url = type + ":" + expand + ":" + id;
-                document.location = url;
-            }
-            var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
             function drawPie2D(data, pie2DConfig) {
                 data = eval('(' + data + ')');
                 pie2DConfig = eval('(' + pie2DConfig + ')');
                 var chart = new iChart.Pie2D({
                     render: 'canvasDiv',
                     data: data,
-                    label:{
-                        fontsize: 12*ratio
-                    },
                     border : {
                         enable : false
                     },
                     title: {
                         text:pie2DConfig.title,
-                        fontsize:15*ratio,
-                        offsety:10*ratio
+                        // fontsize:15,
                     },
                     bound_event:null,
-                    padding:0*ratio,//默认为10
+                    padding:0,//默认为10
                     showpercent: false,
                     decimalsnum: 2,
-                    width: pie2DConfig.width*ratio,
-                    height: pie2DConfig.height*ratio,
+                    width: pie2DConfig.width,
+                    height: pie2DConfig.height,
                     animation : true,
                     turn_off_touchmove : true,
                     mutex:true,//是否仅有一块扇形区处于弹出状态
                     legend:{
                         enable:false,
                         padding:0,
-                        offsetx:4*ratio,
-                        offsety:0*ratio,
                         color:'#3e576f',
-                        fontsize:12*ratio,//文本大小
-                        sign_size:10*ratio,//小图标大小
-                        line_height:16*ratio,//设置行高
-                        sign_space:5*ratio,//小图标与文本间距
                         border:false,
                         align:'left',
                         background_color : null,//透明背景
@@ -68,12 +53,10 @@
                     sub_option:{
                         mini_label_threshold_angle : 5,//迷你label的阀值,单位:角度
                         mini_label:{//迷你label配置项
-                            fontsize:10*ratio,
                             fontweight:600,
                             color : '#FFFFFF'
                         },
-                        offsety:-20*ratio,
-                        shadow_blur:4*ratio,//此组件阴影的模糊程度,单位px。(默认为4)
+                        offsety:-20,
                         strokeStyle:'red',
                         label : {
                             background_color:null,
@@ -83,8 +66,8 @@
                                 enable:false,
                                 color:'#666666'
                             },
-                            offsetx:10*ratio,
-                            fontsize:10*ratio,
+                            offsetx:10,
+                            fontsize:10,
                             fontweight:600,
                             color : '#4572a7'
                         },

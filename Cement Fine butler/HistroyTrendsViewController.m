@@ -29,16 +29,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationItem.title = @"产量";
-    
+    self.title = @"历史趋势";
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
-    self.navigationItem.leftBarButtonItem.title = @"返回";
     
     [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.webView.delegate = self;
-    self.webView.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"LineBasic2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
@@ -75,10 +72,6 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    int ratio = 1;
-    if (IS_RETINA) {
-        ratio = 4;
-    }
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
         int periodUnit = [[self.data objectForKey:@"periodUnit"] intValue];//时间单位，0:天1:月2:年
         NSString *dateFormate;
@@ -119,9 +112,9 @@
         double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
         double min = [Tool getMinValueInNumberValueArray:maxValueArray];
         
-        NSDictionary *unitCostDict = @{@"name":kUnitCostType_UnitCost,@"value":unitCostValues,@"line_width":[NSNumber numberWithInt:ratio],@"color":[kColorList objectAtIndex:0]};
-        NSDictionary *currentCostDict = @{@"name":kUnitCostType_CurrentUnitCost,@"value":currentUnitCostValues,@"line_width":[NSNumber numberWithInt:ratio],@"color":[kColorList objectAtIndex:1]};
-        NSDictionary *budgetedCostDict = @{@"name":kUnitCostType_BudgetedUnitCost,@"value":budgetedUnitCostValues,@"line_width":[NSNumber numberWithInt:ratio],@"color":[kColorList objectAtIndex:2]};
+        NSDictionary *unitCostDict = @{@"name":kUnitCostType_UnitCost,@"value":unitCostValues,@"color":[kColorList objectAtIndex:0]};
+        NSDictionary *currentCostDict = @{@"name":kUnitCostType_CurrentUnitCost,@"value":currentUnitCostValues,@"color":[kColorList objectAtIndex:1]};
+        NSDictionary *budgetedCostDict = @{@"name":kUnitCostType_BudgetedUnitCost,@"value":budgetedUnitCostValues,@"color":[kColorList objectAtIndex:2]};
         NSArray *lineArray = @[unitCostDict,currentCostDict,budgetedCostDict];
         NSDictionary *lineConfigDict = @{@"title":@"2013年9月原材料单位成本趋势",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
         
@@ -145,7 +138,7 @@
     [super viewDidUnload];
 }
 
-- (void)back:(id)sender {
+- (void)pop:(id)sender {
     RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
     [rightViewController resetConditions:self.oldCondition];
     [self.navigationController popToRootViewControllerAnimated:YES];

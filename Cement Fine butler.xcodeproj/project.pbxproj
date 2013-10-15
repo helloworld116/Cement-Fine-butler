@@ -145,8 +145,14 @@
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
 		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
+		0ED53083180CCD5400505259 /* nav-back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53081180CCD5400505259 /* nav-back-arrow.png */; };
+		0ED53084180CCD5400505259 /* nav-back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
 		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
+		0EEDBFCE180D63E40010961D /* calculate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDBFCC180D63E40010961D /* calculate@2x.png */; };
+		0EEDBFCF180D63E40010961D /* calculate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDBFCD180D63E40010961D /* calculate.png */; };
+		0EEDBFD1180D67D90010961D /* Calculate.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD0180D67D80010961D /* Calculate.html */; };
+		0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */; };
 		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
 		470FA09B17F078E800C79B00 /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09717F078E800C79B00 /* search_icon@2x.png */; };
 		472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32DF17CC3C05007E567B /* UIKit.framework */; };
@@ -334,9 +340,16 @@
 		0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.2.1.src.js; sourceTree = "<group>"; };
 		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
 		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
+		0ED53081180CCD5400505259 /* nav-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow.png"; sourceTree = "<group>"; };
+		0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow@2x.png"; sourceTree = "<group>"; };
 		0EDFFBF617E1B045009B4671 /* ConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionCell.h; sourceTree = "<group>"; };
 		0EDFFBF717E1B045009B4671 /* ConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionCell.m; sourceTree = "<group>"; };
 		0EDFFBF917E1B055009B4671 /* ConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConditionCell.xib; sourceTree = "<group>"; };
+		0EEDBFCC180D63E40010961D /* calculate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calculate@2x.png"; sourceTree = "<group>"; };
+		0EEDBFCD180D63E40010961D /* calculate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculate.png; sourceTree = "<group>"; };
+		0EEDBFD0180D67D80010961D /* Calculate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Calculate.html; sourceTree = "<group>"; };
+		0EEDBFD2180D690B0010961D /* RawMaterialsCalculateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalculateViewController.h; sourceTree = "<group>"; };
+		0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalculateViewController.m; sourceTree = "<group>"; };
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		470FA09617F078E800C79B00 /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon.png; sourceTree = "<group>"; };
 		470FA09717F078E800C79B00 /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon@2x.png"; sourceTree = "<group>"; };
@@ -479,6 +492,8 @@
 				0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */,
 				0E5C505A180BF345000B4904 /* RawMaterialsCalViewController.h */,
 				0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */,
+				0EEDBFD2180D690B0010961D /* RawMaterialsCalculateViewController.h */,
+				0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */,
 			);
 			name = CostManager;
 			sourceTree = "<group>";
@@ -509,6 +524,10 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0EEDBFCC180D63E40010961D /* calculate@2x.png */,
+				0EEDBFCD180D63E40010961D /* calculate.png */,
+				0ED53081180CCD5400505259 /* nav-back-arrow.png */,
+				0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */,
 				0E5C5065180C1D72000B4904 /* nav-menu.png */,
 				0E5C5066180C1D72000B4904 /* nav-menu@2x.png */,
 				0E72041617F55C95001E943F /* checked.png */,
@@ -646,6 +665,7 @@
 			isa = PBXGroup;
 			children = (
 				0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */,
+				0EEDBFD0180D67D80010961D /* Calculate.html */,
 				0E693ABD1807EA040061A3F8 /* Donut2D.html */,
 				0E4291E917EC51F50031ECB6 /* LineBasic2D.html */,
 				0E58AFDD17E93A18008A2DF2 /* Pie2D.html */,
@@ -967,6 +987,11 @@
 				0E5C5064180C1B80000B4904 /* NavBarButtonPressed@2x.png in Resources */,
 				0E5C5067180C1D72000B4904 /* nav-menu.png in Resources */,
 				0E5C5068180C1D72000B4904 /* nav-menu@2x.png in Resources */,
+				0ED53083180CCD5400505259 /* nav-back-arrow.png in Resources */,
+				0ED53084180CCD5400505259 /* nav-back-arrow@2x.png in Resources */,
+				0EEDBFCE180D63E40010961D /* calculate@2x.png in Resources */,
+				0EEDBFCF180D63E40010961D /* calculate.png in Resources */,
+				0EEDBFD1180D67D90010961D /* Calculate.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,6 +1067,7 @@
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
+				0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

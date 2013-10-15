@@ -41,7 +41,7 @@
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.title = @"原材料成本管理";
     self.webView.delegate = self;
-    self.webView.scalesPageToFit = IS_RETINA;
+//    self.webView.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
@@ -58,6 +58,7 @@
     //观察查询条件修改
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
+
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -246,7 +247,7 @@
 
 #pragma mark 历史趋势
 -(void)historyTrends:(id)sender{
-    NSArray *unitCostArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
+    NSArray *unitCostTypeArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
     NSArray *timeArray = kCondition_Time_Array;
     NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
     NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
@@ -267,7 +268,7 @@
     HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
     RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
     historyTrendsViewController.oldCondition = rightController.conditions;
-    NSArray *newConditions = @[@{kCondition_UnitCostType:unitCostArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+    NSArray *newConditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     [rightController resetConditions:newConditions];
     historyTrendsViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:historyTrendsViewController animated:YES];

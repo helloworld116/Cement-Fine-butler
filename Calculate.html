@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+        </title>
+        <style type="text/css">
+            *{ -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+            }
+            body{
+                margin: 0
+            }
+        </style>
+        <script type="text/javascript" src="ichart.1.2.1.src.js">
+        </script>
+        <script type="text/javascript">
+            function callBackground(type, expand, index) {
+                var url = type + ":" + expand + ":" + index;
+                document.location = url;
+            }
+            function drawDonut2D(data, donutConfig) {
+                data = eval('(' + data + ')');
+                config = eval('(' + donutConfig + ')');
+                var chart = new iChart.Donut2D({
+                    render: 'canvasDiv',
+                    data: data,
+                    mutex: true,//只允许弹出一个扇形区域
+                    border:true,
+                    padding:0,
+                    animation:true,
+                    title : '',
+                    center : {
+                      text:'单位成本:\n'+config.unitPrice+config.unit+'\n计划单位成本:\n'+config.unitPlanPrice+config.unit,
+                      color:'#3e576f',
+                      fontsize : 10
+                    },
+                    sub_option : {
+                      label : {
+                        line_thickness:1,
+                        line_height:1,
+                        background_color:null,
+                        sign:false,//设置禁用label的小图标
+                        padding:0,
+                        border:{
+                          enable:false,
+                          color:'#666666'
+                        },
+                        fontsize:11,
+                        fontweight:600,
+                        color : '#4572a7'
+                      },
+                      listeners:{
+                        parseText:function(d, t){
+                          return d.get('name')+':'+d.get('value')+"%";
+                        },
+                        click: function(d, e, p) {
+                          callBackground('sector', d.expanded, d.get('id'));
+                          // console.log(d.get('id'));
+                          // d.rebound(d.get('id'));
+                        }
+                      }
+                    },
+                    legend:{
+                      enable:true,
+                      // padding:60,
+                      // offsetx:-86,
+                      // color:'#3e576f',
+                      // fontsize:20,//文本大小
+                      // sign_size:20,//小图标大小
+                      // line_height:24,//设置行高
+                      // sign_space:10,//小图标与文本间距
+                      border:false,
+                      valign:'bottom',
+                      background_color:null//透明背景
+                    },
+                    background_color:'#fefefe',
+                    showpercent:false,
+                    offset_angle:-90,//逆时针偏移120度
+                    decimalsnum:2,
+                    width : config.width,
+                    height : config.height,
+                    radius:100
+                  });
+              chart.draw();
+            }
+        </script>
+    </head>
+    <!--
+       onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
+
+        onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
+     -->
+    <body>
+        <div id='canvasDiv'>
+        </div>
+    </body>
+
+</html>

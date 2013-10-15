@@ -12,6 +12,7 @@
 #import "InventoryColumnViewController.h"
 #import "LossOverViewViewController.h"
 #import "RawMaterialsCalViewController.h"
+#import "RawMaterialsCalculateViewController.h"
 #import "LoginAction.h"
 
 #define kViewTag 12000
@@ -54,11 +55,11 @@
 	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
-                                                          [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
-                                                          [UIColor colorWithWhite:0.0f alpha:0.2f], UITextAttributeTextShadowColor,
-                                                          [NSValue valueWithUIOffset:UIOffsetMake(0.0f, -1.0f)], UITextAttributeTextShadowOffset,
-                                                          [UIColor whiteColor], UITextAttributeTextColor,
-                                                          nil]];
+        [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
+        [UIColor colorWithWhite:0.0f alpha:0.2f], UITextAttributeTextShadowColor,
+        [NSValue valueWithUIOffset:UIOffsetMake(0.0f, -1.0f)], UITextAttributeTextShadowOffset,
+        [UIColor whiteColor], UITextAttributeTextColor,
+        nil]];
     //设置启动界面
     self.storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -141,8 +142,9 @@
     messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+5];
     //原材料成本计算器
     RawMaterialsCalViewController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
-    
-    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,messageController,raw];
+    //原材料成本计算器2
+    RawMaterialsCalculateViewController *rawCal = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalculateViewController"];
+    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,messageController,raw,rawCal];
     return tabBarController;
 }
 							
