@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AB77317EFD27F00A3255E /* SearchCondition.m */; };
 		0E22B15E17D8191F009695FF /* Column2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* Column2D.html */; };
+		0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3D180E306D0089B4A8 /* lock-small.png */; };
+		0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3E180E306D0089B4A8 /* unlock-small.png */; };
+		0E23CF47180E306D0089B4A8 /* lock-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3F180E306D0089B4A8 /* lock-small@2x.png */; };
+		0E23CF48180E306D0089B4A8 /* unlock-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF40180E306D0089B4A8 /* unlock-small@2x.png */; };
+		0E23CF49180E306D0089B4A8 /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF41180E306D0089B4A8 /* lock@2x.png */; };
+		0E23CF4A180E306D0089B4A8 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF42180E306D0089B4A8 /* lock.png */; };
+		0E23CF4B180E306D0089B4A8 /* unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF43180E306D0089B4A8 /* unlock.png */; };
+		0E23CF4C180E306D0089B4A8 /* unlock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF44180E306D0089B4A8 /* unlock@2x.png */; };
+		0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E23CF4E180E34610089B4A8 /* RawMaterialsSettingViewController.m */; };
 		0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E017ED7AC600385E59 /* LoginAction.m */; };
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
@@ -103,8 +112,13 @@
 		0E3841F017D41FDE004B3C87 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841EF17D41FDE004B3C87 /* Tool.m */; };
 		0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F217D4200B004B3C87 /* SearchDate.m */; };
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
+		0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */; };
 		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
 		0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */; };
+		0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BF7180E673A00901D3D /* NoCopyTextField.m */; };
+		0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BFA180E7DCC00901D3D /* EquipmentListViewController.m */; };
+		0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E491BFC180E7E0C00901D3D /* EquipmentListCell.xib */; };
+		0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BFF180E7E4600901D3D /* EquipmentListCell.m */; };
 		0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */; };
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
@@ -182,6 +196,16 @@
 		0E0AB77217EFD27F00A3255E /* SearchCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCondition.h; sourceTree = "<group>"; };
 		0E0AB77317EFD27F00A3255E /* SearchCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCondition.m; sourceTree = "<group>"; };
 		0E22B15D17D8191F009695FF /* Column2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Column2D.html; sourceTree = "<group>"; };
+		0E23CF3D180E306D0089B4A8 /* lock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-small.png"; sourceTree = "<group>"; };
+		0E23CF3E180E306D0089B4A8 /* unlock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-small.png"; sourceTree = "<group>"; };
+		0E23CF3F180E306D0089B4A8 /* lock-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-small@2x.png"; sourceTree = "<group>"; };
+		0E23CF40180E306D0089B4A8 /* unlock-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-small@2x.png"; sourceTree = "<group>"; };
+		0E23CF41180E306D0089B4A8 /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
+		0E23CF42180E306D0089B4A8 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		0E23CF43180E306D0089B4A8 /* unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlock.png; sourceTree = "<group>"; };
+		0E23CF44180E306D0089B4A8 /* unlock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock@2x.png"; sourceTree = "<group>"; };
+		0E23CF4D180E34610089B4A8 /* RawMaterialsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsSettingViewController.h; sourceTree = "<group>"; };
+		0E23CF4E180E34610089B4A8 /* RawMaterialsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsSettingViewController.m; sourceTree = "<group>"; };
 		0E2786DF17ED7AC600385E59 /* LoginAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAction.h; sourceTree = "<group>"; };
 		0E2786E017ED7AC600385E59 /* LoginAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAction.m; sourceTree = "<group>"; };
 		0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistroyTrendsViewController.h; sourceTree = "<group>"; };
@@ -285,9 +309,18 @@
 		0E3841F217D4200B004B3C87 /* SearchDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDate.m; sourceTree = "<group>"; };
 		0E3841F817D4782F004B3C87 /* SidePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidePanelViewController.h; sourceTree = "<group>"; };
 		0E3841F917D47830004B3C87 /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
+		0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentDetailsViewController.h; sourceTree = "<group>"; };
+		0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentDetailsViewController.m; sourceTree = "<group>"; };
 		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
 		0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCostManagerViewController.h; sourceTree = "<group>"; };
 		0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCostManagerViewController.m; sourceTree = "<group>"; };
+		0E491BF6180E673A00901D3D /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
+		0E491BF7180E673A00901D3D /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
+		0E491BF9180E7DCC00901D3D /* EquipmentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentListViewController.h; sourceTree = "<group>"; };
+		0E491BFA180E7DCC00901D3D /* EquipmentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentListViewController.m; sourceTree = "<group>"; };
+		0E491BFC180E7E0C00901D3D /* EquipmentListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EquipmentListCell.xib; sourceTree = "<group>"; };
+		0E491BFE180E7E4600901D3D /* EquipmentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentListCell.h; sourceTree = "<group>"; };
+		0E491BFF180E7E4600901D3D /* EquipmentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentListCell.m; sourceTree = "<group>"; };
 		0E493C3917E70BFC00D0AD0D /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		0E5008ED1805301B00198B9B /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
@@ -474,6 +507,13 @@
 			children = (
 				472F32FD17CC3C05007E567B /* EquipmentMapViewController.h */,
 				472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */,
+				0E491BF9180E7DCC00901D3D /* EquipmentListViewController.h */,
+				0E491BFA180E7DCC00901D3D /* EquipmentListViewController.m */,
+				0E491BFC180E7E0C00901D3D /* EquipmentListCell.xib */,
+				0E491BFE180E7E4600901D3D /* EquipmentListCell.h */,
+				0E491BFF180E7E4600901D3D /* EquipmentListCell.m */,
+				0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */,
+				0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */,
 			);
 			name = Equipment;
 			sourceTree = "<group>";
@@ -494,6 +534,10 @@
 				0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */,
 				0EEDBFD2180D690B0010961D /* RawMaterialsCalculateViewController.h */,
 				0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */,
+				0E23CF4D180E34610089B4A8 /* RawMaterialsSettingViewController.h */,
+				0E23CF4E180E34610089B4A8 /* RawMaterialsSettingViewController.m */,
+				0E491BF6180E673A00901D3D /* NoCopyTextField.h */,
+				0E491BF7180E673A00901D3D /* NoCopyTextField.m */,
 			);
 			name = CostManager;
 			sourceTree = "<group>";
@@ -524,6 +568,14 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0E23CF3D180E306D0089B4A8 /* lock-small.png */,
+				0E23CF3E180E306D0089B4A8 /* unlock-small.png */,
+				0E23CF3F180E306D0089B4A8 /* lock-small@2x.png */,
+				0E23CF40180E306D0089B4A8 /* unlock-small@2x.png */,
+				0E23CF41180E306D0089B4A8 /* lock@2x.png */,
+				0E23CF42180E306D0089B4A8 /* lock.png */,
+				0E23CF43180E306D0089B4A8 /* unlock.png */,
+				0E23CF44180E306D0089B4A8 /* unlock@2x.png */,
 				0EEDBFCC180D63E40010961D /* calculate@2x.png */,
 				0EEDBFCD180D63E40010961D /* calculate.png */,
 				0ED53081180CCD5400505259 /* nav-back-arrow.png */,
@@ -992,6 +1044,15 @@
 				0EEDBFCE180D63E40010961D /* calculate@2x.png in Resources */,
 				0EEDBFCF180D63E40010961D /* calculate.png in Resources */,
 				0EEDBFD1180D67D90010961D /* Calculate.html in Resources */,
+				0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */,
+				0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */,
+				0E23CF47180E306D0089B4A8 /* lock-small@2x.png in Resources */,
+				0E23CF48180E306D0089B4A8 /* unlock-small@2x.png in Resources */,
+				0E23CF49180E306D0089B4A8 /* lock@2x.png in Resources */,
+				0E23CF4A180E306D0089B4A8 /* lock.png in Resources */,
+				0E23CF4B180E306D0089B4A8 /* unlock.png in Resources */,
+				0E23CF4C180E306D0089B4A8 /* unlock@2x.png in Resources */,
+				0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1129,11 @@
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
 				0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */,
+				0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */,
+				0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */,
+				0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */,
+				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
+				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

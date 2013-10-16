@@ -13,6 +13,7 @@
 #import "LossOverViewViewController.h"
 #import "RawMaterialsCalViewController.h"
 #import "RawMaterialsCalculateViewController.h"
+#import "EquipmentListViewController.h"
 #import "LoginAction.h"
 
 #define kViewTag 12000
@@ -67,8 +68,15 @@
         self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     }else{
         LoginAction *loginAction = [[LoginAction alloc] init];
-        [loginAction backstageLoginWithSync:YES];
-        self.window.rootViewController = [self showViewControllers];
+        if ([loginAction backstageLoginWithSync:YES]) {
+            //自动登录成功
+            self.window.rootViewController = [self showViewControllers];
+        }else{
+            //自动登录失败
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        }
     }
     [self.window makeKeyAndVisible];
     return YES;
@@ -142,9 +150,7 @@
     messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+5];
     //原材料成本计算器
     RawMaterialsCalViewController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
-    //原材料成本计算器2
-    RawMaterialsCalculateViewController *rawCal = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalculateViewController"];
-    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,messageController,raw,rawCal];
+    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,messageController,raw];
     return tabBarController;
 }
 							

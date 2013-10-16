@@ -44,7 +44,7 @@
     #define kLoadmoreFooterHeight 44
     #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
     #define kScreenHeight [[UIScreen mainScreen] bounds].size.height
-    #define kPageSize 5
+    #define kPageSize 10
     #define kDateFormatFull @"yyyy-MM-dd HH:mm:ss"
     #define kDateFormatDay @"MM-dd"
     #define kColorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
@@ -79,7 +79,7 @@
 #endif
 
 #ifdef DEBUG
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_ERROR;
 #else
 static const int ddLogLevel = LOG_LEVEL_WARN;
 #endif

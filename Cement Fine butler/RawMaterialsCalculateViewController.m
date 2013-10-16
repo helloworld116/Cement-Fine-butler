@@ -28,6 +28,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.title = @"计算结果";
+    
     self.data = @[
       @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169",@"planPrice":@"169"},
       @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18",@"planPrice":@"18"},
@@ -66,36 +70,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark begin webviewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSString *requestString = [[request URL] absoluteString];
-    NSArray *components = [requestString componentsSeparatedByString:@":"];
-    if([[components objectAtIndex:0] isEqualToString:@"sector"]&&[[components objectAtIndex:1] isEqualToString:@"false"]){
-        //        debugLog(@"the dict is %@",[self.costItems objectAtIndex:[[components objectAtIndex:2] intValue]]);
-        int index = [[components objectAtIndex:2] intValue];
-        //index的值与kLossType中损耗类型索引相同
-        NSArray *lossData = nil;
-//        NSDictionary *data = [self.responseData objectForKey:@"data"];
-//        if (index==0) {
-//            //原材料损耗
-//            lossData = [data objectForKey:@"rawMaterials"];
-//        }else if (index==1){
-//            //半成品损耗
-//            lossData = [data objectForKey:@"semifinishedProduct"];
-//        }else if (index==2){
-//            //成品损耗
-//            lossData = [data objectForKey:@"endProduct"];
-//        }
-//        LossReportViewController *lossReportViewController = [[LossReportViewController alloc] init];
-//        lossReportViewController.title = [kLossType objectAtIndex:index];
-//        lossReportViewController.dataArray = lossData;
-//        lossReportViewController.hidesBottomBarWhenPushed = YES;
-//        //        [self.navigationController performSelector:@selector(pushViewController:animated:) withObject:@[@"lossReportViewController",[NSNumber numberWithBool:YES]] afterDelay:0.3f];
-//        [self.navigationController pushViewController:lossReportViewController animated:YES];
-        return NO;
-    }
     return YES;
-    
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
@@ -109,9 +90,7 @@
         NSString *color = [kColorList objectAtIndex:i];
         NSString *name = [dict objectForKey:@"name"];
         NSString *value = [dict objectForKey:@"rate"];
-        NSString *financePrice = [dict objectForKey:@"financePrice"];
-        NSString *planPrice = [dict objectForKey:@"planPrice"];
-        NSDictionary *chartDict = @{@"name":name,@"value":value,@"color":color,@"financePrice":financePrice,@"planPrice":planPrice};
+        NSDictionary *chartDict = @{@"name":name,@"value":value,@"color":color};
         [dataArray addObject:chartDict];
     }
     NSDictionary *configDict = @{@"unitPrice":[NSNumber numberWithDouble:137.25],@"unitPlanPrice":[NSNumber numberWithDouble:137.65],@"unit":@"元/吨",@"title":@"",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};

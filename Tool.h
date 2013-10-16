@@ -44,4 +44,6 @@
 //+(long long)timeEndIntervalByType:(int)type;
 
 +(NSDictionary *)getTimeInfo:(int)timeType;
+
++(NSString *)longTimeToTimeDesc:(long)time;
 @end

@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RawMaterialsCalCell : UITableViewCell
-
+@property (strong, nonatomic) IBOutlet UILabel *lblName;
+@property (strong, nonatomic) IBOutlet UILabel *lblRate;
+@property (strong, nonatomic) IBOutlet UILabel *lblFinancePrice;
+@property (strong, nonatomic) IBOutlet UILabel *lblPlanPrice;
+@property (strong, nonatomic) IBOutlet UILabel *lblApportionRate;
+@property (strong, nonatomic) IBOutlet UIImageView *imgLockState;
+@property (nonatomic,assign) BOOL isLocked;//指示该行是否被锁定
 @end

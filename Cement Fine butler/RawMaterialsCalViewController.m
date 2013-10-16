@@ -8,6 +8,8 @@
 
 #import "RawMaterialsCalViewController.h"
 #import "RawMaterialsCalCell.h"
+#import "RawMaterialsSettingViewController.h"
+#import "RawMaterialsCalculateViewController.h"
 
 @interface RawMaterialsCalViewController ()
 @property (retain,nonatomic) NSArray *data;
@@ -28,17 +30,16 @@
 {
     [super viewDidLoad];
     self.data = @[
-                  @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169",@"planPrice":@"169"},
-                  @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18",@"planPrice":@"18"},
-                  @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56",@"planPrice":@"56"},
-                  @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60",@"planPrice":@"70"},
-                  @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20",@"planPrice":@"18"}
+                  @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169.79",@"planPrice":@"169",@"locked":[NSNumber numberWithBool:YES]},
+                  @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18.32",@"planPrice":@"18"},
+                  @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56.66",@"planPrice":@"56"},
+                  @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60.45",@"planPrice":@"70"},
+                  @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20.67",@"planPrice":@"18"}
                 ];
-    
 	// Do any additional setup after loading the view.
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(calculate:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = calBarButtonItem;
     self.title = @"原材料成本计算器";
@@ -46,9 +47,14 @@
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     //设置uitableviewcell长按事件
-    UILongPressGestureRecognizer *longPressReger = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-    longPressReger.minimumPressDuration = 1.0;
-    [self.tableView addGestureRecognizer:longPressReger];
+//    UILongPressGestureRecognizer *longPressReger = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+//    longPressReger.minimumPressDuration = 1.0;
+//    [self.tableView addGestureRecognizer:longPressReger];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,14 +64,18 @@
 }
 
 - (void)viewDidUnload {
-    [self setDirectUnitCost:nil];
-    [self setPlanUnitCost:nil];
     [self setTableView:nil];
     [super viewDidUnload];
 }
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)calculate:(id)sender{
+    RawMaterialsCalculateViewController *calculteResutViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalculateViewController"];
+    calculteResutViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:calculteResutViewController animated:YES];
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -88,9 +98,13 @@
 }
 
 #pragma mark - Table view data source
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"RawMaterialsCalCell" owner:self options:nil] objectAtIndex:1];
+    return view;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 110.f;
+    return 50.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -106,11 +120,26 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:cellName owner:self options:nil] objectAtIndex:0];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    NSDictionary *materialsInfo = [self.data objectAtIndex:indexPath.row];
+    cell.lblName.text = [materialsInfo objectForKey:@"name"];
+    cell.lblRate.text = [[materialsInfo objectForKey:@"rate"] stringByAppendingString:@"%"];
+    cell.lblFinancePrice.text = [[materialsInfo objectForKey:@"financePrice"] stringByAppendingString:@"元/吨"];
+    cell.lblPlanPrice.text = [[materialsInfo objectForKey:@"planPrice"] stringByAppendingString:@"元/吨"];
+    BOOL isLocked = [[materialsInfo objectForKey:@"locked"] boolValue];
+    if (isLocked) {
+        cell.imgLockState.image = [UIImage imageNamed:@"lock-small"];
+    }else{
+        cell.imgLockState.image = [UIImage imageNamed:@"unlock-small"];
+    }
     return cell;
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *rawMaterials = [self.data objectAtIndex:indexPath.row];
+    RawMaterialsSettingViewController *rawMaterialsSettingViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsSettingViewController"];
+    rawMaterialsSettingViewController.data = rawMaterials;
+    rawMaterialsSettingViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rawMaterialsSettingViewController animated:YES];
 }
 @end

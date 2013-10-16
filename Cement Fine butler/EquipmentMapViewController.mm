@@ -115,6 +115,9 @@
 
 - (void)viewDidLoad
 {
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.title = @"设备地图列表";
     _annotationList = [[NSMutableArray alloc] init];
     [_annotationList addObjectsFromArray:[self testData]];
     //设置地图缩放级别
@@ -148,6 +151,10 @@
     
     [self.mapView viewWillDisappear];
     self.mapView.delegate = nil; // 不用时，置nil
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

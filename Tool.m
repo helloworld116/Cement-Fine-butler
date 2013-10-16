@@ -313,4 +313,29 @@
     return @{@"timeDesc":timeDesc,@"startTime":[NSNumber numberWithLongLong:startTime],@"endTime":[NSNumber numberWithLongLong:endTime]};
 }
 
++(NSString *)longTimeToTimeDesc:(long)time{
+    if (time!=0) {
+        int day,hour,minute,second;
+        day = time/(3600*24);
+        hour = (time-day*3600*24)/3600;
+        minute = (time-day*3600*24-hour*3600)/60;
+        second = time-day*3600*24-hour*3600-minute*60;
+        NSMutableString *timeDesc = [[NSMutableString alloc] init];
+        if (day!=0) {
+            [timeDesc appendFormat:@"%d天",day];
+        }
+        if (hour!=0) {
+            [timeDesc appendFormat:@"%d小时",hour];
+        }
+        if (minute!=0) {
+            [timeDesc appendFormat:@"%d分钟",minute];
+        }
+        if (second!=0) {
+            [timeDesc appendFormat:@"%d秒",second];
+        }
+        return timeDesc;
+    }else{
+        return @"0";
+    }
+}
 @end
