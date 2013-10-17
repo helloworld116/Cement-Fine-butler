@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RawMaterialsCalculateViewController : UIViewController<UIWebViewDelegate>
-
+@property (retain,nonatomic) NSArray *data;
 @end

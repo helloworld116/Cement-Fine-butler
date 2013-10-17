@@ -80,6 +80,7 @@
 -(void)calculate:(id)sender{
     RawMaterialsCalculateViewController *calculteResutViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalculateViewController"];
     calculteResutViewController.hidesBottomBarWhenPushed = YES;
+    calculteResutViewController.data = self.data;
     [self.navigationController pushViewController:calculteResutViewController animated:YES];
 }
 

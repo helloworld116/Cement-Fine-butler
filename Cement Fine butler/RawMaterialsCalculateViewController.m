@@ -9,7 +9,6 @@
 #import "RawMaterialsCalculateViewController.h"
 
 @interface RawMaterialsCalculateViewController ()
-@property (retain,nonatomic) NSArray *data;
 @property (retain,nonatomic) UIWebView *webView;
 @end
 
@@ -32,13 +31,13 @@
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.title = @"计算结果";
     
-    self.data = @[
-      @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169",@"planPrice":@"169"},
-      @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18",@"planPrice":@"18"},
-      @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56",@"planPrice":@"56"},
-      @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60",@"planPrice":@"70"},
-      @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20",@"planPrice":@"18"}
-      
+//    self.data = @[
+//      @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169",@"planPrice":@"169"},
+//      @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18",@"planPrice":@"18"},
+//      @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56",@"planPrice":@"56"},
+//      @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60",@"planPrice":@"70"},
+//      @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20",@"planPrice":@"18"}
+    
 //      @{@"name":@"熟料",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
 //      @{@"name":@"石膏",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
 //      @{@"name":@"矿渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
@@ -49,7 +48,7 @@
 //      @{@"name":@"矿渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
 //      @{@"name":@"煤煤灰",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
 //      @{@"name":@"炉渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"}
-      ];
+//      ];
     CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight);
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
     self.webView.delegate = self;
@@ -85,15 +84,23 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    double unitPrice=0,unitPlanPrice=0;
     for (int i=0; i<self.data.count; i++) {
         NSDictionary *dict = [self.data objectAtIndex:i];
         NSString *color = [kColorList objectAtIndex:i];
         NSString *name = [dict objectForKey:@"name"];
-        NSString *value = [dict objectForKey:@"rate"];
-        NSDictionary *chartDict = @{@"name":name,@"value":value,@"color":color};
+        double value = [[dict objectForKey:@"rate"] doubleValue];
+        NSDictionary *chartDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
         [dataArray addObject:chartDict];
+        
+        double financePrice = [[dict objectForKey:@"financePrice"] doubleValue];
+        double planPrice = [[dict objectForKey:@"planPrice"] doubleValue];
+        unitPrice+=(financePrice*value)/100;
+        unitPlanPrice+=(planPrice*value)/100;
     }
-    NSDictionary *configDict = @{@"unitPrice":[NSNumber numberWithDouble:137.25],@"unitPlanPrice":[NSNumber numberWithDouble:137.65],@"unit":@"元/吨",@"title":@"",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
+    NSString *unitPriceString = [NSString stringWithFormat:@"%.2f",round(unitPrice*100)/100];
+    NSString *unitPlanPriceString = [NSString stringWithFormat:@"%.2f",round(unitPlanPrice*100)/100];
+    NSDictionary *configDict = @{@"unitPrice":unitPriceString,@"unitPlanPrice":unitPlanPriceString,@"unit":@"元/吨",@"title":@"",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
     NSString *js = [NSString stringWithFormat:@"drawDonut2D('%@','%@')",[Tool objectToString:dataArray],[Tool objectToString:configDict]];
     DDLogVerbose(@"dates is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];

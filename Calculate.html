@@ -31,7 +31,7 @@
                     animation:true,
                     bound_event:'',//禁止弹出
                     title : '',
-                    offsety: -60,
+                    // offsety: -60,
                     layout_distance:1,
                     center : {
                       text:'单位成本:\n'+config.unitPrice+config.unit+'\n\n计划单位成本:\n'+config.unitPlanPrice+config.unit,
@@ -50,7 +50,7 @@
                           enable:false,
                           color:'#666666'
                         },
-                        fontsize:8,
+                        fontsize:10,
                         fontweight:600,
                         color : '#4572a7'
                       },
@@ -59,7 +59,7 @@
                           return d.get('name')+':'+d.get('value')+"%";
                         },
                         click: function(d, e, p) {
-                          callBackground('sector', d.expanded, d.get('id'));
+                          // callBackground('sector', d.expanded, d.get('id'));
                           // console.log(d.get('id'));
                           // d.rebound(d.get('id'));
                         }
@@ -91,11 +91,11 @@
                     },
                     background_color:'#fefefe',
                     showpercent:false,
-                    offset_angle:0,//逆时针偏移120度
+                    offset_angle:120,//逆时针偏移120度
                     decimalsnum:2,
                     width : config.width,
                     height : config.height,
-                    radius:80
+                    radius:85
                   });
               chart.draw();
             }
@@ -106,7 +106,7 @@
 
         onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
      -->
-    <body onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')>
+    <body>
         <div id='canvasDiv'>
         </div>
     </body>

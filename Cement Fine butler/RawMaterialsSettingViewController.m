@@ -51,6 +51,9 @@
     }
     self.textApportionRate.clearsOnInsertion = YES;
     self.switchLocked.on = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
+    if (self.switchLocked.on) {
+        self.textApportionRate.enabled = NO;
+    }
     //监听键盘弹出
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
