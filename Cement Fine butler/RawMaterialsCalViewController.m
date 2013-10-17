@@ -12,7 +12,7 @@
 #import "RawMaterialsCalculateViewController.h"
 
 @interface RawMaterialsCalViewController ()
-@property (retain,nonatomic) NSArray *data;
+
 @end
 
 @implementation RawMaterialsCalViewController
@@ -30,11 +30,11 @@
 {
     [super viewDidLoad];
     self.data = @[
-                  @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169.79",@"planPrice":@"169",@"locked":[NSNumber numberWithBool:YES]},
-                  @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18.32",@"planPrice":@"18"},
-                  @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56.66",@"planPrice":@"56"},
-                  @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60.45",@"planPrice":@"70"},
-                  @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20.67",@"planPrice":@"18"}
+                  @{@"name":@"熟料",@"rate":[NSNumber numberWithDouble:75],@"financePrice":[NSNumber numberWithDouble:169.79],@"planPrice":[NSNumber numberWithDouble:169],@"locked":[NSNumber numberWithBool:YES]},
+                  @{@"name":@"石膏",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:18.32],@"planPrice":[NSNumber numberWithDouble:18],@"locked":[NSNumber numberWithBool:NO]},
+                  @{@"name":@"矿渣",@"rate":[NSNumber numberWithDouble:10],@"financePrice":[NSNumber numberWithDouble:23.56],@"planPrice":[NSNumber numberWithDouble:24],@"locked":[NSNumber numberWithBool:NO]},
+                  @{@"name":@"煤炭灰",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:67.90],@"planPrice":[NSNumber numberWithDouble:70],@"locked":[NSNumber numberWithBool:NO]},
+                  @{@"name":@"炉渣",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:89.55],@"planPrice":[NSNumber numberWithDouble:89],@"locked":[NSNumber numberWithBool:NO]}
                 ];
 	// Do any additional setup after loading the view.
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
@@ -55,6 +55,11 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    [self.tableView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +103,10 @@
 }
 
 #pragma mark - Table view data source
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40.f;
+}
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"RawMaterialsCalCell" owner:self options:nil] objectAtIndex:1];
     return view;
@@ -122,23 +131,28 @@
     }
     NSDictionary *materialsInfo = [self.data objectAtIndex:indexPath.row];
     cell.lblName.text = [materialsInfo objectForKey:@"name"];
-    cell.lblRate.text = [[materialsInfo objectForKey:@"rate"] stringByAppendingString:@"%"];
-    cell.lblFinancePrice.text = [[materialsInfo objectForKey:@"financePrice"] stringByAppendingString:@"元/吨"];
-    cell.lblPlanPrice.text = [[materialsInfo objectForKey:@"planPrice"] stringByAppendingString:@"元/吨"];
+    cell.lblRate.text = [NSString stringWithFormat:@"%.2f",[[materialsInfo objectForKey:@"rate"] doubleValue]];
+    cell.lblFinancePrice.text = [NSString stringWithFormat:@"%.2f",[[materialsInfo objectForKey:@"financePrice"] doubleValue]];
+    cell.lblPlanPrice.text = [NSString stringWithFormat:@"%.2f",[[materialsInfo objectForKey:@"planPrice"] doubleValue]];
     BOOL isLocked = [[materialsInfo objectForKey:@"locked"] boolValue];
     if (isLocked) {
         cell.imgLockState.image = [UIImage imageNamed:@"lock-small"];
     }else{
         cell.imgLockState.image = [UIImage imageNamed:@"unlock-small"];
     }
+    if ([[materialsInfo objectForKey:@"apportionRate"] doubleValue]!=0) {
+        cell.lblApportionRate.text = [NSString stringWithFormat:@"%.2f",[[materialsInfo objectForKey:@"apportionRate"] doubleValue]];
+    }
     return cell;
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *rawMaterials = [self.data objectAtIndex:indexPath.row];
+//    NSDictionary *rawMaterials = [self.data objectAtIndex:indexPath.row];
     RawMaterialsSettingViewController *rawMaterialsSettingViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsSettingViewController"];
-    rawMaterialsSettingViewController.data = rawMaterials;
+//    rawMaterialsSettingViewController.data = rawMaterials;
+    rawMaterialsSettingViewController.data = self.data;
+    rawMaterialsSettingViewController.index = indexPath.row;
     rawMaterialsSettingViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rawMaterialsSettingViewController animated:YES];
 }

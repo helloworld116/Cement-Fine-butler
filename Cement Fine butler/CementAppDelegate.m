@@ -181,4 +181,12 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark 通知消息
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"通知消息" message:notification.alertBody delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView show];
+    application.applicationIconBadgeNumber -=1;
+}
+
 @end

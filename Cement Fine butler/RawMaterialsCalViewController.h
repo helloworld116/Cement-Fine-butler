@@ -10,5 +10,5 @@
 
 @interface RawMaterialsCalViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (retain,nonatomic) NSArray *data;
 @end

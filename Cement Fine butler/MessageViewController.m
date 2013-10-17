@@ -40,10 +40,11 @@
         notification.fireDate=[now dateByAddingTimeInterval:10];
         notification.timeZone=[NSTimeZone defaultTimeZone];
         notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.applicationIconBadgeNumber += 1;
         notification.alertAction = @"库存预警信息";
         notification.alertBody=@"熟料库存只剩300吨，已低于库存下限值600吨。请尽快补充物料";
-//        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+//        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
     }
     UILocalNotification *notification2=[[UILocalNotification alloc] init];
     if (notification) {
@@ -51,10 +52,11 @@
         notification2.fireDate=[now dateByAddingTimeInterval:10];
         notification2.timeZone=[NSTimeZone defaultTimeZone];
         notification2.soundName = UILocalNotificationDefaultSoundName;
+        notification.applicationIconBadgeNumber += 1;
         notification2.alertAction = @"库存预警信息";
         notification2.alertBody=@"熟料库存只剩600吨，已低于库存下限值900吨。请尽快补充物料";
-        //        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        [[UIApplication sharedApplication] presentLocalNotificationNow:notification2];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+//        [[UIApplication sharedApplication] presentLocalNotificationNow:notification2];
     }
 }
 
@@ -101,13 +103,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 @end

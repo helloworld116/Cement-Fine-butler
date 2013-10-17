@@ -16,6 +16,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *textApportionRate;
 @property (strong, nonatomic) IBOutlet UISwitch *switchLocked;
 
-@property (nonatomic,retain) NSDictionary *data;
+@property (nonatomic,retain) NSArray *data;
+@property (nonatomic) NSUInteger index;
+
 - (IBAction)textRateTouch:(id)sender;
+- (IBAction)changeLocked:(id)sender;
 @end
