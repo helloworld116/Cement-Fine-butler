@@ -86,9 +86,10 @@
     }
     cell.lblSeq.text = [NSString stringWithFormat:@"%d",indexPath.row+1];
     NSDictionary *equipmentInfo = [self.data objectAtIndex:indexPath.row];
-    cell.lblStatus.text = [equipmentInfo objectForKey:@"status"];
-    cell.lblSN.text = [equipmentInfo objectForKey:@"sn"];
-    cell.lblName.text= [equipmentInfo objectForKey:@"name"];
+    cell.lblStatus.text = [Tool stringToString:[equipmentInfo objectForKey:@"status"]];
+    cell.lblSN.text = [Tool stringToString:[equipmentInfo objectForKey:@"sn"]];
+
+    cell.lblName.text= [Tool stringToString:[equipmentInfo objectForKey:@"name"]];
     cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"settingFlowRate"] doubleValue]];
     cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"instantFlowRate"] doubleValue]];
     cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];

@@ -13,4 +13,6 @@
 -(void)startLoading;
 -(void)successEndLoading;
 -(void)failureEndLoading;
+
+-(void)removeFromSuperView;
 @end

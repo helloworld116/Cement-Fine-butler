@@ -143,22 +143,24 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+//    [self.loadingView removeFromSuperView];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];
     if (responseCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.bottomWebiew reload];
-        
-        [self.loadingView successEndLoading];
     }else if(responseCode==-1){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{
-
+        NODataView *view = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+        [self.view addSubview:view];
     }
 }
 

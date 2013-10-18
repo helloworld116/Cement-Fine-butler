@@ -16,7 +16,6 @@
 @property (nonatomic,copy) NSString *pword;
 @property BOOL keyboardWasShow;
 @end
-//{"error":0,"message":null,"data":{"factoryId":1,"accessToken":"sertf231412312342wer","expiresIn":10000,"modules":["productionView","priceAssistant","equipmentManagement"]}}
 
 @implementation LoginViewController
 
@@ -140,12 +139,14 @@
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
 //    [SVProgressHUD showErrorWithStatus:@"网络请求出错"];
+    DDLogCError(@"网络请求出错,%@",[request error]);
     self.password.text = nil;
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    if ([[dict objectForKey:@"error"] intValue]==0) {
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==kErrorCode0) {
         NSDictionary *data = [dict objectForKey:@"data"];
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
         kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
@@ -154,30 +155,14 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:self.uname forKey:@"username"];
         [userDefaults setObject:self.pword forKey:@"password"];
-//        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-//        kSharedApp.accessToken = [[dict objectForKey:@"data"] objectForKey:@"accessToken"];
-//        kSharedApp.factoryId = [[dict objectForKey:@"data"] objectForKey:@"factoryId"];
-//        UITabBarController *tab = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"tab"];
-//        [tab.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar.png"]];
-//        CATransition *animation = [CATransition animation];
-//        [animation setDuration:1.0];
-//        [animation setType: kCATransitionFade];
-//        [animation setSubtype: kCATransitionFromTop];
-//        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
-//        [self.navigationController setNavigationBarHidden:YES animated:NO];
-//        [self.navigationController pushViewController:tab animated:NO];
-//        [self.navigationController.view.layer addAnimation:animation forKey:nil];
         
-        
-//        ProductColumnViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
-//        UITabBarController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
         UITabBarController *tabBarController = [kSharedApp showViewControllers];
         tabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:tabBarController animated:YES completion:nil];
     }else{
+        DDLogCWarn(@"登录失败，errorCode is %d",errorCode);
         self.password.text = nil;
         NSString *msg = [dict objectForKey:@"message"];
-//        [SVProgressHUD showErrorWithStatus:msg];
     }
 }
 

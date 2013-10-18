@@ -37,11 +37,9 @@
     //最开始异步请求数据
     NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:condition];
-    
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.title = @"原材料成本管理";
+    
     self.webView.delegate = self;
-//    self.webView.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
@@ -50,7 +48,7 @@
     sc.bounces = NO;//禁用上下拖拽
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-    [self setBottomViewOfSubView];
+//    [self setBottomViewOfSubView];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -276,9 +274,10 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
-    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-    [self.scrollView addSubview:self.loadingView];
-    [self.loadingView startLoading];
+//    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+//    [self.scrollView addSubview:self.loadingView];
+//    [self.loadingView startLoading];
+    [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
     
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
@@ -300,21 +299,25 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    
+    [self.loadingView removeFromSuperView];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+    [MBProgressHUD hideAllHUDsForView:self.scrollView animated:YES];
+    //    [self.loadingView removeFromSuperView];
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==0) {
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.webView reload];
         [self setBottomViewOfSubView];
-    }else if(responseCode==-1){
+    }else if(errorCode==kErrorCodeNegative1){
        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        NODataView *view = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+        [self.view addSubview:view];
     }
-    [self.loadingView successEndLoading];
 }
 
 @end

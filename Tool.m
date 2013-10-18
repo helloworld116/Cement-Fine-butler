@@ -338,4 +338,12 @@
         return @"0";
     }
 }
+
++(NSString *)stringToString:(NSString *)str{
+    if ([[NSNull null] isEqual:str]||str==nil) {
+        return @"";
+    }else{
+        return str;
+    }
+}
 @end

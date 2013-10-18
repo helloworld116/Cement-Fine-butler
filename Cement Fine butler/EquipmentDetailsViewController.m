@@ -43,9 +43,9 @@
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.title = @"设备详情";
     
-    self.lblName.text = [self.data objectForKey:@"name"];
-    self.lblSN.text = [self.data objectForKey:@"sn"];
-    self.lblStatus.text = [self.data objectForKey:@"status"];;
+    self.lblName.text = [Tool stringToString:[self.data objectForKey:@"name"]];
+    self.lblSN.text = [Tool stringToString:[self.data objectForKey:@"sn"]];
+    self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"status"]];;
     self.lblSettingFlowRate.text = [NSString stringWithFormat:@"%2.f",[[self.data objectForKey:@"settingFlowRate"] doubleValue]];
     self.lblInstantFlowRate.text = [NSString stringWithFormat:@"%2.f",[[self.data objectForKey:@"instantFlowRate"] doubleValue]];
     self.lblTotalOutput.text = [NSString stringWithFormat:@"%2.f",[[self.data objectForKey:@"totalOutput"] doubleValue]];

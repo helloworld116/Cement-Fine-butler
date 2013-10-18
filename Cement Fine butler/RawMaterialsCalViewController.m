@@ -12,6 +12,8 @@
 #import "RawMaterialsCalculateViewController.h"
 
 @interface RawMaterialsCalViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *lblUnitPrice;
+@property (strong, nonatomic) IBOutlet UILabel *lblPlanUnitPrice;
 
 @end
 
@@ -39,7 +41,8 @@
 	// Do any additional setup after loading the view.
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(calculate:)];
+//    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(calculate:)];
+    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"计算" style:UIBarButtonItemStylePlain target:self action:@selector(calculate:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = calBarButtonItem;
     self.title = @"原材料成本计算器";
@@ -56,6 +59,19 @@
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     [self.tableView reloadData];
+    double unitPrice=0,unitPlanPrice=0;
+    for (int i=0; i<self.data.count; i++) {
+        NSDictionary *dict = [self.data objectAtIndex:i];
+        double rate = [[dict objectForKey:@"rate"] doubleValue];
+        double financePrice = [[dict objectForKey:@"financePrice"] doubleValue];
+        double planPrice = [[dict objectForKey:@"planPrice"] doubleValue];
+        unitPrice+=(financePrice*rate)/100;
+        unitPlanPrice+=(planPrice*rate)/100;
+    }
+    NSString *unitPriceString = [NSString stringWithFormat:@"%.2f",round(unitPrice*100)/100];
+    NSString *unitPlanPriceString = [NSString stringWithFormat:@"%.2f",round(unitPlanPrice*100)/100];
+    self.lblUnitPrice.text = unitPriceString;
+    self.lblPlanUnitPrice.text = unitPlanPriceString;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -70,6 +86,8 @@
 
 - (void)viewDidUnload {
     [self setTableView:nil];
+    [self setLblUnitPrice:nil];
+    [self setLblPlanUnitPrice:nil];
     [super viewDidUnload];
 }
 
