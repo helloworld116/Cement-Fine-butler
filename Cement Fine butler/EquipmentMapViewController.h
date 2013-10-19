@@ -12,4 +12,5 @@
 
 @property (strong,nonatomic) IBOutlet BMKMapView* mapView;
 
+@property (nonatomic,retain) NSMutableArray *equipmentList;
 @end

@@ -13,7 +13,6 @@
 
 @interface EquipmentMapViewController ()
 @property (nonatomic,retain) CalloutMapAnnotation *calloutAnnotation;
-@property (nonatomic,retain) NSMutableArray *annotationList;
 @end
 
 @implementation EquipmentMapViewController
@@ -100,7 +99,7 @@
 {
 //    [_annotationList removeAllObjects];
 //    [_annotationList addObjectsFromArray:data];
-    [self setAnnotionsWithList:_annotationList];
+    [self setAnnotionsWithList:self.equipmentList];
 }
 
 - (NSArray *)testData{
@@ -118,15 +117,15 @@
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.title = @"设备地图列表";
-    _annotationList = [[NSMutableArray alloc] init];
-    [_annotationList addObjectsFromArray:[self testData]];
+//    _annotationList = [[NSMutableArray alloc] init];
+//    [_annotationList addObjectsFromArray:[self testData]];
     //设置地图缩放级别
     [_mapView setZoomLevel:11];
     
     //  给view中心定位
     BMKCoordinateRegion region;
-    region.center.latitude  = [[[self.annotationList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
-    region.center.longitude = [[[self.annotationList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
+    region.center.latitude  = [[[self.equipmentList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
+    region.center.longitude = [[[self.equipmentList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
     region.span.latitudeDelta  = 0.01;
     region.span.longitudeDelta = 0.01;
     self.mapView.region = region;
@@ -141,7 +140,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self resetAnnitations:self.annotationList];
+    [self resetAnnitations:self.equipmentList];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

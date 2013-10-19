@@ -156,8 +156,10 @@
     
     DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostHistoryURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostHistoryURL]];
-    [self.request setUseCookiePersistence:YES];
+    [self.request setUseCookiePersistence:YES]; 
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
+    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithLongLong:1377964800000] forKey:@"startTime"];
     [self.request setPostValue:[NSNumber numberWithLongLong:1380470400000] forKey:@"endTime"];
     [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];

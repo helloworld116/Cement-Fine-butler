@@ -120,9 +120,11 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
-    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-    [self.view addSubview:self.loadingView];
-    [self.loadingView startLoading];
+//    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+//    [self.view addSubview:self.loadingView];
+//    [self.loadingView startLoading];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];

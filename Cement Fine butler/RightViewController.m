@@ -131,6 +131,34 @@ int stockType=0,timeType=0,lineID=0,productID=0;
         }
     }else if ([kCondition_Lines isEqualToString:headerTitle]){
         lineID = cell.cellID;
+        if (lineID==0) {
+            
+        }else{
+//            NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+//            NSArray *lineProducts;//产线下面的包含的产品
+//            for (NSDictionary *line in lines) {
+//                if (lineID==[[line objectForKey:@"id"] longValue]) {
+//                    lineProducts = [line objectForKey:@"lineProducts"];
+//                }
+//            }
+//            NSMutableArray *products = [NSMutableArray array];
+//            for (NSDictionary *product in lineProducts) {
+//                NSString *name = [product objectForKey:@"productname"];
+//                NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"productid"] longValue]];
+//                NSDictionary *dict = @{@"_id":_id,@"name":name};
+//                [products addObject:dict];
+//            }
+//            NSMutableArray *newConditons = [NSMutableArray arrayWithArray:self.conditions];
+//            for (int i=self.conditions.count-1; i>=0; i--) {
+//                NSString *conditonTitle = [[[self.conditions objectAtIndex:i] allKeys] objectAtIndex:0];
+//                if ([kCondition_Products isEqualToString:conditonTitle]) {
+//                    NSDictionary *newProducts = @{kCondition_Products:products};
+//                    [newConditons replaceObjectAtIndex:i withObject:newProducts];
+//                    break;
+//                }
+//            }
+//            [self resetConditions:newConditons];
+        }
     }else if ([kCondition_Products isEqualToString:headerTitle]){
         productID = cell.cellID;
     }

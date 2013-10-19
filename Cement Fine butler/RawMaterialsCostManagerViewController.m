@@ -8,6 +8,8 @@
 
 #import "RawMaterialsCostManagerViewController.h"
 #import "HistroyTrendsViewController.h"
+#import "CostReductionViewController.h"
+#import "CostComparisonViewController.h"
 
 #define kLabelHeight 30//底部字段描述label高度
 #define kLabelOrignX 10//label距离父容器左边距离
@@ -16,8 +18,10 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) LoadingView *loadingView;
-
+@property (retain, nonatomic) NODataView *noDataView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
+
+@property (retain, nonatomic) NSDictionary *lastRequestCondition;//最后发送请求的查询条件
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -203,12 +207,19 @@
 }
 
 - (IBAction)moreAction:(id)sender {
-    KxMenuItem *menuItem1 = [KxMenuItem menuItem:@"成本还原" image:nil target:self action:@selector(costReduction:)];
-    KxMenuItem *menuItem2 = [KxMenuItem menuItem:@"取消还原" image:nil target:self action:@selector(cancelReduction:)];
+    NSMutableArray *menuItems = [NSMutableArray array];
+    NSArray *recoveryMaterials = [self.data objectForKey:@"recoveryMaterials"];
+    if (recoveryMaterials&&recoveryMaterials.count>0) {
+        KxMenuItem *menuItem1 = [KxMenuItem menuItem:@"成本还原" image:nil target:self action:@selector(costReduction:)];
+        [menuItems addObject:menuItem1];
+    }
+//    KxMenuItem *menuItem2 = [KxMenuItem menuItem:@"取消还原" image:nil target:self action:@selector(cancelReduction:)];
     KxMenuItem *menuItem3 = [KxMenuItem menuItem:@"上期" image:nil target:self action:@selector(yearCompareYear:)];
     KxMenuItem *menuItem4 = [KxMenuItem menuItem:@"同期" image:nil target:self action:@selector(monthCompareMonth:)];
     KxMenuItem *menuItem5 = [KxMenuItem menuItem:@"历史趋势" image:nil target:self action:@selector(historyTrends:)];
-    NSArray *menuItems = @[menuItem1,menuItem2,menuItem3,menuItem4,menuItem5];
+    [menuItems addObject:menuItem3];
+    [menuItems addObject:menuItem4];
+    [menuItems addObject:menuItem5];
     [KxMenu showMenuInView:self.view
                   fromRect:CGRectMake(10, 0, 30, 0)
                  menuItems:menuItems];
@@ -225,7 +236,10 @@
 
 #pragma mark 成本还原
 -(void)costReduction:(id)sender{
-
+    CostReductionViewController *viewController = [[CostReductionViewController alloc] init];
+    viewController.data = [self.data objectForKey:@"recoveryMaterials"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark 取消还原
@@ -235,12 +249,18 @@
 
 #pragma mark 同比
 -(void)yearCompareYear:(id)sender{
-
+    CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
+    viewController.type=2;
+    viewController.condition = self.lastRequestCondition;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark 环比
 -(void)monthCompareMonth:(id)sender{
-
+    CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
+    viewController.type=1;
+    viewController.condition = self.lastRequestCondition;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark 历史趋势
@@ -274,9 +294,10 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
-//    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-//    [self.scrollView addSubview:self.loadingView];
-//    [self.loadingView startLoading];
+    if (self.noDataView) {
+        [self.noDataView removeFromSuperview];
+        self.noDataView = nil;
+    }
     [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
     
     int timeType = [[condition objectForKey:@"timeType"] intValue];
@@ -286,11 +307,18 @@
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
+    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
+    long lineId = [[condition objectForKey:@"lineId"] longValue];
+    [self.request setPostValue:[NSNumber numberWithLong:lineId] forKey:@"lineId"];
+    long productId = [[condition objectForKey:@"productId"] longValue];
+    [self.request setPostValue:[NSNumber numberWithLong:productId] forKey:@"productId"];
     [self.request setPostValue:[NSNumber numberWithInt:0] forKey:@"period"];//0:当期   1:上期   2:同期
+    
+    self.lastRequestCondition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:timeType]};
+    
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -315,8 +343,11 @@
        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{
-        NODataView *view = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-        [self.view addSubview:view];
+        self.data = nil;
+        [self.webView reload];
+        [self setBottomViewOfSubView];
+        self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+        [self.view performSelector:@selector(addSubview:) withObject:self.noDataView afterDelay:0.5];
     }
 }
 

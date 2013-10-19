@@ -80,7 +80,7 @@
 
 #define kErrorCode0 0
 #define kErrorCodeNegative999 -999
-#define kErrorCodeNegative1 -1//会话过期
+#define kErrorCodeNegative1 900//会话过期
 #endif
 
 #ifdef DEBUG

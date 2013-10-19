@@ -14,7 +14,9 @@
 @interface RawMaterialsCalViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *lblUnitPrice;
 @property (strong, nonatomic) IBOutlet UILabel *lblPlanUnitPrice;
+@property (nonatomic,retain) NSArray *defaultData;//用于保存原始数据，用于进行还原操作
 
+- (IBAction)calculate:(id)sender;
 @end
 
 @implementation RawMaterialsCalViewController
@@ -38,11 +40,13 @@
                   @{@"name":@"煤炭灰",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:67.90],@"planPrice":[NSNumber numberWithDouble:70],@"locked":[NSNumber numberWithBool:NO]},
                   @{@"name":@"炉渣",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:89.55],@"planPrice":[NSNumber numberWithDouble:89],@"locked":[NSNumber numberWithBool:NO]}
                 ];
+    
+    self.defaultData = self.data;
 	// Do any additional setup after loading the view.
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
 //    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(calculate:)];
-    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"计算" style:UIBarButtonItemStylePlain target:self action:@selector(calculate:)];
+    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"还原" style:UIBarButtonItemStylePlain target:self action:@selector(revert:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = calBarButtonItem;
     self.title = @"原材料成本计算器";
@@ -59,19 +63,7 @@
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     [self.tableView reloadData];
-    double unitPrice=0,unitPlanPrice=0;
-    for (int i=0; i<self.data.count; i++) {
-        NSDictionary *dict = [self.data objectAtIndex:i];
-        double rate = [[dict objectForKey:@"rate"] doubleValue];
-        double financePrice = [[dict objectForKey:@"financePrice"] doubleValue];
-        double planPrice = [[dict objectForKey:@"planPrice"] doubleValue];
-        unitPrice+=(financePrice*rate)/100;
-        unitPlanPrice+=(planPrice*rate)/100;
-    }
-    NSString *unitPriceString = [NSString stringWithFormat:@"%.2f",round(unitPrice*100)/100];
-    NSString *unitPlanPriceString = [NSString stringWithFormat:@"%.2f",round(unitPlanPrice*100)/100];
-    self.lblUnitPrice.text = unitPriceString;
-    self.lblPlanUnitPrice.text = unitPlanPriceString;
+    [self setLblValue];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -95,7 +87,29 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)calculate:(id)sender{
+-(void)revert:(id)sender{
+    self.data = self.defaultData;
+    [self setLblValue];
+    [self.tableView reloadData];
+}
+
+-(void)setLblValue{
+    double unitPrice=0,unitPlanPrice=0;
+    for (int i=0; i<self.data.count; i++) {
+        NSDictionary *dict = [self.data objectAtIndex:i];
+        double rate = [[dict objectForKey:@"rate"] doubleValue];
+        double financePrice = [[dict objectForKey:@"financePrice"] doubleValue];
+        double planPrice = [[dict objectForKey:@"planPrice"] doubleValue];
+        unitPrice+=(financePrice*rate)/100;
+        unitPlanPrice+=(planPrice*rate)/100;
+    }
+    NSString *unitPriceString = [NSString stringWithFormat:@"%.2f",round(unitPrice*100)/100];
+    NSString *unitPlanPriceString = [NSString stringWithFormat:@"%.2f",round(unitPlanPrice*100)/100];
+    self.lblUnitPrice.text = unitPriceString;
+    self.lblPlanUnitPrice.text = unitPlanPriceString;
+}
+
+-(IBAction)calculate:(id)sender{
     RawMaterialsCalculateViewController *calculteResutViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalculateViewController"];
     calculteResutViewController.hidesBottomBarWhenPushed = YES;
     calculteResutViewController.data = self.data;
@@ -175,4 +189,5 @@
     rawMaterialsSettingViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rawMaterialsSettingViewController animated:YES];
 }
+
 @end

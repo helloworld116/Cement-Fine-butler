@@ -134,9 +134,10 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(int)stockType{
-    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-    [self.view addSubview:self.loadingView];
-    [self.loadingView startLoading];
+//    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+//    [self.view addSubview:self.loadingView];
+//    [self.loadingView startLoading];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     DDLogCInfo(@"******  Request URL is:%@  ******",kStockReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
@@ -151,11 +152,12 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
-    [self.loadingView removeFromSuperView];
+//    [self.loadingView removeFromSuperView];
+     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];

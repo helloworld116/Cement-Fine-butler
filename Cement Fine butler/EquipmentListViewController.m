@@ -12,7 +12,7 @@
 #import "EquipmentDetailsViewController.h"
 
 @interface EquipmentListViewController ()
-@property (nonatomic,retain) NSArray *data;
+@property (nonatomic,retain) NSMutableArray *data;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) LoadingView *loadingView;
 @property (nonatomic,assign) int totalCount;
@@ -44,6 +44,7 @@
 
 -(void)showMapViewController:(id)sender{
     EquipmentMapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentMapViewController"];
+    mapController.equipmentList = self.data;
     mapController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:mapController animated:YES];
 }
@@ -112,9 +113,10 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(int)offset{
-    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-    [self.view addSubview:self.loadingView];
-    [self.loadingView startLoading];
+//    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+//    [self.view addSubview:self.loadingView];
+//    [self.loadingView startLoading];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     DDLogCInfo(@"******  Request URL is:%@  ******",kEquipmentList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kEquipmentList]];
@@ -131,10 +133,12 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+//    [self.loadingView successEndLoading];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];
     if (responseCode==0) {
@@ -145,7 +149,6 @@
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }
-    [self.loadingView successEndLoading];
 }
 - (void)viewDidUnload {
     [self setTableView:nil];
