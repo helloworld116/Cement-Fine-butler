@@ -16,6 +16,7 @@
     if (self) {
         // Initialization code
         UILabel *lblMsg = [[UILabel alloc] initWithFrame:CGRectMake((frame.size.height-160)/2, (frame.size.height-20)/2, 160, 20)];
+        lblMsg.backgroundColor = [UIColor clearColor];
         lblMsg.text = @"没有满足条件的数据";
         lblMsg.font = [UIFont systemFontOfSize:12];
         [self addSubview:lblMsg];
