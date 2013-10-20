@@ -186,6 +186,12 @@
 		472F332B17CC3D3A007E567B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332A17CC3D3A007E567B /* OpenGLES.framework */; };
 		472F332D17CC3D40007E567B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332C17CC3D40007E567B /* QuartzCore.framework */; };
 		472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332E17CC3D48007E567B /* CoreLocation.framework */; };
+		474F913A1814445400D94A85 /* TimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F91391814445400D94A85 /* TimeTableView.m */; };
+		474F913D1814446C00D94A85 /* LineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913C1814446C00D94A85 /* LineTableView.m */; };
+		474F91401814447900D94A85 /* ProductTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913F1814447900D94A85 /* ProductTableView.m */; };
+		474F91431814449400D94A85 /* StockTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F91421814449400D94A85 /* StockTableView.m */; };
+		474F9146181444E600D94A85 /* UnitCostTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F9145181444E600D94A85 /* UnitCostTableView.m */; };
+		474F91491814480800D94A85 /* TimeConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F91481814480800D94A85 /* TimeConditionCell.m */; };
 		4759C36417EEDB08008B8128 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759C36317EEDB08008B8128 /* Line.m */; };
 		4759C36717EEDCA2008B8128 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759C36617EEDCA2008B8128 /* Product.m */; };
 		476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 476FC86917CC41F200EA5251 /* CalloutMapAnnotation.m */; };
@@ -443,6 +449,18 @@
 		472F332A17CC3D3A007E567B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		472F332C17CC3D40007E567B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		472F332E17CC3D48007E567B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		474F91381814445400D94A85 /* TimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableView.h; sourceTree = "<group>"; };
+		474F91391814445400D94A85 /* TimeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableView.m; sourceTree = "<group>"; };
+		474F913B1814446C00D94A85 /* LineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineTableView.h; sourceTree = "<group>"; };
+		474F913C1814446C00D94A85 /* LineTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineTableView.m; sourceTree = "<group>"; };
+		474F913E1814447900D94A85 /* ProductTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableView.h; sourceTree = "<group>"; };
+		474F913F1814447900D94A85 /* ProductTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableView.m; sourceTree = "<group>"; };
+		474F91411814449400D94A85 /* StockTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockTableView.h; sourceTree = "<group>"; };
+		474F91421814449400D94A85 /* StockTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockTableView.m; sourceTree = "<group>"; };
+		474F9144181444E600D94A85 /* UnitCostTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitCostTableView.h; sourceTree = "<group>"; };
+		474F9145181444E600D94A85 /* UnitCostTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitCostTableView.m; sourceTree = "<group>"; };
+		474F91471814480800D94A85 /* TimeConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeConditionCell.h; sourceTree = "<group>"; };
+		474F91481814480800D94A85 /* TimeConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeConditionCell.m; sourceTree = "<group>"; };
 		4759C36217EEDB08008B8128 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
 		4759C36317EEDB08008B8128 /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		4759C36517EEDCA2008B8128 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
@@ -709,6 +727,7 @@
 		0E72472417CD995C0048DFFB /* CustomerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				474F91371814441200D94A85 /* ConditionTableView */,
 				0E72472B17CD9CFC0048DFFB /* LeftViewController.h */,
 				0E72472C17CD9CFC0048DFFB /* LeftViewController.m */,
 				0E72473117CD9D160048DFFB /* CenterViewController.h */,
@@ -851,6 +870,25 @@
 				472F332417CC3CF8007E567B /* mapapi.bundle */,
 			);
 			name = BaiduMap;
+			sourceTree = "<group>";
+		};
+		474F91371814441200D94A85 /* ConditionTableView */ = {
+			isa = PBXGroup;
+			children = (
+				474F91381814445400D94A85 /* TimeTableView.h */,
+				474F91391814445400D94A85 /* TimeTableView.m */,
+				474F913B1814446C00D94A85 /* LineTableView.h */,
+				474F913C1814446C00D94A85 /* LineTableView.m */,
+				474F913E1814447900D94A85 /* ProductTableView.h */,
+				474F913F1814447900D94A85 /* ProductTableView.m */,
+				474F91411814449400D94A85 /* StockTableView.h */,
+				474F91421814449400D94A85 /* StockTableView.m */,
+				474F9144181444E600D94A85 /* UnitCostTableView.h */,
+				474F9145181444E600D94A85 /* UnitCostTableView.m */,
+				474F91471814480800D94A85 /* TimeConditionCell.h */,
+				474F91481814480800D94A85 /* TimeConditionCell.m */,
+			);
+			name = ConditionTableView;
 			sourceTree = "<group>";
 		};
 		4759C36117EEDAEE008B8128 /* Model */ = {
@@ -1152,6 +1190,12 @@
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
 				0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */,
+				474F913A1814445400D94A85 /* TimeTableView.m in Sources */,
+				474F913D1814446C00D94A85 /* LineTableView.m in Sources */,
+				474F91401814447900D94A85 /* ProductTableView.m in Sources */,
+				474F91431814449400D94A85 /* StockTableView.m in Sources */,
+				474F9146181444E600D94A85 /* UnitCostTableView.m in Sources */,
+				474F91491814480800D94A85 /* TimeConditionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

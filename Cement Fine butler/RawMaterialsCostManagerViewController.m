@@ -22,6 +22,7 @@
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 
 @property (retain, nonatomic) NSDictionary *lastRequestCondition;//最后发送请求的查询条件
+@property (nonatomic) BOOL showRight;//条件选择为自定义时间时为YES，其他情况下为NO
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -61,6 +62,10 @@
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.sidePanelController showRightPanelAnimated:NO];
+}
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -230,6 +235,9 @@
     if ([keyPath isEqualToString:@"searchCondition"]) {
         SearchCondition *searchCondition = [change objectForKey:@"new"];
         NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
+        if (4==[[condition objectForKey:@"timeType"] intValue]) {
+            self.showRight = YES;
+        }
         [self sendRequest:condition];
     }
 }

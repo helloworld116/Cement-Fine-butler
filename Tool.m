@@ -262,6 +262,7 @@
             break;
         case 2:
             [comps setMonth:month];
+            break;
     }
   
     NSDate *date = [gregorian dateFromComponents:comps];
@@ -282,10 +283,26 @@
 
 +(NSDictionary *)getTimeInfo:(int)timeType{
     NSString *timeDesc;
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
-    NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSInteger year = [components year];
+    int day,month,year;
+    int beginDay=0,beginMonth=0,beginYear=0;
+    int endDay=0,endMonth=0,endYear=0;
+    if (timeType!=4) {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
+        day = [components day];
+        month = [components month];
+        year = [components year];
+    }else{
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *startDate = [userDefaults objectForKey:@"startDate"];
+        beginDay = [[startDate objectForKey:@"day"] intValue];
+        beginMonth = [[startDate objectForKey:@"month"] intValue];
+        beginYear = [[startDate objectForKey:@"year"] intValue];
+        
+        NSDictionary *endDate = [userDefaults objectForKey:@"endDate"];
+        endDay = [[endDate objectForKey:@"day"] intValue];
+        endMonth = [[endDate objectForKey:@"month"] intValue];
+        endYear = [[endDate objectForKey:@"year"] intValue];
+    }
     switch (timeType) {
         case 0:
             timeDesc = [NSString stringWithFormat:@"%d年",year];
@@ -307,9 +324,13 @@
             break;
         case 3:
             timeDesc = [NSString stringWithFormat:@"%d年%d月%d日",year,month,day];
+            break;
+        case 4:
+            timeDesc = [NSString stringWithFormat:@"%d年%d月%d日至%d年%d月%d日",beginYear,beginMonth,beginDay,endYear,endMonth,endDay];
+            break;
     }
-    long long startTime = [self timeBeginIntervalByType:timeType year:0 month:0 day:0];
-    long long endTime = [self timeEndIntervalByType:timeType year:0 month:0 day:0];
+    long long startTime = [self timeBeginIntervalByType:timeType year:beginYear month:beginMonth day:beginDay];
+    long long endTime = [self timeEndIntervalByType:timeType year:endYear month:endMonth day:endDay];
     return @{@"timeDesc":timeDesc,@"startTime":[NSNumber numberWithLongLong:startTime],@"endTime":[NSNumber numberWithLongLong:endTime]};
 }
 

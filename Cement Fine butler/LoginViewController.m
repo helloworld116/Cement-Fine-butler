@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "LoginAction.h"
 
 
 @interface LoginViewController ()<MBProgressHUDDelegate>
@@ -159,10 +160,15 @@
         UITabBarController *tabBarController = [kSharedApp showViewControllers];
         tabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:tabBarController animated:YES completion:nil];
+        
+        //防止session过期，自动登录
+        LoginAction *loginAction = [[LoginAction alloc] init];
+        [loginAction  backstageLoginWithSync:NO];
+        
     }else{
         DDLogCWarn(@"登录失败，errorCode is %d",errorCode);
         self.password.text = nil;
-        NSString *msg = [dict objectForKey:@"message"];
+//        NSString *msg = [dict objectForKey:@"message"];
     }
 }
 

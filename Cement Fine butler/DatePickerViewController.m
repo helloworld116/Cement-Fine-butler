@@ -57,11 +57,32 @@
 - (IBAction)sureDate:(id)sender {
     self.datePickerOfStart.hidden = YES;
     self.datePickerOfEnd.hidden = YES;
-    NSLog(@"before presentingViewController  is %@",self.presentingViewController );
-    NSLog(@"before presentedViewController  is %@",self.presentedViewController);
-    NSLog(@"before parentViewController is %@",self.parentViewController);
-    NSLog(@"before splitViewController is %@",self.splitViewController);
-    NSLog(@"before searchDisplayController is %@",self.searchDisplayController);
+//    NSLog(@"before presentingViewController  is %@",self.presentingViewController );
+//    NSLog(@"before presentedViewController  is %@",self.presentedViewController);
+//    NSLog(@"before parentViewController is %@",self.parentViewController);
+//    NSLog(@"before splitViewController is %@",self.splitViewController);
+//    NSLog(@"before searchDisplayController is %@",self.searchDisplayController);
+    NSDate *beginDate = self.datePickerOfStart.date;
+    NSDate *endDate = self.datePickerOfEnd.date;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *beginComponents = [calendar components: unitFlags fromDate: beginDate];
+    int beginYear = [beginComponents year];
+    int beginMonth = [beginComponents month];
+    int beginDay = [beginComponents day];
+    
+    NSDateComponents *endComponents = [calendar components: unitFlags fromDate: endDate];
+    int endYear = [endComponents year];
+    int endMonth = [endComponents month];
+    int endDay = [endComponents day];
+    
+    NSDictionary *beginDateDict = @{@"year":[NSNumber numberWithInt:beginYear],@"month":[NSNumber numberWithInt:beginMonth],@"day":[NSNumber numberWithInt:beginDay]};
+    NSDictionary *endDateDict = @{@"year":[NSNumber numberWithInt:endYear],@"month":[NSNumber numberWithInt:endMonth],@"day":[NSNumber numberWithInt:endDay]};
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:beginDateDict forKey:@"startDate"];
+    [userDefault setObject:endDateDict forKey:@"endDate"];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)backgroundTouch:(id)sender {
