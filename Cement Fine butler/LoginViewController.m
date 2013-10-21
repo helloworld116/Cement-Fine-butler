@@ -145,6 +145,7 @@
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+    DDLogCVerbose(@"登录成功");
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==kErrorCode0) {
@@ -163,7 +164,8 @@
         
         //防止session过期，自动登录
         LoginAction *loginAction = [[LoginAction alloc] init];
-        [loginAction  backstageLoginWithSync:NO];
+//        [loginAction  backstageLoginWithSync:NO];
+        [loginAction performSelector:@selector(backstageLoginWithSync:) withObject:[NSNumber numberWithBool:NO] afterDelay:kSharedApp.expiresIn-10];
         
     }else{
         DDLogCWarn(@"登录失败，errorCode is %d",errorCode);

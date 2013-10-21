@@ -10,13 +10,25 @@
 #import "SearchCondition.h"
 
 @implementation SearchCondition
--(id)initWithStockType:(int)stockType timeType:(int)timeType lineID:(long)lineID productID:(long)productID{
+-(id)initWithInventoryType:(int)inventoryType timeType:(int)timeType lineID:(long)lineID productID:(long)productID{
     self = [super init];
-    if (self) {;
+    if (self) {
         self.timeType=timeType;
         self.lineID=lineID;
         self.productID=productID;
-        self.stockType=stockType;
+        self.inventoryType=inventoryType;
+    }
+    return self;
+}
+
+-(id)initWithInventoryType:(int)inventoryType timeType:(int)timeType lineID:(long)lineID productID:(long)productID unitCostType:(int)unitCostType{
+    self = [super init];
+    if (self) {
+        self.inventoryType=inventoryType;
+        self.timeType=timeType;
+        self.lineID=lineID;
+        self.productID=productID;
+        self.unitCostType=unitCostType;
     }
     return self;
 }

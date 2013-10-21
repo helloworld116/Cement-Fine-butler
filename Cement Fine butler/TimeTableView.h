@@ -11,4 +11,6 @@
 @interface TimeTableView : UITableView<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,retain) NSArray *conditon;
 @property (nonatomic) NSUInteger currentSelectCellIndex;
+
+-(id)initWithCondition:(NSArray *)condition andCurrentSelectCellIndex:(NSUInteger)currentSelectCellIndex;
 @end

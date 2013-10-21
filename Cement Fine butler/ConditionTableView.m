@@ -1,17 +1,19 @@
 //
-//  TimeTableView.m
+//  ConditionTableView.m
 //  Cement Fine butler
 //
 //  Created by 文正光 on 13-10-21.
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "TimeTableView.h"
-#import "TimeConditionCell.h"
-#import "DatePickerViewController.h"
-#import "RightViewController.h"
+#import "ConditionTableView.h"
+#import "ConditionCell.h"
 
-@implementation TimeTableView
+@interface ConditionTableView ()
+
+@end
+
+@implementation ConditionTableView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -48,9 +50,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ConditionCell";
-    TimeConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:1];
+        cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
     }
     // Configure the cell...
     NSDictionary *condtionDict = [self.conditon objectAtIndex:indexPath.row];
@@ -58,16 +60,12 @@
     cell.label.font = [UIFont systemFontOfSize:14];
     cell.label.text = [condtionDict objectForKey:@"name"];
     cell.label.textColor = [UIColor blackColor];
-    cell.labelTime.font = [UIFont systemFontOfSize:10];
-    NSDictionary *timeInfo = [Tool getTimeInfo:indexPath.row];
-    cell.labelTime.text=[timeInfo objectForKey:@"timeDesc"];
-    cell.labelTime.textColor = [UIColor blackColor];
     cell.selectedImgView.image = [UIImage imageNamed:@"checked"];
     cell.selectedImgView.hidden = YES;
     if (indexPath.row==self.currentSelectCellIndex) {
         [self setTableViewCellStyle:cell selected:YES];
     }
-  
+    
     //设置标识，以便选中时知道选中的是哪个
     cell.cellID = [[condtionDict objectForKey:@"_id"] intValue];
     return cell;
@@ -76,47 +74,23 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     for (int i=0; i<[[tableView visibleCells] count]; i++) {
-        TimeConditionCell *cell = [[tableView visibleCells] objectAtIndex:i];
+        ConditionCell *cell = [[tableView visibleCells] objectAtIndex:i];
         [self setTableViewCellStyle:cell selected:NO];
     }
-    TimeConditionCell *cell = (TimeConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
+    ConditionCell *cell = (ConditionCell *)[tableView cellForRowAtIndexPath:indexPath];
     [self setTableViewCellStyle:cell selected:YES];
-    //修改搜索条件
-    if (indexPath.row==4) {
-        DatePickerViewController *datePickerViewController = (DatePickerViewController *)[kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController"];
-        [[self viewController] presentModalViewController:datePickerViewController animated:YES];
-    }
 }
 
--(void)setTableViewCellStyle:(TimeConditionCell *)cell selected:(BOOL)selected{
+-(void)setTableViewCellStyle:(ConditionCell *)cell selected:(BOOL)selected{
     if (selected) {
         cell.selectedImgView.hidden = NO;
         cell.label.font = [UIFont boldSystemFontOfSize:14];
         cell.label.textColor = [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1];
-        cell.labelTime.font = [UIFont boldSystemFontOfSize:10];
-        cell.labelTime.textColor = [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1];
     }else{
         cell.selectedImgView.hidden = YES;
         cell.label.font = [UIFont systemFontOfSize:14];
         cell.label.textColor = [UIColor blackColor];
-        cell.labelTime.font = [UIFont systemFontOfSize:10];
-        cell.labelTime.textColor = [UIColor blackColor];
     }
 }
 
-- (UIViewController *)viewController {
-    /// Finds the view's view controller.
-    
-    // Take the view controller class object here and avoid sending the same message iteratively unnecessarily.
-    Class vcc = [UIViewController class];
-    
-    // Traverse responder chain. Return first found view controller, which will be the view's view controller.
-    UIResponder *responder = self;
-    while ((responder = [responder nextResponder]))
-        if ([responder isKindOfClass: vcc])
-            return (UIViewController *)responder;
-    
-    // If the view controller isn't found, return nil.
-    return nil;
-}
 @end

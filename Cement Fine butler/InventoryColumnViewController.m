@@ -189,7 +189,7 @@
             DDLogCVerbose(@"old is %@",[change objectForKey:@"old"]);
             DDLogCVerbose(@"条件发生变化");
             SearchCondition *condition = [change objectForKey:@"new"];
-            [self sendRequest:condition.stockType];
+            [self sendRequest:condition.inventoryType];
         }
     }
 }

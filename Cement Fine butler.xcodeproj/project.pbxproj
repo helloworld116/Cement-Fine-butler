@@ -161,6 +161,7 @@
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
 		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
+		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
 		0ED53083180CCD5400505259 /* nav-back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53081180CCD5400505259 /* nav-back-arrow.png */; };
 		0ED53084180CCD5400505259 /* nav-back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */; };
 		0EDC71FF1810C0F400895931 /* calculate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC71FD1810C0F400895931 /* calculate@2x.png */; };
@@ -386,6 +387,8 @@
 		0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.2.1.src.js; sourceTree = "<group>"; };
 		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
 		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
+		0E9EF1B91814BDCD007557AE /* ConditionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionTableView.h; sourceTree = "<group>"; };
+		0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionTableView.m; sourceTree = "<group>"; };
 		0ED53081180CCD5400505259 /* nav-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow.png"; sourceTree = "<group>"; };
 		0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow@2x.png"; sourceTree = "<group>"; };
 		0EDC71FD1810C0F400895931 /* calculate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calculate@2x.png"; sourceTree = "<group>"; };
@@ -887,6 +890,8 @@
 				474F9145181444E600D94A85 /* UnitCostTableView.m */,
 				474F91471814480800D94A85 /* TimeConditionCell.h */,
 				474F91481814480800D94A85 /* TimeConditionCell.m */,
+				0E9EF1B91814BDCD007557AE /* ConditionTableView.h */,
+				0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */,
 			);
 			name = ConditionTableView;
 			sourceTree = "<group>";
@@ -1196,6 +1201,7 @@
 				474F91431814449400D94A85 /* StockTableView.m in Sources */,
 				474F9146181444E600D94A85 /* UnitCostTableView.m in Sources */,
 				474F91491814480800D94A85 /* TimeConditionCell.m in Sources */,
+				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

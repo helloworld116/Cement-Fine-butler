@@ -139,8 +139,8 @@
 }
 
 - (void)pop:(id)sender {
-    RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
-    [rightViewController resetConditions:self.oldCondition];
+//    RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
+//    [rightViewController resetConditions:self.oldCondition];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ConditionTableView.h"
 
-@interface UnitCostTableView : UITableView
-
+@interface UnitCostTableView : ConditionTableView
+-(id)initWithCondition:(NSArray *)condition andCurrentSelectCellIndex:(NSUInteger)currentSelectCellIndex;
 @end

@@ -36,7 +36,8 @@
     //最开始异步请求数据
 //    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:self.condition];
-    self.navigationItem.title = @"...";
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     
     self.webView.delegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
@@ -47,6 +48,10 @@
     sc.bounces = NO;//禁用上下拖拽
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 //成本对比
-@interface CostComparisonViewController : UIViewController
+@interface CostComparisonViewController : UIViewController<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic,assign) int type;//1表示上期，2表示同期
-@property (nonatomic,retain) NSArray *condition;
+@property (nonatomic,retain) NSDictionary *condition;
 @end

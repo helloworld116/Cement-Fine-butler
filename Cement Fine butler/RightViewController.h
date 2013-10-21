@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *topView;
 
+@property (nonatomic,retain) NSDictionary *currentSelectDict;//{kCondition_Time:2,kCondition_Lines:0,kCondition_Products:0,kCondition_StockType:0,kCondition_UnitCostType:0}
 @property (retain,nonatomic) NSArray *conditions;
 - (IBAction)search:(id)sender;
 - (void)resetConditions:(NSArray *)conditions;

@@ -64,7 +64,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.sidePanelController showRightPanelAnimated:NO];
+//    [self.sidePanelController showRightPanelAnimated:NO];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -260,6 +260,7 @@
     CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
     viewController.type=2;
     viewController.condition = self.lastRequestCondition;
+    viewController.title = [self.reportTitlePre stringByAppendingString:@"原材料成本同比总览"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -268,6 +269,7 @@
     CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
     viewController.type=1;
     viewController.condition = self.lastRequestCondition;
+    viewController.title = [self.reportTitlePre stringByAppendingString:@"原材料成本环比总览"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -292,8 +294,7 @@
         [productArray addObject:dict];
     }
     HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
-    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
-    historyTrendsViewController.oldCondition = rightController.conditions;
+    RightViewController *rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     NSArray *newConditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     [rightController resetConditions:newConditions];
     historyTrendsViewController.hidesBottomBarWhenPushed = YES;

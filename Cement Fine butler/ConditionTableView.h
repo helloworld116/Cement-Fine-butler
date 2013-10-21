@@ -1,5 +1,5 @@
 //
-//  ProductTableView.h
+//  ConditionTableView.h
 //  Cement Fine butler
 //
 //  Created by 文正光 on 13-10-21.
@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ConditionTableView.h"
 
-@interface ProductTableView : ConditionTableView
+@interface ConditionTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,retain) NSArray *conditon;
+@property (nonatomic) NSUInteger currentSelectCellIndex;
+
 -(id)initWithCondition:(NSArray *)condition andCurrentSelectCellIndex:(NSUInteger)currentSelectCellIndex;
 @end
