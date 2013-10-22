@@ -35,15 +35,13 @@
     CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight);
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
     self.webView.delegate = self;
-    [self.view addSubview:self.webView];
-    
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
     sc.showsHorizontalScrollIndicator = NO;
     sc.showsVerticalScrollIndicator = NO;
     sc.bounces = NO;//禁用上下拖拽
-    
+    [self.view addSubview:self.webView];
     self.reportTitlePre = @"";
 }
 

@@ -109,16 +109,31 @@
             </objects>
             <point key="canvasLocation" x="-318" y="284"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YfG-vc-Kzh">
+            <objects>
+                <navigationController storyboardIdentifier="calculatorNavController" definesPresentationContext="YES" id="dMI-C9-DDT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="unc-pl-FLm">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hY1-sw-mNW" kind="relationship" relationship="rootViewController" id="E4E-mq-pJt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vNB-qM-HzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1080" y="884"/>
+        </scene>
         <!--Raw Materials Cal View Controller-->
         <scene sceneID="8vr-FW-7Zm">
             <objects>
                 <viewController storyboardIdentifier="rawMaterialsCalViewController" id="hY1-sw-mNW" customClass="RawMaterialsCalViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Qy-7P-MIU">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vNc-0y-kKL">
-                                <rect key="frame" x="0.0" y="55" width="320" height="405"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="361"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </tableView>
                             <view contentMode="scaleToFill" id="Ybc-k7-kjr">
@@ -174,6 +189,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="AQf-Oq-cPY"/>
                     <connections>
                         <outlet property="lblPlanUnitPrice" destination="y6J-9l-Ta0" id="upZ-hZ-RFW"/>
                         <outlet property="lblUnitPrice" destination="Tnb-Um-uCg" id="Twh-Ab-cHn"/>
@@ -464,7 +480,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4BH-wZ-4TE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="421"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="414"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="gio-wj-zZw">
@@ -484,11 +500,11 @@
                                 </subviews>
                             </scrollView>
                             <view contentMode="scaleToFill" id="wmd-5v-E0C">
-                                <rect key="frame" x="0.0" y="420" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="413" width="320" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bEe-vp-Jah">
-                                        <rect key="frame" x="244" y="8" width="56" height="25"/>
+                                        <rect key="frame" x="80" y="9" width="221" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                                         <state key="normal" title="确定">
@@ -526,7 +542,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem id="iAd-aE-5KP">
+                                    <navigationItem title="选择起止日期" id="iAd-aE-5KP">
                                         <barButtonItem key="leftBarButtonItem" title="返回" id="SGw-fh-UHK">
                                             <connections>
                                                 <action selector="back:" destination="aXW-RJ-Pnf" id="wPy-C3-jFg"/>
@@ -1380,166 +1396,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     <resources>
         <image name="nav-menu.png" width="20" height="17"/>
     </resources>
-    <classes>
-        <class className="BMKMapView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BMKMapView.h"/>
-        </class>
-        <class className="CenterViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CenterViewController.h"/>
-        </class>
-        <class className="CostComparisonViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CostComparisonViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="DatePickerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DatePickerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="action" name="backgroundTouch:"/>
-                <relationship kind="action" name="choiceEndDate:"/>
-                <relationship kind="action" name="choiceStartDate:"/>
-                <relationship kind="action" name="sureDate:"/>
-                <relationship kind="action" name="updateEndDate:"/>
-                <relationship kind="action" name="updateStartDate:"/>
-                <relationship kind="outlet" name="datePickerOfEnd" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="datePickerOfStart" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="lblEndDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStartDate" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="EquipmentDetailsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="stopRecords:"/>
-                <relationship kind="outlet" name="btnStopRecords" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lblInstantFlowRate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblPartialOutput" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblRunDuration" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblSN" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblSettingFlowRate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStatus" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStopCountMonthly" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStopDurationMonthly" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblTotalOutput" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="EquipmentListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="EquipmentMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EquipmentMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="BMKMapView"/>
-            </relationships>
-        </class>
-        <class className="HistroyTrendsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistroyTrendsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="InsetsTextField" superclassName="UITextField">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InsetsTextField.h"/>
-        </class>
-        <class className="InventoryColumnViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InventoryColumnViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="showNav:"/>
-                <relationship kind="action" name="showSearchCondition:"/>
-                <relationship kind="outlet" name="bottomWebiew" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="LeftViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LeftViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backgroundTouch:"/>
-                <relationship kind="action" name="doLogin:"/>
-                <relationship kind="outlet" name="backgroundImgView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="btnLogin" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="continerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="password" candidateClass="InsetsTextField"/>
-                <relationship kind="outlet" name="titleImgView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="username" candidateClass="InsetsTextField"/>
-            </relationships>
-        </class>
-        <class className="MessageViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MessageViewController.h"/>
-        </class>
-        <class className="NoCopyTextField" superclassName="UITextField">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NoCopyTextField.h"/>
-        </class>
-        <class className="ProductColumnViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProductColumnViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="showNav:"/>
-                <relationship kind="action" name="showSearchCondition:"/>
-                <relationship kind="outlet" name="bottomWebiew" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="topContainerView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RawMaterialsCalViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsCalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="calculate:"/>
-                <relationship kind="outlet" name="lblPlanUnitPrice" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblUnitPrice" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RawMaterialsCalculateViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsCalculateViewController.h"/>
-        </class>
-        <class className="RawMaterialsCostManagerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsCostManagerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="moreAction:"/>
-                <relationship kind="action" name="showSearch:"/>
-                <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RawMaterialsSettingViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RawMaterialsSettingViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="changeLocked:"/>
-                <relationship kind="action" name="textRateTouch:"/>
-                <relationship kind="outlet" name="lblName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="switchLocked" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="textApportionRate" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textFinancePrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textPlanPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textRate" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RightViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="search:"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="topView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

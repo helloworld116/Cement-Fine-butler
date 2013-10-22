@@ -10,4 +10,5 @@
 
 @interface LossReportViewController : UIViewController<UIWebViewDelegate>
 @property (nonatomic,retain) NSArray *dataArray;
+@property (nonatomic,retain) NSString *titlePre;
 @end

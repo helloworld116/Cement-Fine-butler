@@ -78,6 +78,19 @@
             self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         }
     }
+    //设置自定义时间
+    if (![defaults objectForKey:@"startDate"]) {
+        NSDate *date = [NSDate date];
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+        unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+        NSDateComponents *beginComponents = [calendar components: unitFlags fromDate: date];
+        int year = [beginComponents year];
+        int month = [beginComponents month];
+        int day = [beginComponents day];
+        NSDictionary *dateDict = @{@"year":[NSNumber numberWithInt:year],@"month":[NSNumber numberWithInt:month],@"day":[NSNumber numberWithInt:day]};
+        [defaults setObject:dateDict forKey:@"startDate"];
+        [defaults setObject:dateDict forKey:@"endDate"];
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -111,7 +124,7 @@
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     //原材料成本管理模块
     JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
-    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"productOverview"] tag:kViewTag+1];
+    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
 //    RawMaterialsCostManagerViewController *rawMaterialsCostManagerViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
 //    UINavigationController *rawMaterialsCostManagerNavController = [[UINavigationController alloc] initWithRootViewController:rawMaterialsCostManagerViewController];
     UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
@@ -122,7 +135,7 @@
     [costManagerController setRightPanel:costManagerRightController];
     //损耗定位
     JASidePanelController *lossController = [[JASidePanelController alloc] init];
-    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+2];
+    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
     LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
     UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
     RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
@@ -132,7 +145,7 @@
     [lossController setRightPanel:lossRightController];
     //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
-    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+3];
+    realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+3];
     ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
     LeftViewController *realTimeReportsLeftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
     NSArray *reportType = @[@"产量报表",@"库存报表"];
@@ -147,13 +160,14 @@
     [realTimeReportsController setRightPanel:realTimeReportsRightController];
     //设备管理
     UINavigationController *equipmentController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
-    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"priceAssaint"] tag:kViewTag+4];
+    equipmentController.tabBarItem = [equipmentController.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"list"] tag:kViewTag+4];
     //消息
-    UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
-    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+5];
+//    UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
+//    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+5];
     //原材料成本计算器
-    RawMaterialsCalViewController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
-    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,messageController,raw];
+    UINavigationController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"calculatorNavController"];
+    raw.tabBarItem = [raw.tabBarItem initWithTitle:@"计算器" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
+    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,raw];
     return tabBarController;
 }
 							

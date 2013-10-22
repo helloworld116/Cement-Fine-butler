@@ -9,10 +9,12 @@
 #import "InventoryColumnViewController.h"
 #import "LoadingView.h"
 
-@interface InventoryColumnViewController ()
+@interface InventoryColumnViewController ()<MBProgressHUDDelegate>
 @property (nonatomic,retain) LoadingView *loadingView;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
+@property (retain, nonatomic) NODataView *noDataView;
+@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation InventoryColumnViewController
@@ -125,6 +127,7 @@
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
         [webView stringByEvaluatingJavaScriptFromString:js];
     }
+    self.bottomWebiew.hidden = NO;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -134,11 +137,24 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(int)stockType{
-//    self.loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-//    [self.view addSubview:self.loadingView];
-//    [self.loadingView startLoading];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
+    //清除原数据
+    self.data = nil;
+    if (self.noDataView) {
+        [self.noDataView removeFromSuperview];
+        self.noDataView = nil;
+    }
+    self.bottomWebiew.hidden=YES;
+    //加载过程提示
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    self.progressHUD.labelText = @"加载中...";
+    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+    self.progressHUD.dimBackground = YES;
+    self.progressHUD.opacity=1.0;
+    self.progressHUD.delegate=self;
+    self.progressHUD.minShowTime=0.5;
+    [self.view addSubview:self.progressHUD];
+    [self.progressHUD show:YES];
+
     DDLogCInfo(@"******  Request URL is:%@  ******",kStockReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
     [self.request setUseCookiePersistence:YES];
@@ -152,13 +168,10 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self.progressHUD hide:YES];
 }
 
--(void)requestSuccess:(ASIHTTPRequest *)request{
-//    [self.loadingView removeFromSuperView];
-     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    
+-(void)requestSuccess:(ASIHTTPRequest *)request{    
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];
     if (responseCode==0) {
@@ -171,6 +184,7 @@
         NODataView *view = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
         [self.view addSubview:view];
     }
+    [self.progressHUD hide:YES];
 }
 
 #pragma mark end webviewDelegate
@@ -192,5 +206,11 @@
             [self sendRequest:condition.inventoryType];
         }
     }
+}
+
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+	[self.progressHUD removeFromSuperview];
+	self.progressHUD = nil;
 }
 @end

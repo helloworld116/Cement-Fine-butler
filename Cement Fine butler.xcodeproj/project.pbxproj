@@ -161,11 +161,19 @@
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
 		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
+		0E9426E9181657AE00DAFDAF /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426DF181657AE00DAFDAF /* calculator.png */; };
+		0E9426EA181657AE00DAFDAF /* calculator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E0181657AE00DAFDAF /* calculator@2x.png */; };
+		0E9426EB181657AE00DAFDAF /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E1181657AE00DAFDAF /* list.png */; };
+		0E9426EC181657AE00DAFDAF /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E2181657AE00DAFDAF /* list@2x.png */; };
+		0E9426ED181657AE00DAFDAF /* uptrend.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E3181657AE00DAFDAF /* uptrend.png */; };
+		0E9426EE181657AE00DAFDAF /* uptrend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E4181657AE00DAFDAF /* uptrend@2x.png */; };
+		0E9426EF181657AE00DAFDAF /* bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E5181657AE00DAFDAF /* bar-chart.png */; };
+		0E9426F0181657AE00DAFDAF /* bar-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E6181657AE00DAFDAF /* bar-chart@2x.png */; };
+		0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E7181657AE00DAFDAF /* pie-chart.png */; };
+		0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */; };
 		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
 		0ED53083180CCD5400505259 /* nav-back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53081180CCD5400505259 /* nav-back-arrow.png */; };
 		0ED53084180CCD5400505259 /* nav-back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */; };
-		0EDC71FF1810C0F400895931 /* calculate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC71FD1810C0F400895931 /* calculate@2x.png */; };
-		0EDC72001810C0F400895931 /* calculate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC71FE1810C0F400895931 /* calculate.png */; };
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
 		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
@@ -387,12 +395,20 @@
 		0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.2.1.src.js; sourceTree = "<group>"; };
 		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
 		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
+		0E9426DF181657AE00DAFDAF /* calculator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculator.png; sourceTree = "<group>"; };
+		0E9426E0181657AE00DAFDAF /* calculator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calculator@2x.png"; sourceTree = "<group>"; };
+		0E9426E1181657AE00DAFDAF /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
+		0E9426E2181657AE00DAFDAF /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
+		0E9426E3181657AE00DAFDAF /* uptrend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uptrend.png; sourceTree = "<group>"; };
+		0E9426E4181657AE00DAFDAF /* uptrend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uptrend@2x.png"; sourceTree = "<group>"; };
+		0E9426E5181657AE00DAFDAF /* bar-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart.png"; sourceTree = "<group>"; };
+		0E9426E6181657AE00DAFDAF /* bar-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart@2x.png"; sourceTree = "<group>"; };
+		0E9426E7181657AE00DAFDAF /* pie-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie-chart.png"; sourceTree = "<group>"; };
+		0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie-chart@2x.png"; sourceTree = "<group>"; };
 		0E9EF1B91814BDCD007557AE /* ConditionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionTableView.h; sourceTree = "<group>"; };
 		0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionTableView.m; sourceTree = "<group>"; };
 		0ED53081180CCD5400505259 /* nav-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow.png"; sourceTree = "<group>"; };
 		0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow@2x.png"; sourceTree = "<group>"; };
-		0EDC71FD1810C0F400895931 /* calculate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calculate@2x.png"; sourceTree = "<group>"; };
-		0EDC71FE1810C0F400895931 /* calculate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculate.png; sourceTree = "<group>"; };
 		0EDC72011811319F00895931 /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
 		0EDC72021811319F00895931 /* NODataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NODataView.m; sourceTree = "<group>"; };
 		0EDFFBF617E1B045009B4671 /* ConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionCell.h; sourceTree = "<group>"; };
@@ -604,8 +620,16 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0EDC71FD1810C0F400895931 /* calculate@2x.png */,
-				0EDC71FE1810C0F400895931 /* calculate.png */,
+				0E9426DF181657AE00DAFDAF /* calculator.png */,
+				0E9426E0181657AE00DAFDAF /* calculator@2x.png */,
+				0E9426E1181657AE00DAFDAF /* list.png */,
+				0E9426E2181657AE00DAFDAF /* list@2x.png */,
+				0E9426E3181657AE00DAFDAF /* uptrend.png */,
+				0E9426E4181657AE00DAFDAF /* uptrend@2x.png */,
+				0E9426E5181657AE00DAFDAF /* bar-chart.png */,
+				0E9426E6181657AE00DAFDAF /* bar-chart@2x.png */,
+				0E9426E7181657AE00DAFDAF /* pie-chart.png */,
+				0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */,
 				0E23CF3D180E306D0089B4A8 /* lock-small.png */,
 				0E23CF3E180E306D0089B4A8 /* unlock-small.png */,
 				0E23CF3F180E306D0089B4A8 /* lock-small@2x.png */,
@@ -1109,8 +1133,16 @@
 				0E23CF4B180E306D0089B4A8 /* unlock.png in Resources */,
 				0E23CF4C180E306D0089B4A8 /* unlock@2x.png in Resources */,
 				0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */,
-				0EDC71FF1810C0F400895931 /* calculate@2x.png in Resources */,
-				0EDC72001810C0F400895931 /* calculate.png in Resources */,
+				0E9426E9181657AE00DAFDAF /* calculator.png in Resources */,
+				0E9426EA181657AE00DAFDAF /* calculator@2x.png in Resources */,
+				0E9426EB181657AE00DAFDAF /* list.png in Resources */,
+				0E9426EC181657AE00DAFDAF /* list@2x.png in Resources */,
+				0E9426ED181657AE00DAFDAF /* uptrend.png in Resources */,
+				0E9426EE181657AE00DAFDAF /* uptrend@2x.png in Resources */,
+				0E9426EF181657AE00DAFDAF /* bar-chart.png in Resources */,
+				0E9426F0181657AE00DAFDAF /* bar-chart@2x.png in Resources */,
+				0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */,
+				0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

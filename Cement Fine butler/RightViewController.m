@@ -13,7 +13,6 @@
 #import "DatePickerViewController.h"
 #import "ConditionTableView.h"
 #import "TimeConditionCell.h"
-#import "TimeTableView.h"
 #import "LineTableView.h"
 #import "ProductTableView.h"
 #import "StockTableView.h"
@@ -34,7 +33,6 @@
 @property (nonatomic,retain) UnitCostTableView *unitCostTableView;
 @property (nonatomic,retain) LineTableView *lineTableView;
 @property (nonatomic,retain) ProductTableView *productTableView;
-@property (nonatomic,retain) TimeTableView *timeTableView;
 @end
 
 @implementation RightViewController
@@ -311,9 +309,9 @@
         }
         //table的headerview，用于放置条件说明
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
-        view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
+//        view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor grayColor];
         label.font = [UIFont systemFontOfSize:13.f];
         label.text = conditionTitle;
         label.backgroundColor = [UIColor clearColor];

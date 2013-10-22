@@ -27,12 +27,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    NSDate *currentDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateAndTime =  [dateFormatter stringFromDate:currentDate];
-    self.lblStartDate.text = dateAndTime;
-    self.lblEndDate.text = dateAndTime;
+//    NSDate *currentDate = [NSDate date];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString *dateAndTime =  [dateFormatter stringFromDate:currentDate];
+    self.navigationItem.title = @"选择起止日期";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *startDate = [defaults valueForKey:@"startDate"];
+    NSDictionary *endDate = [defaults valueForKey:@"endDate"];
+    self.lblStartDate.text = [NSString stringWithFormat:@"%d-%d-%d",[[startDate objectForKey:@"year"] intValue],[[startDate objectForKey:@"month"] intValue],[[startDate objectForKey:@"day"] intValue]];
+    self.lblEndDate.text = [NSString stringWithFormat:@"%d-%d-%d",[[endDate objectForKey:@"year"] intValue],[[endDate objectForKey:@"month"] intValue],[[endDate objectForKey:@"day"] intValue]];
 }
 
 - (void)didReceiveMemoryWarning

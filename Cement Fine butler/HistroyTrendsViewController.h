@@ -13,6 +13,4 @@
 //- (IBAction)back:(id)sender;
 
 - (void)showSearch:(id)sender;
-
-@property (nonatomic,retain) NSArray *oldCondition;
 @end

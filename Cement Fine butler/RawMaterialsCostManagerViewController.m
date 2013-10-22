@@ -10,11 +10,13 @@
 #import "HistroyTrendsViewController.h"
 #import "CostReductionViewController.h"
 #import "CostComparisonViewController.h"
+#import "TimeTableView.h"
+#import "TimeConditionCell.h"
 
 #define kLabelHeight 30//底部字段描述label高度
 #define kLabelOrignX 10//label距离父容器左边距离
 
-@interface RawMaterialsCostManagerViewController ()
+@interface RawMaterialsCostManagerViewController ()<MBProgressHUDDelegate>
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) LoadingView *loadingView;
@@ -23,6 +25,7 @@
 
 @property (retain, nonatomic) NSDictionary *lastRequestCondition;//最后发送请求的查询条件
 @property (nonatomic) BOOL showRight;//条件选择为自定义时间时为YES，其他情况下为NO
+@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -60,11 +63,29 @@
     [super viewDidAppear:animated];
     //观察查询条件修改
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
+    TimeTableView *timeTableView = rightController.timeTableView;
+    NSIndexPath *indexPath = [timeTableView indexPathForSelectedRow];
+    if (indexPath.row==4) {
+        timeTableView.currentSelectCellIndex=4;
+        [timeTableView reloadData];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self.sidePanelController showRightPanelAnimated:NO];
+    if (self.showRight) {
+        [self.sidePanelController showRightPanelAnimated:NO];
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (self.sidePanelController.visiblePanel==self.sidePanelController.rightPanel) {
+        self.showRight = YES;
+    }else{
+        self.showRight = NO;
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -72,8 +93,6 @@
     //移除观察条件
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
     [self.sidePanelController showCenterPanelAnimated:NO];
-//    JASidePanelController *side = (JASidePanelController *)self.tabBarController.selectedViewController;
-//    DDLogCVerbose(@"tab bar controller is %@",[side centerPanel]);
     [KxMenu dismissMenu];
 }
 
@@ -153,6 +172,7 @@
             self.scrollView.contentSize = CGSizeMake(kScreenWidth,bottomViewNeedHeight+self.bottomView.frame.origin.y);
         }
     }
+    self.bottomView.hidden=NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -200,6 +220,7 @@
             [webView stringByEvaluatingJavaScriptFromString:js];
         }
     }
+    self.webView.hidden = NO;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -294,20 +315,37 @@
         [productArray addObject:dict];
     }
     HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
+    JASidePanelController *historyController = [[JASidePanelController alloc] init];
+//    UINavigationController *historyNavController = [[UINavigationController alloc] initWithRootViewController:historyTrendsViewController];
     RightViewController *rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    NSArray *newConditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
-    [rightController resetConditions:newConditions];
-    historyTrendsViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:historyTrendsViewController animated:YES];
+    NSArray *conditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+    rightController.conditions = conditions;
+    rightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [historyController setCenterPanel:historyTrendsViewController];
+    [historyController setRightPanel:rightController];
+    historyController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:historyController animated:YES];
 }
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
+    //清除原数据
+    self.data = nil;
     if (self.noDataView) {
         [self.noDataView removeFromSuperview];
         self.noDataView = nil;
     }
-    [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+    self.webView.hidden=YES;
+    self.bottomView.hidden=YES;
+    //加载过程提示
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.scrollView];
+    self.progressHUD.labelText = @"加载中...";
+    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+    self.progressHUD.dimBackground = YES;
+    self.progressHUD.opacity=1.0;
+    self.progressHUD.delegate = self;
+    [self.scrollView addSubview:self.progressHUD];
+    [self.progressHUD show:YES];
     
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
@@ -336,18 +374,16 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    [self.loadingView removeFromSuperView];
+    [self.progressHUD hide:YES];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
-    [MBProgressHUD hideAllHUDsForView:self.scrollView animated:YES];
-    //    [self.loadingView removeFromSuperView];
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.webView reload];
-        [self setBottomViewOfSubView];
+        [self performSelector:@selector(setBottomViewOfSubView) withObject:nil afterDelay:0.5];
     }else if(errorCode==kErrorCodeNegative1){
        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
@@ -358,6 +394,13 @@
         self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
         [self.view performSelector:@selector(addSubview:) withObject:self.noDataView afterDelay:0.5];
     }
+    [self.progressHUD hide:YES];
+}
+
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+	[self.progressHUD removeFromSuperview];
+	self.progressHUD = nil;
 }
 
 @end

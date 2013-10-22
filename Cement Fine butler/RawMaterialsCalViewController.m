@@ -43,13 +43,12 @@
     
     self.defaultData = self.data;
 	// Do any additional setup after loading the view.
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+//    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
 //    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(calculate:)];
     UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"还原" style:UIBarButtonItemStylePlain target:self action:@selector(revert:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+//    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = calBarButtonItem;
-    self.title = @"原材料成本计算器";
+    self.navigationItem.title = @"原材料成本计算器";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;

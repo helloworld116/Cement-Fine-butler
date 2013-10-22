@@ -35,7 +35,6 @@
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
     self.webView.delegate = self;
     self.webView.backgroundColor = [UIColor clearColor];
-//    self.webView.scalesPageToFit = IS_RETINA;
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
     sc.showsHorizontalScrollIndicator = NO;
     sc.showsVerticalScrollIndicator = NO;
@@ -82,7 +81,7 @@
     double max = [[sortedNumbers objectAtIndex:0] doubleValue];
     max = [Tool max:max];
 //    NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
-    NSDictionary *configDict = @{@"title":@"",@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+    NSDictionary *configDict = @{@"title":[self.titlePre stringByAppendingString:self.title],@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
     NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
     DDLogCVerbose(@"js is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];

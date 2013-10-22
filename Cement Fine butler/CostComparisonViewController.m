@@ -11,11 +11,12 @@
 #define kLabelOrignX 10//label距离父容器左边距离
 
 
-@interface CostComparisonViewController ()
+@interface CostComparisonViewController ()<MBProgressHUDDelegate>
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) NODataView *noDataView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
+@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation CostComparisonViewController
@@ -33,12 +34,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //最开始异步请求数据
-//    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
-    [self sendRequest:self.condition];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    
     self.webView.delegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
@@ -48,6 +45,8 @@
     sc.bounces = NO;//禁用上下拖拽
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    
+    [self sendRequest:self.condition];
 }
 
 -(void)pop:(id)sender{
@@ -136,15 +135,28 @@
             self.scrollView.contentSize = CGSizeMake(kScreenWidth,bottomViewNeedHeight+self.bottomView.frame.origin.y);
         }
     }
+    self.bottomView.hidden=NO;
 }
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
+    //清除原数据
+    self.data = nil;
     if (self.noDataView) {
         [self.noDataView removeFromSuperview];
         self.noDataView = nil;
     }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.webView.hidden=YES;
+    self.bottomView.hidden=YES;
+    //加载过程提示
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.scrollView];
+    self.progressHUD.labelText = @"加载中...";
+    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+    self.progressHUD.dimBackground = YES;
+    self.progressHUD.opacity=1.0;
+    self.progressHUD.delegate = self;
+    [self.scrollView addSubview:self.progressHUD];
+    [self.progressHUD show:YES];
     
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
@@ -168,12 +180,10 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self.progressHUD hide:YES];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    //    [self.loadingView removeFromSuperView];
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==0) {
@@ -190,6 +200,7 @@
         self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
         [self.view performSelector:@selector(addSubview:) withObject:self.noDataView afterDelay:0.5];
     }
+    [self.progressHUD hide:YES];
 }
 
 #pragma mark begin webviewDelegate
@@ -223,6 +234,7 @@
             [webView stringByEvaluatingJavaScriptFromString:js];
         }
     }
+    self.webView.hidden = NO;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -235,5 +247,11 @@
     [self setWebView:nil];
     [self setBottomView:nil];
     [super viewDidUnload];
+}
+
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+	[self.progressHUD removeFromSuperview];
+	self.progressHUD = nil;
 }
 @end
