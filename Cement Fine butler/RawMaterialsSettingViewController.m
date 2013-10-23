@@ -40,16 +40,16 @@
     NSDictionary *rawMaterialsInfo = [self.data objectAtIndex:self.index];
     self.lblName.text = [rawMaterialsInfo objectForKey:@"name"];
     self.textRate.text = [NSString stringWithFormat:@"%.2f",[[rawMaterialsInfo objectForKey:@"rate"] doubleValue]];
-    self.textRate.clearsOnInsertion = YES;
+//    self.textRate.clearsOnInsertion = YES;
     self.textFinancePrice.text = [NSString stringWithFormat:@"%.2f",[[rawMaterialsInfo objectForKey:@"financePrice"] doubleValue]];
-    self.textFinancePrice.clearsOnInsertion = YES;
+//    self.textFinancePrice.clearsOnInsertion = YES;
     self.textPlanPrice.text = [NSString stringWithFormat:@"%.2f",[[rawMaterialsInfo objectForKey:@"planPrice"] doubleValue]];
-    self.textPlanPrice.clearsOnInsertion = YES;
+//    self.textPlanPrice.clearsOnInsertion = YES;
     double apporitionRate = [[rawMaterialsInfo objectForKey:@"apporitionRate"] doubleValue];
     if (apporitionRate!=0) {
         self.textApportionRate.text = [NSString stringWithFormat:@"%.2f",apporitionRate];
     }
-    self.textApportionRate.clearsOnInsertion = YES;
+//    self.textApportionRate.clearsOnInsertion = YES;
     self.switchLocked.on = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
     if (self.switchLocked.on) {
         self.textApportionRate.enabled = NO;

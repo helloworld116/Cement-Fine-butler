@@ -33,7 +33,6 @@
     [super viewDidLoad];
 
 	// Do any additional setup after loading the view.
-    self.navigationItem.title = @".......";
     self.title = @"历史趋势";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
@@ -48,7 +47,7 @@
     sc.showsHorizontalScrollIndicator = NO;
     
     //unitCostType:0表示直接材料单位成本，1表示原材料单位成本
-    NSDictionary *condition = @{@"lineId":[NSNumber numberWithInt:0],@"productId":[NSNumber numberWithInt:0],@"unitCostType":[NSNumber numberWithInt:1],@"timeType":[NSNumber numberWithInt:2]};
+    NSDictionary *condition = @{@"lineId":[NSNumber numberWithInt:0],@"productId":[NSNumber numberWithInt:0],@"unitCostType":[NSNumber numberWithInt:0],@"timeType":[NSNumber numberWithInt:2]};
     self.lastCondition = condition;
     [self sendRequest:condition];
 }

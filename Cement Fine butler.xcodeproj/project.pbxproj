@@ -208,6 +208,7 @@
 		476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476FC86B17CC41F200EA5251 /* CallOutAnnotationView.m */; };
 		476FC87117CC41F200EA5251 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FC86C17CC41F200EA5251 /* Cell.xib */; };
 		476FC87217CC41F200EA5251 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476FC86E17CC41F200EA5251 /* Cell.m */; };
+		47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CB7BA41818131200FE97B6 /* MyKeyboardView.m */; };
 		4D09E885E1064B069A1C072C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D06A687F60314FAF8F9407BD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -494,6 +495,8 @@
 		476FC86C17CC41F200EA5251 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		476FC86D17CC41F200EA5251 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		476FC86E17CC41F200EA5251 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		47CB7BA31818131200FE97B6 /* MyKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyKeyboardView.h; sourceTree = "<group>"; };
+		47CB7BA41818131200FE97B6 /* MyKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyKeyboardView.m; sourceTree = "<group>"; };
 		D06A687F60314FAF8F9407BD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -538,6 +541,8 @@
 				0E346F0D17DAB97300C20BF1 /* LoadingView.m */,
 				0EDC72011811319F00895931 /* NODataView.h */,
 				0EDC72021811319F00895931 /* NODataView.m */,
+				47CB7BA31818131200FE97B6 /* MyKeyboardView.h */,
+				47CB7BA41818131200FE97B6 /* MyKeyboardView.m */,
 			);
 			name = CustomerView;
 			sourceTree = "<group>";
@@ -1240,6 +1245,7 @@
 				474F91491814480800D94A85 /* TimeConditionCell.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
+				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
