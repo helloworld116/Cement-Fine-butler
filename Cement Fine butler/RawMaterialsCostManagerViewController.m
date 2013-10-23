@@ -19,13 +19,13 @@
 @interface RawMaterialsCostManagerViewController ()<MBProgressHUDDelegate>
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
-@property (retain, nonatomic) LoadingView *loadingView;
 @property (retain, nonatomic) NODataView *noDataView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 
 @property (retain, nonatomic) NSDictionary *lastRequestCondition;//最后发送请求的查询条件
 @property (nonatomic) BOOL showRight;//条件选择为自定义时间时为YES，其他情况下为NO
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
+@property (retain,nonatomic) NSDictionary *currentSelectIndexDict;
 @end
 
 @implementation RawMaterialsCostManagerViewController
@@ -45,6 +45,7 @@
     //最开始异步请求数据
     NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:condition];
+    self.currentSelectIndexDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
     self.navigationItem.title = @"原材料成本管理";
     
     self.webView.delegate = self;
@@ -56,7 +57,6 @@
     sc.bounces = NO;//禁用上下拖拽
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-//    [self setBottomViewOfSubView];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -65,8 +65,8 @@
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
     RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
     TimeTableView *timeTableView = rightController.timeTableView;
-    NSIndexPath *indexPath = [timeTableView indexPathForSelectedRow];
-    if (indexPath.row==4) {
+    int timeSelectIndex = [timeTableView indexPathForSelectedRow].row;
+    if (timeSelectIndex==4) {
         timeTableView.currentSelectCellIndex=4;
         [timeTableView reloadData];
     }
@@ -74,9 +74,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (self.showRight) {
-        [self.sidePanelController showRightPanelAnimated:NO];
-    }
+//    if (self.showRight) {
+//        [self.sidePanelController showRightPanelAnimated:NO];
+//    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -92,7 +92,7 @@
     [super viewDidDisappear:animated];
     //移除观察条件
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
-    [self.sidePanelController showCenterPanelAnimated:NO];
+//    [self.sidePanelController showCenterPanelAnimated:NO];
     [KxMenu dismissMenu];
 }
 
@@ -240,8 +240,8 @@
         [menuItems addObject:menuItem1];
     }
 //    KxMenuItem *menuItem2 = [KxMenuItem menuItem:@"取消还原" image:nil target:self action:@selector(cancelReduction:)];
-    KxMenuItem *menuItem3 = [KxMenuItem menuItem:@"上期" image:nil target:self action:@selector(yearCompareYear:)];
-    KxMenuItem *menuItem4 = [KxMenuItem menuItem:@"同期" image:nil target:self action:@selector(monthCompareMonth:)];
+    KxMenuItem *menuItem3 = [KxMenuItem menuItem:@"同比" image:nil target:self action:@selector(yearCompareYear:)];
+    KxMenuItem *menuItem4 = [KxMenuItem menuItem:@"环比" image:nil target:self action:@selector(monthCompareMonth:)];
     KxMenuItem *menuItem5 = [KxMenuItem menuItem:@"历史趋势" image:nil target:self action:@selector(historyTrends:)];
     [menuItems addObject:menuItem3];
     [menuItems addObject:menuItem4];
@@ -260,12 +260,25 @@
             self.showRight = YES;
         }
         [self sendRequest:condition];
+        RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
+        TimeTableView *timeTableView = rightController.timeTableView;
+        int timeSelectIndex=0;
+        for (TimeConditionCell *timeCell in [timeTableView visibleCells]) {
+            if(!timeCell.selectedImgView.hidden){
+                timeSelectIndex = timeCell.cellID;
+                break;
+            }
+        }
+        int lineSelectIndex = [rightController.lineTableView indexPathForSelectedRow].row;
+        int productSelectIndex = [rightController.productTableView indexPathForSelectedRow].row;
+        self.currentSelectIndexDict = @{kCondition_Time:[NSNumber numberWithInt:timeSelectIndex],kCondition_Lines:[NSNumber numberWithInt:lineSelectIndex],kCondition_Products:[NSNumber numberWithInt:productSelectIndex]};
     }
 }
 
 #pragma mark 成本还原
 -(void)costReduction:(id)sender{
     CostReductionViewController *viewController = [[CostReductionViewController alloc] init];
+    viewController.chartTitle = self.reportTitlePre;
     viewController.data = [self.data objectForKey:@"recoveryMaterials"];
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
@@ -281,7 +294,7 @@
     CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
     viewController.type=2;
     viewController.condition = self.lastRequestCondition;
-    viewController.title = [self.reportTitlePre stringByAppendingString:@"原材料成本同比总览"];
+    viewController.title = @"原材料同比成本";
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -290,7 +303,7 @@
     CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
     viewController.type=1;
     viewController.condition = self.lastRequestCondition;
-    viewController.title = [self.reportTitlePre stringByAppendingString:@"原材料成本环比总览"];
+    viewController.title = @"原材料环比成本";
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -314,17 +327,21 @@
         NSDictionary *dict = @{@"_id":_id,@"name":name};
         [productArray addObject:dict];
     }
+    
+//    JASidePanelController *historyController = [[JASidePanelController alloc] init];
     HistroyTrendsViewController *historyTrendsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"historyTrendsViewController"];
-    JASidePanelController *historyController = [[JASidePanelController alloc] init];
-//    UINavigationController *historyNavController = [[UINavigationController alloc] initWithRootViewController:historyTrendsViewController];
-    RightViewController *rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    RightViewController *rightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     NSArray *conditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:timeArray},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
-    rightController.conditions = conditions;
-    rightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    [historyController setCenterPanel:historyTrendsViewController];
-    [historyController setRightPanel:rightController];
-    historyController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:historyController animated:YES];
+//    rightController.conditions = conditions;
+//    rightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//    [historyController setCenterPanel:historyTrendsViewController];
+//    [historyController setRightPanel:rightController];
+//    historyController.hidesBottomBarWhenPushed = YES;
+    RightViewController *rightController = self.sidePanelController.rightPanel;
+    historyTrendsViewController.preViewControllerCondition = rightController.conditions;
+    historyTrendsViewController.preSelectedDict = self.currentSelectIndexDict;
+    [rightController resetConditions:conditions];
+    [self.navigationController pushViewController:historyTrendsViewController animated:YES];
 }
 
 #pragma mark 发送网络请求
@@ -363,13 +380,12 @@
     long productId = [[condition objectForKey:@"productId"] longValue];
     [self.request setPostValue:[NSNumber numberWithLong:productId] forKey:@"productId"];
     [self.request setPostValue:[NSNumber numberWithInt:0] forKey:@"period"];//0:当期   1:上期   2:同期
-    
-    self.lastRequestCondition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:timeType]};
-    
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
     [self.request startAsynchronous];
+    
+    self.lastRequestCondition = condition;
 }
 
 #pragma mark 网络请求

@@ -104,6 +104,8 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateAndTime =  [dateFormatter stringFromDate:select];
     self.lblStartDate.text = dateAndTime;
+    //更新enddate的最小值
+//    self.datePickerOfEnd.minimumDate = self.datePickerOfStart.date;
 }
 
 - (IBAction)updateEndDate:(id)sender {
@@ -112,5 +114,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateAndTime =  [dateFormatter stringFromDate:select];
     self.lblEndDate.text = dateAndTime;
+    //更新startdate的最大值
+//    self.datePickerOfStart.maximumDate = self.datePickerOfEnd.date;
 }
 @end

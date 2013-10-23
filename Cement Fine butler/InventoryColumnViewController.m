@@ -15,6 +15,7 @@
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) NODataView *noDataView;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
+@property (retain,nonatomic) NSString *chartTitle;
 @end
 
 @implementation InventoryColumnViewController
@@ -41,7 +42,7 @@
 //    DDLogVerbose(@"self view subview is %@",[self.view subviews]);
     //观察查询条件修改
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    [self.sidePanelController showCenterPanelAnimated:NO];
+//    [self.sidePanelController showCenterPanelAnimated:NO];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -123,7 +124,7 @@
         NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
         max = [Tool max:max];
-        NSDictionary *configDict = @{@"title":@"原材料库存",@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+        NSDictionary *configDict = @{@"title":self.chartTitle,@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
         [webView stringByEvaluatingJavaScriptFromString:js];
     }
@@ -160,6 +161,11 @@
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:stockType] forKey:@"type"];
+    if (stockType==0) {
+        self.chartTitle = @"原材料库存";
+    }else{
+        self.chartTitle = @"成品库存";
+    }
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];

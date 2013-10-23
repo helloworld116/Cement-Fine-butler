@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RawMaterialsCalViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UIView *viewOfResult;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (retain,nonatomic) NSArray *data;
 @end

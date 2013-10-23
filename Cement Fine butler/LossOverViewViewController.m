@@ -19,6 +19,7 @@
 @property (retain,nonatomic) NSString *reportTitlePre;
 @property (retain, nonatomic) NODataView *noDataView;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
+@property (nonatomic) int currentSelectIndex;
 @end
 
 @implementation LossOverViewViewController
@@ -68,7 +69,16 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    NSString *js = [@"rebound(" stringByAppendingFormat:@"%d)",self.currentSelectIndex];
+    [self.webView stringByEvaluatingJavaScriptFromString:js];
     [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
+    TimeTableView *timeTableView = rightController.timeTableView;
+    NSIndexPath *indexPath = [timeTableView indexPathForSelectedRow];
+    if (indexPath.row==4) {
+        timeTableView.currentSelectCellIndex=4;
+        [timeTableView reloadData];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -105,6 +115,7 @@
     if([[components objectAtIndex:0] isEqualToString:@"sector"]&&[[components objectAtIndex:1] isEqualToString:@"false"]){
 //        debugLog(@"the dict is %@",[self.costItems objectAtIndex:[[components objectAtIndex:2] intValue]]);
         int index = [[components objectAtIndex:2] intValue];
+        self.currentSelectIndex = index;
         //index的值与kLossType中损耗类型索引相同
         NSArray *lossData = nil;
         NSDictionary *data = [self.responseData objectForKey:@"data"];

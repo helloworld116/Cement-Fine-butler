@@ -10,6 +10,8 @@
 
 @interface HistroyTrendsViewController : UIViewController<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (retain,nonatomic) NSArray *preViewControllerCondition;
+@property (retain,nonatomic) NSDictionary *preSelectedDict;
 //- (IBAction)back:(id)sender;
 
 - (void)showSearch:(id)sender;

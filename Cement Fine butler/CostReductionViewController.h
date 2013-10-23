@@ -11,4 +11,5 @@
 //成本还原
 @interface CostReductionViewController : UIViewController<UIWebViewDelegate>
 @property (nonatomic,retain) NSArray *data;
+@property (nonatomic,retain) NSString *chartTitle;
 @end

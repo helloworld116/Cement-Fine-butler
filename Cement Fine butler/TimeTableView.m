@@ -8,7 +8,7 @@
 
 #import "TimeTableView.h"
 #import "TimeConditionCell.h"
-#import "DatePickerViewController.h"
+#import "DatePickerViewController2.h"
 #import "RightViewController.h"
 
 @implementation TimeTableView
@@ -67,7 +67,6 @@
     if (indexPath.row==self.currentSelectCellIndex) {
         [self setTableViewCellStyle:cell selected:YES];
     }
-  
     //设置标识，以便选中时知道选中的是哪个
     cell.cellID = [[condtionDict objectForKey:@"_id"] intValue];
     return cell;
@@ -83,7 +82,8 @@
     [self setTableViewCellStyle:cell selected:YES];
     //修改搜索条件
     if (indexPath.row==4) {
-        DatePickerViewController *datePickerViewController = (DatePickerViewController *)[kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController"];
+//        DatePickerViewController2 *datePickerViewController = (DatePickerViewController2 *)[kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
+        UINavigationController *datePickerViewController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
         [[self viewController] presentModalViewController:datePickerViewController animated:YES];
     }
 }
@@ -104,17 +104,17 @@
     }
 }
 
-- (UIViewController *)viewController {
+- (RightViewController *)viewController {
     /// Finds the view's view controller.
     
     // Take the view controller class object here and avoid sending the same message iteratively unnecessarily.
-    Class vcc = [UIViewController class];
+    Class vcc = [RightViewController class];
     
     // Traverse responder chain. Return first found view controller, which will be the view's view controller.
     UIResponder *responder = self;
     while ((responder = [responder nextResponder]))
         if ([responder isKindOfClass: vcc])
-            return (UIViewController *)responder;
+            return (RightViewController *)responder;
     
     // If the view controller isn't found, return nil.
     return nil;

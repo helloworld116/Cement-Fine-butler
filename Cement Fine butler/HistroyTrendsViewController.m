@@ -14,6 +14,7 @@
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) NODataView *noDataView;
 @property (retain,nonatomic) NSString *titlePre;
+@property (retain,nonatomic) NSDictionary *lastCondition;
 @end
 
 @implementation HistroyTrendsViewController
@@ -30,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @".......";
     self.title = @"历史趋势";
@@ -46,13 +48,22 @@
     sc.showsHorizontalScrollIndicator = NO;
     
     //unitCostType:0表示直接材料单位成本，1表示原材料单位成本
-    NSDictionary *condition = @{@"lineId":[NSNumber numberWithInt:0],@"productId":[NSNumber numberWithInt:0],@"unitCostType":[NSNumber numberWithInt:0],@"timeType":[NSNumber numberWithInt:2]};
+    NSDictionary *condition = @{@"lineId":[NSNumber numberWithInt:0],@"productId":[NSNumber numberWithInt:0],@"unitCostType":[NSNumber numberWithInt:1],@"timeType":[NSNumber numberWithInt:2]};
+    self.lastCondition = condition;
     [self sendRequest:condition];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //观察查询条件修改
+    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.sidePanelController showCenterPanelAnimated:NO];
+    //移除观察条件
+    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+//    [self.sidePanelController showCenterPanelAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,44 +96,78 @@
                 dateFormate = @"yyyy";
                 break;
         }
-        NSArray *unitCosts = [self.data objectForKey:@"unitCost"];
-        NSArray *currentUnitCosts = [self.data objectForKey:@"currentUnitCost"];
-        NSArray *budgetedUnitCosts = [self.data objectForKey:@"budgetedUnitCost"];
-        NSMutableArray *unitCostValues = [[NSMutableArray alloc] init];
-        NSMutableArray *currentUnitCostValues = [[NSMutableArray alloc] init];
-        NSMutableArray *budgetedUnitCostValues = [[NSMutableArray alloc] init];
-        NSMutableArray *timeLabels = [[NSMutableArray alloc] init];
-        for (int i=0; i<unitCosts.count; i++) {
-            NSDictionary *unitCost = [unitCosts objectAtIndex:i];
-            NSDictionary *currentUnitCost = [currentUnitCosts objectAtIndex:i];
-            NSDictionary *budgetedUnitCost = [budgetedUnitCosts objectAtIndex:i];
-            [unitCostValues addObject:[unitCost objectForKey:@"value"]];
-            [currentUnitCostValues addObject:[currentUnitCost objectForKey:@"value"]];
-            [budgetedUnitCostValues addObject:[budgetedUnitCost objectForKey:@"value"]];
-            long long time = [[unitCost objectForKey:@"time"] longLongValue]/1000;//毫秒
-            NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
-            [timeLabels addObject:timeLabel];
+        if([[self.lastCondition objectForKey:@"unitCostType"] intValue]==0){
+            NSArray *unitCosts = [self.data objectForKey:@"unitCost"];
+            NSArray *currentUnitCosts = [self.data objectForKey:@"currentUnitCost"];
+            NSArray *budgetedUnitCosts = [self.data objectForKey:@"budgetedUnitCost"];
+            NSMutableArray *unitCostValues = [[NSMutableArray alloc] init];
+            NSMutableArray *currentUnitCostValues = [[NSMutableArray alloc] init];
+            NSMutableArray *budgetedUnitCostValues = [[NSMutableArray alloc] init];
+            NSMutableArray *timeLabels = [[NSMutableArray alloc] init];
+            for (int i=0; i<unitCosts.count; i++) {
+                NSDictionary *unitCost = [unitCosts objectAtIndex:i];
+                NSDictionary *currentUnitCost = [currentUnitCosts objectAtIndex:i];
+                NSDictionary *budgetedUnitCost = [budgetedUnitCosts objectAtIndex:i];
+                [unitCostValues addObject:[unitCost objectForKey:@"value"]];
+                [currentUnitCostValues addObject:[currentUnitCost objectForKey:@"value"]];
+                [budgetedUnitCostValues addObject:[budgetedUnitCost objectForKey:@"value"]];
+                long long time = [[unitCost objectForKey:@"time"] longLongValue]/1000;//毫秒
+                NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
+                [timeLabels addObject:timeLabel];
+            }
+            NSMutableArray *maxValueArray = [[NSMutableArray alloc] init];
+            [maxValueArray addObjectsFromArray:unitCostValues];
+            [maxValueArray addObjectsFromArray:currentUnitCostValues];
+            [maxValueArray addObjectsFromArray:budgetedUnitCostValues];
+            double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
+            double min = [Tool getMinValueInNumberValueArray:maxValueArray];
+            
+            NSDictionary *unitCostDict = @{@"name":kUnitCostType_UnitCost,@"value":unitCostValues,@"color":[kColorList objectAtIndex:0]};
+            NSDictionary *currentCostDict = @{@"name":kUnitCostType_CurrentUnitCost,@"value":currentUnitCostValues,@"color":[kColorList objectAtIndex:1]};
+            NSDictionary *budgetedCostDict = @{@"name":kUnitCostType_BudgetedUnitCost,@"value":budgetedUnitCostValues,@"color":[kColorList objectAtIndex:2]};
+            NSArray *lineArray = @[unitCostDict,currentCostDict,budgetedCostDict];
+            NSDictionary *lineConfigDict = @{@"title":self.titlePre,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
+            
+            NSString *lineData = [Tool objectToString:lineArray];
+            NSString *labelData = [Tool objectToString:timeLabels];
+            NSString *lineConfigData = [Tool objectToString:lineConfigDict];
+            
+            NSString *js = [NSString stringWithFormat:@"drawLineBasic2D('%@','%@','%@')",lineData,labelData,lineConfigData];
+            DDLogVerbose(@"dates is %@",js);
+            [webView stringByEvaluatingJavaScriptFromString:js];
+        }else{
+            NSArray *materials = [self.data objectForKey:@"materials"];
+            NSMutableArray *maxValueArray = [[NSMutableArray alloc] init];
+            NSMutableArray *timeLabels = [[NSMutableArray alloc] init];
+            NSMutableArray *lineArray = [[NSMutableArray alloc] init];
+            for (int i=0; i<materials.count; i++) {
+                NSDictionary *material = [materials objectAtIndex:i];
+                NSString *name = [material objectForKey:@"name"];
+                NSString *color = [kColorList objectAtIndex:i];
+                NSMutableArray *valueArray = [[NSMutableArray alloc] init];
+                NSArray *dataArray = [material objectForKey:@"history"];
+                for (int j=0; j<dataArray.count; j++) {
+                    NSDictionary *history = [dataArray objectAtIndex:j];
+                    long long time = [[history objectForKey:@"time"] longLongValue]/1000;//毫秒
+                    NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
+                    [timeLabels addObject:timeLabel];
+                    [valueArray addObject:[history objectForKey:@"value"]];
+                }
+                [maxValueArray addObjectsFromArray:valueArray];
+                NSDictionary *result = @{@"name":name,@"color":color,@"value":valueArray};
+                [lineArray addObject:result];
+            }
+            double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
+            double min = [Tool getMinValueInNumberValueArray:maxValueArray];
+            NSDictionary *lineConfigDict = @{@"title":self.titlePre,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
+            NSString *lineData = [Tool objectToString:lineArray];
+            NSString *labelData = [Tool objectToString:timeLabels];
+            NSString *lineConfigData = [Tool objectToString:lineConfigDict];
+            
+            NSString *js = [NSString stringWithFormat:@"drawLineBasic2D('%@','%@','%@')",lineData,labelData,lineConfigData];
+            DDLogVerbose(@"dates is %@",js);
+            [webView stringByEvaluatingJavaScriptFromString:js];
         }
-        NSMutableArray *maxValueArray = [[NSMutableArray alloc] init];
-        [maxValueArray addObjectsFromArray:unitCostValues];
-        [maxValueArray addObjectsFromArray:currentUnitCostValues];
-        [maxValueArray addObjectsFromArray:budgetedUnitCostValues];
-        double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
-        double min = [Tool getMinValueInNumberValueArray:maxValueArray];
-        
-        NSDictionary *unitCostDict = @{@"name":kUnitCostType_UnitCost,@"value":unitCostValues,@"color":[kColorList objectAtIndex:0]};
-        NSDictionary *currentCostDict = @{@"name":kUnitCostType_CurrentUnitCost,@"value":currentUnitCostValues,@"color":[kColorList objectAtIndex:1]};
-        NSDictionary *budgetedCostDict = @{@"name":kUnitCostType_BudgetedUnitCost,@"value":budgetedUnitCostValues,@"color":[kColorList objectAtIndex:2]};
-        NSArray *lineArray = @[unitCostDict,currentCostDict,budgetedCostDict];
-        NSDictionary *lineConfigDict = @{@"title":self.titlePre,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
-        
-        NSString *lineData = [Tool objectToString:lineArray];
-        NSString *labelData = [Tool objectToString:timeLabels];
-        NSString *lineConfigData = [Tool objectToString:lineConfigDict];
-        
-        NSString *js = [NSString stringWithFormat:@"drawLineBasic2D('%@','%@','%@')",lineData,labelData,lineConfigData];
-        DDLogVerbose(@"dates is %@",js);
-        [webView stringByEvaluatingJavaScriptFromString:js];
     }
     self.webView.hidden = NO;
 }
@@ -138,7 +183,9 @@
 }
 
 - (void)pop:(id)sender {
-//    RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
+    RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
+    rightViewController.currentSelectDict = self.preSelectedDict;
+    [rightViewController resetConditions:self.preViewControllerCondition];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -213,5 +260,15 @@
 - (void)hudWasHidden:(MBProgressHUD *)hud {
 	[self.progressHUD removeFromSuperview];
 	self.progressHUD = nil;
+}
+
+#pragma mark observe
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"searchCondition"]) {
+        SearchCondition *searchCondition = [change objectForKey:@"new"];
+        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType],@"unitCostType":[NSNumber numberWithInt:searchCondition.unitCostType]};
+        [self sendRequest:condition];
+        self.lastCondition = condition;
+    }
 }
 @end

@@ -17,6 +17,55 @@
 
 @implementation EquipmentMapViewController
 
+- (void)viewDidLoad
+{
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.title = @"设备地图列表";
+    //设置地图缩放级别
+    [_mapView setZoomLevel:11];
+    
+    //  给view中心定位
+    if (self.equipmentList.count>0) {
+        BMKCoordinateRegion region;
+        region.center.latitude  = [[[self.equipmentList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
+        region.center.longitude = [[[self.equipmentList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
+        region.span.latitudeDelta  = 0.01;
+        region.span.longitudeDelta = 0.01;
+        self.mapView.region = region;
+    }
+    [super viewDidLoad];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.mapView viewWillAppear];
+    self.mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [self resetAnnitations:self.equipmentList];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.mapView removeAnnotation:_calloutAnnotation];
+    _calloutAnnotation = nil;
+    
+    [self.mapView viewWillDisappear];
+    self.mapView.delegate = nil; // 不用时，置nil
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (void)mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
 	if ([view.annotation isKindOfClass:[BMKPointAnnotation class]]) {
         if (_calloutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
@@ -55,9 +104,8 @@
         CallOutAnnotationView *annotationView = (CallOutAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
         if (!annotationView) {
             annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
-            Cell  *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
+            Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
             [annotationView.contentView addSubview:cell];
-            
         }
         return annotationView;
 	} else if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
@@ -97,69 +145,8 @@
 
 - (void)resetAnnitations:(NSArray *)data
 {
-//    [_annotationList removeAllObjects];
-//    [_annotationList addObjectsFromArray:data];
+    //    [_annotationList removeAllObjects];
+    //    [_annotationList addObjectsFromArray:data];
     [self setAnnotionsWithList:self.equipmentList];
 }
-
-- (NSArray *)testData{
-//    NSDictionary *dict1 =@{@"longitude": @"116.404",@"latitude":@"39.915"};
-    NSDictionary *dict2 =@{@"longitude": @"113.958871",@"latitude":@"22.542872"};
-    NSDictionary *dict3 =@{@"longitude": @"113.957971",@"latitude":@"22.548972"};
-    NSDictionary *dict4 =@{@"longitude": @"113.954671",@"latitude":@"22.543672"};
-    NSDictionary *dict5 =@{@"longitude": @"113.955671",@"latitude":@"22.542672"};
-    NSArray *arr = @[dict2,dict3,dict4,dict5];
-    return arr;
-}
-
-- (void)viewDidLoad
-{
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.title = @"设备地图列表";
-//    _annotationList = [[NSMutableArray alloc] init];
-//    [_annotationList addObjectsFromArray:[self testData]];
-    //设置地图缩放级别
-    [_mapView setZoomLevel:11];
-    
-    //  给view中心定位
-    BMKCoordinateRegion region;
-    region.center.latitude  = [[[self.equipmentList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
-    region.center.longitude = [[[self.equipmentList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
-    region.span.latitudeDelta  = 0.01;
-    region.span.longitudeDelta = 0.01;
-    self.mapView.region = region;
-
-    [super viewDidLoad];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [self.mapView viewWillAppear];
-    self.mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [self resetAnnitations:self.equipmentList];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.mapView removeAnnotation:_calloutAnnotation];
-    _calloutAnnotation = nil;
-    
-    [self.mapView viewWillDisappear];
-    self.mapView.delegate = nil; // 不用时，置nil
-}
-
--(void)pop:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

@@ -227,7 +227,13 @@
                 [dataArray addObject:data];
             }
             NSString *pieData = [Tool objectToString:dataArray];
-            NSString *title = [self.reportTitlePre stringByAppendingString:@"直接材料成本"];
+            NSString *comparison = nil;
+            if (self.type==1) {
+                comparison=@"环比";
+            }else{
+                comparison=@"同比";
+            }
+            NSString *title = [self.reportTitlePre stringByAppendingFormat:@"%@%@",comparison,@"直接材料成本"];
             NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
             NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
             DDLogVerbose(@"dates is %@",js);

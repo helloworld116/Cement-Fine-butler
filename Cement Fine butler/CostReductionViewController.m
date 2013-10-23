@@ -9,7 +9,7 @@
 #import "CostReductionViewController.h"
 
 @interface CostReductionViewController ()
-@property (nonatomic,retain) NSString *reportTitlePre;
+
 @property (nonatomic,retain) UIWebView *webView;
 @end
 
@@ -42,7 +42,6 @@
     sc.showsVerticalScrollIndicator = NO;
     sc.bounces = NO;//禁用上下拖拽
     [self.view addSubview:self.webView];
-    self.reportTitlePre = @"";
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +77,7 @@
         }
     }
     NSString *pieData = [Tool objectToString:dataArray];
-    NSString *title = [self.reportTitlePre stringByAppendingString:@"直接材料成本"];
+    NSString *title = [self.chartTitle stringByAppendingString:@"原材料成本"];
     NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
     NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
     DDLogVerbose(@"dates is %@",js);

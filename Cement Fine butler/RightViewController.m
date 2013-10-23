@@ -10,13 +10,10 @@
 #import "RightViewController.h"
 #import "ConditionCell.h"
 #import "SearchCondition.h"
-#import "DatePickerViewController.h"
+#import "DatePickerViewController2.h"
 #import "ConditionTableView.h"
 #import "TimeConditionCell.h"
-#import "LineTableView.h"
-#import "ProductTableView.h"
-#import "StockTableView.h"
-#import "UnitCostTableView.h"
+
 
 //tableview cell高度为40
 #define kTableViewCellHeight 40.f
@@ -29,10 +26,7 @@
 
 @interface RightViewController ()
 @property (nonatomic,retain) SearchCondition *searchCondition;
-@property (nonatomic,retain) StockTableView *stockTableView;
-@property (nonatomic,retain) UnitCostTableView *unitCostTableView;
-@property (nonatomic,retain) LineTableView *lineTableView;
-@property (nonatomic,retain) ProductTableView *productTableView;
+
 @end
 
 @implementation RightViewController
@@ -291,27 +285,28 @@
         NSDictionary *condition = [self.conditions objectAtIndex:i];
         NSString *conditionTitle = [[condition allKeys] objectAtIndex:0];
         if ([kCondition_StockType isEqualToString:conditionTitle]) {
-            tableView = [[StockTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[self.currentSelectDict objectForKey:conditionTitle]];
+            tableView = [[StockTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
             self.stockTableView = tableView;
         }else if ([kCondition_UnitCostType isEqualToString:conditionTitle]) {
-            tableView = [[UnitCostTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[self.currentSelectDict objectForKey:conditionTitle]];
+            tableView = [[UnitCostTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
             self.unitCostTableView = tableView;
         }else if ([kCondition_Time isEqualToString:conditionTitle]) {
 //            NSLog(@".... index is %d",[[self.currentSelectDict objectForKey:conditionTitle] intValue]);
             tableView = [[TimeTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
             self.timeTableView = tableView;
         }else if ([kCondition_Lines isEqualToString:conditionTitle]) {
-            tableView = [[LineTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[self.currentSelectDict objectForKey:conditionTitle]];
+            tableView = [[LineTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
             self.lineTableView = tableView;
         }else if ([kCondition_Products isEqualToString:conditionTitle]) {
-            tableView = [[ProductTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[self.currentSelectDict objectForKey:conditionTitle]];
+            tableView = [[ProductTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
             self.productTableView = tableView;
         }
         //table的headerview，用于放置条件说明
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
-//        view.backgroundColor = self.view.backgroundColor =[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];;
+        view.backgroundColor =[UIColor grayColor];
+//        view.backgroundColor
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
-        label.textColor = [UIColor grayColor];
+        label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:13.f];
         label.text = conditionTitle;
         label.backgroundColor = [UIColor clearColor];
@@ -343,10 +338,14 @@
     NSIndexPath *productSelectedIndexPath = [self.productTableView indexPathForSelectedRow];
     ConditionCell *productCell  = [self.productTableView cellForRowAtIndexPath:productSelectedIndexPath];
     
-    NSIndexPath *timeSelectedIndexPath = [self.timeTableView indexPathForSelectedRow];
-    TimeConditionCell *timeCell  = [self.timeTableView cellForRowAtIndexPath:timeSelectedIndexPath];
-
-    self.searchCondition = [[SearchCondition alloc] initWithInventoryType:stockCell.cellID timeType:timeCell.cellID lineID:lineCell.cellID productID:productCell.cellID unitCostType:unitCostCell.cellID];
+    int timeType = 0;
+    for (TimeConditionCell *timeCell in [self.timeTableView visibleCells]) {
+        if(!timeCell.selectedImgView.hidden){
+            timeType = timeCell.cellID;
+            break;
+        }
+    }
+    self.searchCondition = [[SearchCondition alloc] initWithInventoryType:stockCell.cellID timeType:timeType lineID:lineCell.cellID productID:productCell.cellID unitCostType:unitCostCell.cellID];
     [self.sidePanelController showCenterPanelAnimated:YES];
 }
 

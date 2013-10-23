@@ -19,11 +19,16 @@
                 var url = type + ":" + expand + ":" + index;
                 document.location = url;
             }
+            function rebound(i){
+              if (chart) {
+                chart.rebound(i);
+              }
+            }
             var ratio = window.devicePixelRatio * window.devicePixelRatio; //retina屏幕支持,放大倍数为面积倍数，长和宽
             function drawDonut2D(data, donutConfig) {
                 data = eval('(' + data + ')');
                 config = eval('(' + donutConfig + ')');
-                var chart = new iChart.Donut2D({
+                chart = new iChart.Donut2D({
                     render: 'canvasDiv',
                     data: data,
                     mutex: true,//只允许弹出一个扇形区域
