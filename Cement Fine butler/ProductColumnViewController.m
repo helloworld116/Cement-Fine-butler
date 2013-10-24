@@ -32,21 +32,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //最开始异步请求数据
-    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
-    [self sendRequest:condition];//默认查询原材料库存
-    //设置view相关
+    //设置navigationBar相关
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.topItem.title = @"产量报表";
     
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
-//    self.bottomWebiew.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
     [self.bottomWebiew loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
+    //设置没有数据或发生错误时的view
+    self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    [self.view addSubview:self.noDataView];
+    //异步请求数据
+    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
+    [self sendRequest:condition];//默认查询原材料库存
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -115,11 +117,12 @@
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
         DDLogCVerbose(@"js is %@",js);
         [webView stringByEvaluatingJavaScriptFromString:js];
+        self.bottomWebiew.hidden = NO;
     }else if([Tool isNullOrNil:self.data]){
         //没有满足条件的数据
-        
+        self.noDataView.hidden = NO;
+        self.noDataView.labelMsg.text=@"没有满足条件的数据";
     }
-    self.bottomWebiew.hidden = NO;
 }
    
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -131,11 +134,8 @@
 -(void) sendRequest:(NSDictionary *)condition{
     //清除原数据
     self.data = nil;
-    if (self.noDataView) {
-        [self.noDataView removeFromSuperview];
-        self.noDataView = nil;
-    }
     self.bottomWebiew.hidden=YES;
+    self.noDataView.hidden=YES;
     //加载过程提示
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
     self.progressHUD.labelText = @"加载中...";
@@ -167,6 +167,8 @@
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
     [self.progressHUD hide:YES];
+    self.noDataView.hidden = NO;
+    self.noDataView.labelMsg.text=@"请求出错了。。。";
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{    
@@ -175,12 +177,12 @@
     if (responseCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.bottomWebiew reload];
-    }else if(responseCode==-1){
+    }else if(responseCode==kErrorCodeNegative1){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{
-        NODataView *view = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-        [self.view addSubview:view];
+        self.noDataView.hidden = NO;
+        self.noDataView.labelMsg.text=@"未知错误。。。";
     }
     [self.progressHUD hide:YES];
 }

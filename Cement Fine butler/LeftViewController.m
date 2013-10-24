@@ -103,7 +103,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     int index = tableView.tag-kTableViewTag;
     NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
     cell.textLabel.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];

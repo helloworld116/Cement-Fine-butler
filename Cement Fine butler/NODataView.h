@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NODataView : UIView
+@property (retain,nonatomic) UILabel *labelMsg;
 -(id)initWithFrame:(CGRect)frame message:(NSString *)message;
 @end

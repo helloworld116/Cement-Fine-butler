@@ -113,6 +113,8 @@
 		0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F217D4200B004B3C87 /* SearchDate.m */; };
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
 		0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */; };
+		0E3AEB8718192AC7006BE72A /* wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E3AEB8518192AC7006BE72A /* wifi.png */; };
+		0E3AEB8818192AC7006BE72A /* wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E3AEB8618192AC7006BE72A /* wifi@2x.png */; };
 		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
 		0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */; };
 		0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BF7180E673A00901D3D /* NoCopyTextField.m */; };
@@ -123,6 +125,8 @@
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
 		0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */; };
+		0E5A09FE1818B60C00241891 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5A09FC1818B60C00241891 /* Icon-60@2x.png */; };
+		0E5A09FF1818B60C00241891 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5A09FD1818B60C00241891 /* Icon-60.png */; };
 		0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */; };
 		0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */; };
 		0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */; };
@@ -331,6 +335,8 @@
 		0E3841F917D47830004B3C87 /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
 		0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentDetailsViewController.h; sourceTree = "<group>"; };
 		0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentDetailsViewController.m; sourceTree = "<group>"; };
+		0E3AEB8518192AC7006BE72A /* wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi.png; sourceTree = "<group>"; };
+		0E3AEB8618192AC7006BE72A /* wifi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi@2x.png"; sourceTree = "<group>"; };
 		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
 		0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCostManagerViewController.h; sourceTree = "<group>"; };
 		0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCostManagerViewController.m; sourceTree = "<group>"; };
@@ -348,6 +354,8 @@
 		0E58AFDD17E93A18008A2DF2 /* Pie2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pie2D.html; sourceTree = "<group>"; };
 		0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostManagerCenterViewController.h; sourceTree = "<group>"; };
 		0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostManagerCenterViewController.m; sourceTree = "<group>"; };
+		0E5A09FC1818B60C00241891 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		0E5A09FD1818B60C00241891 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RawMaterialsCalCell.xib; sourceTree = "<group>"; };
 		0E5C5057180BF315000B4904 /* RawMaterialsCalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalCell.h; sourceTree = "<group>"; };
 		0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalCell.m; sourceTree = "<group>"; };
@@ -628,6 +636,8 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0E3AEB8518192AC7006BE72A /* wifi.png */,
+				0E3AEB8618192AC7006BE72A /* wifi@2x.png */,
 				0E9426DF181657AE00DAFDAF /* calculator.png */,
 				0E9426E0181657AE00DAFDAF /* calculator@2x.png */,
 				0E9426E1181657AE00DAFDAF /* list.png */,
@@ -749,6 +759,8 @@
 				0E38418D17D41D3E004B3C87 /* Default~iPad.png */,
 				0E72471417CD93060048DFFB /* Icon-72.png */,
 				0E72471517CD93060048DFFB /* Icon-72@2x.png */,
+				0E5A09FC1818B60C00241891 /* Icon-60@2x.png */,
+				0E5A09FD1818B60C00241891 /* Icon-60.png */,
 				0E72471617CD93060048DFFB /* Icon-Small-50.png */,
 				0E72471717CD93060048DFFB /* Icon-Small-50@2x.png */,
 				0E72471817CD93060048DFFB /* Icon-Small.png */,
@@ -1153,6 +1165,10 @@
 				0E9426F0181657AE00DAFDAF /* bar-chart@2x.png in Resources */,
 				0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */,
 				0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */,
+				0E5A09FE1818B60C00241891 /* Icon-60@2x.png in Resources */,
+				0E5A09FF1818B60C00241891 /* Icon-60.png in Resources */,
+				0E3AEB8718192AC7006BE72A /* wifi.png in Resources */,
+				0E3AEB8818192AC7006BE72A /* wifi@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
