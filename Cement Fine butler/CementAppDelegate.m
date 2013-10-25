@@ -164,10 +164,14 @@
     //消息
 //    UINavigationController *messageController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageNavController"];
 //    messageController.tabBarItem = [messageController.tabBarItem initWithTitle:@"消息" image:[UIImage imageNamed:@"message"] tag:kViewTag+5];
-    //原材料成本计算器
-    UINavigationController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"calculatorNavController"];
-    raw.tabBarItem = [raw.tabBarItem initWithTitle:@"计算器" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
-    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,raw];
+    
+//    //原材料成本计算器
+//    UINavigationController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"calculatorNavController"];
+//    raw.tabBarItem = [raw.tabBarItem initWithTitle:@"计算器" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
+    //更多
+    UINavigationController *moreNav = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
+    moreNav.tabBarItem = [moreNav.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
+    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,moreNav];
     return tabBarController;
 }
 							

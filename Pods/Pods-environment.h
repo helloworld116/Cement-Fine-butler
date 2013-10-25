@@ -36,6 +36,12 @@
 #define COCOAPODS_VERSION_MINOR_CocoaLumberjack 6
 #define COCOAPODS_VERSION_PATCH_CocoaLumberjack 2
 
+// DAContextMenuTableViewController
+#define COCOAPODS_POD_AVAILABLE_DAContextMenuTableViewController
+#define COCOAPODS_VERSION_MAJOR_DAContextMenuTableViewController 1
+#define COCOAPODS_VERSION_MINOR_DAContextMenuTableViewController 0
+#define COCOAPODS_VERSION_PATCH_DAContextMenuTableViewController 2
+
 // EGOTableViewPullRefresh
 #define COCOAPODS_POD_AVAILABLE_EGOTableViewPullRefresh
 #define COCOAPODS_VERSION_MAJOR_EGOTableViewPullRefresh 0

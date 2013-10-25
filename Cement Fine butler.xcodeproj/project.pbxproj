@@ -145,6 +145,7 @@
 		0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */; };
 		0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6A896317F6B0BA0065043F /* MessageCell.xib */; };
 		0E6A896717F6B11E0065043F /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A896617F6B11E0065043F /* MessageCell.m */; };
+		0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DA964181A878A007A5B45 /* ElectricityCell.m */; };
 		0E72041417F55B50001E943F /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041217F55B50001E943F /* message.png */; };
 		0E72041517F55B50001E943F /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041317F55B50001E943F /* message@2x.png */; };
 		0E72041817F55C96001E943F /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041617F55C95001E943F /* checked.png */; };
@@ -182,6 +183,8 @@
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
 		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
+		0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE9F604181A6B99009A4330 /* ElectricityPriceViewController.m */; };
+		0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE9F608181A6DA3009A4330 /* MoreViewController.m */; };
 		0EEDBFD1180D67D90010961D /* Calculate.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD0180D67D80010961D /* Calculate.html */; };
 		0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */; };
 		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
@@ -380,6 +383,8 @@
 		0E6A896317F6B0BA0065043F /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		0E6A896517F6B11E0065043F /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		0E6A896617F6B11E0065043F /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		0E6DA963181A878A007A5B45 /* ElectricityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricityCell.h; sourceTree = "<group>"; };
+		0E6DA964181A878A007A5B45 /* ElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricityCell.m; sourceTree = "<group>"; };
 		0E72041217F55B50001E943F /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		0E72041317F55B50001E943F /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@2x.png"; sourceTree = "<group>"; };
 		0E72041617F55C95001E943F /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
@@ -426,6 +431,10 @@
 		0EDFFBF617E1B045009B4671 /* ConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionCell.h; sourceTree = "<group>"; };
 		0EDFFBF717E1B045009B4671 /* ConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionCell.m; sourceTree = "<group>"; };
 		0EDFFBF917E1B055009B4671 /* ConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConditionCell.xib; sourceTree = "<group>"; };
+		0EE9F603181A6B99009A4330 /* ElectricityPriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricityPriceViewController.h; sourceTree = "<group>"; };
+		0EE9F604181A6B99009A4330 /* ElectricityPriceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricityPriceViewController.m; sourceTree = "<group>"; };
+		0EE9F607181A6DA3009A4330 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		0EE9F608181A6DA3009A4330 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		0EEDBFD0180D67D80010961D /* Calculate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Calculate.html; sourceTree = "<group>"; };
 		0EEDBFD2180D690B0010961D /* RawMaterialsCalculateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalculateViewController.h; sourceTree = "<group>"; };
 		0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalculateViewController.m; sourceTree = "<group>"; };
@@ -796,6 +805,26 @@
 			name = CustomerViewController;
 			sourceTree = "<group>";
 		};
+		0EE9F602181A6B6B009A4330 /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+				0EE9F603181A6B99009A4330 /* ElectricityPriceViewController.h */,
+				0EE9F604181A6B99009A4330 /* ElectricityPriceViewController.m */,
+				0E6DA963181A878A007A5B45 /* ElectricityCell.h */,
+				0E6DA964181A878A007A5B45 /* ElectricityCell.m */,
+			);
+			name = Entry;
+			sourceTree = "<group>";
+		};
+		0EE9F606181A6D82009A4330 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				0EE9F607181A6DA3009A4330 /* MoreViewController.h */,
+				0EE9F608181A6DA3009A4330 /* MoreViewController.m */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +868,8 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0EE9F606181A6D82009A4330 /* More */,
+				0EE9F602181A6B6B009A4330 /* Entry */,
 				0E693ABC1807E65A0061A3F8 /* Loss */,
 				0E43339517E833460047A438 /* CostManager */,
 				0E493C3817E70BCF00D0AD0D /* Message */,
@@ -1262,6 +1293,9 @@
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
+				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,
+				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
+				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
