@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ElectricityPriceViewController : DAContextMenuTableViewController
+@interface ElectricityPriceViewController : UITableViewController
 
 @end

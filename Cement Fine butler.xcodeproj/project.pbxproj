@@ -203,6 +203,7 @@
 		472F332B17CC3D3A007E567B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332A17CC3D3A007E567B /* OpenGLES.framework */; };
 		472F332D17CC3D40007E567B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332C17CC3D40007E567B /* QuartzCore.framework */; };
 		472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332E17CC3D48007E567B /* CoreLocation.framework */; };
+		472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */; };
 		474F913A1814445400D94A85 /* TimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F91391814445400D94A85 /* TimeTableView.m */; };
 		474F913D1814446C00D94A85 /* LineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913C1814446C00D94A85 /* LineTableView.m */; };
 		474F91401814447900D94A85 /* ProductTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913F1814447900D94A85 /* ProductTableView.m */; };
@@ -489,6 +490,8 @@
 		472F332A17CC3D3A007E567B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		472F332C17CC3D40007E567B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		472F332E17CC3D48007E567B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		472F6275181B5C5A00A61252 /* ElectrcityOperateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectrcityOperateViewController.h; sourceTree = "<group>"; };
+		472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectrcityOperateViewController.m; sourceTree = "<group>"; };
 		474F91381814445400D94A85 /* TimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableView.h; sourceTree = "<group>"; };
 		474F91391814445400D94A85 /* TimeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableView.m; sourceTree = "<group>"; };
 		474F913B1814446C00D94A85 /* LineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineTableView.h; sourceTree = "<group>"; };
@@ -812,6 +815,8 @@
 				0EE9F604181A6B99009A4330 /* ElectricityPriceViewController.m */,
 				0E6DA963181A878A007A5B45 /* ElectricityCell.h */,
 				0E6DA964181A878A007A5B45 /* ElectricityCell.m */,
+				472F6275181B5C5A00A61252 /* ElectrcityOperateViewController.h */,
+				472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */,
 			);
 			name = Entry;
 			sourceTree = "<group>";
@@ -1278,6 +1283,7 @@
 				0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */,
 				0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */,
 				0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */,
+				472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */,
 				0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */,
 				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,

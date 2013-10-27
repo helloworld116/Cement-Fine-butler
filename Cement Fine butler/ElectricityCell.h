@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ElectricityCell : DAContextMenuCell
-@property (strong, nonatomic) IBOutlet UILabel *label;
+@interface ElectricityCell : SWTableViewCell
+@property (strong, nonatomic) UILabel *lblElectricityPrice;
+@property (strong, nonatomic) UILabel *lblDate;
+@property long CellID;
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier containingTableView:(UITableView *)containingTableView leftUtilityButtons:(NSArray *)leftUtilityButtons rightUtilityButtons:(NSArray *)rightUtilityButtons;
 @end

@@ -19,6 +19,7 @@ PODS:
   - Reachability (3.1.1)
   - RTLabel (1.0)
   - SVProgressHUD (0.9)
+  - SWTableViewCell (0.0.8)
   - ViewDeck (2.2.11)
 
 DEPENDENCIES:
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - RTLabel
   - SVProgressHUD
+  - SWTableViewCell
   - ViewDeck (~> 2.2.11)
 
 SPEC CHECKSUMS:
@@ -44,6 +46,7 @@ SPEC CHECKSUMS:
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   RTLabel: 124420c05d7897bf7f14b75a26f54f2932ac4ca5
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
+  SWTableViewCell: 279c48862af0bc14dba592b6a76f73da70f74ba5
   ViewDeck: b5eddc8559b0e47259ab7addbf2de6768061f139
 
 COCOAPODS: 0.23.0

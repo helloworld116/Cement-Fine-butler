@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"更多操作";
+    self.navigationItem.title = @"更多操作";
     self.options = @[@"计算器",@"电力价格录入"];
 }
 
@@ -74,6 +74,7 @@
     }else if(indexPath.row==1){
         nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electricityPriceViewController"];
     }
+    nextViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
