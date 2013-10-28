@@ -65,4 +65,8 @@
     return cell;
 }
 
+#pragma mark UITableView Delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *info = [self.list objectAtIndex:indexPath.row];
+}
 @end

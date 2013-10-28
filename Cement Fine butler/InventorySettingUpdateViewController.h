@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface InventorySettingUpdateViewController : UITableViewController
-@property (strong, nonatomic) IBOutlet UILabel *lblName;
-@property (strong, nonatomic) IBOutlet UILabel *lblTotal;
-@property (strong, nonatomic) IBOutlet UITextField *textCaps;
-@property (strong, nonatomic) IBOutlet UITextField *textLower;
+
+@property (nonatomic,retain) NSDictionary *info;
 
 @end

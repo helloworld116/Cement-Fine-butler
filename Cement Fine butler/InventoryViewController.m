@@ -7,6 +7,7 @@
 //
 
 #import "InventoryViewController.h"
+#import "InventoryListViewController.h"
 
 @interface InventoryViewController ()
 @property (nonatomic,retain) NSArray *list;
@@ -55,10 +56,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.text = [self.list objectAtIndex:indexPath.row];
     }
+    cell.textLabel.text = [self.list objectAtIndex:indexPath.row];
     return cell;
 }
 
-
+#pragma mark UITableView Delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    InventoryListViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryListViewController"];
+    nextViewController.type = indexPath.row;
+    [self.navigationController pushViewController:nextViewController animated:YES];
+}
 @end

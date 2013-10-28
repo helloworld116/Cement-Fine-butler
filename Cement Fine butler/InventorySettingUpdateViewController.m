@@ -9,7 +9,10 @@
 #import "InventorySettingUpdateViewController.h"
 
 @interface InventorySettingUpdateViewController ()
-
+@property (strong, nonatomic) IBOutlet UILabel *lblName;
+@property (strong, nonatomic) IBOutlet UILabel *lblTotal;
+@property (strong, nonatomic) IBOutlet UITextField *textCaps;
+@property (strong, nonatomic) IBOutlet UITextField *textLower;
 @end
 
 @implementation InventorySettingUpdateViewController
@@ -26,6 +29,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.lblName.text = [self.info objectForKey:@""];
+    self.lblTotal.text = [NSString stringWithFormat:@"%.2f",[[self.info objectForKey:@""] doubleValue]];
+    self.textCaps.text = [NSString stringWithFormat:@"%.2f",[[self.info objectForKey:@""] doubleValue]];
+    self.textLower.text = [NSString stringWithFormat:@"%.2f",[[self.info objectForKey:@""] doubleValue]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,4 +41,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark UITableView Delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    switch (indexPath.row) {
+        case 0:
+        case 1:
+            [self.textLower resignFirstResponder];
+            [self.textCaps resignFirstResponder];
+            break;
+        case 2:
+            [self.textCaps becomeFirstResponder];
+            break;
+        case 3:
+            [self.textLower becomeFirstResponder];
+            break;
+        default:
+            [self.textLower resignFirstResponder];
+            [self.textCaps resignFirstResponder];
+            break;
+    }
+}
 @end
