@@ -10,5 +10,9 @@
 
 @interface ElectrcityOperateViewController : UITableViewController
 @property(nonatomic,strong) IBOutlet UITextField *textElectricityPrice;
+@property(nonatomic,strong) IBOutlet UILabel *lblDate;
+@property(nonatomic,strong) IBOutlet UIDatePicker *datePicker;
 @property(nonatomic,retain) NSDictionary *electricityInfo;
+
+- (IBAction)dateChanged:(id)sender;
 @end

@@ -118,8 +118,13 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    ElectrcityOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electrcityOperateViewController"];
+    nextViewController.electricityInfo = [self.list objectAtIndex:indexPath.row];
+//    ElectricityCell *cell = (ElectricityCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    [cell hideUtilityButtonsAnimated:YES];
+    [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
 ElectricityCell *currentOperateCell;

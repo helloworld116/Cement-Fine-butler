@@ -27,13 +27,23 @@
 {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
+    [self.textElectricityPrice becomeFirstResponder];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateValue;
     if (self.electricityInfo) {
         self.title = @"修改电力价格";
         self.textElectricityPrice.text = [NSString stringWithFormat:@"%.2f",[[self.electricityInfo objectForKey:@"value"] floatValue]];
+         dateValue = [self.electricityInfo objectForKey:@"date"];
     }else{
         self.title = @"添加电力价格";
-        [self.textElectricityPrice becomeFirstResponder];
+        dateValue =  [dateFormatter stringFromDate:[NSDate date]];
     }
+    self.tableView.bounces = NO;
+    self.datePicker.hidden = YES;
+    self.lblDate.text = dateValue;
+    self.datePicker.date = [dateFormatter dateFromString:dateValue];
+//    self.tableView.sectionFooterHeight = 100.f;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,4 +56,23 @@
     
 }
 
+#pragma mark tableView Delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==0) {
+        [self.textElectricityPrice becomeFirstResponder];
+        self.datePicker.hidden = YES;
+    }else{
+        [self.lblDate becomeFirstResponder];
+        self.datePicker.hidden = NO;
+        [self.textElectricityPrice resignFirstResponder];
+    }
+}
+
+- (IBAction)dateChanged:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *select = [self.datePicker date];
+    NSString *dateString =  [dateFormatter stringFromDate:select];
+    self.lblDate.text = dateString;
+}
 @end

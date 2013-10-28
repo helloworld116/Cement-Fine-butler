@@ -29,7 +29,8 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"更多操作";
-    self.options = @[@"计算器",@"电力价格录入"];
+    self.tableView.bounces = NO;
+    self.options = @[@"计算器",@"电力价格管理",@"消息",@"生产记录",@"修改密码"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,10 +70,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIViewController *nextViewController = nil;
-    if (indexPath.row==0) {
-        nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
-    }else if(indexPath.row==1){
-        nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electricityPriceViewController"];
+    switch (indexPath.row) {
+        case 0:
+            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
+            break;
+        case 1:
+            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electricityPriceViewController"];
+            break;
+        case 2:
+            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageViewController"];
+            break;
+        case 3:
+            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productHistoryViewController"];
+            break;
+        case 4:
+            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"updatePasswordViewController"];
+            break;
     }
     nextViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:nextViewController animated:YES];

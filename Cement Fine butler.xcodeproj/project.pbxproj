@@ -187,6 +187,18 @@
 		0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE9F608181A6DA3009A4330 /* MoreViewController.m */; };
 		0EEDBFD1180D67D90010961D /* Calculate.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD0180D67D80010961D /* Calculate.html */; };
 		0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */; };
+		0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF72798181E12B10059EC59 /* InventoryViewController.m */; };
+		0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF7279B181E13F60059EC59 /* InventoryListViewController.m */; };
+		0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727A4181E157C0059EC59 /* InventoryCommonCell.m */; };
+		0EF727A8181E4F9B0059EC59 /* UpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727A7181E4F9B0059EC59 /* UpdatePasswordViewController.m */; };
+		0EF727AC181E60910059EC59 /* InventorySettingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727AB181E60910059EC59 /* InventorySettingListViewController.m */; };
+		0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF727AD181E63250059EC59 /* InventorySettingListCell.xib */; };
+		0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727B0181E65720059EC59 /* InventorySettingListCell.m */; };
+		0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727B3181E87520059EC59 /* InventorySettingUpdateViewController.m */; };
+		0EF727B8181E8B4E0059EC59 /* ProductHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727B7181E8B4E0059EC59 /* ProductHistoryViewController.m */; };
+		0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF727B9181E8BAA0059EC59 /* ProductHistoryCell.xib */; };
+		0EF727BD181E8E2A0059EC59 /* ProductHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727BC181E8E2A0059EC59 /* ProductHistoryCell.m */; };
+		0EF727C0181E914C0059EC59 /* ProductHistoryUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */; };
 		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
 		470FA09B17F078E800C79B00 /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09717F078E800C79B00 /* search_icon@2x.png */; };
 		472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32DF17CC3C05007E567B /* UIKit.framework */; };
@@ -439,6 +451,28 @@
 		0EEDBFD0180D67D80010961D /* Calculate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Calculate.html; sourceTree = "<group>"; };
 		0EEDBFD2180D690B0010961D /* RawMaterialsCalculateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalculateViewController.h; sourceTree = "<group>"; };
 		0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalculateViewController.m; sourceTree = "<group>"; };
+		0EF72797181E12B10059EC59 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
+		0EF72798181E12B10059EC59 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
+		0EF7279A181E13F60059EC59 /* InventoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryListViewController.h; sourceTree = "<group>"; };
+		0EF7279B181E13F60059EC59 /* InventoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryListViewController.m; sourceTree = "<group>"; };
+		0EF727A3181E157C0059EC59 /* InventoryCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryCommonCell.h; sourceTree = "<group>"; };
+		0EF727A4181E157C0059EC59 /* InventoryCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryCommonCell.m; sourceTree = "<group>"; };
+		0EF727A6181E4F9B0059EC59 /* UpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordViewController.h; sourceTree = "<group>"; };
+		0EF727A7181E4F9B0059EC59 /* UpdatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordViewController.m; sourceTree = "<group>"; };
+		0EF727AA181E60910059EC59 /* InventorySettingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySettingListViewController.h; sourceTree = "<group>"; };
+		0EF727AB181E60910059EC59 /* InventorySettingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySettingListViewController.m; sourceTree = "<group>"; };
+		0EF727AD181E63250059EC59 /* InventorySettingListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventorySettingListCell.xib; sourceTree = "<group>"; };
+		0EF727AF181E65720059EC59 /* InventorySettingListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySettingListCell.h; sourceTree = "<group>"; };
+		0EF727B0181E65720059EC59 /* InventorySettingListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySettingListCell.m; sourceTree = "<group>"; };
+		0EF727B2181E87520059EC59 /* InventorySettingUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySettingUpdateViewController.h; sourceTree = "<group>"; };
+		0EF727B3181E87520059EC59 /* InventorySettingUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySettingUpdateViewController.m; sourceTree = "<group>"; };
+		0EF727B6181E8B4E0059EC59 /* ProductHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductHistoryViewController.h; sourceTree = "<group>"; };
+		0EF727B7181E8B4E0059EC59 /* ProductHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductHistoryViewController.m; sourceTree = "<group>"; };
+		0EF727B9181E8BAA0059EC59 /* ProductHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductHistoryCell.xib; sourceTree = "<group>"; };
+		0EF727BB181E8E2A0059EC59 /* ProductHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductHistoryCell.h; sourceTree = "<group>"; };
+		0EF727BC181E8E2A0059EC59 /* ProductHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductHistoryCell.m; sourceTree = "<group>"; };
+		0EF727BE181E914C0059EC59 /* ProductHistoryUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductHistoryUpdateViewController.h; sourceTree = "<group>"; };
+		0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductHistoryUpdateViewController.m; sourceTree = "<group>"; };
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		470FA09617F078E800C79B00 /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon.png; sourceTree = "<group>"; };
 		470FA09717F078E800C79B00 /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon@2x.png"; sourceTree = "<group>"; };
@@ -548,6 +582,8 @@
 				0E3841E517D41D71004B3C87 /* LoginViewController.m */,
 				0E2786DF17ED7AC600385E59 /* LoginAction.h */,
 				0E2786E017ED7AC600385E59 /* LoginAction.m */,
+				0EF727A6181E4F9B0059EC59 /* UpdatePasswordViewController.h */,
+				0EF727A7181E4F9B0059EC59 /* UpdatePasswordViewController.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -578,7 +614,7 @@
 			name = "Real-time reports";
 			sourceTree = "<group>";
 		};
-		0E3C000317D9C5F2000D22EF /* Equipment */ = {
+		0E3C000317D9C5F2000D22EF /* 设备 */ = {
 			isa = PBXGroup;
 			children = (
 				472F32FD17CC3C05007E567B /* EquipmentMapViewController.h */,
@@ -591,10 +627,10 @@
 				0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */,
 				0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */,
 			);
-			name = Equipment;
+			name = "设备";
 			sourceTree = "<group>";
 		};
-		0E43339517E833460047A438 /* CostManager */ = {
+		0E43339517E833460047A438 /* 原材料成本 */ = {
 			isa = PBXGroup;
 			children = (
 				0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */,
@@ -619,10 +655,10 @@
 				0E5FB50F18121CB700117B99 /* CostComparisonViewController.h */,
 				0E5FB51018121CB700117B99 /* CostComparisonViewController.m */,
 			);
-			name = CostManager;
+			name = "原材料成本";
 			sourceTree = "<group>";
 		};
-		0E493C3817E70BCF00D0AD0D /* Message */ = {
+		0E493C3817E70BCF00D0AD0D /* 消息管理 */ = {
 			isa = PBXGroup;
 			children = (
 				0E493C3917E70BFC00D0AD0D /* MessageViewController.h */,
@@ -631,10 +667,10 @@
 				0E6A896517F6B11E0065043F /* MessageCell.h */,
 				0E6A896617F6B11E0065043F /* MessageCell.m */,
 			);
-			name = Message;
+			name = "消息管理";
 			sourceTree = "<group>";
 		};
-		0E693ABC1807E65A0061A3F8 /* Loss */ = {
+		0E693ABC1807E65A0061A3F8 /* 损耗定位 */ = {
 			isa = PBXGroup;
 			children = (
 				0E693ABF1807FA290061A3F8 /* LossOverViewViewController.h */,
@@ -642,7 +678,7 @@
 				0E87BAE8180926AD008F1E13 /* LossReportViewController.h */,
 				0E87BAE9180926AD008F1E13 /* LossReportViewController.m */,
 			);
-			name = Loss;
+			name = "损耗定位";
 			sourceTree = "<group>";
 		};
 		0E72471317CD92EF0048DFFB /* images */ = {
@@ -808,7 +844,26 @@
 			name = CustomerViewController;
 			sourceTree = "<group>";
 		};
-		0EE9F602181A6B6B009A4330 /* Entry */ = {
+		0EE9F602181A6B6B009A4330 /* 录入相关 */ = {
+			isa = PBXGroup;
+			children = (
+				0EF727B5181E8A440059EC59 /* 生产记录 */,
+				0EF727A9181E606E0059EC59 /* 库存设置 */,
+				0EF72792181E11560059EC59 /* 电力设置 */,
+			);
+			name = "录入相关";
+			sourceTree = "<group>";
+		};
+		0EE9F606181A6D82009A4330 /* 更多 */ = {
+			isa = PBXGroup;
+			children = (
+				0EE9F607181A6DA3009A4330 /* MoreViewController.h */,
+				0EE9F608181A6DA3009A4330 /* MoreViewController.m */,
+			);
+			name = "更多";
+			sourceTree = "<group>";
+		};
+		0EF72792181E11560059EC59 /* 电力设置 */ = {
 			isa = PBXGroup;
 			children = (
 				0EE9F603181A6B99009A4330 /* ElectricityPriceViewController.h */,
@@ -818,16 +873,49 @@
 				472F6275181B5C5A00A61252 /* ElectrcityOperateViewController.h */,
 				472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */,
 			);
-			name = Entry;
+			name = "电力设置";
 			sourceTree = "<group>";
 		};
-		0EE9F606181A6D82009A4330 /* More */ = {
+		0EF72796181E128E0059EC59 /* 库存盘点 */ = {
 			isa = PBXGroup;
 			children = (
-				0EE9F607181A6DA3009A4330 /* MoreViewController.h */,
-				0EE9F608181A6DA3009A4330 /* MoreViewController.m */,
+				0EF72797181E12B10059EC59 /* InventoryViewController.h */,
+				0EF72798181E12B10059EC59 /* InventoryViewController.m */,
+				0EF7279A181E13F60059EC59 /* InventoryListViewController.h */,
+				0EF7279B181E13F60059EC59 /* InventoryListViewController.m */,
+				0EF727A3181E157C0059EC59 /* InventoryCommonCell.h */,
+				0EF727A4181E157C0059EC59 /* InventoryCommonCell.m */,
 			);
-			name = More;
+			name = "库存盘点";
+			sourceTree = "<group>";
+		};
+		0EF727A9181E606E0059EC59 /* 库存设置 */ = {
+			isa = PBXGroup;
+			children = (
+				0EF727AA181E60910059EC59 /* InventorySettingListViewController.h */,
+				0EF727AB181E60910059EC59 /* InventorySettingListViewController.m */,
+				0EF727AD181E63250059EC59 /* InventorySettingListCell.xib */,
+				0EF727AF181E65720059EC59 /* InventorySettingListCell.h */,
+				0EF727B0181E65720059EC59 /* InventorySettingListCell.m */,
+				0EF727B2181E87520059EC59 /* InventorySettingUpdateViewController.h */,
+				0EF727B3181E87520059EC59 /* InventorySettingUpdateViewController.m */,
+			);
+			name = "库存设置";
+			sourceTree = "<group>";
+		};
+		0EF727B5181E8A440059EC59 /* 生产记录 */ = {
+			isa = PBXGroup;
+			children = (
+				0EF727B6181E8B4E0059EC59 /* ProductHistoryViewController.h */,
+				0EF727B7181E8B4E0059EC59 /* ProductHistoryViewController.m */,
+				0EF727B9181E8BAA0059EC59 /* ProductHistoryCell.xib */,
+				0EF727BB181E8E2A0059EC59 /* ProductHistoryCell.h */,
+				0EF727BC181E8E2A0059EC59 /* ProductHistoryCell.m */,
+				0EF727BE181E914C0059EC59 /* ProductHistoryUpdateViewController.h */,
+				0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */,
+				0EF72796181E128E0059EC59 /* 库存盘点 */,
+			);
+			name = "生产记录";
 			sourceTree = "<group>";
 		};
 		472F32D317CC3C05007E567B = {
@@ -873,12 +961,12 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
-				0EE9F606181A6D82009A4330 /* More */,
-				0EE9F602181A6B6B009A4330 /* Entry */,
-				0E693ABC1807E65A0061A3F8 /* Loss */,
-				0E43339517E833460047A438 /* CostManager */,
-				0E493C3817E70BCF00D0AD0D /* Message */,
-				0E3C000317D9C5F2000D22EF /* Equipment */,
+				0EE9F606181A6D82009A4330 /* 更多 */,
+				0EE9F602181A6B6B009A4330 /* 录入相关 */,
+				0E693ABC1807E65A0061A3F8 /* 损耗定位 */,
+				0E43339517E833460047A438 /* 原材料成本 */,
+				0E493C3817E70BCF00D0AD0D /* 消息管理 */,
+				0E3C000317D9C5F2000D22EF /* 设备 */,
 				0E3841F417D44027004B3C87 /* Real-time reports */,
 				0E3841EA17D41DCE004B3C87 /* CustomerView */,
 				0E3841E317D41D63004B3C87 /* User */,
@@ -1034,6 +1122,11 @@
 				CLASSPREFIX = Cement;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "河南丰博自动化有限公司";
+				TargetAttributes = {
+					472F32DB17CC3C05007E567B = {
+						DevelopmentTeam = TQ28XDLG3L;
+					};
+				};
 			};
 			buildConfigurationList = 472F32D717CC3C05007E567B /* Build configuration list for PBXProject "Cement Fine butler" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1064,6 +1157,7 @@
 				472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */,
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
+				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
 				0E72471C17CD93060048DFFB /* Icon-72.png in Resources */,
 				0E72471D17CD93060048DFFB /* Icon-72@2x.png in Resources */,
 				0E72471E17CD93060048DFFB /* Icon-Small-50.png in Resources */,
@@ -1148,6 +1242,7 @@
 				0E3841D717D41D3E004B3C87 /* password@2x~iPad.png in Resources */,
 				0E3841D817D41D3E004B3C87 /* username@2x~iPad.png in Resources */,
 				0E3841D917D41D3E004B3C87 /* login@2x~iPad.png in Resources */,
+				0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */,
 				0E3841DA17D41D3E004B3C87 /* password~iPad.png in Resources */,
 				0E3841DB17D41D3E004B3C87 /* username~iPad.png in Resources */,
 				0E3841DC17D41D3E004B3C87 /* body~iPad.png in Resources */,
@@ -1257,11 +1352,14 @@
 				0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */,
 				0E72473017CD9D080048DFFB /* RightViewController.m in Sources */,
 				0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */,
+				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
 				0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */,
 				0E3841F017D41FDE004B3C87 /* Tool.m in Sources */,
 				0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
+				0EF727B8181E8B4E0059EC59 /* ProductHistoryViewController.m in Sources */,
+				0EF727AC181E60910059EC59 /* InventorySettingListViewController.m in Sources */,
 				0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */,
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
@@ -1269,6 +1367,7 @@
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
+				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
@@ -1276,10 +1375,13 @@
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
+				0EF727BD181E8E2A0059EC59 /* ProductHistoryCell.m in Sources */,
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
+				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
+				0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */,
 				0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */,
 				0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */,
 				0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */,
@@ -1293,13 +1395,16 @@
 				474F913A1814445400D94A85 /* TimeTableView.m in Sources */,
 				474F913D1814446C00D94A85 /* LineTableView.m in Sources */,
 				474F91401814447900D94A85 /* ProductTableView.m in Sources */,
+				0EF727C0181E914C0059EC59 /* ProductHistoryUpdateViewController.m in Sources */,
 				474F91431814449400D94A85 /* StockTableView.m in Sources */,
+				0EF727A8181E4F9B0059EC59 /* UpdatePasswordViewController.m in Sources */,
 				474F9146181444E600D94A85 /* UnitCostTableView.m in Sources */,
 				474F91491814480800D94A85 /* TimeConditionCell.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,
+				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);
@@ -1397,6 +1502,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1406,6 +1513,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1416,6 +1524,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1425,6 +1535,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
