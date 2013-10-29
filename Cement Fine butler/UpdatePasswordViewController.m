@@ -8,7 +8,7 @@
 
 #import "UpdatePasswordViewController.h"
 
-@interface UpdatePasswordViewController ()
+@interface UpdatePasswordViewController ()<UITextFieldDelegate>
 @property (nonatomic,retain) NSString *currentPassword;
 @property (nonatomic,retain) NSString *password;
 @property (nonatomic,retain) NSString *password2;
@@ -29,6 +29,11 @@
 {
     [super viewDidLoad];
     self.title = @"修改密码";
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.textCurrentPassword.delegate = self;
+    self.textNewPassword.delegate = self;
+    self.textNewPassword2.delegate = self;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.lblCurrentUsername.text = [defaults objectForKey:@"username"];
 }
@@ -41,6 +46,10 @@
 
 - (IBAction)update:(id)sender {
     
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(BOOL)validate{
@@ -63,6 +72,19 @@
     if (![self.password2 isEqualToString:self.password2]) {
         errorMsg = @"两次输入的密码不一致！";
         return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    self.tableView.contentOffset = CGPointMake(0, 30.f);
+    if (theTextField == self.textCurrentPassword) {
+        [self.textNewPassword becomeFirstResponder];
+    } else if (theTextField == self.textNewPassword) {
+        [self.textNewPassword2 becomeFirstResponder];
+    }else if (theTextField == self.textNewPassword2){
+        [theTextField resignFirstResponder];
+        [self update:nil];
     }
     return YES;
 }

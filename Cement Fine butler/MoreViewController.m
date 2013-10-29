@@ -30,10 +30,18 @@
     [super viewDidLoad];
     self.navigationItem.title = @"更多操作";
     self.tableView.bounces = NO;
-    self.options = @[@{@"name":@"计算器",@"storyboard":@"rawMaterialsCalViewController"},@{@"name":@"电力价格管理",@"storyboard":@"electricityPriceViewController"},@{@"name":@"消息",@"storyboard":@"messageViewController"},@{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},@{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},@{@"name":@"库存设置",@"storyboard":@"inventorySettingListViewController"},@{@"name":@"修改密码",@"storyboard":@"updatePasswordViewController"}];
-    
-    
-//    self.options = @[@"计算器",@"电力价格管理",@"消息",@"生产记录",@"库存盘点",@"库存设置",@"修改密码"];
+    self.options = @[
+                     @{@"name":@"原材料成本计算器",@"storyboard":@"rawMaterialsCalViewController"},
+                     @{@"name":@"电力价格管理",@"storyboard":@"electricityPriceViewController"},
+                     @{@"name":@"消息",@"storyboard":@"messageViewController"},
+                     @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
+                     @{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},
+                     @{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},
+                     @{@"name":@"库存设置",@"storyboard":@"inventorySettingListViewController"},
+                     @{@"name":@"过磅录入",@"storyboard":@"weighViewController"},
+                     @{@"name":@"固定成本管理",@"storyboard":@"fixedCostsViewController"},
+                     @{@"name":@"修改密码",@"storyboard":@"updatePasswordViewController"}
+                     ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,23 +81,6 @@
 {
     NSString *controllerIdentifier = [self.options[indexPath.row] objectForKey:@"storyboard"];
     UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:controllerIdentifier];
-//    switch (indexPath.row) {
-//        case 0:
-//            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
-//            break;
-//        case 1:
-//            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electricityPriceViewController"];
-//            break;
-//        case 2:
-//            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageViewController"];
-//            break;
-//        case 3:
-//            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productHistoryViewController"];
-//            break;
-//        case 4:
-//            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"updatePasswordViewController"];
-//            break;
-//    }
     nextViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }

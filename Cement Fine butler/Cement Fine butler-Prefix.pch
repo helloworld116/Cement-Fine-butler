@@ -55,7 +55,9 @@
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
 
     //接口地址
-    #define kServerURL @"http://121.199.6.98/mobile/"
+    #define kServerURL @"http://192.168.1.105:8080/mobile/"
+//    #define kServerURL @"http://192.168.1.9:8080/mobile/"
+//    #define kServerURL @"http://121.199.6.98/mobile/"
     //#define kServerURL @"http://192.168.1.90:8080/dynamicmeasurement/"
     #define kLoginURL [kServerURL stringByAppendingString:@"login"]
     #define kStockReportURL [kServerURL stringByAppendingString:@"stock"]
@@ -71,6 +73,24 @@
     #define kLoss [kServerURL stringByAppendingString:@"loss"]
     //原材料成本计算器
     #define kCalculator [kServerURL stringByAppendingString:@"material/calculator"]
+    //电力价格列表
+#define kElectricityList [kServerURL stringByAppendingString:@"electricityPrice/search"]
+
+    //库存设置列表
+#define kInventorySettingList [kServerURL stringByAppendingString:@"stock/datgrid"]
+
+//库存盘点下使用的所有原材料列表
+//http://192.168.1.105:8080/mobile/inventory/getMaterials?accessToken=06275d466e14db86199ec030d46800a8&factoryId=2
+#define kAllMaterialList [kServerURL stringByAppendingString:@"inventory/getMaterials"]
+//原材料库存盘点列表
+//http://192.168.1.105:8080/mobile/inventory/material/list?accessToken=06275d466e14db86199ec030d46800a8&factoryId=2&page=1&rows=10&beginTime=1356969600000&endTime=1385827200000
+#define kInventoryMaterialList [kServerURL stringByAppendingString:@"inventory/material/list"]
+//半成品库存盘点列表
+#define kInventoryHalfList [kServerURL stringByAppendingString:@"inventory/half/list"]
+//成品库存盘点列表
+#define kInventoryProductList [kServerURL stringByAppendingString:@"inventory/product/list"]
+
+
 
     //检测网络是否存在使用网址
     #define kCheckNetworkWebsite @"www.baidu.com"

@@ -42,12 +42,6 @@
 #define COCOAPODS_VERSION_MINOR_DAContextMenuTableViewController 0
 #define COCOAPODS_VERSION_PATCH_DAContextMenuTableViewController 2
 
-// EGOTableViewPullRefresh
-#define COCOAPODS_POD_AVAILABLE_EGOTableViewPullRefresh
-#define COCOAPODS_VERSION_MAJOR_EGOTableViewPullRefresh 0
-#define COCOAPODS_VERSION_MINOR_EGOTableViewPullRefresh 1
-#define COCOAPODS_VERSION_PATCH_EGOTableViewPullRefresh 0
-
 // JASidePanels
 #define COCOAPODS_POD_AVAILABLE_JASidePanels
 #define COCOAPODS_VERSION_MAJOR_JASidePanels 1

@@ -152,7 +152,7 @@
         NSDictionary *data = [dict objectForKey:@"data"];
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
         kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
-        kSharedApp.factory = [data objectForKey:@"factory"];
+        kSharedApp.factory = [data objectForKey:@"factorys"][0];
         //保存用户名和密码
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:self.uname forKey:@"username"];
@@ -176,11 +176,15 @@
 
 #pragma mark textfield代理
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    self.keyboardWasShow = NO;
-    [textField resignFirstResponder];
+    if (self.username==textField) {
+        [self.password becomeFirstResponder];
+    }else if (self.password==textField){
+        [self doLogin:nil];
+        [textField resignFirstResponder];
+        self.keyboardWasShow = NO;
+    }
     return YES;
 }
-
     
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (!self.keyboardWasShow) {

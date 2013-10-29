@@ -39,6 +39,8 @@
         self.title = @"添加电力价格";
         dateValue =  [dateFormatter stringFromDate:[NSDate date]];
     }
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.tableView.bounces = NO;
     self.datePicker.hidden = YES;
     self.lblDate.text = dateValue;
@@ -74,5 +76,9 @@
     NSDate *select = [self.datePicker date];
     NSString *dateString =  [dateFormatter stringFromDate:select];
     self.lblDate.text = dateString;
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
