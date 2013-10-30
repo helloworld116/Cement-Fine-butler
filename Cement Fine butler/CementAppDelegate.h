@@ -14,7 +14,7 @@
 @property (strong, nonatomic) BMKMapManager* mapManager; 
 
 @property (strong, nonatomic) UIStoryboard *storyboard;
-
+@property (nonatomic,retain) ASIDownloadCache *myCache; 
 @property (copy, nonatomic) NSString *accessToken;
 @property int expiresIn;//过期时间（秒）
 @property (retain, nonatomic) NSDictionary *factory;//工厂信息

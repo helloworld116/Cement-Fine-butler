@@ -91,6 +91,15 @@
         [defaults setObject:dateDict forKey:@"startDate"];
         [defaults setObject:dateDict forKey:@"endDate"];
     }
+    
+    //自定义缓存
+    ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
+    self.myCache = cache;
+    //设置缓存路径
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    [self.myCache setStoragePath:[documentDirectory stringByAppendingPathComponent:@"resource"]];
+    [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
     [self.window makeKeyAndVisible];
     return YES;
 }

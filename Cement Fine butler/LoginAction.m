@@ -38,7 +38,7 @@ static int loginCount2=0;
                 NSDictionary *data = [dict objectForKey:@"data"];
                 kSharedApp.accessToken = [data objectForKey:@"accessToken"];
                 kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
-                kSharedApp.factory = [data objectForKey:@"factory"];
+                kSharedApp.factory = [data objectForKey:@"factorys"][0];
                 loginResult = YES;
                 DDLogCInfo(@"登录成功");
                 //防止session过期自动登录

@@ -24,7 +24,7 @@
         self.lblInventory.font = [UIFont systemFontOfSize:15];
         self.lblInventory.backgroundColor = [UIColor clearColor];
         
-        self.lblDate = [[UILabel alloc] initWithFrame:CGRectMake(210, 15, 100, 30)];
+        self.lblDate = [[UILabel alloc] initWithFrame:CGRectMake(205, 15, 95, 30)];
         self.lblDate.textAlignment = UITextAlignmentCenter;
         self.lblDate.font = [UIFont systemFontOfSize:15];
         self.lblDate.backgroundColor = [UIColor clearColor];

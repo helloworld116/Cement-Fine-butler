@@ -19,10 +19,12 @@
     #import <JASidePanels/UIViewController+JASidePanel.h>
     #import <ASIHTTPRequest/ASIHTTPRequest.h>
     #import <ASIHTTPRequest/ASIFormDataRequest.h>
+    #import <ASIHTTPRequest/ASIDownloadCache.h>
     #import <MBProgressHUD/MBProgressHUD.h>
 //    #import <RMSwipeTableViewCell/RMSwipeTableViewCell.h>
 //    #import <SVProgressHUD/SVProgressHUD.h>
     #import <ViewDeck/IIViewDeckController.h>
+    #import "PullTableView.h"
     #import <RTLabel/RTLabel.h>
     #import <KxMenu/KxMenu.h>
     #import <DAContextMenuTableViewController/DAContextMenuCell.h>
@@ -48,7 +50,7 @@
     #define kLoadmoreFooterHeight 44
     #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
     #define kScreenHeight [[UIScreen mainScreen] bounds].size.height
-    #define kPageSize 50
+    #define kPageSize 10
     #define kDateFormatFull @"yyyy-MM-dd HH:mm:ss"
     #define kDateFormatDay @"MM-dd"
     #define kColorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
@@ -81,7 +83,7 @@
 
 //库存盘点下使用的所有原材料列表
 //http://192.168.1.105:8080/mobile/inventory/getMaterials?accessToken=06275d466e14db86199ec030d46800a8&factoryId=2
-#define kAllMaterialList [kServerURL stringByAppendingString:@"inventory/getMaterials"]
+#define kInventoryAllMaterialList [kServerURL stringByAppendingString:@"inventory/getMaterials"]
 //原材料库存盘点列表
 //http://192.168.1.105:8080/mobile/inventory/material/list?accessToken=06275d466e14db86199ec030d46800a8&factoryId=2&page=1&rows=10&beginTime=1356969600000&endTime=1385827200000
 #define kInventoryMaterialList [kServerURL stringByAppendingString:@"inventory/material/list"]
@@ -89,7 +91,18 @@
 #define kInventoryHalfList [kServerURL stringByAppendingString:@"inventory/half/list"]
 //成品库存盘点列表
 #define kInventoryProductList [kServerURL stringByAppendingString:@"inventory/product/list"]
-
+//原材料库存盘点添加
+#define kInventoryMaterialAdd [kServerURL stringByAppendingString:@"inventory/material/add"]
+//半成品库存盘点添加
+#define kInventoryHalfAdd [kServerURL stringByAppendingString:@"inventory/half/add"]
+//成品库存盘点添加
+#define kInventoryProductAdd [kServerURL stringByAppendingString:@"inventory/product/add"]
+//原材料库存盘点修改
+#define kInventoryMaterialUpdate [kServerURL stringByAppendingString:@"inventory/material/update"]
+//半成品库存盘点修改
+#define kInventoryHalfUpdate [kServerURL stringByAppendingString:@"inventory/half/update"]
+//成品库存盘点修改
+#define kInventoryProductUpdate [kServerURL stringByAppendingString:@"inventory/product/update"]
 
 
     //检测网络是否存在使用网址
@@ -112,7 +125,7 @@
 #endif
 
 #ifdef DEBUG
-static const int ddLogLevel = LOG_LEVEL_ERROR;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
 static const int ddLogLevel = LOG_LEVEL_WARN;
 #endif

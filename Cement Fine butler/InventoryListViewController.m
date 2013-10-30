@@ -8,13 +8,16 @@
 
 #import "InventoryListViewController.h"
 #import "InventoryCommonCell.h"
+#import "InventoryOperateViewController.h"
 
 @interface InventoryListViewController ()<MBProgressHUDDelegate>
+@property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
 @property (nonatomic,retain) NSMutableArray *list;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain,nonatomic) NSString *URL;
 @property (nonatomic) NSUInteger currentPage;
+@property (nonatomic) NSUInteger totalCount;
 @end
 //kInventoryList
 //accessToken=06275d466e14db86199ec030d46800a8&factoryId=2&page=1&rows=10&beginTime=1356969600000&endTime=1385827200000
@@ -32,6 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
     switch (self.type) {
         case 0:
             self.title = @"原材料库存";
@@ -50,8 +56,18 @@
             self.URL = kInventoryMaterialList;
             break;
     }
+    self.tableView.rowHeight = 60.f;
+//    self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
+//    self.pullTableView.pullBackgroundColor = [UIColor whiteColor];
+//    self.pullTableView.pullTextColor = [UIColor blackColor];
     
     self.currentPage = 1;
+    self.list = [NSMutableArray array];
+//    [self sendRequest:self.currentPage withProgress:YES];
+    if(!self.pullTableView.pullTableIsRefreshing) {
+        self.pullTableView.pullTableIsRefreshing = YES;
+        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,16 +92,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    InventoryCommonCell *cell = (InventoryCommonCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"InventoryCommonCell";
+    InventoryCommonCell *cell = (InventoryCommonCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
     if (!cell) {
         cell = [[InventoryCommonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSDictionary *info = [self.list objectAtIndex:indexPath.row];
-    cell.lblName.text = [Tool stringToString:[info objectForKey:@"productName"]];
+    NSString *lblNameStr = nil;
+    switch (self.type) {
+        case 0:
+            lblNameStr = [Tool stringToString:[info objectForKey:@"materialName"]];
+            break;
+        case 1:
+        case 2:
+            lblNameStr = [Tool stringToString:[info objectForKey:@"productName"]];
+            break;
+        default:
+            lblNameStr = [Tool stringToString:[info objectForKey:@"materialName"]];
+            break;
+    }
+    cell.lblName.text = lblNameStr;
     cell.lblInventory.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"stock"] floatValue]];
     cell.lblDate.text = [Tool stringToString:[info objectForKey:@"strCreateTime"]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -100,7 +130,20 @@
     lblName.textAlignment = UITextAlignmentCenter;
     lblName.font = [UIFont systemFontOfSize:12.f];
     lblName.textColor = [UIColor whiteColor];
-    lblName.text = self.title;
+    switch (self.type) {
+        case 0:
+            lblName.text = @"原材料";
+            break;
+        case 1:
+            lblName.text = @"半成品";
+            break;
+        case 2:
+            lblName.text = @"成品";
+            break;
+        default:
+            lblName.text = @"原材料";
+            break;
+    }
     
     UILabel *lblInventory = [[UILabel alloc] initWithFrame:CGRectMake(110, 0, 100, viewHeight)];
     lblInventory.backgroundColor = [UIColor clearColor];
@@ -109,7 +152,7 @@
     lblInventory.textColor = [UIColor whiteColor];
     lblInventory.text = @"库存量(吨)";
     
-    UILabel *lblDate = [[UILabel alloc] initWithFrame:CGRectMake(210, 0, 100, viewHeight)];
+    UILabel *lblDate = [[UILabel alloc] initWithFrame:CGRectMake(205, 0, 95, viewHeight)];
     lblDate.backgroundColor = [UIColor clearColor];
     lblDate.textAlignment = UITextAlignmentCenter;
     lblDate.font = [UIFont systemFontOfSize:12.f];
@@ -124,29 +167,26 @@
 }
 
 #pragma UITableView Delegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPat{
-    
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    InventoryOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryOperateViewController"];
+    nextViewController.type = self.type;
+    nextViewController.inventoryInfo = [self.list objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
 #pragma mark 发送网络请求
--(void) sendRequest:(NSUInteger)currentPage{
-    //清除原数据
-    //    self.data = nil;
-    //    if (self.noDataView) {
-    //        [self.noDataView removeFromSuperview];
-    //        self.noDataView = nil;
-    //    }
-    self.tableView.hidden=YES;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate = self;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
-    
+-(void) sendRequest:(NSUInteger)currentPage withProgress:(BOOL)isProgress{
+    if (isProgress) {
+        //加载过程提示
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.tableView];
+        self.progressHUD.labelText = @"加载中...";
+        self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+        self.progressHUD.dimBackground = YES;
+        self.progressHUD.opacity=1.0;
+        self.progressHUD.delegate = self;
+        [self.tableView addSubview:self.progressHUD];
+        [self.progressHUD show:YES];
+    }
     DDLogCInfo(@"******  Request URL is:%@  ******",self.URL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:self.URL]];
     [self.request setUseCookiePersistence:YES];
@@ -155,6 +195,8 @@
     [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithInt:currentPage] forKey:@"page"];
     [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"rows"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1356969600000] forKey:@"beginTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:1385827200000] forKey:@"endTime"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -170,9 +212,12 @@
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==0) {
+        self.totalCount = [[[dict objectForKey:@"data"] objectForKey:@"total"] intValue];
+        if (self.currentPage==1) {
+            [self.list removeAllObjects];
+        }
         [self.list addObjectsFromArray:[[dict objectForKey:@"data"] objectForKey:@"rows"] ];
         [self.tableView reloadData];
-        self.tableView.hidden = NO;
     }else if(errorCode==kErrorCodeNegative1){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
@@ -189,7 +234,45 @@
 }
 
 
+#pragma mark - Refresh and load more methods
+- (void) refreshTable
+{
+    //Code to actually refresh goes here.
+    self.currentPage = 1;
+    [self sendRequest:self.currentPage withProgress:NO];
+    self.pullTableView.pullLastRefreshDate = [NSDate date];
+    self.pullTableView.pullTableIsRefreshing = NO;
+}
+
+- (void) loadMoreDataToTable
+{
+    //Code to actually load more data goes here.
+    if (self.totalCount>self.currentPage*kPageSize) {
+        self.currentPage++;
+        [self sendRequest:self.currentPage withProgress:NO];
+    }
+    self.pullTableView.pullTableIsLoadingMore = NO;
+}
+
+#pragma mark - PullTableViewDelegate
+
+- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
+{
+    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
+{
+    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+}
+
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)add:(id)sender{
+    InventoryOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryOperateViewController"];
+    nextViewController.type = self.type;
+    [self.navigationController pushViewController:nextViewController animated:YES];
 }
 @end

@@ -138,6 +138,9 @@
 		0E5C5068180C1D72000B4904 /* nav-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5066180C1D72000B4904 /* nav-menu@2x.png */; };
 		0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FB50D18121C5300117B99 /* CostReductionViewController.m */; };
 		0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FB51018121CB700117B99 /* CostComparisonViewController.m */; };
+		0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E62CC4E1820E62000281A73 /* InventoryOperateViewController.m */; };
+		0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E62CC511820F83200281A73 /* InventoryChoiceViewController.m */; };
+		0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E62CC541820FA0800281A73 /* ChoiceCell.m */; };
 		0E62E85617F1252C00D4681E /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85417F1252C00D4681E /* check_icon@2x.png */; };
 		0E62E85717F1252C00D4681E /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85517F1252C00D4681E /* check_icon.png */; };
 		0E693ABB1807CE810061A3F8 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */; };
@@ -399,6 +402,12 @@
 		0E5FB50D18121C5300117B99 /* CostReductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostReductionViewController.m; sourceTree = "<group>"; };
 		0E5FB50F18121CB700117B99 /* CostComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostComparisonViewController.h; sourceTree = "<group>"; };
 		0E5FB51018121CB700117B99 /* CostComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostComparisonViewController.m; sourceTree = "<group>"; };
+		0E62CC4D1820E62000281A73 /* InventoryOperateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryOperateViewController.h; sourceTree = "<group>"; };
+		0E62CC4E1820E62000281A73 /* InventoryOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryOperateViewController.m; sourceTree = "<group>"; };
+		0E62CC501820F83200281A73 /* InventoryChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryChoiceViewController.h; sourceTree = "<group>"; };
+		0E62CC511820F83200281A73 /* InventoryChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryChoiceViewController.m; sourceTree = "<group>"; };
+		0E62CC531820FA0800281A73 /* ChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceCell.h; sourceTree = "<group>"; };
+		0E62CC541820FA0800281A73 /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
 		0E62E85417F1252C00D4681E /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		0E62E85517F1252C00D4681E /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
@@ -953,6 +962,12 @@
 				0EF7279B181E13F60059EC59 /* InventoryListViewController.m */,
 				0EF727A3181E157C0059EC59 /* InventoryCommonCell.h */,
 				0EF727A4181E157C0059EC59 /* InventoryCommonCell.m */,
+				0E62CC4D1820E62000281A73 /* InventoryOperateViewController.h */,
+				0E62CC4E1820E62000281A73 /* InventoryOperateViewController.m */,
+				0E62CC501820F83200281A73 /* InventoryChoiceViewController.h */,
+				0E62CC511820F83200281A73 /* InventoryChoiceViewController.m */,
+				0E62CC531820FA0800281A73 /* ChoiceCell.h */,
+				0E62CC541820FA0800281A73 /* ChoiceCell.m */,
 			);
 			name = "库存盘点";
 			sourceTree = "<group>";
@@ -1428,6 +1443,7 @@
 				0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */,
 				0E72473017CD9D080048DFFB /* RightViewController.m in Sources */,
 				0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */,
+				0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */,
 				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
 				0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */,
@@ -1441,8 +1457,10 @@
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
+				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
+				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
