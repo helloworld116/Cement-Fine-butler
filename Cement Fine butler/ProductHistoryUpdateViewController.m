@@ -54,6 +54,8 @@
     }else{
         title = @"添加";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.lblLine.text = @"请选择";
+        self.lblProduct.text = @"请选择";
         self.lblTime.text = [dateFormatter stringFromDate:[NSDate date]];
     }
     self.title = [title stringByAppendingFormat:@"%@",@"生产记录"];
@@ -183,7 +185,7 @@
         self.lblLine.text = [newValue objectForKey:@"lineName"];
     }
     if ([newValue objectForKey:@"productName"]) {
-        self.lineId = [[newValue objectForKey:@"productId"] longValue];
+        self.productId = [[newValue objectForKey:@"productId"] longValue];
         self.lblProduct.text = [newValue objectForKey:@"productName"];
     }
 }

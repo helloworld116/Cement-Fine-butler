@@ -110,7 +110,7 @@
         [self.tableView addSubview:self.progressHUD];
         [self.progressHUD show:YES];
     }
-    DDLogCInfo(@"******  Request URL is:%@  ******",kFixcostList);
+    DDLogCInfo(@"******  Request URL is:%@  ******",kProductHistoryList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kProductHistoryList]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];

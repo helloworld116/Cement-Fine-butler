@@ -87,7 +87,7 @@
 
 -(void)sureChoice:(id)sender{
     NSDictionary *oldDict = self.list[self.currentSelectCellIndex];
-    NSDictionary *newDict = @{@"lienId":[oldDict objectForKey:@"id"],@"lineName":[oldDict objectForKey:@"name"]};
+    NSDictionary *newDict = @{@"lineId":[oldDict objectForKey:@"id"],@"lineName":[oldDict objectForKey:@"name"]};
     [self.delegate passValue:newDict];
     [self.navigationController popViewControllerAnimated:YES];
 }
