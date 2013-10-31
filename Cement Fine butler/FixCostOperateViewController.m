@@ -1,78 +1,48 @@
 //
-//  InventoryOperateViewController.m
+//  FixCostOperateViewController.m
 //  Cement Fine butler
 //
-//  Created by 文正光 on 13-10-30.
+//  Created by 文正光 on 13-10-31.
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "InventoryOperateViewController.h"
-#import "InventoryChoiceViewController.h"
+#import "FixCostOperateViewController.h"
+#import "FixcostSubjectChoiceViewController.h"
 
-@interface InventoryOperateViewController ()<MBProgressHUDDelegate,UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet UILabel *lblTypeName;
+@interface FixCostOperateViewController ()<UITextFieldDelegate,PassValueDelegate,MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *lblName;
 @property (strong, nonatomic) IBOutlet UITextField *textValue;
 @property (strong, nonatomic) IBOutlet UILabel *lblDate;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (nonatomic) long _id;//原材料、半成品或成品id
+@property (nonatomic) long _id;//成本项id
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 - (IBAction)dateChange:(id)sender;
-
 @end
 
-@implementation InventoryOperateViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation FixCostOperateViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSString *title = nil;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    if (self.inventoryInfo) {
+    [dateFormatter setDateFormat:@"yyyy-MM"];
+    if (self.fixcostInfo) {
         title = @"修改";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
-        if (self.type==0) {
-            self._id = [[self.inventoryInfo objectForKey:@"materialId"] longValue];
-            self.lblName.text = [Tool stringToString:[self.inventoryInfo objectForKey:@"materialName"]];
-        }else{
-            self._id = [[self.inventoryInfo objectForKey:@"productId"] longValue];
-            self.lblName.text = [Tool stringToString:[self.inventoryInfo objectForKey:@"productName"]];
-        }
-        NSString *inventoryDate = [Tool stringToString:[self.inventoryInfo objectForKey:@"strCreateTime"]];
-        self.lblDate.text = inventoryDate;
-        self.datePicker.date = [dateFormatter dateFromString:inventoryDate];
-        self.textValue.text = [NSString stringWithFormat:@"%.2f",[[self.inventoryInfo objectForKey:@"stock"] doubleValue]];
+        self._id = [[self.fixcostInfo objectForKey:@"subject"] longValue];
+        self.lblName.text = [Tool stringToString:[self.fixcostInfo objectForKey:@"name"]];
+        NSString *createDate = [Tool stringToString:[self.fixcostInfo objectForKey:@"strCreateTime"]];
+        self.lblDate.text = createDate;
+        self.datePicker.date = [dateFormatter dateFromString:createDate];
+        self.textValue.text = [NSString stringWithFormat:@"%.2f",[[self.fixcostInfo objectForKey:@"price"] doubleValue]];
     }else{
         title = @"添加";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
         self.lblDate.text = [dateFormatter stringFromDate:[NSDate date]];
     }
-    switch (self.type) {
-        case 0:
-            self.lblTypeName.text = @"原材料";
-            break;
-        case 1:
-            self.lblTypeName.text = @"半成品";
-            break;
-        case 2:
-            self.lblTypeName.text = @"成品";
-            break;
-        default:
-            self.lblTypeName.text = @"原材料";
-            break;
-    }
-    self.title = [title stringByAppendingFormat:@"%@%@",self.lblTypeName.text,@"库存"];
+    self.title = [title stringByAppendingFormat:@"%@",@"固定成本"];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.textValue.delegate = self;
@@ -88,19 +58,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row) {
         case 0:{
-                self.datePicker.hidden = YES;
-                [self.textValue resignFirstResponder];
-                InventoryChoiceViewController *nextViewController = [[InventoryChoiceViewController alloc] init];
-                nextViewController.type = self.type;
-//                if (self.type==0) {
-//                   nextViewController.inventoryId = [[self.inventoryInfo objectForKey:@"materialId"] intValue];
-//                }else{
-//                    nextViewController.inventoryId = [[self.inventoryInfo objectForKey:@"productId"] intValue];
-//                }
-                nextViewController.inventoryId = self._id;
-                nextViewController.delegate = self;
-                [self.navigationController pushViewController:nextViewController animated:YES];
-            }
+            self.datePicker.hidden = YES;
+            [self.textValue resignFirstResponder];
+            FixcostSubjectChoiceViewController *nextViewController = [[FixcostSubjectChoiceViewController alloc] init];
+            nextViewController.subjectId = self._id;
+            nextViewController.delegate = self;
+            [self.navigationController pushViewController:nextViewController animated:YES];
+        }
             break;
         case 1:
             self.datePicker.hidden = YES;
@@ -112,9 +76,10 @@
             break;
     }
 }
+
 - (IBAction)dateChange:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM"];
     NSDate *select = [self.datePicker date];
     NSString *dateString =  [dateFormatter stringFromDate:select];
     self.lblDate.text = dateString;
@@ -134,21 +99,17 @@
     self.progressHUD.delegate = self;
     [self.tableView addSubview:self.progressHUD];
     [self.progressHUD show:YES];
-
+    
     DDLogCInfo(@"******  Request URL is:%@  ******",url);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
     [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:[self.datePicker.date timeIntervalSince1970]*1000] forKey:@"createTime"];
-    [self.request setPostValue:self.textValue.text forKey:@"stock"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[self.inventoryInfo objectForKey:@"id"] longValue]] forKey:@"id"];
-    if(self.type==0){
-        [self.request setPostValue:[NSNumber numberWithLong:self._id] forKey:@"materialId"];
-    }else{
-        [self.request setPostValue:[NSNumber numberWithLong:self._id] forKey:@"productId"];
-    }
+    [self.request setPostValue:self.lblDate.text forKey:@"strCreateTime"];
+    [self.request setPostValue:self.textValue.text forKey:@"price"];
+    [self.request setPostValue:[NSNumber numberWithLong:[[self.fixcostInfo objectForKey:@"id"] longValue]] forKey:@"id"];
+    [self.request setPostValue:[NSNumber numberWithLong:self._id] forKey:@"subject"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -166,12 +127,12 @@
     if (errorCode==0) {
         long databaseId;
         //修改操作
-        if (self.inventoryInfo) {
-            databaseId = [[self.inventoryInfo objectForKey:@"id"] longValue];
+        if (self.fixcostInfo) {
+            databaseId = [[self.fixcostInfo objectForKey:@"id"] longValue];
         }else{
             databaseId = [[dict objectForKey:@"data"] longValue];
         }
-        NSDictionary *dict = @{@"id":[NSNumber numberWithLong:databaseId],@"name": self.lblName.text,@"inventoryId": [NSNumber numberWithLong:self._id],@"time": self.lblDate.text,@"stock": self.textValue.text};
+        NSDictionary *dict = @{@"id":[NSNumber numberWithLong:databaseId],@"name": self.lblName.text,@"subject": [NSNumber numberWithLong:self._id],@"strCreateTime": self.lblDate.text,@"price": self.textValue.text};
         [self.delegate passValue:dict];
         [self.navigationController popViewControllerAnimated:YES];
     }else if(errorCode==kErrorCodeNegative1){
@@ -200,31 +161,11 @@
 }
 
 -(void)add:(id)sender{
-    switch (self.type) {
-        case 0:
-            [self sendRequest:kInventoryMaterialAdd];
-            break;
-        case 1:
-            [self sendRequest:kInventoryHalfAdd];
-            break;
-        case 2:
-            [self sendRequest:kInventoryProductAdd];
-            break;
-    }
+    [self sendRequest:kFixcostAdd];
 }
 
 -(void)update:(id)sender{
-    switch (self.type) {
-        case 0:
-            [self sendRequest:kInventoryMaterialUpdate];
-            break;
-        case 1:
-            [self sendRequest:kInventoryHalfUpdate];
-            break;
-        case 2:
-            [self sendRequest:kInventoryProductUpdate];
-            break;
-    }
+    [self sendRequest:kFixcostUpdate];
 }
 
 #pragma mark InventoryPassValueDelegate
@@ -232,4 +173,5 @@
     self._id = [[newValue objectForKey:@"id"] longValue];
     self.lblName.text = [newValue objectForKey:@"name"];
 }
+
 @end

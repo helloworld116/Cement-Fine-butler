@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PassValueDelegate.h"
 
 @interface InventorySettingUpdateViewController : UITableViewController
 
 @property (nonatomic,retain) NSDictionary *info;
-
+@property(nonatomic,assign) NSObject<PassValueDelegate> *delegate;
 @end

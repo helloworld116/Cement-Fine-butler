@@ -37,9 +37,9 @@
                      @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
                      @{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},
                      @{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},
-                     @{@"name":@"库存设置",@"storyboard":@"inventorySettingListViewController"},
+                     @{@"name":@"库位设置",@"storyboard":@"inventorySettingListViewController"},
                      @{@"name":@"过磅录入",@"storyboard":@"weighViewController"},
-                     @{@"name":@"固定成本管理",@"storyboard":@"fixedCostsViewController"},
+                     @{@"name":@"固定成本管理",@"storyboard":@"fixCostsViewController"},
                      @{@"name":@"修改密码",@"storyboard":@"updatePasswordViewController"}
                      ];
 }

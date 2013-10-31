@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InventoryPassValueDelegate.h"
 
-@interface InventoryOperateViewController : UITableViewController
+@interface InventoryOperateViewController : UITableViewController<InventoryPassValueDelegate>
 @property (nonatomic) int type;//0原材料库存，1半成品库存，2成品库存
 @property (nonatomic,retain) NSDictionary *inventoryInfo;
+@property(nonatomic,assign) NSObject<InventoryPassValueDelegate> *delegate;
 @end
 

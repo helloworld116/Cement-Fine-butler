@@ -112,6 +112,7 @@
 		0E3841F017D41FDE004B3C87 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841EF17D41FDE004B3C87 /* Tool.m */; };
 		0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F217D4200B004B3C87 /* SearchDate.m */; };
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
+		0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */; };
 		0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */; };
 		0E3AEB8718192AC7006BE72A /* wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E3AEB8518192AC7006BE72A /* wifi.png */; };
 		0E3AEB8818192AC7006BE72A /* wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E3AEB8618192AC7006BE72A /* wifi@2x.png */; };
@@ -149,6 +150,10 @@
 		0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6A896317F6B0BA0065043F /* MessageCell.xib */; };
 		0E6A896717F6B11E0065043F /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A896617F6B11E0065043F /* MessageCell.m */; };
 		0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DA964181A878A007A5B45 /* ElectricityCell.m */; };
+		0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E430B182244C600016B93 /* YearAndMonthDatePickerView.m */; };
+		0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6E430D182245E000016B93 /* YearAndMonthDatePickerView.xib */; };
+		0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E43111822800000016B93 /* LineChoiceViewController.m */; };
+		0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E4314182282D500016B93 /* ProductChoiceViewController.m */; };
 		0E72041417F55B50001E943F /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041217F55B50001E943F /* message.png */; };
 		0E72041517F55B50001E943F /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041317F55B50001E943F /* message@2x.png */; };
 		0E72041817F55C96001E943F /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E72041617F55C95001E943F /* checked.png */; };
@@ -169,6 +174,10 @@
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
 		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
+		0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182A18222E57001B0372 /* FixcostsViewController.m */; };
+		0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182F18223198001B0372 /* FixcostSubjectChoiceViewController.m */; };
+		0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931832182233DB001B0372 /* FixCostOperateViewController.m */; };
+		0E931836182239D7001B0372 /* FixcostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931835182239D7001B0372 /* FixcostCell.m */; };
 		0E9426E9181657AE00DAFDAF /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426DF181657AE00DAFDAF /* calculator.png */; };
 		0E9426EA181657AE00DAFDAF /* calculator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E0181657AE00DAFDAF /* calculator@2x.png */; };
 		0E9426EB181657AE00DAFDAF /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E1181657AE00DAFDAF /* list.png */; };
@@ -364,6 +373,9 @@
 		0E3841F217D4200B004B3C87 /* SearchDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDate.m; sourceTree = "<group>"; };
 		0E3841F817D4782F004B3C87 /* SidePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidePanelViewController.h; sourceTree = "<group>"; };
 		0E3841F917D47830004B3C87 /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
+		0E3843241821F0D600D58433 /* UITextField+DisableCopyPaste.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisableCopyPaste.h"; sourceTree = "<group>"; };
+		0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisableCopyPaste.m"; sourceTree = "<group>"; };
+		0E3843281821F37700D58433 /* InventoryPassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryPassValueDelegate.h; sourceTree = "<group>"; };
 		0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentDetailsViewController.h; sourceTree = "<group>"; };
 		0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentDetailsViewController.m; sourceTree = "<group>"; };
 		0E3AEB8518192AC7006BE72A /* wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi.png; sourceTree = "<group>"; };
@@ -419,6 +431,13 @@
 		0E6A896617F6B11E0065043F /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		0E6DA963181A878A007A5B45 /* ElectricityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricityCell.h; sourceTree = "<group>"; };
 		0E6DA964181A878A007A5B45 /* ElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricityCell.m; sourceTree = "<group>"; };
+		0E6E430A182244C600016B93 /* YearAndMonthDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearAndMonthDatePickerView.h; sourceTree = "<group>"; };
+		0E6E430B182244C600016B93 /* YearAndMonthDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YearAndMonthDatePickerView.m; sourceTree = "<group>"; };
+		0E6E430D182245E000016B93 /* YearAndMonthDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YearAndMonthDatePickerView.xib; sourceTree = "<group>"; };
+		0E6E43101822800000016B93 /* LineChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChoiceViewController.h; sourceTree = "<group>"; };
+		0E6E43111822800000016B93 /* LineChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChoiceViewController.m; sourceTree = "<group>"; };
+		0E6E4313182282D500016B93 /* ProductChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductChoiceViewController.h; sourceTree = "<group>"; };
+		0E6E4314182282D500016B93 /* ProductChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductChoiceViewController.m; sourceTree = "<group>"; };
 		0E72041217F55B50001E943F /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		0E72041317F55B50001E943F /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@2x.png"; sourceTree = "<group>"; };
 		0E72041617F55C95001E943F /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
@@ -444,6 +463,15 @@
 		0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.2.1.src.js; sourceTree = "<group>"; };
 		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
 		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
+		0E93182918222E57001B0372 /* FixcostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostsViewController.h; sourceTree = "<group>"; };
+		0E93182A18222E57001B0372 /* FixcostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostsViewController.m; sourceTree = "<group>"; };
+		0E93182D1822313C001B0372 /* PassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassValueDelegate.h; sourceTree = "<group>"; };
+		0E93182E18223198001B0372 /* FixcostSubjectChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostSubjectChoiceViewController.h; sourceTree = "<group>"; };
+		0E93182F18223198001B0372 /* FixcostSubjectChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostSubjectChoiceViewController.m; sourceTree = "<group>"; };
+		0E931831182233DB001B0372 /* FixCostOperateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixCostOperateViewController.h; sourceTree = "<group>"; };
+		0E931832182233DB001B0372 /* FixCostOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixCostOperateViewController.m; sourceTree = "<group>"; };
+		0E931834182239D7001B0372 /* FixcostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostCell.h; sourceTree = "<group>"; };
+		0E931835182239D7001B0372 /* FixcostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostCell.m; sourceTree = "<group>"; };
 		0E9426DF181657AE00DAFDAF /* calculator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculator.png; sourceTree = "<group>"; };
 		0E9426E0181657AE00DAFDAF /* calculator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calculator@2x.png"; sourceTree = "<group>"; };
 		0E9426E1181657AE00DAFDAF /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
@@ -636,6 +664,8 @@
 				0EDC72021811319F00895931 /* NODataView.m */,
 				47CB7BA31818131200FE97B6 /* MyKeyboardView.h */,
 				47CB7BA41818131200FE97B6 /* MyKeyboardView.m */,
+				0E3843241821F0D600D58433 /* UITextField+DisableCopyPaste.h */,
+				0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */,
 			);
 			name = CustomerView;
 			sourceTree = "<group>";
@@ -881,6 +911,34 @@
 			name = CustomerViewController;
 			sourceTree = "<group>";
 		};
+		0E93182818222D70001B0372 /* 固定成本 */ = {
+			isa = PBXGroup;
+			children = (
+				0E93182918222E57001B0372 /* FixcostsViewController.h */,
+				0E93182A18222E57001B0372 /* FixcostsViewController.m */,
+				0E93182E18223198001B0372 /* FixcostSubjectChoiceViewController.h */,
+				0E93182F18223198001B0372 /* FixcostSubjectChoiceViewController.m */,
+				0E931831182233DB001B0372 /* FixCostOperateViewController.h */,
+				0E931832182233DB001B0372 /* FixCostOperateViewController.m */,
+				0E931834182239D7001B0372 /* FixcostCell.h */,
+				0E931835182239D7001B0372 /* FixcostCell.m */,
+				0E6E430A182244C600016B93 /* YearAndMonthDatePickerView.h */,
+				0E6E430B182244C600016B93 /* YearAndMonthDatePickerView.m */,
+				0E6E430D182245E000016B93 /* YearAndMonthDatePickerView.xib */,
+			);
+			name = "固定成本";
+			sourceTree = "<group>";
+		};
+		0E93182C182230FC001B0372 /* 公共 */ = {
+			isa = PBXGroup;
+			children = (
+				0E62CC531820FA0800281A73 /* ChoiceCell.h */,
+				0E62CC541820FA0800281A73 /* ChoiceCell.m */,
+				0E93182D1822313C001B0372 /* PassValueDelegate.h */,
+			);
+			name = "公共";
+			sourceTree = "<group>";
+		};
 		0EC05B0A181F896C001BF5B7 /* EGOTableViewPullRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,9 +981,11 @@
 		0EE9F602181A6B6B009A4330 /* 录入相关 */ = {
 			isa = PBXGroup;
 			children = (
+				0E93182C182230FC001B0372 /* 公共 */,
+				0E93182818222D70001B0372 /* 固定成本 */,
 				0EF72796181E128E0059EC59 /* 库存盘点 */,
 				0EF727B5181E8A440059EC59 /* 生产记录 */,
-				0EF727A9181E606E0059EC59 /* 库存设置 */,
+				0EF727A9181E606E0059EC59 /* 库位设置 */,
 				0EF72792181E11560059EC59 /* 电力设置 */,
 			);
 			name = "录入相关";
@@ -966,13 +1026,12 @@
 				0E62CC4E1820E62000281A73 /* InventoryOperateViewController.m */,
 				0E62CC501820F83200281A73 /* InventoryChoiceViewController.h */,
 				0E62CC511820F83200281A73 /* InventoryChoiceViewController.m */,
-				0E62CC531820FA0800281A73 /* ChoiceCell.h */,
-				0E62CC541820FA0800281A73 /* ChoiceCell.m */,
+				0E3843281821F37700D58433 /* InventoryPassValueDelegate.h */,
 			);
 			name = "库存盘点";
 			sourceTree = "<group>";
 		};
-		0EF727A9181E606E0059EC59 /* 库存设置 */ = {
+		0EF727A9181E606E0059EC59 /* 库位设置 */ = {
 			isa = PBXGroup;
 			children = (
 				0EF727AA181E60910059EC59 /* InventorySettingListViewController.h */,
@@ -983,7 +1042,7 @@
 				0EF727B2181E87520059EC59 /* InventorySettingUpdateViewController.h */,
 				0EF727B3181E87520059EC59 /* InventorySettingUpdateViewController.m */,
 			);
-			name = "库存设置";
+			name = "库位设置";
 			sourceTree = "<group>";
 		};
 		0EF727B5181E8A440059EC59 /* 生产记录 */ = {
@@ -996,6 +1055,10 @@
 				0EF727BC181E8E2A0059EC59 /* ProductHistoryCell.m */,
 				0EF727BE181E914C0059EC59 /* ProductHistoryUpdateViewController.h */,
 				0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */,
+				0E6E43101822800000016B93 /* LineChoiceViewController.h */,
+				0E6E43111822800000016B93 /* LineChoiceViewController.m */,
+				0E6E4313182282D500016B93 /* ProductChoiceViewController.h */,
+				0E6E4314182282D500016B93 /* ProductChoiceViewController.m */,
 			);
 			name = "生产记录";
 			sourceTree = "<group>";
@@ -1239,6 +1302,7 @@
 				472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */,
 				472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */,
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
+				0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */,
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
 				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
 				0E72471C17CD93060048DFFB /* Icon-72.png in Resources */,
@@ -1439,6 +1503,7 @@
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
+				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,
 				0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */,
 				0E72473017CD9D080048DFFB /* RightViewController.m in Sources */,
@@ -1449,6 +1514,7 @@
 				0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */,
 				0E3841F017D41FDE004B3C87 /* Tool.m in Sources */,
 				0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */,
+				0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
 				0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */,
 				0EF727B8181E8B4E0059EC59 /* ProductHistoryViewController.m in Sources */,
@@ -1456,6 +1522,7 @@
 				0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */,
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
+				0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
@@ -1463,6 +1530,7 @@
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
+				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
@@ -1475,6 +1543,7 @@
 				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
+				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,
 				0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
 				0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */,
@@ -1485,10 +1554,12 @@
 				472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */,
 				0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */,
 				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
+				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
 				0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */,
+				0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */,
 				474F913A1814445400D94A85 /* TimeTableView.m in Sources */,
 				474F913D1814446C00D94A85 /* LineTableView.m in Sources */,
 				474F91401814447900D94A85 /* ProductTableView.m in Sources */,
@@ -1497,6 +1568,7 @@
 				0EF727A8181E4F9B0059EC59 /* UpdatePasswordViewController.m in Sources */,
 				474F9146181444E600D94A85 /* UnitCostTableView.m in Sources */,
 				474F91491814480800D94A85 /* TimeConditionCell.m in Sources */,
+				0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,

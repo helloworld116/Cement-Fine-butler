@@ -11,5 +11,5 @@
 @interface ChoiceCell : UITableViewCell
 @property (nonatomic,retain) UILabel *lblName;
 @property (nonatomic,retain) UIImageView *imgChecked;
-@property (nonatomic) int *inventoryId;
+@property (nonatomic) int _id;//选择项id
 @end

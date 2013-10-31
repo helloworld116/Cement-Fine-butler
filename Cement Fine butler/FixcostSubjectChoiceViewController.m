@@ -1,15 +1,15 @@
 //
-//  InventoryChoiceViewController.m
+//  FixcostSubjectChoiceViewController.m
 //  Cement Fine butler
 //
-//  Created by 文正光 on 13-10-30.
+//  Created by 文正光 on 13-10-31.
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "InventoryChoiceViewController.h"
+#import "FixcostSubjectChoiceViewController.h"
 #import "ChoiceCell.h"
 
-@interface InventoryChoiceViewController ()<MBProgressHUDDelegate>
+@interface FixcostSubjectChoiceViewController ()<MBProgressHUDDelegate>
 @property (nonatomic,retain) NSArray *list;
 @property (nonatomic,retain) UIBarButtonItem *rightButtonItem;
 @property (retain, nonatomic) ASIFormDataRequest *request;
@@ -18,7 +18,7 @@
 @property (nonatomic) NSUInteger currentSelectCellIndex;
 @end
 
-@implementation InventoryChoiceViewController
+@implementation FixcostSubjectChoiceViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,22 +34,9 @@
     [super viewDidLoad];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    NSString *title = nil;
-    switch (self.type) {
-        case 0:
-            title = @"原材料";
-            break;
-        case 1:
-            title = @"半成品";
-            break;
-        case 2:
-            title = @"成品";
-            break;
-    }
-    self.title = [NSString stringWithFormat:@"%@选择",title];
+    self.title = @"成本项选择";
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureChoice:)];
     self.firstSelectCellIndex = -1;
-//    self.navigationItem.rightBarButtonItem 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self sendRequest];
 }
@@ -83,21 +70,11 @@
         cell = [[ChoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSDictionary *info = self.list[indexPath.row];
-    NSString *name;
-    int inventoryId;
-    if (self.type==0) {
-        inventoryId = [[info objectForKey:@"materialId"] intValue];
-        name = [info objectForKey:@"materialName"];
-    }else{
-        inventoryId = [[info objectForKey:@"productId"] intValue];
-        name = [info objectForKey:@"productName"];
-    }
-    if (self.inventoryId == inventoryId) {
-        self.firstSelectCellIndex = indexPath.row;
+    cell._id = [[info objectForKey:@"subject"] longValue];
+    cell.lblName.text = [info objectForKey:@"name"];
+    if (cell._id==self.subjectId) {
         cell.imgChecked.hidden = NO;
     }
-    cell._id = inventoryId;
-    cell.lblName.text = name;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -111,7 +88,8 @@
     ChoiceCell *cell = (ChoiceCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.imgChecked.hidden = NO;
     self.currentSelectCellIndex = indexPath.row;
-    if (self.currentSelectCellIndex==self.firstSelectCellIndex) {
+    NSDictionary *info = self.list[self.currentSelectCellIndex];
+    if (self.subjectId==[[info objectForKey:@"subject"] longValue]) {
         self.navigationItem.rightBarButtonItem = nil;
     }else{
         self.navigationItem.rightBarButtonItem = self.rightButtonItem;
@@ -130,25 +108,9 @@
     self.progressHUD.delegate = self;
     [self.tableView addSubview:self.progressHUD];
     [self.progressHUD show:YES];
-    switch (self.type) {
-        case 0:
-            DDLogCInfo(@"******  Request URL is:%@  ******",kInventoryAllMaterialList);
-            self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kInventoryAllMaterialList]];
-            break;
-            
-        case 1:
-            DDLogCInfo(@"******  Request URL is:%@  ******",kInventoryAllHalfProductList);
-            self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kInventoryAllHalfProductList]];
-            break;
-        case 2:
-            DDLogCInfo(@"******  Request URL is:%@  ******",kInventoryAllProductList);
-            self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kInventoryAllProductList]];
-            break;
-    }
-    //设置缓存方式
-    [self.request setDownloadCache:kSharedApp.myCache];
-    //设置缓存数据存储策略，这里采取的是如果无更新或无法联网就读取缓存数据
-    [self.request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+    
+    DDLogCInfo(@"******  Request URL is:%@  ******",kFixcostAllSubjects);
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kFixcostAllSubjects]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
@@ -192,15 +154,7 @@
 
 -(void)sureChoice:(id)sender{
     NSDictionary *oldDict = self.list[self.currentSelectCellIndex];
-    NSString *_id,*_name;
-    if (self.type==0) {
-        _id = @"materialId";
-        _name = @"materialName";
-    }else{
-        _id = @"productId";
-        _name = @"productName";
-    }
-    NSDictionary *newDict = @{@"id":[oldDict objectForKey:_id],@"name":[oldDict objectForKey:_name]};
+    NSDictionary *newDict = @{@"id":[oldDict objectForKey:@"subject"],@"name":[oldDict objectForKey:@"name"]};
     [self.delegate passValue:newDict];
     [self.navigationController popViewControllerAnimated:YES];
 }

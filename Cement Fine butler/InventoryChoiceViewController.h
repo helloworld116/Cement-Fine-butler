@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InventoryPassValueDelegate.h"
+
 
 @interface InventoryChoiceViewController : UITableViewController
 @property (nonatomic) int type;
 @property (nonatomic) int inventoryId;
+@property(nonatomic,assign) NSObject<InventoryPassValueDelegate> *delegate;
 @end

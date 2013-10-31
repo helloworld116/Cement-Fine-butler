@@ -9,18 +9,19 @@
 #import "InventoryListViewController.h"
 #import "InventoryCommonCell.h"
 #import "InventoryOperateViewController.h"
+#import "InventoryPassValueDelegate.h"
 
-@interface InventoryListViewController ()<MBProgressHUDDelegate>
+@interface InventoryListViewController ()<MBProgressHUDDelegate,InventoryPassValueDelegate>
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
 @property (nonatomic,retain) NSMutableArray *list;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain,nonatomic) NSString *URL;
+@property (nonatomic) NSUInteger currentSelectedIndex;//-1表示没有选择任何一个
 @property (nonatomic) NSUInteger currentPage;
 @property (nonatomic) NSUInteger totalCount;
 @end
-//kInventoryList
-//accessToken=06275d466e14db86199ec030d46800a8&factoryId=2&page=1&rows=10&beginTime=1356969600000&endTime=1385827200000
+
 @implementation InventoryListViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -62,12 +63,13 @@
 //    self.pullTableView.pullTextColor = [UIColor blackColor];
     
     self.currentPage = 1;
+    self.currentSelectedIndex = -1;
     self.list = [NSMutableArray array];
-//    [self sendRequest:self.currentPage withProgress:YES];
-    if(!self.pullTableView.pullTableIsRefreshing) {
-        self.pullTableView.pullTableIsRefreshing = YES;
-        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3];
-    }
+    [self sendRequest:self.currentPage withProgress:YES];
+//    if(!self.pullTableView.pullTableIsRefreshing) {
+//        self.pullTableView.pullTableIsRefreshing = YES;
+//        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3];
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,13 +168,16 @@
     return view;
 }
 
-#pragma UITableView Delegate
+#pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.currentSelectedIndex = indexPath.row;
     InventoryOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryOperateViewController"];
     nextViewController.type = self.type;
     nextViewController.inventoryInfo = [self.list objectAtIndex:indexPath.row];
+    nextViewController.delegate = self;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }
+
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSUInteger)currentPage withProgress:(BOOL)isProgress{
@@ -266,12 +271,48 @@
     [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
 }
 
+#pragma mark InventoryPassValueDelegate
+-(void)passValue:(NSDictionary *)newValue{
+    id name = [newValue objectForKey:@"name"];
+    id time = [newValue objectForKey:@"time"];
+    id stock = [newValue objectForKey:@"stock"];
+    id _id = [newValue objectForKey:@"inventoryId"];
+    id databaseId = [newValue objectForKey:@"id"];
+    NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
+    if (self.type==0) {
+       [newDict setObject:name forKey:@"materialName"];
+        [newDict setObject:_id forKey:@"materialId"];
+    }else{
+        [newDict setObject:name forKey:@"productName"];
+        [newDict setObject:_id forKey:@"productId"];
+    }
+    [newDict setObject:time forKey:@"strCreateTime"];
+    [newDict setObject:stock forKey:@"stock"];
+    [newDict setObject:databaseId forKey:@"id"];
+    //之前没有选择，说明是进行添加操作
+    if (self.currentSelectedIndex==-1) {
+        [self.list insertObject:newDict atIndex:0];
+        [self.tableView beginUpdates];
+        NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [[self tableView] insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+//        NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]];
+//        [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationTop];
+    }else{
+        [self.list replaceObjectAtIndex:self.currentSelectedIndex withObject:newDict];
+        NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0]];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)add:(id)sender{
+    self.currentSelectedIndex = -1;
     InventoryOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryOperateViewController"];
+    nextViewController.delegate = self;
     nextViewController.type = self.type;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }

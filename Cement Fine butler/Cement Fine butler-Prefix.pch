@@ -37,6 +37,7 @@
     #import "SearchCondition.h"
     #import "LoadingView.h"
     #import "NODataView.h"
+    #import "UITextField+DisableCopyPaste.h"
     #import "LoginViewController.h"
     #import "Tool.h"
 
@@ -78,14 +79,14 @@
     //电力价格列表
 #define kElectricityList [kServerURL stringByAppendingString:@"electricityPrice/search"]
 
-    //库存设置列表
-#define kInventorySettingList [kServerURL stringByAppendingString:@"stock/datgrid"]
-
+#pragma mark 库存盘点使用接口列表开始
 //库存盘点下使用的所有原材料列表
-//http://192.168.1.105:8080/mobile/inventory/getMaterials?accessToken=06275d466e14db86199ec030d46800a8&factoryId=2
 #define kInventoryAllMaterialList [kServerURL stringByAppendingString:@"inventory/getMaterials"]
+//库存盘点下使用的所有的半成品列表
+#define kInventoryAllHalfProductList [kServerURL stringByAppendingString:@"inventory/getHalfs"]
+//库存盘点下使用的所有成品列表
+#define kInventoryAllProductList [kServerURL stringByAppendingString:@"inventory/getProducts"]
 //原材料库存盘点列表
-//http://192.168.1.105:8080/mobile/inventory/material/list?accessToken=06275d466e14db86199ec030d46800a8&factoryId=2&page=1&rows=10&beginTime=1356969600000&endTime=1385827200000
 #define kInventoryMaterialList [kServerURL stringByAppendingString:@"inventory/material/list"]
 //半成品库存盘点列表
 #define kInventoryHalfList [kServerURL stringByAppendingString:@"inventory/half/list"]
@@ -104,8 +105,35 @@
 //成品库存盘点修改
 #define kInventoryProductUpdate [kServerURL stringByAppendingString:@"inventory/product/update"]
 
+#pragma mark 固定成本管理使用接口开始
+//获取所有的成本项列表
+#define kFixcostAllSubjects [kServerURL stringByAppendingString:@"fixcost/getSubjects"]
+//固定成本查询
+#define kFixcostList [kServerURL stringByAppendingString:@"fixcost/list"]
+//固定成本修改
+#define kFixcostUpdate [kServerURL stringByAppendingString:@"fixcost/update"]
+//固定成本添加
+#define kFixcostAdd [kServerURL stringByAppendingString:@"fixcost/add"]
 
-    //检测网络是否存在使用网址
+#pragma mark 过磅管理接口开始
+//http://192.168.1.105:8080/mobile/weigh/sale/datagrid?accessToken=381a9beb4ab993c6efd3e8d9f7137679&factoryId=2&page=1&rows=20
+
+
+#pragma mark 库位设置接口开始
+//库存设置列表
+#define kInventorySettingList [kServerURL stringByAppendingString:@"stock/datagrid"]
+//库位修改
+#define kInventorySettingUpdate [kServerURL stringByAppendingString:@"stock/update"]
+
+#pragma mark 生产记录接口开始
+//生产记录查询
+#define kProductHistoryList [kServerURL stringByAppendingString:@"manufacture/list"]
+//生产记录添加
+#define kProductHistoryAdd [kServerURL stringByAppendingString:@"manufacture/add"]
+//生产记录修改
+#define kProductHistoryUpdate [kServerURL stringByAppendingString:@"manufacture/update"]
+
+//    //检测网络是否存在使用网址
     #define kCheckNetworkWebsite @"www.baidu.com"
 
     #define kCondition_StockType @"库存类型"
