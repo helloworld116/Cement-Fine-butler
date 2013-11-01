@@ -189,6 +189,16 @@
 		0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E7181657AE00DAFDAF /* pie-chart.png */; };
 		0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */; };
 		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
+		0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */; };
+		0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF16182389040028BE8B /* MaterialWeighCell.xib */; };
+		0EA5CF1A182389230028BE8B /* MaterialWeighCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF19182389230028BE8B /* MaterialWeighCell.m */; };
+		0EA5CF1D182399100028BE8B /* WeighViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF1C182399100028BE8B /* WeighViewController.m */; };
+		0EA5CF281823A6380028BE8B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF261823A6380028BE8B /* MainStoryboard_iPhone.storyboard */; };
+		0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF2D1823A8830028BE8B /* PullTableViewLan.strings */; };
+		0EA5CF311823AE860028BE8B /* ProductWeighViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF301823AE860028BE8B /* ProductWeighViewController.m */; };
+		0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF331823AEFD0028BE8B /* ProductWeighCell.m */; };
+		0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */; };
+		0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */; };
 		0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */; };
 		0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B0D181F896C001BF5B7 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0EC05B1E181F896C001BF5B7 /* LoadMoreTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B0F181F896C001BF5B7 /* LoadMoreTableFooterView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -231,8 +241,6 @@
 		472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 472F32E817CC3C05007E567B /* InfoPlist.strings */; };
 		472F32EC17CC3C05007E567B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F32EB17CC3C05007E567B /* main.m */; };
 		472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F32EF17CC3C05007E567B /* CementAppDelegate.m */; };
-		472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F32F717CC3C05007E567B /* MainStoryboard_iPhone.storyboard */; };
-		472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F32FA17CC3C05007E567B /* MainStoryboard_iPad.storyboard */; };
 		472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */; };
 		472F332617CC3CF8007E567B /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 472F332417CC3CF8007E567B /* mapapi.bundle */; };
 		472F332917CC3D34007E567B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332817CC3D34007E567B /* SystemConfiguration.framework */; };
@@ -484,6 +492,24 @@
 		0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie-chart@2x.png"; sourceTree = "<group>"; };
 		0E9EF1B91814BDCD007557AE /* ConditionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionTableView.h; sourceTree = "<group>"; };
 		0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionTableView.m; sourceTree = "<group>"; };
+		0EA5CF13182341710028BE8B /* MaterialWeighListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialWeighListViewController.h; sourceTree = "<group>"; };
+		0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighListViewController.m; sourceTree = "<group>"; };
+		0EA5CF16182389040028BE8B /* MaterialWeighCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaterialWeighCell.xib; sourceTree = "<group>"; };
+		0EA5CF18182389230028BE8B /* MaterialWeighCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialWeighCell.h; sourceTree = "<group>"; };
+		0EA5CF19182389230028BE8B /* MaterialWeighCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighCell.m; sourceTree = "<group>"; };
+		0EA5CF1B182399100028BE8B /* WeighViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeighViewController.h; sourceTree = "<group>"; };
+		0EA5CF1C182399100028BE8B /* WeighViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeighViewController.m; sourceTree = "<group>"; };
+		0EA5CF221823A50C0028BE8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0EA5CF271823A6380028BE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		0EA5CF2C1823A8830028BE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/PullTableViewLan.strings; sourceTree = "<group>"; };
+		0EA5CF2E1823A88E0028BE8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/PullTableViewLan.strings"; sourceTree = "<group>"; };
+		0EA5CF2F1823AE860028BE8B /* ProductWeighViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductWeighViewController.h; sourceTree = "<group>"; };
+		0EA5CF301823AE860028BE8B /* ProductWeighViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductWeighViewController.m; sourceTree = "<group>"; };
+		0EA5CF321823AEFD0028BE8B /* ProductWeighCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductWeighCell.h; sourceTree = "<group>"; };
+		0EA5CF331823AEFD0028BE8B /* ProductWeighCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductWeighCell.m; sourceTree = "<group>"; };
+		0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductWeighCell.xib; sourceTree = "<group>"; };
+		0EA5CF371823CCF20028BE8B /* MaterialWeighDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialWeighDetailViewController.h; sourceTree = "<group>"; };
+		0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighDetailViewController.m; sourceTree = "<group>"; };
 		0EB2D98D1817AA4F00AEE5E8 /* DatePickerViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController2.h; sourceTree = "<group>"; };
 		0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController2.m; sourceTree = "<group>"; };
 		0EC05B0C181F896C001BF5B7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -551,8 +577,6 @@
 		472F32ED17CC3C05007E567B /* Cement Fine butler-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cement Fine butler-Prefix.pch"; sourceTree = "<group>"; };
 		472F32EE17CC3C05007E567B /* CementAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CementAppDelegate.h; sourceTree = "<group>"; };
 		472F32EF17CC3C05007E567B /* CementAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CementAppDelegate.m; sourceTree = "<group>"; };
-		472F32F817CC3C05007E567B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		472F32FB17CC3C05007E567B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		472F32FD17CC3C05007E567B /* EquipmentMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquipmentMapViewController.h; sourceTree = "<group>"; };
 		472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EquipmentMapViewController.mm; sourceTree = "<group>"; };
 		472F330617CC3CF8007E567B /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
@@ -939,6 +963,43 @@
 			name = "公共";
 			sourceTree = "<group>";
 		};
+		0EA5CF10182340990028BE8B /* 过磅管理 */ = {
+			isa = PBXGroup;
+			children = (
+				0EA5CF1B182399100028BE8B /* WeighViewController.h */,
+				0EA5CF1C182399100028BE8B /* WeighViewController.m */,
+				0EA5CF12182341330028BE8B /* 产品过磅 */,
+				0EA5CF11182341270028BE8B /* 物料过磅 */,
+			);
+			name = "过磅管理";
+			sourceTree = "<group>";
+		};
+		0EA5CF11182341270028BE8B /* 物料过磅 */ = {
+			isa = PBXGroup;
+			children = (
+				0EA5CF13182341710028BE8B /* MaterialWeighListViewController.h */,
+				0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */,
+				0EA5CF16182389040028BE8B /* MaterialWeighCell.xib */,
+				0EA5CF18182389230028BE8B /* MaterialWeighCell.h */,
+				0EA5CF19182389230028BE8B /* MaterialWeighCell.m */,
+				0EA5CF371823CCF20028BE8B /* MaterialWeighDetailViewController.h */,
+				0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */,
+			);
+			name = "物料过磅";
+			sourceTree = "<group>";
+		};
+		0EA5CF12182341330028BE8B /* 产品过磅 */ = {
+			isa = PBXGroup;
+			children = (
+				0EA5CF2F1823AE860028BE8B /* ProductWeighViewController.h */,
+				0EA5CF301823AE860028BE8B /* ProductWeighViewController.m */,
+				0EA5CF321823AEFD0028BE8B /* ProductWeighCell.h */,
+				0EA5CF331823AEFD0028BE8B /* ProductWeighCell.m */,
+				0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */,
+			);
+			name = "产品过磅";
+			sourceTree = "<group>";
+		};
 		0EC05B0A181F896C001BF5B7 /* EGOTableViewPullRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,6 +1042,7 @@
 		0EE9F602181A6B6B009A4330 /* 录入相关 */ = {
 			isa = PBXGroup;
 			children = (
+				0EA5CF10182340990028BE8B /* 过磅管理 */,
 				0E93182C182230FC001B0372 /* 公共 */,
 				0E93182818222D70001B0372 /* 固定成本 */,
 				0EF72796181E128E0059EC59 /* 库存盘点 */,
@@ -1121,10 +1183,9 @@
 				476FC86717CC41E200EA5251 /* Map */,
 				472F32EE17CC3C05007E567B /* CementAppDelegate.h */,
 				472F32EF17CC3C05007E567B /* CementAppDelegate.m */,
-				472F32F717CC3C05007E567B /* MainStoryboard_iPhone.storyboard */,
-				472F32FA17CC3C05007E567B /* MainStoryboard_iPad.storyboard */,
 				0E3841EE17D41FDE004B3C87 /* Tool.h */,
 				0E3841EF17D41FDE004B3C87 /* Tool.m */,
+				0EA5CF261823A6380028BE8B /* MainStoryboard_iPhone.storyboard */,
 				472F32E617CC3C05007E567B /* Supporting Files */,
 			);
 			path = "Cement Fine butler";
@@ -1137,6 +1198,7 @@
 				472F32E817CC3C05007E567B /* InfoPlist.strings */,
 				472F32EB17CC3C05007E567B /* main.m */,
 				472F32ED17CC3C05007E567B /* Cement Fine butler-Prefix.pch */,
+				0EA5CF2D1823A8830028BE8B /* PullTableViewLan.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1280,6 +1342,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 472F32D317CC3C05007E567B;
 			productRefGroup = 472F32DD17CC3C05007E567B /* Products */;
@@ -1299,12 +1362,11 @@
 				0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */,
 				0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */,
 				472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */,
-				472F32F917CC3C05007E567B /* MainStoryboard_iPhone.storyboard in Resources */,
-				472F32FC17CC3C05007E567B /* MainStoryboard_iPad.storyboard in Resources */,
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
 				0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */,
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
 				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
+				0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */,
 				0E72471C17CD93060048DFFB /* Icon-72.png in Resources */,
 				0E72471D17CD93060048DFFB /* Icon-72@2x.png in Resources */,
 				0E72471E17CD93060048DFFB /* Icon-Small-50.png in Resources */,
@@ -1348,6 +1410,7 @@
 				0E3841AC17D41D3E004B3C87 /* priceAssaint.png in Resources */,
 				0E3841AD17D41D3E004B3C87 /* productOverview.png in Resources */,
 				0E3841AE17D41D3E004B3C87 /* userinfo.png in Resources */,
+				0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */,
 				0E3841AF17D41D3E004B3C87 /* equipment_expand_bg@2x.png in Resources */,
 				0E3841B017D41D3E004B3C87 /* stop_btn@2x.png in Resources */,
 				0E3841B117D41D3E004B3C87 /* background.png in Resources */,
@@ -1404,8 +1467,10 @@
 				0E3841DF17D41D3E004B3C87 /* login_background~ipad.png in Resources */,
 				0E3841E017D41D3E004B3C87 /* Default.png in Resources */,
 				0E3841E117D41D3E004B3C87 /* Default@2x~iPad.png in Resources */,
+				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,
 				0E3841E217D41D3E004B3C87 /* Default~iPad.png in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
+				0EA5CF281823A6380028BE8B /* MainStoryboard_iPhone.storyboard in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 				0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */,
@@ -1512,17 +1577,21 @@
 				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
 				0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */,
+				0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */,
 				0E3841F017D41FDE004B3C87 /* Tool.m in Sources */,
 				0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */,
 				0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
 				0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */,
+				0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */,
 				0EF727B8181E8B4E0059EC59 /* ProductHistoryViewController.m in Sources */,
 				0EF727AC181E60910059EC59 /* InventorySettingListViewController.m in Sources */,
 				0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */,
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
+				0EA5CF1A182389230028BE8B /* MaterialWeighCell.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */,
+				0EA5CF311823AE860028BE8B /* ProductWeighViewController.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
@@ -1539,6 +1608,7 @@
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
 				0EF727BD181E8E2A0059EC59 /* ProductHistoryCell.m in Sources */,
+				0EA5CF1D182399100028BE8B /* WeighViewController.m in Sources */,
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
 				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
@@ -1576,6 +1646,7 @@
 				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
+				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1583,28 +1654,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		472F32E817CC3C05007E567B /* InfoPlist.strings */ = {
+		0EA5CF261823A6380028BE8B /* MainStoryboard_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				472F32E917CC3C05007E567B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		472F32F717CC3C05007E567B /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				472F32F817CC3C05007E567B /* en */,
+				0EA5CF271823A6380028BE8B /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
-		472F32FA17CC3C05007E567B /* MainStoryboard_iPad.storyboard */ = {
+		0EA5CF2D1823A8830028BE8B /* PullTableViewLan.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				472F32FB17CC3C05007E567B /* en */,
+				0EA5CF2C1823A8830028BE8B /* en */,
+				0EA5CF2E1823A88E0028BE8B /* zh-Hans */,
 			);
-			name = MainStoryboard_iPad.storyboard;
+			name = PullTableViewLan.strings;
+			sourceTree = "<group>";
+		};
+		472F32E817CC3C05007E567B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				472F32E917CC3C05007E567B /* en */,
+				0EA5CF221823A50C0028BE8B /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1683,7 +1756,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1705,7 +1778,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

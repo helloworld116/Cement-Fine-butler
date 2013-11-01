@@ -35,10 +35,10 @@
                      @{@"name":@"电力价格管理",@"storyboard":@"electricityPriceViewController"},
                      @{@"name":@"消息",@"storyboard":@"messageViewController"},
                      @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
+                     @{@"name":@"过磅管理",@"storyboard":@"weighViewController"},
                      @{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},
                      @{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},
                      @{@"name":@"库位设置",@"storyboard":@"inventorySettingListViewController"},
-                     @{@"name":@"过磅录入",@"storyboard":@"weighViewController"},
                      @{@"name":@"固定成本管理",@"storyboard":@"fixCostsViewController"},
                      @{@"name":@"修改密码",@"storyboard":@"updatePasswordViewController"}
                      ];

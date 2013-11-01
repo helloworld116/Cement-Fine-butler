@@ -1,0 +1,18 @@
+/* 
+  PullTableViewLan.strings
+  Cement Fine butler
+
+  Created by 文正光 on 13-11-1.
+  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
+*/
+"Release to refresh..." = "释放刷新...";
+"Pull down to refresh..." = "下拉刷新...";
+"Loading..." = "加载中...";
+"Release to load more..." = "释放加载更多...";
+"Pull up to load more..." = "上拉加载更多...";
+"Updated %ld minute ago" = "%ld分钟前更新";
+"Updated %ld minutes ago" = "%ld分钟前更新";
+"Updated %ld hour ago" = "%ld小时前更新";
+"Updated %ld hours ago" = "%ld小时前更新";
+"Updated %ld day ago" = "%ld天前更新";
+"Updated %ld days ago" = "%ld天前更新";

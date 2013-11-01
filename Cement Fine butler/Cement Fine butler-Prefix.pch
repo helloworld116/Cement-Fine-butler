@@ -58,7 +58,7 @@
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
 
     //接口地址
-    #define kServerURL @"http://192.168.1.101:8080/mobile/"
+    #define kServerURL @"http://192.168.1.105:8080/mobile/"
 //    #define kServerURL @"http://192.168.1.9:8080/mobile/"
 //    #define kServerURL @"http://121.199.6.98/mobile/"
     //#define kServerURL @"http://192.168.1.90:8080/dynamicmeasurement/"
@@ -117,6 +117,16 @@
 
 #pragma mark 过磅管理接口开始
 //http://192.168.1.105:8080/mobile/weigh/sale/datagrid?accessToken=381a9beb4ab993c6efd3e8d9f7137679&factoryId=2&page=1&rows=20
+//物料过磅查询
+#define kWeighMaterialList [kServerURL stringByAppendingString:@"weigh/purchase/datagrid"]
+//物料过磅添加
+#define kWeighMaterialAdd [kServerURL stringByAppendingString:@"weigh/addPurchase"]
+//物料过磅添加中使用的所有物料
+#define kWeighAllMaterial [kServerURL stringByAppendingString:@"weigh/getMaterials"]
+//产品过磅查询
+#define kWeighProductList [kServerURL stringByAppendingString:@"weigh/sale/datagrid"]
+//产品过磅添加
+#define kWeighProductAdd [kServerURL stringByAppendingString:@"weigh/addSale"]
 
 
 #pragma mark 库位设置接口开始

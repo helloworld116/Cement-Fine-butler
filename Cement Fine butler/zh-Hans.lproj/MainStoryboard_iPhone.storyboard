@@ -2487,38 +2487,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2763" y="3942"/>
         </scene>
-        <!--Product Weigh View Controller-->
-        <scene sceneID="xFB-Ga-eUf">
-            <objects>
-                <tableViewController storyboardIdentifier="productWeighViewController" id="SWc-KO-pPb" customClass="ProductWeighViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="F61-Tz-Hv6" customClass="PullTableView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cQW-Nu-vUx">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cQW-Nu-vUx" id="o1D-mr-HwT">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="SWc-KO-pPb" id="Z9e-82-ij4"/>
-                            <outlet property="delegate" destination="SWc-KO-pPb" id="Ek1-d9-NB5"/>
-                            <outlet property="pullDelegate" destination="SWc-KO-pPb" id="kOA-qM-tfh"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="pullTableView" destination="F61-Tz-Hv6" id="S7t-Nm-NTJ"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mbA-A9-pBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3150" y="3942"/>
-        </scene>
         <!--Product History Update View Controller-->
         <scene sceneID="Lof-Cv-ayt">
             <objects>
