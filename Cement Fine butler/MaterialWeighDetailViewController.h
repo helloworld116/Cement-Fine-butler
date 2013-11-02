@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PassValueDelegate.h"
 
-@interface MaterialWeighDetailViewController : UITableViewController
-
+@interface MaterialWeighDetailViewController : UITableViewController<PassValueDelegate>
+@property (nonatomic,retain) NSDictionary *materialWeighInfo;
+@property (nonatomic,assign) NSObject<PassValueDelegate> *delegate;
 @end

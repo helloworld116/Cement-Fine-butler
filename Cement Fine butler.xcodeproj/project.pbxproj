@@ -144,6 +144,8 @@
 		0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E62CC541820FA0800281A73 /* ChoiceCell.m */; };
 		0E62E85617F1252C00D4681E /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85417F1252C00D4681E /* check_icon@2x.png */; };
 		0E62E85717F1252C00D4681E /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85517F1252C00D4681E /* check_icon.png */; };
+		0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6638E91824D5D800FB381F /* AllMaterialsViewController.m */; };
+		0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6638EC1824FCC400FB381F /* LogoutAction.m */; };
 		0E693ABB1807CE810061A3F8 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */; };
 		0E693ABE1807EA040061A3F8 /* Donut2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E693ABD1807EA040061A3F8 /* Donut2D.html */; };
 		0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */; };
@@ -430,6 +432,10 @@
 		0E62CC541820FA0800281A73 /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
 		0E62E85417F1252C00D4681E /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		0E62E85517F1252C00D4681E /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
+		0E6638E81824D5D800FB381F /* AllMaterialsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMaterialsViewController.h; sourceTree = "<group>"; };
+		0E6638E91824D5D800FB381F /* AllMaterialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllMaterialsViewController.m; sourceTree = "<group>"; };
+		0E6638EB1824FCC400FB381F /* LogoutAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutAction.h; sourceTree = "<group>"; };
+		0E6638EC1824FCC400FB381F /* LogoutAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutAction.m; sourceTree = "<group>"; };
 		0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		0E693ABD1807EA040061A3F8 /* Donut2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Donut2D.html; sourceTree = "<group>"; };
 		0E693ABF1807FA290061A3F8 /* LossOverViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossOverViewViewController.h; sourceTree = "<group>"; };
@@ -501,8 +507,8 @@
 		0EA5CF1C182399100028BE8B /* WeighViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeighViewController.m; sourceTree = "<group>"; };
 		0EA5CF221823A50C0028BE8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0EA5CF271823A6380028BE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		0EA5CF2C1823A8830028BE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/PullTableViewLan.strings; sourceTree = "<group>"; };
-		0EA5CF2E1823A88E0028BE8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/PullTableViewLan.strings"; sourceTree = "<group>"; };
+		0EA5CF2C1823A8830028BE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PullTableViewLan.strings; sourceTree = "<group>"; };
+		0EA5CF2E1823A88E0028BE8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PullTableViewLan.strings"; sourceTree = "<group>"; };
 		0EA5CF2F1823AE860028BE8B /* ProductWeighViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductWeighViewController.h; sourceTree = "<group>"; };
 		0EA5CF301823AE860028BE8B /* ProductWeighViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductWeighViewController.m; sourceTree = "<group>"; };
 		0EA5CF321823AEFD0028BE8B /* ProductWeighCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductWeighCell.h; sourceTree = "<group>"; };
@@ -673,6 +679,8 @@
 				0E2786E017ED7AC600385E59 /* LoginAction.m */,
 				0EF727A6181E4F9B0059EC59 /* UpdatePasswordViewController.h */,
 				0EF727A7181E4F9B0059EC59 /* UpdatePasswordViewController.m */,
+				0E6638EB1824FCC400FB381F /* LogoutAction.h */,
+				0E6638EC1824FCC400FB381F /* LogoutAction.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -984,6 +992,8 @@
 				0EA5CF19182389230028BE8B /* MaterialWeighCell.m */,
 				0EA5CF371823CCF20028BE8B /* MaterialWeighDetailViewController.h */,
 				0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */,
+				0E6638E81824D5D800FB381F /* AllMaterialsViewController.h */,
+				0E6638E91824D5D800FB381F /* AllMaterialsViewController.m */,
 			);
 			name = "物料过磅";
 			sourceTree = "<group>";
@@ -1602,6 +1612,7 @@
 				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
+				0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
@@ -1627,6 +1638,7 @@
 				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
+				0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
 				0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */,
 				0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */,

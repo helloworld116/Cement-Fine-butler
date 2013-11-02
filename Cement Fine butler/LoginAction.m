@@ -39,6 +39,7 @@ static int loginCount2=0;
                 kSharedApp.accessToken = [data objectForKey:@"accessToken"];
                 kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
                 kSharedApp.factory = [data objectForKey:@"factorys"][0];
+                kSharedApp.user = [data objectForKey:@"user"];
                 loginResult = YES;
                 DDLogCInfo(@"登录成功");
                 //防止session过期自动登录

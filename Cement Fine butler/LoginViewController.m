@@ -153,6 +153,7 @@
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
         kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
         kSharedApp.factory = [data objectForKey:@"factorys"][0];
+        kSharedApp.user = [data objectForKey:@"user"];
         //保存用户名和密码
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:self.uname forKey:@"username"];

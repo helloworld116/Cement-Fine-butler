@@ -8,10 +8,13 @@
 
 #import "UpdatePasswordViewController.h"
 
-@interface UpdatePasswordViewController ()<UITextFieldDelegate>
+@interface UpdatePasswordViewController ()<UITextFieldDelegate,MBProgressHUDDelegate>
 @property (nonatomic,retain) NSString *currentPassword;
 @property (nonatomic,retain) NSString *password;
 @property (nonatomic,retain) NSString *password2;
+
+@property (retain, nonatomic) ASIFormDataRequest *request;
+@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation UpdatePasswordViewController
@@ -87,5 +90,56 @@
         [self update:nil];
     }
     return YES;
+}
+
+#pragma mark 发送网络请求
+-(void) sendRequest:(NSString *)url{
+    //    [self.textValue resignFirstResponder];
+    //    self.datePicker.hidden = YES;
+    
+    //加载过程提示
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.tableView];
+    self.progressHUD.labelText = @"正在提交...";
+    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+    self.progressHUD.dimBackground = YES;
+    self.progressHUD.opacity=1.0;
+    self.progressHUD.delegate = self;
+    [self.tableView addSubview:self.progressHUD];
+    [self.progressHUD show:YES];
+    
+    DDLogCInfo(@"******  Request URL is:%@  ******",url);
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
+    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[kSharedApp.user objectForKey:@"id"] forKey:@"id"];
+    [self.request setPostValue:self.currentPassword forKey:@"oldPass"];
+    [self.request setPostValue:self.password forKey:@"password"];
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+    [self.request startAsynchronous];
+}
+
+#pragma mark 网络请求
+-(void) requestFailed:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
+}
+
+-(void)requestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==0) {
+//        [self.navigationController popViewControllerAnimated:YES];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.password forKey:@"password"];
+    }else if(errorCode==kErrorCodeNegative1){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
+    }
+    [self.progressHUD hide:YES];
 }
 @end

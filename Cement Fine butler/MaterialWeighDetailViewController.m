@@ -7,9 +7,29 @@
 //
 
 #import "MaterialWeighDetailViewController.h"
+#import "AllMaterialsViewController.h"
 
-@interface MaterialWeighDetailViewController ()
+@interface MaterialWeighDetailViewController ()<MBProgressHUDDelegate>
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UITextField *textTicketCode;
+@property (strong, nonatomic) IBOutlet UITextField *textSupplyName;
+@property (strong, nonatomic) IBOutlet UITextField *textCarCode;
+@property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
+@property (strong, nonatomic) IBOutlet UITextField *textGw;//毛重
+@property (strong, nonatomic) IBOutlet UITextField *textTare;//皮重
+@property (strong, nonatomic) IBOutlet UITextField *textNw;//净重
+@property (strong, nonatomic) IBOutlet UITextField *textSupplierNw;//供方净重
+@property (strong, nonatomic) IBOutlet UITextField *textAw;//实收重量
+@property (strong, nonatomic) IBOutlet UITextField *textPrice;
+@property (strong, nonatomic) IBOutlet UITextField *textAmout;
+@property (strong, nonatomic) IBOutlet UILabel *lblTime;
 
+@property (nonatomic) long materialId;//物料id
+@property (nonatomic,retain) NSString *materialCode;// ERP提供物料编码
+@property (nonatomic,retain) AllMaterialsViewController *nextViewController;
+
+@property (retain, nonatomic) ASIFormDataRequest *request;
+@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation MaterialWeighDetailViewController
@@ -26,12 +46,66 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = @"采购详情";
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    if (self.materialWeighInfo) {
+        self.textTicketCode.enabled=NO;
+        self.textSupplyName.enabled=NO;
+        self.textCarCode.enabled=NO;
+        self.textGw.enabled=NO;//毛重
+        self.textTare.enabled=NO;//皮重
+        self.textNw.enabled=NO;//净重
+        self.textSupplierNw.enabled=NO;//供方净重
+        self.textAw.enabled=NO;//实收重量
+        self.textPrice.enabled=NO;
+        self.textAmout.enabled=NO;
+        self.textTicketCode.text = [Tool stringToString:[self.materialWeighInfo objectForKey:@"ticketCode"]];
+        self.textSupplyName.text = [Tool stringToString:[self.materialWeighInfo objectForKey:@"supplyName"]];
+        self.textCarCode.text = [Tool stringToString:[self.materialWeighInfo objectForKey:@"carCode"]];
+        self.lblMaterialName.text = [Tool stringToString:[self.materialWeighInfo objectForKey:@"materialName"]];
+        self.lblTime.text = [Tool stringToString:[self.materialWeighInfo objectForKey:@"createDate"]];
+        double gw = 0;//毛重
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"gw"]]) {
+            gw = [[self.materialWeighInfo objectForKey:@"gw"] doubleValue];
+        }
+        self.textGw.text = [NSString stringWithFormat:@"%.2f",gw];
+        double tare = 0;//皮重
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"tare"]]) {
+            tare = [[self.materialWeighInfo objectForKey:@"tare"] doubleValue];
+        }
+        self.textTare.text = [NSString stringWithFormat:@"%.2f",tare];
+        double nw = 0;//净重
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"nw"]]) {
+            nw = [[self.materialWeighInfo objectForKey:@"nw"] doubleValue];
+        }
+        self.textNw.text = [NSString stringWithFormat:@"%.2f",nw];
+        double supplierNw = 0;//供方净重
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"supplierNw"]]) {
+            supplierNw = [[self.materialWeighInfo objectForKey:@"supplierNw"] doubleValue];
+        }
+        self.textSupplierNw.text = [NSString stringWithFormat:@"%.2f",supplierNw];
+        double aw = 0;//实收重量
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"aw"]]) {
+            aw = [[self.materialWeighInfo objectForKey:@"aw"] doubleValue];
+        }
+        self.textAw.text = [NSString stringWithFormat:@"%.2f",aw];
+        double price = 0;//单价
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"price"]]) {
+            price = [[self.materialWeighInfo objectForKey:@"price"] doubleValue];
+        }
+        self.textPrice.text = [NSString stringWithFormat:@"%.2f",price];
+        double amount = 0;//毛重
+        if (![Tool isNullOrNil:[self.materialWeighInfo objectForKey:@"amount"]]) {
+            amount = [[self.materialWeighInfo objectForKey:@"amount"] doubleValue];
+        }
+        self.textAmout.text = [NSString stringWithFormat:@"%.2f",amount];
+    }else{
+        self.lblMaterialName.text = @"请选择";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.nextViewController = [[AllMaterialsViewController alloc] init];
+        self.nextViewController.delegate = self;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,81 +114,146 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+#pragma mark UITableView Delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (!self.materialWeighInfo) {
+//        self.datePicker.hidden = YES;
+        switch (indexPath.row) {
+            case 0:{
+                    [self.navigationController pushViewController:self.nextViewController animated:YES];
+                }
+                break;
+            case 1:
+                [self.textTicketCode becomeFirstResponder];
+                break;
+            case 2:
+                [self.textSupplyName becomeFirstResponder];
+                break;
+            case 3:
+                [self.textGw becomeFirstResponder];
+                break;
+            case 4:
+                [self.textTare becomeFirstResponder];
+                break;
+            case 5:
+                [self.textNw becomeFirstResponder];
+                break;
+            case 6:
+                [self.textSupplierNw becomeFirstResponder];
+                break;
+            case 7:
+                [self.textAw becomeFirstResponder];
+                break;
+            case 8:
+                [self.textPrice becomeFirstResponder];
+                break;
+            case 9:
+                [self.textAmout becomeFirstResponder];
+                break;
+            case 10:
+                [self.textCarCode becomeFirstResponder];
+                break;
+            case 11:
+                break;
+        }
+    }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
+//- (IBAction)dateChange:(id)sender {
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM"];
+//    NSDate *select = [self.datePicker date];
+//    NSString *dateString =  [dateFormatter stringFromDate:select];
+//    self.lblDate.text = dateString;
+//}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+#pragma mark 发送网络请求
+-(void) sendRequest:(NSString *)url{
+//    [self.textValue resignFirstResponder];
+//    self.datePicker.hidden = YES;
     
-    // Configure the cell...
+    //加载过程提示
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.tableView];
+    self.progressHUD.labelText = @"正在提交...";
+    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+    self.progressHUD.dimBackground = YES;
+    self.progressHUD.opacity=1.0;
+    self.progressHUD.delegate = self;
+    [self.tableView addSubview:self.progressHUD];
+    [self.progressHUD show:YES];
     
-    return cell;
+    DDLogCInfo(@"******  Request URL is:%@  ******",url);
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
+    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:@"2013-11-2 15:23:45" forKey:@"createDate"];
+    [self.request setPostValue:self.textTicketCode.text forKey:@"ticketCode"];
+    [self.request setPostValue:self.textSupplyName.text forKey:@"supplyName"];
+    [self.request setPostValue:self.materialCode forKey:@"materialCord"];
+    [self.request setPostValue:self.lblMaterialName.text forKey:@"materialName"];
+    [self.request setPostValue:self.textGw.text forKey:@"gw"];
+    [self.request setPostValue:self.textTare.text forKey:@"tare"];
+    [self.request setPostValue:self.textNw.text forKey:@"nw"];
+    [self.request setPostValue:self.textSupplierNw.text forKey:@"supplierNw"];
+    [self.request setPostValue:self.textPrice.text forKey:@"price"];
+    [self.request setPostValue:self.textAmout.text forKey:@"amount"];
+    [self.request setPostValue:self.textAw.text forKey:@"aw"];
+    [self.request setPostValue:self.textCarCode.text forKey:@"carCode"];
+    [self.request setPostValue:[NSNumber numberWithLong:self.materialId] forKey:@"materialId"];
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+    [self.request startAsynchronous];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark 网络请求
+-(void) requestFailed:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
 }
 
- */
+-(void)requestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==0) {
+        NSDictionary *dict = @{@"materialName": self.lblMaterialName.text,@"price": self.textPrice.text,@"amount": self.textAmout.text,@"createDate": self.lblTime.text,@"ticketCode":self.textTicketCode.text,@"supplyName":self.textSupplyName.text,@"gw":self.textGw.text,@"aw":self.textAw.text,@"tare":self.textTare.text,@"nw":self.textNw.text,@"supplierNw":self.textSupplierNw.text,@"carCode":self.textCarCode.text};
+        [self.delegate passValue:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if(errorCode==kErrorCodeNegative1){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
+    }
+    [self.progressHUD hide:YES];
+}
 
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+	[self.progressHUD removeFromSuperview];
+	self.progressHUD = nil;
+}
+
+//#pragma mark UITextField Delegate
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    [textField selectAll:self];
+//}
+//
+//
+-(void)add:(id)sender{
+    [self sendRequest:kWeighMaterialAdd];
+}
+
+#pragma mark InventoryPassValueDelegate
+-(void)passValue:(NSDictionary *)newValue{
+    self.materialId = [[newValue objectForKey:@"id"] longValue];
+    self.materialCode = [newValue objectForKey:@"code"];
+    self.lblMaterialName.text = [newValue objectForKey:@"name"];
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

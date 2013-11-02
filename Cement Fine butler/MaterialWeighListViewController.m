@@ -9,6 +9,7 @@
 #import "MaterialWeighListViewController.h"
 #import "PassValueDelegate.h"
 #import "MaterialWeighCell.h"
+#import "MaterialWeighDetailViewController.h"
 
 @interface MaterialWeighListViewController ()<MBProgressHUDDelegate,PassValueDelegate>
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
@@ -25,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"采购列表";
+    self.title = @"采购记录";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
@@ -89,10 +90,10 @@
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.currentSelectedIndex = indexPath.row;
-//    FixCostOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"fixCostOperateViewController"];
-//    nextViewController.fixcostInfo = [self.list objectAtIndex:indexPath.row];
+    MaterialWeighDetailViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"materialWeighDetailViewController"];
+    nextViewController.materialWeighInfo = [self.list objectAtIndex:indexPath.row];
 //    nextViewController.delegate = self;
-//    [self.navigationController pushViewController:nextViewController animated:YES];
+    [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
 #pragma mark 发送网络请求
@@ -187,18 +188,32 @@
 
 #pragma mark PassValueDelegate
 -(void)passValue:(NSDictionary *)newValue{
-    id name = [newValue objectForKey:@"name"];
-    id time = [newValue objectForKey:@"strCreateTime"];
+    id materialName = [newValue objectForKey:@"materialName"];
     id price = [newValue objectForKey:@"price"];
-    id _id = [newValue objectForKey:@"subject"];
-    id databaseId = [newValue objectForKey:@"id"];
+    id amount = [newValue objectForKey:@"amount"];
+    id createDate = [newValue objectForKey:@"createDate"];
+    id ticketCode = [newValue objectForKey:@"ticketCode"];
+    id supplyName = [newValue objectForKey:@"supplyName"];
+    id gw = [newValue objectForKey:@"gw"];
+    id aw = [newValue objectForKey:@"aw"];
+    id tare = [newValue objectForKey:@"tare"];
+    id nw = [newValue objectForKey:@"nw"];
+    id supplierNw = [newValue objectForKey:@"supplierNw"];
+    id carCode = [newValue objectForKey:@"carCode"];
     
     NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
-    [newDict setObject:name forKey:@"name"];
-    [newDict setObject:_id forKey:@"subject"];
-    [newDict setObject:time forKey:@"strCreateTime"];
+    [newDict setObject:materialName forKey:@"materialName"];
+    [newDict setObject:amount forKey:@"amount"];
     [newDict setObject:price forKey:@"price"];
-    [newDict setObject:databaseId forKey:@"id"];
+    [newDict setObject:createDate forKey:@"createDate"];
+    [newDict setObject:ticketCode forKey:@"ticketCode"];
+    [newDict setObject:supplyName forKey:@"supplyName"];
+    [newDict setObject:gw forKey:@"gw"];
+    [newDict setObject:aw forKey:@"aw"];
+    [newDict setObject:tare forKey:@"tare"];
+    [newDict setObject:nw forKey:@"nw"];
+    [newDict setObject:supplierNw forKey:@"supplierNw"];
+    [newDict setObject:carCode forKey:@"carCode"];
     
     [self.list insertObject:newDict atIndex:0];
     [self.tableView beginUpdates];
@@ -212,10 +227,9 @@
 }
 
 -(void)add:(id)sender{
-//    self.currentSelectedIndex = -1;
-//    FixCostOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"fixCostOperateViewController"];
-//    nextViewController.delegate = self;
-//    [self.navigationController pushViewController:nextViewController animated:YES];
+    MaterialWeighDetailViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"materialWeighDetailViewController"];
+    nextViewController.delegate = self;
+    [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
 @end

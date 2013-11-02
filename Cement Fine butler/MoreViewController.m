@@ -53,12 +53,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.options.count;
+    if (section==0) {
+        return self.options.count;
+    }else{
+        return 1;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,7 +74,11 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
+    if (indexPath.section==0) {
+       cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
+    }else{
+        cell.textLabel.text = @"退出当前账号";
+    }
     return cell;
 }
 
@@ -79,10 +88,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *controllerIdentifier = [self.options[indexPath.row] objectForKey:@"storyboard"];
-    UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:controllerIdentifier];
-    nextViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:nextViewController animated:YES];
+    if (indexPath.section==0) {
+        NSString *controllerIdentifier = [self.options[indexPath.row] objectForKey:@"storyboard"];
+        UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:controllerIdentifier];
+        nextViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }else{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"username"];
+        [defaults removeObjectForKey:@"password"];
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }
 }
 
 @end
