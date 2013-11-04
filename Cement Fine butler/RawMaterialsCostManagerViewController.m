@@ -369,7 +369,7 @@
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
     DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
-    [self.request setUseCookiePersistence:YES];
+//    [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
     [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];

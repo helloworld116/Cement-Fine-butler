@@ -118,6 +118,9 @@
 		0E3AEB8818192AC7006BE72A /* wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E3AEB8618192AC7006BE72A /* wifi@2x.png */; };
 		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
 		0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */; };
+		0E43ED6118274341006E3A66 /* ProductWeighDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43ED6018274341006E3A66 /* ProductWeighDetailViewController.m */; };
+		0E43ED64182743E2006E3A66 /* AllProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43ED63182743E2006E3A66 /* AllProductViewController.m */; };
+		0E43ED6718278A8B006E3A66 /* LocalNotifactionServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43ED6618278A8B006E3A66 /* LocalNotifactionServices.m */; };
 		0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BF7180E673A00901D3D /* NoCopyTextField.m */; };
 		0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BFA180E7DCC00901D3D /* EquipmentListViewController.m */; };
 		0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E491BFC180E7E0C00901D3D /* EquipmentListCell.xib */; };
@@ -393,6 +396,12 @@
 		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
 		0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCostManagerViewController.h; sourceTree = "<group>"; };
 		0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCostManagerViewController.m; sourceTree = "<group>"; };
+		0E43ED5F18274341006E3A66 /* ProductWeighDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductWeighDetailViewController.h; sourceTree = "<group>"; };
+		0E43ED6018274341006E3A66 /* ProductWeighDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductWeighDetailViewController.m; sourceTree = "<group>"; };
+		0E43ED62182743E2006E3A66 /* AllProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllProductViewController.h; sourceTree = "<group>"; };
+		0E43ED63182743E2006E3A66 /* AllProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllProductViewController.m; sourceTree = "<group>"; };
+		0E43ED6518278A8B006E3A66 /* LocalNotifactionServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotifactionServices.h; sourceTree = "<group>"; };
+		0E43ED6618278A8B006E3A66 /* LocalNotifactionServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotifactionServices.m; sourceTree = "<group>"; };
 		0E491BF6180E673A00901D3D /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
 		0E491BF7180E673A00901D3D /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
 		0E491BF9180E7DCC00901D3D /* EquipmentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentListViewController.h; sourceTree = "<group>"; };
@@ -765,6 +774,8 @@
 				0E6A896317F6B0BA0065043F /* MessageCell.xib */,
 				0E6A896517F6B11E0065043F /* MessageCell.h */,
 				0E6A896617F6B11E0065043F /* MessageCell.m */,
+				0E43ED6518278A8B006E3A66 /* LocalNotifactionServices.h */,
+				0E43ED6618278A8B006E3A66 /* LocalNotifactionServices.m */,
 			);
 			name = "消息管理";
 			sourceTree = "<group>";
@@ -1006,6 +1017,10 @@
 				0EA5CF321823AEFD0028BE8B /* ProductWeighCell.h */,
 				0EA5CF331823AEFD0028BE8B /* ProductWeighCell.m */,
 				0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */,
+				0E43ED5F18274341006E3A66 /* ProductWeighDetailViewController.h */,
+				0E43ED6018274341006E3A66 /* ProductWeighDetailViewController.m */,
+				0E43ED62182743E2006E3A66 /* AllProductViewController.h */,
+				0E43ED63182743E2006E3A66 /* AllProductViewController.m */,
 			);
 			name = "产品过磅";
 			sourceTree = "<group>";
@@ -1599,6 +1614,7 @@
 				0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */,
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
 				0EA5CF1A182389230028BE8B /* MaterialWeighCell.m in Sources */,
+				0E43ED6718278A8B006E3A66 /* LocalNotifactionServices.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */,
 				0EA5CF311823AE860028BE8B /* ProductWeighViewController.m in Sources */,
@@ -1625,6 +1641,7 @@
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,
+				0E43ED6118274341006E3A66 /* ProductWeighDetailViewController.m in Sources */,
 				0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
 				0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */,
@@ -1641,6 +1658,7 @@
 				0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
 				0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */,
+				0E43ED64182743E2006E3A66 /* AllProductViewController.m in Sources */,
 				0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */,
 				474F913A1814445400D94A85 /* TimeTableView.m in Sources */,
 				474F913D1814446C00D94A85 /* LineTableView.m in Sources */,

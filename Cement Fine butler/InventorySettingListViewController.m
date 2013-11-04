@@ -74,7 +74,9 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:1];
     }
     NSDictionary *info = [self.list objectAtIndex:indexPath.row];
-    cell.lblName.text = [Tool stringToString:[[info objectForKey:@"material"] objectForKey:@"name"]];
+    if(![Tool isNullOrNil:[info objectForKey:@"material"]]){
+        cell.lblName.text = [Tool stringToString:[[info objectForKey:@"material"] objectForKey:@"name"]];
+    }
     cell.lblTotal.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"stock"] doubleValue]];
     cell.lblCaps.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"topLimit"] doubleValue]];
     cell.lblLower.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"lowerLimit"] doubleValue]];

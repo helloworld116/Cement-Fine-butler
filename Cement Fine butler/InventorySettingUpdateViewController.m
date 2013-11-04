@@ -38,8 +38,9 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
     self.textLower.delegate = self;
     self.textCaps.delegate = self;
-    
-    self.lblName.text = [Tool stringToString:[[self.info objectForKey:@"material"] objectForKey:@"name"]];
+    if(![Tool isNullOrNil:[self.info objectForKey:@"material"]]){
+        self.lblName.text = [Tool stringToString:[[self.info objectForKey:@"material"] objectForKey:@"name"]];
+    }
     self.lblTotal.text = [NSString stringWithFormat:@"%.2f",[[self.info objectForKey:@"stock"] doubleValue]];
     self.textCaps.text = [NSString stringWithFormat:@"%.2f",[[self.info objectForKey:@"topLimit"] doubleValue]];
     self.textLower.text = [NSString stringWithFormat:@"%.2f",[[self.info objectForKey:@"lowerLimit"] doubleValue]];

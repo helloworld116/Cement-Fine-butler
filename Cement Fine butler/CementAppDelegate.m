@@ -49,35 +49,6 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
-    //设置navigtionbar
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
-    UIImage *barButton = [[UIImage imageNamed:@"NavBarButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-	[[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-    [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
-        [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
-        [UIColor colorWithWhite:0.0f alpha:0.2f], UITextAttributeTextShadowColor,
-        [NSValue valueWithUIOffset:UIOffsetMake(0.0f, -1.0f)], UITextAttributeTextShadowOffset,
-        [UIColor whiteColor], UITextAttributeTextColor,
-        nil]];
-    //设置启动界面
-    self.storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    if([Tool isNullOrNil:username]||[Tool isNullOrNil:password]){
-        self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-    }else{
-        LoginAction *loginAction = [[LoginAction alloc] init];
-        if ([loginAction backstageLoginWithSync:YES]) {
-            //自动登录成功
-            self.window.rootViewController = [self showViewControllers];
-        }else{
-            //自动登录失败
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alertView show];
-            self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        }
-    }
     //设置自定义时间
     if (![defaults objectForKey:@"startDate"]) {
         NSDate *date = [NSDate date];
@@ -90,16 +61,50 @@
         NSDictionary *dateDict = @{@"year":[NSNumber numberWithInt:year],@"month":[NSNumber numberWithInt:month],@"day":[NSNumber numberWithInt:day]};
         [defaults setObject:dateDict forKey:@"startDate"];
         [defaults setObject:dateDict forKey:@"endDate"];
+        [defaults setObject:[NSNumber numberWithLongLong:[date timeIntervalSince1970]*1000] forKey:@"latestMessage"];
     }
-    
-    //自定义缓存
-    ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
-    self.myCache = cache;
-    //设置缓存路径
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    [self.myCache setStoragePath:[documentDirectory stringByAppendingPathComponent:@"resource"]];
-    [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
+    //设置navigtionbar
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    UIImage *barButton = [[UIImage imageNamed:@"NavBarButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+	[[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
+        [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
+        [UIColor colorWithWhite:0.0f alpha:0.2f], UITextAttributeTextShadowColor,
+        [NSValue valueWithUIOffset:UIOffsetMake(0.0f, -1.0f)], UITextAttributeTextShadowOffset,
+        [UIColor whiteColor], UITextAttributeTextColor,
+        nil]];
+    //预警消息
+    self.notifactionServices = [[LocalNotifactionServices alloc] init];
+    //设置启动界面
+    self.storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    if([Tool isNullOrNil:username]||[Tool isNullOrNil:password]){
+        self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    }else{
+        LoginAction *loginAction = [[LoginAction alloc] init];
+        if ([loginAction backstageLoginWithSync:YES]) {
+            //自动登录成功
+            self.window.rootViewController = [self showViewControllers];
+            //预警消息
+            [self.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
+            [NSTimer scheduledTimerWithTimeInterval:30 target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+        }else{
+            //自动登录失败
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        }
+    }
+//    //自定义缓存
+//    ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
+//    self.myCache = cache;
+//    //设置缓存路径
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentDirectory = [paths objectAtIndex:0];
+//    [self.myCache setStoragePath:[documentDirectory stringByAppendingPathComponent:@"resource"]];
+//    [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
     [self.window makeKeyAndVisible];
     return YES;
 }

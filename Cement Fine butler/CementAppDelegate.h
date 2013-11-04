@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocalNotifactionServices.h"
 
 @interface CementAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BMKMapManager* mapManager; 
-
+@property (strong, nonatomic) LocalNotifactionServices *notifactionServices;
 @property (strong, nonatomic) UIStoryboard *storyboard;
 @property (nonatomic,retain) ASIDownloadCache *myCache; 
 @property (copy, nonatomic) NSString *accessToken;

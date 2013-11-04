@@ -5,26 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="RZo-oM-WqO">
-            <objects>
-                <navigationController storyboardIdentifier="messageNavController" definesPresentationContext="YES" navigationBarHidden="YES" id="u1I-gN-LsE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J6R-Ff-9yh">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ajP-oC-VWj" kind="relationship" relationship="rootViewController" id="NOF-jr-cQH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0qH-aW-dIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-411" y="-302"/>
-        </scene>
-        <!--Message View Controller - Root View Controller-->
+        <!--消息记录-->
         <scene sceneID="QBr-QN-r0f">
             <objects>
-                <tableViewController storyboardIdentifier="messageViewController" id="ajP-oC-VWj" customClass="MessageViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VaX-on-hSD">
+                <tableViewController storyboardIdentifier="messageViewController" id="ajP-oC-VWj" userLabel="消息记录" customClass="MessageViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VaX-on-hSD" customClass="PullTableView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,12 +23,19 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ajP-oC-VWj" id="ahB-ZG-JGe"/>
+                            <outlet property="delegate" destination="ajP-oC-VWj" id="jBI-sX-gIs"/>
+                            <outlet property="pullDelegate" destination="ajP-oC-VWj" id="6Al-P8-FLF"/>
+                        </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="esA-VV-uJY"/>
+                    <connections>
+                        <outlet property="pullTableView" destination="VaX-on-hSD" id="ryG-Um-gqj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8n-pe-EVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62" y="-290"/>
+            <point key="canvasLocation" x="-399" y="-330"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LiU-cC-u9D">

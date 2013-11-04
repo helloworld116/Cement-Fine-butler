@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "LoginAction.h"
+#import "LocalNotifactionServices.h"
 
 
 @interface LoginViewController ()<MBProgressHUDDelegate>
@@ -167,7 +168,10 @@
         LoginAction *loginAction = [[LoginAction alloc] init];
 //        [loginAction  backstageLoginWithSync:NO];
         [loginAction performSelector:@selector(backstageLoginWithSync:) withObject:[NSNumber numberWithBool:NO] afterDelay:kSharedApp.expiresIn-10];
-        
+        //预警消息
+        [kSharedApp.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
+        [NSTimer scheduledTimerWithTimeInterval:30 target:kSharedApp.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+//        [notifactionServices getNotifactions];
     }else{
         DDLogCWarn(@"登录失败，errorCode is %d",errorCode);
         self.password.text = nil;
