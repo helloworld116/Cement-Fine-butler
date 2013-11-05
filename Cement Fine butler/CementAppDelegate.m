@@ -66,6 +66,9 @@
     //设置navigtionbar
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     UIImage *barButton = [[UIImage imageNamed:@"NavBarButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    
+//    UIImage *backButton = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 5)];
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];    
 	[[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
@@ -89,7 +92,7 @@
             self.window.rootViewController = [self showViewControllers];
             //预警消息
             [self.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
-            [NSTimer scheduledTimerWithTimeInterval:30 target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+            [NSTimer scheduledTimerWithTimeInterval:30*60 target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
         }else{
             //自动登录失败
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -218,8 +221,7 @@
 
 #pragma mark 通知消息
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"通知消息" message:notification.alertBody delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:notification.alertAction message:notification.alertBody delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alertView show];
     application.applicationIconBadgeNumber -=1;
 }

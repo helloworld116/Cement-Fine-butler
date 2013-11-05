@@ -28,7 +28,7 @@ static int first=0;
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
     [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithInt:1] forKey:@"page"];
-    [self.request setPostValue:[NSNumber numberWithInt:1] forKey:@"count"];
+    [self.request setPostValue:[NSNumber numberWithInt:2] forKey:@"count"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [self.request setPostValue:[defaults objectForKey:@"latestMessage"] forKey:@"latestMessage"];
     [self.request setDelegate:self];

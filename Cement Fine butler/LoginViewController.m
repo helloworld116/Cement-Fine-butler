@@ -74,6 +74,7 @@
 - (IBAction)doLogin:(id)sender {
     if([self validate]){
         self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.HUD.minSize = CGSizeMake(135.f, 135.f);
         [self.view addSubview:self.HUD];
         self.HUD.delegate = self;
         self.HUD.minShowTime = 3;//最少显示时间为3秒
@@ -81,6 +82,7 @@
         self.HUD.labelText = @"正在登录...";
         [self.HUD showWhileExecuting:@selector(sendRequest) onTarget:self withObject:nil animated:YES];
 //        [self.HUD show:YES];
+//        [self sendRequest];
     }
 }
 
@@ -94,26 +96,35 @@
     [NSCharacterSet whitespaceCharacterSet]];
     self.pword = [self.password.text stringByTrimmingCharactersInSet:
     [NSCharacterSet whitespaceCharacterSet]];
+    
     if (self.uname == nil || [@"" isEqualToString:self.uname]) {
-        self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
         self.HUD.mode = MBProgressHUDModeText;
         self.HUD.labelText = @"用户名不能为空";
         self.HUD.labelFont = [UIFont systemFontOfSize:13.f];
         self.HUD.margin = 5.f;
-        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
-        self.HUD.removeFromSuperViewOnHide = YES;
-        [self.HUD hide:YES afterDelay:2];
+        self.HUD.yOffset = -39;
+//        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
+//        self.HUD.removeFromSuperViewOnHide = YES;
+        self.HUD.delegate = self;
+        [self.view addSubview:self.HUD];
+        [self.HUD show:YES];
+        [self.HUD hide:YES afterDelay:1];
         return NO;
     }
     if (self.pword ==nil || [@"" isEqualToString:self.pword]) {
-        self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
         self.HUD.mode = MBProgressHUDModeText;
         self.HUD.labelText = @"密码不能为空";
         self.HUD.labelFont = [UIFont systemFontOfSize:13.f];
         self.HUD.margin = 5.f;
-        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
-        self.HUD.removeFromSuperViewOnHide = YES;
-        [self.HUD hide:YES afterDelay:2];
+        self.HUD.yOffset = 20;
+//        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
+//        self.HUD.removeFromSuperViewOnHide = YES;
+        self.HUD.delegate = self;
+        [self.view addSubview:self.HUD];
+        [self.HUD show:YES];
+        [self.HUD hide:YES afterDelay:1];
         return NO;
     }
     return YES;
@@ -143,13 +154,20 @@
 //    [SVProgressHUD showErrorWithStatus:@"网络请求出错"];
     DDLogCError(@"网络请求出错,%@",[request error]);
     self.password.text = nil;
+    [self.HUD hide:YES];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
-    DDLogCVerbose(@"登录成功");
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==kErrorCode0) {
+//        self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check_icon"]];
+//        self.HUD.mode = MBProgressHUDModeCustomView;
+//        self.HUD.labelText = @"登录成功";
+//        [self.HUD hide:YES];
+//        sleep(10);
+        
+        DDLogCVerbose(@"登录成功");
         NSDictionary *data = [dict objectForKey:@"data"];
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
         kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
@@ -170,13 +188,14 @@
         [loginAction performSelector:@selector(backstageLoginWithSync:) withObject:[NSNumber numberWithBool:NO] afterDelay:kSharedApp.expiresIn-10];
         //预警消息
         [kSharedApp.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
-        [NSTimer scheduledTimerWithTimeInterval:30 target:kSharedApp.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:30*60 target:kSharedApp.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
 //        [notifactionServices getNotifactions];
     }else{
         DDLogCWarn(@"登录失败，errorCode is %d",errorCode);
         self.password.text = nil;
 //        NSString *msg = [dict objectForKey:@"message"];
     }
+    [self.HUD hide:YES];
 }
 
 #pragma mark textfield代理
