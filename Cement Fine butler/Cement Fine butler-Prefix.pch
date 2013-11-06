@@ -169,6 +169,7 @@
 #define kErrorCode0 0
 #define kErrorCodeNegative999 -999
 #define kErrorCodeNegative1 900//会话过期
+#define kMultiGroupCode @"000000"
 #endif
 
 #ifdef DEBUG

@@ -38,7 +38,9 @@
     [super viewDidLoad];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    if (!kSharedApp.multiGroup) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    }
     switch (self.type) {
         case 0:
             self.title = @"原材料库存";
@@ -117,7 +119,9 @@
     cell.lblName.text = lblNameStr;
     cell.lblInventory.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"stock"] floatValue]];
     cell.lblDate.text = [Tool stringToString:[info objectForKey:@"strCreateTime"]];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (!kSharedApp.multiGroup) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
 }
 
@@ -170,12 +174,14 @@
 
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentSelectedIndex = indexPath.row;
-    InventoryOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryOperateViewController"];
-    nextViewController.type = self.type;
-    nextViewController.inventoryInfo = [self.list objectAtIndex:indexPath.row];
-    nextViewController.delegate = self;
-    [self.navigationController pushViewController:nextViewController animated:YES];
+    if (!kSharedApp.multiGroup) {
+        self.currentSelectedIndex = indexPath.row;
+        InventoryOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryOperateViewController"];
+        nextViewController.type = self.type;
+        nextViewController.inventoryInfo = [self.list objectAtIndex:indexPath.row];
+        nextViewController.delegate = self;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }
 }
 
 

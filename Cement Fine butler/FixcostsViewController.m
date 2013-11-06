@@ -38,7 +38,9 @@
     self.title = @"固定成本列表";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    if (!kSharedApp.multiGroup) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    }
     self.tableView.rowHeight = 60.f;
     self.currentPage = 1;
     self.currentSelectedIndex = -1;
@@ -77,7 +79,9 @@
     cell.lblName.text = [Tool stringToString:[info objectForKey:@"name"]];
     cell.lblPrice.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"price"] floatValue]];
     cell.lblDate.text = [Tool stringToString:[info objectForKey:@"strCreateTime"]];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (!kSharedApp.multiGroup) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
 }
 
@@ -116,11 +120,13 @@
 
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentSelectedIndex = indexPath.row;
-    FixCostOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"fixCostOperateViewController"];
-    nextViewController.fixcostInfo = [self.list objectAtIndex:indexPath.row];
-    nextViewController.delegate = self;
-    [self.navigationController pushViewController:nextViewController animated:YES];
+    if (!kSharedApp.multiGroup) {
+        self.currentSelectedIndex = indexPath.row;
+        FixCostOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"fixCostOperateViewController"];
+        nextViewController.fixcostInfo = [self.list objectAtIndex:indexPath.row];
+        nextViewController.delegate = self;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }
 }
 
 #pragma mark 发送网络请求

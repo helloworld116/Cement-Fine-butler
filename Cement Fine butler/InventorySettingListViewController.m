@@ -35,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"固定成本列表";
+    self.title = @"物料库位列表";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.tableView.rowHeight = 50.f;
@@ -80,7 +80,9 @@
     cell.lblTotal.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"stock"] doubleValue]];
     cell.lblCaps.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"topLimit"] doubleValue]];
     cell.lblLower.text = [NSString stringWithFormat:@"%.2f",[[info objectForKey:@"lowerLimit"] doubleValue]];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (!kSharedApp.multiGroup) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
 }
 
@@ -92,13 +94,14 @@
 
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentSelectedIndex = indexPath.row;
-    NSDictionary *info = [self.list objectAtIndex:indexPath.row];
-    InventorySettingUpdateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventorySettingUpdateViewController"];
-    nextViewController.info = info;
-    nextViewController.delegate = self;
-    [self.navigationController pushViewController:nextViewController animated:YES];
-
+    if (!kSharedApp.multiGroup) {
+        self.currentSelectedIndex = indexPath.row;
+        NSDictionary *info = [self.list objectAtIndex:indexPath.row];
+        InventorySettingUpdateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventorySettingUpdateViewController"];
+        nextViewController.info = info;
+        nextViewController.delegate = self;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }
 }
 
 #pragma mark 发送网络请求

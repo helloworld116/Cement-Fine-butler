@@ -38,7 +38,9 @@
     self.title = @"生产记录列表";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    if (!kSharedApp.multiGroup) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    }
     self.tableView.rowHeight = 60.f;
     self.currentPage = 1;
     self.currentSelectedIndex = -1;
@@ -78,7 +80,9 @@
     cell.lblLine.text = [Tool stringToString:[info objectForKey:@"name"]];
     cell.lblProduct.text = [Tool stringToString:[info objectForKey:@"productZhDes"]];
     cell.lblTime.text = [Tool stringToString:[info objectForKey:@"start_time_str"]];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (!kSharedApp.multiGroup) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
 }
 
@@ -90,11 +94,13 @@
 
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentSelectedIndex = indexPath.row;
-    ProductHistoryUpdateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productHistoryUpdateViewController"];
-    nextViewController.productHistoryInfo = [self.list objectAtIndex:indexPath.row];
-    nextViewController.delegate = self;
-    [self.navigationController pushViewController:nextViewController animated:YES];
+    if (!kSharedApp.multiGroup) {
+        self.currentSelectedIndex = indexPath.row;
+        ProductHistoryUpdateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productHistoryUpdateViewController"];
+        nextViewController.productHistoryInfo = [self.list objectAtIndex:indexPath.row];
+        nextViewController.delegate = self;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }
 }
 
 #pragma mark 发送网络请求

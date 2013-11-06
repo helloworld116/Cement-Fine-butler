@@ -172,7 +172,16 @@
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
         kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
         kSharedApp.factory = [data objectForKey:@"factorys"][0];
+        kSharedApp.factorys = [data objectForKey:@"factorys"];
         kSharedApp.user = [data objectForKey:@"user"];
+        NSArray *permissions = [data objectForKey:@"permissions"];
+        for (NSDictionary *permission in permissions) {
+            if([kMultiGroupCode isEqualToString:[permission objectForKey:@"code"]]){
+                kSharedApp.multiGroup=YES;
+                break;
+            }
+        }
+        
         //保存用户名和密码
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:self.uname forKey:@"username"];

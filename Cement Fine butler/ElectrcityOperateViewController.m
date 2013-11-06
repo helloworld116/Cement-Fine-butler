@@ -34,7 +34,7 @@
     if (self.electricityInfo) {
         self.title = @"修改电力价格";
         self.textElectricityPrice.text = [NSString stringWithFormat:@"%.2f",[[self.electricityInfo objectForKey:@"value"] floatValue]];
-         dateValue = [self.electricityInfo objectForKey:@"date"];
+         dateValue = [self.electricityInfo objectForKey:@"createTime_str"];
     }else{
         self.title = @"添加电力价格";
         dateValue =  [dateFormatter stringFromDate:[NSDate date]];

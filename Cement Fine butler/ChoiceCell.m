@@ -16,7 +16,9 @@
     if (self) {
         // Initialization code
         self.lblName = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 250, 30)];
+        self.lblName.backgroundColor = [UIColor clearColor];
         self.imgChecked = [[UIImageView alloc] initWithFrame:CGRectMake(270, 7, 30, 30)];
+        self.imgChecked.backgroundColor = [UIColor clearColor];
         self.imgChecked.image = [UIImage imageNamed:@"checked"];
         self.imgChecked.hidden = YES;
         [self addSubview:self.lblName];

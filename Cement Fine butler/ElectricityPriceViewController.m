@@ -37,7 +37,9 @@
     self.title = @"电力价格";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    if (!kSharedApp.multiGroup) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    }
     self.tableView.rowHeight = 60.f;
 //    self.list = [@[@{@"id":@1,@"date":@"2013-09-22",@"value":@1.1f},@{@"id":@2,@"date":@"2013-09-23",@"value":@1.2f},@{@"id":@3,@"date":@"2013-09-24",@"value":@1.3f},@{@"id":@4,@"date":@"2013-09-25",@"value":@1.4f},@{@"id":@5,@"date":@"2013-09-26",@"value":@1.5f},@{@"id":@6,@"date":@"2013-09-27",@"value":@1.6f},@{@"id":@7,@"date":@"2013-09-28",@"value":@1.7f}] mutableCopy];
     self.requestCondition = @{@"currentPage": @1};
@@ -81,8 +83,10 @@
     ElectricityCell *cell = (ElectricityCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-        [rightUtilityButtons addUtilityButtonWithColor:[UIColor lightGrayColor] title:@"修改"];
-        [rightUtilityButtons addUtilityButtonWithColor:[UIColor colorWithRed:251./255. green:34./255. blue:38./255. alpha:1.] title:@"删除"];
+        if (!kSharedApp.multiGroup) {
+            [rightUtilityButtons addUtilityButtonWithColor:[UIColor lightGrayColor] title:@"修改"];
+            [rightUtilityButtons addUtilityButtonWithColor:[UIColor colorWithRed:251./255. green:34./255. blue:38./255. alpha:1.] title:@"删除"];
+        }
         cell = [[ElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:cellIdentifier
                                   containingTableView:self.tableView // Used for row height and selection

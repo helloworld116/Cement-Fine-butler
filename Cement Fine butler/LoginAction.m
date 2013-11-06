@@ -38,7 +38,15 @@ static int loginCount2=0;
                 kSharedApp.accessToken = [data objectForKey:@"accessToken"];
                 kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
                 kSharedApp.factory = [data objectForKey:@"factorys"][0];
+                kSharedApp.factorys = [data objectForKey:@"factorys"];
                 kSharedApp.user = [data objectForKey:@"user"];
+                NSArray *permissions = [data objectForKey:@"permissions"];
+                for (NSDictionary *permission in permissions) {
+                    if([kMultiGroupCode isEqualToString:[permission objectForKey:@"code"]]){
+                        kSharedApp.multiGroup=YES;
+                        break;
+                    }
+                }
                 loginResult = YES;
                 DDLogCInfo(@"登录成功");
                 //防止session过期自动登录
