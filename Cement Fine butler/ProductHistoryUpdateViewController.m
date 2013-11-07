@@ -151,7 +151,7 @@
         NSDictionary *dict = @{@"id":[NSNumber numberWithLong:databaseId],@"lineId":[NSNumber numberWithLong:self.lineId],@"lineName": self.lblLine.text,@"productId": [NSNumber numberWithLong:self.productId],@"productName": self.lblProduct.text,@"time":self.lblTime.text};
         [self.delegate passValue:dict];
         [self.navigationController popViewControllerAnimated:YES];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

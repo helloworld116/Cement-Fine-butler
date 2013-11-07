@@ -19,10 +19,10 @@
 
 @property (copy, nonatomic) NSString *accessToken;
 @property int expiresIn;//过期时间（秒）
-@property (retain, nonatomic) NSDictionary *factory;//工厂信息
-@property (retain, nonatomic) NSArray *factorys;//工厂信息
+@property (retain, nonatomic) NSDictionary *factory;//当前工厂信息
+@property (retain, nonatomic) NSArray *factorys;//账户下所有工厂信息
 @property (retain, nonatomic) NSDictionary *user;//用户信息
-@property (assign, nonatomic) BOOL multiGroup;//是否是多集团用法
+@property (assign, nonatomic) BOOL multiGroup;//是否是多集团用户
 
 -(UITabBarController *) showViewControllers;
 @end

@@ -223,7 +223,7 @@
     int errorCode = [[self.responseData objectForKey:@"error"] intValue];
     if (errorCode==0) {
         [self.webView reload];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

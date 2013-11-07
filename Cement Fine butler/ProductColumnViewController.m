@@ -177,7 +177,7 @@
     if (responseCode==0) {
         self.data = [dict objectForKey:@"data"];
         [self.bottomWebiew reload];
-    }else if(responseCode==kErrorCodeNegative1){
+    }else if(responseCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

@@ -170,7 +170,7 @@
     if (errorCode==0) {
         self.list = [dict objectForKey:@"data"];
         [self.tableView reloadData];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

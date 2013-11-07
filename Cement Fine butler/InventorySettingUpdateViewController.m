@@ -115,7 +115,7 @@
         NSDictionary *dict = @{@"topLimit":self.textCaps.text,@"lowerLimit":self.textLower.text};
         [self.delegate passValue:dict];
         [self.navigationController popViewControllerAnimated:YES];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

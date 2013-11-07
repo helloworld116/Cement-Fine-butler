@@ -45,7 +45,7 @@
     
     self.lblName.text = [Tool stringToString:[self.data objectForKey:@"name"]];
     self.lblSN.text = [Tool stringToString:[self.data objectForKey:@"sn"]];
-    self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"status"]];;
+    self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"statusLabel"]];;
     self.lblSettingFlowRate.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"settingFlowRate"] doubleValue]];
     self.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"instantFlowRate"] doubleValue]];
     self.lblTotalOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"totalOutput"] doubleValue]];

@@ -400,7 +400,7 @@
         self.data = [dict objectForKey:@"data"];
         [self.webView reload];
         [self performSelector:@selector(setBottomViewOfSubView) withObject:nil afterDelay:0.5];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

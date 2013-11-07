@@ -217,6 +217,7 @@
 		0EC05B26181F896C001BF5B7 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC05B1A181F896C001BF5B7 /* grayArrow@2x.png */; };
 		0EC05B27181F896C001BF5B7 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC05B1B181F896C001BF5B7 /* whiteArrow.png */; };
 		0EC05B28181F896C001BF5B7 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC05B1C181F896C001BF5B7 /* whiteArrow@2x.png */; };
+		0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */; };
 		0ED53083180CCD5400505259 /* nav-back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53081180CCD5400505259 /* nav-back-arrow.png */; };
 		0ED53084180CCD5400505259 /* nav-back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */; };
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
@@ -543,6 +544,8 @@
 		0EC05B1A181F896C001BF5B7 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		0EC05B1B181F896C001BF5B7 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		0EC05B1C181F896C001BF5B7 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		0EC5CDF4182B6B9F00E63DCA /* ChoiceFactoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceFactoryViewController.h; sourceTree = "<group>"; };
+		0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceFactoryViewController.m; sourceTree = "<group>"; };
 		0ED53081180CCD5400505259 /* nav-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow.png"; sourceTree = "<group>"; };
 		0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow@2x.png"; sourceTree = "<group>"; };
 		0EDC72011811319F00895931 /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
@@ -1083,6 +1086,8 @@
 			children = (
 				0EE9F607181A6DA3009A4330 /* MoreViewController.h */,
 				0EE9F608181A6DA3009A4330 /* MoreViewController.m */,
+				0EC5CDF4182B6B9F00E63DCA /* ChoiceFactoryViewController.h */,
+				0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */,
 			);
 			name = "更多";
 			sourceTree = "<group>";
@@ -1670,6 +1675,7 @@
 				474F91491814480800D94A85 /* TimeConditionCell.m in Sources */,
 				0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
+				0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,

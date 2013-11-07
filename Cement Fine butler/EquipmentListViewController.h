@@ -8,7 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EquipmentListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@interface EquipmentListViewController : UITableViewController
 @end

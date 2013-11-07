@@ -11,10 +11,11 @@
 #import "ElectrcityOperateViewController.h"
 
 @interface ElectricityPriceViewController ()<SWTableViewCellDelegate,MBProgressHUDDelegate>
+@property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
 @property (retain,nonatomic) NSMutableArray *list;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
-//@property (nonatomic) NSUInteger currentPage;
+@property (nonatomic) NSUInteger currentPage;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) NODataView *noDataView;
 @property (retain,nonatomic) NSDictionary *requestCondition;
@@ -233,19 +234,16 @@ ElectricityCell *currentOperateCell;
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
-    if (errorCode==0) {
+    if (errorCode==kErrorCode0) {
         [self.list addObjectsFromArray:[[dict objectForKey:@"data"] objectForKey:@"rows"] ];
         [self.tableView reloadData];
         self.tableView.hidden = NO;
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
+//        kSharedApp.window.rootViewController = loginViewController;
+//        kSharedApp.window setRootViewController:(UIViewController *)
+        [kSharedApp.window performSelector:@selector(setRootViewController:) withObject:loginViewController afterDelay:3.f];
     }else{
-//        self.data = nil;
-//        [self.webView reload];
-//        [self setBottomViewOfSubView];
-//        self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-//        [self.view performSelector:@selector(addSubview:) withObject:self.noDataView afterDelay:0.5];
     }
     [self.progressHUD hide:YES];
 }

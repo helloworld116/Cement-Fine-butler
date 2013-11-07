@@ -29,7 +29,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
     [self.textElectricityPrice becomeFirstResponder];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM"];
     NSString *dateValue;
     if (self.electricityInfo) {
         self.title = @"修改电力价格";
@@ -72,7 +72,7 @@
 
 - (IBAction)dateChanged:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM"];
     NSDate *select = [self.datePicker date];
     NSString *dateString =  [dateFormatter stringFromDate:select];
     self.lblDate.text = dateString;

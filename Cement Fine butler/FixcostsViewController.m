@@ -174,7 +174,7 @@
         }
         [self.list addObjectsFromArray:[[dict objectForKey:@"data"] objectForKey:@"rows"] ];
         [self.tableView reloadData];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{

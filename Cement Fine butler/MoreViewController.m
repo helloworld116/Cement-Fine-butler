@@ -9,9 +9,10 @@
 #import "MoreViewController.h"
 #import "RawMaterialsCalViewController.h"
 #import "ElectricityPriceViewController.h"
-#import "ChoiceCell.h"
+#import "PassValueDelegate.h"
+#import "ChoiceFactoryViewController.h"
 
-@interface MoreViewController ()
+@interface MoreViewController ()<PassValueDelegate>
 @property (nonatomic,retain) NSArray *options;
 @end
 
@@ -60,7 +61,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==0) {
-        return kSharedApp.factorys.count;
+        return 1;
     }else if(section==1) {
         return self.options.count;
     }else{
@@ -80,21 +81,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ChoiceCell";
-    ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"MenuCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
     if (!cell) {
-        cell = [[ChoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     if (indexPath.section==0) {
-        cell.lblName.text = [kSharedApp.factorys[indexPath.row] objectForKey:@"name"];
-        if (indexPath.row==0) {
-            cell.imgChecked.hidden = NO;
+        cell.textLabel.text = [kSharedApp.factory objectForKey:@"name"];
+        if (kSharedApp.factorys.count>1) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }else if(indexPath.section==1) {
-        cell.lblName.text = [self.options[indexPath.row] objectForKey:@"name"];
+        cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else{
-        cell.lblName.text = @"退出当前账号";
+        cell.textLabel.text = @"退出当前账号";
     }
     return cell;
 }
@@ -106,13 +108,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==0) {
-        for (int i=0; i<[[tableView visibleCells] count]; i++) {
-            ChoiceCell *cell = (ChoiceCell *)[[tableView visibleCells] objectAtIndex:i];
-            cell.imgChecked.hidden = YES;
+        if (kSharedApp.factorys.count>1) {
+            ChoiceFactoryViewController *nextViewController = [[ChoiceFactoryViewController alloc] init];
+            nextViewController.delegate = self;
+            [self.navigationController pushViewController:nextViewController animated:YES];
         }
-        ChoiceCell *cell = (ChoiceCell *)[tableView cellForRowAtIndexPath:indexPath];
-        cell.imgChecked.hidden = NO;
-//        self.currentSelectCellIndex = indexPath.row;
     }else if (indexPath.section==1) {
         NSString *controllerIdentifier = [self.options[indexPath.row] objectForKey:@"storyboard"];
         UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:controllerIdentifier];
@@ -120,7 +120,6 @@
         [self.navigationController pushViewController:nextViewController animated:YES];
     }else{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults removeObjectForKey:@"username"];
         [defaults removeObjectForKey:@"password"];
         kSharedApp.accessToken=nil;
         kSharedApp.expiresIn=0;
@@ -133,4 +132,10 @@
     }
 }
 
+#pragma mark PassValueDelegate
+-(void)passValue:(NSDictionary *)newValue{
+    kSharedApp.factory = newValue;
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.textLabel.text = [newValue objectForKey:@"name"];
+}
 @end

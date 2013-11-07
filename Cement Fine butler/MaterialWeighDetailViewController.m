@@ -220,7 +220,7 @@
         NSDictionary *dict = @{@"materialName": self.lblMaterialName.text,@"price": self.textPrice.text,@"amount": self.textAmout.text,@"createDate": self.lblTime.text,@"ticketCode":self.textTicketCode.text,@"supplyName":self.textSupplyName.text,@"gw":self.textGw.text,@"aw":self.textAw.text,@"tare":self.textTare.text,@"nw":self.textNw.text,@"supplierNw":self.textSupplierNw.text,@"carCode":self.textCarCode.text};
         [self.delegate passValue:dict];
         [self.navigationController popViewControllerAnimated:YES];
-    }else if(errorCode==kErrorCodeNegative1){
+    }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{
