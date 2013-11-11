@@ -127,6 +127,7 @@
 		0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BFF180E7E4600901D3D /* EquipmentListCell.m */; };
 		0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */; };
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
+		0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E511B39183106F20077CA4C /* PromptMessageView.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
 		0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */; };
 		0E5A09FE1818B60C00241891 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5A09FC1818B60C00241891 /* Icon-60@2x.png */; };
@@ -414,6 +415,8 @@
 		0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		0E5008ED1805301B00198B9B /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		0E5008EE1805301B00198B9B /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
+		0E511B38183106F20077CA4C /* PromptMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptMessageView.h; sourceTree = "<group>"; };
+		0E511B39183106F20077CA4C /* PromptMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptMessageView.m; sourceTree = "<group>"; };
 		0E58AFDD17E93A18008A2DF2 /* Pie2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pie2D.html; sourceTree = "<group>"; };
 		0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostManagerCenterViewController.h; sourceTree = "<group>"; };
 		0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostManagerCenterViewController.m; sourceTree = "<group>"; };
@@ -710,6 +713,8 @@
 				47CB7BA41818131200FE97B6 /* MyKeyboardView.m */,
 				0E3843241821F0D600D58433 /* UITextField+DisableCopyPaste.h */,
 				0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */,
+				0E511B38183106F20077CA4C /* PromptMessageView.h */,
+				0E511B39183106F20077CA4C /* PromptMessageView.m */,
 			);
 			name = CustomerView;
 			sourceTree = "<group>";
@@ -1597,6 +1602,7 @@
 				472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */,
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
+				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
 				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,

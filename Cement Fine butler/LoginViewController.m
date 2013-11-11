@@ -172,6 +172,7 @@
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
         kSharedApp.expiresIn = [[data objectForKey:@"expiresIn"] intValue];
         kSharedApp.factory = [data objectForKey:@"factorys"][0];
+        kSharedApp.startFactoryId=kSharedApp.finalFactoryId=[[kSharedApp.factory objectForKey:@"id"] intValue];
         kSharedApp.factorys = [data objectForKey:@"factorys"];
         kSharedApp.user = [data objectForKey:@"user"];
         NSArray *permissions = [data objectForKey:@"permissions"];

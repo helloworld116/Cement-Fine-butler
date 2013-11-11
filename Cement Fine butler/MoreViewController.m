@@ -32,11 +32,12 @@
     [super viewDidLoad];
     self.navigationItem.title = @"更多操作";
     self.tableView.bounces = NO;
+    self.tableView.rowHeight = 60;
     self.options = @[
          @{@"name":@"原材料成本计算器",@"storyboard":@"rawMaterialsCalViewController"},
          @{@"name":@"电力价格管理",@"storyboard":@"electricityPriceViewController"},
          @{@"name":@"消息",@"storyboard":@"messageViewController"},
-         @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
+//         @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
          @{@"name":@"过磅管理",@"storyboard":@"weighViewController"},
          @{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},
          @{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},
@@ -91,12 +92,15 @@
         cell.textLabel.text = [kSharedApp.factory objectForKey:@"name"];
         if (kSharedApp.factorys.count>1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }else if(indexPath.section==1) {
         cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else{
         cell.textLabel.text = @"退出当前账号";
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
 }
@@ -121,6 +125,8 @@
     }else{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults removeObjectForKey:@"password"];
+//        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+//        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
         kSharedApp.accessToken=nil;
         kSharedApp.expiresIn=0;
         kSharedApp.factorys=nil;

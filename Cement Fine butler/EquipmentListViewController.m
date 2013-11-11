@@ -132,7 +132,8 @@
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:[[kSharedApp.factory objectForKey:@"id"] intValue]] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithLong:kPageSize] forKey:@"count"];
-    [self.request setPostValue:[NSNumber numberWithInt:currentPage-1] forKey:@"offset"];
+    //暂时使用offset，后面改成page
+    [self.request setPostValue:[NSNumber numberWithInt:currentPage] forKey:@"page"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];

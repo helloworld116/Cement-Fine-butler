@@ -37,6 +37,7 @@
     #import "SearchCondition.h"
     #import "LoadingView.h"
     #import "NODataView.h"
+    #import "PromptMessageView.h"
     #import "UITextField+DisableCopyPaste.h"
     #import "LoginViewController.h"
     #import "Tool.h"
@@ -78,7 +79,11 @@
     //原材料成本计算器
     #define kCalculator [kServerURL stringByAppendingString:@"material/calculator"]
     //电力价格列表
-#define kElectricityList [kServerURL stringByAppendingString:@"electricityPrice/search"]
+    #define kElectricityList [kServerURL stringByAppendingString:@"electricityPrice/search"]
+    //电力价格添加
+    #define kElectricityAdd [kServerURL stringByAppendingString:@"electricityPrice/save"]
+    //电力价格修改
+    #define kElectricityUpdate [kServerURL stringByAppendingString:@"electricityPrice/update"]
 
 //消息预警
 #define kMessageList [kServerURL stringByAppendingString:@"messages"]
@@ -165,6 +170,13 @@
 #define kMessageType1 @"[盒子网络断开]"
 #define kMessageType2 @"[库存消息]"
 #define kMessageType3 @"[盒子位置变更]"
+
+//#define kSetEquipmentType(typeCode)(\
+//if(typeCode isEqualToString(@"")ret\))
+//#define @"010" @"双托辊电子皮带秤"
+//#define @"020" @"定量给料机"
+//#define @"030" @"科里奥利粉体定量给料秤"
+//#define @"040" @"连续式失重秤"
 
 #define kErrorCode0 0
 #define kErrorCodeNegative999 -999

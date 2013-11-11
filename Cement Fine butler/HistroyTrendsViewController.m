@@ -12,7 +12,8 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
-@property (retain, nonatomic) NODataView *noDataView;
+//@property (retain, nonatomic) NODataView *noDataView;
+@property (retain, nonatomic) PromptMessageView *messageView;
 @property (retain,nonatomic) NSString *titlePre;
 @property (retain,nonatomic) NSDictionary *lastCondition;
 @end
@@ -196,9 +197,9 @@
 -(void) sendRequest:(NSDictionary *)condition{
     //清除原数据
     self.data = nil;
-    if (self.noDataView) {
-        [self.noDataView removeFromSuperview];
-        self.noDataView = nil;
+    if (self.messageView) {
+        [self.messageView removeFromSuperview];
+        self.messageView = nil;
     }
     self.webView.hidden=YES;
     //加载过程提示
@@ -239,18 +240,29 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
+    NSString *message = nil;
+    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
+        message = @"网络请求超时啦。。。";
+    }else{
+        message = @"网络出错啦。。。";
+    }
     [self.progressHUD hide:YES];
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
+    [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==0) {
+    if (responseCode==kErrorCode0) {
         self.data = [dict objectForKey:@"data"];
         [self.webView reload];
-    }else if(responseCode==-1){
+    }else if(responseCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+        [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
     }
     [self.progressHUD hide:YES];
 }

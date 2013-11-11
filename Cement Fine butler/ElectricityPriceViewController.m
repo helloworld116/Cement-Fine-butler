@@ -15,10 +15,11 @@
 @property (retain,nonatomic) NSMutableArray *list;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
-@property (nonatomic) NSUInteger currentPage;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) NODataView *noDataView;
-@property (retain,nonatomic) NSDictionary *requestCondition;
+
+@property (nonatomic) NSUInteger totalCount;
+@property (nonatomic) NSUInteger currentPage;
 @end
 
 @implementation ElectricityPriceViewController
@@ -42,12 +43,11 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
     }
     self.tableView.rowHeight = 60.f;
-//    self.list = [@[@{@"id":@1,@"date":@"2013-09-22",@"value":@1.1f},@{@"id":@2,@"date":@"2013-09-23",@"value":@1.2f},@{@"id":@3,@"date":@"2013-09-24",@"value":@1.3f},@{@"id":@4,@"date":@"2013-09-25",@"value":@1.4f},@{@"id":@5,@"date":@"2013-09-26",@"value":@1.5f},@{@"id":@6,@"date":@"2013-09-27",@"value":@1.6f},@{@"id":@7,@"date":@"2013-09-28",@"value":@1.7f}] mutableCopy];
-    self.requestCondition = @{@"currentPage": @1};
     //数据
     self.list = [NSMutableArray array];
     //发送请求
-    [self sendRequest:self.requestCondition];
+    self.currentPage = 1;
+    [self sendRequest:self.currentPage withProgress:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,7 +170,6 @@ ElectricityCell *currentOperateCell;
 
 #pragma mark UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;{
-    
     switch (buttonIndex) {
         case 0:
 //            [currentOperateCell hideUtilityButtonsAnimated:YES];
@@ -194,31 +193,26 @@ ElectricityCell *currentOperateCell;
 }
 
 #pragma mark 发送网络请求
--(void) sendRequest:(NSDictionary *)condition{
-    //清除原数据
-//    self.data = nil;
-//    if (self.noDataView) {
-//        [self.noDataView removeFromSuperview];
-//        self.noDataView = nil;
-//    }
-    self.tableView.hidden=YES;
+-(void) sendRequest:(NSUInteger)currentPage withProgress:(BOOL)isProgress{
     //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate = self;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
+    if (isProgress) {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.progressHUD.labelText = @"加载中...";
+        self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+        self.progressHUD.dimBackground = YES;
+        self.progressHUD.opacity=1.0;
+        self.progressHUD.delegate = self;
+        [self.view addSubview:self.progressHUD];
+        [self.progressHUD show:YES];
+    }
     
-    DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostURL);
+    DDLogCInfo(@"******  Request URL is:%@  ******",kElectricityList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kElectricityList]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
     [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithInt:[[condition objectForKey:@"currentPage"] intValue]] forKey:@"page"];
+    [self.request setPostValue:[NSNumber numberWithInt:currentPage] forKey:@"page"];
     [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"rows"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
@@ -235,9 +229,12 @@ ElectricityCell *currentOperateCell;
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==kErrorCode0) {
+        if (self.currentPage==1) {
+            [self.list removeAllObjects];
+        }
         [self.list addObjectsFromArray:[[dict objectForKey:@"data"] objectForKey:@"rows"] ];
+        self.totalCount = [[[dict objectForKey:@"data"] objectForKey:@"total"] integerValue];
         [self.tableView reloadData];
-        self.tableView.hidden = NO;
     }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
 //        kSharedApp.window.rootViewController = loginViewController;
@@ -254,6 +251,37 @@ ElectricityCell *currentOperateCell;
 	self.progressHUD = nil;
 }
 
+#pragma mark - Refresh and load more methods
+- (void) refreshTable
+{
+    //Code to actually refresh goes here.
+    self.pullTableView.pullLastRefreshDate = [NSDate date];
+    self.pullTableView.pullTableIsRefreshing = NO;
+}
+
+- (void) loadMoreDataToTable
+{
+    //Code to actually load more data goes here.
+    self.pullTableView.pullTableIsLoadingMore = NO;
+}
+
+#pragma mark - PullTableViewDelegate
+
+- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
+{
+    self.currentPage = 1;
+    [self sendRequest:self.currentPage withProgress:NO];
+    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
+{
+    if (self.totalCount>self.currentPage*kPageSize) {
+        self.currentPage++;
+        [self sendRequest:self.currentPage withProgress:NO];
+    }
+    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+}
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];

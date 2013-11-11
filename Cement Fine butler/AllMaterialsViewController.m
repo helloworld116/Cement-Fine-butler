@@ -14,9 +14,9 @@
 @property (nonatomic,retain) UIBarButtonItem *rightButtonItem;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
-@property (nonatomic) NSUInteger firstSelectCellIndex;
-@property (nonatomic) NSUInteger currentSelectCellIndex;
-
+@property (nonatomic) NSUInteger firstSelectCellIndex;//第一次选中的cell索引
+@property (nonatomic) NSUInteger currentSelectCellIndex;//当前选中的cell索引
+@property (nonatomic) long currentSelectMaterialId;//当前选中的原材料id
 @end
 
 @implementation AllMaterialsViewController
@@ -38,6 +38,7 @@
     self.title = @"物料选择";
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureChoice:)];
     self.firstSelectCellIndex = -1;
+    self.currentSelectMaterialId = self.materialId;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self sendRequest];
 }
@@ -66,16 +67,17 @@
 {
     static NSString *CellIdentifier = @"ChoiceCell";
     ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    // Configure the cell...
     if (!cell) {
         cell = [[ChoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSDictionary *info = self.list[indexPath.row];
     long materialId = [[info objectForKey:@"id"] intValue];
     NSString *name = [info objectForKey:@"name"];
-    if (self.materialId == materialId) {
+    if (self.currentSelectMaterialId == materialId) {
         self.firstSelectCellIndex = indexPath.row;
         cell.imgChecked.hidden = NO;
+    }else{
+        cell.imgChecked.hidden = YES;
     }
     cell._id = materialId;
     cell.lblName.text = name;
@@ -90,6 +92,7 @@
         cell.imgChecked.hidden = YES;
     }
     ChoiceCell *cell = (ChoiceCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.currentSelectMaterialId = cell._id;
     cell.imgChecked.hidden = NO;
     self.currentSelectCellIndex = indexPath.row;
     if (self.currentSelectCellIndex==self.firstSelectCellIndex) {
@@ -131,7 +134,7 @@
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
-    if (errorCode==0) {
+    if (errorCode==kErrorCode0) {
         self.list = [dict objectForKey:@"data"];
         [self.tableView reloadData];
     }else if(errorCode==kErrorCodeExpired){

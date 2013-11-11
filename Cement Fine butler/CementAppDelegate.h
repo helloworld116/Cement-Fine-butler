@@ -23,6 +23,7 @@
 @property (retain, nonatomic) NSArray *factorys;//账户下所有工厂信息
 @property (retain, nonatomic) NSDictionary *user;//用户信息
 @property (assign, nonatomic) BOOL multiGroup;//是否是多集团用户
+@property (assign, nonatomic) int startFactoryId,finalFactoryId;//开始选择的工厂id和最后选择的工厂id
 
 -(UITabBarController *) showViewControllers;
 @end
