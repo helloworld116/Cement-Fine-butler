@@ -370,6 +370,9 @@
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
     DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
+//    // 设置持久连接的超时时间为120秒
+//    [self.request setPersistentConnectionTimeoutSeconds:120];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
 //    [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
@@ -391,13 +394,13 @@
 
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
     NSString *message = nil;
     if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
         message = @"网络请求超时啦。。。";
     }else{
         message = @"网络出错啦。。。";
     }
-    [self.progressHUD hide:YES];
     self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
     [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
 }

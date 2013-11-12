@@ -182,6 +182,8 @@
 #define kErrorCodeNegative999 -999
 #define kErrorCodeExpired 900//会话过期
 
+#define kASIHttpRequestTimeoutSeconds 10
+
 #define kMultiGroupCode @"000000"
 #endif
 

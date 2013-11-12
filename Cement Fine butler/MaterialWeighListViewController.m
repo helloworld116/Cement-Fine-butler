@@ -113,6 +113,7 @@
     }
     DDLogCInfo(@"******  Request URL is:%@  ******",kWeighMaterialList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kWeighMaterialList]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];

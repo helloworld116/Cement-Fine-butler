@@ -13,21 +13,39 @@
 
 @interface EquipmentListViewController ()<MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
+@property (strong, nonatomic) UIBarButtonItem *rightButtonItem;
 @property (nonatomic,retain) NSMutableArray *list;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain, nonatomic) LoadingView *loadingView;
+@property (retain, nonatomic) PromptMessageView *messageView;
 @property (nonatomic,assign) int totalCount;
 @property (nonatomic,assign) int currentPage;
 @end
 
 @implementation EquipmentListViewController
+//- (void)loadView {
+//    self.view = [[UIView alloc] initWithFrame:CGRectZero];
+//    self.view.backgroundColor = [UIColor whiteColor];
+//    
+//    UITableView *tblView = [[UITableView alloc]
+//                            initWithFrame:CGRectZero
+//                            style:UITableViewStylePlain
+//                            ];
+//    
+//    tblView.autoresizingMask =
+//    UIViewAutoresizingFlexibleWidth |
+//    UIViewAutoresizingFlexibleHeight
+//    ;
+//    
+//    self.tableView = tblView;
+//    [self.view addSubview:tblView];
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.title = @"设备列表";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地图" style:UIBarButtonItemStyleBordered target:self action:@selector(showMapViewController:)];
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地图" style:UIBarButtonItemStyleBordered target:self action:@selector(showMapViewController:)];
     self.currentPage=1;
     self.list = [NSMutableArray array];
     [self sendRequest:self.currentPage withProgress:YES];
@@ -128,6 +146,7 @@
     }
     DDLogCInfo(@"******  Request URL is:%@  ******",kEquipmentList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kEquipmentList]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:[[kSharedApp.factory objectForKey:@"id"] intValue]] forKey:@"factoryId"];
@@ -143,6 +162,14 @@
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
     [self.progressHUD hide:YES];
+    NSString *message = nil;
+    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
+        message = @"网络请求超时啦。。。";
+    }else{
+        message = @"网络出错啦。。。";
+    }
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
+    [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
@@ -153,11 +180,16 @@
             [self.list removeAllObjects];
         }
         [self.list addObjectsFromArray:[[dict objectForKey:@"data"] objectForKey:@"equipments"]];
+        if (self.list.count>0) {
+            self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+        }
         self.totalCount = [[[dict objectForKey:@"data"] objectForKey:@"totalCount"] intValue];
         [self.tableView reloadData];
     }else if(responseCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
     }
     [self.progressHUD hide:YES];
 }

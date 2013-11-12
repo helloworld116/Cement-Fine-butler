@@ -208,6 +208,7 @@ ElectricityCell *currentOperateCell;
     
     DDLogCInfo(@"******  Request URL is:%@  ******",kElectricityList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kElectricityList]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];

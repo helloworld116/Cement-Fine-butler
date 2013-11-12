@@ -14,7 +14,7 @@
 @interface CostComparisonViewController ()<MBProgressHUDDelegate>
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
-@property (retain, nonatomic) NODataView *noDataView;
+@property (retain, nonatomic) PromptMessageView *messageView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
@@ -142,9 +142,9 @@
 -(void) sendRequest:(NSDictionary *)condition{
     //清除原数据
     self.data = nil;
-    if (self.noDataView) {
-        [self.noDataView removeFromSuperview];
-        self.noDataView = nil;
+    if (self.messageView) {
+        [self.messageView removeFromSuperview];
+        self.messageView = nil;
     }
     self.webView.hidden=YES;
     self.bottomView.hidden=YES;
@@ -181,6 +181,14 @@
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
     [self.progressHUD hide:YES];
+    NSString *message = nil;
+    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
+        message = @"网络请求超时啦。。。";
+    }else{
+        message = @"网络出错啦。。。";
+    }
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
+    [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
@@ -197,8 +205,8 @@
         self.data = nil;
         [self.webView reload];
         [self setBottomViewOfSubView];
-        self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-        [self.view performSelector:@selector(addSubview:) withObject:self.noDataView afterDelay:0.5];
+        self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+        [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
     }
     [self.progressHUD hide:YES];
 }

@@ -12,7 +12,7 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 
-@property (retain, nonatomic) NODataView *noDataView;
+@property (retain, nonatomic) PromptMessageView *messageView;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 @end
@@ -44,8 +44,9 @@
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
     //设置没有数据或发生错误时的view
-    self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-    [self.view addSubview:self.noDataView];
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    [self.view addSubview:self.messageView];
+    self.messageView.hidden = YES;
     //异步请求数据
     NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
     [self sendRequest:condition];//默认查询原材料库存
@@ -120,8 +121,8 @@
         self.bottomWebiew.hidden = NO;
     }else if([Tool isNullOrNil:self.data]){
         //没有满足条件的数据
-        self.noDataView.hidden = NO;
-        self.noDataView.labelMsg.text=@"没有满足条件的数据";
+        self.messageView.hidden = NO;
+        self.messageView.labelMsg.text=@"没有满足条件的数据";
     }
 }
    
@@ -135,7 +136,7 @@
     //清除原数据
     self.data = nil;
     self.bottomWebiew.hidden=YES;
-    self.noDataView.hidden=YES;
+    self.messageView.hidden=YES;
     //加载过程提示
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
     self.progressHUD.labelText = @"加载中...";
@@ -152,6 +153,7 @@
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
     DDLogCInfo(@"******  Request URL is:%@  ******",kOutputReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
@@ -167,8 +169,8 @@
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
     [self.progressHUD hide:YES];
-    self.noDataView.hidden = NO;
-    self.noDataView.labelMsg.text=@"请求出错了。。。";
+    self.messageView.hidden = NO;
+    self.messageView.labelMsg.text=@"请求出错了。。。";
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{    
@@ -181,8 +183,8 @@
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{
-        self.noDataView.hidden = NO;
-        self.noDataView.labelMsg.text=@"未知错误。。。";
+        self.messageView.hidden = NO;
+        self.messageView.labelMsg.text=@"未知错误。。。";
     }
     [self.progressHUD hide:YES];
 }

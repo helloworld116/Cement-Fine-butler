@@ -137,6 +137,7 @@
     }
     DDLogCInfo(@"******  Request URL is:%@  ******",kMessageList);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMessageList]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];

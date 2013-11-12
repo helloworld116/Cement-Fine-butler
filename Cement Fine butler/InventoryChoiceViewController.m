@@ -145,10 +145,7 @@
             self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kInventoryAllProductList]];
             break;
     }
-    //设置缓存方式
-    [self.request setDownloadCache:kSharedApp.myCache];
-    //设置缓存数据存储策略，这里采取的是如果无更新或无法联网就读取缓存数据
-    [self.request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];

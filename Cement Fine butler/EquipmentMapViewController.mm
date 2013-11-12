@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.title = @"设备地图列表";
@@ -34,7 +35,6 @@
         region.span.longitudeDelta = 0.01;
         self.mapView.region = region;
     }
-    [super viewDidLoad];
 }
 
 -(void)viewWillAppear:(BOOL)animated

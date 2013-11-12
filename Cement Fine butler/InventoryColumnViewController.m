@@ -158,6 +158,7 @@
 
     DDLogCInfo(@"******  Request URL is:%@  ******",kStockReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:stockType] forKey:@"type"];

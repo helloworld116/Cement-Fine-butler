@@ -408,13 +408,13 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="元/吨" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AuF-u5-jc4">
-                                                    <rect key="frame" x="255" y="6" width="35" height="30"/>
+                                                    <rect key="frame" x="254" y="6" width="36" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" id="lg9-9M-j1D" customClass="NoCopyTextField">
-                                                    <rect key="frame" x="10" y="6" width="246" height="30"/>
+                                                    <rect key="frame" x="10" y="6" width="245" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -437,13 +437,13 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="元/吨" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y2M-dz-iL8">
-                                                    <rect key="frame" x="255" y="6" width="35" height="30"/>
+                                                    <rect key="frame" x="254" y="6" width="36" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" id="RL7-Jy-Ige" customClass="NoCopyTextField">
-                                                    <rect key="frame" x="10" y="6" width="246" height="30"/>
+                                                    <rect key="frame" x="10" y="6" width="245" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -1482,10 +1482,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-1589" y="1696"/>
         </scene>
-        <!--Inventory Column View Controller-->
+        <!--库存报表-->
         <scene sceneID="T8B-uq-1s4">
             <objects>
-                <viewController storyboardIdentifier="inventoryColumnViewController" id="REM-73-e9s" customClass="InventoryColumnViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="inventoryColumnViewController" id="REM-73-e9s" userLabel="库存报表" customClass="InventoryColumnViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xpJ-2B-sXl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1538,10 +1538,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-411" y="-927"/>
         </scene>
-        <!--Product Column View Controller-->
+        <!--产量报表-->
         <scene sceneID="NFr-y1-LVO">
             <objects>
-                <viewController storyboardIdentifier="productColumnViewController" id="BFp-W7-3UZ" customClass="ProductColumnViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="productColumnViewController" id="BFp-W7-3UZ" userLabel="产量报表" customClass="ProductColumnViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rfb-E5-tuA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

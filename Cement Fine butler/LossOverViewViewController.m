@@ -155,7 +155,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSDictionary *data = [self.responseData objectForKey:@"data"];
     NSDictionary *overview = [data objectForKey:@"overview"];
-    if (overview) {
+    if (overview&&[[overview objectForKey:@"totalLoss"] doubleValue]>0) {
         double totalLoss = [[overview objectForKey:@"totalLoss"] doubleValue];
         //原材料损耗
         double rawMaterialsLoss = [[overview objectForKey:@"rawMaterialsLoss"] doubleValue];
@@ -206,6 +206,7 @@
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
     DDLogCInfo(@"******  Request URL is:%@  ******",kLoss);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoss]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
@@ -228,7 +229,13 @@
     self.responseData = [Tool stringToDictionary:request.responseString];
     int errorCode = [[self.responseData objectForKey:@"error"] intValue];
     if (errorCode==0) {
-        [self.webView reload];
+        //服务端正常响应，但是没有数据，数据都为0
+        if ([[[self.responseData objectForKey:@"data"] objectForKey:@"totalLoass"] doubleValue]==0) {
+            self.noDataView = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+            [self.view performSelector:@selector(addSubview:) withObject:self.noDataView afterDelay:0.5];
+        }else{
+            [self.webView reload];
+        }
     }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
