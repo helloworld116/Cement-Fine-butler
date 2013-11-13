@@ -30,6 +30,7 @@
 @interface CementAppDelegate()
 @property (nonatomic,retain) LoginAction *loginAction;
 //@property (nonatomic,retain) UIStoryboard *storyboard;
+@property (nonatomic,retain) Reachability *hostReach;
 @end
 
 @implementation CementAppDelegate
@@ -37,6 +38,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //网络状况检查
+    [self netWorkChecker];
+    [self addNetWorkChangeNotification];
     //设置日志记录器
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     //设置初始化百度地图
@@ -92,7 +96,7 @@
             self.window.rootViewController = [self showViewControllers];
             //预警消息
             [self.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
-            [NSTimer scheduledTimerWithTimeInterval:30*60 target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+            self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:30*60 target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
         }else{
             //自动登录失败
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -226,4 +230,43 @@
     application.applicationIconBadgeNumber -=1;
 }
 
+
+#pragma mark network check
+-(void)netWorkChecker
+{
+    self.hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    switch ([self.hostReach currentReachabilityStatus]) {
+        case NotReachable:
+            DDLogCInfo(@"没有网络连接");
+            // 没有网络连接
+            break;
+        case ReachableViaWWAN:
+            // 使用3G网络
+            DDLogCInfo(@"使用3G网络");
+            break;
+        case ReachableViaWiFi:
+            // 使用WiFi网络
+            DDLogCInfo(@"使用WiFi网络");
+            break;
+    }
+}
+
+
+-(void)addNetWorkChangeNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name: kReachabilityChangedNotification
+                                               object: nil];
+    self.hostReach = [Reachability reachabilityWithHostname:kCheckNetworkWebsite];
+    [self.hostReach startNotifier];
+}
+
+- (void)reachabilityChanged:(NSNotification *)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    DDLogCInfo(@"网络连接状况改变，目前连接状态码为：%d ", status);
+}
 @end

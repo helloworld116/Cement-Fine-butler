@@ -39,6 +39,7 @@
     #import "NODataView.h"
     #import "PromptMessageView.h"
     #import "UITextField+DisableCopyPaste.h"
+    #import <Reachability.h>
     #import "LoginViewController.h"
     #import "Tool.h"
 
@@ -59,7 +60,7 @@
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
 
     //接口地址
-//    #define kServerURL @"http://192.168.1.105:8080/mobile/"
+//    #define kServerURL @"http://192.168.1.9:8080/mobile/"
     #define kServerURL @"http://121.199.6.98/mobile/"
 //    #define kServerURL @"http://121.199.6.98/mobile/"
     //#define kServerURL @"http://192.168.1.90:8080/dynamicmeasurement/"
@@ -84,6 +85,8 @@
     #define kElectricityAdd [kServerURL stringByAppendingString:@"electricityPrice/save"]
     //电力价格修改
     #define kElectricityUpdate [kServerURL stringByAppendingString:@"electricityPrice/update"]
+    //电力价格删除
+    #define kElectricityDelete [kServerURL stringByAppendingString:@"electricityPrice/delete"]
 
 //消息预警
 #define kMessageList [kServerURL stringByAppendingString:@"messages"]
@@ -182,7 +185,7 @@
 #define kErrorCodeNegative999 -999
 #define kErrorCodeExpired 900//会话过期
 
-#define kASIHttpRequestTimeoutSeconds 10
+#define kASIHttpRequestTimeoutSeconds 30
 
 #define kMultiGroupCode @"000000"
 #endif

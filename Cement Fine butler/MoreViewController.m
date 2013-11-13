@@ -133,6 +133,15 @@
         kSharedApp.factory=nil;
         kSharedApp.user=nil;
         kSharedApp.multiGroup=NO;
+        //取消自动登录服务
+        [kSharedApp.loginTimer invalidate];
+        //取消定时获取消息服务
+        [kSharedApp.messageTimer invalidate];
+        //取消所有本地通知
+        NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications] ;
+        for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
+            [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
+        }
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }

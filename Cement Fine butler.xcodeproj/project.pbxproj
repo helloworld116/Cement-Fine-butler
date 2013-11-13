@@ -195,6 +195,7 @@
 		0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E7181657AE00DAFDAF /* pie-chart.png */; };
 		0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */; };
 		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
+		0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3496118332A8200F25706 /* ElectricitySevices.m */; };
 		0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */; };
 		0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF16182389040028BE8B /* MaterialWeighCell.xib */; };
 		0EA5CF1A182389230028BE8B /* MaterialWeighCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF19182389230028BE8B /* MaterialWeighCell.m */; };
@@ -511,6 +512,8 @@
 		0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie-chart@2x.png"; sourceTree = "<group>"; };
 		0E9EF1B91814BDCD007557AE /* ConditionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionTableView.h; sourceTree = "<group>"; };
 		0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionTableView.m; sourceTree = "<group>"; };
+		0EA3496018332A8200F25706 /* ElectricitySevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricitySevices.h; sourceTree = "<group>"; };
+		0EA3496118332A8200F25706 /* ElectricitySevices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricitySevices.m; sourceTree = "<group>"; };
 		0EA5CF13182341710028BE8B /* MaterialWeighListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialWeighListViewController.h; sourceTree = "<group>"; };
 		0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighListViewController.m; sourceTree = "<group>"; };
 		0EA5CF16182389040028BE8B /* MaterialWeighCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaterialWeighCell.xib; sourceTree = "<group>"; };
@@ -990,6 +993,15 @@
 			name = "公共";
 			sourceTree = "<group>";
 		};
+		0EA3495F183326C800F25706 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0EA3496018332A8200F25706 /* ElectricitySevices.h */,
+				0EA3496118332A8200F25706 /* ElectricitySevices.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		0EA5CF10182340990028BE8B /* 过磅管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1112,7 @@
 		0EF72792181E11560059EC59 /* 电力设置 */ = {
 			isa = PBXGroup;
 			children = (
+				0EA3495F183326C800F25706 /* Model */,
 				0EE9F603181A6B99009A4330 /* ElectricityPriceViewController.h */,
 				0EE9F604181A6B99009A4330 /* ElectricityPriceViewController.m */,
 				0E6DA963181A878A007A5B45 /* ElectricityCell.h */,
@@ -1633,6 +1646,7 @@
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
+				0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */,
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,

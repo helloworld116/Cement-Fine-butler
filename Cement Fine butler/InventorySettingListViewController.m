@@ -205,7 +205,8 @@
     [newDict setObject:lowerLimit forKey:@"lowerLimit"];
     [self.list replaceObjectAtIndex:self.currentSelectedIndex withObject:newDict];
     NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0]];
-    [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];}
+    [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+}
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];

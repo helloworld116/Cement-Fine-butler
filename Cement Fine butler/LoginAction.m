@@ -96,6 +96,6 @@ static int loginCount2=0;
 
 
 -(void)checkLogin{
-    [NSTimer scheduledTimerWithTimeInterval:kSharedApp.expiresIn-10 target:self selector:@selector(backstageLoginWithSync:) userInfo:nil repeats:YES];
+    kSharedApp.loginTimer = [NSTimer scheduledTimerWithTimeInterval:kSharedApp.expiresIn-10 target:self selector:@selector(backstageLoginWithSync:) userInfo:nil repeats:YES];
 }
 @end

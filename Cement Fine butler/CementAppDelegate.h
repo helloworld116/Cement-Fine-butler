@@ -25,5 +25,7 @@
 @property (assign, nonatomic) BOOL multiGroup;//是否是多集团用户
 @property (assign, nonatomic) int startFactoryId,finalFactoryId;//开始选择的工厂id和最后选择的工厂id
 
+@property (nonatomic,retain) NSTimer *loginTimer,*messageTimer;//定时登录，定时获取消息的定时器
+
 -(UITabBarController *) showViewControllers;
 @end

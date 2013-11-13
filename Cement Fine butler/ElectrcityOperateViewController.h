@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PassValueDelegate.h"
 
 @interface ElectrcityOperateViewController : UITableViewController
 @property(nonatomic,strong) IBOutlet UITextField *textElectricityPrice;
 @property(nonatomic,strong) IBOutlet UILabel *lblDate;
 @property(nonatomic,strong) IBOutlet UIDatePicker *datePicker;
 @property(nonatomic,retain) NSDictionary *electricityInfo;
+@property(nonatomic,assign) NSObject<PassValueDelegate> *delegate;
 
 - (IBAction)dateChanged:(id)sender;
 @end

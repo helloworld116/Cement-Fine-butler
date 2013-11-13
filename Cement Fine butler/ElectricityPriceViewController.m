@@ -9,14 +9,16 @@
 #import "ElectricityPriceViewController.h"
 #import "ElectricityCell.h"
 #import "ElectrcityOperateViewController.h"
+#import "PassValueDelegate.h"
 
-@interface ElectricityPriceViewController ()<SWTableViewCellDelegate,MBProgressHUDDelegate>
+@interface ElectricityPriceViewController ()<PassValueDelegate,SWTableViewCellDelegate,MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
 @property (retain,nonatomic) NSMutableArray *list;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) NODataView *noDataView;
+@property (nonatomic,assign) NSUInteger currentSelectedIndex;
 
 @property (nonatomic) NSUInteger totalCount;
 @property (nonatomic) NSUInteger currentPage;
@@ -45,6 +47,7 @@
     self.tableView.rowHeight = 60.f;
     //数据
     self.list = [NSMutableArray array];
+    self.currentSelectedIndex = -1;
     //发送请求
     self.currentPage = 1;
     [self sendRequest:self.currentPage withProgress:YES];
@@ -137,10 +140,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    self.currentSelectedIndex = indexPath.row;
     ElectrcityOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electrcityOperateViewController"];
     nextViewController.electricityInfo = [self.list objectAtIndex:indexPath.row];
 //    ElectricityCell *cell = (ElectricityCell *)[tableView cellForRowAtIndexPath:indexPath];
 //    [cell hideUtilityButtonsAnimated:YES];
+    nextViewController.delegate = self;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
@@ -176,10 +181,7 @@ ElectricityCell *currentOperateCell;
             currentOperateCell=nil;
             break;
         case 1:{
-                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:currentOperateCell];
-                [self.list removeObjectAtIndex:cellIndexPath.row];
-                [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                currentOperateCell = nil;
+            [self deleteEle];
             }
             break;
         default:
@@ -189,6 +191,7 @@ ElectricityCell *currentOperateCell;
 
 -(void)add:(id)sender{
     ElectrcityOperateViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"electrcityOperateViewController"];
+    nextViewController.delegate = self;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }
 
@@ -238,8 +241,6 @@ ElectricityCell *currentOperateCell;
         [self.tableView reloadData];
     }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-//        kSharedApp.window.rootViewController = loginViewController;
-//        kSharedApp.window setRootViewController:(UIViewController *)
         [kSharedApp.window performSelector:@selector(setRootViewController:) withObject:loginViewController afterDelay:3.f];
     }else{
     }
@@ -284,7 +285,80 @@ ElectricityCell *currentOperateCell;
     [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
 }
 
+#pragma mark 删除电力价格
+-(void) deleteEle{
+    //加载过程提示
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    self.progressHUD.labelText = @"加载中...";
+    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+    self.progressHUD.dimBackground = YES;
+    self.progressHUD.opacity=1.0;
+    self.progressHUD.delegate = self;
+    [self.view addSubview:self.progressHUD];
+    [self.progressHUD show:YES];
+    
+    DDLogCInfo(@"******  Request URL is:%@  ******",kElectricityDelete);
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kElectricityDelete]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+    [self.request setUseCookiePersistence:YES];
+    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
+    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"ids"];
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(deleteRequestFailed:)];
+    [self.request setDidFinishSelector:@selector(deleteRequestSuccess:)];
+    [self.request startAsynchronous];
+}
+
+#pragma mark 网络请求
+-(void) deleteRequestFailed:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
+}
+
+-(void) deleteRequestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==kErrorCode0) {
+        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:currentOperateCell];
+        [self.list removeObjectAtIndex:cellIndexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        currentOperateCell = nil;
+    }else if(errorCode==kErrorCodeExpired){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        [kSharedApp.window performSelector:@selector(setRootViewController:) withObject:loginViewController afterDelay:3.f];
+    }else{
+    }
+    [self.progressHUD hide:YES];
+}
+
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark PassValueDelegate
+-(void)passValue:(NSDictionary *)newValue{
+    id databaseId = [newValue objectForKey:@"id"];
+    id createTime_str = [newValue objectForKey:@"createTime_str"];
+    id price = [newValue objectForKey:@"price"];
+    
+    NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
+    [newDict setObject:databaseId forKey:@"id"];
+    [newDict setObject:createTime_str forKey:@"createTime_str"];
+    [newDict setObject:price forKey:@"price"];
+
+    //之前没有选择，说明是进行添加操作
+    if (self.currentSelectedIndex==-1) {
+        [self.list insertObject:newDict atIndex:0];
+        [self.tableView beginUpdates];
+        NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [[self tableView] insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+    }else{
+        [self.list replaceObjectAtIndex:self.currentSelectedIndex withObject:newDict];
+        NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0]];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+    }
+
 }
 @end

@@ -8,7 +8,7 @@
 
 #import "ElectrcityOperateViewController.h"
 
-@interface ElectrcityOperateViewController ()<UITextFieldDelegate,MBProgressHUDDelegate>
+@interface ElectrcityOperateViewController ()<MBProgressHUDDelegate>
 @property (nonatomic,retain) UIBarButtonItem *rightBarButtonItem;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
@@ -41,10 +41,11 @@
     }
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
+    self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
     [self.textElectricityPrice becomeFirstResponder];
     self.tableView.bounces = NO;
     self.datePicker.hidden = YES;
+    [self.textElectricityPrice addTarget:self action:@selector(textFieldDidChange:)forControlEvents:UIControlEventEditingChanged];
     self.lblDate.text = dateValue;
     self.datePicker.date = [dateFormatter dateFromString:dateValue];
 //    self.tableView.sectionFooterHeight = 100.f;
@@ -53,11 +54,16 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)save:(id)sender{
-    
+    if (self.electricityInfo) {
+        //修改
+        [self sendRequest:kElectricityUpdate];
+    }else{
+        //添加
+        [self sendRequest:kElectricityAdd];
+    }
 }
 
 #pragma mark tableView Delegate
@@ -71,8 +77,10 @@
         [self.textElectricityPrice resignFirstResponder];
     }
 }
+
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSString *)url{
+    [self.textElectricityPrice resignFirstResponder];
     self.datePicker.hidden = YES;
     
     //加载过程提示
@@ -92,8 +100,14 @@
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
     [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
-    [self.request setPostValue:@"" forKey:@"price"];
-    [self.request setPostValue:@"" forKey:@"createTime_str"];
+    NSString *price = [self.textElectricityPrice.text stringByTrimmingCharactersInSet:
+     [NSCharacterSet whitespaceCharacterSet]];
+    [self.request setPostValue:price forKey:@"price"];
+    [self.request setPostValue:self.lblDate.text forKey:@"createTime_str"];
+    if (self.electricityInfo) {
+        //修改传id
+        [self.request setPostValue:[self.electricityInfo objectForKey:@"id"] forKey:@"id"];
+    }
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -108,7 +122,7 @@
 -(void)requestSuccess:(ASIHTTPRequest *)request{
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
-    if (errorCode==0) {
+    if (errorCode==kErrorCode0) {
         long databaseId;
         if (self.electricityInfo) {
             //修改操作
@@ -116,8 +130,8 @@
         }else{
             databaseId = [[dict objectForKey:@"data"] longValue];
         }
-//        NSDictionary *dict = @{@"id":[NSNumber numberWithLong:databaseId],@"lineId":[NSNumber numberWithLong:self.lineId],@"lineName": self.lblLine.text,@"productId": [NSNumber numberWithLong:self.productId],@"productName": self.lblProduct.text,@"time":self.lblTime.text};
-//        [self.delegate passValue:dict];
+        NSDictionary *dict = @{@"id":[NSNumber numberWithLong:databaseId],@"createTime_str":self.lblDate.text,@"price":[self.textElectricityPrice.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]};
+        [self.delegate passValue:dict];
         [self.navigationController popViewControllerAnimated:YES];
     }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
@@ -140,6 +154,33 @@
     NSDate *select = [self.datePicker date];
     NSString *dateString =  [dateFormatter stringFromDate:select];
     self.lblDate.text = dateString;
+    [self rightButtonShowOrHidden];
+}
+
+#pragma mark UITextField监听
+- (void)textFieldDidChange:(UITextField *)textField{
+    [self rightButtonShowOrHidden];
+}
+
+//控制右边添加或修改按钮是否显示
+-(void)rightButtonShowOrHidden{
+    if (self.electricityInfo) {
+        NSString *originPrice = [NSString stringWithFormat:@"%.2f",[[self.electricityInfo objectForKey:@"price"] floatValue]];
+        NSString *currentPrice = self.textElectricityPrice.text;
+        NSString *originDate = [self.electricityInfo objectForKey:@"createTime_str"];
+        NSString *currentDate = self.lblDate.text;
+        if ((![originPrice isEqualToString:currentPrice])||(![originDate isEqualToString:currentDate])) {
+            self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+        }else{
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+    }else{
+        if (![@"" isEqualToString:self.textElectricityPrice.text]) {
+            self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+        }else{
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+    }
 }
 
 -(void)pop:(id)sender{
