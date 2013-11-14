@@ -48,4 +48,6 @@
 +(NSString *)longTimeToTimeDesc:(long)time;
 
 +(NSString *)stringToString:(NSString *)str;
+
++(NSString *)equipmentType:(NSString *)code;
 @end

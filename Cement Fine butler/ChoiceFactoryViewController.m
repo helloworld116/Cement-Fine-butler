@@ -95,6 +95,9 @@
 
 -(void)sureChoice:(id)sender{
     NSDictionary *selectedFactory = kSharedApp.factorys[self.currentSelectCellIndex];
+    kSharedApp.factory = selectedFactory;
+    kSharedApp.startFactoryId = kSharedApp.finalFactoryId;
+    kSharedApp.finalFactoryId = [[selectedFactory objectForKey:@"id"] intValue];
     [self.delegate passValue:selectedFactory];
     [self.navigationController popViewControllerAnimated:YES];
 }

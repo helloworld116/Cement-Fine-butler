@@ -151,7 +151,13 @@
     UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
     [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
     RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    if (kSharedApp.multiGroup) {
+        //集团
+        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
+    }else{
+        //集团下的工厂
+        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    }
     costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
     [costManagerController setRightPanel:costManagerRightController];
     //损耗定位
@@ -173,7 +179,13 @@
     realTimeReportsLeftController.conditions = @[@{@"实时报表":reportType}];
     RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     //    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
-    realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    if (kSharedApp.multiGroup) {
+        //集团
+        realTimeReportsRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
+    }else{
+        //集团下的工厂
+        realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    }
     realTimeReportsRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
     [realTimeReportsController setLeftFixedWidth:140.f];
     [realTimeReportsController setCenterPanel:productColumnViewController];

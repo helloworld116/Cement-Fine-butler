@@ -17,6 +17,7 @@
 @property (nonatomic) long _id;//成本项id
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
+@property (retain,nonatomic) FixcostSubjectChoiceViewController *nextViewController;
 - (IBAction)dateChange:(id)sender;
 @end
 
@@ -60,10 +61,12 @@
         case 0:{
             self.datePicker.hidden = YES;
             [self.textValue resignFirstResponder];
-            FixcostSubjectChoiceViewController *nextViewController = [[FixcostSubjectChoiceViewController alloc] init];
-            nextViewController.subjectId = self._id;
-            nextViewController.delegate = self;
-            [self.navigationController pushViewController:nextViewController animated:YES];
+            if (!self.nextViewController) {
+                self.nextViewController = [[FixcostSubjectChoiceViewController alloc] init];
+                self.nextViewController.subjectId = self._id;
+                self.nextViewController.delegate = self;
+            }
+            [self.navigationController pushViewController:self.nextViewController animated:YES];
         }
             break;
         case 1:

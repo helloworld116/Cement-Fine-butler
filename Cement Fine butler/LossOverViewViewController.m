@@ -65,7 +65,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBarHidden=YES;
-    if (kSharedApp.startFactoryId!=kSharedApp.finalFactoryId) {
+    if ((kSharedApp.startFactoryId!=kSharedApp.finalFactoryId)&&self.responseData) {
         self.responseData = nil;
         //send request
         NSDictionary *condition = @{@"timeType":[NSNumber numberWithInt:2]};

@@ -367,4 +367,18 @@
         return str;
     }
 }
+
++(NSString *)equipmentType:(NSString *)code{
+    NSString *type = nil;
+    if ([@"010" isEqualToString:code]) {
+        type = @"双托辊电子皮带秤";
+    }else if ([@"020" isEqualToString:code]){
+        type = @"定量给料机";
+    }else if ([@"030" isEqualToString:code]){
+        type = @"科里奥利粉体定量给料秤";
+    }else if ([@"040" isEqualToString:code]){
+        type = @"连续式失重秤";
+    }
+    return type;
+}
 @end

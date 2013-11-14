@@ -174,13 +174,6 @@
 #define kMessageType2 @"[库存消息]"
 #define kMessageType3 @"[盒子位置变更]"
 
-//#define kSetEquipmentType(typeCode)(\
-//if(typeCode isEqualToString(@"")ret\))
-//#define @"010" @"双托辊电子皮带秤"
-//#define @"020" @"定量给料机"
-//#define @"030" @"科里奥利粉体定量给料秤"
-//#define @"040" @"连续式失重秤"
-
 #define kErrorCode0 0
 #define kErrorCodeNegative999 -999
 #define kErrorCodeExpired 900//会话过期

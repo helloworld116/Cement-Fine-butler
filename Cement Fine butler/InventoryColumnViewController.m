@@ -109,24 +109,26 @@
     //    [webView stringByEvaluatingJavaScriptFromString:js];
     if (self.data) {
         NSArray *stockArray = [self.data objectForKey:@"materials"];
-        NSMutableArray *stocksForSort = [NSMutableArray array];
-        NSMutableArray *stocks = [NSMutableArray array];
-        for (int i=0;i<stockArray.count;i++) {
-            NSDictionary *stock = [stockArray objectAtIndex:i];
-            double value = [[stock objectForKey:@"stock"] doubleValue];
-            NSString *name = [stock objectForKey:@"name"];
-            NSString *color = [kColorList objectAtIndex:i];
-            NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
-            [stocks addObject:reportDict];
-            [stocksForSort addObject:[NSNumber numberWithDouble:value]];
+        if(stockArray.count>0){
+            NSMutableArray *stocksForSort = [NSMutableArray array];
+            NSMutableArray *stocks = [NSMutableArray array];
+            for (int i=0;i<stockArray.count;i++) {
+                NSDictionary *stock = [stockArray objectAtIndex:i];
+                double value = [[stock objectForKey:@"stock"] doubleValue];
+                NSString *name = [stock objectForKey:@"name"];
+                NSString *color = [kColorList objectAtIndex:i];
+                NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
+                [stocks addObject:reportDict];
+                [stocksForSort addObject:[NSNumber numberWithDouble:value]];
+            }
+            NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+            NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            double max = [[sortedNumbers objectAtIndex:0] doubleValue];
+            max = [Tool max:max];
+            NSDictionary *configDict = @{@"title":self.chartTitle,@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+            NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
+            [webView stringByEvaluatingJavaScriptFromString:js];
         }
-        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
-        NSArray *sortedNumbers = [stocksForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-        double max = [[sortedNumbers objectAtIndex:0] doubleValue];
-        max = [Tool max:max];
-        NSDictionary *configDict = @{@"title":self.chartTitle,@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
-        NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
-        [webView stringByEvaluatingJavaScriptFromString:js];
     }
     self.bottomWebiew.hidden = NO;
 }

@@ -52,6 +52,42 @@
     [self sendRequest:condition];//默认查询原材料库存
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (kSharedApp.startFactoryId!=kSharedApp.finalFactoryId) {
+        RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
+        for (NSDictionary *factory in kSharedApp.factorys) {
+            if ([[factory objectForKey:@"id"] intValue]==[[kSharedApp.user objectForKey:@"factoryid"] intValue]) {
+                //选中的是集团
+                [rightViewController resetConditions:@[@{@"时间段":kCondition_Time_Array}]];
+            }else{
+                //选中的是集团下的子工厂
+                if (kSharedApp.finalFactoryId==[[factory objectForKey:@"id"] intValue]) {
+                    NSArray *lines = [factory objectForKey:@"lines"];
+                    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+                    for (NSDictionary *line in lines) {
+                        NSString *name = [line objectForKey:@"name"];
+                        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+                        NSDictionary *dict = @{@"_id":_id,@"name":name};
+                        [lineArray addObject:dict];
+                    }
+                    NSArray *products = [factory objectForKey:@"products"];
+                    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+                    for (NSDictionary *product in products) {
+                        NSString *name = [product objectForKey:@"name"];
+                        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+                        NSDictionary *dict = @{@"_id":_id,@"name":name};
+                        [productArray addObject:dict];
+                    }
+                    NSArray *newCondition = @[@{@"时间段":kCondition_Time_Array},@{@"产线":lineArray},@{@"产品":productArray}];
+                    [rightViewController resetConditions:newCondition];
+                    break;
+                }
+            }
+        }
+    }
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //观察查询条件修改

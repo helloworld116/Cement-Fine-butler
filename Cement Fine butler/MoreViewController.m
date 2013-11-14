@@ -149,7 +149,6 @@
 
 #pragma mark PassValueDelegate
 -(void)passValue:(NSDictionary *)newValue{
-    kSharedApp.factory = newValue;
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     cell.textLabel.text = [newValue objectForKey:@"name"];
 }
