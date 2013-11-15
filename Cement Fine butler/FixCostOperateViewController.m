@@ -107,8 +107,7 @@
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setPostValue:self.lblDate.text forKey:@"strCreateTime"];
     [self.request setPostValue:self.textValue.text forKey:@"price"];
     [self.request setPostValue:[NSNumber numberWithLong:[[self.fixcostInfo objectForKey:@"id"] longValue]] forKey:@"id"];

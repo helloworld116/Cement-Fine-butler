@@ -216,8 +216,7 @@
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostHistoryURL]];
     [self.request setUseCookiePersistence:YES]; 
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
     self.titlePre = [timeInfo objectForKey:@"timeDesc"];

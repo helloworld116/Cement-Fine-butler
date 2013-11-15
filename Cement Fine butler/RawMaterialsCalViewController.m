@@ -222,8 +222,7 @@
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCalculator]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];

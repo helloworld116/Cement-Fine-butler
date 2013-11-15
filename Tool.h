@@ -49,5 +49,13 @@
 
 +(NSString *)stringToString:(NSString *)str;
 
++(long)longValue:(id)value;
+
++(int)intValue:(id)value;
+
++(double)doubleValue:(id)value;
+
++(float)floatValue:(id)value;
+
 +(NSString *)equipmentType:(NSString *)code;
 @end

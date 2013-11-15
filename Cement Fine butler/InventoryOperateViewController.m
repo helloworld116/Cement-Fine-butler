@@ -43,7 +43,9 @@
         title = @"修改";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
         if (self.type==0) {
-            self._id = [[self.inventoryInfo objectForKey:@"materialId"] longValue];
+            [Tool longValue:[self.inventoryInfo objectForKey:@"xxxx"]];
+            self._id = [Tool longValue:[self.inventoryInfo objectForKey:@"materialId"]];
+//            self._id = [[self.inventoryInfo objectForKey:@"materialId"] longValue];
             self.lblName.text = [Tool stringToString:[self.inventoryInfo objectForKey:@"materialName"]];
         }else{
             self._id = [[self.inventoryInfo objectForKey:@"productId"] longValue];
@@ -139,8 +141,7 @@
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[self.datePicker.date timeIntervalSince1970]*1000] forKey:@"createTime"];
     [self.request setPostValue:self.textValue.text forKey:@"stock"];
     [self.request setPostValue:[NSNumber numberWithLong:[[self.inventoryInfo objectForKey:@"id"] longValue]] forKey:@"id"];

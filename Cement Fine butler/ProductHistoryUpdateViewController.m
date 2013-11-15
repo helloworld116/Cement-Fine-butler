@@ -121,8 +121,7 @@
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithLong:self.lineId] forKey:@"lineId"];
     [self.request setPostValue:[NSNumber numberWithLong:self.productId] forKey:@"productId"];
     [self.request setPostValue:self.lblTime.text forKey:@"start_time_str"];

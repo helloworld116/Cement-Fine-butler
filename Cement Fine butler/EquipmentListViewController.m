@@ -54,6 +54,11 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    if ((kSharedApp.startFactoryId!=kSharedApp.finalFactoryId)&&(self.list==nil)) {
+        [self.list removeAllObjects];
+        //send request
+        [self sendRequest:self.currentPage withProgress:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,8 +154,8 @@
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:[[kSharedApp.factory objectForKey:@"id"] intValue]] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithLong:kPageSize] forKey:@"count"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"count"];
     //暂时使用offset，后面改成page
     [self.request setPostValue:[NSNumber numberWithInt:currentPage] forKey:@"page"];
     [self.request setDelegate:self];

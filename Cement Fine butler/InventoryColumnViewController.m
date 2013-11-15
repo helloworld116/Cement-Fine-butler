@@ -163,6 +163,7 @@
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithInt:stockType] forKey:@"type"];
     if (stockType==0) {
         self.chartTitle = @"原材料库存";

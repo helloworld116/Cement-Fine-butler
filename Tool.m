@@ -368,6 +368,38 @@
     }
 }
 
++(long)longValue:(id)value{
+    if ([[NSNull null] isEqual:value]||value==nil){
+        return 0;
+    }else{
+        return [value longValue];
+    }
+}
+
++(int)intValue:(id)value{
+    if ([[NSNull null] isEqual:value]||value==nil){
+        return 0;
+    }else{
+        return [value intValue];
+    }
+}
+
++(double)doubleValue:(id)value{
+    if ([[NSNull null] isEqual:value]||value==nil){
+        return 0;
+    }else{
+        return [value doubleValue];
+    }
+}
+
++(float)floatValue:(id)value{
+    if ([[NSNull null] isEqual:value]||value==nil){
+        return 0;
+    }else{
+        return [value floatValue];
+    }
+}
+
 +(NSString *)equipmentType:(NSString *)code{
     NSString *type = nil;
     if ([@"010" isEqualToString:code]) {

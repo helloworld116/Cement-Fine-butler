@@ -111,8 +111,7 @@
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setPostValue:[kSharedApp.user objectForKey:@"id"] forKey:@"id"];
     [self.request setPostValue:self.currentPassword forKey:@"oldPass"];
     [self.request setPostValue:self.password forKey:@"password"];

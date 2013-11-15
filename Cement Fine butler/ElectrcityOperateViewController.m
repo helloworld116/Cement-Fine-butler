@@ -48,6 +48,9 @@
     [self.textElectricityPrice addTarget:self action:@selector(textFieldDidChange:)forControlEvents:UIControlEventEditingChanged];
     self.lblDate.text = dateValue;
     self.datePicker.date = [dateFormatter dateFromString:dateValue];
+    if (IS_IPHONE_5) {
+        self.tableView.sectionFooterHeight += 88;
+    }
 //    self.tableView.sectionFooterHeight = 100.f;
 }
 
@@ -98,8 +101,7 @@
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    int factoryId = [[kSharedApp.factory objectForKey:@"id"] intValue];
-    [self.request setPostValue:[NSNumber numberWithInt:factoryId] forKey:@"factoryId"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     NSString *price = [self.textElectricityPrice.text stringByTrimmingCharactersInSet:
      [NSCharacterSet whitespaceCharacterSet]];
     [self.request setPostValue:price forKey:@"price"];

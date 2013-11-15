@@ -158,6 +158,7 @@
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+    [self.HUD hide:YES];
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==kErrorCode0) {
@@ -204,8 +205,9 @@
         DDLogCWarn(@"登录失败，errorCode is %d",errorCode);
         self.password.text = nil;
 //        NSString *msg = [dict objectForKey:@"message"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+        [alertView show];
     }
-    [self.HUD hide:YES];
 }
 
 #pragma mark textfield代理
