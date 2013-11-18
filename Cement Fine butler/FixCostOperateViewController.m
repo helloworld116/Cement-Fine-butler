@@ -47,6 +47,9 @@
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.textValue.delegate = self;
+    if (IS_IPHONE_5) {
+        self.tableView.sectionFooterHeight += 88;
+    }
 }
 
 - (void)didReceiveMemoryWarning

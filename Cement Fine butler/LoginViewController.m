@@ -77,7 +77,7 @@
         self.HUD.minSize = CGSizeMake(135.f, 135.f);
         [self.view addSubview:self.HUD];
         self.HUD.delegate = self;
-        self.HUD.minShowTime = 3;//最少显示时间为3秒
+//        self.HUD.minShowTime = 3;//最少显示时间为3秒
         self.HUD.dimBackground = YES;//
         self.HUD.labelText = @"正在登录...";
         [self.HUD showWhileExecuting:@selector(sendRequest) onTarget:self withObject:nil animated:YES];

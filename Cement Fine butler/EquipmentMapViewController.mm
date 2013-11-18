@@ -39,16 +39,19 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.mapView viewWillAppear];
     self.mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self resetAnnitations:self.equipmentList];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.mapView removeAnnotation:_calloutAnnotation];
     _calloutAnnotation = nil;
     
@@ -137,7 +140,7 @@
         //        BasicMapAnnotation *  annotation=[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude];
         //        [_mapView addAnnotation:annotation];
         BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
-        annotation.title= @"cnm";
+        annotation.title = @"";
         annotation.coordinate = coordinate;
         [self.mapView addAnnotation:annotation];
     }

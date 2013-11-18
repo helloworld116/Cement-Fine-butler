@@ -123,27 +123,42 @@
         nextViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:nextViewController animated:YES];
     }else{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults removeObjectForKey:@"password"];
-//        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-//        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-        kSharedApp.accessToken=nil;
-        kSharedApp.expiresIn=0;
-        kSharedApp.factorys=nil;
-        kSharedApp.factory=nil;
-        kSharedApp.user=nil;
-        kSharedApp.multiGroup=NO;
-        //取消自动登录服务
-        [kSharedApp.loginTimer invalidate];
-        //取消定时获取消息服务
-        [kSharedApp.messageTimer invalidate];
-        //取消所有本地通知
-        NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications] ;
-        for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
-            [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出当前账号?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+    }
+}
+
+#pragma mark UIAlertView Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;{
+    switch (buttonIndex) {
+        case 0:
+            break;
+        case 1:{
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults removeObjectForKey:@"password"];
+            //        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+            //        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+            kSharedApp.accessToken=nil;
+            kSharedApp.expiresIn=0;
+            kSharedApp.factorys=nil;
+            kSharedApp.factory=nil;
+            kSharedApp.user=nil;
+            kSharedApp.multiGroup=NO;
+            //取消自动登录服务
+            [kSharedApp.loginTimer invalidate];
+            //取消定时获取消息服务
+            [kSharedApp.messageTimer invalidate];
+            //取消所有本地通知
+            NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications] ;
+            for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
+                [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
+            }
+            LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+            kSharedApp.window.rootViewController = loginViewController;
         }
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
+            break;
+        default:
+            break;
     }
 }
 

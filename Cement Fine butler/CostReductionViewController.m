@@ -78,7 +78,7 @@
     }
     NSString *pieData = [Tool objectToString:dataArray];
     NSString *title = [self.chartTitle stringByAppendingString:@"原材料成本"];
-    NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
+    NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width-60]};
     NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
     DDLogVerbose(@"dates is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];

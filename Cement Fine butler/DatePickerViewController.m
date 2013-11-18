@@ -37,6 +37,13 @@
     NSDictionary *endDate = [defaults valueForKey:@"endDate"];
     self.lblStartDate.text = [NSString stringWithFormat:@"%d-%d-%d",[[startDate objectForKey:@"year"] intValue],[[startDate objectForKey:@"month"] intValue],[[startDate objectForKey:@"day"] intValue]];
     self.lblEndDate.text = [NSString stringWithFormat:@"%d-%d-%d",[[endDate objectForKey:@"year"] intValue],[[endDate objectForKey:@"month"] intValue],[[endDate objectForKey:@"day"] intValue]];
+    if (IS_IPHONE_5) {
+//        self.datePickerOfStart.frame = CGRectMake
+        CGRect datePickerFrame = self.datePickerOfStart.frame;
+        datePickerFrame.origin.y += 88.f;
+        self.datePickerOfStart.frame = datePickerFrame;
+        self.datePickerOfEnd.frame = datePickerFrame;
+    }
 }
 
 - (void)didReceiveMemoryWarning

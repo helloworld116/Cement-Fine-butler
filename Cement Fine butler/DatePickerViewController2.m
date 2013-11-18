@@ -33,6 +33,9 @@
     self.lblEndDate.text = [NSString stringWithFormat:@"%d-%d-%d",[[endDate objectForKey:@"year"] intValue],[[endDate objectForKey:@"month"] intValue],[[endDate objectForKey:@"day"] intValue]];
     self.datePicker.hidden = YES;
     self.tableView.bounces = NO;
+    if (IS_IPHONE_5) {
+        self.tableView.sectionFooterHeight+=88;
+    }
 }
 
 - (void)didReceiveMemoryWarning

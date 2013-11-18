@@ -773,12 +773,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="tLq-Er-uVh">
             <objects>
                 <tableViewController id="9zu-Zd-CoF" customClass="DatePickerViewController2" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="40" sectionFooterHeight="71" id="X1k-8R-xeA">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="40" sectionFooterHeight="77" id="X1k-8R-xeA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <datePicker key="tableFooterView" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="33g-XN-wue">
-                            <rect key="frame" x="0.0" y="258" width="320" height="216"/>
+                            <rect key="frame" x="0.0" y="264" width="320" height="216"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <date key="date" timeIntervalSinceReferenceDate="402991585.902165">
                                 <!--2013-10-09 06:06:25 +0000-->
@@ -1553,12 +1553,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <navigationItem id="BMn-nG-gYj">
                                         <barButtonItem key="leftBarButtonItem" image="nav-menu.png" id="eVm-jM-cgd">
                                             <connections>
-                                                <action selector="showNav:" destination="BFp-W7-3UZ" id="tdJ-US-vAU"/>
+                                                <action selector="showNav:" destination="BFp-W7-3UZ" id="7gT-ZD-6Qm"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="pa4-Gl-TGE">
                                             <connections>
-                                                <action selector="showSearchCondition:" destination="BFp-W7-3UZ" id="zrg-cW-IHJ"/>
+                                                <action selector="showSearchCondition:" destination="BFp-W7-3UZ" id="gEm-wu-B2v"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -2847,12 +2847,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="Lof-Cv-ayt">
             <objects>
                 <tableViewController storyboardIdentifier="productHistoryUpdateViewController" id="nMl-9j-Xls" customClass="ProductHistoryUpdateViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="20" sectionFooterHeight="46" id="Jec-YV-WfE">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="20" sectionFooterHeight="48" id="Jec-YV-WfE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <datePicker key="tableFooterView" hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="70y-Wg-QAb">
-                            <rect key="frame" x="0.0" y="213" width="320" height="216"/>
+                            <rect key="frame" x="0.0" y="215" width="320" height="216"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <date key="date" timeIntervalSinceReferenceDate="404809193.52909899">
                                 <!--2013-10-30 06:59:53 +0000-->

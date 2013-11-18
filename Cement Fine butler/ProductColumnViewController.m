@@ -33,8 +33,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //设置navigationBar相关
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.topItem.title = @"产量报表";
+//    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationBar.topItem.title = @"产量报表";
+    self.navigationItem.title = @"产量报表";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStylePlain target:self action:@selector(showSearchCondition:)];
     
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
