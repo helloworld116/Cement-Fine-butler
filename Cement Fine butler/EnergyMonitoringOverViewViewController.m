@@ -47,6 +47,17 @@
 //    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height+1);
 //    NSLog(@"%f",self.scrollView.bounds.size.height);
 //    self.scrollView.delegate = self;
+    
+    self.lblValueCoalAmount.text = @"......";
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+////    [currencyFormatter setNumberStyle:kCFNumberFormatterDecimalStyle];
+//    [formatter setPositiveFormat:@"###,###0.##"];
+//    NSLog(@"%@",[formatter stringFromNumber:[NSNumber numberWithInt:10395209.98]]);
+
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"###,##0.##"];
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:1244.4563]];
+    self.lblValueCoalAmount.text = formattedNumberString;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,6 +68,7 @@
 
 -(void)showCoalInfo:(id)sender{
     EnergyMonitoringListViewController *nextViewController = [[EnergyMonitoringListViewController alloc] initWithNibName:@"EnergyMonitoringListViewController" bundle:nil];
+    nextViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:nextViewController animated:YES];
 }
 

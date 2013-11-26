@@ -1835,8 +1835,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: lei deng (GL997P4Y62)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1846,7 +1846,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1857,8 +1857,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: lei deng (GL997P4Y62)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1868,7 +1868,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
