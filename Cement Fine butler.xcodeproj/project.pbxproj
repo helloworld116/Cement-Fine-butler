@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AB77317EFD27F00A3255E /* SearchCondition.m */; };
+		0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581718442B9C00959EC1 /* BackgroundLayer.m */; };
+		0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581A18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m */; };
+		0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */; };
+		0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */; };
+		0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */; };
 		0E22B15E17D8191F009695FF /* Column2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* Column2D.html */; };
 		0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3D180E306D0089B4A8 /* lock-small.png */; };
 		0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3E180E306D0089B4A8 /* unlock-small.png */; };
@@ -275,6 +280,14 @@
 /* Begin PBXFileReference section */
 		0E0AB77217EFD27F00A3255E /* SearchCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCondition.h; sourceTree = "<group>"; };
 		0E0AB77317EFD27F00A3255E /* SearchCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCondition.m; sourceTree = "<group>"; };
+		0E12581618442B9C00959EC1 /* BackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundLayer.h; sourceTree = "<group>"; };
+		0E12581718442B9C00959EC1 /* BackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundLayer.m; sourceTree = "<group>"; };
+		0E12581918442CDF00959EC1 /* EnergyMonitoringOverViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMonitoringOverViewViewController.h; sourceTree = "<group>"; };
+		0E12581A18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMonitoringOverViewViewController.m; sourceTree = "<group>"; };
+		0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyMonitoringOverViewViewController.xib; sourceTree = "<group>"; };
+		0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMonitoringListViewController.h; sourceTree = "<group>"; };
+		0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMonitoringListViewController.m; sourceTree = "<group>"; };
+		0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyMonitoringListViewController.xib; sourceTree = "<group>"; };
 		0E22B15D17D8191F009695FF /* Column2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Column2D.html; sourceTree = "<group>"; };
 		0E23CF3D180E306D0089B4A8 /* lock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-small.png"; sourceTree = "<group>"; };
 		0E23CF3E180E306D0089B4A8 /* unlock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-small.png"; sourceTree = "<group>"; };
@@ -687,6 +700,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E12581518442AD200959EC1 /* 能源监控 */ = {
+			isa = PBXGroup;
+			children = (
+				0E12581618442B9C00959EC1 /* BackgroundLayer.h */,
+				0E12581718442B9C00959EC1 /* BackgroundLayer.m */,
+				0E12581918442CDF00959EC1 /* EnergyMonitoringOverViewViewController.h */,
+				0E12581A18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m */,
+				0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */,
+				0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */,
+				0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */,
+				0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */,
+			);
+			name = "能源监控";
+			sourceTree = "<group>";
+		};
 		0E3841E317D41D63004B3C87 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -1217,6 +1245,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0E12581518442AD200959EC1 /* 能源监控 */,
 				0EE9F606181A6D82009A4330 /* 更多 */,
 				0EE9F602181A6B6B009A4330 /* 录入相关 */,
 				0E693ABC1807E65A0061A3F8 /* 损耗定位 */,
@@ -1462,6 +1491,7 @@
 				0E3841AF17D41D3E004B3C87 /* equipment_expand_bg@2x.png in Resources */,
 				0E3841B017D41D3E004B3C87 /* stop_btn@2x.png in Resources */,
 				0E3841B117D41D3E004B3C87 /* background.png in Resources */,
+				0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */,
 				0E3841B217D41D3E004B3C87 /* equipment_expand_bg.png in Resources */,
 				0E3841B317D41D3E004B3C87 /* left.png in Resources */,
 				0E3841B417D41D3E004B3C87 /* stop_btn.png in Resources */,
@@ -1562,6 +1592,7 @@
 				0E9426EF181657AE00DAFDAF /* bar-chart.png in Resources */,
 				0E9426F0181657AE00DAFDAF /* bar-chart@2x.png in Resources */,
 				0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */,
+				0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */,
 				0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */,
 				0E5A09FE1818B60C00241891 /* Icon-60@2x.png in Resources */,
 				0E5A09FF1818B60C00241891 /* Icon-60.png in Resources */,
@@ -1648,12 +1679,15 @@
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */,
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
+				0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
 				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
+				0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
 				0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */,
+				0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,

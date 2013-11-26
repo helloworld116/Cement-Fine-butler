@@ -14,6 +14,7 @@
 #import "RawMaterialsCalViewController.h"
 #import "RawMaterialsCalculateViewController.h"
 #import "EquipmentListViewController.h"
+#import "EnergyMonitoringOverViewViewController.h"
 #import "LoginAction.h"
 
 #define kViewTag 12000
@@ -143,23 +144,27 @@
     //根据权限选择需要展现的视图
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
-    //原材料成本管理模块
-    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
-    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
-//    RawMaterialsCostManagerViewController *rawMaterialsCostManagerViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
-//    UINavigationController *rawMaterialsCostManagerNavController = [[UINavigationController alloc] initWithRootViewController:rawMaterialsCostManagerViewController];
-    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
-    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
-    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    if (kSharedApp.multiGroup) {
-        //集团
-        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
-    }else{
-        //集团下的工厂
-        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    }
-    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    [costManagerController setRightPanel:costManagerRightController];
+//    //原材料成本管理模块
+//    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
+//    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+//    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
+//    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
+//    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    if (kSharedApp.multiGroup) {
+//        //集团
+//        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
+//    }else{
+//        //集团下的工厂
+//        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+//    }
+//    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//    [costManagerController setRightPanel:costManagerRightController];
+    
+    //能源监控
+    EnergyMonitoringOverViewViewController *energyMonitoringOverViewViewController = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
+    UINavigationController *energyMonitoringNav = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewViewController];
+    energyMonitoringNav.tabBarItem = [energyMonitoringNav.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+    
     //损耗定位
     JASidePanelController *lossController = [[JASidePanelController alloc] init];
     lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
@@ -204,7 +209,7 @@
     //更多
     UINavigationController *moreNav = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
     moreNav.tabBarItem = [moreNav.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
-    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,moreNav];
+    tabBarController.viewControllers = @[energyMonitoringNav,lossController,realTimeReportsController,equipmentController,moreNav];
     return tabBarController;
 }
 							
