@@ -70,6 +70,8 @@
     }
     //设置navigtionbar
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[UIColor colorWithRed:100/255.f green:100/255.f blue:100/255.f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundColor:[UIColor redColor]];
     UIImage *barButton = [[UIImage imageNamed:@"NavBarButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     
 //    UIImage *backButton = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 5)];
@@ -161,9 +163,15 @@
 //    [costManagerController setRightPanel:costManagerRightController];
     
     //能源监控
+    JASidePanelController *energyMonitoringSidePanelViewController = [[JASidePanelController alloc] init];
     EnergyMonitoringOverViewViewController *energyMonitoringOverViewViewController = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
     UINavigationController *energyMonitoringNav = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewViewController];
-    energyMonitoringNav.tabBarItem = [energyMonitoringNav.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+    RightViewController* energyMonitoringRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    energyMonitoringRightController.conditions = @[@{@"时间段":timeArray}];
+    energyMonitoringRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [energyMonitoringSidePanelViewController setCenterPanel:energyMonitoringNav];
+    [energyMonitoringSidePanelViewController setRightPanel:energyMonitoringRightController];
+    energyMonitoringSidePanelViewController.tabBarItem = [energyMonitoringNav.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
     
     //损耗定位
     JASidePanelController *lossController = [[JASidePanelController alloc] init];
@@ -209,7 +217,7 @@
     //更多
     UINavigationController *moreNav = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
     moreNav.tabBarItem = [moreNav.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
-    tabBarController.viewControllers = @[energyMonitoringNav,lossController,realTimeReportsController,equipmentController,moreNav];
+    tabBarController.viewControllers = @[energyMonitoringSidePanelViewController,lossController,realTimeReportsController,equipmentController,moreNav];
     return tabBarController;
 }
 							

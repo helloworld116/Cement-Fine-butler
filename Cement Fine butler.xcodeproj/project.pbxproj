@@ -13,6 +13,8 @@
 		0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */; };
 		0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */; };
 		0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */; };
+		0E1258261845F8F000959EC1 /* SubCateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258241845F8F000959EC1 /* SubCateViewController.m */; };
+		0E1258271845F8F000959EC1 /* SubCateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258251845F8F000959EC1 /* SubCateViewController.xib */; };
 		0E22B15E17D8191F009695FF /* Column2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* Column2D.html */; };
 		0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3D180E306D0089B4A8 /* lock-small.png */; };
 		0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3E180E306D0089B4A8 /* unlock-small.png */; };
@@ -288,6 +290,9 @@
 		0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMonitoringListViewController.h; sourceTree = "<group>"; };
 		0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMonitoringListViewController.m; sourceTree = "<group>"; };
 		0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyMonitoringListViewController.xib; sourceTree = "<group>"; };
+		0E1258231845F8F000959EC1 /* SubCateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCateViewController.h; sourceTree = "<group>"; };
+		0E1258241845F8F000959EC1 /* SubCateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCateViewController.m; sourceTree = "<group>"; };
+		0E1258251845F8F000959EC1 /* SubCateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCateViewController.xib; sourceTree = "<group>"; };
 		0E22B15D17D8191F009695FF /* Column2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Column2D.html; sourceTree = "<group>"; };
 		0E23CF3D180E306D0089B4A8 /* lock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-small.png"; sourceTree = "<group>"; };
 		0E23CF3E180E306D0089B4A8 /* unlock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-small.png"; sourceTree = "<group>"; };
@@ -703,6 +708,9 @@
 		0E12581518442AD200959EC1 /* 能源监控 */ = {
 			isa = PBXGroup;
 			children = (
+				0E1258231845F8F000959EC1 /* SubCateViewController.h */,
+				0E1258241845F8F000959EC1 /* SubCateViewController.m */,
+				0E1258251845F8F000959EC1 /* SubCateViewController.xib */,
 				0E12581618442B9C00959EC1 /* BackgroundLayer.h */,
 				0E12581718442B9C00959EC1 /* BackgroundLayer.m */,
 				0E12581918442CDF00959EC1 /* EnergyMonitoringOverViewViewController.h */,
@@ -1468,6 +1476,7 @@
 				0E38419A17D41D3E004B3C87 /* top@2x.png in Resources */,
 				0E38419B17D41D3E004B3C87 /* background@2x.png in Resources */,
 				0E38419C17D41D3E004B3C87 /* login_background@2x.png in Resources */,
+				0E1258271845F8F000959EC1 /* SubCateViewController.xib in Resources */,
 				0E38419D17D41D3E004B3C87 /* body.png in Resources */,
 				0E38419E17D41D3E004B3C87 /* login_background.png in Resources */,
 				0E38419F17D41D3E004B3C87 /* password.png in Resources */,
@@ -1736,6 +1745,7 @@
 				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
+				0E1258261845F8F000959EC1 /* SubCateViewController.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);
@@ -1835,8 +1845,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: lei deng (GL997P4Y62)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1846,7 +1856,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1857,8 +1867,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: lei deng (GL997P4Y62)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1868,7 +1878,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

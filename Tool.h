@@ -58,4 +58,6 @@
 +(float)floatValue:(id)value;
 
 +(NSString *)equipmentType:(NSString *)code;
+
++(UIImage *)createImageWithColor:(UIColor *) color;
 @end
