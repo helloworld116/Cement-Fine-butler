@@ -13,8 +13,6 @@
 		0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */; };
 		0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */; };
 		0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */; };
-		0E1258261845F8F000959EC1 /* SubCateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258241845F8F000959EC1 /* SubCateViewController.m */; };
-		0E1258271845F8F000959EC1 /* SubCateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258251845F8F000959EC1 /* SubCateViewController.xib */; };
 		0E22B15E17D8191F009695FF /* Column2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* Column2D.html */; };
 		0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3D180E306D0089B4A8 /* lock-small.png */; };
 		0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3E180E306D0089B4A8 /* unlock-small.png */; };
@@ -250,6 +248,11 @@
 		0EF727C0181E914C0059EC59 /* ProductHistoryUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */; };
 		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
 		470FA09B17F078E800C79B00 /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09717F078E800C79B00 /* search_icon@2x.png */; };
+		471B5B08184655E7002D6BDC /* EnergySubCateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B5B07184655E7002D6BDC /* EnergySubCateView.m */; };
+		471B5B0A184656CC002D6BDC /* EnergySubCateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 471B5B09184656CC002D6BDC /* EnergySubCateView.xib */; };
+		471B5B131846582F002D6BDC /* ECViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B5B0F1846582F002D6BDC /* ECViewController.m */; };
+		471B5B141846582F002D6BDC /* ExtensiveCellContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B5B111846582F002D6BDC /* ExtensiveCellContainer.m */; };
+		471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 471B5B121846582F002D6BDC /* ExtensiveCellContainer.xib */; };
 		472F32E017CC3C05007E567B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32DF17CC3C05007E567B /* UIKit.framework */; };
 		472F32E217CC3C05007E567B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E117CC3C05007E567B /* Foundation.framework */; };
 		472F32E417CC3C05007E567B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F32E317CC3C05007E567B /* CoreGraphics.framework */; };
@@ -290,9 +293,6 @@
 		0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMonitoringListViewController.h; sourceTree = "<group>"; };
 		0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMonitoringListViewController.m; sourceTree = "<group>"; };
 		0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyMonitoringListViewController.xib; sourceTree = "<group>"; };
-		0E1258231845F8F000959EC1 /* SubCateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCateViewController.h; sourceTree = "<group>"; };
-		0E1258241845F8F000959EC1 /* SubCateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCateViewController.m; sourceTree = "<group>"; };
-		0E1258251845F8F000959EC1 /* SubCateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCateViewController.xib; sourceTree = "<group>"; };
 		0E22B15D17D8191F009695FF /* Column2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Column2D.html; sourceTree = "<group>"; };
 		0E23CF3D180E306D0089B4A8 /* lock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-small.png"; sourceTree = "<group>"; };
 		0E23CF3E180E306D0089B4A8 /* unlock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-small.png"; sourceTree = "<group>"; };
@@ -609,6 +609,14 @@
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		470FA09617F078E800C79B00 /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon.png; sourceTree = "<group>"; };
 		470FA09717F078E800C79B00 /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon@2x.png"; sourceTree = "<group>"; };
+		471B5B06184655E7002D6BDC /* EnergySubCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergySubCateView.h; sourceTree = "<group>"; };
+		471B5B07184655E7002D6BDC /* EnergySubCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergySubCateView.m; sourceTree = "<group>"; };
+		471B5B09184656CC002D6BDC /* EnergySubCateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergySubCateView.xib; sourceTree = "<group>"; };
+		471B5B0E1846582F002D6BDC /* ECViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECViewController.h; sourceTree = "<group>"; };
+		471B5B0F1846582F002D6BDC /* ECViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECViewController.m; sourceTree = "<group>"; };
+		471B5B101846582F002D6BDC /* ExtensiveCellContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensiveCellContainer.h; sourceTree = "<group>"; };
+		471B5B111846582F002D6BDC /* ExtensiveCellContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtensiveCellContainer.m; sourceTree = "<group>"; };
+		471B5B121846582F002D6BDC /* ExtensiveCellContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExtensiveCellContainer.xib; sourceTree = "<group>"; };
 		472F32DC17CC3C05007E567B /* Cement Fine butler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cement Fine butler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F32DF17CC3C05007E567B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		472F32E117CC3C05007E567B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -708,9 +716,6 @@
 		0E12581518442AD200959EC1 /* 能源监控 */ = {
 			isa = PBXGroup;
 			children = (
-				0E1258231845F8F000959EC1 /* SubCateViewController.h */,
-				0E1258241845F8F000959EC1 /* SubCateViewController.m */,
-				0E1258251845F8F000959EC1 /* SubCateViewController.xib */,
 				0E12581618442B9C00959EC1 /* BackgroundLayer.h */,
 				0E12581718442B9C00959EC1 /* BackgroundLayer.m */,
 				0E12581918442CDF00959EC1 /* EnergyMonitoringOverViewViewController.h */,
@@ -719,6 +724,9 @@
 				0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */,
 				0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */,
 				0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */,
+				471B5B06184655E7002D6BDC /* EnergySubCateView.h */,
+				471B5B07184655E7002D6BDC /* EnergySubCateView.m */,
+				471B5B09184656CC002D6BDC /* EnergySubCateView.xib */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -1209,9 +1217,22 @@
 			name = "生产记录";
 			sourceTree = "<group>";
 		};
+		471B5B0D1846582F002D6BDC /* ExtensiveCell */ = {
+			isa = PBXGroup;
+			children = (
+				471B5B0E1846582F002D6BDC /* ECViewController.h */,
+				471B5B0F1846582F002D6BDC /* ECViewController.m */,
+				471B5B101846582F002D6BDC /* ExtensiveCellContainer.h */,
+				471B5B111846582F002D6BDC /* ExtensiveCellContainer.m */,
+				471B5B121846582F002D6BDC /* ExtensiveCellContainer.xib */,
+			);
+			path = ExtensiveCell;
+			sourceTree = "<group>";
+		};
 		472F32D317CC3C05007E567B = {
 			isa = PBXGroup;
 			children = (
+				471B5B0D1846582F002D6BDC /* ExtensiveCell */,
 				0EC05B0A181F896C001BF5B7 /* EGOTableViewPullRefresh */,
 				0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */,
 				0EEDBFD0180D67D80010961D /* Calculate.html */,
@@ -1476,7 +1497,6 @@
 				0E38419A17D41D3E004B3C87 /* top@2x.png in Resources */,
 				0E38419B17D41D3E004B3C87 /* background@2x.png in Resources */,
 				0E38419C17D41D3E004B3C87 /* login_background@2x.png in Resources */,
-				0E1258271845F8F000959EC1 /* SubCateViewController.xib in Resources */,
 				0E38419D17D41D3E004B3C87 /* body.png in Resources */,
 				0E38419E17D41D3E004B3C87 /* login_background.png in Resources */,
 				0E38419F17D41D3E004B3C87 /* password.png in Resources */,
@@ -1504,6 +1524,7 @@
 				0E3841B217D41D3E004B3C87 /* equipment_expand_bg.png in Resources */,
 				0E3841B317D41D3E004B3C87 /* left.png in Resources */,
 				0E3841B417D41D3E004B3C87 /* stop_btn.png in Resources */,
+				471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */,
 				0E3841B517D41D3E004B3C87 /* top.png in Resources */,
 				0E3841B617D41D3E004B3C87 /* nv_line@2x.png in Resources */,
 				0EC05B23181F896C001BF5B7 /* blueArrow.png in Resources */,
@@ -1584,6 +1605,7 @@
 				0EEDBFD1180D67D90010961D /* Calculate.html in Resources */,
 				0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */,
 				0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */,
+				471B5B0A184656CC002D6BDC /* EnergySubCateView.xib in Resources */,
 				0E23CF47180E306D0089B4A8 /* lock-small@2x.png in Resources */,
 				0E23CF48180E306D0089B4A8 /* unlock-small@2x.png in Resources */,
 				0E23CF49180E306D0089B4A8 /* lock@2x.png in Resources */,
@@ -1665,6 +1687,7 @@
 				0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */,
 				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
+				471B5B141846582F002D6BDC /* ExtensiveCellContainer.m in Sources */,
 				0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */,
 				0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */,
 				0E3841F017D41FDE004B3C87 /* Tool.m in Sources */,
@@ -1685,6 +1708,7 @@
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
+				471B5B131846582F002D6BDC /* ECViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */,
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
@@ -1725,6 +1749,7 @@
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
 				0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
+				471B5B08184655E7002D6BDC /* EnergySubCateView.m in Sources */,
 				0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */,
 				0E43ED64182743E2006E3A66 /* AllProductViewController.m in Sources */,
 				0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */,
@@ -1745,7 +1770,6 @@
 				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
-				0E1258261845F8F000959EC1 /* SubCateViewController.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);
@@ -1856,7 +1880,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1878,7 +1902,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

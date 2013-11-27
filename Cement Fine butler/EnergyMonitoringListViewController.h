@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECViewController.h"
 
-@interface EnergyMonitoringListViewController : UIViewController
+@interface EnergyMonitoringListViewController :ECViewController
 @property (nonatomic) int type;//0表示煤，1表示电
 @property (nonatomic, strong) NSDictionary *data;
 @end

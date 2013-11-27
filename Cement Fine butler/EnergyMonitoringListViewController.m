@@ -7,6 +7,7 @@
 //
 
 #import "EnergyMonitoringListViewController.h"
+#import "EnergySubCateView.h"
 
 @interface EnergyMonitoringListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -101,33 +102,24 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSections
 {
-    // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [self.products count];
+    return self.products.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == self.selectedIndex && self.selectedIndex != -1 ) {
-        if (self.isOpen == YES) {
-            return 150.f;
-        }else{
-            return 60.f;
-        }
-    }
+- (CGFloat)heightForExtensiveCellAtIndexPath:(NSIndexPath *)indexPath{
     return 60.f;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)extensiveCellForRowIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ChoiceCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
@@ -136,8 +128,20 @@
     return cell;
 }
 
+- (UIView *)viewForContainerAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row<self.products.count) {
+        EnergySubCateView *view = [[[NSBundle mainBundle] loadNibNamed:@"EnergySubCateView" owner:self options:nil] objectAtIndex:0];
+        view.type = self.type;
+        view.product = [self.products objectAtIndex:indexPath.row];
+        return view;
+    }else{
+        return nil;
+    }
+}
+
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    [self extendCellAtIndexPath:indexPath];
 }
 @end
