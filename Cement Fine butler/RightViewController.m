@@ -24,8 +24,12 @@
 //勾选标记大小
 #define kImageViewSize 30
 
+#define kBackgroundColor [UIColor colorWithRed:31/255.0 green:36/255.0 blue:43/255.0 alpha:1]
+
 @interface RightViewController ()
 @property (nonatomic,retain) SearchCondition *searchCondition;
+@property (strong, nonatomic) IBOutlet UIView *viewOfBottom;
+@property (strong, nonatomic) IBOutlet UIButton *btnOfSearch;
 
 @end
 
@@ -44,7 +48,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-//    self.view.backgroundColor =[UIColor colorWithRed:53/255.0 green:53/255.0 blue:52/255.0 alpha:1];
+    self.view.backgroundColor = kBackgroundColor;
+    self.viewOfBottom.backgroundColor = kBackgroundColor;
+    self.btnOfSearch.backgroundColor = [UIColor blueColor];
+//    self.btnOfSearc
     //重新设置scrollView高度
     self.scrollView.frame = CGRectMake(kOrignX, self.scrollView.frame.origin.y, self.scrollView.frame.size.width-kOrignX, self.scrollView.frame.size.height);
     self.scrollView.bounces = NO;
@@ -293,6 +300,7 @@
         }else if ([kCondition_Time isEqualToString:conditionTitle]) {
 //            NSLog(@".... index is %d",[[self.currentSelectDict objectForKey:conditionTitle] intValue]);
             tableView = [[TimeTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
+            tableView.backgroundColor = kBackgroundColor;
             self.timeTableView = tableView;
         }else if ([kCondition_Lines isEqualToString:conditionTitle]) {
             tableView = [[LineTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
