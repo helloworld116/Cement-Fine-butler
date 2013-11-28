@@ -13,6 +13,15 @@
 		0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */; };
 		0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */; };
 		0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */; };
+		0E12582B1846D22D00959EC1 /* SubCateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258291846D22D00959EC1 /* SubCateViewController.m */; };
+		0E12582C1846D22D00959EC1 /* SubCateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12582A1846D22D00959EC1 /* SubCateViewController.xib */; };
+		0E1258331846D71C00959EC1 /* FolderCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12582E1846D71C00959EC1 /* FolderCoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0E1258341846D71C00959EC1 /* UIFolderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258301846D71C00959EC1 /* UIFolderTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0E1258351846D71C00959EC1 /* UIView+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258321846D71C00959EC1 /* UIView+screenshot.m */; };
+		0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12583D18471C2D00959EC1 /* RawMaterialCostViewController.m */; };
+		0E12584018471C2D00959EC1 /* RawMaterialCostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12583E18471C2D00959EC1 /* RawMaterialCostViewController.xib */; };
+		0E12584418473A8300959EC1 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12584218473A8300959EC1 /* ProductViewController.m */; };
+		0E12584518473A8300959EC1 /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12584318473A8300959EC1 /* ProductViewController.xib */; };
 		0E22B15E17D8191F009695FF /* Column2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E22B15D17D8191F009695FF /* Column2D.html */; };
 		0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3D180E306D0089B4A8 /* lock-small.png */; };
 		0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF3E180E306D0089B4A8 /* unlock-small.png */; };
@@ -293,6 +302,21 @@
 		0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMonitoringListViewController.h; sourceTree = "<group>"; };
 		0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMonitoringListViewController.m; sourceTree = "<group>"; };
 		0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyMonitoringListViewController.xib; sourceTree = "<group>"; };
+		0E1258281846D22D00959EC1 /* SubCateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCateViewController.h; sourceTree = "<group>"; };
+		0E1258291846D22D00959EC1 /* SubCateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCateViewController.m; sourceTree = "<group>"; };
+		0E12582A1846D22D00959EC1 /* SubCateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCateViewController.xib; sourceTree = "<group>"; };
+		0E12582D1846D71C00959EC1 /* FolderCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderCoverView.h; sourceTree = "<group>"; };
+		0E12582E1846D71C00959EC1 /* FolderCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderCoverView.m; sourceTree = "<group>"; };
+		0E12582F1846D71C00959EC1 /* UIFolderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFolderTableView.h; sourceTree = "<group>"; };
+		0E1258301846D71C00959EC1 /* UIFolderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFolderTableView.m; sourceTree = "<group>"; };
+		0E1258311846D71C00959EC1 /* UIView+screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+screenshot.h"; sourceTree = "<group>"; };
+		0E1258321846D71C00959EC1 /* UIView+screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+screenshot.m"; sourceTree = "<group>"; };
+		0E12583C18471C2D00959EC1 /* RawMaterialCostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialCostViewController.h; sourceTree = "<group>"; };
+		0E12583D18471C2D00959EC1 /* RawMaterialCostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialCostViewController.m; sourceTree = "<group>"; };
+		0E12583E18471C2D00959EC1 /* RawMaterialCostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RawMaterialCostViewController.xib; sourceTree = "<group>"; };
+		0E12584118473A8300959EC1 /* ProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
+		0E12584218473A8300959EC1 /* ProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
+		0E12584318473A8300959EC1 /* ProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
 		0E22B15D17D8191F009695FF /* Column2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Column2D.html; sourceTree = "<group>"; };
 		0E23CF3D180E306D0089B4A8 /* lock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-small.png"; sourceTree = "<group>"; };
 		0E23CF3E180E306D0089B4A8 /* unlock-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-small.png"; sourceTree = "<group>"; };
@@ -716,6 +740,15 @@
 		0E12581518442AD200959EC1 /* 能源监控 */ = {
 			isa = PBXGroup;
 			children = (
+				0E1258281846D22D00959EC1 /* SubCateViewController.h */,
+				0E1258291846D22D00959EC1 /* SubCateViewController.m */,
+				0E12582A1846D22D00959EC1 /* SubCateViewController.xib */,
+				0E12582D1846D71C00959EC1 /* FolderCoverView.h */,
+				0E12582E1846D71C00959EC1 /* FolderCoverView.m */,
+				0E12582F1846D71C00959EC1 /* UIFolderTableView.h */,
+				0E1258301846D71C00959EC1 /* UIFolderTableView.m */,
+				0E1258311846D71C00959EC1 /* UIView+screenshot.h */,
+				0E1258321846D71C00959EC1 /* UIView+screenshot.m */,
 				0E12581618442B9C00959EC1 /* BackgroundLayer.h */,
 				0E12581718442B9C00959EC1 /* BackgroundLayer.m */,
 				0E12581918442CDF00959EC1 /* EnergyMonitoringOverViewViewController.h */,
@@ -729,6 +762,19 @@
 				471B5B09184656CC002D6BDC /* EnergySubCateView.xib */,
 			);
 			name = "能源监控";
+			sourceTree = "<group>";
+		};
+		0E1258361846E42700959EC1 /* 新原材料成本 */ = {
+			isa = PBXGroup;
+			children = (
+				0E12583C18471C2D00959EC1 /* RawMaterialCostViewController.h */,
+				0E12583D18471C2D00959EC1 /* RawMaterialCostViewController.m */,
+				0E12583E18471C2D00959EC1 /* RawMaterialCostViewController.xib */,
+				0E12584118473A8300959EC1 /* ProductViewController.h */,
+				0E12584218473A8300959EC1 /* ProductViewController.m */,
+				0E12584318473A8300959EC1 /* ProductViewController.xib */,
+			);
+			name = "新原材料成本";
 			sourceTree = "<group>";
 		};
 		0E3841E317D41D63004B3C87 /* User */ = {
@@ -1274,6 +1320,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0E1258361846E42700959EC1 /* 新原材料成本 */,
 				0E12581518442AD200959EC1 /* 能源监控 */,
 				0EE9F606181A6D82009A4330 /* 更多 */,
 				0EE9F602181A6B6B009A4330 /* 录入相关 */,
@@ -1466,6 +1513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */,
+				0E12584018471C2D00959EC1 /* RawMaterialCostViewController.xib in Resources */,
 				0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */,
 				472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */,
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
@@ -1493,6 +1541,7 @@
 				0E38419617D41D3E004B3C87 /* body@2x.png in Resources */,
 				0E38419717D41D3E004B3C87 /* password@2x.png in Resources */,
 				0E38419817D41D3E004B3C87 /* title@2x.png in Resources */,
+				0E12582C1846D22D00959EC1 /* SubCateViewController.xib in Resources */,
 				0E38419917D41D3E004B3C87 /* left@2x.png in Resources */,
 				0E38419A17D41D3E004B3C87 /* top@2x.png in Resources */,
 				0E38419B17D41D3E004B3C87 /* background@2x.png in Resources */,
@@ -1510,6 +1559,7 @@
 				0E3841A717D41D3E004B3C87 /* equipmentList@2x.png in Resources */,
 				0E3841A817D41D3E004B3C87 /* login@2x.png in Resources */,
 				0EC05B28181F896C001BF5B7 /* whiteArrow@2x.png in Resources */,
+				0E12584518473A8300959EC1 /* ProductViewController.xib in Resources */,
 				0E3841A917D41D3E004B3C87 /* login.png in Resources */,
 				0E3841AA17D41D3E004B3C87 /* tabBar.png in Resources */,
 				0E3841AB17D41D3E004B3C87 /* equipmentList.png in Resources */,
@@ -1675,6 +1725,7 @@
 			files = (
 				472F32EC17CC3C05007E567B /* main.m in Sources */,
 				472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */,
+				0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */,
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
@@ -1685,6 +1736,7 @@
 				0E72473017CD9D080048DFFB /* RightViewController.m in Sources */,
 				0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */,
 				0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */,
+				0E1258351846D71C00959EC1 /* UIView+screenshot.m in Sources */,
 				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
 				471B5B141846582F002D6BDC /* ExtensiveCellContainer.m in Sources */,
@@ -1732,6 +1784,7 @@
 				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
+				0E1258341846D71C00959EC1 /* UIFolderTableView.m in Sources */,
 				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,
 				0E43ED6118274341006E3A66 /* ProductWeighDetailViewController.m in Sources */,
 				0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */,
@@ -1747,6 +1800,7 @@
 				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
+				0E12584418473A8300959EC1 /* ProductViewController.m in Sources */,
 				0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
 				471B5B08184655E7002D6BDC /* EnergySubCateView.m in Sources */,
@@ -1764,7 +1818,9 @@
 				0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */,
+				0E1258331846D71C00959EC1 /* FolderCoverView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
+				0E12582B1846D22D00959EC1 /* SubCateViewController.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,
 				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
@@ -1880,7 +1936,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1902,7 +1958,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

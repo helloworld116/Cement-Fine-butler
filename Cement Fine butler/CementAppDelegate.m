@@ -15,6 +15,7 @@
 #import "RawMaterialsCalculateViewController.h"
 #import "EquipmentListViewController.h"
 #import "EnergyMonitoringOverViewViewController.h"
+#import "RawMaterialCostViewController.h"
 #import "LoginAction.h"
 
 #define kViewTag 12000
@@ -69,8 +70,8 @@
         [defaults setObject:[NSNumber numberWithLongLong:[date timeIntervalSince1970]*1000] forKey:@"latestMessage"];
     }
     //设置navigtionbar
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[UIColor colorWithRed:100/255.f green:100/255.f blue:100/255.f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[UIColor colorWithRed:52/255.f green:54/255.f blue:68/255.f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
 //    [[UINavigationBar appearance] setBackgroundColor:[UIColor redColor]];
     UIImage *barButton = [[UIImage imageNamed:@"NavBarButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     
@@ -173,16 +174,22 @@
     [energyMonitoringSidePanelViewController setRightPanel:energyMonitoringRightController];
     energyMonitoringSidePanelViewController.tabBarItem = [energyMonitoringNav.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
     
-    //损耗定位
-    JASidePanelController *lossController = [[JASidePanelController alloc] init];
-    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
-    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
-    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
-    RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    lossRightController.conditions = @[@{@"时间段":timeArray}];
-    lossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    [lossController setCenterPanel:lossNavController];
-    [lossController setRightPanel:lossRightController];
+//    //损耗定位
+//    JASidePanelController *lossController = [[JASidePanelController alloc] init];
+//    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
+//    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
+//    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
+//    RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    lossRightController.conditions = @[@{@"时间段":timeArray}];
+//    lossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//    [lossController setCenterPanel:lossNavController];
+//    [lossController setRightPanel:lossRightController];
+    
+    
+    RawMaterialCostViewController *rawMaterialCostViewController = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
+    UINavigationController *lossController = [[UINavigationController alloc] initWithRootViewController:rawMaterialCostViewController];
+    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
+    
     //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
     realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+3];

@@ -8,11 +8,13 @@
 
 #import "EnergyMonitoringListViewController.h"
 #import "EnergySubCateView.h"
+#import "SubCateViewController.h"
+#import "UIFolderTableView.h"
 
 @interface EnergyMonitoringListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *topView;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIFolderTableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *lblValueFee;
 @property (strong, nonatomic) IBOutlet UILabel *lblTextFee;
 @property (strong, nonatomic) IBOutlet UILabel *lblTextAmount;
@@ -52,7 +54,7 @@
     if (self.type==0) {
         double coalFee = [[overview objectForKey:@"coalFee"] doubleValue];
         double coalAmount = [[overview objectForKey:@"coalAmount"] doubleValue];
-        if (coalFee/10000>1) {
+        if (coalFee/100000>1) {
             coalFee/=10000;
             self.lblTextFee.text = @"今日煤费(万元)";
         }else{
@@ -61,7 +63,7 @@
         NSString *coalFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
         self.lblValueFee.text = coalFeeString;
         
-        if (coalAmount/10000>1) {
+        if (coalAmount/100000>1) {
             coalAmount/=10000;
             self.lblTextAmount.text = @"今日煤耗(万吨)";
         }else{
@@ -72,7 +74,7 @@
     }else if(self.type==1){
         double electricityFee = [[overview objectForKey:@"electricityFee"] doubleValue];
         double electricityAmount = [[overview objectForKey:@"electricityAmount"] doubleValue];
-        if (electricityFee/10000>1) {
+        if (electricityFee/100000>1) {
             electricityFee/=10000;
             self.lblTextFee.text = @"今日电费(万元)";
         }else{
@@ -81,7 +83,7 @@
         NSString *eletricityFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
         self.lblValueFee.text = eletricityFeeString;
         
-        if (electricityAmount/10000>1) {
+        if (electricityAmount/100000>1) {
             electricityAmount/=10000;
             self.lblTextAmount.text = @"今日电耗(万度)";
         }else{
@@ -102,21 +104,21 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSections
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
     return 1;
 }
 
-- (NSInteger)numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.products.count;
 }
 
-- (CGFloat)heightForExtensiveCellAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60.f;
 }
 
-- (UITableViewCell *)extensiveCellForRowIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ChoiceCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -125,23 +127,63 @@
     }
     NSDictionary *product = [self.products objectAtIndex:indexPath.row];
     cell.textLabel.text = [product objectForKey:@"name"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
-- (UIView *)viewForContainerAtIndexPath:(NSIndexPath *)indexPath
+-(void)CloseAndOpenACtion:(NSIndexPath *)indexPath
 {
-    if (indexPath.row<self.products.count) {
-        EnergySubCateView *view = [[[NSBundle mainBundle] loadNibNamed:@"EnergySubCateView" owner:self options:nil] objectAtIndex:0];
-        view.type = self.type;
-        view.product = [self.products objectAtIndex:indexPath.row];
-        return view;
-    }else{
-        return nil;
+    if (indexPath.row == self.selectedIndex) {
+        self.isOpen = NO;
+        [self didSelectCellRowFirstDo:NO nextDo:NO];
+        self.selectedIndex = -1;
+    }
+    else
+    {
+        if (self.selectedIndex!=-1) {
+            self.selectedIndex = indexPath.row;
+            [self didSelectCellRowFirstDo:YES nextDo:NO];
+            
+        }
+        else
+        {
+            [self didSelectCellRowFirstDo:NO nextDo:YES];
+        }
+    }
+}
+- (void)didSelectCellRowFirstDo:(BOOL)firstDoInsert nextDo:(BOOL)nextDoInsert
+{
+    self.isOpen = firstDoInsert;
+    if (nextDoInsert) {
+        self.isOpen = YES;
+        self.selectedIndex = [self.tableView indexPathForSelectedRow].row;
+        [self didSelectCellRowFirstDo:YES nextDo:NO];
     }
 }
 
+
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self extendCellAtIndexPath:indexPath];
+    SubCateViewController *subVc = [[SubCateViewController alloc]
+                                    initWithNibName:NSStringFromClass([SubCateViewController class])
+                                    bundle:nil];
+    subVc.type = self.type;
+    subVc.product = [self.products objectAtIndex:indexPath.row];
+    self.tableView.scrollEnabled = NO;
+    UIFolderTableView *folderTableView = (UIFolderTableView *)tableView;
+    [folderTableView openFolderAtIndexPath:indexPath WithContentView:subVc.view
+                                 openBlock:^(UIView *subClassView, CFTimeInterval duration, CAMediaTimingFunction *timingFunction){
+                                     // opening actions
+                                     //[self CloseAndOpenACtion:indexPath];
+                                 }
+                                closeBlock:^(UIView *subClassView, CFTimeInterval duration, CAMediaTimingFunction *timingFunction){
+                                    // closing actions
+                                    //[self CloseAndOpenACtion:indexPath];
+                                    //[cell changeArrowWithUp:NO];
+                                }
+                           completionBlock:^{
+                               // completed actions
+                               self.tableView.scrollEnabled = YES;
+                           }];
 }
 @end

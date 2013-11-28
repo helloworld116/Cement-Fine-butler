@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubCateViewController">
             <connections>
+                <outlet property="imgLine1" destination="xYD-QY-gNE" id="hv7-s8-a7i"/>
+                <outlet property="imgLine2" destination="yyp-9F-MlD" id="NPM-L8-kKb"/>
+                <outlet property="imgLine3" destination="rbK-NH-bZc" id="kgw-24-Lur"/>
                 <outlet property="lblTextAmount" destination="1kM-59-BsN" id="ibO-Ts-tzs"/>
                 <outlet property="lblTextAverage" destination="IxE-nc-He8" id="oPO-p2-ncV"/>
                 <outlet property="lblTextFee" destination="53Z-qp-ZG4" id="c8P-t7-Pij"/>
