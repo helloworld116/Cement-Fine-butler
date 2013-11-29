@@ -30,6 +30,8 @@
 @property (nonatomic,retain) SearchCondition *searchCondition;
 @property (strong, nonatomic) IBOutlet UIView *viewOfBottom;
 @property (strong, nonatomic) IBOutlet UIButton *btnOfSearch;
+@property (strong, nonatomic) IBOutlet UIView *viewOfTop;
+@property (strong, nonatomic) IBOutlet UILabel *lblCondition;
 
 @end
 
@@ -49,9 +51,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = kBackgroundColor;
+    self.viewOfTop.backgroundColor = kBackgroundColor;
+    self.lblCondition.backgroundColor = [UIColor clearColor];
+    self.lblCondition.textColor = kRelativelyColor;
     self.viewOfBottom.backgroundColor = kBackgroundColor;
-    self.btnOfSearch.backgroundColor = [UIColor blueColor];
-//    self.btnOfSearc
+    self.btnOfSearch.backgroundColor = kGeneralColor;
+    [self.btnOfSearch setBackgroundImage:[Tool createImageWithColor:[UIColor blueColor]] forState:UIControlStateHighlighted];
+    self.btnOfSearch.layer.shadowRadius = 4.0f;
     //重新设置scrollView高度
     self.scrollView.frame = CGRectMake(kOrignX, self.scrollView.frame.origin.y, self.scrollView.frame.size.width-kOrignX, self.scrollView.frame.size.height);
     self.scrollView.bounces = NO;
@@ -311,7 +317,7 @@
         }
         //table的headerview，用于放置条件说明
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
-        view.backgroundColor =[UIColor grayColor];
+        view.backgroundColor =[UIColor blackColor];
 //        view.backgroundColor
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, kTableViewHeaderViewHeight)];
         label.textColor = [UIColor whiteColor];

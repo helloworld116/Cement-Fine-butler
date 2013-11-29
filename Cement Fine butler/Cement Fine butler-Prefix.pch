@@ -58,6 +58,8 @@
     #define kDateFormatDay @"MM-dd"
     #define kColorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
+    #define kGeneralColor [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]
+    #define kRelativelyColor [UIColor whiteColor]
 
     //接口地址
 //    #define kServerURL @"http://192.168.1.9:8080/mobile/"
@@ -154,6 +156,12 @@
 #define kProductHistoryAdd [kServerURL stringByAppendingString:@"manufacture/add"]
 //生产记录修改
 #define kProductHistoryUpdate [kServerURL stringByAppendingString:@"manufacture/update"]
+
+#pragma mark 原材料成本损失
+#define kRawMaterialLoss [kServerURL stringByAppendingString:@"cost/overview"]
+
+#pragma mark 能源监控
+#define kEnergyMonitoring [kServerURL stringByAppendingString:@"energe/overview"]
 
 //    //检测网络是否存在使用网址
     #define kCheckNetworkWebsite @"www.baidu.com"

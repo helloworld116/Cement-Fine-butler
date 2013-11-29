@@ -13,8 +13,10 @@
 #import "StockTableView.h"
 #import "UnitCostTableView.h"
 #define kOrignX 60
+#define kUnSelectedColor [UIColor whiteColor]
+#define kSelectedColor [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1]
 
-@interface RightViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface RightViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (nonatomic,retain) TimeTableView *timeTableView;

@@ -73,11 +73,13 @@
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[UIColor colorWithRed:52/255.f green:54/255.f blue:68/255.f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
 //    [[UINavigationBar appearance] setBackgroundColor:[UIColor redColor]];
-    UIImage *barButton = [[UIImage imageNamed:@"NavBarButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    UIImage *barButton = [[UIImage imageNamed:@"nav-bar-button-dark"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    UIImage *highlightedBarButton = [[UIImage imageNamed:@"nav-bar-button-dark-highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     
 //    UIImage *backButton = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 5)];
 //    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];    
 	[[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:highlightedBarButton forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
 	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:

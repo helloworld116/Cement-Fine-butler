@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTextStandardCosts;
 @property (strong, nonatomic) IBOutlet UILabel *lblValueStandardCosts;
 @property (strong, nonatomic) IBOutlet UILabel *lblSuggestion;
+@property (strong, nonatomic) IBOutlet UILabel *lblSuggestionTip;
 @end
 
 @implementation ProductViewController
@@ -55,10 +56,11 @@
     self.lblValueStandardCosts.textColor = valueColor;
     self.lblValueTotalLoss.textColor = valueColor;
     
-    NSString *time = @"今日";
+    NSString *lblStr = @"今日";
     self.lblTextQuotesCosts.text = @"行情成本";
     self.lblTextActualCosts.text = @"实际成本";
     self.lblTextStandardCosts.text = @"标准成本";
+    self.lblSuggestionTip.text = @"建议：";
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
     double quotesCosts = [[self.product objectForKey:@"quotesCosts"] doubleValue];
@@ -66,12 +68,19 @@
     double actualCosts = [[self.product objectForKey:@"actualCosts"] doubleValue];
     double standardCosts = [[self.product objectForKey:@"standardCosts"] doubleValue];
     NSString *suggestion = [self.product objectForKey:@"suggestion"];
-    if (totalLoss/10000>1) {
-        totalLoss/=10000;
-        self.lblTextTotalLoss.text = [time stringByAppendingString:@"已损失(万元)"];
+    if(totalLoss>0){
+        lblStr = [lblStr stringByAppendingString:@"已节约"];
     }else{
-        self.lblTextTotalLoss.text = [time stringByAppendingString:@"已损失(元)"];
+        lblStr = [lblStr stringByAppendingString:@"已损失"];
+        totalLoss = -totalLoss;
     }
+    if (totalLoss/100000>1) {
+        totalLoss/=10000;
+        lblStr = [lblStr stringByAppendingString:@"(万元)"];
+    }else{
+        lblStr = [lblStr stringByAppendingString:@"(元)"];
+    }
+    self.lblTextTotalLoss.text = lblStr;
     
     NSString *quotesCostsStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:quotesCosts]];
     NSString *totalLossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:totalLoss]];
@@ -82,7 +91,7 @@
     self.lblValueTotalLoss.text = totalLossStr;
     self.lblValueActualCosts.text = actualCostsStr;
     self.lblValueStandardCosts.text = standardCostsStr;
-    self.lblSuggestion.text = [@"建议：<br>" stringByAppendingString:suggestion];
+    self.lblSuggestion.text = suggestion;
 }
 
 - (void)didReceiveMemoryWarning

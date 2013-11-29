@@ -44,7 +44,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    self.view.backgroundColor = [UIColor grayColor];
+    self.topView.backgroundColor = kGeneralColor;
+    self.lblTextCoalFee.textColor = kRelativelyColor;
+    self.lblTextCoalAmount.textColor = kRelativelyColor;
+    self.lblValueCoalFee.textColor = kRelativelyColor;
+    self.lblValueCoalAmount.textColor = kRelativelyColor;
+    self.bottomView.backgroundColor = kRelativelyColor;
+    self.lblTextElectricityFee.textColor = kGeneralColor;
+    self.lblTextElectricityAmount.textColor = kGeneralColor;
+    self.lblValueElectricityFee.textColor = kGeneralColor;
+    self.lblValueElectricityAmount.textColor = kGeneralColor;
+    
     self.title = @"能源监控";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     self.scrollView.delegate = self;
     self.scrollView.showsVerticalScrollIndicator = NO;
     
@@ -137,5 +149,9 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
 //    scrollView.contentInset = UIEdgeInsetsMake(1, 0, -1, 0);
 //    NSLog(@"height is %f",scrollView.contentSize.height);
+}
+
+- (void)showSearchCondition:(id)sender {
+    [self.sidePanelController showRightPanelAnimated:YES];
 }
 @end

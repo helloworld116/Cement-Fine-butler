@@ -334,6 +334,20 @@
     return @{@"timeDesc":timeDesc,@"startTime":[NSNumber numberWithLongLong:startTime],@"endTime":[NSNumber numberWithLongLong:endTime]};
 }
 
++(NSDictionary *)getTimeInfoFromUserDefault{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *startDate = [userDefaults objectForKey:@"startDate"];
+    int beginDay = [[startDate objectForKey:@"day"] intValue];
+    int beginMonth = [[startDate objectForKey:@"month"] intValue];
+    int beginYear = [[startDate objectForKey:@"year"] intValue];
+    
+    NSDictionary *endDate = [userDefaults objectForKey:@"endDate"];
+    int endDay = [[endDate objectForKey:@"day"] intValue];
+    int endMonth = [[endDate objectForKey:@"month"] intValue];
+    int endYear = [[endDate objectForKey:@"year"] intValue];
+    return @{@"startTime":[NSString stringWithFormat:@"%d-%d-%d",beginYear,beginMonth,beginDay],@"endTime":[NSString stringWithFormat:@"%d-%d-%d",endYear,endMonth,endDay]};
+}
+
 +(NSString *)longTimeToTimeDesc:(long)time{
     if (time!=0) {
         int day,hour,minute,second;
@@ -425,5 +439,17 @@
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return theImage;
+}
+
++(UIColor *)randomColor{
+    static BOOL seed = NO;
+    if (!seed) {
+        seed = YES;
+        srandom(time(NULL));
+    }
+    CGFloat red = (CGFloat)random()/(CGFloat)RAND_MAX;
+    CGFloat green = (CGFloat)random()/(CGFloat)RAND_MAX;
+    CGFloat blue = (CGFloat)random()/(CGFloat)RAND_MAX;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:1.0f];//alpha为1.0,颜色完全不透明
 }
 @end

@@ -45,6 +45,8 @@
 
 +(NSDictionary *)getTimeInfo:(int)timeType;
 
++(NSDictionary *)getTimeInfoFromUserDefault;
+
 +(NSString *)longTimeToTimeDesc:(long)time;
 
 +(NSString *)stringToString:(NSString *)str;

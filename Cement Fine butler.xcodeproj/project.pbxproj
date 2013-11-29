@@ -32,6 +32,12 @@
 		0E23CF4B180E306D0089B4A8 /* unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF43180E306D0089B4A8 /* unlock.png */; };
 		0E23CF4C180E306D0089B4A8 /* unlock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E23CF44180E306D0089B4A8 /* unlock@2x.png */; };
 		0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E23CF4E180E34610089B4A8 /* RawMaterialsSettingViewController.m */; };
+		0E26F01618483F05003F8E40 /* nav-bar-button-dark-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01218483F05003F8E40 /* nav-bar-button-dark-highlighted@2x.png */; };
+		0E26F01718483F05003F8E40 /* nav-bar-button-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01318483F05003F8E40 /* nav-bar-button-dark.png */; };
+		0E26F01818483F05003F8E40 /* nav-bar-button-dark-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01418483F05003F8E40 /* nav-bar-button-dark-highlighted.png */; };
+		0E26F01918483F05003F8E40 /* nav-bar-button-dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01518483F05003F8E40 /* nav-bar-button-dark@2x.png */; };
+		0E26F01C184871DC003F8E40 /* EnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E26F01B184871DC003F8E40 /* EnergyCell.m */; };
+		0E26F01E184871FA003F8E40 /* EnergyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01D184871FA003F8E40 /* EnergyCell.xib */; };
 		0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E017ED7AC600385E59 /* LoginAction.m */; };
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
@@ -328,6 +334,13 @@
 		0E23CF44180E306D0089B4A8 /* unlock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock@2x.png"; sourceTree = "<group>"; };
 		0E23CF4D180E34610089B4A8 /* RawMaterialsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsSettingViewController.h; sourceTree = "<group>"; };
 		0E23CF4E180E34610089B4A8 /* RawMaterialsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsSettingViewController.m; sourceTree = "<group>"; };
+		0E26F01218483F05003F8E40 /* nav-bar-button-dark-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark-highlighted@2x.png"; sourceTree = "<group>"; };
+		0E26F01318483F05003F8E40 /* nav-bar-button-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark.png"; sourceTree = "<group>"; };
+		0E26F01418483F05003F8E40 /* nav-bar-button-dark-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark-highlighted.png"; sourceTree = "<group>"; };
+		0E26F01518483F05003F8E40 /* nav-bar-button-dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark@2x.png"; sourceTree = "<group>"; };
+		0E26F01A184871DC003F8E40 /* EnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyCell.h; sourceTree = "<group>"; };
+		0E26F01B184871DC003F8E40 /* EnergyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyCell.m; sourceTree = "<group>"; };
+		0E26F01D184871FA003F8E40 /* EnergyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyCell.xib; sourceTree = "<group>"; };
 		0E2786DF17ED7AC600385E59 /* LoginAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAction.h; sourceTree = "<group>"; };
 		0E2786E017ED7AC600385E59 /* LoginAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAction.m; sourceTree = "<group>"; };
 		0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistroyTrendsViewController.h; sourceTree = "<group>"; };
@@ -757,6 +770,9 @@
 				0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */,
 				0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */,
 				0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */,
+				0E26F01A184871DC003F8E40 /* EnergyCell.h */,
+				0E26F01B184871DC003F8E40 /* EnergyCell.m */,
+				0E26F01D184871FA003F8E40 /* EnergyCell.xib */,
 				471B5B06184655E7002D6BDC /* EnergySubCateView.h */,
 				471B5B07184655E7002D6BDC /* EnergySubCateView.m */,
 				471B5B09184656CC002D6BDC /* EnergySubCateView.xib */,
@@ -895,6 +911,10 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0E26F01218483F05003F8E40 /* nav-bar-button-dark-highlighted@2x.png */,
+				0E26F01318483F05003F8E40 /* nav-bar-button-dark.png */,
+				0E26F01418483F05003F8E40 /* nav-bar-button-dark-highlighted.png */,
+				0E26F01518483F05003F8E40 /* nav-bar-button-dark@2x.png */,
 				0E3AEB8518192AC7006BE72A /* wifi.png */,
 				0E3AEB8618192AC7006BE72A /* wifi@2x.png */,
 				0E9426DF181657AE00DAFDAF /* calculator.png */,
@@ -1525,6 +1545,7 @@
 				0E72471D17CD93060048DFFB /* Icon-72@2x.png in Resources */,
 				0E72471E17CD93060048DFFB /* Icon-Small-50.png in Resources */,
 				0E72471F17CD93060048DFFB /* Icon-Small-50@2x.png in Resources */,
+				0E26F01E184871FA003F8E40 /* EnergyCell.xib in Resources */,
 				0E72472017CD93060048DFFB /* Icon-Small.png in Resources */,
 				0E72472117CD93060048DFFB /* Icon-Small@2x.png in Resources */,
 				0E72472217CD93060048DFFB /* Icon.png in Resources */,
@@ -1533,6 +1554,7 @@
 				0E38418E17D41D3E004B3C87 /* navigationBarBackButton.png in Resources */,
 				0E38418F17D41D3E004B3C87 /* navigationBarBackButton@2x.png in Resources */,
 				0E38419017D41D3E004B3C87 /* tmall_bg_main.png in Resources */,
+				0E26F01718483F05003F8E40 /* nav-bar-button-dark.png in Resources */,
 				0E38419117D41D3E004B3C87 /* tmall_bg_main@2x.png in Resources */,
 				0E38419217D41D3E004B3C87 /* logo.png in Resources */,
 				0E38419317D41D3E004B3C87 /* stop.png in Resources */,
@@ -1567,6 +1589,7 @@
 				0E3841AD17D41D3E004B3C87 /* productOverview.png in Resources */,
 				0E3841AE17D41D3E004B3C87 /* userinfo.png in Resources */,
 				0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */,
+				0E26F01618483F05003F8E40 /* nav-bar-button-dark-highlighted@2x.png in Resources */,
 				0E3841AF17D41D3E004B3C87 /* equipment_expand_bg@2x.png in Resources */,
 				0E3841B017D41D3E004B3C87 /* stop_btn@2x.png in Resources */,
 				0E3841B117D41D3E004B3C87 /* background.png in Resources */,
@@ -1580,6 +1603,7 @@
 				0EC05B23181F896C001BF5B7 /* blueArrow.png in Resources */,
 				0E3841B717D41D3E004B3C87 /* nv_line.png in Resources */,
 				0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */,
+				0E26F01918483F05003F8E40 /* nav-bar-button-dark@2x.png in Resources */,
 				0E3841B917D41D3E004B3C87 /* backButton@2x.png in Resources */,
 				0E3841BA17D41D3E004B3C87 /* backButton_selected@2x.png in Resources */,
 				0E3841BB17D41D3E004B3C87 /* backButton_selected.png in Resources */,
@@ -1630,6 +1654,7 @@
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0EA5CF281823A6380028BE8B /* MainStoryboard_iPhone.storyboard in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
+				0E26F01818483F05003F8E40 /* nav-bar-button-dark-highlighted.png in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 				0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */,
 				0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */,
@@ -1828,6 +1853,7 @@
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
+				0E26F01C184871DC003F8E40 /* EnergyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1936,7 +1962,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1958,7 +1984,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

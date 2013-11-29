@@ -40,18 +40,28 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
+    self.topView.backgroundColor = kGeneralColor;
+    self.lblTextAmount.textColor = [UIColor lightTextColor];
+    self.lblTextFee.textColor = [UIColor lightTextColor];
+    self.lblValueAmount.textColor = kRelativelyColor;
+    self.lblValueFee.textColor = kRelativelyColor;
+    
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height-kNavBarHeight-kTabBarHeight+1);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.bounces = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight = 60.f;
-    self.tableView.backgroundColor = [UIColor lightGrayColor];
+//    self.tableView.backgroundColor = [UIColor lightGrayColor];
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     if (self.type==0) {
+        self.title = @"煤耗详情";
         double coalFee = [[overview objectForKey:@"coalFee"] doubleValue];
         double coalAmount = [[overview objectForKey:@"coalAmount"] doubleValue];
         if (coalFee/100000>1) {
@@ -72,6 +82,7 @@
         NSString *coalAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalAmount]];
         self.lblValueAmount.text = coalAmountString;
     }else if(self.type==1){
+        self.title = @"电耗详情";
         double electricityFee = [[overview objectForKey:@"electricityFee"] doubleValue];
         double electricityAmount = [[overview objectForKey:@"electricityAmount"] doubleValue];
         if (electricityFee/100000>1) {
@@ -185,5 +196,9 @@
                                // completed actions
                                self.tableView.scrollEnabled = YES;
                            }];
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
