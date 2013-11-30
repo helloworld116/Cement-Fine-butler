@@ -214,6 +214,8 @@
 		0E9426F0181657AE00DAFDAF /* bar-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E6181657AE00DAFDAF /* bar-chart@2x.png */; };
 		0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E7181657AE00DAFDAF /* pie-chart.png */; };
 		0E9426F2181657AE00DAFDAF /* pie-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */; };
+		0E9C4CD618497D9700B82F13 /* UIView+NavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */; };
+		0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C4CD81849D92B00B82F13 /* TitleView.m */; };
 		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
 		0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3496118332A8200F25706 /* ElectricitySevices.m */; };
 		0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */; };
@@ -565,6 +567,10 @@
 		0E9426E6181657AE00DAFDAF /* bar-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart@2x.png"; sourceTree = "<group>"; };
 		0E9426E7181657AE00DAFDAF /* pie-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie-chart.png"; sourceTree = "<group>"; };
 		0E9426E8181657AE00DAFDAF /* pie-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie-chart@2x.png"; sourceTree = "<group>"; };
+		0E9C4CD418497D9700B82F13 /* UIView+NavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NavigationItem.h"; sourceTree = "<group>"; };
+		0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NavigationItem.m"; sourceTree = "<group>"; };
+		0E9C4CD71849D92A00B82F13 /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
+		0E9C4CD81849D92B00B82F13 /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
 		0E9EF1B91814BDCD007557AE /* ConditionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionTableView.h; sourceTree = "<group>"; };
 		0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionTableView.m; sourceTree = "<group>"; };
 		0EA3496018332A8200F25706 /* ElectricitySevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricitySevices.h; sourceTree = "<group>"; };
@@ -824,6 +830,10 @@
 				0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */,
 				0E511B38183106F20077CA4C /* PromptMessageView.h */,
 				0E511B39183106F20077CA4C /* PromptMessageView.m */,
+				0E9C4CD418497D9700B82F13 /* UIView+NavigationItem.h */,
+				0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */,
+				0E9C4CD71849D92A00B82F13 /* TitleView.h */,
+				0E9C4CD81849D92B00B82F13 /* TitleView.m */,
 			);
 			name = CustomerView;
 			sourceTree = "<group>";
@@ -1791,6 +1801,7 @@
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
+				0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
 				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
@@ -1808,6 +1819,7 @@
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
 				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
+				0E9C4CD618497D9700B82F13 /* UIView+NavigationItem.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E1258341846D71C00959EC1 /* UIFolderTableView.m in Sources */,
 				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,

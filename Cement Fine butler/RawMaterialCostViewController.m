@@ -18,6 +18,9 @@
 @property (strong, nonatomic) HMSegmentedControl *segmented;
 @property (strong, nonatomic) UIScrollView *scrollViewOfProducts;
 
+@property (strong, nonatomic) TitleView *titleView;
+@property (nonatomic,retain) NSString *timeInfo;
+
 @property (strong, nonatomic) NSDictionary *responseData;
 @property (strong, nonatomic) NSDictionary *data;
 @property (retain, nonatomic) ASIFormDataRequest *request;
@@ -39,14 +42,51 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.topView.backgroundColor = kGeneralColor;
-    self.lblTextLoss.textColor = kRelativelyColor;
+    self.topView.backgroundColor = kRelativelyColor;
+    self.lblTextLoss.textColor = kGeneralColor;
     self.lblValueLoss.textColor = [UIColor redColor];
+    
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"原材料成本损失";
+    self.navigationItem.titleView = self.titleView;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
 //    NSString *responseString = @"{\"error\":0,\"message\":\"\",\"data\":{\"overview\":{\"totalLoss\":3453.76},\"products\":[{\"id\":1,\"name\":\"PC32.5\",\"quotesCosts\":89.45,\"totalLoss\":786.54,\"actualCosts\":87.90,\"standardCosts\":88.56,\"suggestion\":\"您今日生产情况高于行业平均水平，根据最新行情数据建议改进生产配方\"},{\"id\":2,\"name\":\"PC42.5\",\"quotesCosts\":563.45,\"totalLoss\":689.80,\"actualCosts\":56.90,\"standardCosts\":90.56,\"suggestion\":\"您今日生产情况低于行业平均水平，根据最新行情数据建议保持生产配方\"},{\"id\":3,\"name\":\"PC42.5\",\"quotesCosts\":78.89,\"totalLoss\":1899.54,\"actualCosts\":87.96,\"standardCosts\":66.77,\"suggestion\":\"您今日生产情况低于行业平均水平，根据最新行情数据建议改进生产配方\"}]}}";
 //    self.responseData = [Tool stringToDictionary:responseString];
 //    [self buildViewWithData];
-    [self sendRequest:nil];
+    
+    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, 40)];
+    [self.segmented setScrollEnabled:YES];
+    [self.segmented setBackgroundColor:[UIColor colorWithRed:158/255 green:171/255 blue:30/255 alpha:1]];
+    [self.segmented setTextColor:kRelativelyColor];
+    [self.segmented setSelectedTextColor:[UIColor blackColor]];
+    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+    [self.segmented setSelectionIndicatorHeight:0];
+    [self.segmented setSelectionIndicatorColor:kRelativelyColor];
+    [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+    [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    
+    self.scrollViewOfProducts = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height+self.segmented.frame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.topView.frame.size.height-self.segmented.frame.size.height-kTabBarHeight)];
+    self.scrollViewOfProducts.pagingEnabled = YES;
+    self.scrollViewOfProducts.showsHorizontalScrollIndicator = NO;
+    self.scrollViewOfProducts.delegate = self;
+    [self.scrollView addSubview:self.scrollViewOfProducts];
+    
+    NSDictionary *condition = @{@"timeType":@2};
+    [self sendRequest:condition];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //观察查询条件修改
+    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
+    TimeTableView *timeTableView = rightController.timeTableView;
+    int timeSelectIndex = [timeTableView indexPathForSelectedRow].row;
+    if (timeSelectIndex==4) {
+        timeTableView.currentSelectCellIndex=4;
+        [timeTableView reloadData];
+    }
 }
 
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
@@ -64,26 +104,35 @@
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSDictionary *)condition{
     //清除原数据
+    self.scrollView.hidden = YES;
     self.data = nil;
     //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.scrollView];
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
     self.progressHUD.labelText = @"加载中...";
     self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
+//    self.progressHUD.dimBackground = YES;
     self.progressHUD.opacity=1.0;
     self.progressHUD.delegate = self;
-    [self.scrollView addSubview:self.progressHUD];
+    [self.view addSubview:self.progressHUD];
     [self.progressHUD show:YES];
     
-//    int timeType = [[condition objectForKey:@"timeType"] intValue];
-    NSDictionary *timeInfo = [Tool getTimeInfoFromUserDefault];
+    int timeType = [[condition objectForKey:@"timeType"] intValue];
+    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
+    self.timeInfo = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.timeInfo ;
+    NSDate *startTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"startTime"] doubleValue]/1000];
+    NSDate *endTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"endTime"] doubleValue]/1000];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *startTimeStr = [formatter stringFromDate:startTimeDate];
+    NSString *endTimeStr = [formatter stringFromDate:endTimeDate];
     DDLogCInfo(@"******  Request URL is:%@  ******",kRawMaterialLoss);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kRawMaterialLoss]];
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[timeInfo objectForKey:@"startTime"] forKey:@"startTime"];
-    [self.request setPostValue:[timeInfo objectForKey:@"endTime"] forKey:@"endTime"];
+    [self.request setPostValue:startTimeStr forKey:@"startTime"];
+    [self.request setPostValue:endTimeStr forKey:@"endTime"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -104,6 +153,7 @@
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
     self.responseData = [Tool stringToDictionary:request.responseString];
     int errorCode = [[self.responseData objectForKey:@"error"] intValue];
     if (errorCode==kErrorCode0) {
@@ -114,7 +164,6 @@
     }else{
         self.data = nil;
     }
-    [self.progressHUD hide:YES];
 }
 
 #pragma mark MBProgressHUDDelegate methods
@@ -125,12 +174,11 @@
 
 -(void)buildViewWithData{
     self.data = [self.responseData objectForKey:@"data"];
-    
     NSArray *products = [self.data objectForKey:@"products"];
     NSUInteger productCount = products.count;
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     double totalLoss = [[overview objectForKey:@"totalLoss"] doubleValue];
-    NSString *lblStr = @"今日";
+    NSString *lblStr = @"";
     if(totalLoss>0){
         lblStr = [lblStr stringByAppendingString:@"总节约"];
     }else{
@@ -143,28 +191,12 @@
     }else{
         lblStr = [lblStr stringByAppendingString:@"(元)："];
     }
-
     self.lblTextLoss.text = lblStr;
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
     NSString *totalLossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:totalLoss]];
     self.lblValueLoss.text = totalLossStr;
-    
-    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, 40)];
-    [self.segmented setScrollEnabled:YES];
-    [self.segmented setBackgroundColor:[UIColor colorWithRed:0/255 green:180/255 blue:255/255 alpha:1]];
-    [self.segmented setTextColor:kRelativelyColor];
-    [self.segmented setSelectedTextColor:[UIColor colorWithRed:0/255 green:180/255 blue:255/255 alpha:1]];
-    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-    [self.segmented setSelectionIndicatorHeight:0];
-    [self.segmented setSelectionIndicatorColor:kRelativelyColor];
-    
-    self.scrollViewOfProducts = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height+self.segmented.frame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.topView.frame.size.height-self.segmented.frame.size.height-kTabBarHeight)];
     self.scrollViewOfProducts.contentSize = CGSizeMake(self.scrollViewOfProducts.frame.size.width*productCount, self.scrollViewOfProducts.frame.size.height);
-    self.scrollViewOfProducts.pagingEnabled = YES;
-    self.scrollViewOfProducts.showsHorizontalScrollIndicator = NO;
-    self.scrollViewOfProducts.delegate = self;
-    [self.scrollView addSubview:self.scrollViewOfProducts];
     NSMutableArray *productNames = [NSMutableArray array];
     for (int i=0;i<products.count;i++) {
         NSDictionary *product = products[i];
@@ -176,10 +208,28 @@
         [self.scrollViewOfProducts addSubview:viewController.view];
     }
     self.segmented.sectionTitles = productNames;
-    self.segmented.selectionIndicatorLocation =HMSegmentedControlSelectionIndicatorLocationDown;
-    self.segmented.selectionStyle = HMSegmentedControlSelectionStyleBox;
-    [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.scrollView addSubview:self.segmented];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.scrollView.hidden = NO;
+    });
+}
+
+- (void)showSearchCondition:(id)sender {
+    [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+#pragma mark observe
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"searchCondition"]) {
+        SearchCondition *searchCondition = [change objectForKey:@"new"];
+        NSDictionary *condition = @{@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
+        if (4==[[condition objectForKey:@"timeType"] intValue]) {
+//            self.showRight = YES;
+        }
+        [self sendRequest:condition];
+    }
 }
 
 - (void)didReceiveMemoryWarning

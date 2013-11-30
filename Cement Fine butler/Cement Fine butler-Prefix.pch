@@ -41,6 +41,7 @@
     #import "UITextField+DisableCopyPaste.h"
     #import <Reachability.h>
     #import "LoginViewController.h"
+    #import "TitleView.h"
     #import "Tool.h"
 
     #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
@@ -161,7 +162,7 @@
 #define kRawMaterialLoss [kServerURL stringByAppendingString:@"cost/overview"]
 
 #pragma mark 能源监控
-#define kEnergyMonitoring [kServerURL stringByAppendingString:@"energe/overview"]
+#define kEnergyMonitoring [kServerURL stringByAppendingString:@"energy/overview"]
 
 //    //检测网络是否存在使用网址
     #define kCheckNetworkWebsite @"www.baidu.com"

@@ -12,4 +12,5 @@
 @interface EnergyMonitoringListViewController :UIViewController
 @property (nonatomic) int type;//0表示煤，1表示电
 @property (nonatomic, strong) NSDictionary *data;
+@property (nonatomic, copy) NSString *timeInfo;
 @end

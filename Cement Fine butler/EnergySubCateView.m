@@ -24,7 +24,6 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    NSString *time = @"今日";
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
     
@@ -36,9 +35,9 @@
         NSString *textFee = @"";
         if (coalFee/10000>1) {
             coalFee/=10000;
-            textFee = [time stringByAppendingString:@"煤费(万元)"];
+            textFee = @"煤费(万元)";
         }else{
-            textFee = [time stringByAppendingString:@"煤费(元)"];
+            textFee = @"煤费(元)";
         }
         self.lblTextFee.text = textFee;
         NSString *feeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
@@ -47,15 +46,15 @@
         NSString *textAmount = @"";
         if (coalAmount/10000>1) {
             coalAmount/=10000;
-            textAmount = [time stringByAppendingString:@"煤耗(万吨)"];
+            textAmount = @"煤耗(万吨)";
         }else{
-            textAmount = [time stringByAppendingString:@"煤耗(吨)"];
+            textAmount = @"煤耗(吨)";
         }
         self.lblTextAmount.text = textAmount;
         NSString *amountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalAmount]];
         self.lblValueFee.text = amountString;
         
-        self.lblTextAverage.text = [time stringByAppendingString:@"吨煤耗"];
+        self.lblTextAverage.text = @"吨煤耗";
         NSString *averageString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalUnitAmount]];
         self.lblValueAverage.text = averageString;
         
@@ -71,9 +70,9 @@
         NSString *textFee = @"";
         if (electricityFee/10000>1) {
             electricityFee/=10000;
-            textFee = [time stringByAppendingString:@"电费(万元)"];
+            textFee = @"电费(万元)";
         }else{
-            textFee = [time stringByAppendingString:@"电费(元)"];
+            textFee = @"电费(元)";
         }
         self.lblTextFee.text = textFee;
         NSString *feeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
@@ -82,15 +81,15 @@
         NSString *textAmount = @"";
         if (electricityAmount/10000>1) {
             electricityAmount/=10000;
-            textAmount = [time stringByAppendingString:@"电耗(万度)"];
+            textAmount = @"电耗(万度)";
         }else{
-            textAmount = [time stringByAppendingString:@"电耗(度)"];
+            textAmount = @"电耗(度)";
         }
         self.lblTextAmount.text = textAmount;
         NSString *amountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityAmount]];
         self.lblValueFee.text = amountString;
         
-        self.lblTextAverage.text = [time stringByAppendingString:@"吨电耗"];
+        self.lblTextAverage.text = @"吨电耗";
         NSString *averageString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityUnitAmount]];
         self.lblValueAverage.text = averageString;
         

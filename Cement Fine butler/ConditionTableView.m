@@ -31,6 +31,7 @@
         self.currentSelectCellIndex = currentSelectCellIndex;
         self.delegate = self;
         self.dataSource = self;
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
@@ -59,7 +60,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.font = [UIFont systemFontOfSize:14];
     cell.label.text = [condtionDict objectForKey:@"name"];
-    cell.label.textColor = [UIColor blackColor];
+    cell.label.textColor = kUnSelectedColor;
     cell.selectedImgView.image = [UIImage imageNamed:@"checked"];
     cell.selectedImgView.hidden = YES;
     if (indexPath.row==self.currentSelectCellIndex) {
@@ -68,6 +69,10 @@
     
     //设置标识，以便选中时知道选中的是哪个
     cell.cellID = [[condtionDict objectForKey:@"_id"] intValue];
+    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 240, 1)];
+    separatorView.layer.borderColor = [UIColor colorWithRed:45/255.0 green:49/255.0 blue:57/255.0 alpha:1].CGColor;
+    separatorView.layer.borderWidth = 1.0;
+    [cell.contentView addSubview:separatorView];
     return cell;
 }
 
@@ -85,11 +90,11 @@
     if (selected) {
         cell.selectedImgView.hidden = NO;
         cell.label.font = [UIFont boldSystemFontOfSize:14];
-        cell.label.textColor = [UIColor colorWithRed:100/255.0 green:160/255.0 blue:38/255.0 alpha:1];
+        cell.label.textColor = kGeneralColor;
     }else{
         cell.selectedImgView.hidden = YES;
         cell.label.font = [UIFont systemFontOfSize:14];
-        cell.label.textColor = [UIColor blackColor];
+        cell.label.textColor = kRelativelyColor;
     }
 }
 

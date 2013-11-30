@@ -36,7 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.backgroundColor = [UIColor colorWithRed:31/255.0 green:32/255.0 blue:38/255.0 alpha:1];
+//    [UIColor colorWithRed:31/255.0 green:32/255.0 blue:38/255.0 alpha:1]
+    self.view.backgroundColor = kGeneralColor;
     UIColor *textColor = [UIColor colorWithRed:94/255.0 green:94/255.0 blue:94/255.0 alpha:1];
     self.lblTextActualCosts.backgroundColor = [UIColor clearColor];
     self.lblTextQuotesCosts.backgroundColor = [UIColor clearColor];
@@ -56,7 +57,7 @@
     self.lblValueStandardCosts.textColor = valueColor;
     self.lblValueTotalLoss.textColor = valueColor;
     
-    NSString *lblStr = @"今日";
+    NSString *lblStr = @"";
     self.lblTextQuotesCosts.text = @"行情成本";
     self.lblTextActualCosts.text = @"实际成本";
     self.lblTextStandardCosts.text = @"标准成本";

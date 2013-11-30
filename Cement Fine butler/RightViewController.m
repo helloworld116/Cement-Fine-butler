@@ -306,7 +306,6 @@
         }else if ([kCondition_Time isEqualToString:conditionTitle]) {
 //            NSLog(@".... index is %d",[[self.currentSelectDict objectForKey:conditionTitle] intValue]);
             tableView = [[TimeTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
-            tableView.backgroundColor = kBackgroundColor;
             self.timeTableView = tableView;
         }else if ([kCondition_Lines isEqualToString:conditionTitle]) {
             tableView = [[LineTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
@@ -315,6 +314,7 @@
             tableView = [[ProductTableView alloc] initWithCondition:[condition objectForKey:conditionTitle] andCurrentSelectCellIndex:[[self.currentSelectDict objectForKey:conditionTitle] intValue]];
             self.productTableView = tableView;
         }
+        tableView.backgroundColor = kBackgroundColor;
         //table的headerview，用于放置条件说明
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, kTableViewHeaderViewHeight)];
         view.backgroundColor =[UIColor blackColor];

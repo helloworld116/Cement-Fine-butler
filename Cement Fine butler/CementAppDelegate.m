@@ -187,10 +187,15 @@
 //    [lossController setCenterPanel:lossNavController];
 //    [lossController setRightPanel:lossRightController];
     
-    
-    RawMaterialCostViewController *rawMaterialCostViewController = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
-    UINavigationController *lossController = [[UINavigationController alloc] initWithRootViewController:rawMaterialCostViewController];
-    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
+    JASidePanelController *rawMaterialCostLossSidePanelViewController = [[JASidePanelController alloc] init];
+    RawMaterialCostViewController *rawMaterialCostLossViewController = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
+    UINavigationController *rawMaterialCostLossNav = [[UINavigationController alloc] initWithRootViewController:rawMaterialCostLossViewController];
+    RightViewController *rawMaterialCostLossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    rawMaterialCostLossRightController.conditions = @[@{@"时间段":timeArray}];
+    rawMaterialCostLossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [rawMaterialCostLossSidePanelViewController setCenterPanel:rawMaterialCostLossNav];
+    [rawMaterialCostLossSidePanelViewController setRightPanel:rawMaterialCostLossRightController];
+    rawMaterialCostLossSidePanelViewController.tabBarItem = [rawMaterialCostLossSidePanelViewController.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
     
     //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
@@ -226,7 +231,7 @@
     //更多
     UINavigationController *moreNav = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
     moreNav.tabBarItem = [moreNav.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
-    tabBarController.viewControllers = @[energyMonitoringSidePanelViewController,lossController,realTimeReportsController,equipmentController,moreNav];
+    tabBarController.viewControllers = @[energyMonitoringSidePanelViewController,rawMaterialCostLossSidePanelViewController,realTimeReportsController,equipmentController,moreNav];
     return tabBarController;
 }
 							

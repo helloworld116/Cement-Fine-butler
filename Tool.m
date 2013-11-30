@@ -334,19 +334,60 @@
     return @{@"timeDesc":timeDesc,@"startTime":[NSNumber numberWithLongLong:startTime],@"endTime":[NSNumber numberWithLongLong:endTime]};
 }
 
-+(NSDictionary *)getTimeInfoFromUserDefault{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *startDate = [userDefaults objectForKey:@"startDate"];
-    int beginDay = [[startDate objectForKey:@"day"] intValue];
-    int beginMonth = [[startDate objectForKey:@"month"] intValue];
-    int beginYear = [[startDate objectForKey:@"year"] intValue];
-    
-    NSDictionary *endDate = [userDefaults objectForKey:@"endDate"];
-    int endDay = [[endDate objectForKey:@"day"] intValue];
-    int endMonth = [[endDate objectForKey:@"month"] intValue];
-    int endYear = [[endDate objectForKey:@"year"] intValue];
-    return @{@"startTime":[NSString stringWithFormat:@"%d-%d-%d",beginYear,beginMonth,beginDay],@"endTime":[NSString stringWithFormat:@"%d-%d-%d",endYear,endMonth,endDay]};
-}
+//+(NSDictionary *)getTimeInfoFromUserDefault:(int)timeType{
+//    NSString *timeDesc;
+//    int day=0,month=0,year=0;
+//    int beginDay=0,beginMonth=0,beginYear=0;
+//    int endDay=0,endMonth=0,endYear=0;
+//    if (timeType!=4) {
+//        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:[NSDate date]];
+//        day = [components day];
+//        month = [components month];
+//        year = [components year];
+//    }else{
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        NSDictionary *startDate = [userDefaults objectForKey:@"startDate"];
+//        beginDay = [[startDate objectForKey:@"day"] intValue];
+//        beginMonth = [[startDate objectForKey:@"month"] intValue];
+//        beginYear = [[startDate objectForKey:@"year"] intValue];
+//        
+//        NSDictionary *endDate = [userDefaults objectForKey:@"endDate"];
+//        endDay = [[endDate objectForKey:@"day"] intValue];
+//        endMonth = [[endDate objectForKey:@"month"] intValue];
+//        endYear = [[endDate objectForKey:@"year"] intValue];
+//    }
+//    NSCalendar *gregorian = [[NSCalendar alloc]
+//                             initWithCalendarIdentifier:NSGregorianCalendar];
+//    NSDateComponents *comps = [[NSDateComponents alloc] init];
+//    [comps setYear:year];
+//    switch (timeType) {
+//        case 0:
+//            timeDesc = [NSString stringWithFormat:@"%d年",year];
+//            break;
+//        case 1:
+//            if (month<=3) {
+//                month=1;
+//            }else if(month<=6){
+//                month=2;
+//            }else if(month<=9){
+//                month=3;
+//            }else if(month<=12){
+//                month=4;
+//            }
+//            timeDesc = [NSString stringWithFormat:@"%d年%d季度",year,month];
+//            break;
+//        case 2:
+//            timeDesc = [NSString stringWithFormat:@"%d年%d月份",year,month];
+//            break;
+//        case 3:
+//            timeDesc = [NSString stringWithFormat:@"%d年%d月%d日",year,month,day];
+//            break;
+//        case 4:
+//            timeDesc = [NSString stringWithFormat:@"%d年%d月%d日至%d年%d月%d日",beginYear,beginMonth,beginDay,endYear,endMonth,endDay];
+//            break;
+//    }
+//    return @{@"timeDesc":timeDesc,@"startTime":[NSString stringWithFormat:@"%d-%d-%d",beginYear,beginMonth,beginDay],@"endTime":[NSString stringWithFormat:@"%d-%d-%d",endYear,endMonth,endDay]};
+//}
 
 +(NSString *)longTimeToTimeDesc:(long)time{
     if (time!=0) {
