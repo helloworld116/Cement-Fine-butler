@@ -89,6 +89,11 @@
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+}
+
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
     self.scrollViewOfProducts.contentOffset = CGPointMake(segmentedControl.selectedSegmentIndex*kScreenWidth, 0);
 }

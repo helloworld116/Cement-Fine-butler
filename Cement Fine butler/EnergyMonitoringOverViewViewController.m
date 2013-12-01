@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) TitleView *titleView;
 @property (nonatomic,retain) NSString *timeInfo;
+@property (retain, nonatomic) PromptMessageView *messageView;//请求出错或没有响应数据时响应页面
 
 @property (strong, nonatomic) NSDictionary *responseData;//响应数据
 @property (strong, nonatomic) NSDictionary *data;//真正用到的数据
@@ -76,6 +77,15 @@
     [self.bottomView addGestureRecognizer:bottomTabGesture];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height-kNavBarHeight-kTabBarHeight+1);
     
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
+    CGRect messageViewRect = self.messageView.frame;
+    messageViewRect.size = CGSizeMake(kScreenWidth, 100);
+    self.messageView.frame = messageViewRect;
+    self.messageView.hidden = YES;
+    [self.view addSubview:self.messageView];
+    self.messageView.center = self.messageView.superview.center;
+    
+    
     NSDictionary *condition = @{@"timeType":@2};
     [self sendRequest:condition];
 }
@@ -91,6 +101,11 @@
         timeTableView.currentSelectCellIndex=4;
         [timeTableView reloadData];
     }
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,13 +163,16 @@
 -(void) sendRequest:(NSDictionary *)condition{
     //清除原数据
     self.scrollView.hidden = YES;
+    self.messageView.hidden = YES;
     self.data = nil;
     //加载过程提示
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.backgroundColor = [UIColor lightGrayColor];
+//    self.progressHUD.color = [UIColor whiteColor];
+//    self.progressHUD.i
+    self.progressHUD.userInteractionEnabled = NO;
     self.progressHUD.labelText = @"加载中...";
     self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
+//    self.progressHUD.dimBackground = YES;
     self.progressHUD.opacity=1.0;
     self.progressHUD.delegate = self;
     [self.view addSubview:self.progressHUD];
@@ -194,6 +212,8 @@
     }else{
         message = @"网络出错啦。。。";
     }
+    self.messageView.labelMsg.text = message;
+    self.messageView.hidden = NO;
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
@@ -207,6 +227,9 @@
         kSharedApp.window.rootViewController = loginViewController;
     }else{
         self.data = nil;
+        NSString *message = @"没有满足条件的数据";
+        self.messageView.labelMsg.text = message;
+        self.messageView.hidden = NO;
     }
 }
 
