@@ -298,6 +298,7 @@
 		476FC87117CC41F200EA5251 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FC86C17CC41F200EA5251 /* Cell.xib */; };
 		476FC87217CC41F200EA5251 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476FC86E17CC41F200EA5251 /* Cell.m */; };
 		47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CB7BA41818131200FE97B6 /* MyKeyboardView.m */; };
+		47FB1FFC184CF06B00BF3BF8 /* EquipmentPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB1FFB184CF06B00BF3BF8 /* EquipmentPointAnnotation.m */; };
 		4D09E885E1064B069A1C072C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D06A687F60314FAF8F9407BD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -738,6 +739,8 @@
 		476FC86E17CC41F200EA5251 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		47CB7BA31818131200FE97B6 /* MyKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyKeyboardView.h; sourceTree = "<group>"; };
 		47CB7BA41818131200FE97B6 /* MyKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyKeyboardView.m; sourceTree = "<group>"; };
+		47FB1FFA184CF06B00BF3BF8 /* EquipmentPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentPointAnnotation.h; sourceTree = "<group>"; };
+		47FB1FFB184CF06B00BF3BF8 /* EquipmentPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentPointAnnotation.m; sourceTree = "<group>"; };
 		D06A687F60314FAF8F9407BD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -869,6 +872,8 @@
 				0E491BFF180E7E4600901D3D /* EquipmentListCell.m */,
 				0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */,
 				0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */,
+				47FB1FFA184CF06B00BF3BF8 /* EquipmentPointAnnotation.h */,
+				47FB1FFB184CF06B00BF3BF8 /* EquipmentPointAnnotation.m */,
 			);
 			name = "设备";
 			sourceTree = "<group>";
@@ -1847,6 +1852,7 @@
 				0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */,
 				0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */,
 				0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */,
+				47FB1FFC184CF06B00BF3BF8 /* EquipmentPointAnnotation.m in Sources */,
 				0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */,
 				0EC05B1E181F896C001BF5B7 /* LoadMoreTableFooterView.m in Sources */,
 				472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */,
@@ -1992,7 +1998,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -2014,7 +2020,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

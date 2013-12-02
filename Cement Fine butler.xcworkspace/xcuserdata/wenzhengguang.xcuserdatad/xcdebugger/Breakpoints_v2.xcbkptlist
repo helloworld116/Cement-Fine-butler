@@ -461,5 +461,51 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cement Fine butler/EquipmentMapViewController.mm"
+            timestampString = "407695765.691722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-mapView:viewForAnnotation:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EquipmentMapViewController mapView:viewForAnnotation:]"
+                  moduleName = "Cement Fine butler"
+                  urlString = "file:///Users/wenzhengguang/dev/ios/Cement%20Fine%20butler/Cement%20Fine%20butler/EquipmentMapViewController.mm"
+                  timestampString = "407695765.739011"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "780">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EquipmentMapViewController mapView:viewForAnnotation:]"
+                  moduleName = "Cement Fine butler"
+                  urlString = "file:///Users/wenzhengguang/dev/ios/Cement%20Fine%20butler/Cement%20Fine%20butler/EquipmentMapViewController.mm"
+                  timestampString = "407695765.739253"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "1278">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

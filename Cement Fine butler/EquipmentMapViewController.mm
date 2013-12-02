@@ -10,6 +10,7 @@
 #import "CalloutMapAnnotation.h"
 #import "CallOutAnnotationView.h"
 #import "Cell.h"
+#import "EquipmentPointAnnotation.h"
 
 @interface EquipmentMapViewController ()
 @property (nonatomic,retain) CalloutMapAnnotation *calloutAnnotation;
@@ -111,7 +112,7 @@
             [annotationView.contentView addSubview:cell];
         }
         return annotationView;
-	} else if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
+	} else if ([annotation isKindOfClass:[EquipmentPointAnnotation class]]) {
         BMKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
         if (!annotationView) {
             annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomAnnotation"];
@@ -139,7 +140,8 @@
         //
         //        BasicMapAnnotation *  annotation=[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude];
         //        [_mapView addAnnotation:annotation];
-        BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+        EquipmentPointAnnotation *annotation = [[EquipmentPointAnnotation alloc] init];
+        annotation.equipmentInfo = dic;
         annotation.title = @"";
         annotation.coordinate = coordinate;
         [self.mapView addAnnotation:annotation];
