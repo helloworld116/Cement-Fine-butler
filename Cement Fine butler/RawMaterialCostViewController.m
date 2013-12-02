@@ -43,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.topView.backgroundColor = kRelativelyColor;
-    self.lblTextLoss.textColor = kGeneralColor;
+    self.lblTextLoss.textColor = [UIColor darkTextColor];
     self.lblValueLoss.textColor = [UIColor redColor];
     
     self.titleView = [[TitleView alloc] init];
@@ -57,12 +57,12 @@
     
     self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, 40)];
     [self.segmented setScrollEnabled:YES];
-    [self.segmented setBackgroundColor:[UIColor colorWithRed:158/255 green:171/255 blue:30/255 alpha:1]];
-    [self.segmented setTextColor:kRelativelyColor];
-    [self.segmented setSelectedTextColor:[UIColor blackColor]];
-    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-    [self.segmented setSelectionIndicatorHeight:0];
-    [self.segmented setSelectionIndicatorColor:kRelativelyColor];
+    [self.segmented setBackgroundColor:kGeneralColor];
+    [self.segmented setTextColor:[UIColor darkTextColor]];
+    [self.segmented setSelectedTextColor:kRelativelyColor];
+    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+    [self.segmented setSelectionIndicatorHeight:3];
+    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
     [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
     [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     

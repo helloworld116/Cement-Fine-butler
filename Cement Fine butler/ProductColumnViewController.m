@@ -12,6 +12,7 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 
+@property (strong, nonatomic) TitleView *titleView;
 @property (retain, nonatomic) PromptMessageView *messageView;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
@@ -35,9 +36,12 @@
     //设置navigationBar相关
 //    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
 //    self.navigationBar.topItem.title = @"产量报表";
-    self.navigationItem.title = @"产量报表";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStylePlain target:self action:@selector(showSearchCondition:)];
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"产量报表";
+    self.navigationItem.titleView = self.titleView;
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
@@ -46,7 +50,9 @@
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
     //设置没有数据或发生错误时的view
-    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
+    CGRect messageViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kStatusBarHeight);
+    self.messageView.frame = messageViewRect;
     [self.view addSubview:self.messageView];
     self.messageView.hidden = YES;
     //异步请求数据
@@ -151,16 +157,11 @@
         NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
         max = [Tool max:max];
-        NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
-        NSDictionary *configDict = @{@"title":title,@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+//        NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
+        NSDictionary *configDict = @{@"title":@"产量报表",@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
         DDLogCVerbose(@"js is %@",js);
         [webView stringByEvaluatingJavaScriptFromString:js];
-        self.bottomWebiew.hidden = NO;
-    }else if([Tool isNullOrNil:self.data]){
-        //没有满足条件的数据
-        self.messageView.hidden = NO;
-        self.messageView.labelMsg.text=@"没有满足条件的数据";
     }
 }
    
@@ -173,7 +174,7 @@
 -(void) sendRequest:(NSDictionary *)condition{
     //清除原数据
     self.data = nil;
-    self.bottomWebiew.hidden=YES;
+    self.scrollView.hidden=YES;
     self.messageView.hidden=YES;
     //加载过程提示
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -189,6 +190,7 @@
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.reportTitlePre;
     DDLogCInfo(@"******  Request URL is:%@  ******",kOutputReportURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
@@ -215,9 +217,15 @@
 -(void)requestSuccess:(ASIHTTPRequest *)request{    
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==0) {
+    if (responseCode==kErrorCode0) {
         self.data = [dict objectForKey:@"data"];
-        [self.bottomWebiew reload];
+        if (self.data&&(NSNull *)self.data!=[NSNull null]) {
+            [self.bottomWebiew reload];
+            self.scrollView.hidden = NO;
+        }else{
+            self.messageView.hidden = NO;
+            self.messageView.labelMsg.text=@"没有满足条件的数据";
+        }
     }else if(responseCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;

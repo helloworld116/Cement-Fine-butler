@@ -76,7 +76,7 @@
     }else if (section==1) {
         return @"录入相关";
     }else{
-        return @"账号";
+        return @"账号与安全";
     }
 }
 

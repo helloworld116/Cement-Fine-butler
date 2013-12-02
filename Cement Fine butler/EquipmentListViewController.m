@@ -78,6 +78,7 @@
 #pragma mark - Table view data source
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:1];
+    view.backgroundColor = kGeneralColor;
     return view;
 }
 
@@ -115,11 +116,18 @@
     cell.lblStatus.text = [Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]];
     cell.lblSN.text = [Tool stringToString:[equipmentInfo objectForKey:@"sn"]];
 
-    cell.lblName.text= [Tool stringToString:[equipmentInfo objectForKey:@"name"]];
+    cell.lblEquipmentType.text= [Tool stringToString:[equipmentInfo objectForKey:@"typename"]];
+    cell.lblLineName.text = [Tool stringToString:[equipmentInfo objectForKey:@"linename"]];
     cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"settingFlowRate"] doubleValue]];
     cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"instantFlowRate"] doubleValue]];
     cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
+    if (equipmentStatus==0) {
+        cell.contentView.backgroundColor = [UIColor greenColor];
+    }else{
+        cell.contentView.backgroundColor = [UIColor redColor];
+    }
     return cell;
 }
 

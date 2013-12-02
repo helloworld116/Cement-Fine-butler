@@ -242,6 +242,8 @@
 		0EC05B27181F896C001BF5B7 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC05B1B181F896C001BF5B7 /* whiteArrow.png */; };
 		0EC05B28181F896C001BF5B7 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC05B1C181F896C001BF5B7 /* whiteArrow@2x.png */; };
 		0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */; };
+		0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */; };
+		0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */; };
 		0ED53083180CCD5400505259 /* nav-back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53081180CCD5400505259 /* nav-back-arrow.png */; };
 		0ED53084180CCD5400505259 /* nav-back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */; };
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
@@ -613,6 +615,9 @@
 		0EC05B1C181F896C001BF5B7 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		0EC5CDF4182B6B9F00E63DCA /* ChoiceFactoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceFactoryViewController.h; sourceTree = "<group>"; };
 		0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceFactoryViewController.m; sourceTree = "<group>"; };
+		0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyOfProductViewController.h; sourceTree = "<group>"; };
+		0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyOfProductViewController.m; sourceTree = "<group>"; };
+		0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyOfProductViewController.xib; sourceTree = "<group>"; };
 		0ED53081180CCD5400505259 /* nav-back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow.png"; sourceTree = "<group>"; };
 		0ED53082180CCD5400505259 /* nav-back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-back-arrow@2x.png"; sourceTree = "<group>"; };
 		0EDC72011811319F00895931 /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
@@ -782,6 +787,9 @@
 				471B5B06184655E7002D6BDC /* EnergySubCateView.h */,
 				471B5B07184655E7002D6BDC /* EnergySubCateView.m */,
 				471B5B09184656CC002D6BDC /* EnergySubCateView.xib */,
+				0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */,
+				0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */,
+				0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -905,6 +913,13 @@
 				0E43ED6618278A8B006E3A66 /* LocalNotifactionServices.m */,
 			);
 			name = "消息管理";
+			sourceTree = "<group>";
+		};
+		0E58311E184CB1B200844FA5 /* 行业数据 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "行业数据";
 			sourceTree = "<group>";
 		};
 		0E693ABC1807E65A0061A3F8 /* 损耗定位 */ = {
@@ -1207,6 +1222,7 @@
 		0EE9F602181A6B6B009A4330 /* 录入相关 */ = {
 			isa = PBXGroup;
 			children = (
+				0E58311E184CB1B200844FA5 /* 行业数据 */,
 				0EA5CF10182340990028BE8B /* 过磅管理 */,
 				0E93182C182230FC001B0372 /* 公共 */,
 				0E93182818222D70001B0372 /* 固定成本 */,
@@ -1661,6 +1677,7 @@
 				0E3841E117D41D3E004B3C87 /* Default@2x~iPad.png in Resources */,
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,
 				0E3841E217D41D3E004B3C87 /* Default~iPad.png in Resources */,
+				0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0EA5CF281823A6380028BE8B /* MainStoryboard_iPhone.storyboard in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
@@ -1761,6 +1778,7 @@
 				472F32EC17CC3C05007E567B /* main.m in Sources */,
 				472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */,
 				0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */,
+				0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */,
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,

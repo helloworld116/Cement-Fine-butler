@@ -12,7 +12,6 @@
                 <outlet property="lblValueAmount" destination="txT-wx-Rfa" id="ZFw-lp-cQn"/>
                 <outlet property="lblValueFee" destination="yGv-MB-23A" id="cdp-Hm-ebc"/>
                 <outlet property="scrollView" destination="w1N-Uu-eeO" id="kbH-C6-FEj"/>
-                <outlet property="tableView" destination="FEZ-5c-oFY" id="XtL-tm-bAf"/>
                 <outlet property="topView" destination="LP4-t7-ceJ" id="lcK-Yu-zZX"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -61,11 +60,6 @@
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FEZ-5c-oFY" customClass="UIFolderTableView">
-                            <rect key="frame" x="0.0" y="79" width="320" height="401"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </tableView>
                     </subviews>
                 </scrollView>
             </subviews>

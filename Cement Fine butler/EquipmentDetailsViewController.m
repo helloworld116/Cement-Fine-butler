@@ -19,6 +19,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblStopCountMonthly;
 @property (strong, nonatomic) IBOutlet UILabel *lblStopDurationMonthly;
 @property (strong, nonatomic) IBOutlet UILabel *lblRunDuration;
+@property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
+@property (strong, nonatomic) IBOutlet UILabel *lblLineName;
+@property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
+
 @property (strong, nonatomic) IBOutlet UIButton *btnStopRecords;
 
 - (IBAction)stopRecords:(id)sender;
@@ -43,13 +47,16 @@
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.title = @"设备详情";
     
-    self.lblName.text = [Tool stringToString:[self.data objectForKey:@"name"]];
+//    self.lblName.text = [Tool stringToString:[self.data objectForKey:@"name"]];
     self.lblSN.text = [Tool stringToString:[self.data objectForKey:@"sn"]];
-    self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"statusLabel"]];;
+    self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"statusLabel"]];
+    self.lblEquipmentType.text = [Tool stringToString:[self.data objectForKey:@"typename"]];
+    self.lblLineName.text = [Tool stringToString:[self.data objectForKey:@"linename"]];
+    self.lblMaterialName.text = [Tool stringToString:[self.data objectForKey:@"materialName"]];
     self.lblSettingFlowRate.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"settingFlowRate"] doubleValue]];
     self.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"instantFlowRate"] doubleValue]];
     self.lblTotalOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"totalOutput"] doubleValue]];
-    self.lblPartialOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"partialOutput"] doubleValue]];
+    self.lblPartialOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"partOutput"] doubleValue]];
     self.lblStopCountMonthly.text = [NSString stringWithFormat:@"%d",[[self.data objectForKey:@"stopCountMonthly"] intValue]];
     self.lblStopDurationMonthly.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"stopDurationMonthly"] longValue]];
     self.lblRunDuration.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"runDuration"] longValue]];

@@ -12,10 +12,12 @@
 
 //tableview cell高度为40
 #define kTableViewCellHeight 40.f
-//tableview header高度为cell高度一半
-#define kTableViewHeaderViewHeight kTableViewCellHeight/2
+//tableview header高度
+#define kTableViewHeaderViewHeight 30.f
 //tableview开始标记序号
 #define kTableViewTag 11000
+
+#define kBackgroundColor [UIColor colorWithRed:31/255.0 green:36/255.0 blue:43/255.0 alpha:1]
 
 @interface LeftViewController ()
 
@@ -36,6 +38,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.backgroundColor = kBackgroundColor;
+    
     CGFloat beginOrign = 0;
     CGFloat totalHeight =0;
     //设置tableview，每一个筛选条件就是一个tableview
@@ -44,6 +48,8 @@
         int cellCount = [[[self.conditions objectAtIndex:i] objectForKey:key] count];
         CGFloat tableViewHeight = cellCount*kTableViewCellHeight+kTableViewHeaderViewHeight;
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, beginOrign, self.scrollView.frame.size.width, tableViewHeight) style:UITableViewStylePlain];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.backgroundColor = kBackgroundColor;
         tableView.bounces = NO;
         tableView.tag = kTableViewTag+i;
         tableView.dataSource = self;
@@ -91,8 +97,17 @@
     return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 200, kTableViewHeaderViewHeight)];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:17.f];
+    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+    label.backgroundColor = [UIColor clearColor];
+    return label;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,6 +122,14 @@
     int index = tableView.tag-kTableViewTag;
     NSString *key = [[[self.conditions objectAtIndex:index] allKeys] objectAtIndex:0];
     cell.textLabel.text = [[[self.conditions objectAtIndex:index] objectForKey:key] objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.textColor = kRelativelyColor;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 125, 1)];
+    separatorView.layer.borderColor = [UIColor colorWithRed:45/255.0 green:49/255.0 blue:57/255.0 alpha:1].CGColor;
+    separatorView.layer.borderWidth = 1.0;
+    [cell.contentView addSubview:separatorView];
     return cell;
 }
 
@@ -175,13 +198,16 @@
         NSArray *timeArray = kCondition_Time_Array;
         ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
         realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-        [self.sidePanelController setCenterPanel:productColumnViewController];
+        realTimeReportsRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+        UINavigationController *productColumnVCNav = [[UINavigationController alloc] initWithRootViewController:productColumnViewController];
+        [self.sidePanelController setCenterPanel:productColumnVCNav];
         [self.sidePanelController setRightPanel:realTimeReportsRightController];
     }else if (indexPath.row==1){
         InventoryColumnViewController *inventoryColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
+        UINavigationController *inventoryColumnVCNav = [[UINavigationController alloc] initWithRootViewController:inventoryColumnViewController];
         NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
         realTimeReportsRightController.conditions = @[@{@"库存类型":stockType}];
-        [self.sidePanelController setCenterPanel:inventoryColumnViewController];
+        [self.sidePanelController setCenterPanel:inventoryColumnVCNav];
         [self.sidePanelController setRightPanel:realTimeReportsRightController];
     }
 }

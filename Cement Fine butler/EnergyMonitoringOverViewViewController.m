@@ -78,12 +78,10 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height-kNavBarHeight-kTabBarHeight+1);
     
     self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
-    CGRect messageViewRect = self.messageView.frame;
-    messageViewRect.size = CGSizeMake(kScreenWidth, 100);
+    CGRect messageViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kStatusBarHeight);
     self.messageView.frame = messageViewRect;
     self.messageView.hidden = YES;
     [self.view addSubview:self.messageView];
-    self.messageView.center = self.messageView.superview.center;
     
     
     NSDictionary *condition = @{@"timeType":@2};

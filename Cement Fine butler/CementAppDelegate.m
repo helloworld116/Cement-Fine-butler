@@ -201,6 +201,7 @@
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
     realTimeReportsController.tabBarItem = [realTimeReportsController.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+3];
     ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+    UINavigationController *realTimeReportsNavController = [[UINavigationController alloc] initWithRootViewController:productColumnViewController];
     LeftViewController *realTimeReportsLeftController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
     NSArray *reportType = @[@"产量报表",@"库存报表"];
     realTimeReportsLeftController.conditions = @[@{@"实时报表":reportType}];
@@ -215,7 +216,7 @@
     }
     realTimeReportsRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
     [realTimeReportsController setLeftFixedWidth:140.f];
-    [realTimeReportsController setCenterPanel:productColumnViewController];
+    [realTimeReportsController setCenterPanel:realTimeReportsNavController];
     [realTimeReportsController setLeftPanel:realTimeReportsLeftController];
     [realTimeReportsController setRightPanel:realTimeReportsRightController];
     //设备管理

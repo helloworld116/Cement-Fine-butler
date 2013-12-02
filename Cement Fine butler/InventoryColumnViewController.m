@@ -13,7 +13,7 @@
 @property (nonatomic,retain) LoadingView *loadingView;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
-@property (retain, nonatomic) NODataView *noDataView;
+@property (retain, nonatomic) PromptMessageView *messageView;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain,nonatomic) NSString *chartTitle;
 @end
@@ -57,18 +57,24 @@
 	// Do any additional setup after loading the view.
     //最开始异步请求数据
     [self sendRequest:0];//默认查询原材料库存
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.topItem.title = @"库存报表";
-    //
+    self.title = @"库存报表";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+    
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
-//    self.bottomWebiew.scalesPageToFit = IS_RETINA;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
     [self.bottomWebiew loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
     //    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
+    //设置没有数据或发生错误时的view
+    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
+    CGRect messageViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kStatusBarHeight);
+    self.messageView.frame = messageViewRect;
+    self.messageView.hidden = YES;
+    [self.view addSubview:self.messageView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,12 +107,6 @@
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    //    NSString *data = @"[{'name':'IE','value':35.75,'color':'#a5c2d5'},{'name':'Chrome','value':29.84,'color':'#cbab4f'},{'name':'Firefox','value':24.88,'color':'#76a871'},{'name':'Safari','value':6.77,'color':'#9f7961'},{'name':'Opera','value':2.02,'color':'#a56f8f'}]";
-    //    NSString *columnConfig= [NSString stringWithFormat:@"{'title':'2013年库存','tagName':'库存(吨)','height':%f,'width':%f,'start_scale':%f,'end_scale':%f,'scale_space':%f}",self.bottomWebiew.frame.size.height,self.bottomWebiew.frame.size.width,0.0,40.0,8.0];
-    //    //    NSString *js = [[ stringByAppendingString:data] stringByAppendingFormat:@""];
-    //    NSString *js = [NSString stringWithFormat:@"drawColumn(\"%@\",\"%@\")",data,columnConfig];
-    //    DDLogVerbose(@"dates is %@",js);
-    //    [webView stringByEvaluatingJavaScriptFromString:js];
     if (self.data) {
         NSArray *stockArray = [self.data objectForKey:@"materials"];
         if(stockArray.count>0){
@@ -130,7 +130,6 @@
             [webView stringByEvaluatingJavaScriptFromString:js];
         }
     }
-    self.bottomWebiew.hidden = NO;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
@@ -142,11 +141,8 @@
 -(void) sendRequest:(int)stockType{
     //清除原数据
     self.data = nil;
-    if (self.noDataView) {
-        [self.noDataView removeFromSuperview];
-        self.noDataView = nil;
-    }
-    self.bottomWebiew.hidden=YES;
+    self.scrollView.hidden=YES;
+    self.messageView.hidden = YES;
     //加载过程提示
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
     self.progressHUD.labelText = @"加载中...";
@@ -154,7 +150,6 @@
     self.progressHUD.dimBackground = YES;
     self.progressHUD.opacity=1.0;
     self.progressHUD.delegate=self;
-    self.progressHUD.minShowTime=0.5;
     [self.view addSubview:self.progressHUD];
     [self.progressHUD show:YES];
 
@@ -179,22 +174,31 @@
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
     [self.progressHUD hide:YES];
+    self.messageView.hidden = NO;
+    self.messageView.labelMsg.text=@"请求出错了。。。";
 }
 
--(void)requestSuccess:(ASIHTTPRequest *)request{    
+-(void)requestSuccess:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==0) {
+    if (responseCode==kErrorCode0) {
         self.data = [dict objectForKey:@"data"];
-        [self.bottomWebiew reload];
-    }else if(responseCode==-1){
+        NSArray *materials = [self.data objectForKey:@"materials"];
+        if (self.data&&(NSNull *)self.data!=[NSNull null]&&materials.count>0) {
+            [self.bottomWebiew reload];
+            self.scrollView.hidden = NO;
+        }else{
+            self.messageView.hidden = NO;
+            self.messageView.labelMsg.text=@"没有满足条件的数据";
+        }
+    }else if(responseCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
     }else{
-        NODataView *view = [[NODataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-        [self.view addSubview:view];
+        self.messageView.hidden = NO;
+        self.messageView.labelMsg.text=@"未知错误。。。";
     }
-    [self.progressHUD hide:YES];
 }
 
 #pragma mark end webviewDelegate

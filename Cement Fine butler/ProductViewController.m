@@ -37,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    [UIColor colorWithRed:31/255.0 green:32/255.0 blue:38/255.0 alpha:1]
-    self.view.backgroundColor = kGeneralColor;
+    self.view.backgroundColor = kRelativelyColor;
     UIColor *textColor = [UIColor colorWithRed:94/255.0 green:94/255.0 blue:94/255.0 alpha:1];
     self.lblTextActualCosts.backgroundColor = [UIColor clearColor];
     self.lblTextQuotesCosts.backgroundColor = [UIColor clearColor];
@@ -47,7 +47,7 @@
     self.lblTextQuotesCosts.textColor = textColor;
     self.lblTextStandardCosts.textColor = textColor;
     self.lblTextTotalLoss.textColor = textColor;
-    UIColor *valueColor = [UIColor whiteColor];
+    UIColor *valueColor = kGeneralColor;
     self.lblValueActualCosts.backgroundColor = [UIColor clearColor];
     self.lblValueQuotesCosts.backgroundColor = [UIColor clearColor];
     self.lblValueStandardCosts.backgroundColor = [UIColor clearColor];
