@@ -253,6 +253,10 @@
 		0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE9F608181A6DA3009A4330 /* MoreViewController.m */; };
 		0EEDBFD1180D67D90010961D /* Calculate.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD0180D67D80010961D /* Calculate.html */; };
 		0EEDBFD4180D690B0010961D /* RawMaterialsCalculateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */; };
+		0EF4CD39184D67D00050A63A /* IndustryStandardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF4CD38184D67D00050A63A /* IndustryStandardViewController.m */; };
+		0EF4CD3C184D6B480050A63A /* IndustryStandardOperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF4CD3B184D6B480050A63A /* IndustryStandardOperationViewController.m */; };
+		0EF4CD3F184D6C840050A63A /* IndustryStandardTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF4CD3E184D6C840050A63A /* IndustryStandardTypeViewController.m */; };
+		0EF4CD42184DBDFB0050A63A /* EquipmentAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF4CD41184DBDFB0050A63A /* EquipmentAnnotationView.m */; };
 		0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF72798181E12B10059EC59 /* InventoryViewController.m */; };
 		0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF7279B181E13F60059EC59 /* InventoryListViewController.m */; };
 		0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727A4181E157C0059EC59 /* InventoryCommonCell.m */; };
@@ -633,6 +637,14 @@
 		0EEDBFD0180D67D80010961D /* Calculate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Calculate.html; sourceTree = "<group>"; };
 		0EEDBFD2180D690B0010961D /* RawMaterialsCalculateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalculateViewController.h; sourceTree = "<group>"; };
 		0EEDBFD3180D690B0010961D /* RawMaterialsCalculateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalculateViewController.m; sourceTree = "<group>"; };
+		0EF4CD37184D67D00050A63A /* IndustryStandardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndustryStandardViewController.h; sourceTree = "<group>"; };
+		0EF4CD38184D67D00050A63A /* IndustryStandardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryStandardViewController.m; sourceTree = "<group>"; };
+		0EF4CD3A184D6B480050A63A /* IndustryStandardOperationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndustryStandardOperationViewController.h; sourceTree = "<group>"; };
+		0EF4CD3B184D6B480050A63A /* IndustryStandardOperationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryStandardOperationViewController.m; sourceTree = "<group>"; };
+		0EF4CD3D184D6C840050A63A /* IndustryStandardTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndustryStandardTypeViewController.h; sourceTree = "<group>"; };
+		0EF4CD3E184D6C840050A63A /* IndustryStandardTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryStandardTypeViewController.m; sourceTree = "<group>"; };
+		0EF4CD40184DBDFB0050A63A /* EquipmentAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentAnnotationView.h; sourceTree = "<group>"; };
+		0EF4CD41184DBDFB0050A63A /* EquipmentAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentAnnotationView.m; sourceTree = "<group>"; };
 		0EF72797181E12B10059EC59 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		0EF72798181E12B10059EC59 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 		0EF7279A181E13F60059EC59 /* InventoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryListViewController.h; sourceTree = "<group>"; };
@@ -863,6 +875,7 @@
 		0E3C000317D9C5F2000D22EF /* 设备 */ = {
 			isa = PBXGroup;
 			children = (
+				476FC86717CC41E200EA5251 /* Map */,
 				472F32FD17CC3C05007E567B /* EquipmentMapViewController.h */,
 				472F32FE17CC3C05007E567B /* EquipmentMapViewController.mm */,
 				0E491BF9180E7DCC00901D3D /* EquipmentListViewController.h */,
@@ -874,6 +887,8 @@
 				0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */,
 				47FB1FFA184CF06B00BF3BF8 /* EquipmentPointAnnotation.h */,
 				47FB1FFB184CF06B00BF3BF8 /* EquipmentPointAnnotation.m */,
+				0EF4CD40184DBDFB0050A63A /* EquipmentAnnotationView.h */,
+				0EF4CD41184DBDFB0050A63A /* EquipmentAnnotationView.m */,
 			);
 			name = "设备";
 			sourceTree = "<group>";
@@ -923,6 +938,12 @@
 		0E58311E184CB1B200844FA5 /* 行业数据 */ = {
 			isa = PBXGroup;
 			children = (
+				0EF4CD37184D67D00050A63A /* IndustryStandardViewController.h */,
+				0EF4CD38184D67D00050A63A /* IndustryStandardViewController.m */,
+				0EF4CD3A184D6B480050A63A /* IndustryStandardOperationViewController.h */,
+				0EF4CD3B184D6B480050A63A /* IndustryStandardOperationViewController.m */,
+				0EF4CD3D184D6C840050A63A /* IndustryStandardTypeViewController.h */,
+				0EF4CD3E184D6C840050A63A /* IndustryStandardTypeViewController.m */,
 			);
 			name = "行业数据";
 			sourceTree = "<group>";
@@ -1126,6 +1147,10 @@
 		0E93182C182230FC001B0372 /* 公共 */ = {
 			isa = PBXGroup;
 			children = (
+				0E6E43101822800000016B93 /* LineChoiceViewController.h */,
+				0E6E43111822800000016B93 /* LineChoiceViewController.m */,
+				0E6E4313182282D500016B93 /* ProductChoiceViewController.h */,
+				0E6E4314182282D500016B93 /* ProductChoiceViewController.m */,
 				0E62CC531820FA0800281A73 /* ChoiceCell.h */,
 				0E62CC541820FA0800281A73 /* ChoiceCell.m */,
 				0E93182D1822313C001B0372 /* PassValueDelegate.h */,
@@ -1306,10 +1331,6 @@
 				0EF727BC181E8E2A0059EC59 /* ProductHistoryCell.m */,
 				0EF727BE181E914C0059EC59 /* ProductHistoryUpdateViewController.h */,
 				0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */,
-				0E6E43101822800000016B93 /* LineChoiceViewController.h */,
-				0E6E43111822800000016B93 /* LineChoiceViewController.m */,
-				0E6E4313182282D500016B93 /* ProductChoiceViewController.h */,
-				0E6E4314182282D500016B93 /* ProductChoiceViewController.m */,
 			);
 			name = "生产记录";
 			sourceTree = "<group>";
@@ -1384,7 +1405,6 @@
 				0E3841E317D41D63004B3C87 /* User */,
 				0E72472417CD995C0048DFFB /* CustomerViewController */,
 				0E72471317CD92EF0048DFFB /* images */,
-				476FC86717CC41E200EA5251 /* Map */,
 				472F32EE17CC3C05007E567B /* CementAppDelegate.h */,
 				472F32EF17CC3C05007E567B /* CementAppDelegate.m */,
 				0E3841EE17D41FDE004B3C87 /* Tool.h */,
@@ -1803,6 +1823,7 @@
 				0E3841F017D41FDE004B3C87 /* Tool.m in Sources */,
 				0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */,
 				0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */,
+				0EF4CD3C184D6B480050A63A /* IndustryStandardOperationViewController.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
 				0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */,
 				0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */,
@@ -1821,6 +1842,7 @@
 				471B5B131846582F002D6BDC /* ECViewController.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */,
+				0EF4CD42184DBDFB0050A63A /* EquipmentAnnotationView.m in Sources */,
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */,
 				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
@@ -1834,6 +1856,7 @@
 				0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
+				0EF4CD39184D67D00050A63A /* IndustryStandardViewController.m in Sources */,
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
@@ -1885,6 +1908,7 @@
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,
 				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
+				0EF4CD3F184D6C840050A63A /* IndustryStandardTypeViewController.m in Sources */,
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
@@ -1998,7 +2022,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -2020,7 +2044,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

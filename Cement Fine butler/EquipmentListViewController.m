@@ -120,7 +120,7 @@
     cell.lblLineName.text = [Tool stringToString:[equipmentInfo objectForKey:@"linename"]];
     cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"settingFlowRate"] doubleValue]];
     cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"instantFlowRate"] doubleValue]];
-    cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];
+//    cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
     if (equipmentStatus==0) {

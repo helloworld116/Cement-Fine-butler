@@ -16,9 +16,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblInstantFlowRate;
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalOutput;
 @property (strong, nonatomic) IBOutlet UILabel *lblPartialOutput;
-@property (strong, nonatomic) IBOutlet UILabel *lblStopCountMonthly;
-@property (strong, nonatomic) IBOutlet UILabel *lblStopDurationMonthly;
-@property (strong, nonatomic) IBOutlet UILabel *lblRunDuration;
+//@property (strong, nonatomic) IBOutlet UILabel *lblStopCountMonthly;
+//@property (strong, nonatomic) IBOutlet UILabel *lblStopDurationMonthly;
+//@property (strong, nonatomic) IBOutlet UILabel *lblRunDuration;
 @property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
 @property (strong, nonatomic) IBOutlet UILabel *lblLineName;
 @property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
@@ -57,9 +57,9 @@
     self.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"instantFlowRate"] doubleValue]];
     self.lblTotalOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"totalOutput"] doubleValue]];
     self.lblPartialOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"partOutput"] doubleValue]];
-    self.lblStopCountMonthly.text = [NSString stringWithFormat:@"%d",[[self.data objectForKey:@"stopCountMonthly"] intValue]];
-    self.lblStopDurationMonthly.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"stopDurationMonthly"] longValue]];
-    self.lblRunDuration.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"runDuration"] longValue]];
+//    self.lblStopCountMonthly.text = [NSString stringWithFormat:@"%d",[[self.data objectForKey:@"stopCountMonthly"] intValue]];
+//    self.lblStopDurationMonthly.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"stopDurationMonthly"] longValue]];
+//    self.lblRunDuration.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"runDuration"] longValue]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,9 +76,9 @@
     [self setLblInstantFlowRate:nil];
     [self setLblTotalOutput:nil];
     [self setLblPartialOutput:nil];
-    [self setLblStopCountMonthly:nil];
-    [self setLblStopDurationMonthly:nil];
-    [self setLblRunDuration:nil];
+//    [self setLblStopCountMonthly:nil];
+//    [self setLblStopDurationMonthly:nil];
+//    [self setLblRunDuration:nil];
     [self setBtnStopRecords:nil];
     [super viewDidUnload];
 }

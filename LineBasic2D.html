@@ -24,12 +24,12 @@
                     data: data,
                     align:'center',
                     animation:true,
-                    width : 60*(labels.length-1),//相邻两个之间间隔为60
+                    width : labels.length>6?60*(labels.length-1):300,//相邻两个之间间隔为60
                     height : lineBasic2DConfig.height,
                     padding:'0 10',
                     turn_off_touchmove:true,
                     border:{
-                        enable:true
+                        enable:false
                     },
                     tip:{
                         enable:false,

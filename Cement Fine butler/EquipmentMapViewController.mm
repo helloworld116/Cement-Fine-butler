@@ -11,6 +11,7 @@
 #import "CallOutAnnotationView.h"
 #import "Cell.h"
 #import "EquipmentPointAnnotation.h"
+#import "EquipmentAnnotationView.h"
 
 @interface EquipmentMapViewController ()
 @property (nonatomic,retain) CalloutMapAnnotation *calloutAnnotation;
@@ -71,7 +72,7 @@
 }
 
 - (void)mapView:(BMKMapView *) mapView didSelectAnnotationView:(BMKAnnotationView *)view {
-	if ([view.annotation isKindOfClass:[BMKPointAnnotation class]]) {
+	if ([view.annotation isKindOfClass:[EquipmentPointAnnotation class]]) {
         if (_calloutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
             _calloutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
             return;
@@ -83,6 +84,7 @@
         _calloutAnnotation = [[CalloutMapAnnotation alloc]
                               initWithLatitude:view.annotation.coordinate.latitude
                               andLongitude:view.annotation.coordinate.longitude];
+        _calloutAnnotation.equipmentInfo = ((EquipmentPointAnnotation *)view.annotation).equipmentInfo;
         [mapView addAnnotation:_calloutAnnotation];
         [mapView setCenterCoordinate:_calloutAnnotation.coordinate animated:YES];
 	}
@@ -105,21 +107,42 @@
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation {
 	if ([annotation isKindOfClass:[CalloutMapAnnotation class]]) {
-        CallOutAnnotationView *annotationView = (CallOutAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
-        if (!annotationView) {
-            annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
-            Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
-            [annotationView.contentView addSubview:cell];
-        }
+//        CallOutAnnotationView *annotationView = (CallOutAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
+//        if (!annotationView) {
+//            annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
+//            NSDictionary *equipmentInfo = ((CalloutMapAnnotation *)annotation).equipmentInfo;
+//            Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
+//            cell.lblEquipmentName.text = [@"设备" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+//            cell.lblCompany.text = [kSharedApp.factory objectForKey:@"name"];
+//            cell.lblBox.text = [@"控制盒编号：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"boxsn"]]];
+//            cell.lblSN.text = [@"仪表编号：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+//            cell.lblEquipmentType.text = [@"设备类型：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"typename"]]];
+//            cell.lblMaterial.text = [@"物料：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+//            cell.lblLine.text = [@"生产线：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
+//            [annotationView.contentView addSubview:cell];
+//        }
+        CallOutAnnotationView *annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
+        NSDictionary *equipmentInfo = ((CalloutMapAnnotation *)annotation).equipmentInfo;
+        Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
+        cell.lblEquipmentName.text = [@"设备" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+        cell.lblCompany.text = [kSharedApp.factory objectForKey:@"name"];
+        cell.lblStatus.text = [@"设备状态：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]]];
+        cell.lblBox.text = [@"控制盒编号：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"boxsn"]]];
+        cell.lblSN.text = [@"仪表编号：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+        cell.lblEquipmentType.text = [@"设备类型：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"typename"]]];
+        cell.lblMaterial.text = [@"物料：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+        cell.lblLine.text = [@"生产线：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
+        [annotationView.contentView addSubview:cell];
         return annotationView;
 	} else if ([annotation isKindOfClass:[EquipmentPointAnnotation class]]) {
-        BMKAnnotationView *annotationView =[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
+        EquipmentAnnotationView *annotationView = (EquipmentAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
         if (!annotationView) {
-            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomAnnotation"];
+            annotationView = [[EquipmentAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomAnnotation"];
             ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
             // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
             annotationView.canShowCallout = NO;
             annotationView.annotation = annotation;
+            annotationView.equipmentInfo = ((EquipmentPointAnnotation *)annotation).equipmentInfo;
         }
 		return annotationView;
     }

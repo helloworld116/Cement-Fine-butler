@@ -14,7 +14,7 @@
 @interface LossOverViewViewController ()<MBProgressHUDDelegate>
 @property (retain,nonatomic) UIWebView *webView;
 @property (retain,nonatomic) NSDictionary *responseData;
-
+@property (strong, nonatomic) TitleView *titleView;
 @property (retain,nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) NSString *reportTitlePre;
 @property (retain, nonatomic) NODataView *noDataView;
@@ -37,7 +37,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.title = @"损耗总览";
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"损耗总览";
+    self.navigationItem.titleView = self.titleView;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     
 //    NSString *testData = @"{\"error\":\"0\",\"message\":\"1\",\"data\":{\"overView\":{\"totalLoss\":2200.0,\"rawMaterialsLoss\":600.0,\"semifinishedProductLoss\":1000.0,\"endProductLoss\":600.0},\"rawMaterials\":[{\"name\":\"熟料\",\"value\":100.0},{\"name\":\"石膏\",\"value\":200.0}],\"semifinishedProduct\":[{\"name\":\"熟料粉\",\"value\":1000.0}],\"endProduct\":[{\"name\":\"P.O42.5\",\"value\":100.0},{\"name\":\"P.O52.5\",\"value\":500.0}]}}";
@@ -167,7 +170,7 @@
         double endProductLoss = [[overview objectForKey:@"endProductLoss"] doubleValue];
         NSDictionary *endProductDict = @{@"name":[kLossType objectAtIndex:2],@"value":[NSNumber numberWithDouble:endProductLoss],@"color":[kColorList objectAtIndex:2]};
         NSArray *dataArray = @[rawMaterialsDict,semifinishedProductDict,endProductDict];
-        NSDictionary *configDict = @{@"totalLoss":[NSNumber numberWithDouble:totalLoss],@"unit":@"吨",@"title":[self.reportTitlePre stringByAppendingString:@"损耗总览"],@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
+        NSDictionary *configDict = @{@"totalLoss":[NSNumber numberWithDouble:totalLoss],@"unit":@"吨",@"title":@"损耗总览",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
         NSString *js = [NSString stringWithFormat:@"drawDonut2D('%@','%@')",[Tool objectToString:dataArray],[Tool objectToString:configDict]];
         DDLogVerbose(@"dates is %@",js);
         [webView stringByEvaluatingJavaScriptFromString:js];
@@ -204,6 +207,8 @@
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.reportTitlePre;
+    
     DDLogCInfo(@"******  Request URL is:%@  ******",kLoss);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kLoss]];
     self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;

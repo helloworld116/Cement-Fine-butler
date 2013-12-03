@@ -14,6 +14,7 @@
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 //@property (retain, nonatomic) NODataView *noDataView;
 @property (retain, nonatomic) PromptMessageView *messageView;
+@property (strong, nonatomic) TitleView *titleView;
 @property (retain,nonatomic) NSString *titlePre;
 @property (retain,nonatomic) NSDictionary *lastCondition;
 @end
@@ -34,7 +35,9 @@
     [super viewDidLoad];
 
 	// Do any additional setup after loading the view.
-    self.title = @"历史趋势";
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"历史趋势";
+    self.navigationItem.titleView = self.titleView;
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
@@ -219,12 +222,12 @@
     [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
-    self.titlePre = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
     int unitCostType = [[condition objectForKey:@"unitCostType"] intValue];
     if (unitCostType==0) {
-        self.titlePre = [NSString stringWithFormat:@"%@%@",self.titlePre,@"直接材料单位成本历史趋势"];
+        self.titlePre = @"直接材料单位成本历史趋势";
     }else{
-        self.titlePre = [NSString stringWithFormat:@"%@%@",self.titlePre,@"原材料单位成本历史趋势"];
+        self.titlePre = @"原材料单位成本历史趋势";
     }
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];

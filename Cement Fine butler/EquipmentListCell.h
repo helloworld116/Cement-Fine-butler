@@ -13,7 +13,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 @property (strong, nonatomic) IBOutlet UILabel *lblSN;
 @property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
-@property (strong, nonatomic) IBOutlet UILabel *lblStopCount;
 @property (strong, nonatomic) IBOutlet UILabel *lblSettingFlowRate;
 @property (strong, nonatomic) IBOutlet UILabel *lblInstantFlowRate;
 @property (strong, nonatomic) IBOutlet UILabel *lblLineName;

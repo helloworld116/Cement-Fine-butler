@@ -10,6 +10,7 @@
 
 @interface CalloutMapAnnotation : NSObject<BMKAnnotation>
 
+@property (nonatomic,retain) NSDictionary *equipmentInfo;
 @property (nonatomic) CLLocationDegrees latitude;
 @property (nonatomic) CLLocationDegrees longitude;
 

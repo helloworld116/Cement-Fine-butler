@@ -9,6 +9,7 @@
 #import "LossReportViewController.h"
 
 @interface LossReportViewController ()
+@property (strong, nonatomic) TitleView *titleView;
 @property (retain,nonatomic) UIWebView *webView;
 @end
 
@@ -29,6 +30,12 @@
 	// Do any additional setup after loading the view.
 //    CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight);
 //    UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(pop)];
+    
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = self.title;
+    self.titleView.lblTimeInfo.text = self.titlePre;
+    self.navigationItem.titleView = self.titleView;
+    
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight);
@@ -81,7 +88,7 @@
     double max = [[sortedNumbers objectAtIndex:0] doubleValue];
     max = [Tool max:max];
 //    NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
-    NSDictionary *configDict = @{@"title":[self.titlePre stringByAppendingString:self.title],@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+    NSDictionary *configDict = @{@"title":self.title,@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
     NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
     DDLogCVerbose(@"js is %@",js);
     [webView stringByEvaluatingJavaScriptFromString:js];

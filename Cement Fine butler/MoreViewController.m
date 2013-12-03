@@ -43,6 +43,7 @@
          @{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},
          @{@"name":@"库位设置",@"storyboard":@"inventorySettingListViewController"},
          @{@"name":@"固定成本管理",@"storyboard":@"fixCostsViewController"},
+         @{@"name":@"行业数据",@"storyboard":@"industryStandardVC"},
          @{@"name":@"修改密码",@"storyboard":@"updatePasswordViewController"}
          ];
 }
