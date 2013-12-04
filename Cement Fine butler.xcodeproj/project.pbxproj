@@ -168,6 +168,9 @@
 		0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E62CC541820FA0800281A73 /* ChoiceCell.m */; };
 		0E62E85617F1252C00D4681E /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85417F1252C00D4681E /* check_icon@2x.png */; };
 		0E62E85717F1252C00D4681E /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E62E85517F1252C00D4681E /* check_icon.png */; };
+		0E632263184ED35A00D5F4B7 /* UIColor+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E632262184ED35A00D5F4B7 /* UIColor+Random.m */; };
+		0E6322AD184F469E00D5F4B7 /* Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6322AC184F469E00D5F4B7 /* Factory.m */; };
+		0E6322B0184F485800D5F4B7 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6322AF184F485800D5F4B7 /* CommonViewController.m */; };
 		0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6638E91824D5D800FB381F /* AllMaterialsViewController.m */; };
 		0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6638EC1824FCC400FB381F /* LogoutAction.m */; };
 		0E693ABB1807CE810061A3F8 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E693ABA1807CE810061A3F8 /* libbaidumapapi.a */; };
@@ -510,6 +513,12 @@
 		0E62CC541820FA0800281A73 /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
 		0E62E85417F1252C00D4681E /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		0E62E85517F1252C00D4681E /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
+		0E632261184ED35A00D5F4B7 /* UIColor+Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Random.h"; sourceTree = "<group>"; };
+		0E632262184ED35A00D5F4B7 /* UIColor+Random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Random.m"; sourceTree = "<group>"; };
+		0E6322AB184F469E00D5F4B7 /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
+		0E6322AC184F469E00D5F4B7 /* Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Factory.m; sourceTree = "<group>"; };
+		0E6322AE184F485800D5F4B7 /* CommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
+		0E6322AF184F485800D5F4B7 /* CommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		0E6638E81824D5D800FB381F /* AllMaterialsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMaterialsViewController.h; sourceTree = "<group>"; };
 		0E6638E91824D5D800FB381F /* AllMaterialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllMaterialsViewController.m; sourceTree = "<group>"; };
 		0E6638EB1824FCC400FB381F /* LogoutAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutAction.h; sourceTree = "<group>"; };
@@ -1411,6 +1420,12 @@
 				0E3841EF17D41FDE004B3C87 /* Tool.m */,
 				0EA5CF261823A6380028BE8B /* MainStoryboard_iPhone.storyboard */,
 				472F32E617CC3C05007E567B /* Supporting Files */,
+				0E632261184ED35A00D5F4B7 /* UIColor+Random.h */,
+				0E632262184ED35A00D5F4B7 /* UIColor+Random.m */,
+				0E6322AB184F469E00D5F4B7 /* Factory.h */,
+				0E6322AC184F469E00D5F4B7 /* Factory.m */,
+				0E6322AE184F485800D5F4B7 /* CommonViewController.h */,
+				0E6322AF184F485800D5F4B7 /* CommonViewController.m */,
 			);
 			path = "Cement Fine butler";
 			sourceTree = "<group>";
@@ -1826,6 +1841,7 @@
 				0EF4CD3C184D6B480050A63A /* IndustryStandardOperationViewController.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
 				0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */,
+				0E6322B0184F485800D5F4B7 /* CommonViewController.m in Sources */,
 				0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */,
 				0EF727B8181E8B4E0059EC59 /* ProductHistoryViewController.m in Sources */,
 				0EF727AC181E60910059EC59 /* InventorySettingListViewController.m in Sources */,
@@ -1860,11 +1876,13 @@
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
+				0E6322AD184F469E00D5F4B7 /* Factory.m in Sources */,
 				0EF727BD181E8E2A0059EC59 /* ProductHistoryCell.m in Sources */,
 				0EA5CF1D182399100028BE8B /* WeighViewController.m in Sources */,
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
 				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
 				0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */,
+				0E632263184ED35A00D5F4B7 /* UIColor+Random.m in Sources */,
 				0E9C4CD618497D9700B82F13 /* UIView+NavigationItem.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E1258341846D71C00959EC1 /* UIFolderTableView.m in Sources */,

@@ -49,6 +49,8 @@
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"原材料成本损失";
     self.navigationItem.titleView = self.titleView;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showMaterialCost:)];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
 //    NSString *responseString = @"{\"error\":0,\"message\":\"\",\"data\":{\"overview\":{\"totalLoss\":3453.76},\"products\":[{\"id\":1,\"name\":\"PC32.5\",\"quotesCosts\":89.45,\"totalLoss\":786.54,\"actualCosts\":87.90,\"standardCosts\":88.56,\"suggestion\":\"您今日生产情况高于行业平均水平，根据最新行情数据建议改进生产配方\"},{\"id\":2,\"name\":\"PC42.5\",\"quotesCosts\":563.45,\"totalLoss\":689.80,\"actualCosts\":56.90,\"standardCosts\":90.56,\"suggestion\":\"您今日生产情况低于行业平均水平，根据最新行情数据建议保持生产配方\"},{\"id\":3,\"name\":\"PC42.5\",\"quotesCosts\":78.89,\"totalLoss\":1899.54,\"actualCosts\":87.96,\"standardCosts\":66.77,\"suggestion\":\"您今日生产情况低于行业平均水平，根据最新行情数据建议改进生产配方\"}]}}";
@@ -223,6 +225,46 @@
 
 - (void)showSearchCondition:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+- (void)showMaterialCost:(id)sender{
+    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+    for (NSDictionary *line in lines) {
+        NSString *name = [line objectForKey:@"name"];
+        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+        NSDictionary *dict = @{@"_id":_id,@"name":name};
+        [lineArray addObject:dict];
+    }
+    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+    for (NSDictionary *product in products) {
+        NSString *name = [product objectForKey:@"name"];
+        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+        NSDictionary *dict = @{@"_id":_id,@"name":name};
+        [productArray addObject:dict];
+    }
+    NSArray *timeArray = kCondition_Time_Array;
+    //原材料成本管理模块
+    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
+    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
+    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    if (kSharedApp.multiGroup) {
+        //集团
+        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
+    }else{
+        //集团下的工厂
+        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+    }
+    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
+    [costManagerController setRightPanel:costManagerRightController];
+    
+//    rawMaterialsCostManagerNavController.modalPresentationStyle =UIModalPresentationCustom;
+//    rawMaterialsCostManagerNavController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:costManagerController animated:YES];
+//    UINavigationController *datePickerViewController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
+//    [self presentModalViewController:datePickerViewController animated:YES];
 }
 
 #pragma mark observe

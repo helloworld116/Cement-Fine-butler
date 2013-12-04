@@ -79,9 +79,9 @@
 //    UIImage *backButton = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 5)];
 //    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];    
 	[[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setBackgroundImage:highlightedBarButton forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-    [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:highlightedBarButton forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+//	UIImage *barButtonHighlighted = [[UIImage imageNamed:@"NavBarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+//    [[UIBarButtonItem appearance] setBackgroundImage:barButtonHighlighted forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
         [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
         [UIColor colorWithWhite:0.0f alpha:0.2f], UITextAttributeTextShadowColor,
@@ -150,54 +150,55 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     
-    //原材料成本管理模块
-    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
-    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
-    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
-    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
-    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    if (kSharedApp.multiGroup) {
-        //集团
-        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
-    }else{
-        //集团下的工厂
-        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    }
-    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    [costManagerController setRightPanel:costManagerRightController];
+    //原材料成本损失
+    JASidePanelController *rawMaterialCostLossSidePanelViewController = [[JASidePanelController alloc] init];
+    RawMaterialCostViewController *rawMaterialCostLossViewController = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
+    UINavigationController *rawMaterialCostLossNav = [[UINavigationController alloc] initWithRootViewController:rawMaterialCostLossViewController];
+    RightViewController *rawMaterialCostLossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    rawMaterialCostLossRightController.conditions = @[@{@"时间段":timeArray}];
+    rawMaterialCostLossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [rawMaterialCostLossSidePanelViewController setCenterPanel:rawMaterialCostLossNav];
+    [rawMaterialCostLossSidePanelViewController setRightPanel:rawMaterialCostLossRightController];
+    rawMaterialCostLossSidePanelViewController.tabBarItem = [rawMaterialCostLossSidePanelViewController.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+1];
     
-//    //能源监控
-//    JASidePanelController *energyMonitoringSidePanelViewController = [[JASidePanelController alloc] init];
-//    EnergyMonitoringOverViewViewController *energyMonitoringOverViewViewController = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
-//    UINavigationController *energyMonitoringNav = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewViewController];
-//    RightViewController* energyMonitoringRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-//    energyMonitoringRightController.conditions = @[@{@"时间段":timeArray}];
-//    energyMonitoringRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-//    [energyMonitoringSidePanelViewController setCenterPanel:energyMonitoringNav];
-//    [energyMonitoringSidePanelViewController setRightPanel:energyMonitoringRightController];
-//    energyMonitoringSidePanelViewController.tabBarItem = [energyMonitoringNav.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+//    //原材料成本管理模块
+//    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
+//    costManagerController.tabBarItem = [costManagerController.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+//    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
+//    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
+//    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    if (kSharedApp.multiGroup) {
+//        //集团
+//        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
+//    }else{
+//        //集团下的工厂
+//        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+//    }
+//    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//    [costManagerController setRightPanel:costManagerRightController];
     
-    //损耗定位
-    JASidePanelController *lossController = [[JASidePanelController alloc] init];
-    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
-    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
-    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
-    RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    lossRightController.conditions = @[@{@"时间段":timeArray}];
-    lossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    [lossController setCenterPanel:lossNavController];
-    [lossController setRightPanel:lossRightController];
+    //能源监控
+    JASidePanelController *energyMonitoringSidePanelViewController = [[JASidePanelController alloc] init];
+    EnergyMonitoringOverViewViewController *energyMonitoringOverViewViewController = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
+    UINavigationController *energyMonitoringNav = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewViewController];
+    RightViewController* energyMonitoringRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    energyMonitoringRightController.conditions = @[@{@"时间段":timeArray}];
+    energyMonitoringRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [energyMonitoringSidePanelViewController setCenterPanel:energyMonitoringNav];
+    [energyMonitoringSidePanelViewController setRightPanel:energyMonitoringRightController];
+    energyMonitoringSidePanelViewController.tabBarItem = [energyMonitoringNav.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+2];
     
-//    //原材料成本损失
-//    JASidePanelController *rawMaterialCostLossSidePanelViewController = [[JASidePanelController alloc] init];
-//    RawMaterialCostViewController *rawMaterialCostLossViewController = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
-//    UINavigationController *rawMaterialCostLossNav = [[UINavigationController alloc] initWithRootViewController:rawMaterialCostLossViewController];
-//    RightViewController *rawMaterialCostLossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-//    rawMaterialCostLossRightController.conditions = @[@{@"时间段":timeArray}];
-//    rawMaterialCostLossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-//    [rawMaterialCostLossSidePanelViewController setCenterPanel:rawMaterialCostLossNav];
-//    [rawMaterialCostLossSidePanelViewController setRightPanel:rawMaterialCostLossRightController];
-//    rawMaterialCostLossSidePanelViewController.tabBarItem = [rawMaterialCostLossSidePanelViewController.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
+//    //损耗定位
+//    JASidePanelController *lossController = [[JASidePanelController alloc] init];
+//    lossController.tabBarItem = [lossController.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+2];
+//    LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
+//    UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
+//    RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    lossRightController.conditions = @[@{@"时间段":timeArray}];
+//    lossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//    [lossController setCenterPanel:lossNavController];
+//    [lossController setRightPanel:lossRightController];
+
     
     //实时报表（默认产量报表）
     JASidePanelController *realTimeReportsController = [[JASidePanelController alloc] init];
@@ -232,9 +233,12 @@
 //    UINavigationController *raw = [self.storyboard instantiateViewControllerWithIdentifier:@"calculatorNavController"];
 //    raw.tabBarItem = [raw.tabBarItem initWithTitle:@"计算器" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
     //更多
+    JASidePanelController *moreSidePanelVC = [[JASidePanelController alloc] init];
+    moreSidePanelVC.tabBarItem = [moreSidePanelVC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
     UINavigationController *moreNav = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
-    moreNav.tabBarItem = [moreNav.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"calculator"] tag:kViewTag+5];
-    tabBarController.viewControllers = @[costManagerController,lossController,realTimeReportsController,equipmentController,moreNav];
+    [moreSidePanelVC setCenterPanel:moreNav];
+    
+    tabBarController.viewControllers = @[rawMaterialCostLossSidePanelViewController,energyMonitoringSidePanelViewController,realTimeReportsController,equipmentController,moreSidePanelVC];
     return tabBarController;
 }
 							

@@ -11,6 +11,7 @@
 #import "ElectricityPriceViewController.h"
 #import "PassValueDelegate.h"
 #import "ChoiceFactoryViewController.h"
+#import "LossOverViewViewController.h"
 
 @interface MoreViewController ()<PassValueDelegate>
 @property (nonatomic,retain) NSArray *options;
@@ -48,6 +49,12 @@
          ];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.sidePanelController setRightPanel:nil];
+    [self.sidePanelController setLeftPanel:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -57,14 +64,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==0) {
         return 1;
-    }else if(section==1) {
+    }else if(section==1){
+        return 1;
+    }else if(section==2) {
         return self.options.count;
     }else{
         return 1;
@@ -74,7 +83,9 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section==0) {
         return @"当前工厂";
-    }else if (section==1) {
+    }else if(section==1){
+        return @"损耗";
+    }else if (section==2) {
         return @"录入相关";
     }else{
         return @"账号与安全";
@@ -96,7 +107,10 @@
         }else{
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    }else if(indexPath.section==1) {
+    }else if(indexPath.section==1){
+        cell.textLabel.text = @"损耗定位";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }else if(indexPath.section==2) {
         cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else{
@@ -118,7 +132,26 @@
             nextViewController.delegate = self;
             [self.navigationController pushViewController:nextViewController animated:YES];
         }
-    }else if (indexPath.section==1) {
+    }else if(indexPath.section==1){
+        //损耗定位
+//        JASidePanelController *lossController = [[JASidePanelController alloc] init];
+//        LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
+//        UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
+//        RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//        NSArray *timeArray = kCondition_Time_Array;
+//        lossRightController.conditions = @[@{@"时间段":timeArray}];
+//        lossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//        [lossController setCenterPanel:lossNavController];
+//        [lossController setRightPanel:lossRightController];
+//        
+//        lossController.hidesBottomBarWhenPushed = YES;
+//        self.navigationController.navigationBarHidden = YES;
+//        [self.navigationController pushViewController:lossController animated:YES];
+        
+        LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
+        lossOverViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:lossOverViewController animated:YES];
+    }else if (indexPath.section==2) {
         NSString *controllerIdentifier = [self.options[indexPath.row] objectForKey:@"storyboard"];
         UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:controllerIdentifier];
         nextViewController.hidesBottomBarWhenPushed = YES;

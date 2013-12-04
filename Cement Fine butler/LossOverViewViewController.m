@@ -40,13 +40,19 @@
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"损耗总览";
     self.navigationItem.titleView = self.titleView;
-    
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
+    RightViewController *rightController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    NSArray *timeArray = kCondition_Time_Array;
+    rightController.conditions = @[@{@"时间段":timeArray}];
+    rightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    [self.sidePanelController setRightPanel:rightController];
     
 //    NSString *testData = @"{\"error\":\"0\",\"message\":\"1\",\"data\":{\"overView\":{\"totalLoss\":2200.0,\"rawMaterialsLoss\":600.0,\"semifinishedProductLoss\":1000.0,\"endProductLoss\":600.0},\"rawMaterials\":[{\"name\":\"熟料\",\"value\":100.0},{\"name\":\"石膏\",\"value\":200.0}],\"semifinishedProduct\":[{\"name\":\"熟料粉\",\"value\":1000.0}],\"endProduct\":[{\"name\":\"P.O42.5\",\"value\":100.0},{\"name\":\"P.O52.5\",\"value\":500.0}]}}";
 //    self.responseData = [Tool stringToDictionary:testData];
     //添加webview
-    CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight);
+    CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight);
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
     self.webView.delegate = self;
     self.webView.backgroundColor = [UIColor clearColor];
@@ -67,20 +73,20 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden=YES;
-    if ((kSharedApp.startFactoryId!=kSharedApp.finalFactoryId)&&self.responseData) {
-        self.responseData = nil;
-        //send request
-        NSDictionary *condition = @{@"timeType":[NSNumber numberWithInt:2]};
-        [self sendRequest:condition];
-    }
+////    self.navigationController.navigationBarHidden=YES;
+//    if ((kSharedApp.startFactoryId!=kSharedApp.finalFactoryId)&&self.responseData) {
+//        self.responseData = nil;
+//        //send request
+//        NSDictionary *condition = @{@"timeType":[NSNumber numberWithInt:2]};
+//        [self sendRequest:condition];
+//    }
+    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     NSString *js = [@"rebound(" stringByAppendingFormat:@"%d)",self.currentSelectIndex];
     [self.webView stringByEvaluatingJavaScriptFromString:js];
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
     RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
     TimeTableView *timeTableView = rightController.timeTableView;
     NSIndexPath *indexPath = [timeTableView indexPathForSelectedRow];
@@ -92,6 +98,10 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
 }
 
@@ -111,10 +121,6 @@
 //        }
         [self sendRequest:condition];
     }
-}
-
--(void)showSearch:(id)sender{
-    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 #pragma mark begin webviewDelegate
@@ -256,5 +262,14 @@
 - (void)hudWasHidden:(MBProgressHUD *)hud {
 	[self.progressHUD removeFromSuperview];
 	self.progressHUD = nil;
+}
+
+#pragma mark NavigationItem按钮事件
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)showSearch:(id)sender{
+    [self.sidePanelController showRightPanelAnimated:YES];
 }
 @end

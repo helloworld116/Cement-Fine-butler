@@ -20,6 +20,7 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) NSDictionary *data;
 //@property (retain, nonatomic) NODataView *noDataView;
+@property (retain, nonatomic) TitleView *titleView;
 @property (retain, nonatomic) PromptMessageView *messageView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 
@@ -43,11 +44,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //最开始异步请求数据
-    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
-    [self sendRequest:condition];
-    self.currentSelectIndexDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    self.navigationItem.title = @"原材料成本管理";
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"原材料成本管理";
+    self.navigationItem.titleView = self.titleView;
     
     self.webView.delegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
@@ -58,6 +57,10 @@
     sc.bounces = NO;//禁用上下拖拽
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    
+    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
+    [self sendRequest:condition];
+    self.currentSelectIndexDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -241,13 +244,15 @@
             for (int i=0; i<materials.count; i++) {
                 NSDictionary *material = [materials objectAtIndex:i];
                 NSString *color = [kColorList objectAtIndex:i];
+//                NSString *color = [UIColor randomColorString];
                 NSString *name = [NSString stringWithFormat:@"%@ %@元/吨",[material objectForKey:@"name"],[material objectForKey:@"unitCost"]];
-                NSString *value = [NSString stringWithFormat:@"%.2f",[[material objectForKey:@"unitCost"] doubleValue]/unitCost*100];
+                NSString *value = [NSString stringWithFormat:@"%.2f",[[material objectForKey:@"unitCost"] doubleValue]];
+//                double value = [[material objectForKey:@"unitCost"] doubleValue];
                 NSDictionary *data = @{@"name":name,@"value":value,@"color":color};
                 [dataArray addObject:data];
             }
             NSString *pieData = [Tool objectToString:dataArray];
-            NSString *title = [self.reportTitlePre stringByAppendingString:@"直接材料成本"];
+            NSString *title = @"直接材料成本";
             NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
             NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
             DDLogVerbose(@"dates is %@",js);
@@ -401,6 +406,7 @@
     int timeType = [[condition objectForKey:@"timeType"] intValue];
     NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.reportTitlePre;
     DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostURL);
     self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
 //    // 设置持久连接的超时时间为120秒
