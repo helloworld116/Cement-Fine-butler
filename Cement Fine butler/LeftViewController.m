@@ -81,9 +81,9 @@
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kTableViewHeaderViewHeight;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return kTableViewHeaderViewHeight;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return kTableViewCellHeight;
@@ -97,18 +97,15 @@
     return [[[self.conditions objectAtIndex:index] objectForKey:key] count];
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    return [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-//}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 200, kTableViewHeaderViewHeight)];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:17.f];
-    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
-    label.backgroundColor = [UIColor clearColor];
-    return label;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 200, kTableViewHeaderViewHeight)];
+//    label.textColor = [UIColor whiteColor];
+//    label.font = [UIFont systemFontOfSize:17.f];
+//    label.text = [[[self.conditions objectAtIndex:(tableView.tag-kTableViewTag)] allKeys] objectAtIndex:0];
+//    label.backgroundColor = [UIColor clearColor];
+//    return label;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -175,41 +172,56 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    self.sidePanelController.rightPanel = nil;
-//    RightViewController* realTimeReportsRightController = (RightViewController *)self.sidePanelController.rightPanel;
+//    RightViewController* realTimeReportsRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    self.sidePanelController.rightPanel = nil;
+////    RightViewController* realTimeReportsRightController = (RightViewController *)self.sidePanelController.rightPanel;
+//    if (indexPath.row==0) {
+//        NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+//        NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+//        for (NSDictionary *line in lines) {
+//            NSString *name = [line objectForKey:@"name"];
+//            NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+//            NSDictionary *dict = @{@"_id":_id,@"name":name};
+//            [lineArray addObject:dict];
+//        }
+//        NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+//        NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+//        for (NSDictionary *product in products) {
+//            NSString *name = [product objectForKey:@"name"];
+//            NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+//            NSDictionary *dict = @{@"_id":_id,@"name":name};
+//            [productArray addObject:dict];
+//        }
+//        NSArray *timeArray = kCondition_Time_Array;
+//        ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+//        realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+//        realTimeReportsRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//        UINavigationController *productColumnVCNav = [[UINavigationController alloc] initWithRootViewController:productColumnViewController];
+//        [self.sidePanelController setCenterPanel:productColumnVCNav];
+//        [self.sidePanelController setRightPanel:realTimeReportsRightController];
+//    }else if (indexPath.row==1){
+//        InventoryColumnViewController *inventoryColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
+//        UINavigationController *inventoryColumnVCNav = [[UINavigationController alloc] initWithRootViewController:inventoryColumnViewController];
+//        NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
+//        realTimeReportsRightController.conditions = @[@{@"库存类型":stockType}];
+//        [self.sidePanelController setCenterPanel:inventoryColumnVCNav];
+//        [self.sidePanelController setRightPanel:realTimeReportsRightController];
+//    }
+    UITabBarController *tabbarController = (UITabBarController *)[self.sidePanelController centerPanel];
+    NSArray *viewControllers = tabbarController.viewControllers;
+    NSMutableArray *newViewControllers = [NSMutableArray arrayWithArray:viewControllers];
     if (indexPath.row==0) {
-        NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
-        NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-        for (NSDictionary *line in lines) {
-            NSString *name = [line objectForKey:@"name"];
-            NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
-            NSDictionary *dict = @{@"_id":_id,@"name":name};
-            [lineArray addObject:dict];
-        }
-        NSArray *products = [kSharedApp.factory objectForKey:@"products"];
-        NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-        for (NSDictionary *product in products) {
-            NSString *name = [product objectForKey:@"name"];
-            NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
-            NSDictionary *dict = @{@"_id":_id,@"name":name};
-            [productArray addObject:dict];
-        }
-        NSArray *timeArray = kCondition_Time_Array;
-        ProductColumnViewController *productColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
-        realTimeReportsRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-        realTimeReportsRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-        UINavigationController *productColumnVCNav = [[UINavigationController alloc] initWithRootViewController:productColumnViewController];
-        [self.sidePanelController setCenterPanel:productColumnVCNav];
-        [self.sidePanelController setRightPanel:realTimeReportsRightController];
+        ProductColumnViewController *productColumnVC = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+        UINavigationController *realTimeReportsNC = [[UINavigationController alloc] initWithRootViewController:productColumnVC];
+        [newViewControllers replaceObjectAtIndex:2 withObject:realTimeReportsNC];
+        
     }else if (indexPath.row==1){
-        InventoryColumnViewController *inventoryColumnViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
-        UINavigationController *inventoryColumnVCNav = [[UINavigationController alloc] initWithRootViewController:inventoryColumnViewController];
-        NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
-        realTimeReportsRightController.conditions = @[@{@"库存类型":stockType}];
-        [self.sidePanelController setCenterPanel:inventoryColumnVCNav];
-        [self.sidePanelController setRightPanel:realTimeReportsRightController];
+        InventoryColumnViewController *inventoryColumnVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
+        UINavigationController *inventoryColumnNC = [[UINavigationController alloc] initWithRootViewController:inventoryColumnVC];
+        [newViewControllers replaceObjectAtIndex:2 withObject:inventoryColumnNC];
     }
+    [tabbarController setViewControllers:newViewControllers];
+    [self.sidePanelController showCenterPanelAnimated:YES];
 }
 
 - (void)viewDidUnload {

@@ -10,6 +10,8 @@
 #import "HMSegmentedControl.h"
 #import "ProductViewController.h"
 
+#define kSegmentedHeight 40.f
+
 @interface RawMaterialCostViewController ()<UIScrollViewDelegate,MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *topView;
@@ -21,10 +23,10 @@
 @property (strong, nonatomic) TitleView *titleView;
 @property (nonatomic,retain) NSString *timeInfo;
 
-@property (strong, nonatomic) NSDictionary *responseData;
-@property (strong, nonatomic) NSDictionary *data;
-@property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain,nonatomic) MBProgressHUD *progressHUD;
+//@property (strong, nonatomic) NSDictionary *responseData;
+//@property (strong, nonatomic) NSDictionary *data;
+//@property (retain, nonatomic) ASIFormDataRequest *request;
+//@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation RawMaterialCostViewController
@@ -42,58 +44,37 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.topView.backgroundColor = kRelativelyColor;
-    self.lblTextLoss.textColor = [UIColor darkTextColor];
-    self.lblValueLoss.textColor = [UIColor redColor];
-    
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"原材料成本损失";
     self.navigationItem.titleView = self.titleView;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showMaterialCost:)];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
-//    NSString *responseString = @"{\"error\":0,\"message\":\"\",\"data\":{\"overview\":{\"totalLoss\":3453.76},\"products\":[{\"id\":1,\"name\":\"PC32.5\",\"quotesCosts\":89.45,\"totalLoss\":786.54,\"actualCosts\":87.90,\"standardCosts\":88.56,\"suggestion\":\"您今日生产情况高于行业平均水平，根据最新行情数据建议改进生产配方\"},{\"id\":2,\"name\":\"PC42.5\",\"quotesCosts\":563.45,\"totalLoss\":689.80,\"actualCosts\":56.90,\"standardCosts\":90.56,\"suggestion\":\"您今日生产情况低于行业平均水平，根据最新行情数据建议保持生产配方\"},{\"id\":3,\"name\":\"PC42.5\",\"quotesCosts\":78.89,\"totalLoss\":1899.54,\"actualCosts\":87.96,\"standardCosts\":66.77,\"suggestion\":\"您今日生产情况低于行业平均水平，根据最新行情数据建议改进生产配方\"}]}}";
-//    self.responseData = [Tool stringToDictionary:responseString];
-//    [self buildViewWithData];
+    self.topView.backgroundColor = kRelativelyColor;
+    self.lblTextLoss.textColor = [UIColor darkTextColor];
+    self.lblValueLoss.textColor = [UIColor redColor];
     
-    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, 40)];
-    [self.segmented setScrollEnabled:YES];
-    [self.segmented setBackgroundColor:kGeneralColor];
-    [self.segmented setTextColor:[UIColor darkTextColor]];
-    [self.segmented setSelectedTextColor:kRelativelyColor];
-    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
-    [self.segmented setSelectionIndicatorHeight:3];
-    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
-    [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-    [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    
-    self.scrollViewOfProducts = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height+self.segmented.frame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.topView.frame.size.height-self.segmented.frame.size.height-kTabBarHeight)];
+    self.scrollViewOfProducts = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height+kSegmentedHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.topView.frame.size.height-kSegmentedHeight-kTabBarHeight)];
     self.scrollViewOfProducts.pagingEnabled = YES;
     self.scrollViewOfProducts.showsHorizontalScrollIndicator = NO;
     self.scrollViewOfProducts.delegate = self;
     [self.scrollView addSubview:self.scrollViewOfProducts];
     
-    NSDictionary *condition = @{@"timeType":@2};
-    [self sendRequest:condition];
+    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
+    self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    
+    //获取请求数据
+    self.URL = kRawMaterialLoss;
+    [self sendRequest];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //观察查询条件修改
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
-    TimeTableView *timeTableView = rightController.timeTableView;
-    int timeSelectIndex = [timeTableView indexPathForSelectedRow].row;
-    if (timeSelectIndex==4) {
-        timeTableView.currentSelectCellIndex=4;
-        [timeTableView reloadData];
-    }
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
 }
 
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
@@ -108,79 +89,8 @@
     [self.segmented setSelectedSegmentIndex:page animated:YES];
 }
 
-#pragma mark 发送网络请求
--(void) sendRequest:(NSDictionary *)condition{
-    //清除原数据
-    self.scrollView.hidden = YES;
-    self.data = nil;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-//    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate = self;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
-    
-    int timeType = [[condition objectForKey:@"timeType"] intValue];
-    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
-    self.timeInfo = [timeInfo objectForKey:@"timeDesc"];
-    self.titleView.lblTimeInfo.text = self.timeInfo ;
-    NSDate *startTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"startTime"] doubleValue]/1000];
-    NSDate *endTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"endTime"] doubleValue]/1000];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *startTimeStr = [formatter stringFromDate:startTimeDate];
-    NSString *endTimeStr = [formatter stringFromDate:endTimeDate];
-    DDLogCInfo(@"******  Request URL is:%@  ******",kRawMaterialLoss);
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kRawMaterialLoss]];
-    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
-    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:startTimeStr forKey:@"startTime"];
-    [self.request setPostValue:endTimeStr forKey:@"endTime"];
-    [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
-    [self.request setDidFinishSelector:@selector(requestSuccess:)];
-    [self.request startAsynchronous];
-    
-//    self.lastRequestCondition = condition;
-}
-
-#pragma mark 网络请求
--(void) requestFailed:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    NSString *message = nil;
-    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
-        message = @"网络请求超时啦。。。";
-    }else{
-        message = @"网络出错啦。。。";
-    }
-}
-
--(void)requestSuccess:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    self.responseData = [Tool stringToDictionary:request.responseString];
-    int errorCode = [[self.responseData objectForKey:@"error"] intValue];
-    if (errorCode==kErrorCode0) {
-        [self buildViewWithData];
-    }else if(errorCode==kErrorCodeExpired){
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        self.data = nil;
-    }
-}
-
-#pragma mark MBProgressHUDDelegate methods
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-	[self.progressHUD removeFromSuperview];
-	self.progressHUD = nil;
-}
 
 -(void)buildViewWithData{
-    self.data = [self.responseData objectForKey:@"data"];
     NSArray *products = [self.data objectForKey:@"products"];
     NSUInteger productCount = products.count;
     NSDictionary *overview = [self.data objectForKey:@"overview"];
@@ -214,8 +124,23 @@
         viewController.view.frame = CGRectMake(i*kScreenWidth, 0, kScreenWidth, self.scrollViewOfProducts.frame.size.height);
         [self.scrollViewOfProducts addSubview:viewController.view];
     }
+    if (self.segmented) {
+        [self.segmented removeFromSuperview];
+    }
+    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, kSegmentedHeight)];
+    self.segmented.selectedSegmentIndex = 0;
+    [self.segmented setScrollEnabled:YES];
+    [self.segmented setBackgroundColor:kGeneralColor];
+    [self.segmented setTextColor:[UIColor darkTextColor]];
+    [self.segmented setSelectedTextColor:kRelativelyColor];
+    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+    [self.segmented setSelectionIndicatorHeight:3];
+    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
+    [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+    [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     self.segmented.sectionTitles = productNames;
     [self.scrollView addSubview:self.segmented];
+    
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -228,56 +153,56 @@
 }
 
 - (void)showMaterialCost:(id)sender{
-    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
-    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-    for (NSDictionary *line in lines) {
-        NSString *name = [line objectForKey:@"name"];
-        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
-        NSDictionary *dict = @{@"_id":_id,@"name":name};
-        [lineArray addObject:dict];
-    }
-    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
-    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-    for (NSDictionary *product in products) {
-        NSString *name = [product objectForKey:@"name"];
-        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
-        NSDictionary *dict = @{@"_id":_id,@"name":name};
-        [productArray addObject:dict];
-    }
-    NSArray *timeArray = kCondition_Time_Array;
-    //原材料成本管理模块
-    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
-    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
-    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    if (kSharedApp.multiGroup) {
-        //集团
-        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
-    }else{
-        //集团下的工厂
-        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
-    }
-    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
-    [costManagerController setRightPanel:costManagerRightController];
-    
-//    rawMaterialsCostManagerNavController.modalPresentationStyle =UIModalPresentationCustom;
-//    rawMaterialsCostManagerNavController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:costManagerController animated:YES];
-//    UINavigationController *datePickerViewController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
-//    [self presentModalViewController:datePickerViewController animated:YES];
+//    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
+//    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+//    for (NSDictionary *line in lines) {
+//        NSString *name = [line objectForKey:@"name"];
+//        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
+//        NSDictionary *dict = @{@"_id":_id,@"name":name};
+//        [lineArray addObject:dict];
+//    }
+//    NSArray *products = [kSharedApp.factory objectForKey:@"products"];
+//    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
+//    for (NSDictionary *product in products) {
+//        NSString *name = [product objectForKey:@"name"];
+//        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
+//        NSDictionary *dict = @{@"_id":_id,@"name":name};
+//        [productArray addObject:dict];
+//    }
+//    NSArray *timeArray = kCondition_Time_Array;
+//    //原材料成本管理模块
+//    JASidePanelController *costManagerController = [[JASidePanelController alloc] init];
+//    UINavigationController *rawMaterialsCostManagerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerNavController"];
+//    RightViewController* costManagerRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    if (kSharedApp.multiGroup) {
+//        //集团
+//        costManagerRightController.conditions = @[@{@"时间段":kCondition_Time_Array}];
+//    }else{
+//        //集团下的工厂
+//        costManagerRightController.conditions = @[@{@"时间段":timeArray},@{@"产线":lineArray},@{@"产品":productArray}];
+//    }
+//    costManagerRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+//    [costManagerController setCenterPanel:rawMaterialsCostManagerNavController];
+//    [costManagerController setRightPanel:costManagerRightController];
+//    
+////    rawMaterialsCostManagerNavController.modalPresentationStyle =UIModalPresentationCustom;
+////    rawMaterialsCostManagerNavController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentModalViewController:costManagerController animated:YES];
+////    UINavigationController *datePickerViewController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
+////    [self presentModalViewController:datePickerViewController animated:YES];
 }
 
 #pragma mark observe
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"searchCondition"]) {
-        SearchCondition *searchCondition = [change objectForKey:@"new"];
-        NSDictionary *condition = @{@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
-        if (4==[[condition objectForKey:@"timeType"] intValue]) {
-//            self.showRight = YES;
-        }
-        [self sendRequest:condition];
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//    if ([keyPath isEqualToString:@"searchCondition"]) {
+//        SearchCondition *searchCondition = [change objectForKey:@"new"];
+//        self.condition = @{@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
+//        if (4==[[self.condition objectForKey:@"timeType"] intValue]) {
+////            self.showRight = YES;
+//        }
+//        [self sendRequest];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -285,4 +210,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self buildViewWithData];
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
+    self.timeInfo = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.timeInfo ;
+    NSDate *startTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"startTime"] doubleValue]/1000];
+    NSDate *endTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"endTime"] doubleValue]/1000];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *startTimeStr = [formatter stringFromDate:startTimeDate];
+    NSString *endTimeStr = [formatter stringFromDate:endTimeDate];
+    [self.request setPostValue:startTimeStr forKey:@"startTime"];
+    [self.request setPostValue:endTimeStr forKey:@"endTime"];
+}
+-(void)clear{
+    self.scrollView.hidden = YES;
+}
 @end

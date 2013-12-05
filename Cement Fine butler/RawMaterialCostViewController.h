@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RawMaterialCostViewController : UIViewController
+@interface RawMaterialCostViewController : CommonViewController
 
 @end

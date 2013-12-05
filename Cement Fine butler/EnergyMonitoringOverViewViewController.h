@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EnergyMonitoringOverViewViewController : UIViewController
+@interface EnergyMonitoringOverViewViewController : CommonViewController
 
 @end

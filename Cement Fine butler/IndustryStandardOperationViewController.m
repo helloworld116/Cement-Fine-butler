@@ -10,7 +10,7 @@
 #import "IndustryStandardTypeViewController.h"
 #import "ProductChoiceViewController.h"
 
-@interface IndustryStandardOperationViewController ()<UITextFieldDelegate,PassValueDelegate,MBProgressHUDDelegate>
+@interface IndustryStandardOperationViewController ()<PassValueDelegate,MBProgressHUDDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *lblProductName;
 @property (strong, nonatomic) IBOutlet UILabel *lblTypeName;
@@ -47,7 +47,46 @@
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
-    self.textValue.delegate = self;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textFieldChanged:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:self.textValue];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lblProductNameChanged:)
+                                                 name:@"lblProductNameChanged"
+                                               object:self.lblProductName];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lblTypeNameChanged:)
+                                                 name:@"lblTypeNameChanged"
+                                               object:self.lblTypeName];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.textValue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lblProductNameChanged" object:self.lblProductName];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lblTypeNameChanged" object:self.lblTypeName];
+}
+
+-(void)textFieldChanged:(NSNotification *)notification{
+    UITextField *textfield = (UITextField *)notification.object;
+    if (![textfield.text isEqualToString:@""]&&self.productId!=0&&self.typeId!=0) {
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
+-(void)lblProductNameChanged:(NSNotification *)notification{
+    NSLog(@"notification is %@",notification);
+}
+
+-(void)lblTypeNameChanged:(NSNotification *)notification{
+    NSLog(@"notification is %@",notification);
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,16 +132,6 @@
 
 -(void)save:(id)sender{
     [self sendRequest:kIndustryStandardAdd];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    self.val = [self.textValue.text stringByTrimmingCharactersInSet:
-                [NSCharacterSet whitespaceCharacterSet]];
-    if (self.productId!=0&&self.typeId!=0&&(![Tool isNullOrNil:self.val])) {
-        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
-    }else{
-        self.navigationItem.rightBarButtonItem = nil;
-    }
 }
 
 #pragma mark 发送网络请求

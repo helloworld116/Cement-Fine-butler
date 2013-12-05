@@ -7,14 +7,12 @@
 //
 
 #import "InventoryColumnViewController.h"
-#import "LoadingView.h"
 
-@interface InventoryColumnViewController ()<MBProgressHUDDelegate>
-@property (nonatomic,retain) LoadingView *loadingView;
-@property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain, nonatomic) NSDictionary *data;
-@property (retain, nonatomic) PromptMessageView *messageView;
-@property (retain,nonatomic) MBProgressHUD *progressHUD;
+@interface InventoryColumnViewController ()<UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *topContainerView;
+@property (strong, nonatomic) IBOutlet UIWebView *bottomWebiew;
+
 @property (retain,nonatomic) NSString *chartTitle;
 @end
 
@@ -29,34 +27,11 @@
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-//    self.loadingView = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
-//    [self.loadingView startLoading];
-//    [self.view insertSubview:self.loadingView aboveSubview:self.bottomWebiew];
-//    [self.view bringSubviewToFront:self.loadingView];
-//    DDLogVerbose(@"self view subview is %@",[self.view subviews]);
-    //观察查询条件修改
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-//    [self.sidePanelController showCenterPanelAnimated:NO];
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    //移除观察条件
-    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //最开始异步请求数据
-    [self sendRequest:0];//默认查询原材料库存
     self.title = @"库存报表";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
@@ -69,12 +44,21 @@
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
     //    self.bottomWebiew.frame = CGRectMake(self.bottomWebiew.frame.origin.x, self.bottomWebiew.frame.origin.y, self.bottomWebiew.frame.size.width*2, self.bottomWebiew.frame.size.height);
-    //设置没有数据或发生错误时的view
-    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
-    CGRect messageViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kStatusBarHeight);
-    self.messageView.frame = messageViewRect;
-    self.messageView.hidden = YES;
-    [self.view addSubview:self.messageView];
+    
+    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
+    self.rightVC.conditions = @[@{@"库存类型":stockType}];
+
+    self.leftVC = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
+    NSArray *reportType = @[@"产量报表",@"库存报表"];
+    self.leftVC.conditions = @[@{@"实时报表":reportType}];
+    
+    self.URL = kStockReportURL;
+    [self sendRequest];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +71,6 @@
     [self setTopContainerView:nil];
     [self setBottomWebiew:nil];
     [self setScrollView:nil];
-    [self setNavigationBar:nil];
     [super viewDidUnload];
 }
 
@@ -128,6 +111,10 @@
             NSDictionary *configDict = @{@"title":self.chartTitle,@"tagName":@"库存(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
             NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:stocks],[Tool objectToString:configDict]];
             [webView stringByEvaluatingJavaScriptFromString:js];
+        }else{
+            self.messageView.frame = self.view.frame;
+            self.messageView.labelMsg.text = @"没有满足条件的数据！！！";
+            self.messageView.hidden = NO;
         }
     }
 }
@@ -137,94 +124,47 @@
 }
 #pragma mark end webviewDelegate
 
-#pragma mark 发送网络请求
--(void) sendRequest:(int)stockType{
-    //清除原数据
-    self.data = nil;
-    self.scrollView.hidden=YES;
-    self.messageView.hidden = YES;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate=self;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
+- (void)showNav:(id)sender {
+    [self.sidePanelController showLeftPanelAnimated:YES];
+}
 
-    DDLogCInfo(@"******  Request URL is:%@  ******",kStockReportURL);
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kStockReportURL]];
-    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
-    [self.request setUseCookiePersistence:YES];
-    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithInt:stockType] forKey:@"type"];
-    if (stockType==0) {
+- (void)showSearchCondition:(id)sender {
+    [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+//#pragma mark 观察条件变化
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//    if ([keyPath isEqualToString:@"searchCondition"]) {
+//        SearchCondition *searchCondition = [change objectForKey:@"new"];
+//        self.condition = @{@"inventoryType":[NSNumber numberWithInt:searchCondition.inventoryType]};
+//        [self sendRequest];
+//    }
+//}
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self.bottomWebiew reload];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.scrollView.hidden = NO;
+    });
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    int inventoryType = self.condition.inventoryType;
+    [self.request setPostValue:[NSNumber numberWithInt:inventoryType] forKey:@"type"];
+    if (inventoryType==0) {
         self.chartTitle = @"原材料库存";
     }else{
         self.chartTitle = @"成品库存";
     }
-    [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
-    [self.request setDidFinishSelector:@selector(requestSuccess:)];
-    [self.request startAsynchronous];
 }
-
-#pragma mark 网络请求
--(void) requestFailed:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    self.messageView.hidden = NO;
-    self.messageView.labelMsg.text=@"请求出错了。。。";
-}
-
--(void)requestSuccess:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==kErrorCode0) {
-        self.data = [dict objectForKey:@"data"];
-        NSArray *materials = [self.data objectForKey:@"materials"];
-        if (self.data&&(NSNull *)self.data!=[NSNull null]&&materials.count>0) {
-            [self.bottomWebiew reload];
-            self.scrollView.hidden = NO;
-        }else{
-            self.messageView.hidden = NO;
-            self.messageView.labelMsg.text=@"没有满足条件的数据";
-        }
-    }else if(responseCode==kErrorCodeExpired){
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        self.messageView.hidden = NO;
-        self.messageView.labelMsg.text=@"未知错误。。。";
-    }
-}
-
-#pragma mark end webviewDelegate
-- (IBAction)showNav:(id)sender {
-    [self.sidePanelController showLeftPanelAnimated:YES];
-}
-
-- (IBAction)showSearchCondition:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
-}
-
-#pragma mark 观察条件变化
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"searchCondition"]) {
-        if ([change objectForKey:@"old"]) {
-            DDLogCVerbose(@"old is %@",[change objectForKey:@"old"]);
-            DDLogCVerbose(@"条件发生变化");
-            SearchCondition *condition = [change objectForKey:@"new"];
-            [self sendRequest:condition.inventoryType];
-        }
-    }
-}
-
-#pragma mark MBProgressHUDDelegate methods
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-	[self.progressHUD removeFromSuperview];
-	self.progressHUD = nil;
+-(void)clear{
+    self.scrollView.hidden = YES;
 }
 @end

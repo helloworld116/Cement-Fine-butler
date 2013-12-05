@@ -8,13 +8,12 @@
 
 #import "ProductColumnViewController.h"
 
-@interface ProductColumnViewController ()<MBProgressHUDDelegate>
-@property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain, nonatomic) NSDictionary *data;
+@interface ProductColumnViewController ()<UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *topContainerView;
+@property (strong, nonatomic) IBOutlet UIWebView *bottomWebiew;
 
 @property (strong, nonatomic) TitleView *titleView;
-@property (retain, nonatomic) PromptMessageView *messageView;
-@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
 @end
 
@@ -33,9 +32,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //设置navigationBar相关
-//    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationBar.topItem.title = @"产量报表";
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"产量报表";
     self.navigationItem.titleView = self.titleView;
@@ -49,15 +45,25 @@
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
     sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
-    //设置没有数据或发生错误时的view
-    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
-    CGRect messageViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kStatusBarHeight);
-    self.messageView.frame = messageViewRect;
-    [self.view addSubview:self.messageView];
-    self.messageView.hidden = YES;
+    
+    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    if (kSharedApp.multiGroup) {
+        //集团
+        self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
+    }else{
+        //集团下的工厂
+        NSArray *lineArray = [Factory allLines];
+        NSArray *productArray = [Factory allProducts];
+        self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+    }
+    self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    self.leftVC = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
+    NSArray *reportType = @[@"产量报表",@"库存报表"];
+    self.leftVC.conditions = @[@{@"实时报表":reportType}];
+    
     //异步请求数据
-    NSDictionary *condition = @{@"lineId": [NSNumber numberWithLong:0],@"productId": [NSNumber numberWithLong:0],@"timeType":[NSNumber numberWithInt:2]};
-    [self sendRequest:condition];//默认查询原材料库存
+    self.URL = kOutputReportURL;
+    [self sendRequest];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -67,27 +73,13 @@
         for (NSDictionary *factory in kSharedApp.factorys) {
             if ([[factory objectForKey:@"id"] intValue]==[[kSharedApp.user objectForKey:@"factoryid"] intValue]) {
                 //选中的是集团
-                [rightViewController resetConditions:@[@{@"时间段":kCondition_Time_Array}]];
+                [rightViewController resetConditions:@[@{kCondition_Time:kCondition_Time_Array}]];
             }else{
                 //选中的是集团下的子工厂
                 if (kSharedApp.finalFactoryId==[[factory objectForKey:@"id"] intValue]) {
-                    NSArray *lines = [factory objectForKey:@"lines"];
-                    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-                    for (NSDictionary *line in lines) {
-                        NSString *name = [line objectForKey:@"name"];
-                        NSNumber *_id = [NSNumber numberWithLong:[[line objectForKey:@"id"] longValue]];
-                        NSDictionary *dict = @{@"_id":_id,@"name":name};
-                        [lineArray addObject:dict];
-                    }
-                    NSArray *products = [factory objectForKey:@"products"];
-                    NSMutableArray *productArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
-                    for (NSDictionary *product in products) {
-                        NSString *name = [product objectForKey:@"name"];
-                        NSNumber *_id = [NSNumber numberWithLong:[[product objectForKey:@"id"] longValue]];
-                        NSDictionary *dict = @{@"_id":_id,@"name":name};
-                        [productArray addObject:dict];
-                    }
-                    NSArray *newCondition = @[@{@"时间段":kCondition_Time_Array},@{@"产线":lineArray},@{@"产品":productArray}];
+                    NSArray *lineArray = [Factory allLines];
+                    NSArray *productArray = [Factory allProducts];
+                    NSArray *newCondition = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
                     [rightViewController resetConditions:newCondition];
                     break;
                 }
@@ -96,25 +88,29 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    //观察查询条件修改
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
-    TimeTableView *timeTableView = rightController.timeTableView;
-    NSIndexPath *indexPath = [timeTableView indexPathForSelectedRow];
-    if (indexPath.row==4) {
-        timeTableView.currentSelectCellIndex=4;
-        [timeTableView reloadData];
-    }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    //移除观察条件
-    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
-//    [self.sidePanelController showCenterPanelAnimated:NO];
-}
+//-(void)viewDidAppear:(BOOL)animated{
+//    [super viewDidAppear:animated];
+//    //观察查询条件修改
+//    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+//    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
+//    TimeTableView *timeTableView = rightController.timeTableView;
+//    NSIndexPath *indexPath = [timeTableView indexPathForSelectedRow];
+//    if (indexPath.row==4) {
+//        timeTableView.currentSelectCellIndex=4;
+//        [timeTableView reloadData];
+//    }
+//}
+//
+//-(void)viewDidDisappear:(BOOL)animated{
+//    [super viewDidDisappear:animated];
+//    //移除观察条件
+//    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+////    [self.sidePanelController showCenterPanelAnimated:NO];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -126,7 +122,6 @@
     [self setTopContainerView:nil];
     [self setBottomWebiew:nil];
     [self setScrollView:nil];
-    [self setNavigationBar:nil];
     [super viewDidUnload];
 }
 
@@ -170,92 +165,48 @@
 }
 #pragma mark end webviewDelegate
 
-#pragma mark 发送网络请求
--(void) sendRequest:(NSDictionary *)condition{
-    //清除原数据
-    self.data = nil;
-    self.scrollView.hidden=YES;
-    self.messageView.hidden=YES;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate=self;
-    self.progressHUD.minShowTime=0.5;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
 
-    int timeType = [[condition objectForKey:@"timeType"] intValue];
-    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
-    self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
-    self.titleView.lblTimeInfo.text = self.reportTitlePre;
-    DDLogCInfo(@"******  Request URL is:%@  ******",kOutputReportURL);
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kOutputReportURL]];
-    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
-    [self.request setUseCookiePersistence:YES];
-    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
-    [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
-    [self.request setDidFinishSelector:@selector(requestSuccess:)];
-    [self.request startAsynchronous];
-}
+//#pragma mark 观察条件变化
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//    if ([keyPath isEqualToString:@"searchCondition"]) {
+//        SearchCondition *searchCondition = [change objectForKey:@"new"];
+//        self.condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
+//        [self sendRequest];
+//    }
+//}
 
-#pragma mark 网络请求
--(void) requestFailed:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    self.messageView.hidden = NO;
-    self.messageView.labelMsg.text=@"请求出错了。。。";
-}
-
--(void)requestSuccess:(ASIHTTPRequest *)request{    
-    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==kErrorCode0) {
-        self.data = [dict objectForKey:@"data"];
-        if (self.data&&(NSNull *)self.data!=[NSNull null]) {
-            [self.bottomWebiew reload];
-            self.scrollView.hidden = NO;
-        }else{
-            self.messageView.hidden = NO;
-            self.messageView.labelMsg.text=@"没有满足条件的数据";
-        }
-    }else if(responseCode==kErrorCodeExpired){
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        self.messageView.hidden = NO;
-        self.messageView.labelMsg.text=@"未知错误。。。";
-    }
-    [self.progressHUD hide:YES];
-}
-
-#pragma mark 观察条件变化
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"searchCondition"]) {
-        SearchCondition *searchCondition = [change objectForKey:@"new"];
-        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
-        [self sendRequest:condition];
-    }
-}
-
-- (IBAction)showNav:(id)sender {
+- (void)showNav:(id)sender {
     [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
-- (IBAction)showSearchCondition:(id)sender {
+- (void)showSearchCondition:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 
-#pragma mark MBProgressHUDDelegate methods
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-	[self.progressHUD removeFromSuperview];
-	self.progressHUD = nil;
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self.bottomWebiew reload];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.scrollView.hidden = NO;
+    });
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
+    self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.reportTitlePre;
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
+    [self.request setPostValue:[NSNumber numberWithLong:self.condition.lineID] forKey:@"lineId"];
+    [self.request setPostValue:[NSNumber numberWithLong:self.condition.productID] forKey:@"productId"];
+}
+-(void)clear{
+    self.scrollView.hidden = YES;
 }
 @end

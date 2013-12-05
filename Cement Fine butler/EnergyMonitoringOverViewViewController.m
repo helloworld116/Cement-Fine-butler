@@ -24,12 +24,6 @@
 
 @property (strong, nonatomic) TitleView *titleView;
 @property (nonatomic,retain) NSString *timeInfo;
-@property (retain, nonatomic) PromptMessageView *messageView;//请求出错或没有响应数据时响应页面
-
-@property (strong, nonatomic) NSDictionary *responseData;//响应数据
-@property (strong, nonatomic) NSDictionary *data;//真正用到的数据
-@property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation EnergyMonitoringOverViewViewController
@@ -83,27 +77,29 @@
     self.messageView.hidden = YES;
     [self.view addSubview:self.messageView];
     
-    
-    NSDictionary *condition = @{@"timeType":@2};
-    [self sendRequest:condition];
+    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
+    self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    //获取请求数据
+    self.URL = kEnergyMonitoring;
+    [self sendRequest];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //观察查询条件修改
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    RightViewController *rightController = (RightViewController *)self.sidePanelController.rightPanel;
-    TimeTableView *timeTableView = rightController.timeTableView;
-    int timeSelectIndex = [timeTableView indexPathForSelectedRow].row;
-    if (timeSelectIndex==4) {
-        timeTableView.currentSelectCellIndex=4;
-        [timeTableView reloadData];
-    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,102 +141,21 @@
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 
-#pragma mark observe
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"searchCondition"]) {
-        SearchCondition *searchCondition = [change objectForKey:@"new"];
-        NSDictionary *condition = @{@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
-        if (4==[[condition objectForKey:@"timeType"] intValue]) {
-            //            self.showRight = YES;
-        }
-        [self sendRequest:condition];
-    }
-}
-
-#pragma mark 发送网络请求
--(void) sendRequest:(NSDictionary *)condition{
-    //清除原数据
-    self.scrollView.hidden = YES;
-    self.messageView.hidden = YES;
-    self.data = nil;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//    self.progressHUD.color = [UIColor whiteColor];
-//    self.progressHUD.i
-    self.progressHUD.userInteractionEnabled = NO;
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-//    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate = self;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
-    
-    int timeType = [[condition objectForKey:@"timeType"] intValue];
-    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
-    self.timeInfo = [timeInfo objectForKey:@"timeDesc"];
-    self.titleView.lblTimeInfo.text = self.timeInfo ;
-    NSDate *startTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"startTime"] doubleValue]/1000];
-    NSDate *endTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"endTime"] doubleValue]/1000];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *startTimeStr = [formatter stringFromDate:startTimeDate];
-    NSString *endTimeStr = [formatter stringFromDate:endTimeDate];
-    DDLogCInfo(@"******  Request URL is:%@  ******",kEnergyMonitoring);
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kEnergyMonitoring]];
-    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
-    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:startTimeStr forKey:@"startTime"];
-    [self.request setPostValue:endTimeStr forKey:@"endTime"];
-    [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
-    [self.request setDidFinishSelector:@selector(requestSuccess:)];
-    [self.request startAsynchronous];
-    
-    //    self.lastRequestCondition = condition;
-}
-
-#pragma mark 网络请求
--(void) requestFailed:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    NSString *message = nil;
-    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
-        message = @"网络请求超时啦。。。";
-    }else{
-        message = @"网络出错啦。。。";
-    }
-    self.messageView.labelMsg.text = message;
-    self.messageView.hidden = NO;
-}
-
--(void)requestSuccess:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    self.responseData = [Tool stringToDictionary:request.responseString];
-    int errorCode = [[self.responseData objectForKey:@"error"] intValue];
-    if (errorCode==kErrorCode0) {
-        [self setLabelValue];
-    }else if(errorCode==kErrorCodeExpired){
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        self.data = nil;
-        NSString *message = @"没有满足条件的数据";
-        self.messageView.labelMsg.text = message;
-        self.messageView.hidden = NO;
-    }
-}
-
-#pragma mark MBProgressHUDDelegate methods
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-	[self.progressHUD removeFromSuperview];
-	self.progressHUD = nil;
-}
+//#pragma mark observe
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//    if ([keyPath isEqualToString:@"searchCondition"]) {
+//        SearchCondition *searchCondition = [change objectForKey:@"new"];
+//        self.condition = @{@"timeType":[NSNumber numberWithInt:searchCondition.timeType]};
+//        if (4==[[self.condition objectForKey:@"timeType"] intValue]) {
+////            self.showRight = YES;
+//        }
+//        [self sendRequest];
+//    }
+//}
 
 -(void)setLabelValue{
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
-    self.data = [self.responseData objectForKey:@"data"];
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     double coalFee = [[overview objectForKey:@"coalFee"] doubleValue];
     double coalAmount = [[overview objectForKey:@"coalAmount"] doubleValue];
@@ -288,5 +203,32 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         self.scrollView.hidden = NO;
     });
+}
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self setLabelValue];
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
+    self.timeInfo = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = self.timeInfo ;
+    NSDate *startTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"startTime"] doubleValue]/1000];
+    NSDate *endTimeDate = [NSDate dateWithTimeIntervalSince1970:[[timeInfo objectForKey:@"endTime"] doubleValue]/1000];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *startTimeStr = [formatter stringFromDate:startTimeDate];
+    NSString *endTimeStr = [formatter stringFromDate:endTimeDate];
+    [self.request setPostValue:startTimeStr forKey:@"startTime"];
+    [self.request setPostValue:endTimeStr forKey:@"endTime"];
+}
+
+-(void)clear{
+    self.scrollView.hidden = YES;
 }
 @end

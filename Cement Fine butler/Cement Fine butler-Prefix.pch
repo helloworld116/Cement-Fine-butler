@@ -44,6 +44,8 @@
     #import "TitleView.h"
     #import "Tool.h"
     #import "UIColor+Random.h"
+    #import "CommonViewController.h"
+    #import "Factory.h"
 
     #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
     #define IS_Pad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
