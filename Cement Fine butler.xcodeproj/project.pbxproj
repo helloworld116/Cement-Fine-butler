@@ -7,17 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0907C818517F4000905166 /* RealTimeReportLeftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0907C718517F4000905166 /* RealTimeReportLeftController.m */; };
+		0E0907CB1851A3C400905166 /* RawMaterialLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0907CA1851A3C400905166 /* RawMaterialLeftViewController.m */; };
 		0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AB77317EFD27F00A3255E /* SearchCondition.m */; };
 		0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581718442B9C00959EC1 /* BackgroundLayer.m */; };
 		0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581A18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m */; };
 		0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12581B18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib */; };
 		0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */; };
 		0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */; };
-		0E12582B1846D22D00959EC1 /* SubCateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258291846D22D00959EC1 /* SubCateViewController.m */; };
-		0E12582C1846D22D00959EC1 /* SubCateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12582A1846D22D00959EC1 /* SubCateViewController.xib */; };
-		0E1258331846D71C00959EC1 /* FolderCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12582E1846D71C00959EC1 /* FolderCoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0E1258341846D71C00959EC1 /* UIFolderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258301846D71C00959EC1 /* UIFolderTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0E1258351846D71C00959EC1 /* UIView+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1258321846D71C00959EC1 /* UIView+screenshot.m */; };
 		0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12583D18471C2D00959EC1 /* RawMaterialCostViewController.m */; };
 		0E12584018471C2D00959EC1 /* RawMaterialCostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E12583E18471C2D00959EC1 /* RawMaterialCostViewController.xib */; };
 		0E12584418473A8300959EC1 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E12584218473A8300959EC1 /* ProductViewController.m */; };
@@ -36,8 +33,6 @@
 		0E26F01718483F05003F8E40 /* nav-bar-button-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01318483F05003F8E40 /* nav-bar-button-dark.png */; };
 		0E26F01818483F05003F8E40 /* nav-bar-button-dark-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01418483F05003F8E40 /* nav-bar-button-dark-highlighted.png */; };
 		0E26F01918483F05003F8E40 /* nav-bar-button-dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01518483F05003F8E40 /* nav-bar-button-dark@2x.png */; };
-		0E26F01C184871DC003F8E40 /* EnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E26F01B184871DC003F8E40 /* EnergyCell.m */; };
-		0E26F01E184871FA003F8E40 /* EnergyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26F01D184871FA003F8E40 /* EnergyCell.xib */; };
 		0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E017ED7AC600385E59 /* LoginAction.m */; };
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
@@ -149,7 +144,6 @@
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
 		0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E511B39183106F20077CA4C /* PromptMessageView.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
-		0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */; };
 		0E5A09FE1818B60C00241891 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5A09FC1818B60C00241891 /* Icon-60@2x.png */; };
 		0E5A09FF1818B60C00241891 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5A09FD1818B60C00241891 /* Icon-60.png */; };
 		0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */; };
@@ -274,8 +268,6 @@
 		0EF727C0181E914C0059EC59 /* ProductHistoryUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF727BF181E914C0059EC59 /* ProductHistoryUpdateViewController.m */; };
 		470FA09A17F078E800C79B00 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09617F078E800C79B00 /* search_icon.png */; };
 		470FA09B17F078E800C79B00 /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470FA09717F078E800C79B00 /* search_icon@2x.png */; };
-		471B5B08184655E7002D6BDC /* EnergySubCateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B5B07184655E7002D6BDC /* EnergySubCateView.m */; };
-		471B5B0A184656CC002D6BDC /* EnergySubCateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 471B5B09184656CC002D6BDC /* EnergySubCateView.xib */; };
 		471B5B131846582F002D6BDC /* ECViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B5B0F1846582F002D6BDC /* ECViewController.m */; };
 		471B5B141846582F002D6BDC /* ExtensiveCellContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B5B111846582F002D6BDC /* ExtensiveCellContainer.m */; };
 		471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 471B5B121846582F002D6BDC /* ExtensiveCellContainer.xib */; };
@@ -310,6 +302,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0907C618517F4000905166 /* RealTimeReportLeftController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealTimeReportLeftController.h; sourceTree = "<group>"; };
+		0E0907C718517F4000905166 /* RealTimeReportLeftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealTimeReportLeftController.m; sourceTree = "<group>"; };
+		0E0907C91851A3C400905166 /* RawMaterialLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialLeftViewController.h; sourceTree = "<group>"; };
+		0E0907CA1851A3C400905166 /* RawMaterialLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialLeftViewController.m; sourceTree = "<group>"; };
 		0E0AB77217EFD27F00A3255E /* SearchCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCondition.h; sourceTree = "<group>"; };
 		0E0AB77317EFD27F00A3255E /* SearchCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCondition.m; sourceTree = "<group>"; };
 		0E12581618442B9C00959EC1 /* BackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundLayer.h; sourceTree = "<group>"; };
@@ -320,15 +316,6 @@
 		0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMonitoringListViewController.h; sourceTree = "<group>"; };
 		0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMonitoringListViewController.m; sourceTree = "<group>"; };
 		0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyMonitoringListViewController.xib; sourceTree = "<group>"; };
-		0E1258281846D22D00959EC1 /* SubCateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCateViewController.h; sourceTree = "<group>"; };
-		0E1258291846D22D00959EC1 /* SubCateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCateViewController.m; sourceTree = "<group>"; };
-		0E12582A1846D22D00959EC1 /* SubCateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCateViewController.xib; sourceTree = "<group>"; };
-		0E12582D1846D71C00959EC1 /* FolderCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderCoverView.h; sourceTree = "<group>"; };
-		0E12582E1846D71C00959EC1 /* FolderCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderCoverView.m; sourceTree = "<group>"; };
-		0E12582F1846D71C00959EC1 /* UIFolderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFolderTableView.h; sourceTree = "<group>"; };
-		0E1258301846D71C00959EC1 /* UIFolderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFolderTableView.m; sourceTree = "<group>"; };
-		0E1258311846D71C00959EC1 /* UIView+screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+screenshot.h"; sourceTree = "<group>"; };
-		0E1258321846D71C00959EC1 /* UIView+screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+screenshot.m"; sourceTree = "<group>"; };
 		0E12583C18471C2D00959EC1 /* RawMaterialCostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialCostViewController.h; sourceTree = "<group>"; };
 		0E12583D18471C2D00959EC1 /* RawMaterialCostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialCostViewController.m; sourceTree = "<group>"; };
 		0E12583E18471C2D00959EC1 /* RawMaterialCostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RawMaterialCostViewController.xib; sourceTree = "<group>"; };
@@ -350,9 +337,6 @@
 		0E26F01318483F05003F8E40 /* nav-bar-button-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark.png"; sourceTree = "<group>"; };
 		0E26F01418483F05003F8E40 /* nav-bar-button-dark-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark-highlighted.png"; sourceTree = "<group>"; };
 		0E26F01518483F05003F8E40 /* nav-bar-button-dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-button-dark@2x.png"; sourceTree = "<group>"; };
-		0E26F01A184871DC003F8E40 /* EnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyCell.h; sourceTree = "<group>"; };
-		0E26F01B184871DC003F8E40 /* EnergyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyCell.m; sourceTree = "<group>"; };
-		0E26F01D184871FA003F8E40 /* EnergyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyCell.xib; sourceTree = "<group>"; };
 		0E2786DF17ED7AC600385E59 /* LoginAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAction.h; sourceTree = "<group>"; };
 		0E2786E017ED7AC600385E59 /* LoginAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAction.m; sourceTree = "<group>"; };
 		0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistroyTrendsViewController.h; sourceTree = "<group>"; };
@@ -486,8 +470,6 @@
 		0E511B38183106F20077CA4C /* PromptMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptMessageView.h; sourceTree = "<group>"; };
 		0E511B39183106F20077CA4C /* PromptMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptMessageView.m; sourceTree = "<group>"; };
 		0E58AFDD17E93A18008A2DF2 /* Pie2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pie2D.html; sourceTree = "<group>"; };
-		0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostManagerCenterViewController.h; sourceTree = "<group>"; };
-		0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostManagerCenterViewController.m; sourceTree = "<group>"; };
 		0E5A09FC1818B60C00241891 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		0E5A09FD1818B60C00241891 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RawMaterialsCalCell.xib; sourceTree = "<group>"; };
@@ -679,9 +661,6 @@
 		46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		470FA09617F078E800C79B00 /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon.png; sourceTree = "<group>"; };
 		470FA09717F078E800C79B00 /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon@2x.png"; sourceTree = "<group>"; };
-		471B5B06184655E7002D6BDC /* EnergySubCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergySubCateView.h; sourceTree = "<group>"; };
-		471B5B07184655E7002D6BDC /* EnergySubCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergySubCateView.m; sourceTree = "<group>"; };
-		471B5B09184656CC002D6BDC /* EnergySubCateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergySubCateView.xib; sourceTree = "<group>"; };
 		471B5B0E1846582F002D6BDC /* ECViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECViewController.h; sourceTree = "<group>"; };
 		471B5B0F1846582F002D6BDC /* ECViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECViewController.m; sourceTree = "<group>"; };
 		471B5B101846582F002D6BDC /* ExtensiveCellContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensiveCellContainer.h; sourceTree = "<group>"; };
@@ -788,15 +767,6 @@
 		0E12581518442AD200959EC1 /* 能源监控 */ = {
 			isa = PBXGroup;
 			children = (
-				0E1258281846D22D00959EC1 /* SubCateViewController.h */,
-				0E1258291846D22D00959EC1 /* SubCateViewController.m */,
-				0E12582A1846D22D00959EC1 /* SubCateViewController.xib */,
-				0E12582D1846D71C00959EC1 /* FolderCoverView.h */,
-				0E12582E1846D71C00959EC1 /* FolderCoverView.m */,
-				0E12582F1846D71C00959EC1 /* UIFolderTableView.h */,
-				0E1258301846D71C00959EC1 /* UIFolderTableView.m */,
-				0E1258311846D71C00959EC1 /* UIView+screenshot.h */,
-				0E1258321846D71C00959EC1 /* UIView+screenshot.m */,
 				0E12581618442B9C00959EC1 /* BackgroundLayer.h */,
 				0E12581718442B9C00959EC1 /* BackgroundLayer.m */,
 				0E12581918442CDF00959EC1 /* EnergyMonitoringOverViewViewController.h */,
@@ -805,12 +775,6 @@
 				0E12581E1844988000959EC1 /* EnergyMonitoringListViewController.h */,
 				0E12581F1844988000959EC1 /* EnergyMonitoringListViewController.m */,
 				0E1258201844988000959EC1 /* EnergyMonitoringListViewController.xib */,
-				0E26F01A184871DC003F8E40 /* EnergyCell.h */,
-				0E26F01B184871DC003F8E40 /* EnergyCell.m */,
-				0E26F01D184871FA003F8E40 /* EnergyCell.xib */,
-				471B5B06184655E7002D6BDC /* EnergySubCateView.h */,
-				471B5B07184655E7002D6BDC /* EnergySubCateView.m */,
-				471B5B09184656CC002D6BDC /* EnergySubCateView.xib */,
 				0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */,
 				0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */,
 				0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */,
@@ -827,6 +791,8 @@
 				0E12584118473A8300959EC1 /* ProductViewController.h */,
 				0E12584218473A8300959EC1 /* ProductViewController.m */,
 				0E12584318473A8300959EC1 /* ProductViewController.xib */,
+				0E0907C91851A3C400905166 /* RawMaterialLeftViewController.h */,
+				0E0907CA1851A3C400905166 /* RawMaterialLeftViewController.m */,
 			);
 			name = "新原材料成本";
 			sourceTree = "<group>";
@@ -877,6 +843,8 @@
 				0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */,
 				0E346F0917DAB4E900C20BF1 /* InventoryColumnViewController.h */,
 				0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */,
+				0E0907C618517F4000905166 /* RealTimeReportLeftController.h */,
+				0E0907C718517F4000905166 /* RealTimeReportLeftController.m */,
 			);
 			name = "实时报表";
 			sourceTree = "<group>";
@@ -907,8 +875,6 @@
 			children = (
 				0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */,
 				0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */,
-				0E58AFDF17E94AD8008A2DF2 /* CostManagerCenterViewController.h */,
-				0E58AFE017E94AD8008A2DF2 /* CostManagerCenterViewController.m */,
 				0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */,
 				0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */,
 				0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */,
@@ -1611,7 +1577,6 @@
 				0E72471D17CD93060048DFFB /* Icon-72@2x.png in Resources */,
 				0E72471E17CD93060048DFFB /* Icon-Small-50.png in Resources */,
 				0E72471F17CD93060048DFFB /* Icon-Small-50@2x.png in Resources */,
-				0E26F01E184871FA003F8E40 /* EnergyCell.xib in Resources */,
 				0E72472017CD93060048DFFB /* Icon-Small.png in Resources */,
 				0E72472117CD93060048DFFB /* Icon-Small@2x.png in Resources */,
 				0E72472217CD93060048DFFB /* Icon.png in Resources */,
@@ -1629,7 +1594,6 @@
 				0E38419617D41D3E004B3C87 /* body@2x.png in Resources */,
 				0E38419717D41D3E004B3C87 /* password@2x.png in Resources */,
 				0E38419817D41D3E004B3C87 /* title@2x.png in Resources */,
-				0E12582C1846D22D00959EC1 /* SubCateViewController.xib in Resources */,
 				0E38419917D41D3E004B3C87 /* left@2x.png in Resources */,
 				0E38419A17D41D3E004B3C87 /* top@2x.png in Resources */,
 				0E38419B17D41D3E004B3C87 /* background@2x.png in Resources */,
@@ -1747,7 +1711,6 @@
 				0EEDBFD1180D67D90010961D /* Calculate.html in Resources */,
 				0E23CF45180E306D0089B4A8 /* lock-small.png in Resources */,
 				0E23CF46180E306D0089B4A8 /* unlock-small.png in Resources */,
-				471B5B0A184656CC002D6BDC /* EnergySubCateView.xib in Resources */,
 				0E23CF47180E306D0089B4A8 /* lock-small@2x.png in Resources */,
 				0E23CF48180E306D0089B4A8 /* unlock-small@2x.png in Resources */,
 				0E23CF49180E306D0089B4A8 /* lock@2x.png in Resources */,
@@ -1829,7 +1792,6 @@
 				0E72473017CD9D080048DFFB /* RightViewController.m in Sources */,
 				0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */,
 				0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */,
-				0E1258351846D71C00959EC1 /* UIView+screenshot.m in Sources */,
 				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
 				471B5B141846582F002D6BDC /* ExtensiveCellContainer.m in Sources */,
@@ -1850,6 +1812,7 @@
 				0EA5CF1A182389230028BE8B /* MaterialWeighCell.m in Sources */,
 				0E43ED6718278A8B006E3A66 /* LocalNotifactionServices.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
+				0E0907C818517F4000905166 /* RealTimeReportLeftController.m in Sources */,
 				0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */,
 				0EA5CF311823AE860028BE8B /* ProductWeighViewController.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
@@ -1861,7 +1824,6 @@
 				0EF4CD42184DBDFB0050A63A /* EquipmentAnnotationView.m in Sources */,
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */,
-				0E58AFE117E94AD8008A2DF2 /* CostManagerCenterViewController.m in Sources */,
 				0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
 				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
@@ -1885,7 +1847,6 @@
 				0E632263184ED35A00D5F4B7 /* UIColor+Random.m in Sources */,
 				0E9C4CD618497D9700B82F13 /* UIView+NavigationItem.m in Sources */,
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
-				0E1258341846D71C00959EC1 /* UIFolderTableView.m in Sources */,
 				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,
 				0E43ED6118274341006E3A66 /* ProductWeighDetailViewController.m in Sources */,
 				0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */,
@@ -1905,12 +1866,12 @@
 				0E12584418473A8300959EC1 /* ProductViewController.m in Sources */,
 				0E6638ED1824FCC400FB381F /* LogoutAction.m in Sources */,
 				0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */,
-				471B5B08184655E7002D6BDC /* EnergySubCateView.m in Sources */,
 				0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */,
 				0E43ED64182743E2006E3A66 /* AllProductViewController.m in Sources */,
 				0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */,
 				474F913A1814445400D94A85 /* TimeTableView.m in Sources */,
 				474F913D1814446C00D94A85 /* LineTableView.m in Sources */,
+				0E0907CB1851A3C400905166 /* RawMaterialLeftViewController.m in Sources */,
 				474F91401814447900D94A85 /* ProductTableView.m in Sources */,
 				0EF727C0181E914C0059EC59 /* ProductHistoryUpdateViewController.m in Sources */,
 				474F91431814449400D94A85 /* StockTableView.m in Sources */,
@@ -1920,9 +1881,7 @@
 				0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */,
-				0E1258331846D71C00959EC1 /* FolderCoverView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
-				0E12582B1846D22D00959EC1 /* SubCateViewController.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,
 				0EF7279C181E13F70059EC59 /* InventoryListViewController.m in Sources */,
@@ -1931,7 +1890,6 @@
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
-				0E26F01C184871DC003F8E40 /* EnergyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

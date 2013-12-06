@@ -37,7 +37,7 @@
     self.options = @[
          @{@"name":@"原材料成本计算器",@"storyboard":@"rawMaterialsCalViewController"},
          @{@"name":@"电力价格管理",@"storyboard":@"electricityPriceViewController"},
-         @{@"name":@"消息",@"storyboard":@"messageViewController"},
+         @{@"name":@"消息历史",@"storyboard":@"messageViewController"},
 //         @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
          @{@"name":@"过磅管理",@"storyboard":@"weighViewController"},
          @{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},

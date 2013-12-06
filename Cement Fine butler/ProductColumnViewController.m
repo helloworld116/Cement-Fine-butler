@@ -7,6 +7,7 @@
 //
 
 #import "ProductColumnViewController.h"
+#import "RealTimeReportLeftController.h"
 
 @interface ProductColumnViewController ()<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -57,9 +58,8 @@
         self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     }
     self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    self.leftVC = [self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"];
-    NSArray *reportType = @[@"产量报表",@"库存报表"];
-    self.leftVC.conditions = @[@{@"实时报表":reportType}];
+    self.leftVC = [[RealTimeReportLeftController alloc] init];
+    self.leftVC.conditions = @[@"产量报表",@"库存报表"];
     
     //异步请求数据
     self.URL = kOutputReportURL;
@@ -141,7 +141,7 @@
         NSMutableArray *products = [NSMutableArray array];
         for (int i=0;i<productArray.count;i++) {
             NSDictionary *product = [productArray objectAtIndex:i];
-            double value = [[product objectForKey:@"output"] doubleValue];
+            double value = [Tool doubleValue:[product objectForKey:@"output"]];
             NSString *name = [product objectForKey:@"name"];
             NSString *color = [kColorList objectAtIndex:i];
             NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
@@ -151,9 +151,9 @@
         NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
         NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
-        max = [Tool max:max];
+        int newMax = [Tool max:max];
 //        NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
-        NSDictionary *configDict = @{@"title":@"产量报表",@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithFloat:0],@"end_scale":[NSNumber numberWithFloat:max],@"scale_space":[NSNumber numberWithFloat:max/5]};
+        NSDictionary *configDict = @{@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithInt:0],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:newMax/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
         DDLogCVerbose(@"js is %@",js);
         [webView stringByEvaluatingJavaScriptFromString:js];

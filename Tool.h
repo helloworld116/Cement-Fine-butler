@@ -27,17 +27,17 @@
 
 + (double)objectToDouble:(id)d;
 
-+ (double)max:(double)max;
++(int)max:(double)max;
 
-+(double)min:(double)min;
++(int)min:(double)min;
 
 +(BOOL)isNullOrNil:(id)object;
 
 +(NSString *)setTimeInt:(NSTimeInterval)timeSeconds setTimeFormat:(NSString *)timeFormatStr setTimeZome:(NSString *)timeZoneStr;
 
-+(double)getMaxValueInNumberValueArray:(NSArray *)array;
++(int)getMaxValueInNumberValueArray:(NSArray *)array;
 
-+(double)getMinValueInNumberValueArray:(NSArray *)array;
++(int)getMinValueInNumberValueArray:(NSArray *)array;
 
 //+(long long)timeBeginIntervalByType:(int)type;
 //

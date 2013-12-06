@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
+@interface LeftViewController : UITableViewController
 @property (retain,nonatomic) NSArray *conditions;
 @end

@@ -206,8 +206,9 @@
     [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self.request setPostValue:[NSNumber numberWithInt:currentPage] forKey:@"page"];
     [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"rows"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:1356969600000] forKey:@"beginTime"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:1385827200000] forKey:@"endTime"];
+    NSDictionary *timeInfo = [Tool getTimeInfo:2];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"beginTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];

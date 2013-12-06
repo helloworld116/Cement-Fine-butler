@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LossOverViewViewController : UIViewController<UIWebViewDelegate>
+@interface LossOverViewViewController : CommonViewController
 
 @end

@@ -55,21 +55,23 @@
                                              selector:@selector(textFieldChanged:)
                                                  name:UITextFieldTextDidChangeNotification
                                                object:self.textValue];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(lblProductNameChanged:)
-                                                 name:@"lblProductNameChanged"
-                                               object:self.lblProductName];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(lblTypeNameChanged:)
-                                                 name:@"lblTypeNameChanged"
-                                               object:self.lblTypeName];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(lblProductNameChanged:)
+//                                                 name:@"lblProductNameChanged"
+//                                               object:self.lblProductName];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(lblTypeNameChanged:)
+//                                                 name:@"lblTypeNameChanged"
+//                                               object:self.lblTypeName];
+    [self.lblProductName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.lblTypeName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.textValue];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lblProductNameChanged" object:self.lblProductName];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lblTypeNameChanged" object:self.lblTypeName];
+    [self.lblProductName removeObserver:self forKeyPath:@"text"];
+    [self.lblTypeName removeObserver:self forKeyPath:@"text"];
 }
 
 -(void)textFieldChanged:(NSNotification *)notification{
@@ -81,13 +83,18 @@
     }
 }
 
--(void)lblProductNameChanged:(NSNotification *)notification{
-    NSLog(@"notification is %@",notification);
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    NSLog(@"the text changed");
 }
 
--(void)lblTypeNameChanged:(NSNotification *)notification{
-    NSLog(@"notification is %@",notification);
-}
+//-(void)lblProductNameChanged:(NSNotification *)notification{
+//    NSLog(@"notification is %@",notification);
+//}
+//
+//-(void)lblTypeNameChanged:(NSNotification *)notification{
+//    NSLog(@"notification is %@",notification);
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -113,7 +120,7 @@
             [self.textValue resignFirstResponder];
             if (!self.industryStandardTypeVC) {
                 self.industryStandardTypeVC = [[IndustryStandardTypeViewController alloc] init];
-                self.industryStandardTypeVC.typeId = self.productId;
+                self.industryStandardTypeVC.typeId = self.typeId;
                 self.industryStandardTypeVC.delegate = self;
             }
             [self.navigationController pushViewController:self.industryStandardTypeVC animated:YES];

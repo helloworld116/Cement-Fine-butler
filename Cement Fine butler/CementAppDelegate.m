@@ -102,7 +102,7 @@
             self.window.rootViewController = [self showViewControllers];
             //预警消息
             [self.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
-            self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:30*60 target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+            self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:kGetMessageSeconds target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
         }else{
             //自动登录失败
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -146,7 +146,7 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     
-    rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+    rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
     energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源监控" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
     realTimeReportsNC.tabBarItem = [realTimeReportsNC.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
     equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];

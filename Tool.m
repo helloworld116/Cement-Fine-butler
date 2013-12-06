@@ -99,47 +99,51 @@
 }
 
 //12800经过运算后得到13000
-+(double)max:(double)max{
-    double newMax=max;
-    long multiple = 1;
-    while(newMax/10>1){
-        newMax/=10;
-        multiple*=10;
-    }
-//    newMax = [[[NSString stringWithFormat:@"%.1f", newMax] substringToIndex:3] doubleValue];
-    newMax = [[[NSString stringWithFormat:@"%f",newMax] substringToIndex:3] doubleValue];
-    NSLog(@"...is %f",(double)newMax*multiple);
-    NSLog(@",..is %f",(double)max);
-//    if ((double)(newMax*multiple)!=(double)max) {
-    if ([self firstDouble:newMax*multiple isEqualTo:max]) {
-        if (newMax>1.0) {
-            newMax+=0.1;
-        }
-        newMax*=multiple;
++(int)max:(double)max{
+    if (max<0) {
+        return -[self min:(-max)];
     }else{
-        newMax = max;
+        double newMax=max;
+        int multiple = 1;
+        while(newMax/10>1){
+            newMax/=10;
+            multiple*=10;
+        }
+        newMax = [[[NSString stringWithFormat:@"%.1f",newMax] substringToIndex:3] doubleValue];
+        if ([self firstDouble:newMax*multiple isEqualTo:max]) {
+            newMax = max;
+        }else{
+            if (newMax>1.0) {
+                newMax+=0.1;
+            }
+            newMax*=multiple;
+        }
+        return (int)newMax;
     }
-    return newMax;
 }
 
 //12800经过运算后得到10000
-+(double)min:(double)min{
-    double newMin=min;
-    long multiple = 1;
-    while(newMin/10>1){
-        newMin/=10;
-        multiple*=10;
-    }
-    newMin = [[[NSString stringWithFormat:@"%f",newMin] substringToIndex:3] doubleValue];
-    if (newMin*multiple!=min) {
-        if (newMin>1.0) {
-            newMin-=0.1;
-        }
-        newMin*=multiple;
++(int)min:(double)min{
+    if (min<0) {
+        return -[self max:(-min)];
     }else{
-        newMin = min;
+        double newMin=min;
+        int multiple = 1;
+        while(newMin/10>1){
+            newMin/=10;
+            multiple*=10;
+        }
+        newMin = [[[NSString stringWithFormat:@"%.1f",newMin] substringToIndex:3] doubleValue];
+        if([self firstDouble:newMin*multiple isEqualTo:min]){
+            newMin = min;
+        }else{
+            if (newMin>1.0) {
+                newMin-=0.1;
+            }
+            newMin*=multiple;
+        }
+        return (int)newMin;
     }
-    return newMin;
 }
 
 +(BOOL)firstDouble:(double)first isEqualTo:(double)second {
@@ -186,20 +190,18 @@
     return date_string;
 }
 
-+(double)getMaxValueInNumberValueArray:(NSArray *)array{
++(int)getMaxValueInNumberValueArray:(NSArray *)array{
     NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
     NSArray *sortedNumbers = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     double max = [[sortedNumbers objectAtIndex:0] doubleValue];
-    max = [self max:max];
-    return max;
+    return [self max:max];
 }
 
-+(double)getMinValueInNumberValueArray:(NSArray *)array{
++(int)getMinValueInNumberValueArray:(NSArray *)array{
     NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
     NSArray *sortedNumbers = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     double min = [[sortedNumbers objectAtIndex:(array.count-1)] doubleValue];
-    min = [self min:min];
-    return min;
+    return [self min:min];
 }
 
 

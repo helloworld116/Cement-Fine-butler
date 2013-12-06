@@ -38,12 +38,12 @@
     [numberFormatter setPositiveFormat:@"###,##0.##"];
     
     if (self.type==0) {
-        double coalFee = [[self.product objectForKey:@"totalCoalLoss"] doubleValue];
-        double coalAmount = [[self.product objectForKey:@"coalAmount"] doubleValue];
-        double coalUnitAmount = [[self.product objectForKey:@"coalUnitAmount"] doubleValue];
-        double industryCoalUnitAmount = [[self.product objectForKey:@"industryCoalUnitFee"] doubleValue];
+        double coalFee = [Tool doubleValue:[self.product objectForKey:@"totalCoalLoss"]];
+        double coalAmount = [Tool doubleValue:[self.product objectForKey:@"coalAmount"]];
+        double coalUnitAmount = [Tool doubleValue:[self.product objectForKey:@"coalUnitAmount"]];
+        double industryCoalUnitAmount = [Tool doubleValue:[self.product objectForKey:@"industryCoalUnitFee"]];
         NSString *textFee = @"";
-        if (coalFee/10000>1) {
+        if (coalFee/100000>1) {
             coalFee/=10000;
             textFee = @"煤费(万元)";
         }else{
@@ -54,7 +54,7 @@
         self.lblValueFee.text = feeString;
         
         NSString *textAmount = @"";
-        if (coalAmount/10000>1) {
+        if (coalAmount/100000>1) {
             coalAmount/=10000;
             textAmount = @"煤耗(万吨)";
         }else{
@@ -72,13 +72,13 @@
         self.lblValueIndustry.text = industryString;
         
     }else if(self.type==1){
-        double electricityFee = [[self.product objectForKey:@"totalElecLoss"] doubleValue];
-        double electricityAmount = [[self.product objectForKey:@"electricityAmount"] doubleValue];
-        double electricityUnitAmount = [[self.product objectForKey:@"electricityUnitAmount"] doubleValue];
-        double industryElectricityUnitAmount = [[self.product objectForKey:@"industryElectricityUnitFee"] doubleValue];
+        double electricityFee = [Tool doubleValue:[self.product objectForKey:@"totalElecLoss"]];
+        double electricityAmount = [Tool doubleValue:[self.product objectForKey:@"electricityAmount"]];
+        double electricityUnitAmount = [Tool doubleValue:[self.product objectForKey:@"electricityUnitAmount"]];
+        double industryElectricityUnitAmount = [Tool doubleValue:[self.product objectForKey:@"industryElectricityUnitFee"]];
         
         NSString *textFee = @"";
-        if (electricityFee/10000>1) {
+        if (electricityFee/100000>1) {
             electricityFee/=10000;
             textFee = @"电费(万元)";
         }else{
@@ -89,7 +89,7 @@
         self.lblValueFee.text = feeString;
         
         NSString *textAmount = @"";
-        if (electricityAmount/10000>1) {
+        if (electricityAmount/100000>1) {
             electricityAmount/=10000;
             textAmount = @"电耗(万度)";
         }else{

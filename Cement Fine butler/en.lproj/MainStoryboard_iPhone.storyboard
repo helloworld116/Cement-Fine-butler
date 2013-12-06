@@ -79,18 +79,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gYu-LC-pos">
-                        <barButtonItem key="leftBarButtonItem" title="..." id="bFo-nj-RHd">
-                            <connections>
-                                <action selector="moreAction:" destination="xkp-O5-k5u" id="CR6-bZ-h30"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="0cw-Wm-4yM">
-                            <connections>
-                                <action selector="showSearch:" destination="xkp-O5-k5u" id="pLT-SA-uTk"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="gYu-LC-pos"/>
                     <connections>
                         <outlet property="bottomView" destination="lFl-3W-NSR" id="D4v-SH-u8r"/>
                         <outlet property="scrollView" destination="X2J-T0-o9b" id="IGO-rb-VbL"/>
@@ -993,10 +982,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-1023" y="2722"/>
         </scene>
-        <!--Left View Controller-->
+        <!--View Controller-->
         <scene sceneID="bjh-Tp-KF4">
             <objects>
-                <viewController storyboardIdentifier="leftViewController" id="NAb-HC-6vW" customClass="LeftViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftViewController" id="NAb-HC-6vW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="www-vy-RT1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

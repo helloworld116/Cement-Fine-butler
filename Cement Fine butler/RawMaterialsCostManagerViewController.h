@@ -8,11 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RawMaterialsCostManagerViewController : UIViewController<UIWebViewDelegate>
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (strong, nonatomic) IBOutlet UIView *bottomView;
-- (IBAction)showSearch:(id)sender;
-- (IBAction)moreAction:(id)sender;
-
+@interface RawMaterialsCostManagerViewController : CommonViewController
 @end

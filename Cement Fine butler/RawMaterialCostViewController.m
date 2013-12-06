@@ -9,6 +9,7 @@
 #import "RawMaterialCostViewController.h"
 #import "HMSegmentedControl.h"
 #import "ProductViewController.h"
+#import "RawMaterialLeftViewController.h"
 
 #define kSegmentedHeight 40.f
 
@@ -47,7 +48,7 @@
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"原材料成本损失";
     self.navigationItem.titleView = self.titleView;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showMaterialCost:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
     self.topView.backgroundColor = kRelativelyColor;
@@ -63,7 +64,8 @@
     self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
     self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
     self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    
+    self.leftVC = [[RawMaterialLeftViewController alloc] init];
+    self.leftVC.conditions = @[@"原材料成本损失",@"原材料成本总览"];
     //获取请求数据
     self.URL = kRawMaterialLoss;
     [self sendRequest];
@@ -152,7 +154,7 @@
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 
-- (void)showMaterialCost:(id)sender{
+- (void)showNav:(id)sender{
 //    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];
 //    NSMutableArray *lineArray = [NSMutableArray arrayWithObject:@{@"name":@"全部",@"_id":[NSNumber numberWithInt:0]}];
 //    for (NSDictionary *line in lines) {
@@ -190,6 +192,8 @@
 //    [self presentModalViewController:costManagerController animated:YES];
 ////    UINavigationController *datePickerViewController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
 ////    [self presentModalViewController:datePickerViewController animated:YES];
+    
+    [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
 #pragma mark observe

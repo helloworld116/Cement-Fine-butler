@@ -55,7 +55,7 @@
     self.lblValueActualCosts.textColor = valueColor;
     self.lblValueQuotesCosts.textColor = valueColor;
     self.lblValueStandardCosts.textColor = valueColor;
-    self.lblValueTotalLoss.textColor = valueColor;
+    self.lblValueTotalLoss.textColor = [UIColor redColor];
     
     NSString *lblStr = @"";
     self.lblTextQuotesCosts.text = @"行情成本";

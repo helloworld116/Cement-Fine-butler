@@ -12,7 +12,6 @@
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @end
 
-static int first=0;
 
 @implementation LocalNotifactionServices
 
@@ -30,7 +29,12 @@ static int first=0;
     [self.request setPostValue:[NSNumber numberWithInt:1] forKey:@"page"];
     [self.request setPostValue:[NSNumber numberWithInt:1] forKey:@"count"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.request setPostValue:[defaults objectForKey:@"latestMessage"] forKey:@"latestMessage"];
+    long long lastTime = [[defaults objectForKey:@"latestMessage"] longLongValue];
+    if ([[defaults objectForKey:@"latestMessage"] longLongValue]==0) {
+        lastTime = (long long)[[NSDate date] timeIntervalSince1970]*1000;
+    }
+    [self.request setPostValue:[NSNumber numberWithLongLong:lastTime] forKey:@"latestMessage"];
+    [defaults setObject:[NSNumber numberWithLongLong:[[NSDate date] timeIntervalSince1970]*1000] forKey:@"latestMessage"];
     [self.request setDelegate:self];
     [self.request setDidFailSelector:@selector(requestFailed:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
@@ -46,10 +50,6 @@ static int first=0;
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==0) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        long long latestMessage = [[defaults objectForKey:@"latestMessage"] longLongValue];
-        [defaults setObject:[NSNumber numberWithLongLong:latestMessage+30*60*1000] forKey:@"latestMessage"];
-        
         NSArray *msgs = [[dict objectForKey:@"data"] objectForKey:@"msgs"];
         for (NSDictionary *msg in msgs) {
             UILocalNotification *notification=[[UILocalNotification alloc] init];

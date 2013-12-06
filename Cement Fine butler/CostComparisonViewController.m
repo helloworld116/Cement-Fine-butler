@@ -11,12 +11,11 @@
 #define kLabelOrignX 10//label距离父容器左边距离
 
 
-@interface CostComparisonViewController ()<MBProgressHUDDelegate>
-@property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain, nonatomic) NSDictionary *data;
-@property (retain, nonatomic) PromptMessageView *messageView;
+@interface CostComparisonViewController ()<UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
-@property (retain,nonatomic) MBProgressHUD *progressHUD;
 @end
 
 @implementation CostComparisonViewController
@@ -46,7 +45,8 @@
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     
-    [self sendRequest:self.condition];
+    self.URL = kMaterialCostURL;
+    [self sendRequest];
 }
 
 -(void)pop:(id)sender{
@@ -138,77 +138,6 @@
     self.bottomView.hidden=NO;
 }
 
-#pragma mark 发送网络请求
--(void) sendRequest:(NSDictionary *)condition{
-    //清除原数据
-    self.data = nil;
-    if (self.messageView) {
-        [self.messageView removeFromSuperview];
-        self.messageView = nil;
-    }
-    self.webView.hidden=YES;
-    self.bottomView.hidden=YES;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.scrollView];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate = self;
-    [self.scrollView addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
-    
-    int timeType = [[condition objectForKey:@"timeType"] intValue];
-    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
-    self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
-    DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostURL);
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostURL]];
-    [self.request setUseCookiePersistence:YES];
-    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
-    [self.request setPostValue:[NSNumber numberWithInt:self.type] forKey:@"period"];//0:当期   1:上期   2:同期
-    [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
-    [self.request setDidFinishSelector:@selector(requestSuccess:)];
-    [self.request startAsynchronous];
-}
-
-#pragma mark 网络请求
--(void) requestFailed:(ASIHTTPRequest *)request{
-    [self.progressHUD hide:YES];
-    NSString *message = nil;
-    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
-        message = @"网络请求超时啦。。。";
-    }else{
-        message = @"网络出错啦。。。";
-    }
-    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
-    [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
-}
-
--(void)requestSuccess:(ASIHTTPRequest *)request{
-    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    int errorCode = [[dict objectForKey:@"error"] intValue];
-    if (errorCode==0) {
-        self.data = [dict objectForKey:@"data"];
-        [self.webView reload];
-        [self setBottomViewOfSubView];
-    }else if(errorCode==kErrorCodeExpired){
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        self.data = nil;
-        [self.webView reload];
-        [self setBottomViewOfSubView];
-        self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-        [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
-    }
-    [self.progressHUD hide:YES];
-}
 
 #pragma mark begin webviewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -262,9 +191,33 @@
     [super viewDidUnload];
 }
 
-#pragma mark MBProgressHUDDelegate methods
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-	[self.progressHUD removeFromSuperview];
-	self.progressHUD = nil;
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self.webView reload];
+    [self setBottomViewOfSubView];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.scrollView.hidden = NO;
+    });
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
+    self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
+//    self.titleView.lblTimeInfo.text = self.reportTitlePre;
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];;
+    [self.request setPostValue:[NSNumber numberWithLong:self.condition.lineID] forKey:@"lineId"];
+    [self.request setPostValue:[NSNumber numberWithLong:self.condition.productID] forKey:@"productId"];
+    [self.request setPostValue:[NSNumber numberWithInt:self.type] forKey:@"period"];//0:当期   1:上期   2:同期
+    
+}
+-(void)clear{
+    self.scrollView.hidden = YES;
 }
 @end

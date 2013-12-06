@@ -8,12 +8,11 @@
 
 #import "HistroyTrendsViewController.h"
 
-@interface HistroyTrendsViewController ()<MBProgressHUDDelegate>
-@property (retain, nonatomic) ASIFormDataRequest *request;
-@property (retain, nonatomic) NSDictionary *data;
-@property (retain,nonatomic) MBProgressHUD *progressHUD;
-//@property (retain, nonatomic) NODataView *noDataView;
-@property (retain, nonatomic) PromptMessageView *messageView;
+#define kTitle1 @"直接材料单位成本历史趋势"
+#define kTitle2 @"原材料单位成本历史趋势"
+
+@interface HistroyTrendsViewController ()<UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) TitleView *titleView;
 @property (retain,nonatomic) NSString *titlePre;
 @property (retain,nonatomic) NSDictionary *lastCondition;
@@ -33,10 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 	// Do any additional setup after loading the view.
     self.titleView = [[TitleView alloc] init];
-    self.titleView.lblTitle.text = @"历史趋势";
+    self.titleView.lblTitle.font = [UIFont boldSystemFontOfSize:15];
+    self.titleView.lblTitle.text = kTitle1;
     self.navigationItem.titleView = self.titleView;
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
@@ -50,24 +49,35 @@
     sc.contentSize = CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height);
     sc.showsHorizontalScrollIndicator = NO;
     
-    //unitCostType:0表示直接材料单位成本，1表示原材料单位成本
-    NSDictionary *condition = @{@"lineId":[NSNumber numberWithInt:0],@"productId":[NSNumber numberWithInt:0],@"unitCostType":[NSNumber numberWithInt:0],@"timeType":[NSNumber numberWithInt:2]};
-    self.lastCondition = condition;
-    [self sendRequest:condition];
+    NSArray *unitCostTypeArray = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"直接材料单位成本"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"原材料单位成本"}];
+    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    if (kSharedApp.multiGroup) {
+        //集团
+        self.rightVC.conditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:kCondition_Time_Array}];
+    }else{
+        //集团下的工厂
+        NSArray *lineArray = [Factory allLines];
+        NSArray *productArray = [Factory allProducts];
+        self.rightVC.conditions = @[@{kCondition_UnitCostType:unitCostTypeArray},@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+    }
+    self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
+    
+    self.URL = kMaterialCostHistoryURL;
+    [self sendRequest];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    //观察查询条件修改
-    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    //移除观察条件
-    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
-//    [self.sidePanelController showCenterPanelAnimated:NO];
-}
+//-(void)viewDidAppear:(BOOL)animated{
+//    [super viewDidAppear:animated];
+//    //观察查询条件修改
+//    [self.sidePanelController.rightPanel addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+//}
+//
+//-(void)viewDidDisappear:(BOOL)animated{
+//    [super viewDidDisappear:animated];
+//    //移除观察条件
+//    [self.sidePanelController.rightPanel removeObserver:self forKeyPath:@"searchCondition"];
+////    [self.sidePanelController showCenterPanelAnimated:NO];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -99,7 +109,8 @@
                 dateFormate = @"yyyy";
                 break;
         }
-        if([[self.lastCondition objectForKey:@"unitCostType"] intValue]==0){
+        if(self.condition.unitCostType==0){
+            //直接材料单位成本
             NSArray *unitCosts = [self.data objectForKey:@"unitCost"];
             NSArray *currentUnitCosts = [self.data objectForKey:@"currentUnitCost"];
             NSArray *budgetedUnitCosts = [self.data objectForKey:@"budgetedUnitCost"];
@@ -122,14 +133,14 @@
             [maxValueArray addObjectsFromArray:unitCostValues];
             [maxValueArray addObjectsFromArray:currentUnitCostValues];
             [maxValueArray addObjectsFromArray:budgetedUnitCostValues];
-            double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
-            double min = [Tool getMinValueInNumberValueArray:maxValueArray];
+            int max = [Tool getMaxValueInNumberValueArray:maxValueArray];
+            int min = [Tool getMinValueInNumberValueArray:maxValueArray];
             
             NSDictionary *unitCostDict = @{@"name":kUnitCostType_UnitCost,@"value":unitCostValues,@"color":[kColorList objectAtIndex:0]};
             NSDictionary *currentCostDict = @{@"name":kUnitCostType_CurrentUnitCost,@"value":currentUnitCostValues,@"color":[kColorList objectAtIndex:1]};
             NSDictionary *budgetedCostDict = @{@"name":kUnitCostType_BudgetedUnitCost,@"value":budgetedUnitCostValues,@"color":[kColorList objectAtIndex:2]};
             NSArray *lineArray = @[unitCostDict,currentCostDict,budgetedCostDict];
-            NSDictionary *lineConfigDict = @{@"title":self.titlePre,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
+            NSDictionary *lineConfigDict = @{@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithInt:min],@"end_scale":[NSNumber numberWithInt:max],@"scale_space":[NSNumber numberWithInt:(max-min)/5]};
             
             NSString *lineData = [Tool objectToString:lineArray];
             NSString *labelData = [Tool objectToString:timeLabels];
@@ -139,30 +150,44 @@
             DDLogVerbose(@"dates is %@",js);
             [webView stringByEvaluatingJavaScriptFromString:js];
         }else{
+            //原材料单位成本
             NSArray *materials = [self.data objectForKey:@"materials"];
             NSMutableArray *maxValueArray = [[NSMutableArray alloc] init];
             NSMutableArray *timeLabels = [[NSMutableArray alloc] init];
             NSMutableArray *lineArray = [[NSMutableArray alloc] init];
+            
+            NSMutableArray *timeCountArray = [[NSMutableArray alloc] init];
             for (int i=0; i<materials.count; i++) {
                 NSDictionary *material = [materials objectAtIndex:i];
                 NSString *name = [material objectForKey:@"name"];
                 NSString *color = [kColorList objectAtIndex:i];
                 NSMutableArray *valueArray = [[NSMutableArray alloc] init];
                 NSArray *dataArray = [material objectForKey:@"history"];
+                [timeCountArray addObject:[NSNumber numberWithInt:dataArray.count]];
                 for (int j=0; j<dataArray.count; j++) {
                     NSDictionary *history = [dataArray objectAtIndex:j];
-                    long long time = [[history objectForKey:@"time"] longLongValue]/1000;//毫秒
-                    NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
-                    [timeLabels addObject:timeLabel];
                     [valueArray addObject:[history objectForKey:@"value"]];
                 }
                 [maxValueArray addObjectsFromArray:valueArray];
                 NSDictionary *result = @{@"name":name,@"color":color,@"value":valueArray};
                 [lineArray addObject:result];
             }
-            double max = [Tool getMaxValueInNumberValueArray:maxValueArray];
-            double min = [Tool getMinValueInNumberValueArray:maxValueArray];
-            NSDictionary *lineConfigDict = @{@"title":self.titlePre,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithDouble:min],@"end_scale":[NSNumber numberWithDouble:max],@"scale_space":[NSNumber numberWithDouble:(max-min)/5]};
+            ///////这里是处理返回数据中每条记录个数不一致的情况
+            NSMutableArray *timeCountArrayForSort = [NSMutableArray arrayWithArray:timeCountArray];
+            NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+            NSArray *sortedNumbers = [timeCountArrayForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            int maxCount = [[sortedNumbers objectAtIndex:0] intValue];
+            int maxCountIndex = [timeCountArray indexOfObject:[NSNumber numberWithInt:maxCount]];
+            NSArray *historys = [[materials objectAtIndex:maxCountIndex] objectForKey:@"history"];
+            for (NSDictionary *history in historys) {
+                long long time = [[history objectForKey:@"time"] longLongValue]/1000;//毫秒
+                NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
+                [timeLabels addObject:timeLabel];
+            }
+            ////////
+            int max = [Tool getMaxValueInNumberValueArray:maxValueArray];
+            int min = [Tool getMinValueInNumberValueArray:maxValueArray];
+            NSDictionary *lineConfigDict = @{@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithInt:min],@"end_scale":[NSNumber numberWithInt:max],@"scale_space":[NSNumber numberWithInt:(max-min)/5]};
             NSString *lineData = [Tool objectToString:lineArray];
             NSString *labelData = [Tool objectToString:timeLabels];
             NSString *lineConfigData = [Tool objectToString:lineConfigDict];
@@ -186,9 +211,6 @@
 }
 
 - (void)pop:(id)sender {
-    RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
-    rightViewController.currentSelectDict = self.preSelectedDict;
-    [rightViewController resetConditions:self.preViewControllerCondition];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -196,92 +218,123 @@
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 
-#pragma mark 发送网络请求
--(void) sendRequest:(NSDictionary *)condition{
-    //清除原数据
-    self.data = nil;
-    if (self.messageView) {
-        [self.messageView removeFromSuperview];
-        self.messageView = nil;
-    }
-    self.webView.hidden=YES;
-    //加载过程提示
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.labelText = @"加载中...";
-    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
-    self.progressHUD.opacity=1.0;
-    self.progressHUD.delegate = self;
-    [self.view addSubview:self.progressHUD];
-    [self.progressHUD show:YES];
-
-    DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostHistoryURL);
-    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostHistoryURL]];
-    [self.request setUseCookiePersistence:YES]; 
-    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    int timeType = [[condition objectForKey:@"timeType"] intValue];
-    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
-    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
-    int unitCostType = [[condition objectForKey:@"unitCostType"] intValue];
-    if (unitCostType==0) {
-        self.titlePre = @"直接材料单位成本历史趋势";
-    }else{
-        self.titlePre = @"原材料单位成本历史趋势";
-    }
-    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
-    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
-    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
-    [self.request setPostValue:[NSNumber numberWithInt:unitCostType] forKey:@"type"];//0:代表查询直接材料1:代表查询原材料
-    [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
-    [self.request setDidFinishSelector:@selector(requestSuccess:)];
-    [self.request startAsynchronous];
-}
-
-#pragma mark 网络请求
--(void) requestFailed:(ASIHTTPRequest *)request{
-    NSString *message = nil;
-    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
-        message = @"网络请求超时啦。。。";
-    }else{
-        message = @"网络出错啦。。。";
-    }
-    [self.progressHUD hide:YES];
-    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
-    [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
-}
-
--(void)requestSuccess:(ASIHTTPRequest *)request{
-    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
-    int responseCode = [[dict objectForKey:@"error"] intValue];
-    if (responseCode==kErrorCode0) {
-        self.data = [dict objectForKey:@"data"];
-        [self.webView reload];
-    }else if(responseCode==kErrorCodeExpired){
-        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
-        [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
-    }
-    [self.progressHUD hide:YES];
-}
-
-#pragma mark MBProgressHUDDelegate methods
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-	[self.progressHUD removeFromSuperview];
-	self.progressHUD = nil;
-}
+//#pragma mark 发送网络请求
+//-(void) sendRequest:(NSDictionary *)condition{
+//    //清除原数据
+//    self.data = nil;
+//    if (self.messageView) {
+//        [self.messageView removeFromSuperview];
+//        self.messageView = nil;
+//    }
+//    self.webView.hidden=YES;
+//    //加载过程提示
+//    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//    self.progressHUD.labelText = @"加载中...";
+//    self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
+//    self.progressHUD.dimBackground = YES;
+//    self.progressHUD.opacity=1.0;
+//    self.progressHUD.delegate = self;
+//    [self.view addSubview:self.progressHUD];
+//    [self.progressHUD show:YES];
+//
+//    DDLogCInfo(@"******  Request URL is:%@  ******",kMaterialCostHistoryURL);
+//    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kMaterialCostHistoryURL]];
+//    [self.request setUseCookiePersistence:YES]; 
+//    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+//    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+//    int timeType = [[condition objectForKey:@"timeType"] intValue];
+//    NSDictionary *timeInfo = [Tool getTimeInfo:timeType];
+//    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
+//    int unitCostType = [[condition objectForKey:@"unitCostType"] intValue];
+//    if (unitCostType==0) {
+//        self.titlePre = @"直接材料单位成本历史趋势";
+//    }else{
+//        self.titlePre = @"原材料单位成本历史趋势";
+//    }
+//    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
+//    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
+//    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"lineId"] longValue]] forKey:@"lineId"];
+//    [self.request setPostValue:[NSNumber numberWithLong:[[condition objectForKey:@"productId"] longValue]] forKey:@"productId"];
+//    [self.request setPostValue:[NSNumber numberWithInt:unitCostType] forKey:@"type"];//0:代表查询直接材料1:代表查询原材料
+//    [self.request setDelegate:self];
+//    [self.request setDidFailSelector:@selector(requestFailed:)];
+//    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+//    [self.request startAsynchronous];
+//}
+//
+//#pragma mark 网络请求
+//-(void) requestFailed:(ASIHTTPRequest *)request{
+//    NSString *message = nil;
+//    if ([@"The request timed out" isEqualToString:[[request error] localizedDescription]]) {
+//        message = @"网络请求超时啦。。。";
+//    }else{
+//        message = @"网络出错啦。。。";
+//    }
+//    [self.progressHUD hide:YES];
+//    self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight) message:message];
+//    [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
+//}
+//
+//-(void)requestSuccess:(ASIHTTPRequest *)request{
+//    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+//    int responseCode = [[dict objectForKey:@"error"] intValue];
+//    if (responseCode==kErrorCode0) {
+//        self.data = [dict objectForKey:@"data"];
+//        [self.webView reload];
+//    }else if(responseCode==kErrorCodeExpired){
+//        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+//        kSharedApp.window.rootViewController = loginViewController;
+//    }else{
+//        self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight)];
+//        [self.view performSelector:@selector(addSubview:) withObject:self.messageView afterDelay:0.5];
+//    }
+//    [self.progressHUD hide:YES];
+//}
+//
+//#pragma mark MBProgressHUDDelegate methods
+//- (void)hudWasHidden:(MBProgressHUD *)hud {
+//	[self.progressHUD removeFromSuperview];
+//	self.progressHUD = nil;
+//}
 
 #pragma mark observe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"searchCondition"]) {
-        SearchCondition *searchCondition = [change objectForKey:@"new"];
-        NSDictionary *condition = @{@"productId":[NSNumber numberWithLong:searchCondition.productID],@"lineId":[NSNumber numberWithLong:searchCondition.lineID],@"timeType":[NSNumber numberWithInt:searchCondition.timeType],@"unitCostType":[NSNumber numberWithInt:searchCondition.unitCostType]};
-        [self sendRequest:condition];
-        self.lastCondition = condition;
+        self.condition = [change objectForKey:@"new"];
+        [self sendRequest];
     }
+}
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self.webView reload];
+//    double delayInSeconds = 0.5;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        self.scrollView.hidden = NO;
+//    });
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
+    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
+    if (self.condition.unitCostType==0) {
+        self.titleView.lblTitle.text = kTitle1;
+    }else{
+        self.titleView.lblTitle.text = kTitle2;
+    }
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
+    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];;
+    [self.request setPostValue:[NSNumber numberWithLong:self.condition.lineID] forKey:@"lineId"];
+    [self.request setPostValue:[NSNumber numberWithLong:self.condition.productID] forKey:@"productId"];
+    [self.request setPostValue:[NSNumber numberWithInt:self.condition.unitCostType] forKey:@"type"];//0:代表查询直接材料1:代表查询原材料
+    
+}
+-(void)clear{
+    self.webView.hidden = YES;
 }
 @end
