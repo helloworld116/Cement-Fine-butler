@@ -11,5 +11,5 @@
 //成本对比
 @interface CostComparisonViewController : CommonViewController
 @property (nonatomic,assign) int type;//1表示上期，2表示同期
-
+@property (nonatomic,assign) int timeType;
 @end

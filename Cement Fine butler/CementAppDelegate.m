@@ -118,6 +118,7 @@
 //    NSString *documentDirectory = [paths objectAtIndex:0];
 //    [self.myCache setStoragePath:[documentDirectory stringByAppendingPathComponent:@"resource"]];
 //    [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
+    application.applicationIconBadgeNumber = 0;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -146,11 +147,11 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     
-    rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+    rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+1];
     energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源监控" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
-    realTimeReportsNC.tabBarItem = [realTimeReportsNC.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
-    equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
-    moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
+    realTimeReportsNC.tabBarItem = [realTimeReportsNC.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+1];
+    equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+1];
+    moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"more"] tag:kViewTag+1];
     
     tabBarController.viewControllers = @[rawMaterialCostLossNC,energyMonitoringOverViewNC,realTimeReportsNC,equipmentNC,moreNC];
     

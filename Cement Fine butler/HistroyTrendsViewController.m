@@ -33,6 +33,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
+    
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.font = [UIFont boldSystemFontOfSize:15];
     self.titleView.lblTitle.text = kTitle1;

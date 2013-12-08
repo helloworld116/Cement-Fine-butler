@@ -80,6 +80,7 @@
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = kRelativelyColor;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = kBackgroundColor;
     
     UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 125, 1)];
     separatorView.layer.borderColor = [UIColor colorWithRed:45/255.0 green:49/255.0 blue:57/255.0 alpha:1].CGColor;

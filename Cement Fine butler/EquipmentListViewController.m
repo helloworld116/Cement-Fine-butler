@@ -44,6 +44,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
     self.navigationItem.title = @"设备列表";
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地图" style:UIBarButtonItemStyleBordered target:self action:@selector(showMapViewController:)];
     self.currentPage=1;
@@ -122,12 +125,12 @@
     cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"instantFlowRate"] doubleValue]];
 //    cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
-    if (equipmentStatus==0) {
-        cell.contentView.backgroundColor = [UIColor greenColor];
-    }else{
-        cell.contentView.backgroundColor = [UIColor redColor];
-    }
+//    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
+//    if (equipmentStatus==0) {
+//        cell.contentView.backgroundColor = [UIColor greenColor];
+//    }else{
+//        cell.contentView.backgroundColor = [UIColor redColor];
+//    }
     return cell;
 }
 

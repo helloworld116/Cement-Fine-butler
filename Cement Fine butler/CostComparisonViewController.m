@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
+@property (retain, nonatomic) TitleView *titleView;
 @end
 
 @implementation CostComparisonViewController
@@ -33,6 +34,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.titleView = [[TitleView alloc] init];
+    self.navigationItem.titleView = self.titleView;
+    if (self.type==1) {
+       self.titleView.lblTitle.text = @"原材料环比成本";
+    }else{
+       self.titleView.lblTitle.text = @"原材料同比成本";
+    }
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.webView.delegate = self;
@@ -45,8 +53,13 @@
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     
+    self.condition.timeType = self.timeType;
     self.URL = kMaterialCostURL;
     [self sendRequest];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 }
 
 -(void)pop:(id)sender{
@@ -163,13 +176,7 @@
                 [dataArray addObject:data];
             }
             NSString *pieData = [Tool objectToString:dataArray];
-            NSString *comparison = nil;
-            if (self.type==1) {
-                comparison=@"环比";
-            }else{
-                comparison=@"同比";
-            }
-            NSString *title = [self.reportTitlePre stringByAppendingFormat:@"%@%@",comparison,@"直接材料成本"];
+            NSString *title = @"直接材料成本";
             NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
             NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
             DDLogVerbose(@"dates is %@",js);
@@ -209,7 +216,13 @@
 -(void)setRequestParams{
     NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
     self.reportTitlePre = [timeInfo objectForKey:@"timeDesc"];
-//    self.titleView.lblTimeInfo.text = self.reportTitlePre;
+    NSString *comparison = nil;
+    if (self.type==1) {
+        comparison=@"环比";
+    }else{
+        comparison=@"同比";
+    }
+    self.titleView.lblTimeInfo.text = [self.reportTitlePre stringByAppendingString:comparison];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];;
     [self.request setPostValue:[NSNumber numberWithLong:self.condition.lineID] forKey:@"lineId"];

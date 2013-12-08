@@ -33,6 +33,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
+    
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"产量报表";
     self.navigationItem.titleView = self.titleView;

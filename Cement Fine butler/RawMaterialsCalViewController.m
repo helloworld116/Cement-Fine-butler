@@ -35,6 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
 //    self.data = @[
 //                  @{@"name":@"熟料",@"rate":[NSNumber numberWithDouble:75],@"financePrice":[NSNumber numberWithDouble:169.79],@"planPrice":[NSNumber numberWithDouble:169],@"locked":[NSNumber numberWithBool:YES]},
 //                  @{@"name":@"石膏",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:18.32],@"planPrice":[NSNumber numberWithDouble:18],@"locked":[NSNumber numberWithBool:NO]},

@@ -34,6 +34,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //iOS7设置view
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"损耗总览";
     self.navigationItem.titleView = self.titleView;
@@ -46,6 +50,8 @@
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
     self.webView.delegate = self;
     self.webView.backgroundColor = [UIColor clearColor];
+//    self.webView.opaque = NO;
+//    self.webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Chatroom-Bg.png"]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
     sc.showsHorizontalScrollIndicator = NO;
     sc.showsVerticalScrollIndicator = NO;
@@ -130,7 +136,7 @@
         lossReportViewController.titlePre = self.timeDesc;
         lossReportViewController.title = [kLossType objectAtIndex:index];
         lossReportViewController.dataArray = lossData;
-        lossReportViewController.hidesBottomBarWhenPushed = YES;
+//        lossReportViewController.hidesBottomBarWhenPushed = YES;
 //        [self.navigationController performSelector:@selector(pushViewController:animated:) withObject:@[@"lossReportViewController",[NSNumber numberWithBool:YES]] afterDelay:0.3f];
         [self.navigationController pushViewController:lossReportViewController animated:YES];
         return NO;

@@ -193,7 +193,7 @@
 #define kErrorCodeNegative999 -999
 #define kErrorCodeExpired 900//会话过期
 
-#define kGetMessageSeconds 30
+#define kGetMessageSeconds 60*10//10分钟获取一次消息
 
 #define kASIHttpRequestTimeoutSeconds 30
 
@@ -201,7 +201,7 @@
 #endif
 
 #ifdef DEBUG
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_WARN;
 #else
 static const int ddLogLevel = LOG_LEVEL_WARN;
 #endif

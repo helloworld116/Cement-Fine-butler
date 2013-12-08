@@ -43,6 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //iOS7设置view
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"原材料成本管理";
     self.navigationItem.titleView = self.titleView;
@@ -289,10 +293,12 @@
 
 - (void)moreAction:(id)sender {
     NSMutableArray *menuItems = [NSMutableArray array];
-    NSArray *recoveryMaterials = [self.data objectForKey:@"recoveryMaterials"];
-    if (recoveryMaterials&&recoveryMaterials.count>0) {
-        KxMenuItem *menuItem1 = [KxMenuItem menuItem:@"成本还原" image:nil target:self action:@selector(costReduction:)];
-        [menuItems addObject:menuItem1];
+    if (![Tool isNullOrNil:self.data]) {
+        NSArray *recoveryMaterials = [self.data objectForKey:@"recoveryMaterials"];
+        if (recoveryMaterials&&recoveryMaterials.count>0) {
+            KxMenuItem *menuItem1 = [KxMenuItem menuItem:@"成本还原" image:nil target:self action:@selector(costReduction:)];
+            [menuItems addObject:menuItem1];
+        }
     }
 //    KxMenuItem *menuItem2 = [KxMenuItem menuItem:@"取消还原" image:nil target:self action:@selector(cancelReduction:)];
     KxMenuItem *menuItem3 = [KxMenuItem menuItem:@"同比" image:nil target:self action:@selector(yearCompareYear:)];
@@ -335,8 +341,7 @@
 -(void)yearCompareYear:(id)sender{
     CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
     viewController.type=2;
-    viewController.condition = self.condition;
-    viewController.title = @"原材料同比成本";
+    viewController.timeType = self.condition.timeType;
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }
@@ -345,8 +350,7 @@
 -(void)monthCompareMonth:(id)sender{
     CostComparisonViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"costComparisonViewController"];
     viewController.type=1;
-    viewController.condition = self.condition;
-    viewController.title = @"原材料环比成本";
+    viewController.timeType = self.condition.timeType;
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }

@@ -31,6 +31,11 @@
 //    CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight);
 //    UIBarButtonItem *barBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(pop)];
     
+    //iOS7设置view
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
+    
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = self.title;
     self.titleView.lblTimeInfo.text = self.titlePre;

@@ -9,6 +9,8 @@
 #import "ConditionTableView.h"
 #import "ConditionCell.h"
 
+#define kBackgroundColor [UIColor colorWithRed:31/255.0 green:36/255.0 blue:43/255.0 alpha:1]
+
 @interface ConditionTableView ()
 
 @end
@@ -63,6 +65,7 @@
     cell.label.textColor = kUnSelectedColor;
     cell.selectedImgView.image = [UIImage imageNamed:@"checked"];
     cell.selectedImgView.hidden = YES;
+    cell.backgroundColor = kBackgroundColor;
     if (indexPath.row==self.currentSelectCellIndex) {
         [self setTableViewCellStyle:cell selected:YES];
     }

@@ -32,8 +32,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
     //最开始异步请求数据
-    self.navigationItem.title = @"库存报表";
+    self.navigationItem.title = @"原材料库存";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
@@ -161,9 +164,9 @@
     int inventoryType = self.condition.inventoryType;
     [self.request setPostValue:[NSNumber numberWithInt:inventoryType] forKey:@"type"];
     if (inventoryType==0) {
-        self.chartTitle = @"原材料库存";
+        self.navigationItem.title = @"原材料库存";
     }else{
-        self.chartTitle = @"成品库存";
+        self.navigationItem.title = @"成品库存";
     }
 }
 -(void)clear{

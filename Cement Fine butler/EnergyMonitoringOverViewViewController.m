@@ -43,6 +43,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
+    
 //    self.view.backgroundColor = [UIColor grayColor];
     self.topView.backgroundColor = kGeneralColor;
     self.lblTextCoalFee.textColor = kRelativelyColor;
@@ -60,6 +64,9 @@
     self.navigationItem.titleView = self.titleView;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+//    CGRect viewFrame = self.view.frame;
+//    viewFrame.size.height = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight;
+//    self.view.frame = viewFrame;
     self.scrollView.delegate = self;
     self.scrollView.showsVerticalScrollIndicator = NO;
     

@@ -11,6 +11,8 @@
 #import "DatePickerViewController2.h"
 #import "RightViewController.h"
 
+#define kBackgroundColor [UIColor colorWithRed:31/255.0 green:36/255.0 blue:43/255.0 alpha:1]
+
 @implementation TimeTableView
 
 - (id)initWithFrame:(CGRect)frame
@@ -71,6 +73,7 @@
     }
     //设置标识，以便选中时知道选中的是哪个
     cell.cellID = [[condtionDict objectForKey:@"_id"] intValue];
+    cell.backgroundColor = kBackgroundColor;
     
     UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 240, 1)];
     separatorView.layer.borderColor = [UIColor colorWithRed:45/255.0 green:49/255.0 blue:57/255.0 alpha:1].CGColor;
