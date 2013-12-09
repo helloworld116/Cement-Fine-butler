@@ -125,13 +125,17 @@
     cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"instantFlowRate"] doubleValue]];
 //    cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
 //    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
 //    if (equipmentStatus==0) {
-//        cell.contentView.backgroundColor = [UIColor greenColor];
+//        cell.backgroundColor = [UIColor greenColor];
 //    }else{
-//        cell.contentView.backgroundColor = [UIColor redColor];
+//        cell.backgroundColor = [UIColor redColor];
 //    }
-    return cell;
 }
 
 
