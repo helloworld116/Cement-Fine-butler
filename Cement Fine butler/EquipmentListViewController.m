@@ -20,6 +20,7 @@
 @property (retain, nonatomic) PromptMessageView *messageView;
 @property (nonatomic,assign) int totalCount;
 @property (nonatomic,assign) int currentPage;
+@property (nonatomic,retain) NSTimer *timer;
 @end
 
 @implementation EquipmentListViewController
@@ -52,6 +53,7 @@
     self.currentPage=1;
     self.list = [NSMutableArray array];
     [self sendRequest:self.currentPage withProgress:YES];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -62,6 +64,18 @@
         //send request
         [self sendRequest:self.currentPage withProgress:YES];
     }
+    NSDictionary *info = @{@"page":[NSNumber numberWithInt:self.currentPage],@"isProgress":@NO};
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+}
+
+-(void)onTimer:(NSTimer *)timer {
+    NSDictionary *condition = [timer userInfo];
+    [self sendRequest:[[condition objectForKey:@"page"] intValue] withProgress:[[condition objectForKey:@"isProgress"] boolValue]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,13 +143,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
-//    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
-//    if (equipmentStatus==0) {
-//        cell.backgroundColor = [UIColor greenColor];
-//    }else{
-//        cell.backgroundColor = [UIColor redColor];
-//    }
+    NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
+    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
+    if (equipmentStatus==0) {
+        cell.backgroundColor = [UIColor greenColor];
+    }else{
+        cell.backgroundColor = [UIColor redColor];
+    }
 }
 
 

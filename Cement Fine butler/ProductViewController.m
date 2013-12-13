@@ -64,11 +64,11 @@
     self.lblSuggestionTip.text = @"建议：";
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
-    double quotesCosts = [[self.product objectForKey:@"quotesCosts"] doubleValue];
-    double totalLoss = [[self.product objectForKey:@"totalLoss"] doubleValue];
-    double actualCosts = [[self.product objectForKey:@"actualCosts"] doubleValue];
-    double standardCosts = [[self.product objectForKey:@"standardCosts"] doubleValue];
-    NSString *suggestion = [self.product objectForKey:@"suggestion"];
+    double quotesCosts = [Tool doubleValue:[self.product objectForKey:@"quotesCosts"]];
+    double totalLoss = [Tool doubleValue:[self.product objectForKey:@"totalLoss"]];
+    double actualCosts = [Tool doubleValue:[self.product objectForKey:@"actualCosts"]];
+    double standardCosts = [Tool doubleValue:[self.product objectForKey:@"standardCosts"]];
+    NSString *suggestion = [Tool stringToString:[self.product objectForKey:@"suggestion"]];
     if(totalLoss>0){
         lblStr = [lblStr stringByAppendingString:@"已节约"];
     }else{

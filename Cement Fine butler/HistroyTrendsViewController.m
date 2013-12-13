@@ -99,6 +99,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+    int labelCount = 10;
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
         int periodUnit = [[self.data objectForKey:@"periodUnit"] intValue];//时间单位，0:天1:月2:年
         NSString *dateFormate;
@@ -133,6 +134,24 @@
                 NSString *timeLabel = [Tool setTimeInt:time setTimeFormat:dateFormate setTimeZome:nil];
                 [timeLabels addObject:timeLabel];
             }
+            NSMutableArray *newTimeLabels = [NSMutableArray array];
+            if (timeLabels.count>labelCount) {
+                if ((timeLabels.count-1)%labelCount==0) {
+                    int diff = (timeLabels.count-1)/labelCount;
+                    for (int i=0; i<labelCount; i++) {
+                        [newTimeLabels addObject:[timeLabels objectAtIndex:i*diff]];
+                    }
+                }else{
+                    int diff = (int)round(timeLabels.count*1.0/labelCount);
+                    for (int i=1; i<=labelCount-2; i++) {
+                        [newTimeLabels addObject:[timeLabels objectAtIndex:i*diff]];
+                    }
+                    [newTimeLabels insertObject:[timeLabels objectAtIndex:0] atIndex:0];
+                    [newTimeLabels addObject:[timeLabels objectAtIndex:timeLabels.count-1]];
+                }
+            }else{
+                [newTimeLabels addObjectsFromArray:timeLabels];
+            }
             NSMutableArray *maxValueArray = [[NSMutableArray alloc] init];
             [maxValueArray addObjectsFromArray:unitCostValues];
             [maxValueArray addObjectsFromArray:currentUnitCostValues];
@@ -147,7 +166,7 @@
             NSDictionary *lineConfigDict = @{@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithInt:min],@"end_scale":[NSNumber numberWithInt:max],@"scale_space":[NSNumber numberWithInt:(max-min)/5]};
             
             NSString *lineData = [Tool objectToString:lineArray];
-            NSString *labelData = [Tool objectToString:timeLabels];
+            NSString *labelData = [Tool objectToString:newTimeLabels];
             NSString *lineConfigData = [Tool objectToString:lineConfigDict];
             
             NSString *js = [NSString stringWithFormat:@"drawLineBasic2D('%@','%@','%@')",lineData,labelData,lineConfigData];
@@ -189,11 +208,29 @@
                 [timeLabels addObject:timeLabel];
             }
             ////////
+            NSMutableArray *newTimeLabels = [NSMutableArray array];
+            if (timeLabels.count>labelCount) {
+                if ((timeLabels.count-1)%labelCount==0) {
+                    int diff = (timeLabels.count-1)/labelCount;
+                    for (int i=0; i<labelCount; i++) {
+                        [newTimeLabels addObject:[timeLabels objectAtIndex:i*diff]];
+                    }
+                }else{
+                    int diff = (int)round(timeLabels.count*1.0/labelCount);
+                    for (int i=1; i<=labelCount-2; i++) {
+                        [newTimeLabels addObject:[timeLabels objectAtIndex:i*diff]];
+                    }
+                    [newTimeLabels insertObject:[timeLabels objectAtIndex:0] atIndex:0];
+                    [newTimeLabels addObject:[timeLabels objectAtIndex:timeLabels.count-1]];
+                }
+            }else{
+                [newTimeLabels addObjectsFromArray:timeLabels];
+            }
             int max = [Tool getMaxValueInNumberValueArray:maxValueArray];
             int min = [Tool getMinValueInNumberValueArray:maxValueArray];
             NSDictionary *lineConfigDict = @{@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"start_scale":[NSNumber numberWithInt:min],@"end_scale":[NSNumber numberWithInt:max],@"scale_space":[NSNumber numberWithInt:(max-min)/5]};
             NSString *lineData = [Tool objectToString:lineArray];
-            NSString *labelData = [Tool objectToString:timeLabels];
+            NSString *labelData = [Tool objectToString:newTimeLabels];
             NSString *lineConfigData = [Tool objectToString:lineConfigDict];
             
             NSString *js = [NSString stringWithFormat:@"drawLineBasic2D('%@','%@','%@')",lineData,labelData,lineConfigData];
