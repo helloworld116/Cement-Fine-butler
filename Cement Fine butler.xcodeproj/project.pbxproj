@@ -225,6 +225,12 @@
 		0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */; };
 		0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */; };
 		0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */; };
+		0EBFCA9018613901004CD92D /* background_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBFCA8E18613901004CD92D /* background_1@2x.png */; };
+		0EBFCA9118613901004CD92D /* background_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBFCA8F18613901004CD92D /* background_1.png */; };
+		0EBFCA94186140F1004CD92D /* background_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBFCA92186140F1004CD92D /* background_2.png */; };
+		0EBFCA95186140F1004CD92D /* background_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBFCA93186140F1004CD92D /* background_2@2x.png */; };
+		0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBFCA991861A62F004CD92D /* LossPlaceCell.m */; };
+		0EBFCA9C1861A6A9004CD92D /* LossPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBFCA9B1861A6A9004CD92D /* LossPlaceCell.xib */; };
 		0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B0D181F896C001BF5B7 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0EC05B1E181F896C001BF5B7 /* LoadMoreTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B0F181F896C001BF5B7 /* LoadMoreTableFooterView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B11181F896C001BF5B7 /* MessageInterceptor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -594,6 +600,13 @@
 		0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighDetailViewController.m; sourceTree = "<group>"; };
 		0EB2D98D1817AA4F00AEE5E8 /* DatePickerViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController2.h; sourceTree = "<group>"; };
 		0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController2.m; sourceTree = "<group>"; };
+		0EBFCA8E18613901004CD92D /* background_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_1@2x.png"; sourceTree = "<group>"; };
+		0EBFCA8F18613901004CD92D /* background_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_1.png; sourceTree = "<group>"; };
+		0EBFCA92186140F1004CD92D /* background_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_2.png; sourceTree = "<group>"; };
+		0EBFCA93186140F1004CD92D /* background_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_2@2x.png"; sourceTree = "<group>"; };
+		0EBFCA981861A62F004CD92D /* LossPlaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossPlaceCell.h; sourceTree = "<group>"; };
+		0EBFCA991861A62F004CD92D /* LossPlaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossPlaceCell.m; sourceTree = "<group>"; };
+		0EBFCA9B1861A6A9004CD92D /* LossPlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LossPlaceCell.xib; sourceTree = "<group>"; };
 		0EC05B0C181F896C001BF5B7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		0EC05B0D181F896C001BF5B7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		0EC05B0E181F896C001BF5B7 /* LoadMoreTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreTableFooterView.h; sourceTree = "<group>"; };
@@ -934,6 +947,9 @@
 				0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */,
 				0E87BAE8180926AD008F1E13 /* LossReportViewController.h */,
 				0E87BAE9180926AD008F1E13 /* LossReportViewController.m */,
+				0EBFCA981861A62F004CD92D /* LossPlaceCell.h */,
+				0EBFCA991861A62F004CD92D /* LossPlaceCell.m */,
+				0EBFCA9B1861A6A9004CD92D /* LossPlaceCell.xib */,
 			);
 			name = "损耗定位";
 			sourceTree = "<group>";
@@ -941,6 +957,10 @@
 		0E72471317CD92EF0048DFFB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0EBFCA92186140F1004CD92D /* background_2.png */,
+				0EBFCA93186140F1004CD92D /* background_2@2x.png */,
+				0EBFCA8E18613901004CD92D /* background_1@2x.png */,
+				0EBFCA8F18613901004CD92D /* background_1.png */,
 				0E439F5D1855A6F50008C0D8 /* checked.png */,
 				0E439F5E1855A6F50008C0D8 /* checked@2x.png */,
 				47F24FD11854725E0089390B /* more@2x.png */,
@@ -1613,6 +1633,7 @@
 				0E3841A217D41D3E004B3C87 /* username.png in Resources */,
 				0E3841A317D41D3E004B3C87 /* tabBar@2x.png in Resources */,
 				0E3841A417D41D3E004B3C87 /* productOverview@2x.png in Resources */,
+				0EBFCA9118613901004CD92D /* background_1.png in Resources */,
 				0E3841A517D41D3E004B3C87 /* priceAssaint@2x.png in Resources */,
 				0E3841A617D41D3E004B3C87 /* userinfo@2x.png in Resources */,
 				0E3841A717D41D3E004B3C87 /* equipmentList@2x.png in Resources */,
@@ -1637,6 +1658,7 @@
 				471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */,
 				0E3841B517D41D3E004B3C87 /* top.png in Resources */,
 				0E3841B617D41D3E004B3C87 /* nv_line@2x.png in Resources */,
+				0EBFCA94186140F1004CD92D /* background_2.png in Resources */,
 				0EC05B23181F896C001BF5B7 /* blueArrow.png in Resources */,
 				0E3841B717D41D3E004B3C87 /* nv_line.png in Resources */,
 				0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */,
@@ -1704,6 +1726,7 @@
 				0E72041417F55B50001E943F /* message.png in Resources */,
 				0E72041517F55B50001E943F /* message@2x.png in Resources */,
 				0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */,
+				0EBFCA9018613901004CD92D /* background_1@2x.png in Resources */,
 				0E693ABE1807EA040061A3F8 /* Donut2D.html in Resources */,
 				0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */,
 				0E5C5061180C1B80000B4904 /* NavBarButton.png in Resources */,
@@ -1725,6 +1748,7 @@
 				0E23CF4A180E306D0089B4A8 /* lock.png in Resources */,
 				0E23CF4B180E306D0089B4A8 /* unlock.png in Resources */,
 				0E23CF4C180E306D0089B4A8 /* unlock@2x.png in Resources */,
+				0EBFCA9C1861A6A9004CD92D /* LossPlaceCell.xib in Resources */,
 				0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */,
 				0E9426E9181657AE00DAFDAF /* calculator.png in Resources */,
 				0E9426EA181657AE00DAFDAF /* calculator@2x.png in Resources */,
@@ -1734,6 +1758,7 @@
 				0E9426ED181657AE00DAFDAF /* uptrend.png in Resources */,
 				0E9426EE181657AE00DAFDAF /* uptrend@2x.png in Resources */,
 				0E9426EF181657AE00DAFDAF /* bar-chart.png in Resources */,
+				0EBFCA95186140F1004CD92D /* background_2@2x.png in Resources */,
 				0E9426F0181657AE00DAFDAF /* bar-chart@2x.png in Resources */,
 				0E9426F1181657AE00DAFDAF /* pie-chart.png in Resources */,
 				0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */,
@@ -1793,6 +1818,7 @@
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
+				0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
 				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,
