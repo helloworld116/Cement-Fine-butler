@@ -26,7 +26,7 @@
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.title = @"设备地图列表";
     //设置地图缩放级别
-    [_mapView setZoomLevel:11];
+    [_mapView setZoomLevel:6];
     
     //  给view中心定位
     if (self.equipmentList.count>0) {

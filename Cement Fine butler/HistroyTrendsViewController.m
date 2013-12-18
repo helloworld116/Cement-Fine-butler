@@ -99,7 +99,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    int labelCount = 10;
+    int labelCount = 6;
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
         int periodUnit = [[self.data objectForKey:@"periodUnit"] intValue];//时间单位，0:天1:月2:年
         NSString *dateFormate;

@@ -137,8 +137,9 @@
     EnergyMonitoringOverViewViewController *energyMonitoringOverViewVC = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
     UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
     //实时报表（默认产量报表）
-    ProductColumnViewController *productColumnVC = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
-    UINavigationController *realTimeReportsNC = [[UINavigationController alloc] initWithRootViewController:productColumnVC];
+    
+    LossOverViewViewController *lossOverViewVC = [[LossOverViewViewController alloc] init];
+    UINavigationController *lossOverViewNC = [[UINavigationController alloc] initWithRootViewController:lossOverViewVC];
     //设备管理
     UINavigationController *equipmentNC = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
     //更多
@@ -148,12 +149,12 @@
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     
     rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"原材料" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+1];
-    energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源监控" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+1];
-    realTimeReportsNC.tabBarItem = [realTimeReportsNC.tabBarItem initWithTitle:@"实时报表" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+1];
-    equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+1];
-    moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"more"] tag:kViewTag+1];
+    energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源监控" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+2];
+    lossOverViewNC.tabBarItem = [lossOverViewNC.tabBarItem initWithTitle:@"损耗定位" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+3];
+    equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+4];
+    moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"more"] tag:kViewTag+5];
     
-    tabBarController.viewControllers = @[rawMaterialCostLossNC,energyMonitoringOverViewNC,realTimeReportsNC,equipmentNC,moreNC];
+    tabBarController.viewControllers = @[rawMaterialCostLossNC,energyMonitoringOverViewNC,lossOverViewNC,equipmentNC,moreNC];
     
     JASidePanelController *sideController = [[JASidePanelController alloc] init];
     [sideController setCenterPanel:tabBarController];
@@ -345,5 +346,16 @@
     NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
     NetworkStatus status = [curReach currentReachabilityStatus];
     DDLogCInfo(@"网络连接状况改变，目前连接状态码为：%d ", status);
+    switch (status) {
+        case 0:
+            
+            break;
+        case 1:
+        case 2:
+            
+            break;
+        default:
+            break;
+    }
 }
 @end

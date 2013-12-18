@@ -11,7 +11,7 @@
 #import "ElectricityPriceViewController.h"
 #import "PassValueDelegate.h"
 #import "ChoiceFactoryViewController.h"
-#import "LossOverViewViewController.h"
+#import "ProductColumnViewController.h"
 
 @interface MoreViewController ()<PassValueDelegate>
 @property (nonatomic,retain) NSArray *options;
@@ -31,21 +31,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     self.navigationItem.title = @"更多操作";
-    self.tableView.bounces = NO;
+//    self.tableView.bounces = NO;
     self.tableView.rowHeight = 60;
     self.options = @[
-         @{@"name":@"原材料成本计算器",@"storyboard":@"rawMaterialsCalViewController"},
+//         @{@"name":@"原材料成本计算器",@"storyboard":@"rawMaterialsCalViewController"},
          @{@"name":@"电力价格管理",@"storyboard":@"electricityPriceViewController"},
-         @{@"name":@"消息历史",@"storyboard":@"messageViewController"},
+//         @{@"name":@"消息历史",@"storyboard":@"messageViewController"},
 //         @{@"name":@"生产启动",@"storyboard":@"productionStartupViewController"},
          @{@"name":@"过磅管理",@"storyboard":@"weighViewController"},
          @{@"name":@"生产记录",@"storyboard":@"productHistoryViewController"},
          @{@"name":@"库存盘点",@"storyboard":@"inventoryViewController"},
          @{@"name":@"库位设置",@"storyboard":@"inventorySettingListViewController"},
          @{@"name":@"固定成本管理",@"storyboard":@"fixCostsViewController"},
-         @{@"name":@"行业数据",@"storyboard":@"industryStandardVC"},
-         @{@"name":@"修改密码",@"storyboard":@"updatePasswordViewController"}
+         @{@"name":@"行业数据",@"storyboard":@"industryStandardVC"}
          ];
 }
 
@@ -64,7 +64,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -73,10 +73,15 @@
         return 1;
     }else if(section==1){
         return 1;
-    }else if(section==2) {
-        return self.options.count;
-    }else{
+    }else if(section==2){
         return 1;
+    }else if(section==3) {
+        return self.options.count;
+    }else if(section==4){
+        return 1;
+    }else{
+        //账号与安全
+        return 2;
     }
 }
 
@@ -84,9 +89,13 @@
     if (section==0) {
         return @"当前工厂";
     }else if(section==1){
-        return @"损耗";
-    }else if (section==2) {
-        return @"录入相关";
+        return @"报表";
+    }else if (section==2){
+        return @"成本计算";
+    }else if (section==3) {
+        return @"数据录入";
+    }else if (section==4) {
+        return @"消息";
     }else{
         return @"账号与安全";
     }
@@ -108,14 +117,25 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }else if(indexPath.section==1){
-        cell.textLabel.text = @"损耗定位";
+        cell.textLabel.text = @"实时报表";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }else if(indexPath.section==2) {
+    }else if (indexPath.section==2){
+        cell.textLabel.text = @"原材料成本计算器";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }else if(indexPath.section==3) {
         cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }else{
-        cell.textLabel.text = @"退出当前账号";
-        cell.accessoryType = UITableViewCellAccessoryNone;
+    }else if(indexPath.section==4){
+        cell.textLabel.text = @"消息列表";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }else if(indexPath.section==5){
+        if (indexPath.row==0) {
+            cell.textLabel.text = @"修改密码";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }else if(indexPath.row==1){
+            cell.textLabel.text = @"退出当前账号";
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     return cell;
 }
@@ -130,35 +150,39 @@
         if (kSharedApp.factorys.count>1) {
             ChoiceFactoryViewController *nextViewController = [[ChoiceFactoryViewController alloc] init];
             nextViewController.delegate = self;
+            nextViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:nextViewController animated:YES];
+        }else{
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }else if(indexPath.section==1){
-        //损耗定位
-//        JASidePanelController *lossController = [[JASidePanelController alloc] init];
-//        LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
-//        UINavigationController *lossNavController = [[UINavigationController alloc] initWithRootViewController:lossOverViewController];
-//        RightViewController* lossRightController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-//        NSArray *timeArray = kCondition_Time_Array;
-//        lossRightController.conditions = @[@{@"时间段":timeArray}];
-//        lossRightController.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-//        [lossController setCenterPanel:lossNavController];
-//        [lossController setRightPanel:lossRightController];
-//        
-//        lossController.hidesBottomBarWhenPushed = YES;
-//        self.navigationController.navigationBarHidden = YES;
-//        [self.navigationController pushViewController:lossController animated:YES];
-        
-        LossOverViewViewController *lossOverViewController = [[LossOverViewViewController alloc] init];
-        lossOverViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:lossOverViewController animated:YES];
-    }else if (indexPath.section==2) {
+        //实时报表
+        ProductColumnViewController *productColumnVC = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+        productColumnVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:productColumnVC animated:YES];
+    }else if(indexPath.section==2){
+        UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
+        nextViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }else if (indexPath.section==3) {
         NSString *controllerIdentifier = [self.options[indexPath.row] objectForKey:@"storyboard"];
         UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:controllerIdentifier];
         nextViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:nextViewController animated:YES];
-    }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出当前账号?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alertView show];
+    }else if(indexPath.section==4){
+        UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"messageViewController"];
+        nextViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }else if(indexPath.section==5){
+        if (indexPath.row==0) {
+            UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"updatePasswordViewController"];
+            nextViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:nextViewController animated:YES];
+        }else if(indexPath.row==1){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出当前账号?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alertView show];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
     }
 }
 

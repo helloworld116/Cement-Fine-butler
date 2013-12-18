@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     self.navigationItem.title = @"选择起止日期";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *startDate = [defaults valueForKey:@"startDate"];

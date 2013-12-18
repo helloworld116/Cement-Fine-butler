@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblProduct;
 @property (strong, nonatomic) IBOutlet UILabel *lblTime;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (nonatomic,retain) UIBarButtonItem *rightButtonItem;
 @property (nonatomic) long _id;//生产记录id
 @property (nonatomic) long lineId;//产线id
 @property (nonatomic) long productId;//产品id
@@ -37,6 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     NSString *title = nil;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -53,7 +55,7 @@
         self.datePicker.date = [dateFormatter dateFromString:startTime];
     }else{
         title = @"添加";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
         self.lblLine.text = @"请选择";
         self.lblProduct.text = @"请选择";
         self.lblTime.text = [dateFormatter stringFromDate:[NSDate date]];
@@ -63,6 +65,16 @@
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     if (IS_IPHONE_5) {
         self.tableView.sectionFooterHeight += 88;
+    }
+    [self.lblLine addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.lblProduct addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (self.lineId!=0&&self.productId!=0) {
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
@@ -101,7 +113,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *select = [self.datePicker date];
-    NSString *dateString =  [dateFormatter stringFromDate:select];
+    NSString *dateString = [dateFormatter stringFromDate:select];
     self.lblTime.text = dateString;
 }
 
@@ -170,6 +182,8 @@
 }
 
 -(void)pop:(id)sender{
+    [self.lblLine removeObserver:self forKeyPath:@"text"];
+    [self.lblProduct removeObserver:self forKeyPath:@"text"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

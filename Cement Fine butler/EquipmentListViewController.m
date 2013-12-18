@@ -53,7 +53,7 @@
     self.currentPage=1;
     self.list = [NSMutableArray array];
     [self sendRequest:self.currentPage withProgress:YES];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -184,7 +184,8 @@
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"count"];
+//    [self.request setPostValue:[NSNumber numberWithInt:kPageSize] forKey:@"count"];
+    [self.request setPostValue:[NSNumber numberWithInt:100] forKey:@"count"];
     //暂时使用offset，后面改成page
     [self.request setPostValue:[NSNumber numberWithInt:currentPage] forKey:@"page"];
     [self.request setDelegate:self];

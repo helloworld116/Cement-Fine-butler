@@ -31,6 +31,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_1.png"]];
+    
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_1"]];
+//    [self.view addSubview:imageView];
+//    [self.view sendSubviewToBack:imageView];
+    
+//    self.view.layer.contents = (id)[UIImage imageNamed:@"background_1"].CGImage;
+    
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
+    
     self.title = @"修改密码";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
@@ -48,7 +58,9 @@
 }
 
 - (IBAction)update:(id)sender {
-    
+    if ([self validate]) {
+        [self sendRequest:kUpdatePasswordURL];
+    }
 }
 
 -(void)pop:(id)sender{

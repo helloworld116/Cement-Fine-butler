@@ -41,8 +41,8 @@
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"损耗总览";
     self.navigationItem.titleView = self.titleView;
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+//    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+//    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     
     //添加webview
@@ -138,6 +138,7 @@
         lossReportViewController.dataArray = lossData;
 //        lossReportViewController.hidesBottomBarWhenPushed = YES;
 //        [self.navigationController performSelector:@selector(pushViewController:animated:) withObject:@[@"lossReportViewController",[NSNumber numberWithBool:YES]] afterDelay:0.3f];
+        lossReportViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:lossReportViewController animated:YES];
         return NO;
     }

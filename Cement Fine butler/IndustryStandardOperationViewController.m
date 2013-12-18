@@ -42,11 +42,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     self.title = @"行业数据添加";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
+    [self.lblProductName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.lblTypeName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -63,20 +65,18 @@
 //                                             selector:@selector(lblTypeNameChanged:)
 //                                                 name:@"lblTypeNameChanged"
 //                                               object:self.lblTypeName];
-    [self.lblProductName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
-    [self.lblTypeName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.textValue];
-    [self.lblProductName removeObserver:self forKeyPath:@"text"];
-    [self.lblTypeName removeObserver:self forKeyPath:@"text"];
+//    [self.lblProductName removeObserver:self forKeyPath:@"text"];
+//    [self.lblTypeName removeObserver:self forKeyPath:@"text"];
 }
 
 -(void)textFieldChanged:(NSNotification *)notification{
     UITextField *textfield = (UITextField *)notification.object;
-    if (![textfield.text isEqualToString:@""]&&self.productId!=0&&self.typeId!=0) {
+    if (![Tool isNullOrNil:textfield.text]&&self.productId!=0&&self.typeId!=0) {
         self.navigationItem.rightBarButtonItem = self.rightButtonItem;
     }else{
         self.navigationItem.rightBarButtonItem = nil;
@@ -84,8 +84,11 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    NSLog(@"the text changed");
+    if (![Tool isNullOrNil:self.textValue.text]&&self.productId!=0&&self.typeId!=0) {
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 //-(void)lblProductNameChanged:(NSNotification *)notification{
@@ -134,6 +137,8 @@
 }
 
 -(void)pop:(id)sender{
+    [self.lblProductName removeObserver:self forKeyPath:@"text"];
+    [self.lblTypeName removeObserver:self forKeyPath:@"text"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

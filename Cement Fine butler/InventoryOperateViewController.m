@@ -10,6 +10,7 @@
 #import "InventoryChoiceViewController.h"
 
 @interface InventoryOperateViewController ()<MBProgressHUDDelegate,UITextFieldDelegate>
+@property (nonatomic,retain) UIBarButtonItem *rightButtonItem;
 @property (strong, nonatomic) IBOutlet UILabel *lblTypeName;
 @property (strong, nonatomic) IBOutlet UILabel *lblName;
 @property (strong, nonatomic) IBOutlet UITextField *textValue;
@@ -36,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     NSString *title = nil;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -57,7 +59,7 @@
         self.textValue.text = [NSString stringWithFormat:@"%.2f",[[self.inventoryInfo objectForKey:@"stock"] doubleValue]];
     }else{
         title = @"添加";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
         self.lblDate.text = [dateFormatter stringFromDate:[NSDate date]];
     }
     switch (self.type) {
@@ -80,6 +82,37 @@
     self.textValue.delegate = self;
     if (IS_IPHONE_5) {
         self.tableView.sectionFooterHeight += 88;
+    }
+    [self.lblName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textFieldChanged:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:self.textValue];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.textValue];
+}
+
+-(void)textFieldChanged:(NSNotification *)notification{
+    UITextField *textfield = (UITextField *)notification.object;
+    if (![Tool isNullOrNil:textfield.text]&&self._id!=0) {
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (![Tool isNullOrNil:self.textValue.text]&&self._id!=0) {
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
@@ -200,6 +233,7 @@
 }
 
 -(void)pop:(id)sender{
+    [self.lblName removeObserver:self forKeyPath:@"text"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
