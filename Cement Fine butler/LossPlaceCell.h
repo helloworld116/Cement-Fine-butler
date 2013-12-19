@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LossPlaceCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *lblPlace;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewPlace;
 
 @end

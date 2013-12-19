@@ -17,6 +17,7 @@
 #import "EnergyMonitoringOverViewViewController.h"
 #import "RawMaterialCostViewController.h"
 #import "LoginAction.h"
+#import "LossOverViewVC.h"
 
 #define kViewTag 12000
 
@@ -138,7 +139,8 @@
     UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
     //实时报表（默认产量报表）
     
-    LossOverViewViewController *lossOverViewVC = [[LossOverViewViewController alloc] init];
+//    LossOverViewViewController *lossOverViewVC = [[LossOverViewViewController alloc] init];
+    LossOverViewVC *lossOverViewVC = [[LossOverViewVC alloc] init];
     UINavigationController *lossOverViewNC = [[UINavigationController alloc] initWithRootViewController:lossOverViewVC];
     //设备管理
     UINavigationController *equipmentNC = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
