@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LossOverViewVC : UITableViewController
+@interface LossOverViewVC : CommonViewController
 
 @end

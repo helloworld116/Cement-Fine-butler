@@ -90,9 +90,9 @@
     }
     NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
     NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    double max = [[sortedNumbers objectAtIndex:0] doubleValue];
+    double max = [Tool doubleValue:[sortedNumbers objectAtIndex:0]];
     int newMax = [Tool max:max];
-    double min = [[sortedNumbers objectAtIndex:sortedNumbers.count-1] doubleValue];
+    double min = [Tool doubleValue:[sortedNumbers objectAtIndex:sortedNumbers.count-1]];
     int newMin = [Tool min:min];
     NSDictionary *configDict = @{@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithInt:newMin],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:(newMax-newMin)/5]};
     NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
