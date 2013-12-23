@@ -12,6 +12,7 @@
 #import "PassValueDelegate.h"
 #import "ChoiceFactoryViewController.h"
 #import "ProductColumnViewController.h"
+#import "REMenuReportVC.h"
 
 @interface MoreViewController ()<PassValueDelegate>
 @property (nonatomic,retain) NSArray *options;

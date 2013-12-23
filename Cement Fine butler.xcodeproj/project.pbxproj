@@ -66,6 +66,7 @@
 		0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E693AC01807FA290061A3F8 /* LossOverViewViewController.m */; };
 		0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6A896317F6B0BA0065043F /* MessageCell.xib */; };
 		0E6A896717F6B11E0065043F /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A896617F6B11E0065043F /* MessageCell.m */; };
+		0E6B027E18682DD700B63321 /* REMenuReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B027D18682DD700B63321 /* REMenuReportVC.m */; };
 		0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DA964181A878A007A5B45 /* ElectricityCell.m */; };
 		0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E430B182244C600016B93 /* YearAndMonthDatePickerView.m */; };
 		0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6E430D182245E000016B93 /* YearAndMonthDatePickerView.xib */; };
@@ -270,6 +271,8 @@
 		0E6A896317F6B0BA0065043F /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		0E6A896517F6B11E0065043F /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		0E6A896617F6B11E0065043F /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		0E6B027C18682DD700B63321 /* REMenuReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuReportVC.h; sourceTree = "<group>"; };
+		0E6B027D18682DD700B63321 /* REMenuReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuReportVC.m; sourceTree = "<group>"; };
 		0E6DA963181A878A007A5B45 /* ElectricityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricityCell.h; sourceTree = "<group>"; };
 		0E6DA964181A878A007A5B45 /* ElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricityCell.m; sourceTree = "<group>"; };
 		0E6E430A182244C600016B93 /* YearAndMonthDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearAndMonthDatePickerView.h; sourceTree = "<group>"; };
@@ -576,6 +579,8 @@
 				0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */,
 				0E0907C618517F4000905166 /* RealTimeReportLeftController.h */,
 				0E0907C718517F4000905166 /* RealTimeReportLeftController.m */,
+				0E6B027C18682DD700B63321 /* REMenuReportVC.h */,
+				0E6B027D18682DD700B63321 /* REMenuReportVC.m */,
 			);
 			name = "实时报表";
 			sourceTree = "<group>";
@@ -1321,6 +1326,7 @@
 				472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */,
 				0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */,
 				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
+				0E6B027E18682DD700B63321 /* REMenuReportVC.m in Sources */,
 				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,

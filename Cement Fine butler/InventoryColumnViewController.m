@@ -37,6 +37,9 @@
     }
     //最开始异步请求数据
     self.navigationItem.title = @"原材料库存";
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
@@ -131,6 +134,10 @@
 
 - (void)showNav:(id)sender {
     [self.sidePanelController showLeftPanelAnimated:YES];
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showSearchCondition:(id)sender {

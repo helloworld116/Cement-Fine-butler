@@ -153,8 +153,8 @@
 -(void)setAnnotionsWithList:(NSArray *)list
 {
     for (NSDictionary *dic in list) {
-        CLLocationDegrees latitude=[[dic objectForKey:@"latitude"] doubleValue];
-        CLLocationDegrees longitude=[[dic objectForKey:@"longitude"] doubleValue];
+        CLLocationDegrees latitude=[Tool doubleValue:[dic objectForKey:@"latitude"]];
+        CLLocationDegrees longitude=[Tool doubleValue:[dic objectForKey:@"longitude"]];
         CLLocationCoordinate2D coordinate=CLLocationCoordinate2DMake(latitude, longitude);
         //
         //        BMKCoordinateRegion region=BMKCoordinateRegionMakeWithDistance(location,span ,span );

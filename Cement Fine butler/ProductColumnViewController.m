@@ -8,6 +8,7 @@
 
 #import "ProductColumnViewController.h"
 #import "RealTimeReportLeftController.h"
+#import "InventoryColumnViewController.h"
 
 @interface ProductColumnViewController ()<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -16,6 +17,8 @@
 
 @property (strong, nonatomic) TitleView *titleView;
 @property (retain, nonatomic) NSString *reportTitlePre;//报表标题前缀，指明时间段
+
+@property (strong, nonatomic) REMenu *menu;
 @end
 
 @implementation ProductColumnViewController
@@ -41,8 +44,12 @@
     self.titleView.lblTitle.text = @"产量报表";
     self.navigationItem.titleView = self.titleView;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(toggleMenu)];
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
@@ -183,8 +190,19 @@
     [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)showSearchCondition:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+- (void)toggleMenu
+{
+    if (self.menu.isOpen)
+        return [self.menu close];
+    [self.menu showFromNavigationController:self.navigationController];
 }
 
 #pragma mark 自定义公共VC
@@ -210,6 +228,7 @@
     [self.request setPostValue:[NSNumber numberWithLong:self.condition.lineID] forKey:@"lineId"];
     [self.request setPostValue:[NSNumber numberWithLong:self.condition.productID] forKey:@"productId"];
 }
+
 -(void)clear{
     self.scrollView.hidden = YES;
 }
