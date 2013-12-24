@@ -14,7 +14,6 @@
 @interface EquipmentListViewController ()<MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
 @property (strong, nonatomic) UIBarButtonItem *rightButtonItem;
-@property (nonatomic,retain) NSMutableArray *list;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain, nonatomic) PromptMessageView *messageView;
@@ -49,11 +48,15 @@
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
     self.navigationItem.title = @"设备列表";
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地图" style:UIBarButtonItemStyleBordered target:self action:@selector(showMapViewController:)];
+//    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地图" style:UIBarButtonItemStyleBordered target:self action:@selector(showMapViewController:)];
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.currentPage=1;
-    self.list = [NSMutableArray array];
-    [self sendRequest:self.currentPage withProgress:YES];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.list = [NSMutableArray array];
+//    [self sendRequest:self.currentPage withProgress:YES];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    self.tableView.separatorColor = [UIColor colorWithRed:132.0f/255.0f green:132.0f/255.0f blue:131.0f/255.0f alpha:1.0f];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -230,6 +233,10 @@
 }
 - (void)viewDidUnload {
     [super viewDidUnload];
+}
+
+-(void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark MBProgressHUDDelegate methods

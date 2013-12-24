@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EquipmentListViewController : UITableViewController
+@property (nonatomic,retain) NSMutableArray *list; 
 @end

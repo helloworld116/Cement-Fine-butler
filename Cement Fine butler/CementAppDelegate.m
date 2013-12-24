@@ -18,6 +18,7 @@
 #import "RawMaterialCostViewController.h"
 #import "LoginAction.h"
 #import "LossOverViewVC.h"
+#import "EquipmentMapViewController.h"
 
 #define kViewTag 12000
 
@@ -143,7 +144,9 @@
     LossOverViewVC *lossOverViewVC = [[LossOverViewVC alloc] init];
     UINavigationController *lossOverViewNC = [[UINavigationController alloc] initWithRootViewController:lossOverViewVC];
     //设备管理
-    UINavigationController *equipmentNC = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
+//    UINavigationController *equipmentNC = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
+    EquipmentMapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentMapViewController"];
+    UINavigationController *equipmentNC = [[UINavigationController alloc] initWithRootViewController:mapController];
     //更多
     UINavigationController *moreNC = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
     

@@ -12,31 +12,26 @@
 #import "Cell.h"
 #import "EquipmentPointAnnotation.h"
 #import "EquipmentAnnotationView.h"
+#import "EquipmentListViewController.h"
 
 @interface EquipmentMapViewController ()
 @property (nonatomic,retain) CalloutMapAnnotation *calloutAnnotation;
+@property (strong, nonatomic) UIBarButtonItem *rightButtonItem;
 @end
+
 
 @implementation EquipmentMapViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.title = @"设备地图列表";
-    //设置地图缩放级别
-    [_mapView setZoomLevel:6];
+    self.navigationItem.title = @"设备地图列表";
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleBordered target:self action:@selector(showListController:)];
     
-    //  给view中心定位
-    if (self.equipmentList.count>0) {
-        BMKCoordinateRegion region;
-        region.center.latitude  = [[[self.equipmentList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
-        region.center.longitude = [[[self.equipmentList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
-        region.span.latitudeDelta  = 0.01;
-        region.span.longitudeDelta = 0.01;
-        self.mapView.region = region;
-    }
+    [_mapView setZoomLevel:6];
+    self.equipmentList = [NSMutableArray array];
+    self.URL = kEquipmentList;
+    [self sendRequest];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -48,7 +43,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self resetAnnitations:self.equipmentList];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -176,5 +170,44 @@
     //    [_annotationList removeAllObjects];
     //    [_annotationList addObjectsFromArray:data];
     [self setAnnotionsWithList:self.equipmentList];
+}
+
+-(void)showListController:(id)sender{
+    EquipmentListViewController *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentListViewController"];
+    nextVC.list = self.equipmentList;
+    nextVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:nextVC animated:YES];
+}
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    self.mapView.hidden = NO;
+    [self.equipmentList addObjectsFromArray:[[self.responseData objectForKey:@"data"] objectForKey:@"equipments"]];
+    if (self.equipmentList.count>0) {
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem;
+//        //设置地图缩放级别
+//        [_mapView setZoomLevel:10];
+//        //给view中心定位
+//        BMKCoordinateRegion region;
+//        region.center.latitude  = [[[self.equipmentList objectAtIndex:0] objectForKey:@"latitude"] doubleValue];
+//        region.center.longitude = [[[self.equipmentList objectAtIndex:0] objectForKey:@"longitude"] doubleValue];
+//        region.span.latitudeDelta  = 0.01;
+//        region.span.longitudeDelta = 0.01;
+//        self.mapView.region = region;
+    }
+    [self resetAnnitations:self.equipmentList];
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    [self.request setPostValue:[NSNumber numberWithInt:100] forKey:@"count"];
+    [self.request setPostValue:[NSNumber numberWithInt:1] forKey:@"page"];
+}
+
+-(void)clear{
+    self.mapView.hidden = YES;
 }
 @end
