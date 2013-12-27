@@ -19,6 +19,10 @@
 #import "LoginAction.h"
 #import "LossOverViewVC.h"
 #import "EquipmentMapViewController.h"
+#import "NavigationController.h"
+#import "EnergyNavigationController.h"
+#import "LossNavigationController.h"
+#import "MoreNavigationController.h"
 
 #define kViewTag 12000
 
@@ -134,21 +138,22 @@
 -(UIViewController *) showViewControllers{
     //原材料成本损失
     RawMaterialCostViewController *rawMaterialCostLossVC = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
-    UINavigationController *rawMaterialCostLossNC = [[UINavigationController alloc] initWithRootViewController:rawMaterialCostLossVC];
+    NavigationController *rawMaterialCostLossNC = [[NavigationController alloc] initWithRootViewController:rawMaterialCostLossVC];
     //能源监控
     EnergyMonitoringOverViewViewController *energyMonitoringOverViewVC = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
-    UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
-    //实时报表（默认产量报表）
-    
+//    UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
+    EnergyNavigationController *energyMonitoringOverViewNC = [[EnergyNavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
+    //损耗定位
 //    LossOverViewViewController *lossOverViewVC = [[LossOverViewViewController alloc] init];
     LossOverViewVC *lossOverViewVC = [[LossOverViewVC alloc] init];
-    UINavigationController *lossOverViewNC = [[UINavigationController alloc] initWithRootViewController:lossOverViewVC];
+    LossNavigationController *lossOverViewNC = [[LossNavigationController alloc] initWithRootViewController:lossOverViewVC];
     //设备管理
 //    UINavigationController *equipmentNC = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentNavController"];
     EquipmentMapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentMapViewController"];
     UINavigationController *equipmentNC = [[UINavigationController alloc] initWithRootViewController:mapController];
     //更多
-    UINavigationController *moreNC = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
+//    UINavigationController *moreNC = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
+    MoreNavigationController *moreNC = [[MoreNavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"moreViewController"]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];

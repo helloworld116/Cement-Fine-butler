@@ -49,6 +49,7 @@
     }
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"原材料成本管理";
+    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
@@ -76,8 +77,8 @@
         self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     }
     self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    self.leftVC = [[RawMaterialLeftViewController alloc] init];
-    self.leftVC.conditions = @[@"原材料成本损失",@"原材料成本总览"];
+//    self.leftVC = [[RawMaterialLeftViewController alloc] init];
+//    self.leftVC.conditions = @[@"原材料成本损失",@"原材料成本总览"];
 
     //获取请求数据
     self.URL = kMaterialCostURL;

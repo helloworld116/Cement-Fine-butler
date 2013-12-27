@@ -47,12 +47,12 @@
                         <rect key="frame" x="30" y="40" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble" id="gks-UL-bLA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gks-UL-bLA">
                         <rect key="frame" x="99" y="5" width="221" height="110"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S1O-lj-d1N">
-                        <rect key="frame" x="140" y="47" width="140" height="21"/>
+                        <rect key="frame" x="120" y="47" width="180" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="highlightedColor"/>
@@ -77,6 +77,5 @@
     </objects>
     <resources>
         <image name="arrow-down" width="128" height="128"/>
-        <image name="bubble" width="112" height="136"/>
     </resources>
 </document>

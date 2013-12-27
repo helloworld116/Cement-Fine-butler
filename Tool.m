@@ -430,7 +430,7 @@
 }
 
 +(NSString *)stringToString:(NSString *)str{
-    if ([[NSNull null] isEqual:str]||str==nil) {
+    if ([[NSNull null] isEqual:str]||str==nil||[str isEqualToString:@"null"]) {
         return @"";
     }else{
         return str;
@@ -494,5 +494,11 @@
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return theImage;
+}
+
++(NSString *)numberToStringWithFormatter:(NSNumber *)number{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"###,##0.##"];
+    return [numberFormatter stringFromNumber:number];
 }
 @end

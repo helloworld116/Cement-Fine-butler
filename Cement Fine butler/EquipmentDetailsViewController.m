@@ -43,9 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
-    self.title = @"设备详情";
+    self.navigationItem.title = @"设备详情";
     
 //    self.lblName.text = [Tool stringToString:[self.data objectForKey:@"name"]];
     self.lblSN.text = [Tool stringToString:[self.data objectForKey:@"sn"]];

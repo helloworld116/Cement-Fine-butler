@@ -40,6 +40,7 @@
     // Do any additional setup after loading the view from its nib.
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTimeInfo.text = self.timeInfo;
+    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;

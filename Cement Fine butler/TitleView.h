@@ -11,4 +11,5 @@
 @interface TitleView : UIView
 @property (nonatomic,strong) UILabel *lblTitle;
 @property (nonatomic,strong) UILabel *lblTimeInfo;
+@property (strong,nonatomic) UIButton *bgBtn;
 @end

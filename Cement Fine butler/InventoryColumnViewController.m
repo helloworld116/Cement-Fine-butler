@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIView *topContainerView;
 @property (strong, nonatomic) IBOutlet UIWebView *bottomWebiew;
 
+@property (strong, nonatomic) TitleView *titleView;
 @property (retain,nonatomic) NSString *chartTitle;
 @end
 
@@ -35,12 +36,15 @@
     if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
-    //最开始异步请求数据
-    self.navigationItem.title = @"原材料库存";
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"原材料库存";
+    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = self.titleView;
+    
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
@@ -56,8 +60,8 @@
     NSArray *stockType = @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"原材料库存"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"成品库存"}];
     self.rightVC.conditions = @[@{@"库存类型":stockType}];
 
-    self.leftVC = [[RealTimeReportLeftController alloc] init];
-    self.leftVC.conditions = @[@"产量报表",@"库存报表"];
+//    self.leftVC = [[RealTimeReportLeftController alloc] init];
+//    self.leftVC.conditions = @[@"产量报表",@"库存报表"];
     
     self.URL = kStockReportURL;
     [self sendRequest];
@@ -171,9 +175,9 @@
     int inventoryType = self.condition.inventoryType;
     [self.request setPostValue:[NSNumber numberWithInt:inventoryType] forKey:@"type"];
     if (inventoryType==0) {
-        self.navigationItem.title = @"原材料库存";
+        self.titleView.lblTitle.text = @"原材料库存";
     }else{
-        self.navigationItem.title = @"成品库存";
+        self.titleView.lblTitle.text = @"成品库存";
     }
 }
 -(void)clear{

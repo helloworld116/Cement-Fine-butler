@@ -62,4 +62,6 @@
 +(NSString *)equipmentType:(NSString *)code;
 
 +(UIImage *)createImageWithColor:(UIColor *) color;
+
++(NSString *)numberToStringWithFormatter:(NSNumber *)number;
 @end

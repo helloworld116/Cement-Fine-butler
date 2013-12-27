@@ -67,6 +67,10 @@
 		0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6A896317F6B0BA0065043F /* MessageCell.xib */; };
 		0E6A896717F6B11E0065043F /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A896617F6B11E0065043F /* MessageCell.m */; };
 		0E6B027E18682DD700B63321 /* REMenuReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B027D18682DD700B63321 /* REMenuReportVC.m */; };
+		0E6B0281186BC95C00B63321 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B0280186BC95C00B63321 /* NavigationController.m */; };
+		0E6B0284186BD72A00B63321 /* EnergyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B0283186BD72A00B63321 /* EnergyNavigationController.m */; };
+		0E6B0287186C17BF00B63321 /* LossNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B0286186C17BF00B63321 /* LossNavigationController.m */; };
+		0E6B028A186D106400B63321 /* MoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B0289186D106400B63321 /* MoreNavigationController.m */; };
 		0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DA964181A878A007A5B45 /* ElectricityCell.m */; };
 		0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E430B182244C600016B93 /* YearAndMonthDatePickerView.m */; };
 		0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6E430D182245E000016B93 /* YearAndMonthDatePickerView.xib */; };
@@ -273,6 +277,14 @@
 		0E6A896617F6B11E0065043F /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		0E6B027C18682DD700B63321 /* REMenuReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuReportVC.h; sourceTree = "<group>"; };
 		0E6B027D18682DD700B63321 /* REMenuReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuReportVC.m; sourceTree = "<group>"; };
+		0E6B027F186BC95C00B63321 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		0E6B0280186BC95C00B63321 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		0E6B0282186BD72A00B63321 /* EnergyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyNavigationController.h; sourceTree = "<group>"; };
+		0E6B0283186BD72A00B63321 /* EnergyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyNavigationController.m; sourceTree = "<group>"; };
+		0E6B0285186C17BF00B63321 /* LossNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossNavigationController.h; sourceTree = "<group>"; };
+		0E6B0286186C17BF00B63321 /* LossNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossNavigationController.m; sourceTree = "<group>"; };
+		0E6B0288186D106400B63321 /* MoreNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreNavigationController.h; sourceTree = "<group>"; };
+		0E6B0289186D106400B63321 /* MoreNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreNavigationController.m; sourceTree = "<group>"; };
 		0E6DA963181A878A007A5B45 /* ElectricityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricityCell.h; sourceTree = "<group>"; };
 		0E6DA964181A878A007A5B45 /* ElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricityCell.m; sourceTree = "<group>"; };
 		0E6E430A182244C600016B93 /* YearAndMonthDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearAndMonthDatePickerView.h; sourceTree = "<group>"; };
@@ -512,6 +524,8 @@
 				0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */,
 				0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */,
 				0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */,
+				0E6B0282186BD72A00B63321 /* EnergyNavigationController.h */,
+				0E6B0283186BD72A00B63321 /* EnergyNavigationController.m */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -527,6 +541,8 @@
 				0E12584318473A8300959EC1 /* ProductViewController.xib */,
 				0E0907C91851A3C400905166 /* RawMaterialLeftViewController.h */,
 				0E0907CA1851A3C400905166 /* RawMaterialLeftViewController.m */,
+				0E6B027F186BC95C00B63321 /* NavigationController.h */,
+				0E6B0280186BC95C00B63321 /* NavigationController.m */,
 			);
 			name = "新原材料成本";
 			sourceTree = "<group>";
@@ -673,6 +689,8 @@
 				0E9F2DC1186287F700F0F0E2 /* LossDescCell.m */,
 				0E9F2DC31862937D00F0F0E2 /* LossOverViewVC.h */,
 				0E9F2DC41862937D00F0F0E2 /* LossOverViewVC.m */,
+				0E6B0285186C17BF00B63321 /* LossNavigationController.h */,
+				0E6B0286186C17BF00B63321 /* LossNavigationController.m */,
 			);
 			name = "损耗定位";
 			sourceTree = "<group>";
@@ -847,6 +865,8 @@
 				0EE9F608181A6DA3009A4330 /* MoreViewController.m */,
 				0EC5CDF4182B6B9F00E63DCA /* ChoiceFactoryViewController.h */,
 				0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */,
+				0E6B0288186D106400B63321 /* MoreNavigationController.h */,
+				0E6B0289186D106400B63321 /* MoreNavigationController.m */,
 			);
 			name = "更多";
 			sourceTree = "<group>";
@@ -1245,6 +1265,7 @@
 				472F32EC17CC3C05007E567B /* main.m in Sources */,
 				472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */,
 				0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */,
+				0E6B0281186BC95C00B63321 /* NavigationController.m in Sources */,
 				0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */,
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
@@ -1253,10 +1274,12 @@
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
 				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,
+				0E6B028A186D106400B63321 /* MoreNavigationController.m in Sources */,
 				0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */,
 				0E72473017CD9D080048DFFB /* RightViewController.m in Sources */,
 				0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */,
 				0E62CC551820FA0800281A73 /* ChoiceCell.m in Sources */,
+				0E6B0287186C17BF00B63321 /* LossNavigationController.m in Sources */,
 				0EF727B1181E65720059EC59 /* InventorySettingListCell.m in Sources */,
 				0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */,
 				471B5B141846582F002D6BDC /* ExtensiveCellContainer.m in Sources */,
@@ -1288,6 +1311,7 @@
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */,
 				0EF4CD42184DBDFB0050A63A /* EquipmentAnnotationView.m in Sources */,
+				0E6B0284186BD72A00B63321 /* EnergyNavigationController.m in Sources */,
 				0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */,
 				0E12581818442B9C00959EC1 /* BackgroundLayer.m in Sources */,
 				0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */,

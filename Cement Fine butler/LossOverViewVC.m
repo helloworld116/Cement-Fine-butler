@@ -12,6 +12,9 @@
 #import "LossReportViewController.h"
 
 @interface LossOverViewVC ()<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) TitleView *titleView;
+@property (strong, nonatomic) NSString *timeDesc;
+
 @property (nonatomic,retain) UILabel *lblTotalLossAmount;
 @property (nonatomic,retain) UITableView *tableView;
 
@@ -19,6 +22,7 @@
 @property (nonatomic,retain) NSArray *rawMaterials;
 @property (nonatomic,retain) NSArray *semifinishedProduct;
 @property (nonatomic,retain) NSArray *endProduct;
+@property (nonatomic,retain) NSArray *logistics;
 @end
 
 @implementation LossOverViewVC
@@ -36,26 +40,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-//    [self.view addSubview:scrollView];
-//    
-//    CGRect topViewFrame = CGRectMake(0, 0, kScreenWidth, 60);
-//    self.viewTop = [[UIView alloc] initWithFrame:topViewFrame];
-//    UILabel *lblTotalLossAmount = [[UILabel alloc] initWithFrame:CGRectZero];
-//    CGRect lblFrame = lblTotalLossAmount.frame;
-//    lblFrame.size = CGSizeMake(300, 40);
-//    lblTotalLossAmount.frame = lblFrame;
-//    lblTotalLossAmount.center = self.viewTop.center;
-//    [self.viewTop addSubview:lblTotalLossAmount];
-//    [scrollView addSubview:self.viewTop];
-//    
-//    CGRect tableViewFrame = CGRectMake(0, topViewFrame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight-topViewFrame.size.height);
-//    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-//    self.tableView.dataSource = self;
-//    self.tableView.delegate = self;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    [scrollView addSubview:self.tableView];
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
+    self.titleView = [[TitleView alloc] init];
+    self.titleView.lblTitle.text = @"损耗总览";
+    self.navigationItem.titleView = self.titleView;
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     
     CGRect topViewFrame = CGRectMake(0, 0, kScreenWidth, 60);
     UIView *topView = [[UIView alloc] initWithFrame:topViewFrame];
@@ -65,7 +58,6 @@
     self.lblTotalLossAmount.textAlignment = UITextAlignmentCenter;
     CGRect lblFrame = self.lblTotalLossAmount.frame;
     lblFrame.size = CGSizeMake(300, 40);
-    self.lblTotalLossAmount.text = @"总损耗2400吨";
     self.lblTotalLossAmount.frame = lblFrame;
     self.lblTotalLossAmount.center = topView.center;
     [topView addSubview:self.lblTotalLossAmount];
@@ -79,6 +71,9 @@
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2"]];
     [self.view addSubview:self.tableView];
     
+    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+    self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
+    self.rightVC.currentSelectDict = @{kCondition_Time:@2};
     self.URL = kLoss;
     [self sendRequest];
 }
@@ -142,25 +137,27 @@
         cell.imgViewBubble.image= [[UIImage imageNamed:@"bubble"] resizableImageWithCapInsets:UIEdgeInsetsMake(42,30,38,25)];//42,28,38,28
         cell.imgViewMiddle.image = [UIImage imageNamed:@"trunk"];
         switch (indexPath.row) {
-            case 1:
-                cell.lblLossAmount.text = @"损耗1000吨";
-                cell.lblLossType.text = @"物流损耗";
+            case 1:{
+                    double logisticsLoss = [Tool doubleValue:[self.overview objectForKey:@"logisticsLoss"]];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:logisticsLoss]]];
+                    cell.lblLossType.text = @"物流损耗";
+                }
                 break;
             case 3:{
                     double rawMaterialsLoss = [Tool doubleValue:[self.overview objectForKey:@"rawMaterialsLoss"]];
-                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%.2f吨",rawMaterialsLoss];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:rawMaterialsLoss]]];
                     cell.lblLossType.text = @"原材料损耗";
                 }
                 break;
             case 5:{
                     double semifinishedProductLoss = [Tool doubleValue:[self.overview objectForKey:@"semifinishedProductLoss"]];
-                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%.2f吨",semifinishedProductLoss];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:semifinishedProductLoss]]];
                     cell.lblLossType.text = @"半成品损耗";
                 }
                 break;
             case 7:{
                     double endProductLoss = [Tool doubleValue:[self.overview objectForKey:@"endProductLoss"]];
-                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%.2f吨",endProductLoss];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:endProductLoss]]];
                     cell.lblLossType.text = @"成品损耗";
                 }
                 break;
@@ -176,27 +173,38 @@
     if (indexPath.row%2!=0) {
         LossReportViewController *nextVC = [[LossReportViewController alloc] init];
         nextVC.hidesBottomBarWhenPushed = YES;
+        nextVC.dateDesc = self.timeDesc;
+        nextVC.data = self.data;
         switch (indexPath.row) {
             case 1:
-                
+                if ([Tool doubleValue:[self.overview objectForKey:@"logisticsLoss"]]!=0) {
+//                    nextVC.title = @"物流损耗";
+//                    nextVC.dataArray = self.logistics;
+                    nextVC.type = 0;
+                    [self.navigationController pushViewController:nextVC animated:YES];
+                }
                 break;
             case 3:
                 if ([Tool doubleValue:[self.overview objectForKey:@"rawMaterialsLoss"]]!=0) {
-                    //                nextVC.titlePre = self.timeDesc;
-                    //                nextVC.title = [kLossType objectAtIndex:index];
-                    nextVC.dataArray = self.rawMaterials;
+//                    nextVC.title = @"原材料损耗";
+//                    nextVC.dataArray = self.rawMaterials;
+                    nextVC.type = 1;
                     [self.navigationController pushViewController:nextVC animated:YES];
                 }
                 break;
             case 5:
                 if ([Tool doubleValue:[self.overview objectForKey:@"semifinishedProductLoss"]]!=0) {
-                    nextVC.dataArray = self.semifinishedProduct;
+//                    nextVC.title = @"半成品损耗";
+//                    nextVC.dataArray = self.semifinishedProduct;
+                    nextVC.type = 2;
                     [self.navigationController pushViewController:nextVC animated:YES];
                 }
                 break;
             case 7:
                 if ([Tool doubleValue:[self.overview objectForKey:@"endProductLoss"]]!=0) {
-                    nextVC.dataArray = self.endProduct;
+//                    nextVC.title = @"成品损耗";
+//                    nextVC.dataArray = self.endProduct;
+                    nextVC.type = 3;
                     [self.navigationController pushViewController:nextVC animated:YES];
                 }
                 break;
@@ -212,11 +220,11 @@
         double totalLoss = [Tool doubleValue:[self.overview objectForKey:@"totalLoss"]];
         [self.tableView reloadData];
         self.tableView.hidden = NO;
-        self.lblTotalLossAmount.text = [NSString stringWithFormat:@"总损耗%.2f吨",totalLoss];
-        
-        self.rawMaterials = [self.data objectForKey:@"rawMaterials"];
-        self.semifinishedProduct = [self.data objectForKey:@"semifinishedProduct"];
-        self.endProduct = [self.data objectForKey:@"endProduct"];
+        self.lblTotalLossAmount.text = [NSString stringWithFormat:@"总损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:totalLoss]]];
+    }else{
+        self.messageView.hidden = NO;
+        self.messageView.labelMsg.text = @"没有满足条件的数据！！！";
+        self.messageView.center = self.view.center;
     }
 }
 
@@ -226,13 +234,26 @@
 
 -(void)setRequestParams{
     NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
-//    self.timeDesc = [timeInfo objectForKey:@"timeDesc"];
-//    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
+    self.timeDesc = [timeInfo objectForKey:@"timeDesc"];
+    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
     [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
 }
 
 -(void)clear{
     self.tableView.hidden = YES;
+}
+
+#pragma mark
+-(void)showSearch:(id)sender{
+    [self.sidePanelController showRightPanelAnimated:YES];
+}
+
+#pragma mark 查询条件发生更改
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"searchCondition"]) {
+        self.condition = [change objectForKey:@"new"];
+        [self sendRequest];
+    }
 }
 @end

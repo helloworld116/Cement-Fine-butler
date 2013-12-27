@@ -133,9 +133,9 @@
             lossData = [data objectForKey:@"endProduct"];
         }
         LossReportViewController *lossReportViewController = [[LossReportViewController alloc] init];
-        lossReportViewController.titlePre = self.timeDesc;
+        lossReportViewController.dateDesc = self.timeDesc;
         lossReportViewController.title = [kLossType objectAtIndex:index];
-        lossReportViewController.dataArray = lossData;
+        lossReportViewController.data = data;
 //        lossReportViewController.hidesBottomBarWhenPushed = YES;
 //        [self.navigationController performSelector:@selector(pushViewController:animated:) withObject:@[@"lossReportViewController",[NSNumber numberWithBool:YES]] afterDelay:0.3f];
         lossReportViewController.hidesBottomBarWhenPushed = YES;

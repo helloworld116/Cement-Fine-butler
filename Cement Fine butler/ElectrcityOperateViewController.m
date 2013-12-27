@@ -8,7 +8,7 @@
 
 #import "ElectrcityOperateViewController.h"
 
-@interface ElectrcityOperateViewController ()<MBProgressHUDDelegate>
+@interface ElectrcityOperateViewController ()<MBProgressHUDDelegate,UITextFieldDelegate>
 @property (nonatomic,retain) UIBarButtonItem *rightBarButtonItem;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
@@ -35,20 +35,23 @@
     if (self.electricityInfo) {
         self.title = @"修改电力价格";
         self.textElectricityPrice.text = [NSString stringWithFormat:@"%.2f",[[self.electricityInfo objectForKey:@"price"] floatValue]];
-         dateValue = [self.electricityInfo objectForKey:@"createTime_str"];
+        dateValue = [Tool stringToString:[self.electricityInfo objectForKey:@"createTime_str"]];
     }else{
         self.title = @"添加电力价格";
-        dateValue =  [dateFormatter stringFromDate:[NSDate date]];
+        dateValue = [dateFormatter stringFromDate:[NSDate date]];
     }
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
-    [self.textElectricityPrice becomeFirstResponder];
+//    [self.textElectricityPrice becomeFirstResponder];
+    self.textElectricityPrice.delegate = self;
     self.tableView.bounces = NO;
     self.datePicker.hidden = YES;
     [self.textElectricityPrice addTarget:self action:@selector(textFieldDidChange:)forControlEvents:UIControlEventEditingChanged];
     self.lblDate.text = dateValue;
-    self.datePicker.date = [dateFormatter dateFromString:dateValue];
+    if(![@"" isEqualToString:dateValue]){
+        self.datePicker.date = [dateFormatter dateFromString:dateValue];
+    }
     if (IS_IPHONE_5) {
         self.tableView.sectionFooterHeight += 88;
     }
@@ -184,6 +187,12 @@
             self.navigationItem.rightBarButtonItem = nil;
         }
     }
+}
+
+#pragma mark UITextField Delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [textField selectAll:self];
 }
 
 -(void)pop:(id)sender{

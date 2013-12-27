@@ -9,6 +9,13 @@
 #import "UpdatePasswordViewController.h"
 
 @interface UpdatePasswordViewController ()<UITextFieldDelegate,MBProgressHUDDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *lblCurrentUsername;
+@property (strong, nonatomic) IBOutlet UITextField *textCurrentPassword;
+@property (strong, nonatomic) IBOutlet UITextField *textNewPassword;
+@property (strong, nonatomic) IBOutlet UITextField *textNewPassword2;
+
+- (IBAction)update:(id)sender;
+
 @property (nonatomic,retain) NSString *currentPassword;
 @property (nonatomic,retain) NSString *password;
 @property (nonatomic,retain) NSString *password2;
@@ -31,17 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_1.png"]];
-    
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_1"]];
-//    [self.view addSubview:imageView];
-//    [self.view sendSubviewToBack:imageView];
-    
-//    self.view.layer.contents = (id)[UIImage imageNamed:@"background_1"].CGImage;
-    
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     
-    self.title = @"修改密码";
+    self.navigationItem.title = @"修改密码";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
     self.textCurrentPassword.delegate = self;
@@ -49,6 +48,10 @@
     self.textNewPassword2.delegate = self;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.lblCurrentUsername.text = [defaults objectForKey:@"username"];
+    
+//    self.textCurrentPassword.text = @"123456";
+//    self.textNewPassword.text = @"123456";
+//    self.textNewPassword2.text = @"123456";
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +71,7 @@
 }
 
 -(BOOL)validate{
-//    BOOL validateResult = NO;
+    BOOL validateResult = YES;
     [self.textCurrentPassword resignFirstResponder];
     [self.textNewPassword resignFirstResponder];
     [self.textNewPassword2 resignFirstResponder];
@@ -78,17 +81,20 @@
     NSString *errorMsg;
     if (self.currentPassword == nil || [@"" isEqualToString:self.currentPassword]) {
         errorMsg = @"当前密码不能为空！";
-        return NO;
+        validateResult = NO;
+    }else{
+        if (self.password == nil || [@"" isEqualToString:self.password]) {
+            errorMsg = @"新密码不能为空！";
+            validateResult = NO;
+        }else{
+            if (![self.password2 isEqualToString:self.password2]) {
+                errorMsg = @"两次输入的密码不一致！";
+                validateResult = NO;
+            }
+        }
     }
-    if (self.password == nil || [@"" isEqualToString:self.password]) {
-        errorMsg = @"新密码不能为空！";
-        return NO;
-    }
-    if (![self.password2 isEqualToString:self.password2]) {
-        errorMsg = @"两次输入的密码不一致！";
-        return NO;
-    }
-    return YES;
+    [self showErrorMessage:errorMsg];
+    return validateResult;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
@@ -106,14 +112,11 @@
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSString *)url{
-    //    [self.textValue resignFirstResponder];
-    //    self.datePicker.hidden = YES;
-    
     //加载过程提示
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.tableView];
     self.progressHUD.labelText = @"正在提交...";
     self.progressHUD.labelFont = [UIFont systemFontOfSize:12];
-    self.progressHUD.dimBackground = YES;
+//    self.progressHUD.dimBackground = YES;
     self.progressHUD.opacity=1.0;
     self.progressHUD.delegate = self;
     [self.tableView addSubview:self.progressHUD];
@@ -139,18 +142,37 @@
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{
+    [self.progressHUD hide:YES];
+    self.textCurrentPassword.text = @"";
+    self.textNewPassword.text = @"";
+    self.textNewPassword2.text = @"";
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
-    if (errorCode==0) {
+    if (errorCode==kErrorCode0) {
 //        [self.navigationController popViewControllerAnimated:YES];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:self.password forKey:@"password"];
+        [self showErrorMessage:[dict objectForKey:@"message"]];
     }else if(errorCode==kErrorCodeExpired){
         LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         kSharedApp.window.rootViewController = loginViewController;
-    }else{
-        
+    }else if(errorCode==101){
+        [self showErrorMessage:[dict objectForKey:@"message"]];
     }
-    [self.progressHUD hide:YES];
+}
+
+-(void)showErrorMessage:(NSString *)message{
+    if (message) {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.progressHUD.mode = MBProgressHUDModeText;
+        self.progressHUD.labelText = message;
+        self.progressHUD.labelFont = [UIFont systemFontOfSize:13.f];
+        self.progressHUD.margin = 5.f;
+//        self.progressHUD.yOffset = 20;
+        self.progressHUD.delegate = self;
+        [self.view addSubview:self.progressHUD];
+        [self.progressHUD show:YES];
+        [self.progressHUD hide:YES afterDelay:1];
+    }
 }
 @end

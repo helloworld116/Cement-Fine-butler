@@ -42,6 +42,7 @@
     
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"产量报表";
+    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
@@ -69,8 +70,8 @@
         self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
     }
     self.rightVC.currentSelectDict = @{kCondition_Time:[NSNumber numberWithInt:2]};
-    self.leftVC = [[RealTimeReportLeftController alloc] init];
-    self.leftVC.conditions = @[@"产量报表",@"库存报表"];
+//    self.leftVC = [[RealTimeReportLeftController alloc] init];
+//    self.leftVC.conditions = @[@"产量报表",@"库存报表"];
     
     //异步请求数据
     self.URL = kOutputReportURL;
@@ -196,13 +197,6 @@
 
 - (void)showSearchCondition:(id)sender {
     [self.sidePanelController showRightPanelAnimated:YES];
-}
-
-- (void)toggleMenu
-{
-    if (self.menu.isOpen)
-        return [self.menu close];
-    [self.menu showFromNavigationController:self.navigationController];
 }
 
 #pragma mark 自定义公共VC

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LossReportViewController : UIViewController<UIWebViewDelegate>
-@property (nonatomic,retain) NSArray *dataArray;
-@property (nonatomic,retain) NSString *titlePre;
+@property (nonatomic,retain) NSDictionary *data;
+@property (nonatomic,retain) NSString *dateDesc;
+@property (nonatomic) NSInteger type;//0表示物流损耗，1表示原材料，2表示半成品，3表示成品
 @end

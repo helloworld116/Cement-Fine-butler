@@ -9,7 +9,7 @@
 #import "RawMaterialsSettingViewController.h"
 #import "RawMaterialsCalViewController.h"
 
-@interface RawMaterialsSettingViewController ()
+@interface RawMaterialsSettingViewController ()<UITextFieldDelegate>
 @property BOOL isKeyboardShow;
 @property (nonatomic,retain) NSString *tempApportionRate;
 @end
@@ -63,7 +63,10 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
-    
+    self.textApportionRate.delegate = self;
+    self.textFinancePrice.delegate = self;
+    self.textPlanPrice.delegate = self;
+    self.textRate.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -203,4 +206,9 @@
 //        [self.textFinancePrice becomeFirstResponder];
 //    }
 //}
+#pragma mark UITextField Delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [textField selectAll:self];
+}
 @end

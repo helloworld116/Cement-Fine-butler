@@ -8,6 +8,10 @@
 
 #import "TitleView.h"
 
+@interface TitleView()
+
+@end
+
 @implementation TitleView
 
 - (id)initWithFrame:(CGRect)frame
@@ -34,10 +38,13 @@
         self.lblTimeInfo.textColor = [UIColor lightTextColor];
         self.lblTimeInfo.textAlignment = UITextAlignmentCenter;
         self.lblTimeInfo.font = [UIFont systemFontOfSize:10];
+        
+        self.bgBtn = [[UIButton alloc] initWithFrame:self.frame];
+        self.bgBtn.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.bgBtn];
         [self addSubview:self.lblTitle];
         [self addSubview:self.lblTimeInfo];
     }
     return self;
 }
-
 @end

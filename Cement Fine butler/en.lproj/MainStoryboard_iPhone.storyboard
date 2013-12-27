@@ -913,7 +913,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--More View Controller - Root View Controller-->
         <scene sceneID="Hjf-ZB-M4T">
             <objects>
-                <tableViewController id="kae-0T-IMD" customClass="MoreViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="moreViewController" id="kae-0T-IMD" customClass="MoreViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zt6-Jh-gm4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

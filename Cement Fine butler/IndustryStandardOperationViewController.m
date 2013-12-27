@@ -10,7 +10,7 @@
 #import "IndustryStandardTypeViewController.h"
 #import "ProductChoiceViewController.h"
 
-@interface IndustryStandardOperationViewController ()<PassValueDelegate,MBProgressHUDDelegate>
+@interface IndustryStandardOperationViewController ()<PassValueDelegate,MBProgressHUDDelegate,UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *lblProductName;
 @property (strong, nonatomic) IBOutlet UILabel *lblTypeName;
@@ -49,6 +49,7 @@
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
     [self.lblProductName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     [self.lblTypeName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+    self.textValue.delegate = self;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -144,6 +145,12 @@
 
 -(void)save:(id)sender{
     [self sendRequest:kIndustryStandardAdd];
+}
+
+#pragma mark UITextField Delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [textField selectAll:self];
 }
 
 #pragma mark 发送网络请求

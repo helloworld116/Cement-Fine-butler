@@ -68,12 +68,13 @@
         [self sendRequest:self.currentPage withProgress:YES];
     }
     NSDictionary *info = @{@"page":[NSNumber numberWithInt:self.currentPage],@"isProgress":@NO};
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.timer invalidate];
+    [self.request clearDelegatesAndCancel];
 }
 
 -(void)onTimer:(NSTimer *)timer {
@@ -275,6 +276,23 @@
         [self sendRequest:self.currentPage withProgress:NO];
     }
     [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    NSLog(@"touchesBegan");
+}
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesCancelled:touches withEvent:event];
+    NSLog(@"touchesCancelled");
+}
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
+    NSLog(@"touchesEnded");
+}
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesMoved:touches withEvent:event];
+    NSLog(@"touchesMoved");
 }
 
 @end
