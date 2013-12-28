@@ -12,4 +12,5 @@
 @property (nonatomic,strong) UILabel *lblTitle;
 @property (nonatomic,strong) UILabel *lblTimeInfo;
 @property (strong,nonatomic) UIButton *bgBtn;
+@property (strong,nonatomic) UIImage *imgArrow;
 @end

@@ -68,7 +68,7 @@
         [self sendRequest:self.currentPage withProgress:YES];
     }
     NSDictionary *info = @{@"page":[NSNumber numberWithInt:self.currentPage],@"isProgress":@NO};
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -97,16 +97,16 @@
 
 
 #pragma mark - Table view data source
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:1];
-    view.backgroundColor = kGeneralColor;
-    return view;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:1];
-    return view.frame.size.height;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:1];
+//    view.backgroundColor = kGeneralColor;
+//    return view;
+//}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:1];
+//    return view.frame.size.height;
+//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:0];
@@ -132,18 +132,19 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
     }
-    cell.lblSeq.text = [NSString stringWithFormat:@"%d",indexPath.row+1];
     NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
-    cell.lblStatus.text = [Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]];
-    cell.lblSN.text = [Tool stringToString:[equipmentInfo objectForKey:@"sn"]];
-
-    cell.lblEquipmentType.text= [Tool stringToString:[equipmentInfo objectForKey:@"typename"]];
-    cell.lblLineName.text = [Tool stringToString:[equipmentInfo objectForKey:@"linename"]];
-    cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"settingFlowRate"] doubleValue]];
-    cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[equipmentInfo objectForKey:@"instantFlowRate"] doubleValue]];
-//    cell.lblStopCount.text = [NSString stringWithFormat:@"%d",[[equipmentInfo objectForKey:@"stopCountMonthly"] intValue]];
+    NSString *imgName = [NSString stringWithFormat:@"%@%@",@"equipment_",[Tool stringToString:[equipmentInfo objectForKey:@"code"]]];
+    cell.imgView.image = [UIImage imageNamed:imgName];
+    cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@[%@]",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]],[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+    cell.lblSN.text = [NSString stringWithFormat:@"%@%@",@"SN:",[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+    cell.lblStatus.text = [NSString stringWithFormat:@"%@%@",@"状态:",[Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]]];
+    cell.lblLineName.text = [NSString stringWithFormat:@"%@%@",@"产线:",[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
+    cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
+    cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"瞬时流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"settingFlowRate"]]]],@"吨/时"];
+    cell.lblPartOutput.text = [NSString stringWithFormat:@"分累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"partOutput"]]]],@"吨"];
+    cell.lblTotalOutput.text = [NSString stringWithFormat:@"分累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        return cell;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
