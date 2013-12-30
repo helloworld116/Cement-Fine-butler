@@ -37,7 +37,7 @@
     if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
-    self.titleView = [[TitleView alloc] init];
+    self.titleView = [[TitleView alloc] initWithArrow:YES];
     self.titleView.lblTimeInfo.text = self.dateDesc;
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;

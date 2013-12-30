@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.titleView = [[TitleView alloc] init];
+    self.titleView = [[TitleView alloc] initWithArrow:YES];
     self.titleView.lblTimeInfo.text = self.timeInfo;
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;

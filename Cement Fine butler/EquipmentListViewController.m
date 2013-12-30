@@ -140,22 +140,22 @@
     cell.lblStatus.text = [NSString stringWithFormat:@"%@%@",@"状态:",[Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]]];
     cell.lblLineName.text = [NSString stringWithFormat:@"%@%@",@"产线:",[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
     cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
-    cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"瞬时流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"settingFlowRate"]]]],@"吨/时"];
+    cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"设定流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"settingFlowRate"]]]],@"吨/时"];
     cell.lblPartOutput.text = [NSString stringWithFormat:@"分累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"partOutput"]]]],@"吨"];
-    cell.lblTotalOutput.text = [NSString stringWithFormat:@"分累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
+    cell.lblTotalOutput.text = [NSString stringWithFormat:@"总累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
-    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
-    if (equipmentStatus==0) {
-        cell.backgroundColor = [UIColor greenColor];
-    }else{
-        cell.backgroundColor = [UIColor redColor];
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
+//    int equipmentStatus = [[equipmentInfo objectForKey:@"status"] intValue];
+//    if (equipmentStatus==0) {
+//        cell.backgroundColor = [UIColor greenColor];
+//    }else{
+//        cell.backgroundColor = [UIColor redColor];
+//    }
+//}
 
 
 #pragma mark - Table view delegate

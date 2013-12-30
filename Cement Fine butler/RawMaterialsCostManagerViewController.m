@@ -47,7 +47,7 @@
     if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
-    self.titleView = [[TitleView alloc] init];
+    self.titleView = [[TitleView alloc] initWithArrow:YES];
     self.titleView.lblTitle.text = @"原材料成本管理";
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
