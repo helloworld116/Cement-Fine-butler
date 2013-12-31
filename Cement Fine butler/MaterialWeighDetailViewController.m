@@ -13,7 +13,6 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UITextField *textTicketCode;
 @property (strong, nonatomic) IBOutlet UITextField *textSupplyName;
-@property (strong, nonatomic) IBOutlet UITextField *textCarCode;
 @property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
 @property (strong, nonatomic) IBOutlet UITextField *textGw;//毛重
 @property (strong, nonatomic) IBOutlet UITextField *textTare;//皮重
@@ -22,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *textAw;//实收重量
 @property (strong, nonatomic) IBOutlet UITextField *textPrice;
 @property (strong, nonatomic) IBOutlet UITextField *textAmout;
+@property (strong, nonatomic) IBOutlet UITextField *textCarCode;
 @property (strong, nonatomic) IBOutlet UILabel *lblTime;
 
 @property (nonatomic) long materialId;//物料id
@@ -30,6 +30,8 @@
 
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (retain,nonatomic) MBProgressHUD *progressHUD;
+
+- (IBAction)dateChange:(id)sender;
 @end
 
 @implementation MaterialWeighDetailViewController
@@ -50,7 +52,10 @@
     self.title = @"采购详情";
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    self.datePicker.hidden = YES;
+    self.tableView.bounces = NO;
     if (self.materialWeighInfo) {
+        self.tableView.sectionFooterHeight -= 216.f;
         self.textTicketCode.enabled=NO;
         self.textSupplyName.enabled=NO;
         self.textCarCode.enabled=NO;
@@ -106,6 +111,9 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
         self.nextViewController = [[AllMaterialsViewController alloc] init];
         self.nextViewController.delegate = self;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        self.lblTime.text = [dateFormatter stringFromDate:[NSDate date]];
     }
 }
 
@@ -118,11 +126,11 @@
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (!self.materialWeighInfo) {
-//        self.datePicker.hidden = YES;
+        self.datePicker.hidden = YES;
+        NSLog(@"row is %d",indexPath.row);
         switch (indexPath.row) {
-            case 0:{
-                    [self.navigationController pushViewController:self.nextViewController animated:YES];
-                }
+            case 0:
+                [self.navigationController pushViewController:self.nextViewController animated:YES];
                 break;
             case 1:
                 [self.textTicketCode becomeFirstResponder];
@@ -155,18 +163,28 @@
                 [self.textCarCode becomeFirstResponder];
                 break;
             case 11:
+                [self.textTicketCode resignFirstResponder];
+                [self.textGw resignFirstResponder];
+                [self.textTare resignFirstResponder];
+                [self.textNw resignFirstResponder];
+                [self.textSupplierNw resignFirstResponder];
+                [self.textAw resignFirstResponder];
+                [self.textPrice resignFirstResponder];
+                [self.textAmout resignFirstResponder];
+                [self.textCarCode resignFirstResponder];
+                self.datePicker.hidden = NO;
                 break;
         }
     }
 }
 
-//- (IBAction)dateChange:(id)sender {
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM"];
-//    NSDate *select = [self.datePicker date];
-//    NSString *dateString =  [dateFormatter stringFromDate:select];
-//    self.lblDate.text = dateString;
-//}
+- (IBAction)dateChange:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *select = [self.datePicker date];
+    NSString *dateString = [dateFormatter stringFromDate:select];
+    self.lblTime.text = dateString;
+}
 
 #pragma mark 发送网络请求
 -(void) sendRequest:(NSString *)url{
@@ -188,7 +206,7 @@
     [self.request setUseCookiePersistence:YES];
     [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
     [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-    [self.request setPostValue:@"2013-11-2 15:23:45" forKey:@"createDate"];
+    [self.request setPostValue:self.lblTime.text forKey:@"createDate"];
     [self.request setPostValue:self.textTicketCode.text forKey:@"ticketCode"];
     [self.request setPostValue:self.textSupplyName.text forKey:@"supplyName"];
     [self.request setPostValue:self.materialCode forKey:@"materialCord"];
