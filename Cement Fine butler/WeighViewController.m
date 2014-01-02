@@ -12,6 +12,9 @@
 
 @interface WeighViewController ()
 @property (nonatomic,retain) NSArray *list;
+
+@property (nonatomic, retain) MaterialWeighListViewController *materialWeighListVC;
+@property (nonatomic, retain) ProductWeighViewController *productWeighVC;
 @end
 
 @implementation WeighViewController
@@ -69,11 +72,15 @@
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
-        MaterialWeighListViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"materialWeighListViewController"];
-        [self.navigationController pushViewController:nextViewController animated:YES];
+        if (!self.materialWeighListVC) {
+            self.materialWeighListVC = [self.storyboard instantiateViewControllerWithIdentifier:@"materialWeighListViewController"];
+        }
+        [self.navigationController pushViewController:self.materialWeighListVC animated:YES];
     }else if(indexPath.row==1){
-        ProductWeighViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productWeighViewController"];
-        [self.navigationController pushViewController:nextViewController animated:YES];
+        if (!self.productWeighVC) {
+            self.productWeighVC = [self.storyboard instantiateViewControllerWithIdentifier:@"productWeighViewController"];
+        }
+        [self.navigationController pushViewController:self.productWeighVC animated:YES];
     }
 }
 

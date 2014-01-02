@@ -35,7 +35,10 @@
                     // width: pie2DConfig.width,
                     // height: pie2DConfig.height,
                     width: 320,
-                    height: 260,
+                    height: 320,
+                    background_color : '#f1f1f1',
+                    gradient:true,//开启渐变
+                    gradient_mode:'LinearGradientUpDown',
                     animation : true,
                     turn_off_touchmove : true,
                     mutex:true,//是否仅有一块扇形区处于弹出状态
@@ -63,7 +66,7 @@
                         label : {
                             background_color:null,
                             sign:false,//设置禁用label的小图标
-                            padding:'0 4',
+                            padding:'0 0',
                             border:{
                                 enable:false,
                                 color:'#666666'
@@ -73,14 +76,14 @@
                             fontweight:600,
                             color : '#4572a7'
                         },
-                        border : {
-                            width : 2,
-                            color : '#ffffff'
-                        },
+                        // border : {
+                        //     width : 2,
+                        //     color : '#ffffff'
+                        // },
                         listeners:{
                             parseText:function(d, t){
                                 // return d.get('value')+"%";
-                                return d.get('name');
+                                return d.get('name')+"\n"+d.get('value');
                                 // return d.get('name')+' '+d.get('value')+"%";
                             }
                         }

@@ -46,17 +46,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.titleView = [[TitleView alloc] initWithArrow:YES];
-    self.titleView.lblTitle.text = @"原材料成本损失";
+    self.titleView.lblTitle.text = @"原材料成本";
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
     
     self.topView.backgroundColor = kRelativelyColor;
-    self.lblTextLoss.textColor = [UIColor darkTextColor];
     self.lblValueLoss.textColor = [UIColor redColor];
     
     self.scrollViewOfProducts = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height+kSegmentedHeight, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.topView.frame.size.height-kSegmentedHeight-kTabBarHeight)];
+    self.scrollViewOfProducts.bounces = NO;
     self.scrollViewOfProducts.pagingEnabled = YES;
     self.scrollViewOfProducts.showsHorizontalScrollIndicator = NO;
     self.scrollViewOfProducts.delegate = self;

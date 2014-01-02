@@ -55,12 +55,11 @@
     self.lblValueActualCosts.textColor = valueColor;
     self.lblValueQuotesCosts.textColor = valueColor;
     self.lblValueStandardCosts.textColor = valueColor;
-    self.lblValueTotalLoss.textColor = [UIColor redColor];
     
     NSString *lblStr = @"";
-    self.lblTextQuotesCosts.text = @"行情成本";
-    self.lblTextActualCosts.text = @"实际成本";
-    self.lblTextStandardCosts.text = @"标准成本";
+    self.lblTextQuotesCosts.text = @"行情成本(元/吨)";
+    self.lblTextActualCosts.text = @"实际成本(元/吨)";
+    self.lblTextStandardCosts.text = @"标准成本(元/吨)";
     self.lblSuggestionTip.text = @"建议：";
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"###,##0.##"];
@@ -71,9 +70,11 @@
     NSString *suggestion = [Tool stringToString:[self.product objectForKey:@"suggestion"]];
     if(totalLoss>0){
         lblStr = [lblStr stringByAppendingString:@"已节约"];
+        self.lblValueTotalLoss.textColor = [UIColor greenColor];
     }else{
         lblStr = [lblStr stringByAppendingString:@"已损失"];
         totalLoss = -totalLoss;
+        self.lblValueTotalLoss.textColor = [UIColor redColor];
     }
     if (totalLoss/100000>1) {
         totalLoss/=10000;

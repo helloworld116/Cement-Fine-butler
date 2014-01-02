@@ -11,6 +11,9 @@
 
 @interface InventoryViewController ()
 @property (nonatomic,retain) NSArray *list;
+@property (nonatomic,retain) InventoryListViewController *materialListVC;
+@property (nonatomic,retain) InventoryListViewController *semiListVC;
+@property (nonatomic,retain) InventoryListViewController *endListVC;
 @end
 
 @implementation InventoryViewController
@@ -68,9 +71,29 @@
 
 #pragma mark UITableView Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    InventoryListViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryListViewController"];
-    nextViewController.type = indexPath.row;
-    [self.navigationController pushViewController:nextViewController animated:YES];
+    switch (indexPath.row) {
+        case 0:
+            if (!self.materialListVC) {
+               self.materialListVC = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryListViewController"];
+            }
+            self.materialListVC.type = indexPath.row;
+            [self.navigationController pushViewController:self.materialListVC animated:YES];
+            break;
+        case 1:
+            if (!self.semiListVC) {
+                self.semiListVC = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryListViewController"];
+            }
+            self.semiListVC.type = indexPath.row;
+            [self.navigationController pushViewController:self.semiListVC animated:YES];
+            break;
+        case 2:
+            if (!self.endListVC) {
+                self.endListVC = [self.storyboard instantiateViewControllerWithIdentifier:@"inventoryListViewController"];
+            }
+            self.endListVC.type = indexPath.row;
+            [self.navigationController pushViewController:self.endListVC animated:YES];
+            break;
+    }
 }
 
 -(void)pop:(id)sender{

@@ -32,7 +32,7 @@
     if (self) {
         self.frame = CGRectMake(0, 0, 200, 44);
         self.backgroundColor = [UIColor colorWithRed:52/255.f green:54/255.f blue:68/255.f alpha:1.0];
-        
+//        self.backgroundColor = [Tool hexStringToColor:@"#5c9cec"];
         self.lblTitle = [[UILabel alloc] initWithFrame:CGRectZero];
         self.lblTitle.backgroundColor = [UIColor clearColor];
         self.lblTitle.textAlignment = UITextAlignmentCenter;

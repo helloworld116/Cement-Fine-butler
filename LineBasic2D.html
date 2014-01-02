@@ -26,6 +26,9 @@
                     animation:false,
                     width : labels.length>6?60*(labels.length-1):320,//相邻两个之间间隔为60
                     height : lineBasic2DConfig.height,
+                    background_color : '#f1f1f1',
+                    gradient:true,//开启渐变
+                    gradient_mode:'RadialGradientOutIn',
                     padding:'0 15 0 15',
                     turn_off_touchmove:true,
                     border:{
@@ -81,6 +84,7 @@
                             color:'#9f9f9f',
                             width:[0,0,2,2]
                         },
+                        grid_color:'#4682B4',//网格的颜色
                         grids:{
                             vertical:{
                                 way:'share_alike',

@@ -78,7 +78,8 @@
     //设置navigtionbar
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[UIColor colorWithRed:52/255.f green:54/255.f blue:68/255.f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setBackgroundColor:[UIColor redColor]];
+//    [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
+//    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[Tool hexStringToColor:@"#5c9cec"]] forBarMetrics:UIBarMetricsDefault];
     UIImage *barButton = [[UIImage imageNamed:@"nav-bar-button-dark"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     UIImage *highlightedBarButton = [[UIImage imageNamed:@"nav-bar-button-dark-highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     

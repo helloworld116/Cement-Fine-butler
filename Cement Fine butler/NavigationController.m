@@ -12,6 +12,8 @@
 
 @interface NavigationController ()
 @property (strong, readwrite, nonatomic) REMenu *menu;
+@property (strong, nonatomic) RawMaterialCostViewController *rawMaterilCostVC;
+@property (strong, nonatomic) RawMaterialsCostManagerViewController *rawMaterialsCostManagerVC;
 @end
 
 @implementation NavigationController
@@ -34,8 +36,10 @@
                                                        image:nil
                                             highlightedImage:nil
                                                       action:^(REMenuItem *item) {
-                                                          RawMaterialCostViewController *controller = [[RawMaterialCostViewController alloc] init];
-                                                          [weakSelf setViewControllers:@[controller] animated:NO];
+                                                          if (!self.rawMaterilCostVC) {
+                                                              self.rawMaterilCostVC = [[RawMaterialCostViewController alloc] init];
+                                                          }
+                                                          [weakSelf setViewControllers:@[self.rawMaterilCostVC] animated:NO];
                                                       }];
     
     REMenuItem *item2 = [[REMenuItem alloc] initWithTitle:@"成本详情"
@@ -43,8 +47,10 @@
                                                           image:nil
                                                highlightedImage:nil
                                                          action:^(REMenuItem *item) {
-                                                         RawMaterialsCostManagerViewController *controller = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
-                                                         [weakSelf setViewControllers:@[controller] animated:NO];
+                                                             if (!self.rawMaterialsCostManagerVC) {
+                                                                 self.rawMaterialsCostManagerVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCostManagerViewController"];
+                                                             }
+                                                             [weakSelf setViewControllers:@[self.rawMaterialsCostManagerVC] animated:NO];
                                                      }];
     self.menu = [[REMenu alloc] initWithItems:@[item1, item2]];
     self.menu.backgroundColor = [UIColor whiteColor];

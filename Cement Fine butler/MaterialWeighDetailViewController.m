@@ -160,6 +160,9 @@
                 [self.textAmout becomeFirstResponder];
                 break;
             case 10:
+//                if (self.datePicker.hidden) {
+//                    self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height-216);
+//                }
                 [self.textCarCode becomeFirstResponder];
                 break;
             case 11:
@@ -173,6 +176,9 @@
                 [self.textAmout resignFirstResponder];
                 [self.textCarCode resignFirstResponder];
                 self.datePicker.hidden = NO;
+//                if (!self.datePicker.hidden) {
+//                    self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height+216);
+//                }
                 break;
         }
     }
@@ -273,5 +279,12 @@
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark UITextfield代理
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (self.datePicker.hidden) {
+        self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height+216);
+    }
 }
 @end

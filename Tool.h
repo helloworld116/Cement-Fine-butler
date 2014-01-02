@@ -63,5 +63,7 @@
 
 +(UIImage *)createImageWithColor:(UIColor *) color;
 
++(UIColor *) hexStringToColor: (NSString *) stringToConvert;
+
 +(NSString *)numberToStringWithFormatter:(NSNumber *)number;
 @end
