@@ -33,8 +33,13 @@
     self.data = @[@{@"id":@1,@"name":@"标准成本"},@{@"id":@2,@"name":@"煤业界均耗"},@{@"id":@3,@"name":@"电业界均耗"}];
     
     self.title = @"行业数据类型选择";
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
+    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
+    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+
     self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureChoice:)];
 }
 

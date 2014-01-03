@@ -40,8 +40,13 @@
         self.title = @"添加电力价格";
         dateValue = [dateFormatter stringFromDate:[NSDate date]];
     }
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
+    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
+    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+
     self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
 //    [self.textElectricityPrice becomeFirstResponder];
     self.textElectricityPrice.delegate = self;

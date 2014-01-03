@@ -159,6 +159,8 @@
     for (UIView *subView in [self.bottomView subviews]) {
         [subView removeFromSuperview];
     }
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"###,##0.##"];
     NSDictionary *overView = [self.data objectForKey:@"overView"];
     NSString *totalCost,*unitCost,*currentUnitCost,*budgetedUnitCost,*costHuanbiRate,*costTongbiRate;
     if (overView&&(NSNull *)overView!=[NSNull null]) {
@@ -176,19 +178,23 @@
         }
         //当前单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"currentUnitCost"]]) {
-            currentUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"currentUnitCost"] doubleValue]];
+//            currentUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"currentUnitCost"] doubleValue]];
+            currentUnitCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"currentUnitCost"]]]];
         }
         //计划单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"budgetedUnitCost"]]) {
-            budgetedUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"budgetedUnitCost"] doubleValue]];
+//            budgetedUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"budgetedUnitCost"] doubleValue]];
+            budgetedUnitCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"budgetedUnitCost"]]]];
         }
         //财务单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"unitCost"]]) {
-            unitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"unitCost"] doubleValue]];
+//            unitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"unitCost"] doubleValue]];
+            unitCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"unitCost"]]]];
         }
         //总成本
         if (![Tool isNullOrNil:[overView objectForKey:@"totalCost"]]) {
-            totalCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"totalCost"] doubleValue]];
+//            totalCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"totalCost"] doubleValue]];
+            totalCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"totalCost"]]]];
         }
         NSString *preStr = @"<font size=20 color='red'>";
         NSString *sufStr = @"</font>";

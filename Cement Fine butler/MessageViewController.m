@@ -59,8 +59,13 @@
 ////        [[UIApplication sharedApplication] presentLocalNotificationNow:notification2];
 //    }
     self.title = @"消息历史";
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
+    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
+    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+
     self.tableView.rowHeight = 60.f;
     self.currentPage = 1;
     self.list = [NSMutableArray array];

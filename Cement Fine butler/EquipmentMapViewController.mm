@@ -26,8 +26,13 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"设备地图列表";
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleBordered target:self action:@selector(showListController:)];
-    
+//    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleBordered target:self action:@selector(showListController:)];
+    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setFrame:CGRectMake(0, 0, 40, 30)];
+    [bt setImage:[UIImage imageNamed:@"list_icon"] forState:UIControlStateNormal];
+    [bt setImage:[UIImage imageNamed:@"list_click_icon"] forState:UIControlStateHighlighted];
+    [bt addTarget:self action:@selector(showListController:) forControlEvents:UIControlEventTouchUpInside];
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
     [_mapView setZoomLevel:6];
     self.equipmentList = [NSMutableArray array];
     self.URL = kEquipmentList;

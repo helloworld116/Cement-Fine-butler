@@ -50,7 +50,13 @@
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setFrame:CGRectMake(0, 0, 40, 30)];
+    [bt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [bt setImage:[UIImage imageNamed:@"search_click"] forState:UIControlStateHighlighted];
+    [bt addTarget:self action:@selector(showSearchCondition:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
     
     self.topView.backgroundColor = kRelativelyColor;
     self.lblValueLoss.textColor = [UIColor redColor];

@@ -48,7 +48,13 @@
     self.navigationItem.titleView = self.titleView;
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
+    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setFrame:CGRectMake(0, 0, 40, 30)];
+    [bt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [bt setImage:[UIImage imageNamed:@"search_click"] forState:UIControlStateHighlighted];
+    [bt addTarget:self action:@selector(showSearch:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
     
     CGRect topViewFrame = CGRectMake(0, 0, kScreenWidth, 60);
     UIView *topView = [[UIView alloc] initWithFrame:topViewFrame];

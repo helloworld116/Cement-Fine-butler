@@ -63,7 +63,13 @@
     self.titleView.lblTitle.text = @"能源监控";
     self.navigationItem.titleView = self.titleView;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
+    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setFrame:CGRectMake(0, 0, 40, 30)];
+    [bt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [bt setImage:[UIImage imageNamed:@"search_click"] forState:UIControlStateHighlighted];
+    [bt addTarget:self action:@selector(showSearchCondition:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
 //    CGRect viewFrame = self.view.frame;
 //    viewFrame.size.height = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight;
 //    self.view.frame = viewFrame;
