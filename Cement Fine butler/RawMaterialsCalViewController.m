@@ -59,8 +59,7 @@
     [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
-    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"还原" style:UIBarButtonItemStylePlain target:self action:@selector(revert:)];
-//    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"还原" target:self action:@selector(revert:)];
     self.navigationItem.rightBarButtonItem = calBarButtonItem;
 //    self.navigationItem.rightBarButtonItem.
     self.navigationItem.title = @"原材料成本计算器";

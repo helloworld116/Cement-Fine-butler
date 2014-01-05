@@ -862,18 +862,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="9zu-Zd-CoF" id="QX9-gp-tij"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="sUW-IC-z46">
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="2hP-go-Aq7">
-                            <connections>
-                                <action selector="back:" destination="9zu-Zd-CoF" id="nfp-7G-812"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="确定" id="v8K-3t-3RR">
-                            <connections>
-                                <action selector="sureDate:" destination="9zu-Zd-CoF" id="Agh-Na-o75"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="sUW-IC-z46"/>
                     <connections>
                         <outlet property="datePicker" destination="33g-XN-wue" id="UsJ-pQ-pus"/>
                         <outlet property="lblEndDate" destination="p8o-Wq-ouV" id="uTh-69-64m"/>

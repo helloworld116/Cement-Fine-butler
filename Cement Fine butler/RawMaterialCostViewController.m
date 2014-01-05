@@ -50,13 +50,8 @@
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
-    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
-    [bt setFrame:CGRectMake(0, 0, 40, 30)];
-    [bt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
-    [bt setImage:[UIImage imageNamed:@"search_click"] forState:UIControlStateHighlighted];
-    [bt addTarget:self action:@selector(showSearchCondition:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearchCondition:)];
     
     self.topView.backgroundColor = kRelativelyColor;
     self.lblValueLoss.textColor = [UIColor redColor];
@@ -105,7 +100,7 @@
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     double totalLoss = [[overview objectForKey:@"totalLoss"] doubleValue];
     NSString *lblStr = @"";
-    if(totalLoss>0){
+    if(totalLoss>=0){
         lblStr = [lblStr stringByAppendingString:@"总节约"];
     }else{
         lblStr = [lblStr stringByAppendingString:@"总损失"];

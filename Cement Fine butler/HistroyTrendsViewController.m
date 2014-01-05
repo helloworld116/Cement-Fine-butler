@@ -41,14 +41,18 @@
     self.titleView.lblTitle.font = [UIFont boldSystemFontOfSize:15];
     self.titleView.lblTitle.text = kTitle1;
     self.navigationItem.titleView = self.titleView;
-    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
-    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    
+//    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
+//    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+//    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
+//    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
+    
     
     [(UIScrollView *)[[self.webView subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.webView.delegate = self;

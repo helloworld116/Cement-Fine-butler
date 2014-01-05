@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cement Fine butler/RawMaterialsCostManagerViewController.m"
-            timestampString = "408184907.161723"
+            timestampString = "410627573.948786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "@implementation RawMaterialsCostManagerViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cement Fine butler/RawMaterialsCostManagerViewController.m"
-            timestampString = "408184907.161723"
+            timestampString = "410627573.948786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -322,12 +322,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cement Fine butler/ElectricityPriceViewController.m"
-            timestampString = "404447088.000873"
+            timestampString = "410627573.948786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

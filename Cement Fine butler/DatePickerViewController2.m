@@ -27,6 +27,9 @@
     [super viewDidLoad];
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     self.navigationItem.title = @"选择起止日期";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(back:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"确定" target:self action:@selector(sureDate:)];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *startDate = [defaults valueForKey:@"startDate"];
     NSDictionary *endDate = [defaults valueForKey:@"endDate"];

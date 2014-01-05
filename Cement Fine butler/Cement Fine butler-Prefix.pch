@@ -45,6 +45,7 @@
     #import "Tool.h"
     #import "UIColor+Random.h"
     #import "CommonViewController.h"
+    #import "UIBarButtonItem+ButtonWithoutBorder.h"
     #import "Factory.h"
 
     #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )

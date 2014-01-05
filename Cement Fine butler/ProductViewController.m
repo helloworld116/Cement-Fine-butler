@@ -68,7 +68,7 @@
     double actualCosts = [Tool doubleValue:[self.product objectForKey:@"actualCosts"]];
     double standardCosts = [Tool doubleValue:[self.product objectForKey:@"standardCosts"]];
     NSString *suggestion = [Tool stringToString:[self.product objectForKey:@"suggestion"]];
-    if(totalLoss>0){
+    if(totalLoss>=0){
         lblStr = [lblStr stringByAppendingString:@"已节约"];
         self.lblValueTotalLoss.textColor = [UIColor greenColor];
     }else{
