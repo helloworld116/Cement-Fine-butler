@@ -28,7 +28,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
     self.title = @"选择产品";
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureChoice:)];
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"确定" target:self action:@selector(sureChoice:)];
     self.list = [kSharedApp.factory objectForKey:@"products"];
 }
 

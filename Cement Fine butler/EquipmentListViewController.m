@@ -61,7 +61,7 @@
 //    [self sendRequest:self.currentPage withProgress:YES];
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    self.tableView.separatorColor = [UIColor colorWithRed:132.0f/255.0f green:132.0f/255.0f blue:131.0f/255.0f alpha:1.0f];
+    self.tableView.separatorColor = [Tool hexStringToColor:@"#e3e3e3"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -73,7 +73,7 @@
         [self sendRequest:self.currentPage withProgress:YES];
     }
     NSDictionary *info = @{@"page":[NSNumber numberWithInt:self.currentPage],@"isProgress":@NO};
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -140,15 +140,14 @@
     NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
     NSString *imgName = [NSString stringWithFormat:@"%@%@",@"equipment_",[Tool stringToString:[equipmentInfo objectForKey:@"code"]]];
     cell.imgView.image = [UIImage imageNamed:imgName];
-    cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@[%@]",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]],[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
-    cell.lblSN.text = [NSString stringWithFormat:@"%@%@",@"SN:",[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
-    cell.lblStatus.text = [NSString stringWithFormat:@"%@%@",@"状态:",[Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]]];
-    cell.lblLineName.text = [NSString stringWithFormat:@"%@%@",@"产线:",[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
-    cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
-    cell.lblSettingFlowRate.text = [NSString stringWithFormat:@"设定流量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"settingFlowRate"]]]],@"吨/时"];
-    cell.lblPartOutput.text = [NSString stringWithFormat:@"分累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"partOutput"]]]],@"吨"];
-    cell.lblTotalOutput.text = [NSString stringWithFormat:@"总累积量:%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@ （%@）",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]],[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+    cell.lblSN.text = [NSString stringWithFormat:@"%@%@",@"SN：",[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+    cell.lblStatus.text = [Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]];
+    cell.lblLineName.text = [NSString stringWithFormat:@"%@%@",@"产线：",[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
+    cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
+    cell.lblTotalOutput.text = [NSString stringWithFormat:@"总累积量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
+    int status = [Tool intValue:[equipmentInfo objectForKey:@"status"]];
+    [self colorByEquipmentStatus:status equipmentCell:cell];
     return cell;
 }
 
@@ -161,6 +160,39 @@
 //        cell.backgroundColor = [UIColor redColor];
 //    }
 //}
+
+-(void)colorByEquipmentStatus:(int)status equipmentCell:(EquipmentListCell*)cell{
+    switch (status) {
+        case 0:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#30bee1"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_meter_normal_icon"];
+            break;
+        case 1:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#ff5976"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_meter_fault_icon"];
+            break;
+        case 2:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#fdbf6b"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_disconnect_the_meter_scale_icon"];
+            break;
+        case 3:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#5287b0"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_system_does_not_start_icon"];
+            break;
+        case 4:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#ff7ab3"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_disconnect_the_meter_box_icon"];
+            break;
+        case 5:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#bf5efc"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_network_anomaly_icon"];
+            break;
+        case 6:
+            cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#19bc9b"];
+            cell.imgStatus.image = [UIImage imageNamed:@"status_normal_shutdown_icon"];
+            break;
+    }
+}
 
 
 #pragma mark - Table view delegate

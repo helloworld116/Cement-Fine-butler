@@ -134,12 +134,13 @@
     self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, kSegmentedHeight)];
     self.segmented.selectedSegmentIndex = 0;
     [self.segmented setScrollEnabled:YES];
-    [self.segmented setBackgroundColor:kGeneralColor];
-    [self.segmented setTextColor:[UIColor darkTextColor]];
+    [self.segmented setBackgroundColor:[Tool hexStringToColor:@"#e2ebf7"]];
+    [self.segmented setTextColor:kGeneralColor];
     [self.segmented setSelectedTextColor:kRelativelyColor];
-    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+//    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleBox];
     [self.segmented setSelectionIndicatorHeight:3];
-    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
+    [self.segmented setSelectionIndicatorColor:kGeneralColor];//kRelativelyColor
     [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
     [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     self.segmented.sectionTitles = productNames;

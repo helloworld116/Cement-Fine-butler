@@ -52,7 +52,7 @@
             break;
     }
     self.title = [NSString stringWithFormat:@"%@选择",title];
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureChoice:)];
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"确定" target:self action:@selector(sureChoice:)];
     self.firstSelectCellIndex = -1;
 //    self.navigationItem.rightBarButtonItem 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

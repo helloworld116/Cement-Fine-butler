@@ -15,7 +15,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 @property (strong, nonatomic) IBOutlet UILabel *lblLineName;
 @property (strong, nonatomic) IBOutlet UILabel *lblInstantFlowRate;
-@property (strong, nonatomic) IBOutlet UILabel *lblSettingFlowRate;
-@property (strong, nonatomic) IBOutlet UILabel *lblPartOutput;
+//@property (strong, nonatomic) IBOutlet UILabel *lblSettingFlowRate;
+//@property (strong, nonatomic) IBOutlet UILabel *lblPartOutput;
+@property (strong, nonatomic) IBOutlet UIImageView *imgStatus;
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalOutput;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatusColor;
 @end

@@ -50,8 +50,8 @@
     [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
     [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
+    
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(save:)];
     [self.lblProductName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     [self.lblTypeName addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     self.textValue.delegate = self;

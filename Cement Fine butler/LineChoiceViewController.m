@@ -28,11 +28,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
     self.navigationItem.title = @"选择产线";
-    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
-    [bt setFrame:CGRectMake(0, 0, 40, 30)];
-    [bt setTitle:@"确定" forState:UIControlStateNormal];
-    [bt addTarget:self action:@selector(sureChoice:) forControlEvents:UIControlEventTouchUpInside];
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"确定" target:self action:@selector(sureChoice:)];
     self.list = [kSharedApp.factory objectForKey:@"lines"];
 }
 

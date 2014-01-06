@@ -41,7 +41,7 @@
     [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(update:)];
     self.textLower.delegate = self;
     self.textCaps.delegate = self;
     if(![Tool isNullOrNil:[self.info objectForKey:@"material"]]){

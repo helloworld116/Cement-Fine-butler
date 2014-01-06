@@ -44,7 +44,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     if (self.productHistoryInfo) {
         title = @"修改";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"修改" target:self action:@selector(update:)];
         self._id = [[self.productHistoryInfo objectForKey:@"id"] longValue];
         self.lblLine.text = [Tool stringToString:[self.productHistoryInfo objectForKey:@"name"]];
         self.lineId = [[self.productHistoryInfo objectForKey:@"lineId"] longValue];
@@ -55,7 +55,7 @@
         self.datePicker.date = [dateFormatter dateFromString:startTime];
     }else{
         title = @"添加";
-        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(add:)];
         self.lblLine.text = @"请选择";
         self.lblProduct.text = @"请选择";
         self.lblTime.text = [dateFormatter stringFromDate:[NSDate date]];

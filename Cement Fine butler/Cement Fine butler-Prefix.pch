@@ -65,7 +65,7 @@
     #define kColorList @[@"#9400D3",@"#FF1493",@"#00BFFF",@"#00CED1",@"#B22222",@"#228B22",@"#FF00FF",@"#FFD700",@"#ADFF2F",@"#CD5C5C",@"#FF69B4",@"#ADD8E6",@"#90EE90",@"#FFB6C1",@"#FFA07A",@"#20B2AA",@"#87CEFA",@"#8470FF",@"#778899",@"#0000CD",@"#3CB371",@"#696969",@"#1E90FF",@"#D19275"]
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
 //    #define kGeneralColor [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]
-    #define kGeneralColor [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]
+    #define kGeneralColor [UIColor colorWithRed:92/255.0 green:156/255.0 blue:236/255.0 alpha:1.0]
     #define kRelativelyColor [UIColor whiteColor]
 
     //接口地址

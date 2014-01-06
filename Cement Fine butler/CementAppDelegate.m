@@ -152,13 +152,14 @@
     MoreNavigationController *moreNC = [[MoreNavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"moreViewController"]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
+//    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
+//    tabBarController.tabBar
     
-    rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"pie-chart"] tag:kViewTag+1];
-    energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源" image:[UIImage imageNamed:@"uptrend"] tag:kViewTag+2];
-    lossOverViewNC.tabBarItem = [lossOverViewNC.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"bar-chart"] tag:kViewTag+3];
-    equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"equipmentList"] tag:kViewTag+4];
-    moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"more"] tag:kViewTag+5];
+    rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"cost_icon"] tag:kViewTag+1];
+    energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源" image:[UIImage imageNamed:@"energy_icon"] tag:kViewTag+2];
+    lossOverViewNC.tabBarItem = [lossOverViewNC.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"loss_icon"] tag:kViewTag+3];
+    equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"equipment_icon"] tag:kViewTag+4];
+    moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"more_icon"] tag:kViewTag+5];
     
     tabBarController.viewControllers = @[rawMaterialCostLossNC,energyMonitoringOverViewNC,lossOverViewNC,equipmentNC,moreNC];
     

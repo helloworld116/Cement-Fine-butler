@@ -49,16 +49,11 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
-    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
-    [bt setFrame:CGRectMake(0, 0, 40, 30)];
-    [bt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
-    [bt setImage:[UIImage imageNamed:@"search_click"] forState:UIControlStateHighlighted];
-    [bt addTarget:self action:@selector(showSearch:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
     
     CGRect topViewFrame = CGRectMake(0, 0, kScreenWidth, 60);
     UIView *topView = [[UIView alloc] initWithFrame:topViewFrame];
-    topView.backgroundColor = [UIColor lightGrayColor];
+    topView.backgroundColor = [Tool hexStringToColor:@"#f2f8ff"];
     self.lblTotalLossAmount = [[UILabel alloc] initWithFrame:CGRectZero];
     self.lblTotalLossAmount.backgroundColor = [UIColor clearColor];
     self.lblTotalLossAmount.textAlignment = UITextAlignmentCenter;
@@ -74,7 +69,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2"]];
+//    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2"]];
     [self.view addSubview:self.tableView];
     
     self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
@@ -114,19 +109,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         switch (indexPath.row/2) {
             case 0:
-                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse"];
+                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse_icon"];
                 cell.lblPlace.text = @"供应方";
                 break;
             case 1:
-                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse"];
+                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse_icon"];
                 cell.lblPlace.text = @"原材料仓";
                 break;
             case 2:
-                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse"];
+                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse_icon"];
                 cell.lblPlace.text = @"半成品仓";
                 break;
             case 3:
-                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse"];
+                cell.imgViewPlace.image = [UIImage imageNamed:@"warehouse_icon"];
                 cell.lblPlace.text = @"成品仓";
                 break;
         }
@@ -139,9 +134,11 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"LossCell" owner:self options:nil] objectAtIndex:1];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.imgViewArrow.image = [UIImage imageNamed:@"arrow-down"];
-        cell.imgViewBubble.image= [[UIImage imageNamed:@"bubble"] resizableImageWithCapInsets:UIEdgeInsetsMake(42,30,38,25)];//42,28,38,28
-        cell.imgViewMiddle.image = [UIImage imageNamed:@"trunk"];
+        cell.imgViewArrow.image = [UIImage imageNamed:@"arrow_down2"];
+        cell.imgViewBubble.image= [UIImage imageNamed:@"bubble2"];
+//        cell.imgViewArrow.image = [UIImage imageNamed:@"arrow-down"];
+//        cell.imgViewBubble.image= [[UIImage imageNamed:@"bubble"] resizableImageWithCapInsets:UIEdgeInsetsMake(42,30,38,25)];//42,28,38,28
+        cell.imgViewMiddle.image = [UIImage imageNamed:@"car_icon"];
         switch (indexPath.row) {
             case 1:{
                     double logisticsLoss = [Tool doubleValue:[self.overview objectForKey:@"logisticsLoss"]];

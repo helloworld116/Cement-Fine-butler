@@ -42,7 +42,8 @@
         self.textValue.text = [NSString stringWithFormat:@"%.2f",[[self.fixcostInfo objectForKey:@"price"] doubleValue]];
     }else{
         title = @"添加";
-        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+//        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(save:)];
         self.lblDate.text = [dateFormatter stringFromDate:[NSDate date]];
     }
     self.title = [title stringByAppendingFormat:@"%@",@"固定成本"];

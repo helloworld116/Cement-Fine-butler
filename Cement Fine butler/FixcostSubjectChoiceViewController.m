@@ -40,7 +40,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
     self.title = @"成本项选择";
-    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureChoice:)];
+    self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"确定" target:self action:@selector(sureChoice:)];
     self.firstSelectCellIndex = -1;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self sendRequest];

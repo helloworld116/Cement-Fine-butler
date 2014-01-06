@@ -59,7 +59,8 @@
         self.textValue.text = [NSString stringWithFormat:@"%.2f",[[self.inventoryInfo objectForKey:@"stock"] doubleValue]];
     }else{
         title = @"添加";
-        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+//        self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
+        self.rightButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(add:)];
         self.lblDate.text = [dateFormatter stringFromDate:[NSDate date]];
     }
     switch (self.type) {
