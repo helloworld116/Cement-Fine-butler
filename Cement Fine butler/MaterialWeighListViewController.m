@@ -35,7 +35,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
     if (!kSharedApp.multiGroup) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus_icon"] highlightedImage:[UIImage imageNamed:@"plus_click_icon"] target:self action:@selector(add:)];
+        //todo 暂时未完成，不提供
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus_icon"] highlightedImage:[UIImage imageNamed:@"plus_click_icon"] target:self action:@selector(add:)];
     }
     self.tableView.rowHeight = 50.f;
     self.currentPage = 1;

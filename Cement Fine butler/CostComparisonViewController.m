@@ -81,6 +81,8 @@
     for (UIView *subView in [self.bottomView subviews]) {
         [subView removeFromSuperview];
     }
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"###,##0.##"];
     NSDictionary *overView = [self.data objectForKey:@"overView"];
     NSString *totalCost,*unitCost,*currentUnitCost,*budgetedUnitCost,*costHuanbiRate,*costTongbiRate;
     if (overView&&(NSNull *)overView!=[NSNull null]) {
@@ -88,60 +90,64 @@
         if (![Tool isNullOrNil:[overView objectForKey:@"costHuanbiRate"]]) {
             costHuanbiRate = [NSString stringWithFormat:@"%.2f%@",[[overView objectForKey:@"costHuanbiRate"] doubleValue]*100,@"%"];
         }else{
-            costHuanbiRate = @"---";
+            costHuanbiRate = @"";
         }
         //成本同比增长率
         if (![Tool isNullOrNil:[overView objectForKey:@"costTongbiRate"]]) {
             costTongbiRate = [NSString stringWithFormat:@"%.2f%@",[[overView objectForKey:@"costTongbiRate"] doubleValue]*100,@"%"];
         }else{
-            costTongbiRate = @"---";
+            costTongbiRate = @"";
         }
         //当前单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"currentUnitCost"]]) {
-            currentUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"currentUnitCost"] doubleValue]];
+            //            currentUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"currentUnitCost"] doubleValue]];
+            currentUnitCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"currentUnitCost"]]]];
         }
         //计划单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"budgetedUnitCost"]]) {
-            budgetedUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"budgetedUnitCost"] doubleValue]];
+            //            budgetedUnitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"budgetedUnitCost"] doubleValue]];
+            budgetedUnitCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"budgetedUnitCost"]]]];
         }
         //财务单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"unitCost"]]) {
-            unitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"unitCost"] doubleValue]];
+            //            unitCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"unitCost"] doubleValue]];
+            unitCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"unitCost"]]]];
         }
         //总成本
         if (![Tool isNullOrNil:[overView objectForKey:@"totalCost"]]) {
-            totalCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"totalCost"] doubleValue]];
+            //            totalCost = [NSString stringWithFormat:@"%.2f",[[overView objectForKey:@"totalCost"] doubleValue]];
+            totalCost = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[Tool doubleValue:[overView objectForKey:@"totalCost"]]]];
         }
         NSString *preStr = @"<font size=20 color='red'>";
         NSString *sufStr = @"</font>";
         
         RTLabel *lblTotalCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, 0, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
-        NSString *strTotalCost = [@"总成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,totalCost,sufStr,@"元"];
+        NSString *strTotalCost = [@"总成本: " stringByAppendingFormat:@"%@%@%@%@",preStr,totalCost,sufStr,@"元"];
         [lblTotalCost setText:strTotalCost];
         [self.bottomView addSubview:lblTotalCost];
         
         RTLabel *lblFinanceUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
-        NSString *strFinanceUnitCost = [@"财务单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,unitCost,sufStr,@"元/吨"];
+        NSString *strFinanceUnitCost = [@"财务单位成本: " stringByAppendingFormat:@"%@%@%@%@",preStr,unitCost,sufStr,@"元/吨"];
         [lblFinanceUitCost setText:strFinanceUnitCost];
         [self.bottomView addSubview:lblFinanceUitCost];
         
         RTLabel *lblCurrentUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*2, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
-        NSString *strCurrentUnitCost = [@"当期单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,currentUnitCost,sufStr,@"元/吨"];
+        NSString *strCurrentUnitCost = [@"当期单位成本: " stringByAppendingFormat:@"%@%@%@%@",preStr,currentUnitCost,sufStr,@"元/吨"];
         [lblCurrentUitCost setText:strCurrentUnitCost];
         [self.bottomView addSubview:lblCurrentUitCost];
         
         RTLabel *lblPlanUitCost = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*3, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
-        NSString *strPlanUnitCost = [@"计划单位成本：" stringByAppendingFormat:@"%@%@%@%@",preStr,budgetedUnitCost,sufStr,@"元/吨"];
+        NSString *strPlanUnitCost = [@"计划单位成本: " stringByAppendingFormat:@"%@%@%@%@",preStr,budgetedUnitCost,sufStr,@"元/吨"];
         [lblPlanUitCost setText:strPlanUnitCost];
         [self.bottomView addSubview:lblPlanUitCost];
         
         RTLabel *lblTongbi = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*4, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
-        NSString *strTongbi = [@"同比增长：" stringByAppendingFormat:@"%@%@%@",preStr,costTongbiRate,sufStr];
+        NSString *strTongbi = [@"同比增长: " stringByAppendingFormat:@"%@%@%@",preStr,costTongbiRate,sufStr];
         [lblTongbi setText:strTongbi];
         [self.bottomView addSubview:lblTongbi];
         
         RTLabel *lblHuanbi = [[RTLabel alloc] initWithFrame:CGRectMake(kLabelOrignX, kLabelHeight*5, kScreenWidth-2*kLabelOrignX, kLabelHeight)];
-        NSString *strHuanbi = [@"环比增长：" stringByAppendingFormat:@"%@%@%@",preStr,costHuanbiRate,sufStr];
+        NSString *strHuanbi = [@"环比增长: " stringByAppendingFormat:@"%@%@%@",preStr,costHuanbiRate,sufStr];
         [lblHuanbi setText:strHuanbi];
         [self.bottomView addSubview:lblHuanbi];
         
@@ -153,9 +159,9 @@
             self.scrollView.contentSize = CGSizeMake(kScreenWidth,bottomViewNeedHeight+self.bottomView.frame.origin.y);
         }
     }
+    //    self.bottomView.backgroundColor = [Tool hexStringToColor:@"#f1f1f1"];
     self.bottomView.hidden=NO;
 }
-
 
 #pragma mark begin webviewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -169,16 +175,18 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
         NSMutableArray *dataArray = [[NSMutableArray alloc] init];
-        double unitCost = [[[self.data objectForKey:@"overView"] objectForKey:@"unitCost"] doubleValue];
         if (self.data&&(NSNull *)self.data!=[NSNull null]) {
             NSArray *materials = [self.data objectForKey:@"materials"];
             for (int i=0; i<materials.count; i++) {
                 NSDictionary *material = [materials objectAtIndex:i];
-                NSString *color = [kColorList objectAtIndex:i];
-                NSString *name = [NSString stringWithFormat:@"%@ %@元/吨",[material objectForKey:@"name"],[material objectForKey:@"unitCost"]];
-                NSString *value = [NSString stringWithFormat:@"%.2f",[[material objectForKey:@"unitCost"] doubleValue]/unitCost*100];
-                NSDictionary *data = @{@"name":name,@"value":value,@"color":color};
-                [dataArray addObject:data];
+                double unitCost = [Tool doubleValue:[material objectForKey:@"unitCost"]];
+                if (unitCost) {
+                    NSString *color = [kColorList objectAtIndex:i];
+                    NSString *name = [material objectForKey:@"name"];
+                    NSString *value = [NSString stringWithFormat:@"%.2f",unitCost];
+                    NSDictionary *data = @{@"name":name,@"value":value,@"color":color};
+                    [dataArray addObject:data];
+                }
             }
             NSString *pieData = [Tool objectToString:dataArray];
             NSString *title = @"直接材料成本";

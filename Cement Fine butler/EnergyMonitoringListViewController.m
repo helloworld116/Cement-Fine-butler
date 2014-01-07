@@ -42,7 +42,6 @@
     self.titleView.lblTimeInfo.text = self.timeInfo;
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
-//    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
     UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
     [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
@@ -50,11 +49,11 @@
     [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     
-    self.topView.backgroundColor = kGeneralColor;
-    self.lblTextAmount.textColor = [UIColor lightTextColor];
-    self.lblTextFee.textColor = [UIColor lightTextColor];
-    self.lblValueAmount.textColor = kRelativelyColor;
-    self.lblValueFee.textColor = kRelativelyColor;
+    self.topView.backgroundColor = kRelativelyColor;
+    self.lblTextAmount.textColor = kGeneralColor;
+    self.lblTextFee.textColor = kGeneralColor;
+    self.lblValueAmount.textColor = kGeneralColor;
+    self.lblValueFee.textColor = kGeneralColor;
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height-kNavBarHeight+1);
     
@@ -73,18 +72,18 @@
         double coalAmount = [[overview objectForKey:@"coalAmount"] doubleValue];
         if (coalFee/100000>1) {
             coalFee/=10000;
-            self.lblTextFee.text = @"煤费(万元)";
+            self.lblTextFee.text = @"总煤费(万元)";
         }else{
-            self.lblTextFee.text = @"煤费(元)";
+            self.lblTextFee.text = @"总煤费(元)";
         }
         NSString *coalFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
         self.lblValueFee.text = coalFeeString;
         
         if (coalAmount/100000>1) {
             coalAmount/=10000;
-            self.lblTextAmount.text = @"煤耗(万吨)";
+            self.lblTextAmount.text = @"总煤耗(万吨)";
         }else{
-            self.lblTextAmount.text = @"煤耗(吨)";
+            self.lblTextAmount.text = @"总煤耗(吨)";
         }
         NSString *coalAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalAmount]];
         self.lblValueAmount.text = coalAmountString;
@@ -94,18 +93,18 @@
         double electricityAmount = [[overview objectForKey:@"electricityAmount"] doubleValue];
         if (electricityFee/100000>1) {
             electricityFee/=10000;
-            self.lblTextFee.text = @"电费(万元)";
+            self.lblTextFee.text = @"总电费(万元)";
         }else{
-            self.lblTextFee.text = @"电费(元)";
+            self.lblTextFee.text = @"总电费(元)";
         }
         NSString *eletricityFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
         self.lblValueFee.text = eletricityFeeString;
         
         if (electricityAmount/100000>1) {
             electricityAmount/=10000;
-            self.lblTextAmount.text = @"电耗(万度)";
+            self.lblTextAmount.text = @"总电耗(万度)";
         }else{
-            self.lblTextAmount.text = @"电耗(度)";
+            self.lblTextAmount.text = @"总电耗(度)";
         }
         NSString *eletricityAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityAmount]];
         self.lblValueAmount.text = eletricityAmountString;
@@ -127,12 +126,20 @@
     
     self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.topView.frame.size.height, kScreenWidth, 40)];
     [self.segmented setScrollEnabled:YES];
-    [self.segmented setBackgroundColor:kGeneralColor];
-    [self.segmented setTextColor:[UIColor darkTextColor]];
+//    [self.segmented setBackgroundColor:kGeneralColor];
+//    [self.segmented setTextColor:[UIColor darkTextColor]];
+//    [self.segmented setSelectedTextColor:kRelativelyColor];
+//    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+//    [self.segmented setSelectionIndicatorHeight:3];
+//    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
+//    [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+    [self.segmented setBackgroundColor:[Tool hexStringToColor:@"#e2ebf7"]];
+    [self.segmented setTextColor:kGeneralColor];
     [self.segmented setSelectedTextColor:kRelativelyColor];
-    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+    //    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleBox];
     [self.segmented setSelectionIndicatorHeight:3];
-    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
+    [self.segmented setSelectionIndicatorColor:kGeneralColor];
     [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
     [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     self.segmented.sectionTitles = productNames;

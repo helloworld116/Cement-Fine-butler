@@ -152,7 +152,7 @@
     MoreNavigationController *moreNC = [[MoreNavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"moreViewController"]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-//    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar"]];
 //    tabBarController.tabBar
     
     rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"cost_icon"] tag:kViewTag+1];

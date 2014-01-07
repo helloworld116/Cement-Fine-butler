@@ -47,7 +47,7 @@
             self.lblTitle.frame = CGRectMake(0, 2, 200, 30);
             self.lblTimeInfo.frame = CGRectMake(0, 30, 200, 12);
             UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"small-triangle_icon"]];
-            imgView.frame = CGRectMake(165, 17, 10, 10);
+            imgView.frame = CGRectMake(150, 17, 10, 10);
             [self addSubview:imgView];
         }else{
             self.lblTitle.frame = CGRectMake(0, 2, 200, 30);

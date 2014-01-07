@@ -48,7 +48,6 @@
     self.navigationItem.titleView = self.titleView;
     
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
     
     CGRect topViewFrame = CGRectMake(0, 0, kScreenWidth, 60);
@@ -142,19 +141,19 @@
         switch (indexPath.row) {
             case 1:{
                     double logisticsLoss = [Tool doubleValue:[self.overview objectForKey:@"logisticsLoss"]];
-                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:logisticsLoss]]];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:logisticsLoss]]];
                     cell.lblLossType.text = @"物流损耗";
                 }
                 break;
             case 3:{
                     double rawMaterialsLoss = [Tool doubleValue:[self.overview objectForKey:@"rawMaterialsLoss"]];
-                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:rawMaterialsLoss]]];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:rawMaterialsLoss]]];
                     cell.lblLossType.text = @"原材料损耗";
                 }
                 break;
             case 5:{
                     double semifinishedProductLoss = [Tool doubleValue:[self.overview objectForKey:@"semifinishedProductLoss"]];
-                    cell.lblLossAmount.text = [NSString stringWithFormat:@"损耗%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:semifinishedProductLoss]]];
+                    cell.lblLossAmount.text = [NSString stringWithFormat:@"%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:semifinishedProductLoss]]];
                     cell.lblLossType.text = @"半成品损耗";
                 }
                 break;

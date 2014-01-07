@@ -45,6 +45,7 @@
                                                     [self navigtionController:weakSelf withType:1];
                                                    }];
     self.menu = [[REMenu alloc] initWithItems:@[item1, item2]];
+    self.menu.bounce = NO;
 //    self.menu.backgroundColor = [UIColor whiteColor];
     
     // Background view

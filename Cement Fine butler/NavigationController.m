@@ -53,12 +53,12 @@
                                                              [weakSelf setViewControllers:@[self.rawMaterialsCostManagerVC] animated:NO];
                                                      }];
     self.menu = [[REMenu alloc] initWithItems:@[item1, item2]];
-    self.menu.backgroundColor = [UIColor whiteColor];
-    self.menu.highlightedBackgroundColor = 
-    self.menu.textColor = [UIColor darkGrayColor];
-    self.menu.textShadowColor = [UIColor darkGrayColor];
-    self.menu.separatorColor = [UIColor darkGrayColor];
-    self.menu.separatorHeight = 1.0;
+//    self.menu.backgroundColor = [UIColor whiteColor];
+//    self.menu.highlightedBackgroundColor = 
+//    self.menu.textColor = [UIColor darkGrayColor];
+//    self.menu.textShadowColor = [UIColor darkGrayColor];
+//    self.menu.separatorColor = [UIColor darkGrayColor];
+//    self.menu.separatorHeight = 1.0;
     self.menu.bounce = NO;
     
     // Background view

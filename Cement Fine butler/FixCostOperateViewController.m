@@ -33,7 +33,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM"];
     if (self.fixcostInfo) {
         title = @"修改";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(update:)];
         self._id = [[self.fixcostInfo objectForKey:@"subject"] longValue];
         self.lblName.text = [Tool stringToString:[self.fixcostInfo objectForKey:@"name"]];
         NSString *createDate = [Tool stringToString:[self.fixcostInfo objectForKey:@"strCreateTime"]];

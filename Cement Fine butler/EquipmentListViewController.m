@@ -309,10 +309,10 @@
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    if (self.totalCount>self.currentPage*kPageSize) {
-        self.currentPage++;
-        [self sendRequest:self.currentPage withProgress:NO];
-    }
+//    if (self.totalCount>self.currentPage*kPageSize) {
+//        self.currentPage++;
+//        [self sendRequest:self.currentPage withProgress:NO];
+//    }
     [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
 }
 

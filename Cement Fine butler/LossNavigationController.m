@@ -61,7 +61,7 @@
                                                        [self navigtionController:weakSelf withType:3];
                                                    }];
     self.menu = [[REMenu alloc] initWithItems:@[item1, item2, item3, item4]];
-    
+    self.menu.bounce = NO;
     // Background view
     self.menu.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     self.menu.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

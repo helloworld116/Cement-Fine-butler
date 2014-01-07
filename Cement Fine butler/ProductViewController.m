@@ -70,7 +70,7 @@
     NSString *suggestion = [Tool stringToString:[self.product objectForKey:@"suggestion"]];
     if(totalLoss>=0){
         lblStr = [lblStr stringByAppendingString:@"已节约"];
-        self.lblValueTotalLoss.textColor = [UIColor greenColor];
+        self.lblValueTotalLoss.textColor = [Tool hexStringToColor:@"#52d596"];
     }else{
         lblStr = [lblStr stringByAppendingString:@"已损失"];
         totalLoss = -totalLoss;

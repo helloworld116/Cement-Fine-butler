@@ -21,6 +21,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblValueElectricityFee;
 @property (strong, nonatomic) IBOutlet UILabel *lblTextElectricityAmount;
 @property (strong, nonatomic) IBOutlet UILabel *lblValueElectricityAmount;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewCoalFee;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewCoalAmount;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewEleFee;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewEleAmount;
 
 @property (strong, nonatomic) TitleView *titleView;
 @property (nonatomic,retain) NSString *timeInfo;
@@ -33,8 +37,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        NSString *testStr = @"{\"error\":0,\"message\":\"\",\"data\":{\"overview\":{\"coalFee\":4567.42,\"coalAmount\":245.67,\"electricityFee\":78878.88,\"electricityAmount\":78766.10},\"products\":[{\"id\":1,\"name\":\"PC32.5\",\"coalFee\":1236.45,\"coalAmount\":430.60,\"coalUnitAmount\":110.67,\"industryCoalUnitAmount\":109.78,\"electricityFee\":8768.67,\"electricityAmount\":8780.99,\"electricityUnitAmount\":60.99,\"industryElectricityUnitAmount\":59},{\"id\":2,\"name\":\"PC42.5\",\"coalFee\":1452.89,\"coalAmount\":686.98,\"coalUnitAmount\":100.88,\"industryCoalUnitAmount\":110.58,\"electricityFee\":4552.56,\"electricityAmount\":4544.67,\"electricityUnitAmount\":79.10,\"industryElectricityUnitAmount\":89.09},{\"id\":3,\"name\":\"PC42.5\",\"coalFee\":636.45,\"coalAmount\":569.76,\"coalUnitAmount\":109.87,\"industryCoalUnitAmount\":105.53,\"electricityFee\":4353.67,\"electricityAmount\":989.77,\"electricityUnitAmount\":95.45,\"industryElectricityUnitAmount\":98.56},{\"id\":4,\"name\":\"PC52.5\",\"coalFee\":675.56,\"coalAmount\":899.80,\"coalUnitAmount\":176.32,\"industryCoalUnitAmount\":110.50,\"electricityFee\":8456.66,\"electricityAmount\":3534.60,\"electricityUnitAmount\":200.89,\"industryElectricityUnitAmount\":249.98}]}}";
-//        self.responseData = [Tool stringToDictionary:testStr];
     }
     return self;
 }
@@ -48,28 +50,31 @@
     }
     
 //    self.view.backgroundColor = [UIColor grayColor];
-    self.topView.backgroundColor = kGeneralColor;
-    self.lblTextCoalFee.textColor = kRelativelyColor;
-    self.lblTextCoalAmount.textColor = kRelativelyColor;
-    self.lblValueCoalFee.textColor = kRelativelyColor;
-    self.lblValueCoalAmount.textColor = kRelativelyColor;
+    UIColor *coalColor = [Tool hexStringToColor:@"#f7c839"];
+    UIColor *eleColor = [Tool hexStringToColor:@"#52d596"];
+    
+    self.topView.backgroundColor = kRelativelyColor;
+    self.lblTextCoalFee.textColor = coalColor;
+    self.lblTextCoalAmount.textColor = coalColor;
+    self.lblValueCoalFee.textColor = coalColor;
+    self.lblValueCoalAmount.textColor = coalColor;
+    self.imgViewCoalFee.image = [UIImage imageNamed:@"coal_fee_icon"];
+    self.imgViewCoalAmount.image = [UIImage imageNamed:@"coal_consumption_icon"];
+    
     self.bottomView.backgroundColor = kRelativelyColor;
-    self.lblTextElectricityFee.textColor = kGeneralColor;
-    self.lblTextElectricityAmount.textColor = kGeneralColor;
-    self.lblValueElectricityFee.textColor = kGeneralColor;
-    self.lblValueElectricityAmount.textColor = kGeneralColor;
+    self.lblTextElectricityFee.textColor = eleColor;
+    self.lblTextElectricityAmount.textColor = eleColor;
+    self.lblValueElectricityFee.textColor = eleColor;
+    self.lblValueElectricityAmount.textColor = eleColor;
+    self.imgViewEleFee.image = [UIImage imageNamed:@"electricity_icon"];
+    self.imgViewEleAmount.image = [UIImage imageNamed:@"power_consumption_icon"];
     
     self.titleView = [[TitleView alloc] init];
     self.titleView.lblTitle.text = @"能源监控";
     self.navigationItem.titleView = self.titleView;
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
-    UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
-    [bt setFrame:CGRectMake(0, 0, 40, 30)];
-    [bt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
-    [bt setImage:[UIImage imageNamed:@"search_click"] forState:UIControlStateHighlighted];
-    [bt addTarget:self action:@selector(showSearchCondition:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearchCondition:)];
+    
 //    CGRect viewFrame = self.view.frame;
 //    viewFrame.size.height = kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight;
 //    self.view.frame = viewFrame;

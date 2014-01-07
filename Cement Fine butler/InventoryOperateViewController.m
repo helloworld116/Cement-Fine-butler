@@ -43,7 +43,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     if (self.inventoryInfo) {
         title = @"修改";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(update:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"保存" target:self action:@selector(update:)];
         if (self.type==0) {
             [Tool longValue:[self.inventoryInfo objectForKey:@"xxxx"]];
             self._id = [Tool longValue:[self.inventoryInfo objectForKey:@"materialId"]];

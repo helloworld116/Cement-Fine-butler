@@ -53,7 +53,8 @@
     self.navigationItem.titleView = self.titleView;
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(moreAction:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"..." target:self action:@selector(moreAction:)];
+//    [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(moreAction:)];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
     
@@ -169,13 +170,13 @@
         if (![Tool isNullOrNil:[overView objectForKey:@"costHuanbiRate"]]) {
             costHuanbiRate = [NSString stringWithFormat:@"%.2f%@",[[overView objectForKey:@"costHuanbiRate"] doubleValue]*100,@"%"];
         }else{
-            costHuanbiRate = @"---";
+            costHuanbiRate = @"";
         }
         //成本同比增长率
         if (![Tool isNullOrNil:[overView objectForKey:@"costTongbiRate"]]) {
             costTongbiRate = [NSString stringWithFormat:@"%.2f%@",[[overView objectForKey:@"costTongbiRate"] doubleValue]*100,@"%"];
         }else{
-            costTongbiRate = @"---";
+            costTongbiRate = @"";
         }
         //当前单位成本
         if (![Tool isNullOrNil:[overView objectForKey:@"currentUnitCost"]]) {
@@ -238,7 +239,7 @@
             self.scrollView.contentSize = CGSizeMake(kScreenWidth,bottomViewNeedHeight+self.bottomView.frame.origin.y);
         }
     }
-    self.bottomView.backgroundColor = [Tool hexStringToColor:@"#f1f1f1"];
+//    self.bottomView.backgroundColor = [Tool hexStringToColor:@"#f1f1f1"];
     self.bottomView.hidden=NO;
 }
 
