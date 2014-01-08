@@ -75,6 +75,8 @@ static int loginCount2=0;
 -(void) requestFailed:(ASIHTTPRequest *)request{
     //    [SVProgressHUD showErrorWithStatus:@"网络请求出错"];
     DDLogCError(@"网络请求出错,%@",[request error]);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"服务器异常，请稍后再试！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alertView show];
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{

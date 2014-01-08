@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_HMSegmentedControl 3
 #define COCOAPODS_VERSION_PATCH_HMSegmentedControl 0
 
+// Harpy
+#define COCOAPODS_POD_AVAILABLE_Harpy
+#define COCOAPODS_VERSION_MAJOR_Harpy 2
+#define COCOAPODS_VERSION_MINOR_Harpy 5
+#define COCOAPODS_VERSION_PATCH_Harpy 2
+
 // JASidePanels
 #define COCOAPODS_POD_AVAILABLE_JASidePanels
 #define COCOAPODS_VERSION_MAJOR_JASidePanels 1

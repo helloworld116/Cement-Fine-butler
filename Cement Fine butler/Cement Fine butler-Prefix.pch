@@ -30,6 +30,7 @@
     #import <DAContextMenuTableViewController/DAContextMenuCell.h>
     #import <DAContextMenuTableViewController/DAContextMenuTableViewController.h>
     #import <SWTableViewCell/SWTableViewCell.h>
+    #import <Harpy/Harpy.h>
     #import "CementAppDelegate.h"
     #import "LeftViewController.h"
     #import "RightViewController.h"
@@ -70,7 +71,7 @@
 
     //接口地址
 //    #define kServerURL @"http://192.168.1.9:8080/mobile/"
-    #define kServerURL @"http://121.199.6.98/mobile/"
+    #define kServerURL @"http://121.199.6.98/mobile——/"
 //    #define kServerURL @"http://121.199.6.98/mobile/"
     //#define kServerURL @"http://192.168.1.90:8080/dynamicmeasurement/"
     #define kLoginURL [kServerURL stringByAppendingString:@"login"]

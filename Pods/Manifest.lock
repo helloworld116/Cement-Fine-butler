@@ -12,6 +12,7 @@ PODS:
     - Reachability
   - CocoaLumberjack (1.6.2)
   - DAContextMenuTableViewController (1.0.2)
+  - Harpy (2.5.2)
   - HMSegmentedControl (1.3.0)
   - JASidePanels (1.3.2)
   - KxMenu (1)
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - ASIHTTPRequest
   - CocoaLumberjack
   - DAContextMenuTableViewController
+  - Harpy
   - HMSegmentedControl (~> 1.3.0)
   - JASidePanels
   - KxMenu
@@ -39,6 +41,7 @@ SPEC CHECKSUMS:
   ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
   CocoaLumberjack: 19dceba2d0360ed383cba983bc3ef0dd089c42a1
   DAContextMenuTableViewController: 0151e9de219c3236257c2cc970968c77f7464a73
+  Harpy: b992e16082d1ae123f4a135eacfd07a6c6e1feb7
   HMSegmentedControl: 3a58d4fc011e40c93c5299b9e8283e89c32f4c64
   JASidePanels: c0e642a7311ec9cc9adfa616fa4a795e4e169f20
   KxMenu: 99db7f9b685c3c8325d152df3fe5b7fdc8b8343e

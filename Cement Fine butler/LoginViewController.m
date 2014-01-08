@@ -155,6 +155,9 @@
     DDLogCError(@"网络请求出错,%@",[request error]);
     self.password.text = nil;
     [self.HUD hide:YES];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"友情提示" message:@"服务器异常，请稍后再试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alertView show];
+
 }
 
 -(void)requestSuccess:(ASIHTTPRequest *)request{

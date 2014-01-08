@@ -122,6 +122,7 @@
 //    [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
     application.applicationIconBadgeNumber = 0;
     [self.window makeKeyAndVisible];
+    [self checkVersion];
     return YES;
 }
 
@@ -301,6 +302,23 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    /*
+     Perform daily check for new version of your app
+     Useful if user returns to you app from background after extended period of time
+     Place in applicationDidBecomeActive:
+     
+     Also, performs version check on first launch.
+     */
+    [[Harpy sharedInstance] checkVersionDaily];
+    
+    /*
+     Perform weekly check for new version of your app
+     Useful if you user returns to your app from background after extended period of time
+     Place in applicationDidBecomeActive:
+     
+     Also, performs version check on first launch.
+     */
+    [[Harpy sharedInstance] checkVersionWeekly];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -364,5 +382,29 @@
         default:
             break;
     }
+}
+
+
+-(void)checkVersion{
+    // Set the App ID for your app
+    [[Harpy sharedInstance] setAppID:@"730834744"];
+    
+    // (Optional) Set the App Name for your app
+    [[Harpy sharedInstance] setAppName:@"水泥管家"];
+    
+    /* (Optional) Set the Alert Type for your app
+     By default, the Singleton is initialized to HarpyAlertTypeOption */
+    [[Harpy sharedInstance] setAlertType:HarpyAlertTypeSkip];
+    
+    /* (Optional) If your application is not availabe in the U.S. App Store, you must specify the two-letter
+     country code for the region in which your applicaiton is available. */
+//    [[Harpy sharedInstance] setCountryCode:@"HarpyLanguageChineseSimplified"];
+    
+    /* (Optional) Overides system language to predefined language.
+     Please use the HarpyLanguage constants defined inHarpy.h. */
+    [[Harpy sharedInstance] setForceLanguageLocalization:HarpyLanguageChineseSimplified];
+    
+    // Perform check for new version of your app
+    [[Harpy sharedInstance] checkVersion];
 }
 @end
