@@ -99,10 +99,12 @@
     double totalLoss = [[overview objectForKey:@"totalLoss"] doubleValue];
     NSString *lblStr = @"";
     if(totalLoss>=0){
-        lblStr = [lblStr stringByAppendingString:@"总节约"];
-    }else{
         lblStr = [lblStr stringByAppendingString:@"总损失"];
+        self.lblValueLoss.textColor = [UIColor redColor];
+    }else{
+        lblStr = [lblStr stringByAppendingString:@"总节约"];
         totalLoss = -totalLoss;
+        self.lblValueLoss.textColor = [Tool hexStringToColor:@"#52d596"];
     }
     if (totalLoss/100000>1) {
         totalLoss/=10000;
