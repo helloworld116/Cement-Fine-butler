@@ -108,23 +108,36 @@
         NSMutableArray *products = [NSMutableArray array];
         for (int i=0;i<self.dataArray.count;i++) {
             NSDictionary *product = [self.dataArray objectAtIndex:i];
-            double value = [[product objectForKey:@"value"] doubleValue];
-            NSString *name = [product objectForKey:@"name"];
-            NSString *color = [kColorList objectAtIndex:i];
-            NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
-            [products addObject:reportDict];
-            [productsForSort addObject:[NSNumber numberWithDouble:value]];
+            double value = [Tool doubleValue:[product objectForKey:@"value"]];
+            if (value) {
+                NSString *name = [product objectForKey:@"name"];
+                NSString *color = [kColorList objectAtIndex:i];
+                NSDictionary *reportDict = @{@"name":name,@"value":[NSNumber numberWithDouble:value],@"color":color};
+                [products addObject:reportDict];
+                [productsForSort addObject:[NSNumber numberWithDouble:value]];
+            }
         }
-        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
-        NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-        double max = [Tool doubleValue:[sortedNumbers objectAtIndex:0]];
-        int newMax = [Tool max:max];
-        double min = [Tool doubleValue:[sortedNumbers objectAtIndex:sortedNumbers.count-1]];
-        int newMin = [Tool min:min];
-        NSDictionary *configDict = @{@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithInt:newMin],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:(newMax-newMin)/5]};
-        NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
-        DDLogCVerbose(@"js is %@",js);
-        [webView stringByEvaluatingJavaScriptFromString:js];
+        if (products.count) {
+            NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+            NSArray *sortedNumbers = [productsForSort sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            double max = [Tool doubleValue:[sortedNumbers objectAtIndex:0]];
+            int newMax = [Tool max:max];
+            double min = [Tool doubleValue:[sortedNumbers objectAtIndex:sortedNumbers.count-1]];
+            int newMin = [Tool min:min];
+            NSDictionary *configDict = @{@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithInt:newMin],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:(newMax-newMin)/5]};
+            NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
+            DDLogCVerbose(@"js is %@",js);
+            [webView stringByEvaluatingJavaScriptFromString:js];
+        }else{
+            self.webView.hidden = YES;
+            self.view.backgroundColor = [UIColor whiteColor];
+            CGRect messageViewFrame = self.view.frame;
+            messageViewFrame.origin = CGPointMake(0, 0);
+            self.messageView = [[PromptMessageView alloc] initWithFrame:messageViewFrame];
+            self.messageView.center = self.view.center;
+            self.messageView.labelMsg.text = @"没有满足条件的数据";
+            [self.view addSubview:self.messageView];
+        }
     }else{
         self.webView.hidden = YES;
         self.view.backgroundColor = [UIColor whiteColor];

@@ -23,6 +23,8 @@
 		0E23CF4F180E34610089B4A8 /* RawMaterialsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E23CF4E180E34610089B4A8 /* RawMaterialsSettingViewController.m */; };
 		0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E017ED7AC600385E59 /* LoginAction.m */; };
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
+		0E2F040F18812273004119AE /* LossHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F040E18812273004119AE /* LossHeaderView.m */; };
+		0E2F041318813F7A004119AE /* VersionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F041218813F7A004119AE /* VersionService.m */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
 		0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0D17DAB97300C20BF1 /* LoadingView.m */; };
 		0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E38416317D41D3E004B3C87 /* equipment.jpg */; };
@@ -199,6 +201,10 @@
 		0E2786E017ED7AC600385E59 /* LoginAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAction.m; sourceTree = "<group>"; };
 		0E2786E217ED8CC900385E59 /* HistroyTrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistroyTrendsViewController.h; sourceTree = "<group>"; };
 		0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistroyTrendsViewController.m; sourceTree = "<group>"; };
+		0E2F040D18812273004119AE /* LossHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossHeaderView.h; sourceTree = "<group>"; };
+		0E2F040E18812273004119AE /* LossHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossHeaderView.m; sourceTree = "<group>"; };
+		0E2F041118813F7A004119AE /* VersionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionService.h; sourceTree = "<group>"; };
+		0E2F041218813F7A004119AE /* VersionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionService.m; sourceTree = "<group>"; };
 		0E346F0917DAB4E900C20BF1 /* InventoryColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryColumnViewController.h; sourceTree = "<group>"; };
 		0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryColumnViewController.m; sourceTree = "<group>"; };
 		0E346F0C17DAB97300C20BF1 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
@@ -550,6 +556,15 @@
 			name = "新原材料成本";
 			sourceTree = "<group>";
 		};
+		0E2F041018813F4F004119AE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0E2F041118813F7A004119AE /* VersionService.h */,
+				0E2F041218813F7A004119AE /* VersionService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
 		0E3841E317D41D63004B3C87 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +709,8 @@
 				0E9F2DC41862937D00F0F0E2 /* LossOverViewVC.m */,
 				0E6B0285186C17BF00B63321 /* LossNavigationController.h */,
 				0E6B0286186C17BF00B63321 /* LossNavigationController.m */,
+				0E2F040D18812273004119AE /* LossHeaderView.h */,
+				0E2F040E18812273004119AE /* LossHeaderView.m */,
 			);
 			name = "损耗定位";
 			sourceTree = "<group>";
@@ -992,6 +1009,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0E2F041018813F4F004119AE /* Service */,
 				4734FC7C18771038000206DB /* Category */,
 				0E439F5A185550840008C0D8 /* MainStoryboard_iPhone.storyboard */,
 				0E439F57185550750008C0D8 /* MainStoryboard_iPad.storyboard */,
@@ -1283,6 +1301,7 @@
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
+				0E2F041318813F7A004119AE /* VersionService.m in Sources */,
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
 				0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
@@ -1353,6 +1372,7 @@
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,
 				0E43ED6118274341006E3A66 /* ProductWeighDetailViewController.m in Sources */,
+				0E2F040F18812273004119AE /* LossHeaderView.m in Sources */,
 				0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,
 				0EF727A5181E157C0059EC59 /* InventoryCommonCell.m in Sources */,
