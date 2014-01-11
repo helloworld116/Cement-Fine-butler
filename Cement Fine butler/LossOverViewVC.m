@@ -25,6 +25,8 @@
 @property (nonatomic,retain) NSArray *semifinishedProduct;
 @property (nonatomic,retain) NSArray *endProduct;
 @property (nonatomic,retain) NSArray *logistics;
+
+@property (nonatomic) double totalLoss;
 @end
 
 @implementation LossOverViewVC
@@ -68,6 +70,13 @@
     self.rightVC.currentSelectDict = @{kCondition_Time:@2};
     self.URL = kLoss;
     [self sendRequest];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.totalLoss) {
+        [self.headerView.lblTotalLoss startFrom:0 end:self.totalLoss];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,12 +164,20 @@
     if (self.overview&&[Tool doubleValue:[self.overview objectForKey:@"totalLoss"]]!=0) {
         self.tableView.hidden = NO;
         self.headerView.hidden = NO;
-        double totalLoss = [Tool doubleValue:[self.overview objectForKey:@"totalLoss"]];
+        self.totalLoss = [Tool doubleValue:[self.overview objectForKey:@"totalLoss"]];
         [self.tableView reloadData];
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setPositiveFormat:@"###,##0.##"];
-        NSString *lossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:totalLoss]];
-        self.headerView.lblTotalLoss.text = [lossStr stringByAppendingString:@"吨"];
+        [numberFormatter setPositiveFormat:@"###,##0.00"];
+        NSString *lossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:self.totalLoss]];
+        CGSize valueSize = [lossStr sizeWithFont:self.headerView.lblTotalLoss.font constrainedToSize:CGSizeMake(1000, self.headerView.lblTotalLoss.frame.size.height) lineBreakMode:NSLineBreakByWordWrapping];
+        CGRect valueFrame = self.headerView.lblTotalLoss.frame;
+        CGRect unitFrame = self.headerView.lblUnit.frame;
+        valueFrame.size.width = valueSize.width;
+        unitFrame.origin.x = valueFrame.origin.x+valueFrame.size.width+15;
+//        unitFrame.origin.x = 100;
+        self.headerView.lblTotalLoss.frame = valueFrame;
+        self.headerView.lblUnit.frame = unitFrame;
+        [self.headerView.lblTotalLoss startFrom:0 end:self.totalLoss];
     }else{
         self.messageView.hidden = NO;
         self.messageView.labelMsg.text = @"没有满足条件的数据！！！";

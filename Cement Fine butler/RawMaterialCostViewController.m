@@ -17,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UILabel *lblTextLoss;
-@property (strong, nonatomic) IBOutlet UILabel *lblValueLoss;
+@property (strong, nonatomic) IBOutlet UICountingLabel *lblValueLoss;
 @property (strong, nonatomic) HMSegmentedControl *segmented;
 @property (strong, nonatomic) UIScrollView *scrollViewOfProducts;
 
@@ -28,6 +28,8 @@
 //@property (strong, nonatomic) NSDictionary *data;
 //@property (retain, nonatomic) ASIFormDataRequest *request;
 //@property (retain,nonatomic) MBProgressHUD *progressHUD;
+//data
+@property (nonatomic) double totalLoss;
 @end
 
 @implementation RawMaterialCostViewController
@@ -77,6 +79,10 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    if (self.totalLoss) {
+        [self.lblValueLoss startFrom:0 end:self.totalLoss];
+    }
+    
 }
 
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
@@ -112,11 +118,10 @@
     }else{
         lblStr = [lblStr stringByAppendingString:@"(元)："];
     }
+    self.totalLoss = totalLoss;
     self.lblTextLoss.text = lblStr;
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.##"];
-    NSString *totalLossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:totalLoss]];
-    self.lblValueLoss.text = totalLossStr;
+    [self.lblValueLoss startFrom:0 end:self.totalLoss];
+
     self.scrollViewOfProducts.contentSize = CGSizeMake(self.scrollViewOfProducts.frame.size.width*productCount, self.scrollViewOfProducts.frame.size.height);
     NSMutableArray *productNames = [NSMutableArray array];
     for (int i=0;i<products.count;i++) {

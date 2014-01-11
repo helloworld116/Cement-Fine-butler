@@ -22,6 +22,7 @@ PODS:
   - RTLabel (1.0)
   - SVProgressHUD (0.9)
   - SWTableViewCell (0.0.8)
+  - UICountingLabel (1.0.0)
 
 DEPENDENCIES:
   - ASIHTTPRequest
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - RTLabel
   - SVProgressHUD
   - SWTableViewCell
+  - UICountingLabel
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
@@ -51,5 +53,6 @@ SPEC CHECKSUMS:
   RTLabel: 124420c05d7897bf7f14b75a26f54f2932ac4ca5
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
   SWTableViewCell: 279c48862af0bc14dba592b6a76f73da70f74ba5
+  UICountingLabel: bb976960c0130785a600aac592954c23eb395096
 
 COCOAPODS: 0.23.0

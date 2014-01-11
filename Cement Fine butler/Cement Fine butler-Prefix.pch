@@ -31,6 +31,7 @@
     #import <DAContextMenuTableViewController/DAContextMenuTableViewController.h>
     #import <SWTableViewCell/SWTableViewCell.h>
     #import <Harpy/Harpy.h>
+    #import <UICountingLabel.h>
     #import "CementAppDelegate.h"
     #import "LeftViewController.h"
     #import "RightViewController.h"
@@ -47,6 +48,7 @@
     #import "UIColor+Random.h"
     #import "CommonViewController.h"
     #import "UIBarButtonItem+ButtonWithoutBorder.h"
+    #import "UICountingLabel+Counting.h"
     #import "Factory.h"
 
     #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )

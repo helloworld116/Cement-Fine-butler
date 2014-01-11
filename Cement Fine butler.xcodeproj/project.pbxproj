@@ -156,6 +156,7 @@
 		472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332E17CC3D48007E567B /* CoreLocation.framework */; };
 		472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */; };
 		4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */; };
+		4741D7C4188197F9005D3625 /* UICountingLabel+Counting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4741D7C3188197F9005D3625 /* UICountingLabel+Counting.m */; };
 		474F913A1814445400D94A85 /* TimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F91391814445400D94A85 /* TimeTableView.m */; };
 		474F913D1814446C00D94A85 /* LineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913C1814446C00D94A85 /* LineTableView.m */; };
 		474F91401814447900D94A85 /* ProductTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913F1814447900D94A85 /* ProductTableView.m */; };
@@ -469,6 +470,8 @@
 		472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectrcityOperateViewController.m; sourceTree = "<group>"; };
 		4734FC7D18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ButtonWithoutBorder.h"; sourceTree = "<group>"; };
 		4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ButtonWithoutBorder.m"; sourceTree = "<group>"; };
+		4741D7C2188197F9005D3625 /* UICountingLabel+Counting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICountingLabel+Counting.h"; sourceTree = "<group>"; };
+		4741D7C3188197F9005D3625 /* UICountingLabel+Counting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICountingLabel+Counting.m"; sourceTree = "<group>"; };
 		474F91381814445400D94A85 /* TimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableView.h; sourceTree = "<group>"; };
 		474F91391814445400D94A85 /* TimeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableView.m; sourceTree = "<group>"; };
 		474F913B1814446C00D94A85 /* LineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineTableView.h; sourceTree = "<group>"; };
@@ -1108,6 +1111,8 @@
 			children = (
 				4734FC7D18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.h */,
 				4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */,
+				4741D7C2188197F9005D3625 /* UICountingLabel+Counting.h */,
+				4741D7C3188197F9005D3625 /* UICountingLabel+Counting.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1301,6 +1306,7 @@
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
+				4741D7C4188197F9005D3625 /* UICountingLabel+Counting.m in Sources */,
 				0E2F041318813F7A004119AE /* VersionService.m in Sources */,
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
 				0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */,
@@ -1538,7 +1544,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1562,7 +1568,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

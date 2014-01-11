@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LossHeaderView : UIView
-@property (strong, nonatomic) IBOutlet UILabel *lblTotalLoss;
+@property (strong, nonatomic) IBOutlet UICountingLabel *lblTotalLoss;
+@property (weak, nonatomic) IBOutlet UILabel *lblUnit;//单位
 
 @end
