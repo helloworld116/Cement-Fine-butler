@@ -127,7 +127,7 @@
         cell.textLabel.text = [self.options[indexPath.row] objectForKey:@"name"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else if(indexPath.section==4){
-        cell.textLabel.text = @"消息列表";
+        cell.textLabel.text = @"消息历史";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else if(indexPath.section==5){
         if (indexPath.row==0) {

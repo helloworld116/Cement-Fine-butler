@@ -39,29 +39,9 @@
     if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
-//    self.data = @[
-//                  @{@"name":@"熟料",@"rate":[NSNumber numberWithDouble:75],@"financePrice":[NSNumber numberWithDouble:169.79],@"planPrice":[NSNumber numberWithDouble:169],@"locked":[NSNumber numberWithBool:YES]},
-//                  @{@"name":@"石膏",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:18.32],@"planPrice":[NSNumber numberWithDouble:18],@"locked":[NSNumber numberWithBool:NO]},
-//                  @{@"name":@"矿渣",@"rate":[NSNumber numberWithDouble:10],@"financePrice":[NSNumber numberWithDouble:23.56],@"planPrice":[NSNumber numberWithDouble:24],@"locked":[NSNumber numberWithBool:NO]},
-//                  @{@"name":@"煤炭灰",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:67.90],@"planPrice":[NSNumber numberWithDouble:70],@"locked":[NSNumber numberWithBool:NO]},
-//                  @{@"name":@"炉渣",@"rate":[NSNumber numberWithDouble:5],@"financePrice":[NSNumber numberWithDouble:89.55],@"planPrice":[NSNumber numberWithDouble:89],@"locked":[NSNumber numberWithBool:NO]}
-//                ];
-//    
-//    self.defaultData = self.data;
-    
-	// Do any additional setup after loading the view.
-//    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-back-arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(pop:)];
-//    UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"calculate"] style:UIBarButtonItemStyleBordered target:self action:@selector(calculate:)];
-    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
-    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     UIBarButtonItem *calBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"还原" target:self action:@selector(revert:)];
     self.navigationItem.rightBarButtonItem = calBarButtonItem;
-//    self.navigationItem.rightBarButtonItem.
     self.navigationItem.title = @"原材料成本计算器";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

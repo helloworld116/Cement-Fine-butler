@@ -152,7 +152,7 @@
                     }else{
                         newRate = defaultRate+(100-sureApporitionRate)/100*(diff/j);
                         newRate = [[NSString stringWithFormat:@"%.2f",round(newRate*100)/100] doubleValue];
-                        otherValues += [[NSString stringWithFormat:@"%.2f",round(((100-sureApporitionRate)/100*(diff/j))*100)/100] doubleValue];;
+                        otherValues += [[NSString stringWithFormat:@"%.2f",round(((100-sureApporitionRate)/100*(diff/j))*100)/100] doubleValue];
                     }
                 }
                 [newRawMaterialsInfo setObject:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%.2f",newRate] doubleValue]] forKey:@"rate"];

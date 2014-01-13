@@ -27,33 +27,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
-    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
+    self.navigationItem.title = @"计算结果详情";
 
-    self.title = @"计算结果详情";
-    
-//    self.data = @[
-//      @{@"name":@"熟料",@"rate":@"75",@"financePrice":@"169",@"planPrice":@"169"},
-//      @{@"name":@"石膏",@"rate":@"5",@"financePrice":@"18",@"planPrice":@"18"},
-//      @{@"name":@"矿渣",@"rate":@"10",@"financePrice":@"56",@"planPrice":@"56"},
-//      @{@"name":@"煤煤灰",@"rate":@"5",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"炉渣",@"rate":@"5",@"financePrice":@"20",@"planPrice":@"18"}
-    
-//      @{@"name":@"熟料",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"石膏",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"矿渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"煤煤灰",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"炉渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"熟料",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"石膏",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"矿渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"煤煤灰",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"},
-//      @{@"name":@"炉渣",@"rate":@"1",@"financePrice":@"60",@"planPrice":@"70"}
-//      ];
     CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-kTabBarHeight);
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
     self.webView.delegate = self;
