@@ -45,6 +45,7 @@
     self.navigationItem.title = @"原材料成本计算器";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.bounces = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     //设置uitableviewcell长按事件
 //    UILongPressGestureRecognizer *longPressReger = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
@@ -165,9 +166,9 @@
     cell.lblPlanPrice.text = [NSString stringWithFormat:@"%.2f",[[materialsInfo objectForKey:@"planPrice"] doubleValue]];
     BOOL isLocked = [[materialsInfo objectForKey:@"locked"] boolValue];
     if (isLocked) {
-        cell.imgLockState.image = [UIImage imageNamed:@"lock-small"];
+        cell.imgLockState.image = [UIImage imageNamed:@"lock"];
     }else{
-        cell.imgLockState.image = [UIImage imageNamed:@"unlock-small"];
+        cell.imgLockState.image = [UIImage imageNamed:@"unlock"];
     }
     if ([[materialsInfo objectForKey:@"apportionRate"] doubleValue]!=0) {
         cell.lblApportionRate.text = [NSString stringWithFormat:@"%.2f",[[materialsInfo objectForKey:@"apportionRate"] doubleValue]];

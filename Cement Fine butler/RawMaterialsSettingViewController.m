@@ -41,7 +41,7 @@
 //    self.textFinancePrice.clearsOnInsertion = YES;
     self.textPlanPrice.text = [NSString stringWithFormat:@"%.2f",[[rawMaterialsInfo objectForKey:@"planPrice"] doubleValue]];
 //    self.textPlanPrice.clearsOnInsertion = YES;
-    double apporitionRate = [[rawMaterialsInfo objectForKey:@"apporitionRate"] doubleValue];
+    double apporitionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
     if (apporitionRate!=0) {
         self.textApportionRate.text = [NSString stringWithFormat:@"%.2f",apporitionRate];
     }
@@ -113,12 +113,14 @@
     double diff = beginRate-endRate;
     int j=0;//没有锁定并未设置分摊比率的个数
     double sureApporitionRate=0;//已经确定的
+    double otherTotalRate = 0;//外部已经占有的比率
     for (int i=0; i<self.data.count; i++) {
         if (i!=self.index) {
             NSDictionary *rawMaterialsInfo = [self.data objectAtIndex:i];
             BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
             if (!locked) {
                 double apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
+                otherTotalRate += [Tool doubleValue:[rawMaterialsInfo objectForKey:@"rate"]];
                 if (apportionRate==0) {//分摊比不为0，则按改比率添加
                     j++;
                 }else{
@@ -143,16 +145,28 @@
                 double newRate = 0;
                 if (_apportionRate!=0) {//分摊比不为0，则按改比率添加
                     newRate = defaultRate+_apportionRate/100*diff;
-                    otherValues += (_apportionRate/100*diff);
+//                    otherValues += (_apportionRate/100*diff);
+                    newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
+                    otherValues += newRate;
                 }else{
                     //分摊为空则其余的平摊
                     k++;
                     if (j==k) {
-                        newRate = defaultRate+diff-otherValues;
+//                        newRate = defaultRate+diff-otherValues;
+//                        newRate = 100-endRate-((100-otherTotalRate)+diff)/j*(j-1);
+                        newRate = 100 - endRate - otherValues;
                     }else{
-                        newRate = defaultRate+(100-sureApporitionRate)/100*(diff/j);
-                        newRate = [[NSString stringWithFormat:@"%.2f",round(newRate*100)/100] doubleValue];
-                        otherValues += [[NSString stringWithFormat:@"%.2f",round(((100-sureApporitionRate)/100*(diff/j))*100)/100] doubleValue];
+//                        newRate = defaultRate+(100-sureApporitionRate)/100*(diff/j);
+//                        newRate = [[NSString stringWithFormat:@"%.2f",round(newRate*100)/100] doubleValue];
+//                        otherValues += [[NSString stringWithFormat:@"%.2f",round(((100-sureApporitionRate)/100*(diff/j))*100)/100] doubleValue];
+                        if (otherTotalRate) {
+                            newRate = defaultRate+(100-sureApporitionRate)/100*diff/j;
+                        }else{
+                            newRate = defaultRate+((100-otherTotalRate)+diff)/j;
+                        }
+                        newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
+                        otherValues += newRate;
+                        
                     }
                 }
                 [newRawMaterialsInfo setObject:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%.2f",newRate] doubleValue]] forKey:@"rate"];

@@ -173,48 +173,61 @@
 
 -(void)setLabelValue{
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.##"];
+    [numberFormatter setPositiveFormat:@"###,##0.00"];
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     double coalFee = [[overview objectForKey:@"coalFee"] doubleValue];
-    double coalAmount = [[overview objectForKey:@"coalAmount"] doubleValue];
+    double coalLoss = [[overview objectForKey:@"coalLoss"] doubleValue];
     double electricityFee = [[overview objectForKey:@"electricityFee"] doubleValue];
-    double electricityAmount = [[overview objectForKey:@"electricityAmount"] doubleValue];
+    double electricityLoss = [[overview objectForKey:@"electricityLoss"] doubleValue];
+    
+    NSString *type;
+    if (coalLoss>=0) {
+        type=@"损失";
+    }else{
+        type=@"节约";
+        coalLoss=-coalLoss;
+    }
+    if (coalLoss/100000>1) {
+        coalLoss/=10000;
+        self.lblTextCoalFee.text = [NSString stringWithFormat:@"煤总%@(万元)",type ];
+    }else{
+        self.lblTextCoalFee.text = [NSString stringWithFormat:@"煤总%@(元)",type ];
+    }
+    NSString *coalFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalLoss]];
+    self.lblValueCoalFee.text = coalFeeString;
     
     if (coalFee/100000>1) {
         coalFee/=10000;
-        self.lblTextCoalFee.text = @"煤费(万元)";
+        self.lblTextCoalAmount.text = @"煤耗(万元)";
     }else{
-        self.lblTextCoalFee.text = @"煤费(元)";
+        self.lblTextCoalAmount.text = @"煤耗(元)";
     }
-    NSString *coalFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
-    self.lblValueCoalFee.text = coalFeeString;
-    
-    if (coalAmount/100000>1) {
-        coalAmount/=10000;
-        self.lblTextCoalAmount.text = @"煤耗(万吨)";
-    }else{
-        self.lblTextCoalAmount.text = @"煤耗(吨)";
-    }
-    NSString *coalAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalAmount]];
+    NSString *coalAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
     self.lblValueCoalAmount.text = coalAmountString;
+    
+    if (electricityLoss>=0) {
+        type=@"损失";
+    }else{
+        type=@"节约";
+        electricityLoss=-electricityLoss;
+    }
+    if (electricityLoss/100000>1) {
+        electricityLoss/=10000;
+        self.lblTextElectricityFee.text = [NSString stringWithFormat:@"电总%@(万元)",type];
+    }else{
+        self.lblTextElectricityFee.text = [NSString stringWithFormat:@"电总%@(万元)",type];
+    }
+    NSString *eletricityFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityLoss]];
+    self.lblValueElectricityFee.text = eletricityFeeString;
     
     if (electricityFee/100000>1) {
         electricityFee/=10000;
-        self.lblTextElectricityFee.text = @"电费(万元)";
+        self.lblTextElectricityAmount.text = @"电耗(万元)";
     }else{
-        self.lblTextElectricityFee.text = @"电费(元)";
-    }
-    NSString *eletricityFeeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
-    self.lblValueElectricityFee.text = eletricityFeeString;
-    
-    if (electricityAmount/100000>1) {
-        electricityAmount/=10000;
-        self.lblTextElectricityAmount.text = @"电耗(万度)";
-    }else{
-        self.lblTextElectricityAmount.text = @"电耗(度)";
+        self.lblTextElectricityAmount.text = @"电耗(元)";
     }
     
-    NSString *eletricityAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityAmount]];
+    NSString *eletricityAmountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
     self.lblValueElectricityAmount.text = eletricityAmountString;
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);

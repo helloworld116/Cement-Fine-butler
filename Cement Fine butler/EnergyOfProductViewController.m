@@ -35,35 +35,42 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.##"];
+    [numberFormatter setPositiveFormat:@"###,##0.00"];
     
     if (self.type==0) {
-        double coalFee = [Tool doubleValue:[self.product objectForKey:@"totalCoalLoss"]];
-        double coalAmount = [Tool doubleValue:[self.product objectForKey:@"coalAmount"]];
+        double coalLoss = [Tool doubleValue:[self.product objectForKey:@"totalCoalLoss"]];
+        double coalFee = [Tool doubleValue:[self.product objectForKey:@"totalCoalCost"]];
         double coalUnitFee = [Tool doubleValue:[self.product objectForKey:@"coalUnitFee"]];
         double industryCoalUnitAmount = [Tool doubleValue:[self.product objectForKey:@"industryCoalUnitFee"]];
         NSString *textFee = @"";
-        if (coalFee/100000>1) {
-            coalFee/=10000;
-//            textFee = @"煤费(万元)";
-            textFee = @"已损失(万元)";
+        NSString *lossType;
+        if (coalLoss>=0) {
+            lossType = @"损失";
+            self.lblValueFee.textColor = [UIColor redColor];
         }else{
-//            textFee = @"煤费(元)";
-            textFee = @"已损失(元)";
+            lossType = @"节约";
+            coalLoss=-coalLoss;
+            self.lblValueFee.textColor = [Tool hexStringToColor:@"#52d596"];
+        }
+        if (coalLoss/100000>1) {
+            coalLoss/=10000;
+            textFee = [NSString stringWithFormat:@"已%@(万元)",lossType];
+        }else{
+            textFee = [NSString stringWithFormat:@"已%@(元)",lossType];
         }
         self.lblTextFee.text = textFee;
-        NSString *feeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
+        NSString *feeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalLoss]];
         self.lblValueFee.text = feeString;
         
         NSString *textAmount = @"";
-        if (coalAmount/100000>1) {
-            coalAmount/=10000;
-            textAmount = @"煤耗(万吨)";
+        if (coalFee/100000>1) {
+            coalFee/=10000;
+            textAmount = @"煤耗(万元)";
         }else{
-            textAmount = @"煤耗(吨)";
+            textAmount = @"煤耗(元)";
         }
         self.lblTextAmount.text = textAmount;
-        NSString *amountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalAmount]];
+        NSString *amountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:coalFee]];
         self.lblValueAmount.text = amountString;
         
         self.lblTextAverage.text = @"吨煤耗(元/吨)";
@@ -74,32 +81,41 @@
         self.lblValueIndustry.text = industryString;
         
     }else if(self.type==1){
-        double electricityFee = [Tool doubleValue:[self.product objectForKey:@"totalElecLoss"]];
-        double electricityAmount = [Tool doubleValue:[self.product objectForKey:@"electricityAmount"]];
+        double electricityLoss = [Tool doubleValue:[self.product objectForKey:@"totalElecLoss"]];
+        double electricityFee = [Tool doubleValue:[self.product objectForKey:@"totalElecCost"]];
         double electricityUnitFee = [Tool doubleValue:[self.product objectForKey:@"electricityUnitFee"]];
         double industryElectricityUnitAmount = [Tool doubleValue:[self.product objectForKey:@"industryElectricityUnitFee"]];
         
         NSString *textFee = @"";
-        if (electricityFee/100000>1) {
-            electricityFee/=10000;
-//            textFee = @"电费(万元)";
-            textFee = @"已损失(万元)";
+        NSString *lossType;
+        if (electricityLoss>=0) {
+            lossType = @"损失";
+            self.lblValueFee.textColor = [UIColor redColor];
         }else{
-            textFee = @"已损失(元)";
+            lossType = @"节约";
+            electricityLoss = -electricityLoss;
+            self.lblValueFee.textColor = [Tool hexStringToColor:@"#52d596"];
+        }
+        if (electricityLoss/100000>1) {
+            electricityLoss/=10000;
+//            textFee = @"电费(万元)";
+            textFee = [NSString stringWithFormat:@"已%@(万元)",lossType];
+        }else{
+            textFee = [NSString stringWithFormat:@"已%@(元)",lossType];
         }
         self.lblTextFee.text = textFee;
-        NSString *feeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
+        NSString *feeString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityLoss]];
         self.lblValueFee.text = feeString;
         
         NSString *textAmount = @"";
-        if (electricityAmount/100000>1) {
-            electricityAmount/=10000;
-            textAmount = @"电耗(万度)";
+        if (electricityFee/100000>1) {
+            electricityFee/=10000;
+            textAmount = @"电耗(万元)";
         }else{
-            textAmount = @"电耗(度)";
+            textAmount = @"电耗(元)";
         }
         self.lblTextAmount.text = textAmount;
-        NSString *amountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityAmount]];
+        NSString *amountString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:electricityFee]];
         self.lblValueAmount.text = amountString;
         
         self.lblTextAverage.text = @"吨电耗(元/吨)";

@@ -25,7 +25,7 @@
     [[Harpy sharedInstance] setAppID:@"730834744"];
     
     // (Optional) Set the App Name for your app
-    [[Harpy sharedInstance] setAppName:@"动态计量云"];
+    [[Harpy sharedInstance] setAppName:@"成本计量云"];
     
     /* (Optional) Set the Alert Type for your app
      By default, the Singleton is initialized to HarpyAlertTypeOption */
