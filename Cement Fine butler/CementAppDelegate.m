@@ -49,6 +49,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [UIApplication sharedApplication].statusBarHidden = NO;
     //网络状况检查
     [self netWorkChecker];
     [self addNetWorkChangeNotification];
