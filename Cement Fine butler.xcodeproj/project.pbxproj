@@ -53,6 +53,7 @@
 		0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C5055180BE64E000B4904 /* RawMaterialsCalCell.xib */; };
 		0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */; };
 		0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */; };
+		0E5FAB21188FAFAF005860B9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FAB20188FAFAF005860B9 /* BaseViewController.m */; };
 		0E5FB50E18121C5300117B99 /* CostReductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FB50D18121C5300117B99 /* CostReductionViewController.m */; };
 		0E5FB51118121CB700117B99 /* CostComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5FB51018121CB700117B99 /* CostComparisonViewController.m */; };
 		0E62CC4F1820E62000281A73 /* InventoryOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E62CC4E1820E62000281A73 /* InventoryOperateViewController.m */; };
@@ -256,6 +257,8 @@
 		0E5C5058180BF315000B4904 /* RawMaterialsCalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalCell.m; sourceTree = "<group>"; };
 		0E5C505A180BF345000B4904 /* RawMaterialsCalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCalViewController.h; sourceTree = "<group>"; };
 		0E5C505B180BF345000B4904 /* RawMaterialsCalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCalViewController.m; sourceTree = "<group>"; };
+		0E5FAB1F188FAFAF005860B9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		0E5FAB20188FAFAF005860B9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		0E5FB50C18121C5300117B99 /* CostReductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostReductionViewController.h; sourceTree = "<group>"; };
 		0E5FB50D18121C5300117B99 /* CostReductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostReductionViewController.m; sourceTree = "<group>"; };
 		0E5FB50F18121CB700117B99 /* CostComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostComparisonViewController.h; sourceTree = "<group>"; };
@@ -1040,6 +1043,8 @@
 				0E6322AC184F469E00D5F4B7 /* Factory.m */,
 				0E6322AE184F485800D5F4B7 /* CommonViewController.h */,
 				0E6322AF184F485800D5F4B7 /* CommonViewController.m */,
+				0E5FAB1F188FAFAF005860B9 /* BaseViewController.h */,
+				0E5FAB20188FAFAF005860B9 /* BaseViewController.m */,
 			);
 			path = "Cement Fine butler";
 			sourceTree = "<group>";
@@ -1359,6 +1364,7 @@
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
+				0E5FAB21188FAFAF005860B9 /* BaseViewController.m in Sources */,
 				0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */,
 				0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,

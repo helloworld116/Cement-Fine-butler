@@ -13,7 +13,11 @@
     UIButton *imgButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [imgButton setImage:image forState:UIControlStateNormal];
     [imgButton setImage:highlightedImage forState:UIControlStateHighlighted];
-    imgButton.frame = CGRectMake(0.0, 0.0, 40, 30);
+    if(IS_IOS7){
+        imgButton.frame = CGRectMake(0.0, 0.0, 30, 30);
+    }else{
+        imgButton.frame = CGRectMake(0.0, 0.0, 40, 30);
+    }
     [imgButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:imgButton];
     return barItem;

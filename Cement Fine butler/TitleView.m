@@ -40,7 +40,7 @@
         self.lblTitle.textColor = [UIColor whiteColor];
         self.lblTimeInfo = [[UILabel alloc] initWithFrame:CGRectZero];
         self.lblTimeInfo.backgroundColor = [UIColor clearColor];
-        self.lblTimeInfo.textColor = [UIColor lightTextColor];
+        self.lblTimeInfo.textColor = [Tool hexStringToColor:@"#b4d2f7"];
         self.lblTimeInfo.textAlignment = UITextAlignmentCenter;
         self.lblTimeInfo.font = [UIFont systemFontOfSize:10];
         if (isArrow) {

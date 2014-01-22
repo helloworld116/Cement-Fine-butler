@@ -36,7 +36,7 @@
         bounds = frame;
         return CGRectInset(bounds, 0, 0);
     }
-    return CGRectInset( bounds , 35 , 0 );
+    return CGRectInset( bounds , 50 , 0 );
 }
 
 // 控制文本的位置，左右缩 20
@@ -48,6 +48,6 @@
         bounds = frame;
         return CGRectInset(bounds, 0, 0);
     }
-    return CGRectInset( bounds , 35 , 0 );
+    return CGRectInset( bounds , 50 , 0 );
 }
 @end

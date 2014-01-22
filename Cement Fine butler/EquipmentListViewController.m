@@ -60,6 +60,7 @@
 //    self.list = [NSMutableArray array];
 //    [self sendRequest:self.currentPage withProgress:YES];
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 5, 0, 0)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     self.tableView.separatorColor = [Tool hexStringToColor:@"#e3e3e3"];
 }

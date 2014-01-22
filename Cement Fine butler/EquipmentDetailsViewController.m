@@ -9,19 +9,22 @@
 #import "EquipmentDetailsViewController.h"
 
 @interface EquipmentDetailsViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *lblName;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewOfEquipment;
+@property (strong, nonatomic) IBOutlet UILabel *lblBoxSN;
 @property (strong, nonatomic) IBOutlet UILabel *lblSN;
 @property (strong, nonatomic) IBOutlet UILabel *lblStatus;
+
+@property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
+@property (strong, nonatomic) IBOutlet UILabel *lblLineName;
+@property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
+
 @property (strong, nonatomic) IBOutlet UILabel *lblSettingFlowRate;
 @property (strong, nonatomic) IBOutlet UILabel *lblInstantFlowRate;
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalOutput;
 @property (strong, nonatomic) IBOutlet UILabel *lblPartialOutput;
-//@property (strong, nonatomic) IBOutlet UILabel *lblStopCountMonthly;
-//@property (strong, nonatomic) IBOutlet UILabel *lblStopDurationMonthly;
-//@property (strong, nonatomic) IBOutlet UILabel *lblRunDuration;
-@property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
-@property (strong, nonatomic) IBOutlet UILabel *lblLineName;
-@property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
+
+@property (strong, nonatomic) IBOutlet UILabel *lblCreatedTime;
+@property (strong, nonatomic) IBOutlet UILabel *lblUploadTime;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnStopRecords;
 
@@ -43,17 +46,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
-    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
-    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
+    UIView *bview = [[UIView alloc] init];
+    bview.backgroundColor = [Tool hexStringToColor:@"#f3f3f3"];
+    self.tableView.backgroundView = bview;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     self.navigationItem.title = @"设备详情";
     
-//    self.lblName.text = [Tool stringToString:[self.data objectForKey:@"name"]];
+    NSString *imgName = [NSString stringWithFormat:@"%@%@",@"equipment_",[Tool stringToString:[self.data objectForKey:@"code"]]];
+    self.imgViewOfEquipment.image = [UIImage imageNamed:imgName];
     self.lblSN.text = [Tool stringToString:[self.data objectForKey:@"sn"]];
     self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"statusLabel"]];
     self.lblEquipmentType.text = [Tool stringToString:[self.data objectForKey:@"typename"]];
@@ -63,9 +64,12 @@
     self.lblInstantFlowRate.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"instantFlowRate"] doubleValue]];
     self.lblTotalOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"totalOutput"] doubleValue]];
     self.lblPartialOutput.text = [NSString stringWithFormat:@"%.2f",[[self.data objectForKey:@"partOutput"] doubleValue]];
-//    self.lblStopCountMonthly.text = [NSString stringWithFormat:@"%d",[[self.data objectForKey:@"stopCountMonthly"] intValue]];
-//    self.lblStopDurationMonthly.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"stopDurationMonthly"] longValue]];
-//    self.lblRunDuration.text = [Tool longTimeToTimeDesc:[[self.data objectForKey:@"runDuration"] longValue]];
+    NSDateFormatter *objDateFormatter = [[NSDateFormatter alloc] init];
+    [objDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *createdTime = [NSDate dateWithTimeIntervalSince1970:[Tool doubleValue:[self.data objectForKey:@"createdtime"]]/1000];
+    NSDate *uploadTime = [NSDate dateWithTimeIntervalSince1970:[Tool doubleValue:[self.data objectForKey:@"uploadTime"]]/1000];
+    self.lblCreatedTime.text = [objDateFormatter stringFromDate:createdTime];
+    self.lblUploadTime.text = [objDateFormatter stringFromDate:uploadTime];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,7 +79,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setLblName:nil];
     [self setLblSN:nil];
     [self setLblStatus:nil];
     [self setLblSettingFlowRate:nil];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController<UITextFieldDelegate>
+@interface LoginViewController : BaseViewController<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImgView;
 @property (strong, nonatomic) IBOutlet UIView *continerView;
 @property (strong, nonatomic) IBOutlet UIImageView *titleImgView;

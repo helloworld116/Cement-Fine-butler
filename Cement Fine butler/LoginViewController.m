@@ -31,18 +31,22 @@
 }
 
 - (void)setBackground{
-    self.backgroundImgView.image = [UIImage imageNamed:@"login_background.png"];
-    self.continerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"body.png"]];
-    self.titleImgView.image = [UIImage imageNamed:@"title.png"];
-    self.username.background = [UIImage imageNamed:@"username.png"];
-    self.password.background = [UIImage imageNamed:@"password.png"];
-    [self.btnLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
+    self.backgroundImgView.image = [UIImage imageNamed:@"Basemap"];
+    self.continerView.backgroundColor = [UIColor clearColor];
+    self.titleImgView.image = [UIImage imageNamed:@"icon_03"];
+    self.username.background = [UIImage imageNamed:@"username_box"];
+    self.password.background = [UIImage imageNamed:@"key_box"];
+    [self.btnLogin setBackgroundImage:[UIImage imageNamed:@"login_box"] forState:UIControlStateNormal];
+    [self.btnLogin setBackgroundImage:[UIImage imageNamed:@"login_click_box"] forState:UIControlStateHighlighted];
+    [self.username setValue:[UIColor colorWithRed:205.0/255.0 green:229.0/255.0 blue:250.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.password setValue:[UIColor colorWithRed:205.0/255.0 green:229.0/255.0 blue:250.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self setBackground];
     self.username.delegate = self;
     self.password.delegate = self;
@@ -103,9 +107,15 @@
         self.HUD.labelText = @"用户名不能为空";
         self.HUD.labelFont = [UIFont systemFontOfSize:13.f];
         self.HUD.margin = 5.f;
-        self.HUD.yOffset = -39;
-//        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
-//        self.HUD.removeFromSuperViewOnHide = YES;
+        if (IS_IPHONE_5) {
+            self.HUD.yOffset = -43;
+        }else{
+            self.HUD.yOffset = 2;
+        }
+        if(IS_IOS7){
+            self.HUD.yOffset -=10;
+        }
+        self.HUD.xOffset = 85;
         self.HUD.delegate = self;
         [self.view addSubview:self.HUD];
         [self.HUD show:YES];
@@ -118,9 +128,15 @@
         self.HUD.labelText = @"密码不能为空";
         self.HUD.labelFont = [UIFont systemFontOfSize:13.f];
         self.HUD.margin = 5.f;
-        self.HUD.yOffset = 20;
-//        self.HUD.yOffset = (kScreenHeight-kStatusBarHeight)/2-35;
-//        self.HUD.removeFromSuperViewOnHide = YES;
+        if (IS_IPHONE_5) {
+            self.HUD.yOffset = 15;
+        }else{
+            self.HUD.yOffset = 58;
+        }
+        if(IS_IOS7){
+            self.HUD.yOffset -=10;
+        }
+        self.HUD.xOffset = 90;
         self.HUD.delegate = self;
         [self.view addSubview:self.HUD];
         [self.HUD show:YES];
@@ -165,12 +181,6 @@
     NSDictionary *dict = [Tool stringToDictionary:request.responseString];
     int errorCode = [[dict objectForKey:@"error"] intValue];
     if (errorCode==kErrorCode0) {
-//        self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check_icon"]];
-//        self.HUD.mode = MBProgressHUDModeCustomView;
-//        self.HUD.labelText = @"登录成功";
-//        [self.HUD hide:YES];
-//        sleep(10);
-        
         DDLogCVerbose(@"登录成功");
         NSDictionary *data = [dict objectForKey:@"data"];
         kSharedApp.accessToken = [data objectForKey:@"accessToken"];
@@ -231,7 +241,14 @@
         [UIView beginAnimations:@"DownKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         CGRect rect = self.continerView.frame;
-        rect.origin.y += 90;
+        if (IS_IPHONE_5) {
+           rect.origin.y += 65;
+        }else{
+            rect.origin.y += 150;
+        }
+        if (IS_IOS7) {
+            rect.origin.y -= 20;
+        }
         self.continerView.frame = rect;
         [UIView commitAnimations];
     }
@@ -243,7 +260,14 @@
         [UIView beginAnimations:@"UpKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         CGRect rect = self.continerView.frame;
-        rect.origin.y -= 90;
+        if (IS_IPHONE_5) {
+            rect.origin.y -= 65;
+        }else{
+            rect.origin.y -= 150;
+        }
+        if (IS_IOS7) {
+            rect.origin.y += 20;
+        }
         self.continerView.frame = rect;
         [UIView commitAnimations];
         self.keyboardWasShow = YES;

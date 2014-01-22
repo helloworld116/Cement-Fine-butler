@@ -32,6 +32,7 @@
     #import <SWTableViewCell/SWTableViewCell.h>
     #import <Harpy/Harpy.h>
     #import <UICountingLabel.h>
+    #import "BaseViewController.h"
     #import "CementAppDelegate.h"
     #import "LeftViewController.h"
     #import "RightViewController.h"
@@ -51,6 +52,7 @@
     #import "UICountingLabel+Counting.h"
     #import "Factory.h"
 
+    #define IS_IOS7 (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
     #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
     #define IS_Pad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     #define IS_RETINA [UIScreen mainScreen].scale==2?YES:NO

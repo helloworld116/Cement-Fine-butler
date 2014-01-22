@@ -24,7 +24,7 @@
 -(void)responseCode0WithNOData;
 @end
 
-@interface CommonViewController : UIViewController<MBProgressHUDDelegate,CommonVCDataSource>
+@interface CommonViewController : BaseViewController<MBProgressHUDDelegate,CommonVCDataSource>
 @property (retain, nonatomic) NSString *URL;
 @property (retain, nonatomic) SearchCondition *condition;//请求条件
 @property (retain, nonatomic) ASIFormDataRequest *request;
