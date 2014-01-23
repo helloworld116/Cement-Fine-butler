@@ -91,6 +91,7 @@
 		0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182F18223198001B0372 /* FixcostSubjectChoiceViewController.m */; };
 		0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931832182233DB001B0372 /* FixCostOperateViewController.m */; };
 		0E931836182239D7001B0372 /* FixcostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931835182239D7001B0372 /* FixcostCell.m */; };
+		0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E96910B1890F1F600D2501D /* Donut2D_2.html */; };
 		0E9C4CD618497D9700B82F13 /* UIView+NavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */; };
 		0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C4CD81849D92B00B82F13 /* TitleView.m */; };
 		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
@@ -327,6 +328,7 @@
 		0E931832182233DB001B0372 /* FixCostOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixCostOperateViewController.m; sourceTree = "<group>"; };
 		0E931834182239D7001B0372 /* FixcostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostCell.h; sourceTree = "<group>"; };
 		0E931835182239D7001B0372 /* FixcostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostCell.m; sourceTree = "<group>"; };
+		0E96910B1890F1F600D2501D /* Donut2D_2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Donut2D_2.html; sourceTree = "<group>"; };
 		0E9C4CD418497D9700B82F13 /* UIView+NavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NavigationItem.h"; sourceTree = "<group>"; };
 		0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NavigationItem.m"; sourceTree = "<group>"; };
 		0E9C4CD71849D92A00B82F13 /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
@@ -976,6 +978,7 @@
 				471B5B0D1846582F002D6BDC /* ExtensiveCell */,
 				0EC05B0A181F896C001BF5B7 /* EGOTableViewPullRefresh */,
 				0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */,
+				0E96910B1890F1F600D2501D /* Donut2D_2.html */,
 				0EEDBFD0180D67D80010961D /* Calculate.html */,
 				0E693ABD1807EA040061A3F8 /* Donut2D.html */,
 				0E4291E917EC51F50031ECB6 /* LineBasic2D.html */,
@@ -1243,6 +1246,7 @@
 				471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */,
 				0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */,
 				0E9F2DD11862A10D00F0F0E2 /* images.xcassets in Resources */,
+				0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */,
 				0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */,
 				0E439F59185550750008C0D8 /* MainStoryboard_iPad.storyboard in Resources */,
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,

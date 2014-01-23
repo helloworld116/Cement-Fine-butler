@@ -40,6 +40,11 @@
     return self;
 }
 
+-(void)theme{
+    self.scrollView.backgroundColor = [Tool hexStringToColor:@"#f3f3f3"];
+    self.webView.backgroundColor = [UIColor whiteColor];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,14 +57,11 @@
     [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleView;
     
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithText:@"..." target:self action:@selector(moreAction:)];
-//    [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(moreAction:)];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
     
     self.webView.delegate = self;
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Pie2D" ofType:@"html"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Donut2D_2" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.webView subviews] objectAtIndex:0];
     sc.showsHorizontalScrollIndicator = NO;
@@ -85,6 +87,7 @@
     //获取请求数据
     self.URL = kMaterialCostURL;
     [self sendRequest];
+    [self theme];
 }
 
 //-(void)viewDidAppear:(BOOL)animated{
@@ -288,7 +291,7 @@
             NSString *pieData = [Tool objectToString:dataArray];
             NSString *title = @"直接材料成本";
             NSDictionary *configDict = @{@"title":title,@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width]};
-            NSString *js = [NSString stringWithFormat:@"drawPie2D('%@','%@')",pieData,[Tool objectToString:configDict]];
+            NSString *js = [NSString stringWithFormat:@"drawDonut2D('%@','%@')",pieData,[Tool objectToString:configDict]];
             DDLogVerbose(@"dates is %@",js);
             [webView stringByEvaluatingJavaScriptFromString:js];
         }

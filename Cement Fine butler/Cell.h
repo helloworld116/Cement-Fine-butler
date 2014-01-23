@@ -15,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblMaterial;
 @property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
 @property (strong, nonatomic) IBOutlet UILabel *lblBox;
-@property (strong, nonatomic) IBOutlet UILabel *lblSN;
+@property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 
 @end

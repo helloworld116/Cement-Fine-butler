@@ -123,14 +123,15 @@
         CallOutAnnotationView *annotationView = [[CallOutAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"];
         NSDictionary *equipmentInfo = ((CalloutMapAnnotation *)annotation).equipmentInfo;
         Cell *cell = [[[NSBundle mainBundle] loadNibNamed:@"Cell" owner:self options:nil] objectAtIndex:0];
-        cell.lblEquipmentName.text = [@"设备" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
+        NSString *imgName = [NSString stringWithFormat:@"%@%@",@"equipment_",[Tool stringToString:[equipmentInfo objectForKey:@"code"]]];
+        cell.imgView.image = [UIImage imageNamed:imgName];
+        cell.lblEquipmentName.text = [@"设备编码:" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
         cell.lblCompany.text = [kSharedApp.factory objectForKey:@"name"];
-        cell.lblStatus.text = [@"设备状态：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]]];
-        cell.lblBox.text = [@"控制盒编号：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"boxsn"]]];
-        cell.lblSN.text = [@"仪表编号：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
-        cell.lblEquipmentType.text = [@"设备类型：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"typename"]]];
-        cell.lblMaterial.text = [@"物料：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
-        cell.lblLine.text = [@"生产线：" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
+        cell.lblStatus.text = [@"设备状态:" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]]];
+        cell.lblBox.text = [@"控制盒编号:" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"boxsn"]]];
+        cell.lblEquipmentType.text = [@"设备类型:" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"typename"]]];
+        cell.lblMaterial.text = [@"物料:" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+        cell.lblLine.text = [@"生产线:" stringByAppendingString:[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
         [annotationView.contentView addSubview:cell];
         return annotationView;
 	} else if ([annotation isKindOfClass:[EquipmentPointAnnotation class]]) {
