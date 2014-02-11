@@ -118,6 +118,7 @@
 		0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */; };
 		0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */; };
 		0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */; };
+		0ED59D3418AA2BE200C2A703 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED59D3318AA2BE200C2A703 /* DropDownView.m */; };
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
 		0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF917E1B055009B4671 /* ConditionCell.xib */; };
@@ -377,6 +378,8 @@
 		0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyOfProductViewController.h; sourceTree = "<group>"; };
 		0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyOfProductViewController.m; sourceTree = "<group>"; };
 		0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyOfProductViewController.xib; sourceTree = "<group>"; };
+		0ED59D3218AA2BE200C2A703 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
+		0ED59D3318AA2BE200C2A703 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
 		0EDC72011811319F00895931 /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
 		0EDC72021811319F00895931 /* NODataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NODataView.m; sourceTree = "<group>"; };
 		0EDFFBF617E1B045009B4671 /* ConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionCell.h; sourceTree = "<group>"; };
@@ -608,6 +611,8 @@
 				0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */,
 				0E9C4CD71849D92A00B82F13 /* TitleView.h */,
 				0E9C4CD81849D92B00B82F13 /* TitleView.m */,
+				0ED59D3218AA2BE200C2A703 /* DropDownView.h */,
+				0ED59D3318AA2BE200C2A703 /* DropDownView.m */,
 			);
 			name = CustomerView;
 			sourceTree = "<group>";
@@ -1398,6 +1403,7 @@
 				0E491BF8180E673A00901D3D /* NoCopyTextField.m in Sources */,
 				0EC05B1E181F896C001BF5B7 /* LoadMoreTableFooterView.m in Sources */,
 				472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */,
+				0ED59D3418AA2BE200C2A703 /* DropDownView.m in Sources */,
 				0E491BFB180E7DCC00901D3D /* EquipmentListViewController.m in Sources */,
 				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
 				0E6B027E18682DD700B63321 /* REMenuReportVC.m in Sources */,
