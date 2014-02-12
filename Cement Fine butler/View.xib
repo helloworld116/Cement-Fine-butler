@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="4510"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <userGuides>
+                <userLayoutGuide location="240" affinity="minY"/>
+                <userLayoutGuide location="160" affinity="minX"/>
+            </userGuides>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ml7-It-Zis">
+                    <rect key="frame" x="20" y="40" width="130" height="200"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.75294125079999996" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gf1-ie-iyd">
+                    <rect key="frame" x="170" y="40" width="130" height="200"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.50980395079999996" green="0.76470595600000002" blue="0.36862745879999997" alpha="1" colorSpace="deviceRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOA-sW-hws">
+                    <rect key="frame" x="20" y="260" width="280" height="200"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="1" green="0.45098042490000001" blue="0.69803923369999998" alpha="1" colorSpace="deviceRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gf1-ie-iyd" firstAttribute="top" secondItem="1" secondAttribute="top" constant="40" id="6TF-gJ-sNO"/>
+                <constraint firstItem="gf1-ie-iyd" firstAttribute="leading" secondItem="Ml7-It-Zis" secondAttribute="trailing" constant="20" id="FWl-14-H1B"/>
+                <constraint firstItem="Ml7-It-Zis" firstAttribute="top" secondItem="1" secondAttribute="top" constant="40" id="SE8-Xa-Ax2"/>
+                <constraint firstAttribute="bottom" secondItem="gOA-sW-hws" secondAttribute="bottom" constant="20" id="XvX-15-868"/>
+                <constraint firstAttribute="trailing" secondItem="gOA-sW-hws" secondAttribute="trailing" constant="20" id="c71-kH-OdT"/>
+                <constraint firstItem="Ml7-It-Zis" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="djn-ec-GrW"/>
+                <constraint firstAttribute="trailing" secondItem="gf1-ie-iyd" secondAttribute="trailing" constant="20" id="jNz-PA-7cT"/>
+                <constraint firstItem="gOA-sW-hws" firstAttribute="top" secondItem="Ml7-It-Zis" secondAttribute="bottom" constant="20" id="mg8-Ty-xz7"/>
+                <constraint firstItem="Ml7-It-Zis" firstAttribute="width" secondItem="gf1-ie-iyd" secondAttribute="width" id="nRk-6r-0Qm"/>
+                <constraint firstItem="Ml7-It-Zis" firstAttribute="height" secondItem="gOA-sW-hws" secondAttribute="height" id="s7f-Sm-wRj"/>
+                <constraint firstItem="gOA-sW-hws" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="vnY-or-zTb"/>
+                <constraint firstItem="Ml7-It-Zis" firstAttribute="height" secondItem="gf1-ie-iyd" secondAttribute="height" id="xKS-GM-hom"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

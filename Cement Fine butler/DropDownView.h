@@ -17,5 +17,5 @@
 @interface DropDownView : UIView<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,assign) id<DropDownViewDeletegate> delegate;
 -(void)hideDropDown:(UIButton *)btn;
--(id)showDropDown:(UIButton *)btn height:(CGFloat)height list:(NSArray *)list;
+-(id)initWithDropDown:(UIButton *)btn height:(CGFloat)height list:(NSArray *)list;
 @end

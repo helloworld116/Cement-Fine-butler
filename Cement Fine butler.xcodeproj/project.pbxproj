@@ -118,6 +118,8 @@
 		0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */; };
 		0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */; };
 		0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */; };
+		0ECA4A6918AB1F3A005C998A /* ProductDirectMaterialCosts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */; };
+		0ECA4AAE18AB6869005C998A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA4AAD18AB6869005C998A /* View.xib */; };
 		0ED59D3418AA2BE200C2A703 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED59D3318AA2BE200C2A703 /* DropDownView.m */; };
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
@@ -378,6 +380,8 @@
 		0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyOfProductViewController.h; sourceTree = "<group>"; };
 		0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyOfProductViewController.m; sourceTree = "<group>"; };
 		0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyOfProductViewController.xib; sourceTree = "<group>"; };
+		0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDirectMaterialCosts.xib; sourceTree = "<group>"; };
+		0ECA4AAD18AB6869005C998A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		0ED59D3218AA2BE200C2A703 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		0ED59D3318AA2BE200C2A703 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
 		0EDC72011811319F00895931 /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
@@ -876,6 +880,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0ECA4A6718AB1AB1005C998A /* 直接材料成本 */ = {
+			isa = PBXGroup;
+			children = (
+				0ECA4AAD18AB6869005C998A /* View.xib */,
+				0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */,
+			);
+			name = "直接材料成本";
+			sourceTree = "<group>";
+		};
 		0EE9F602181A6B6B009A4330 /* 录入相关 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,6 +1036,7 @@
 		472F32E517CC3C05007E567B /* Cement Fine butler */ = {
 			isa = PBXGroup;
 			children = (
+				0ECA4A6718AB1AB1005C998A /* 直接材料成本 */,
 				0E2F041018813F4F004119AE /* Service */,
 				4734FC7C18771038000206DB /* Category */,
 				0E439F5A185550840008C0D8 /* MainStoryboard_iPhone.storyboard */,
@@ -1242,6 +1256,7 @@
 				472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */,
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
 				0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */,
+				0ECA4A6918AB1F3A005C998A /* ProductDirectMaterialCosts.xib in Resources */,
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
 				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
 				0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */,
@@ -1256,6 +1271,7 @@
 				0E439F59185550750008C0D8 /* MainStoryboard_iPad.storyboard in Resources */,
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,
 				0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */,
+				0ECA4AAE18AB6869005C998A /* View.xib in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
@@ -1554,7 +1570,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1578,7 +1594,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

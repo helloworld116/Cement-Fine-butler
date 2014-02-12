@@ -8,24 +8,108 @@
 
 #import "DropDownView.h"
 
+@interface DropDownView()
+@property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) UIButton *btnSender;
+@property (nonatomic,retain) NSArray *list;
+@end
+
 @implementation DropDownView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+-(void)hideDropDown:(UIButton *)btn{
+    CGRect btnRect = btn.frame;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
+    self.tableview.frame = CGRectMake(0, 0, btnRect.size.width, 0);
+    [UIView commitAnimations];
 }
-*/
 
+-(id)initWithDropDown:(UIButton *)btn height:(CGFloat)height list:(NSArray *)list{
+    self.btnSender = btn;
+    self = [super init];
+    if (self) {
+        CGRect btnRect = btn.frame;
+        
+        self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
+        self.list = [NSArray arrayWithArray:list];
+        self.layer.masksToBounds = NO;
+//        self.layer.cornerRadius = 8;
+//        self.layer.shadowOffset = CGSizeMake(-5, 0);
+//        self.layer.shadowRadius = 5;
+        self.layer.shadowOpacity = 0.5;
+        
+        self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, btnRect.size.width, 0)];
+        self.tableview.delegate = self;
+        self.tableview.dataSource = self;
+//        self.tableview.layer.cornerRadius = 5;
+        self.tableview.backgroundColor = [UIColor colorWithRed:0.239 green:0.239 blue:0.239 alpha:1];
+        self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        self.tableview.separatorColor = [UIColor grayColor];
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, height);
+        self.tableview.frame = CGRectMake(0, 0, btnRect.size.width, height);
+        [UIView commitAnimations];
+        
+        [btn.superview addSubview:self];
+        [self addSubview:self.tableview];
+    }
+    return self;
+}
+
+
+#pragma mark tableviewdelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 40;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.list count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+    }
+    cell.textLabel.text =[self.list objectAtIndex:indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
+    UIView * v = [[UIView alloc] init];
+    v.backgroundColor = [UIColor grayColor];
+    cell.selectedBackgroundView = v;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self hideDropDown:self.btnSender];
+    UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
+    [self.btnSender setTitle:c.textLabel.text forState:UIControlStateNormal];
+    [self myDelegate];
+}
+
+- (void) myDelegate {
+    [self.delegate dropDownDelegateMethod:self];
+}
 @end
