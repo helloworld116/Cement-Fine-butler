@@ -32,6 +32,7 @@
     #import <SWTableViewCell/SWTableViewCell.h>
     #import <Harpy/Harpy.h>
     #import <UICountingLabel.h>
+    #import <PPiFlatSegmentedControl.h>
     #import "BaseViewController.h"
     #import "CementAppDelegate.h"
     #import "LeftViewController.h"

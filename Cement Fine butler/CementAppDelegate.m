@@ -23,6 +23,7 @@
 #import "EnergyNavigationController.h"
 #import "LossNavigationController.h"
 #import "MoreNavigationController.h"
+#import "DirectMaterialCostViewController.h"
 
 //service
 #import "VersionService.h"
@@ -138,8 +139,12 @@
 
 -(UIViewController *) showViewControllers{
     //原材料成本损失
-    RawMaterialCostViewController *rawMaterialCostLossVC = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
-    NavigationController *rawMaterialCostLossNC = [[NavigationController alloc] initWithRootViewController:rawMaterialCostLossVC];
+//    RawMaterialCostViewController *rawMaterialCostLossVC = [[RawMaterialCostViewController alloc] initWithNibName:@"RawMaterialCostViewController" bundle:nil];
+//    NavigationController *rawMaterialCostLossNC = [[NavigationController alloc] initWithRootViewController:rawMaterialCostLossVC];
+    UIStoryboard *costStoryboard = [UIStoryboard storyboardWithName:@"CostStoryboard" bundle:nil];
+    DirectMaterialCostViewController *directMaterialCostVC = [costStoryboard instantiateViewControllerWithIdentifier:@"DirectMaterialCostViewController"];
+    UINavigationController *rawMaterialCostLossNC = [[UINavigationController alloc] initWithRootViewController:directMaterialCostVC];
+    
     //能源监控
     EnergyMonitoringOverViewViewController *energyMonitoringOverViewVC = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
 //    UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];

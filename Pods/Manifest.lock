@@ -12,11 +12,16 @@ PODS:
     - Reachability
   - CocoaLumberjack (1.6.2)
   - DAContextMenuTableViewController (1.0.2)
+  - FontAwesome+iOS (0.1.1)
   - Harpy (2.5.2)
   - HMSegmentedControl (1.3.0)
   - JASidePanels (1.3.2)
   - KxMenu (1)
   - MBProgressHUD (0.7)
+  - PPiAwesomeButton (1.2.9):
+    - FontAwesome+iOS
+  - PPiFlatSegmentedControl (1.3.3):
+    - PPiAwesomeButton
   - Reachability (3.1.1)
   - REMenu (1.7.1)
   - RTLabel (1.0)
@@ -33,6 +38,7 @@ DEPENDENCIES:
   - JASidePanels
   - KxMenu
   - MBProgressHUD
+  - PPiFlatSegmentedControl
   - REMenu (~> 1.7.1)
   - RTLabel
   - SVProgressHUD
@@ -43,11 +49,14 @@ SPEC CHECKSUMS:
   ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
   CocoaLumberjack: 19dceba2d0360ed383cba983bc3ef0dd089c42a1
   DAContextMenuTableViewController: 0151e9de219c3236257c2cc970968c77f7464a73
+  FontAwesome+iOS: 243c5309e90d5788909b0f859f75ecff4a20f88f
   Harpy: b992e16082d1ae123f4a135eacfd07a6c6e1feb7
   HMSegmentedControl: 3a58d4fc011e40c93c5299b9e8283e89c32f4c64
   JASidePanels: c0e642a7311ec9cc9adfa616fa4a795e4e169f20
   KxMenu: 99db7f9b685c3c8325d152df3fe5b7fdc8b8343e
   MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
+  PPiAwesomeButton: 8d8bc4cf62d8c848e433a1f405e019deee2821dc
+  PPiFlatSegmentedControl: 32d42c7f50cd2db1c40ee17a94d78da6f69d9813
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   REMenu: 4c85fa951c74b41b1eb7f9a31ebed2da8ae3f7d7
   RTLabel: 124420c05d7897bf7f14b75a26f54f2932ac4ca5

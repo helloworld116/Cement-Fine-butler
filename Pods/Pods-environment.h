@@ -42,6 +42,12 @@
 #define COCOAPODS_VERSION_MINOR_DAContextMenuTableViewController 0
 #define COCOAPODS_VERSION_PATCH_DAContextMenuTableViewController 2
 
+// FontAwesome+iOS
+#define COCOAPODS_POD_AVAILABLE_FontAwesome_iOS
+#define COCOAPODS_VERSION_MAJOR_FontAwesome_iOS 0
+#define COCOAPODS_VERSION_MINOR_FontAwesome_iOS 1
+#define COCOAPODS_VERSION_PATCH_FontAwesome_iOS 1
+
 // HMSegmentedControl
 #define COCOAPODS_POD_AVAILABLE_HMSegmentedControl
 #define COCOAPODS_VERSION_MAJOR_HMSegmentedControl 1
@@ -71,6 +77,18 @@
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 7
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
+
+// PPiAwesomeButton
+#define COCOAPODS_POD_AVAILABLE_PPiAwesomeButton
+#define COCOAPODS_VERSION_MAJOR_PPiAwesomeButton 1
+#define COCOAPODS_VERSION_MINOR_PPiAwesomeButton 2
+#define COCOAPODS_VERSION_PATCH_PPiAwesomeButton 9
+
+// PPiFlatSegmentedControl
+#define COCOAPODS_POD_AVAILABLE_PPiFlatSegmentedControl
+#define COCOAPODS_VERSION_MAJOR_PPiFlatSegmentedControl 1
+#define COCOAPODS_VERSION_MINOR_PPiFlatSegmentedControl 3
+#define COCOAPODS_VERSION_PATCH_PPiFlatSegmentedControl 3
 
 // REMenu
 #define COCOAPODS_POD_AVAILABLE_REMenu

@@ -98,6 +98,9 @@
 		0E9F2DC2186287F700F0F0E2 /* LossDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F2DC1186287F700F0F0E2 /* LossDescCell.m */; };
 		0E9F2DC51862937D00F0F0E2 /* LossOverViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F2DC41862937D00F0F0E2 /* LossOverViewVC.m */; };
 		0E9F2DD11862A10D00F0F0E2 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9F2DD01862A10D00F0F0E2 /* images.xcassets */; };
+		0EA125AE18AC6B0800700544 /* ProductDirectMaterialCosts.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA125AD18AC6B0800700544 /* ProductDirectMaterialCosts.m */; };
+		0EA125B118AC99EE00700544 /* DirectMaterialCostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA125B018AC99EE00700544 /* DirectMaterialCostViewController.m */; };
+		0EA125B318AC9ACE00700544 /* CostStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EA125B218AC9ACE00700544 /* CostStoryboard.storyboard */; };
 		0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3496118332A8200F25706 /* ElectricitySevices.m */; };
 		0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF14182341710028BE8B /* MaterialWeighListViewController.m */; };
 		0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF16182389040028BE8B /* MaterialWeighCell.xib */; };
@@ -343,6 +346,11 @@
 		0E9F2DC31862937D00F0F0E2 /* LossOverViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossOverViewVC.h; sourceTree = "<group>"; };
 		0E9F2DC41862937D00F0F0E2 /* LossOverViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossOverViewVC.m; sourceTree = "<group>"; };
 		0E9F2DD01862A10D00F0F0E2 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		0EA125AC18AC6B0800700544 /* ProductDirectMaterialCosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDirectMaterialCosts.h; sourceTree = "<group>"; };
+		0EA125AD18AC6B0800700544 /* ProductDirectMaterialCosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDirectMaterialCosts.m; sourceTree = "<group>"; };
+		0EA125AF18AC99EE00700544 /* DirectMaterialCostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectMaterialCostViewController.h; sourceTree = "<group>"; };
+		0EA125B018AC99EE00700544 /* DirectMaterialCostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectMaterialCostViewController.m; sourceTree = "<group>"; };
+		0EA125B218AC9ACE00700544 /* CostStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CostStoryboard.storyboard; sourceTree = "<group>"; };
 		0EA3496018332A8200F25706 /* ElectricitySevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricitySevices.h; sourceTree = "<group>"; };
 		0EA3496118332A8200F25706 /* ElectricitySevices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricitySevices.m; sourceTree = "<group>"; };
 		0EA5CF13182341710028BE8B /* MaterialWeighListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialWeighListViewController.h; sourceTree = "<group>"; };
@@ -885,6 +893,11 @@
 			children = (
 				0ECA4AAD18AB6869005C998A /* View.xib */,
 				0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */,
+				0EA125AC18AC6B0800700544 /* ProductDirectMaterialCosts.h */,
+				0EA125AD18AC6B0800700544 /* ProductDirectMaterialCosts.m */,
+				0EA125AF18AC99EE00700544 /* DirectMaterialCostViewController.h */,
+				0EA125B018AC99EE00700544 /* DirectMaterialCostViewController.m */,
+				0EA125B218AC9ACE00700544 /* CostStoryboard.storyboard */,
 			);
 			name = "直接材料成本";
 			sourceTree = "<group>";
@@ -1272,6 +1285,7 @@
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,
 				0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */,
 				0ECA4AAE18AB6869005C998A /* View.xib in Resources */,
+				0EA125B318AC9ACE00700544 /* CostStoryboard.storyboard in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
@@ -1355,6 +1369,7 @@
 				0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */,
 				0EA5CF15182341710028BE8B /* MaterialWeighListViewController.m in Sources */,
 				0E3841F017D41FDE004B3C87 /* Tool.m in Sources */,
+				0EA125B118AC99EE00700544 /* DirectMaterialCostViewController.m in Sources */,
 				0E3841F317D4200B004B3C87 /* SearchDate.m in Sources */,
 				0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */,
 				0EF4CD3C184D6B480050A63A /* IndustryStandardOperationViewController.m in Sources */,
@@ -1388,6 +1403,7 @@
 				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */,
+				0EA125AE18AC6B0800700544 /* ProductDirectMaterialCosts.m in Sources */,
 				0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */,
 				0E5FAB21188FAFAF005860B9 /* BaseViewController.m in Sources */,
 				0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */,
