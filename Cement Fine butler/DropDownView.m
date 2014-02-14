@@ -44,17 +44,18 @@
         self.list = [NSArray arrayWithArray:list];
         self.layer.masksToBounds = NO;
 //        self.layer.cornerRadius = 8;
-//        self.layer.shadowOffset = CGSizeMake(-5, 0);
+        self.layer.shadowOffset = CGSizeMake(0, 0);
 //        self.layer.shadowRadius = 5;
         self.layer.shadowOpacity = 0.5;
         
         self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, btnRect.size.width, 0)];
+        self.tableview.bounces = NO;
         self.tableview.delegate = self;
         self.tableview.dataSource = self;
 //        self.tableview.layer.cornerRadius = 5;
-        self.tableview.backgroundColor = [UIColor colorWithRed:0.239 green:0.239 blue:0.239 alpha:1];
+        self.tableview.backgroundColor = [Tool hexStringToColor:@"#93baeb"];
         self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.tableview.separatorColor = [UIColor grayColor];
+        self.tableview.separatorColor = [UIColor whiteColor];
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
@@ -62,7 +63,7 @@
         self.tableview.frame = CGRectMake(0, 0, btnRect.size.width, height);
         [UIView commitAnimations];
         
-        [btn.superview addSubview:self];
+        [btn.superview.superview.superview addSubview:self];
         [self addSubview:self.tableview];
     }
     return self;
@@ -75,7 +76,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40;
+    return 30;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -90,7 +91,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     cell.textLabel.text =[self.list objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor whiteColor];
