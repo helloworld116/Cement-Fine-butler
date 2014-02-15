@@ -26,7 +26,7 @@
 }
 
 -(void)hideDropDown:(UIButton *)btn{
-    CGRect btnRect = btn.frame;
+    CGRect btnRect = btn.superview.frame;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
@@ -36,12 +36,14 @@
 
 -(id)initWithDropDown:(UIButton *)btn height:(CGFloat)height list:(NSArray *)list{
     self.btnSender = btn;
+    NSMutableArray *newList = [NSMutableArray arrayWithArray:list];
+    [newList removeObject:btn.titleLabel.text];
     self = [super init];
     if (self) {
-        CGRect btnRect = btn.frame;
+        CGRect btnRect = btn.superview.frame;
         
         self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
-        self.list = [NSArray arrayWithArray:list];
+        self.list = [NSArray arrayWithArray:newList];
         self.layer.masksToBounds = NO;
 //        self.layer.cornerRadius = 8;
         self.layer.shadowOffset = CGSizeMake(0, 0);
@@ -54,8 +56,9 @@
         self.tableview.dataSource = self;
 //        self.tableview.layer.cornerRadius = 5;
         self.tableview.backgroundColor = [Tool hexStringToColor:@"#93baeb"];
-        self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.tableview.separatorColor = [UIColor whiteColor];
+//        self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//        self.tableview.separatorColor = [UIColor whiteColor];
+        self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
@@ -91,8 +94,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
     }
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
+    separatorLineView.backgroundColor = [UIColor whiteColor]; // set color as you want.
+    [cell.contentView addSubview:separatorLineView];
     cell.textLabel.text =[self.list objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor whiteColor];
     

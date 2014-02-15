@@ -35,6 +35,8 @@
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
 		0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */; };
 		0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */; };
+		0E41837A18AF619400596E40 /* EnergyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E41837918AF619400596E40 /* EnergyStoryboard.storyboard */; };
+		0E41837C18AF61B700596E40 /* EnergyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E41837B18AF61B700596E40 /* EnergyView.xib */; };
 		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
 		0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */; };
 		0E439F59185550750008C0D8 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E439F57185550750008C0D8 /* MainStoryboard_iPad.storyboard */; };
@@ -234,6 +236,8 @@
 		0E3843281821F37700D58433 /* InventoryPassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryPassValueDelegate.h; sourceTree = "<group>"; };
 		0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentDetailsViewController.h; sourceTree = "<group>"; };
 		0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentDetailsViewController.m; sourceTree = "<group>"; };
+		0E41837918AF619400596E40 /* EnergyStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EnergyStoryboard.storyboard; sourceTree = "<group>"; };
+		0E41837B18AF61B700596E40 /* EnergyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyView.xib; sourceTree = "<group>"; };
 		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
 		0E43339617E8337D0047A438 /* RawMaterialsCostManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialsCostManagerViewController.h; sourceTree = "<group>"; };
 		0E43339717E8337D0047A438 /* RawMaterialsCostManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawMaterialsCostManagerViewController.m; sourceTree = "<group>"; };
@@ -558,6 +562,8 @@
 				0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */,
 				0E6B0282186BD72A00B63321 /* EnergyNavigationController.h */,
 				0E6B0283186BD72A00B63321 /* EnergyNavigationController.m */,
+				0E41837918AF619400596E40 /* EnergyStoryboard.storyboard */,
+				0E41837B18AF61B700596E40 /* EnergyView.xib */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -1293,9 +1299,11 @@
 				0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */,
 				0E6A896417F6B0BA0065043F /* MessageCell.xib in Resources */,
 				0E693ABE1807EA040061A3F8 /* Donut2D.html in Resources */,
+				0E41837C18AF61B700596E40 /* EnergyView.xib in Resources */,
 				0E5C5056180BE64E000B4904 /* RawMaterialsCalCell.xib in Resources */,
 				0EEDBFD1180D67D90010961D /* Calculate.html in Resources */,
 				0E439F5C185550840008C0D8 /* MainStoryboard_iPhone.storyboard in Resources */,
+				0E41837A18AF619400596E40 /* EnergyStoryboard.storyboard in Resources */,
 				0EBFCA9C1861A6A9004CD92D /* LossCell.xib in Resources */,
 				0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */,
 				0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */,

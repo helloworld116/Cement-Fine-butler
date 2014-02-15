@@ -82,7 +82,7 @@
     }
     //设置navigtionbar
 //    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[UIColor colorWithRed:52/255.f green:54/255.f blue:68/255.f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[Tool hexStringToColor:@"#5c9cec"]] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[Tool createImageWithColor:[Tool hexStringToColor:@"#49bbed"]] forBarMetrics:UIBarMetricsDefault];
     UIImage *barButton = [[UIImage imageNamed:@"nav-bar-button-dark"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     UIImage *highlightedBarButton = [[UIImage imageNamed:@"nav-bar-button-dark-highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     
@@ -162,8 +162,9 @@
     MoreNavigationController *moreNC = [[MoreNavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"moreViewController"]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar"]];
-//    tabBarController.tabBar
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_bar"]];
+    [tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
+    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab_bar_click"]];
     
     rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"cost_icon"] tag:kViewTag+1];
     energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源" image:[UIImage imageNamed:@"energy_icon"] tag:kViewTag+2];
