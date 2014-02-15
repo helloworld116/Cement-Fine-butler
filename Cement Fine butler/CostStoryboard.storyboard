@@ -37,8 +37,8 @@
                                                     <action selector="changeDate:" destination="4zC-NH-97I" eventType="touchUpInside" id="RSG-Lk-8dL"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pED-Lh-8TP">
-                                                <rect key="frame" x="43" y="11" width="8" height="6"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pulldown" translatesAutoresizingMaskIntoConstraints="NO" id="pED-Lh-8TP">
+                                                <rect key="frame" x="42" y="12" width="8" height="6"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
@@ -62,7 +62,7 @@
                                         <color key="textColor" red="0.76470588235294112" green="0.77647058823529413" blue="0.78823529411764703" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mt3-WG-UxM">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cost_arrow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt3-WG-UxM">
                                         <rect key="frame" x="307" y="24" width="6" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -88,12 +88,12 @@
                                         <rect key="frame" x="69" y="0.0" width="36" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21n-QK-M2a">
-                                                <rect key="frame" x="11" y="12" width="14" height="16"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="money_icon" translatesAutoresizingMaskIntoConstraints="NO" id="21n-QK-M2a">
+                                                <rect key="frame" x="11" y="16" width="14" height="16"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="总节约" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgU-x4-D8a">
-                                                <rect key="frame" x="0.0" y="27" width="36" height="21"/>
+                                                <rect key="frame" x="0.0" y="31" width="36" height="16"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.38823533058166504" green="0.82745105028152466" blue="0.65490198135375977" alpha="1" colorSpace="deviceRGB"/>
@@ -174,6 +174,11 @@
             <point key="canvasLocation" x="38" y="32"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cost_arrow_icon" width="6" height="12"/>
+        <image name="money_icon" width="14" height="16"/>
+        <image name="pulldown" width="8" height="6"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
