@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DirectMaterialCostViewController : UIViewController
-
+@interface DirectMaterialCostViewController : CommonViewController
+-(void)showPopupView:(id)sender;
 @end

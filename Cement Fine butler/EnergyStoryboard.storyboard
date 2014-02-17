@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Energy MainVC-->
         <scene sceneID="x0r-zR-FpF">
             <objects>
-                <viewController id="fPn-yK-FWw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnergyMainVC" id="fPn-yK-FWw" customClass="EnergyMainVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u8p-cO-cZp"/>
                         <viewControllerLayoutGuide type="bottom" id="zg1-VQ-uk5"/>
@@ -37,10 +37,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="今天">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="changeDate:" destination="fPn-yK-FWw" eventType="touchUpInside" id="94g-D0-PUH"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pulldown" translatesAutoresizingMaskIntoConstraints="NO" id="cQ2-T6-imd">
                                                 <rect key="frame" x="41" y="12" width="8" height="6"/>
@@ -90,6 +93,13 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="bottomScrollView" destination="OpI-71-Kt1" id="GU7-Ik-Cke"/>
+                        <outlet property="imgViewTime" destination="cQ2-T6-imd" id="81m-aC-yym"/>
+                        <outlet property="lblDetailLoss" destination="xT9-lP-z6U" id="Cnp-pE-3zP"/>
+                        <outlet property="middleView" destination="ab1-jq-E1K" id="sj0-WQ-yDK"/>
+                        <outlet property="topView" destination="PZ6-a4-0sp" id="g7c-oE-Sl4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYL-Ex-Z21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

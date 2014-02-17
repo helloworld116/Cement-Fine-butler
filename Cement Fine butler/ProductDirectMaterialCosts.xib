@@ -15,14 +15,6 @@
                     <rect key="frame" x="7" y="0.0" width="150" height="74"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fza-g6-as9">
-                            <rect key="frame" x="0.0" y="0.0" width="150" height="74"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTO-Ez-j8k">
                             <rect key="frame" x="0.0" y="10" width="150" height="58"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,6 +68,17 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fza-g6-as9">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="58"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="showPopupView:" destination="1" eventType="touchUpInside" id="Z4J-80-ZLW"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -86,9 +89,13 @@
                                 <constraint firstItem="WLM-Rk-O0P" firstAttribute="leading" secondItem="0kG-wN-cQ9" secondAttribute="trailing" constant="6" id="7Qj-4z-rEX"/>
                                 <constraint firstItem="0kG-wN-cQ9" firstAttribute="top" secondItem="cTO-Ez-j8k" secondAttribute="top" id="E1O-hT-qXd"/>
                                 <constraint firstAttribute="trailing" secondItem="0HK-cI-jOM" secondAttribute="trailing" constant="8" id="NKG-C1-arh"/>
+                                <constraint firstAttribute="trailing" secondItem="Fza-g6-as9" secondAttribute="trailing" id="NpY-Te-Ptx"/>
+                                <constraint firstItem="Fza-g6-as9" firstAttribute="top" secondItem="cTO-Ez-j8k" secondAttribute="top" id="QDd-CY-9hi"/>
                                 <constraint firstItem="0HK-cI-jOM" firstAttribute="trailing" secondItem="q5h-NJ-dOm" secondAttribute="trailing" id="R82-DE-sg9"/>
                                 <constraint firstItem="as8-ne-knL" firstAttribute="top" secondItem="WLM-Rk-O0P" secondAttribute="bottom" constant="10" id="SIj-JQ-Fff"/>
                                 <constraint firstItem="0HK-cI-jOM" firstAttribute="baseline" secondItem="as8-ne-knL" secondAttribute="baseline" id="U8A-q6-Eau"/>
+                                <constraint firstItem="Fza-g6-as9" firstAttribute="leading" secondItem="cTO-Ez-j8k" secondAttribute="leading" id="UGz-BE-4LT"/>
+                                <constraint firstAttribute="bottom" secondItem="Fza-g6-as9" secondAttribute="bottom" id="eiV-XP-6BC"/>
                                 <constraint firstAttribute="bottom" secondItem="as8-ne-knL" secondAttribute="bottom" constant="1" id="fjA-Pp-fK9"/>
                                 <constraint firstItem="0kG-wN-cQ9" firstAttribute="leading" secondItem="cTO-Ez-j8k" secondAttribute="leading" constant="14" id="vAs-PV-8PI"/>
                             </constraints>
@@ -104,14 +111,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.98431378602981567" green="0.76862752437591553" blue="0.55294120311737061" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Fza-g6-as9" secondAttribute="trailing" id="AKN-Cs-gAM"/>
                         <constraint firstItem="cTO-Ez-j8k" firstAttribute="leading" secondItem="T98-T5-Y5H" secondAttribute="leading" id="JQR-x8-9vv"/>
                         <constraint firstAttribute="width" secondItem="cTO-Ez-j8k" secondAttribute="width" id="S3F-Jg-f8f"/>
                         <constraint firstAttribute="bottom" secondItem="Vjb-wl-MMI" secondAttribute="bottom" id="YF2-dK-qtd"/>
                         <constraint firstAttribute="centerY" secondItem="cTO-Ez-j8k" secondAttribute="centerY" constant="-2" id="dQS-dg-ZzB"/>
-                        <constraint firstItem="Fza-g6-as9" firstAttribute="leading" secondItem="T98-T5-Y5H" secondAttribute="leading" id="epx-cF-WCx"/>
-                        <constraint firstAttribute="bottom" secondItem="Fza-g6-as9" secondAttribute="bottom" id="fRh-F3-KYp"/>
-                        <constraint firstItem="Fza-g6-as9" firstAttribute="top" secondItem="T98-T5-Y5H" secondAttribute="top" id="iFr-0v-BPs"/>
                         <constraint firstAttribute="trailing" secondItem="Vjb-wl-MMI" secondAttribute="trailing" id="ruf-dK-a1A"/>
                         <constraint firstAttribute="height" constant="74" id="yNO-rI-yl3"/>
                     </constraints>
@@ -316,6 +319,9 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="lblBenchmarkingPrice" destination="WLM-Rk-O0P" id="G6n-Ee-2HO"/>
+                <outlet property="lblQuotationPrice" destination="JEl-dI-QfS" id="Zne-tY-B6O"/>
+                <outlet property="lblRealPrice" destination="NTJ-F9-id3" id="gmB-np-BoT"/>
                 <outlet property="lblStatus" destination="5GA-Qq-DhT" id="RKj-g2-L55"/>
                 <outlet property="lblStatusValue" destination="XZT-Cr-uw3" id="qq3-br-mP7"/>
                 <outlet property="lblSuggestion" destination="qKS-P5-ryx" id="l86-Sc-xoS"/>

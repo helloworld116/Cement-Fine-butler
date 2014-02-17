@@ -114,6 +114,14 @@
 		0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */; };
 		0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */; };
 		0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */; };
+		0EBDEB4C18B1A50A00C0B3B4 /* EnergyMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */; };
+		0EBDEB4F18B1A8D200C0B3B4 /* EnergyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB4E18B1A8D200C0B3B4 /* EnergyView.m */; };
+		0EBDEB5118B1E6DE00C0B3B4 /* CostPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5018B1E6DE00C0B3B4 /* CostPopupView.xib */; };
+		0EBDEB5418B1EAE800C0B3B4 /* CostPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5318B1EAE800C0B3B4 /* CostPopupView.m */; };
+		0EBDEB5718B1EB5400C0B3B4 /* CostPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5618B1EB5400C0B3B4 /* CostPopupVC.m */; };
+		0EBDEB5918B20A4000C0B3B4 /* CostDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5818B20A4000C0B3B4 /* CostDetailView.xib */; };
+		0EBDEB5C18B220AC00C0B3B4 /* CostDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5B18B220AC00C0B3B4 /* CostDetailVC.m */; };
+		0EBDEB5F18B2215E00C0B3B4 /* CostDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5E18B2215E00C0B3B4 /* CostDetailView.m */; };
 		0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBFCA991861A62F004CD92D /* LossPlaceCell.m */; };
 		0EBFCA9C1861A6A9004CD92D /* LossCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBFCA9B1861A6A9004CD92D /* LossCell.xib */; };
 		0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B0D181F896C001BF5B7 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -376,6 +384,20 @@
 		0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighDetailViewController.m; sourceTree = "<group>"; };
 		0EB2D98D1817AA4F00AEE5E8 /* DatePickerViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController2.h; sourceTree = "<group>"; };
 		0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController2.m; sourceTree = "<group>"; };
+		0EBDEB4A18B1A50A00C0B3B4 /* EnergyMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMainVC.h; sourceTree = "<group>"; };
+		0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMainVC.m; sourceTree = "<group>"; };
+		0EBDEB4D18B1A8D200C0B3B4 /* EnergyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyView.h; sourceTree = "<group>"; };
+		0EBDEB4E18B1A8D200C0B3B4 /* EnergyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyView.m; sourceTree = "<group>"; };
+		0EBDEB5018B1E6DE00C0B3B4 /* CostPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CostPopupView.xib; sourceTree = "<group>"; };
+		0EBDEB5218B1EAE800C0B3B4 /* CostPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostPopupView.h; sourceTree = "<group>"; };
+		0EBDEB5318B1EAE800C0B3B4 /* CostPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostPopupView.m; sourceTree = "<group>"; };
+		0EBDEB5518B1EB5400C0B3B4 /* CostPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostPopupVC.h; sourceTree = "<group>"; };
+		0EBDEB5618B1EB5400C0B3B4 /* CostPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostPopupVC.m; sourceTree = "<group>"; };
+		0EBDEB5818B20A4000C0B3B4 /* CostDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CostDetailView.xib; sourceTree = "<group>"; };
+		0EBDEB5A18B220AC00C0B3B4 /* CostDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostDetailVC.h; sourceTree = "<group>"; };
+		0EBDEB5B18B220AC00C0B3B4 /* CostDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostDetailVC.m; sourceTree = "<group>"; };
+		0EBDEB5D18B2215E00C0B3B4 /* CostDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostDetailView.h; sourceTree = "<group>"; };
+		0EBDEB5E18B2215E00C0B3B4 /* CostDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostDetailView.m; sourceTree = "<group>"; };
 		0EBFCA981861A62F004CD92D /* LossPlaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossPlaceCell.h; sourceTree = "<group>"; };
 		0EBFCA991861A62F004CD92D /* LossPlaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossPlaceCell.m; sourceTree = "<group>"; };
 		0EBFCA9B1861A6A9004CD92D /* LossCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LossCell.xib; sourceTree = "<group>"; };
@@ -563,7 +585,11 @@
 				0E6B0282186BD72A00B63321 /* EnergyNavigationController.h */,
 				0E6B0283186BD72A00B63321 /* EnergyNavigationController.m */,
 				0E41837918AF619400596E40 /* EnergyStoryboard.storyboard */,
+				0EBDEB4D18B1A8D200C0B3B4 /* EnergyView.h */,
+				0EBDEB4E18B1A8D200C0B3B4 /* EnergyView.m */,
 				0E41837B18AF61B700596E40 /* EnergyView.xib */,
+				0EBDEB4A18B1A50A00C0B3B4 /* EnergyMainVC.h */,
+				0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -904,6 +930,16 @@
 				0EA125AF18AC99EE00700544 /* DirectMaterialCostViewController.h */,
 				0EA125B018AC99EE00700544 /* DirectMaterialCostViewController.m */,
 				0EA125B218AC9ACE00700544 /* CostStoryboard.storyboard */,
+				0EBDEB5018B1E6DE00C0B3B4 /* CostPopupView.xib */,
+				0EBDEB5218B1EAE800C0B3B4 /* CostPopupView.h */,
+				0EBDEB5318B1EAE800C0B3B4 /* CostPopupView.m */,
+				0EBDEB5518B1EB5400C0B3B4 /* CostPopupVC.h */,
+				0EBDEB5618B1EB5400C0B3B4 /* CostPopupVC.m */,
+				0EBDEB5818B20A4000C0B3B4 /* CostDetailView.xib */,
+				0EBDEB5D18B2215E00C0B3B4 /* CostDetailView.h */,
+				0EBDEB5E18B2215E00C0B3B4 /* CostDetailView.m */,
+				0EBDEB5A18B220AC00C0B3B4 /* CostDetailVC.h */,
+				0EBDEB5B18B220AC00C0B3B4 /* CostDetailVC.m */,
 			);
 			name = "直接材料成本";
 			sourceTree = "<group>";
@@ -1279,6 +1315,7 @@
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
 				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
 				0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */,
+				0EBDEB5918B20A4000C0B3B4 /* CostDetailView.xib in Resources */,
 				0E12584518473A8300959EC1 /* ProductViewController.xib in Resources */,
 				0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */,
 				0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */,
@@ -1288,6 +1325,7 @@
 				0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */,
 				0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */,
 				0E439F59185550750008C0D8 /* MainStoryboard_iPad.storyboard in Resources */,
+				0EBDEB5118B1E6DE00C0B3B4 /* CostPopupView.xib in Resources */,
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,
 				0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */,
 				0ECA4AAE18AB6869005C998A /* View.xib in Resources */,
@@ -1355,6 +1393,8 @@
 				0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */,
 				0E6B0281186BC95C00B63321 /* NavigationController.m in Sources */,
 				0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */,
+				0EBDEB5418B1EAE800C0B3B4 /* CostPopupView.m in Sources */,
+				0EBDEB5718B1EB5400C0B3B4 /* CostPopupVC.m in Sources */,
 				472F32FF17CC3C05007E567B /* EquipmentMapViewController.mm in Sources */,
 				4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
@@ -1364,6 +1404,7 @@
 				0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
 				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
+				0EBDEB5F18B2215E00C0B3B4 /* CostDetailView.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,
 				0E6B028A186D106400B63321 /* MoreNavigationController.m in Sources */,
 				0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */,
@@ -1409,6 +1450,7 @@
 				0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */,
 				0EF727B4181E87520059EC59 /* InventorySettingUpdateViewController.m in Sources */,
 				0E6E4315182282D500016B93 /* ProductChoiceViewController.m in Sources */,
+				0EBDEB5C18B220AC00C0B3B4 /* CostDetailVC.m in Sources */,
 				0E2786E117ED7AC600385E59 /* LoginAction.m in Sources */,
 				0E1258211844988000959EC1 /* EnergyMonitoringListViewController.m in Sources */,
 				0EA125AE18AC6B0800700544 /* ProductDirectMaterialCosts.m in Sources */,
@@ -1416,6 +1458,7 @@
 				0E5FAB21188FAFAF005860B9 /* BaseViewController.m in Sources */,
 				0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */,
 				0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */,
+				0EBDEB4C18B1A50A00C0B3B4 /* EnergyMainVC.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
 				0EF4CD39184D67D00050A63A /* IndustryStandardViewController.m in Sources */,
@@ -1477,6 +1520,7 @@
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
+				0EBDEB4F18B1A8D200C0B3B4 /* EnergyView.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

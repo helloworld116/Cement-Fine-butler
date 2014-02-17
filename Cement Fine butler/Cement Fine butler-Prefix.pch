@@ -33,6 +33,7 @@
     #import <Harpy/Harpy.h>
     #import <UICountingLabel.h>
     #import <PPiFlatSegmentedControl.h>
+    #import <UIViewController+MJPopupViewController.h>
     #import "BaseViewController.h"
     #import "CementAppDelegate.h"
     #import "LeftViewController.h"

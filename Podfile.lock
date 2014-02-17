@@ -18,6 +18,7 @@ PODS:
   - JASidePanels (1.3.2)
   - KxMenu (1)
   - MBProgressHUD (0.7)
+  - MJPopupViewController (0.4)
   - PPiAwesomeButton (1.2.9):
     - FontAwesome+iOS
   - PPiFlatSegmentedControl (1.3.3):
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - JASidePanels
   - KxMenu
   - MBProgressHUD
+  - MJPopupViewController
   - PPiFlatSegmentedControl
   - REMenu (~> 1.7.1)
   - RTLabel
@@ -55,6 +57,7 @@ SPEC CHECKSUMS:
   JASidePanels: c0e642a7311ec9cc9adfa616fa4a795e4e169f20
   KxMenu: 99db7f9b685c3c8325d152df3fe5b7fdc8b8343e
   MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
+  MJPopupViewController: 4cd0badf3dae541017e0e16e2d2c7578d9224052
   PPiAwesomeButton: 8d8bc4cf62d8c848e433a1f405e019deee2821dc
   PPiFlatSegmentedControl: 32d42c7f50cd2db1c40ee17a94d78da6f69d9813
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735

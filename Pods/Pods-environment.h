@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 7
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
 
+// MJPopupViewController
+#define COCOAPODS_POD_AVAILABLE_MJPopupViewController
+#define COCOAPODS_VERSION_MAJOR_MJPopupViewController 0
+#define COCOAPODS_VERSION_MINOR_MJPopupViewController 4
+#define COCOAPODS_VERSION_PATCH_MJPopupViewController 0
+
 // PPiAwesomeButton
 #define COCOAPODS_POD_AVAILABLE_PPiAwesomeButton
 #define COCOAPODS_VERSION_MAJOR_PPiAwesomeButton 1

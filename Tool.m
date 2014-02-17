@@ -532,7 +532,7 @@
 
 +(NSString *)numberToStringWithFormatter:(NSNumber *)number{
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.##"];
+    [numberFormatter setPositiveFormat:@"###,##0.00"];
     return [numberFormatter stringFromNumber:number];
 }
 @end

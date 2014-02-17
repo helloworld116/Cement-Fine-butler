@@ -24,6 +24,7 @@
 #import "LossNavigationController.h"
 #import "MoreNavigationController.h"
 #import "DirectMaterialCostViewController.h"
+#import "EnergyMainVC.h"
 
 //service
 #import "VersionService.h"
@@ -146,9 +147,13 @@
     UINavigationController *rawMaterialCostLossNC = [[UINavigationController alloc] initWithRootViewController:directMaterialCostVC];
     
     //能源监控
-    EnergyMonitoringOverViewViewController *energyMonitoringOverViewVC = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
-//    UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
-    EnergyNavigationController *energyMonitoringOverViewNC = [[EnergyNavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
+//    EnergyMonitoringOverViewViewController *energyMonitoringOverViewVC = [[EnergyMonitoringOverViewViewController alloc] initWithNibName:@"EnergyMonitoringOverViewViewController" bundle:nil];
+////    UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
+//    EnergyNavigationController *energyMonitoringOverViewNC = [[EnergyNavigationController alloc] initWithRootViewController:energyMonitoringOverViewVC];
+    UIStoryboard *energyStoryboard = [UIStoryboard storyboardWithName:@"EnergyStoryboard" bundle:nil];
+    EnergyMainVC *energyMainVC = [energyStoryboard instantiateViewControllerWithIdentifier:@"EnergyMainVC"];
+    UINavigationController *energyMonitoringOverViewNC = [[UINavigationController alloc] initWithRootViewController:energyMainVC];
+    
     //损耗定位
 //    LossOverViewViewController *lossOverViewVC = [[LossOverViewViewController alloc] init];
     LossOverViewVC *lossOverViewVC = [[LossOverViewVC alloc] init];
