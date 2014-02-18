@@ -9,18 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface EnergyView : UIView
-@property (nonatomic,strong) IBOutlet UIView *leftTopView;
-@property (nonatomic,strong) IBOutlet UILabel *lblRealValue;
-@property (nonatomic,strong) IBOutlet UILabel *lblRealText;
-
-
-@property (nonatomic,strong) IBOutlet UIView *leftBottomView;
-@property (nonatomic,strong) IBOutlet UILabel *lblBenchmarkingValue;
-@property (nonatomic,strong) IBOutlet UILabel *lblBenchmarkingText;
-
-@property (nonatomic,strong) IBOutlet UIView *rightView;
-
-@property (nonatomic,strong) IBOutlet UILabel *lblStatus;
-@property (nonatomic,strong) IBOutlet UILabel *lblValue;
-@property (nonatomic,strong) IBOutlet UILabel *lblSuggestion;
+//0表示煤耗，1表示电耗
+-(void)setupValue:(NSDictionary *)data withType:(int)type;
 @end

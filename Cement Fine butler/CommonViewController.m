@@ -26,12 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	// Do any additional setup after loading the view
     self.messageView = [[PromptMessageView alloc] initWithFrame:CGRectZero];
     self.messageView.hidden = YES;
     [self.view addSubview:self.messageView];
     //默认查询条件
     self.condition = [[SearchCondition alloc] initWithInventoryType:0 timeType:2 lineID:0 productID:0 unitCostType:0];
+    self.timeType = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{

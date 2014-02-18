@@ -27,8 +27,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (IS_IOS7) {
-        [self setNeedsStatusBarAppearanceUpdate];
+//    if (IS_IOS7) {
+//        [self setNeedsStatusBarAppearanceUpdate];
+//    }
+    //iOS7设置view
+    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
+        self.edgesForExtendedLayout=UIRectEdgeNone;
     }
 }
 
@@ -38,7 +42,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
-}
+//-(UIStatusBarStyle)preferredStatusBarStyle{
+//    return UIStatusBarStyleLightContent;
+//}
 @end

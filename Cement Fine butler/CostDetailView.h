@@ -9,12 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CostDetailView : UIView
-@property (nonatomic,strong) IBOutlet UIWebView *webView;
-@property (nonatomic,strong) IBOutlet UILabel *lblFinancialPrice;
-@property (nonatomic,strong) IBOutlet UILabel *lblCurrentPrice;
-@property (nonatomic,strong) IBOutlet UILabel *lblPlanPrice;
-@property (nonatomic,strong) IBOutlet UILabel *lblTBText;
-@property (nonatomic,strong) IBOutlet UILabel *lblTBValue;
-@property (nonatomic,strong) IBOutlet UILabel *lblHBText;
-@property (nonatomic,strong) IBOutlet UILabel *lblHBValue;
+-(void)setupValue:(NSDictionary *)product withDate:(NSString *)date;
 @end

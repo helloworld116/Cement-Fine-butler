@@ -68,8 +68,9 @@
     #define kPageSize 10
     #define kDateFormatFull @"yyyy-MM-dd HH:mm:ss"
     #define kDateFormatDay @"MM-dd"
-//    #define kColorList @[@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7",@"#4572a7",@"#aa4643",@"#89a54e",@"#80699b",@"#92a8cd",@"#db843d",@"#a47d7c",@"#4572a7"]
-    #define kColorList @[@"#9400D3",@"#FF1493",@"#00BFFF",@"#00CED1",@"#B22222",@"#228B22",@"#FF00FF",@"#FFD700",@"#ADFF2F",@"#CD5C5C",@"#FF69B4",@"#ADD8E6",@"#90EE90",@"#FFB6C1",@"#FFA07A",@"#20B2AA",@"#87CEFA",@"#8470FF",@"#778899",@"#0000CD",@"#3CB371",@"#696969",@"#1E90FF",@"#D19275"]
+//    #define kColorList @[@"#ff554b",@"#2fda83",@"#5c9cec",@"#4cd9c0",@"#ffd300",@"#fdae61",@"#35d3f2",@"#f673cf",@"#8be867",@"#a5d207",@"#f4730b",@"#ff9600",@"#ef4735",@"#17bdc7",@"#fed700",@"#b454f1",@"#ddaaff",@"#ec4bff",@"#ffae00",@"#4dc32c",@"#ff843c",@"#4ea0ff"]
+#define kColorList @[@"#ff554b",@"#2fda83",@"#5c9cec",@"#4cd9c0",@"#ffd300",@"#fdae61",@"#35d3f2",@"#f673cf",@"#8be867",@"#a5d207",@"#f4730b",@"#ff9600",@"#ef4735",@"#17bdc7",@"#fed700",@"#b454f1",@"#ddaaff",@"#ec4bff",@"#ffae00",@"#4dc32c",@"#ff843c",@"#4ea0ff"]
+//    #define kColorList @[@"#9400D3",@"#FF1493",@"#00BFFF",@"#00CED1",@"#B22222",@"#228B22",@"#FF00FF",@"#FFD700",@"#ADFF2F",@"#CD5C5C",@"#FF69B4",@"#ADD8E6",@"#90EE90",@"#FFB6C1",@"#FFA07A",@"#20B2AA",@"#87CEFA",@"#8470FF",@"#778899",@"#0000CD",@"#3CB371",@"#696969",@"#1E90FF",@"#D19275"]
     #define kSharedApp ((CementAppDelegate *)[[UIApplication sharedApplication] delegate])
 //    #define kGeneralColor [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]
     #define kGeneralColor [UIColor colorWithRed:92/255.0 green:156/255.0 blue:236/255.0 alpha:1.0]
@@ -173,6 +174,7 @@
 
 #pragma mark 原材料成本损失
 #define kRawMaterialLoss [kServerURL stringByAppendingString:@"cost/overview"]
+#define kCostDetail [kServerURL stringByAppendingString:@"cost/detail"]
 
 #pragma mark 能源监控
 #define kEnergyMonitoring [kServerURL stringByAppendingString:@"energy/overview"]

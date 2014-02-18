@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CostDetailVC : CommonViewController
-
+@property (nonatomic,retain) NSString *date;
 @end

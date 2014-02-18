@@ -172,6 +172,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="bottomScorllView" destination="Gmj-jv-8Ww" id="Pn6-M3-LM6"/>
+                        <outlet property="btnDate" destination="Zcb-0j-ax1" id="Mfb-Iv-rm8"/>
                         <outlet property="imgViewDetail" destination="Mt3-WG-UxM" id="Aqe-Xl-B28"/>
                         <outlet property="imgViewStatus" destination="21n-QK-M2a" id="ij5-d7-F9F"/>
                         <outlet property="imgViewTime" destination="pED-Lh-8TP" id="p66-Ff-x2T"/>
@@ -256,7 +257,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abW-2F-yDY">
                                 <rect key="frame" x="0.0" y="80" width="320" height="400"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.85882352939999995" green="0.85882352939999995" blue="0.85882352939999995" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.92941182850000004" green="0.92941182850000004" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.92941182851791382" green="0.92941182851791382" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>

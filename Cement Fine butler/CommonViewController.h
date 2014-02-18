@@ -25,6 +25,7 @@
 @end
 
 @interface CommonViewController : BaseViewController<MBProgressHUDDelegate,CommonVCDataSource>
+@property (nonatomic) int timeType;//0表示今天，1表示昨天，2表示本月，3表示本年
 @property (retain, nonatomic) NSString *URL;
 @property (retain, nonatomic) SearchCondition *condition;//请求条件
 @property (retain, nonatomic) ASIFormDataRequest *request;

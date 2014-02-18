@@ -16,6 +16,7 @@
 //顶部控件
 @property (nonatomic,strong) IBOutlet UIView *topOfView;//头部容器
 @property (nonatomic,strong) DropDownView *dropDownView;
+@property (nonatomic,strong) IBOutlet UIButton *btnDate;
 @property (nonatomic,strong) IBOutlet UIImageView *imgViewTime;//指示时间可以下拉的箭头
 @property (nonatomic,strong) IBOutlet UIImageView *imgViewStatus;
 @property (nonatomic,strong) IBOutlet UILabel *lblStatus;//指示节约或损失
@@ -98,6 +99,7 @@
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
                                        NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.middleView addSubview:self.segmented];
+    self.middleView.hidden = NO;
 }
 
 -(void)setupBottomView:(NSArray *)products{
@@ -112,6 +114,7 @@
         productDirectMaterialCosts.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
         [self.bottomScorllView addSubview:productDirectMaterialCosts];
     }
+    self.bottomScorllView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,19 +127,39 @@
     if (self.dropDownView) {
         [self.dropDownView hideDropDown:sender];
         self.dropDownView = nil;
+//        float rotateAngle = -M_PI;
+//        CGAffineTransform transform = CGAffineTransformMakeRotation(rotateAngle);
+//        self.imgViewTime.transform = transform;
     }else{
+//        [CATransaction begin];
+//        [CATransaction setAnimationDuration:0.1];
+//        self.imgViewTime.transform = CATransform3DMakeRotation((M_PI/180.0)*180.0f, 0.0f, 0.0f, 1.0f);
+//        [CATransaction commit];
         self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:90.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
         self.dropDownView.delegate = self;
     }
+    //旋转代码
+    CGAffineTransform transform = self.imgViewTime.transform;
+    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
+    self.imgViewTime.transform = transform;
 }
 
 
 -(IBAction)showDetail:(id)sender {
     CostDetailVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostDetailVC"];
+    nextVC.date = self.btnDate.currentTitle;
     [self.navigationController pushViewController:nextVC animated:YES];
 }
 
 -(void)dropDownDelegateMethod:(DropDownView *)sender{
+    CGAffineTransform transform = self.imgViewTime.transform;
+    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
+    self.imgViewTime.transform = transform;
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self sendRequest];
+    });
     self.dropDownView = nil;
 }
 
@@ -166,11 +189,31 @@
 }
     
 -(void)setRequestParams{
-    [self.request setPostValue:@"2013-11-1" forKey:@"startTime"];
-    [self.request setPostValue:@"2013-11-30" forKey:@"endTime"];
+    NSString *startDate,*endDate;
+    switch (self.timeType) {
+        case 0:
+            
+            break;
+        case 1:
+            
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        default:
+            break;
+    }
+    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
+    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
 }
+
 -(void)clear{
     self.topOfView.hidden = YES;
+    self.middleView.hidden = YES;
+    self.bottomScorllView.hidden  = YES;
 }
 
 @end

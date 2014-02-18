@@ -30,7 +30,7 @@
                     legend:{
                       enable:true,
                       padding:0,
-                      offsetx:-40,
+                      offsetx:-20,
                       color:null,
                       border:false,
                       fontsize:10,
@@ -50,18 +50,31 @@
                     background_color:null,
                     showpercent:false,
                     decimalsnum:2,
-                    width:306,
-                    height:256,
+                    width:config.width,
+                    height:config.height,
                     radius:55
                   });
+              //利用自定义组件构造右侧说明文本
+              chart.plugin(new iChart.Custom({
+                  drawFn:function(){
+                    //计算位置
+                    var y = chart.get('originy'),w = chart.get('width');
+                    
+                    //在右侧的位置，渲染说明文字
+                    chart.target.textAlign('start')
+                    .textBaseline('middle')
+                    .textFont('600 12px Verdana')
+                    .fillText(config.date,w-228,y+68,false,'#be5985',false,20);
+                  }
+              }));
               chart.draw();
             }
         </script>
     </head>
     <!--
-       onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
-
-     onload=drawDonut2D('[{"color":"#FF1493","name":"熟料","value":"95.58"},{"color":"#00BFFF","name":"粉煤灰","value":"0.54"},{"color":"#00CED1","name":"煤矸石","value":"0.19"},{"color":"#B22222","name":"固体助磨剂","value":"0.61"},{"color":"#228B22","name":"矿粉","value":"1.68"},{"color":"#FFD700","name":"铝泥","value":"0.36"}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"totalLoss":2200}')
+       
+     onload=drawDonut2D('[{"color":"#4572a7","name":"原材料损耗","value":600},{"color":"#aa4643","name":"半成品损耗","value":1000},{"color":"#89a54e","name":"成品损耗","value":600}]','{"title":"原材料损耗总览","unit":"吨","height":320,"width":320,"date":"今年"}')
+     
      -->
     <body>
         <div id='canvasDiv'>

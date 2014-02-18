@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EnergyMainVC : UIViewController
+@interface EnergyMainVC : CommonViewController
 
 @end

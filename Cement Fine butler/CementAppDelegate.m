@@ -52,6 +52,7 @@
 {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //网络状况检查
     [self netWorkChecker];
     [self addNetWorkChangeNotification];

@@ -44,13 +44,23 @@
     self.bottomScrollView.showsHorizontalScrollIndicator = NO;
     self.bottomScrollView.bounces = NO;
     self.bottomScrollView.delegate = self;
-    [self addMiddleView:@[]];
-    [self addBottomView:@[@"",@"",@""]];
+    self.URL = kCostDetail;
+    [self sendRequest];
 }
 
-- (void)addMiddleView:(NSArray *)products{
-    self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 0, kScreenWidth-14, 38) items:@[@{@"text":@"Face"},                                                                          @{@"text":@"Linkedin"},
-         @{@"text":@"Twitter"}] iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
+-(void)setupTopView{
+    double totalCost = [[[self.data objectForKey:@"overview"] objectForKey:@"totalCost"] doubleValue];
+    self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:totalCost]];
+    self.topOfView.hidden = NO;
+}
+
+- (void)setupMiddleView:(NSArray *)products{
+    NSMutableArray *items = [@[] mutableCopy];
+    for (NSDictionary *product in products) {
+        [items addObject:@{@"text":[product objectForKey:@"productName"]}];
+    }
+
+    self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 0, kScreenWidth-14, 38) items:items iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
              self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
          }];
     self.segmented.color=[UIColor whiteColor];
@@ -62,15 +72,18 @@
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
                                             NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.middleView addSubview:self.segmented];
+    self.middleView.hidden = NO;
 }
     
--(void)addBottomView:(NSArray *)products{
+-(void)setupBottomView:(NSArray *)products{
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
     CostDetailView *costDetailView;
     for (int i=0; i<products.count; i++) {
+        NSDictionary *product = products[i];
         costDetailView = [[[NSBundle mainBundle] loadNibNamed:@"CostDetailView" owner:self options:nil] objectAtIndex:0];
+        [costDetailView setupValue:product withDate:self.date];
         costDetailView.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
         [self.bottomScrollView addSubview:costDetailView];
     }
@@ -87,7 +100,29 @@
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
-    
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    NSArray *products = [self.data objectForKey:@"products"];
+    [self setupTopView];
+    [self setupMiddleView:products];
+    [self setupBottomView:products];
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
+    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
+}
+-(void)clear{
+    self.topOfView.hidden = YES;
+    self.middleView.hidden = YES;
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

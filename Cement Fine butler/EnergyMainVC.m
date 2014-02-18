@@ -20,6 +20,8 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblDetailLoss;
     
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
+
+@property (nonatomic) int type;//0表示煤耗，1表示电耗
 @end
 
 @implementation EnergyMainVC
@@ -65,10 +67,22 @@
                                     NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.topView addSubview:self.segmented];
+    self.topView.hidden = NO;
 }
     
 -(void)setupMiddleView{
-
+    if (self.type==0) {
+        //煤耗
+        double coalAmount = [Tool doubleValue:[self.data objectForKey:@"coalAmount"]];
+        double coalLossAmount = [Tool doubleValue:[self.data objectForKey:@"coalLossAmount"]];
+        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@公斤    损失%@公斤",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
+    }else if(self.type==1){
+        //电耗
+        double coalAmount = [Tool doubleValue:[self.data objectForKey:@"coalAmount"]];
+        double coalLossAmount = [Tool doubleValue:[self.data objectForKey:@"coalLossAmount"]];
+        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    损失%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
+    }
+    self.topView.hidden = NO;
 }
     
 -(void)setupBottomView{
@@ -84,6 +98,7 @@
     energyView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
     energyView.frame = CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height);
     [self.bottomScrollView addSubview:energyView];
+    self.bottomScrollView.hidden = NO;
 }
 
 -(IBAction)changeDate:(id)sender {
@@ -94,9 +109,21 @@
         self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:90.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
         self.dropDownView.delegate = self;
     }
+    //旋转代码
+    CGAffineTransform transform = self.imgViewTime.transform;
+    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
+    self.imgViewTime.transform = transform;
 }
 
 -(void)dropDownDelegateMethod:(DropDownView *)sender{
+    CGAffineTransform transform = self.imgViewTime.transform;
+    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
+    self.imgViewTime.transform = transform;
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self sendRequest];
+    });
     self.dropDownView = nil;
 }
     
@@ -110,5 +137,26 @@
     
 -(void)showPopupView:(id)sender{
     [self presentPopupViewController:nil animationType:MJPopupViewAnimationFade];
+}
+
+#pragma mark 自定义公共VC
+-(void)responseCode0WithData{
+    [self setupTopView];
+    [self setupMiddleView];
+    [self setupBottomView];
+}
+
+-(void)responseWithOtherCode{
+    [super responseWithOtherCode];
+}
+
+-(void)setRequestParams{
+    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
+    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
+}
+
+-(void)clear{
+    self.middleView.hidden = YES;
+    self.bottomScrollView.hidden  = YES;
 }
 @end
