@@ -40,7 +40,7 @@
                       text_with_sign_color : true,
                       listeners:{
                           parse:function(p,text,i){
-                              return {text:p.data[i].name+' '+p.data[i].value};
+                              return {text:p.data[i].name+' '+p.data[i].value+'元/吨'};
                           }
                       }
                     },
@@ -50,8 +50,8 @@
                     background_color:null,
                     showpercent:false,
                     decimalsnum:2,
-                    width : 300,
-                    height : 200,
+                    width:306,
+                    height:256,
                     radius:55
                   });
               chart.draw();
