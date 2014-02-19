@@ -9,7 +9,7 @@
 #import "CostPopupVC.h"
 #import "CostPopupView.h"
 
-@interface CostPopupVC ()
+@interface CostPopupVC ()<UITextFieldDelegate>
 
 @end
 
@@ -40,4 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSLog(@"......");
+}
 @end

@@ -112,7 +112,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self hideDropDown:self.btnSender];
     UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
-    [self.btnSender setTitle:c.textLabel.text forState:UIControlStateNormal];
+    NSString *title = c.textLabel.text;
+    [self.btnSender setTitle:title forState:UIControlStateNormal];
+    if ([title isEqualToString:@"今天"]) {
+        self.timeType = 0;
+    }else if ([title isEqualToString:@"昨天"]){
+        self.timeType = 1;
+    }else if ([title isEqualToString:@"本月"]){
+        self.timeType = 2;
+    }else if ([title isEqualToString:@"本年"]){
+        self.timeType = 3;
+    }
     [self myDelegate];
 }
 

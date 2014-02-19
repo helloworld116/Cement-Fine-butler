@@ -21,6 +21,7 @@
 @property (nonatomic,strong) IBOutlet UIImageView *imgViewStatus;
 @property (nonatomic,strong) IBOutlet UILabel *lblStatus;//指示节约或损失
 @property (nonatomic,strong) IBOutlet UILabel *lblValue;//节约或损失的数值
+@property (nonatomic,strong) IBOutlet UILabel *lblUnit;//单位
 
 @property (nonatomic,strong) IBOutlet UILabel *lblDetail;
 @property (nonatomic,strong) IBOutlet UIImageView *imgViewDetail;
@@ -32,7 +33,7 @@
 //底部控件
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScorllView;
 
-
+@property (nonatomic,strong) CostPopupVC *costPopupVC;
 -(IBAction)changeDate:(id)sender;
 -(IBAction)showDetail:(id)sender;
 
@@ -69,12 +70,14 @@
         //损失
         self.lblStatus.textColor = [Tool hexStringToColor:@"#f58383"];
         self.lblValue.textColor = [Tool hexStringToColor:@"#f58383"];
+        self.lblUnit.textColor = [Tool hexStringToColor:@"#f58383"];
         self.imgViewStatus.image = [UIImage imageNamed:@"redmoney_icon"];
         self.lblStatus.text = @"总损失";
         self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:totalLoss]];
     }else{
         self.lblStatus.textColor = [Tool hexStringToColor:@"#70dea9"];
         self.lblValue.textColor = [Tool hexStringToColor:@"#70dea9"];
+        self.lblUnit.textColor = [Tool hexStringToColor:@"#70dea9"];
         self.imgViewStatus.image = [UIImage imageNamed:@"money_icon"];
         self.lblStatus.text = @"总节约";
         self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-totalLoss)]];
@@ -148,6 +151,7 @@
 -(IBAction)showDetail:(id)sender {
     CostDetailVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostDetailVC"];
     nextVC.date = self.btnDate.currentTitle;
+    nextVC.timeType = self.timeType;
     [self.navigationController pushViewController:nextVC animated:YES];
 }
 
@@ -155,6 +159,7 @@
     CGAffineTransform transform = self.imgViewTime.transform;
     transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
     self.imgViewTime.transform = transform;
+    self.timeType = sender.timeType;
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -172,8 +177,21 @@
 }
 
 -(void)showPopupView:(id)sender{
-    CostPopupVC *costPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostPopupVC"];
-    [self presentPopupViewController:costPopupVC animationType:MJPopupViewAnimationFade];
+    self.costPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostPopupVC"];
+    [self presentPopupViewController:self.costPopupVC animationType:MJPopupViewAnimationFade];
+   
+    
+//    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+//	[self.view addSubview:HUD];
+//	HUD.customView = [[[NSBundle mainBundle] loadNibNamed:@"CostPopupView" owner:self options:nil] objectAtIndex:0];
+//	
+//	// Set custom view mode
+//	HUD.mode = MBProgressHUDModeCustomView;
+//	
+//	HUD.delegate = self;
+//	HUD.labelText = @"Completed";
+//	
+//	[HUD show:YES];
 }
     
 #pragma mark 自定义公共VC
@@ -189,25 +207,7 @@
 }
     
 -(void)setRequestParams{
-    NSString *startDate,*endDate;
-    switch (self.timeType) {
-        case 0:
-            
-            break;
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        default:
-            break;
-    }
-    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
-    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
+    [super setRequestParams];
 }
 
 -(void)clear{

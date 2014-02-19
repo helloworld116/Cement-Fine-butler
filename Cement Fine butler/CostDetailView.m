@@ -38,11 +38,10 @@
 }
     
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    NSLog(@"webviewstart");
+
 }
     
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    NSLog(@"webviewfinish");
     NSMutableArray *dataArray = [@[] mutableCopy];
     NSArray *materials = [self.product objectForKey:@"recoveryMaterials"];
     for (int i=0; i<materials.count; i++) {
@@ -65,7 +64,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)err{
-    NSLog(@"webviewerror");
+
 }
 #pragma mark end webviewDelegate
 
@@ -91,23 +90,23 @@
         self.lblPlanPrice.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:planUnitCost]];
         if (costTongbiRate>0) {
             self.lblTBText.text = @"同比增长：";
-            self.lblTBValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:costTongbiRate]];
+            self.lblTBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:costTongbiRate]],@"%"];
         }else if (costTongbiRate==0){
             self.lblTBText.text = @"同比增长：";
             self.lblTBValue.text = @"---";
         }else if (costTongbiRate<0){
             self.lblTBText.text = @"同比减少：";
-            self.lblTBValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-costTongbiRate)]];
+            self.lblTBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-costTongbiRate)]],@"%"];
         }
         if (costHuanbiRate>0) {
             self.lblHBText.text = @"同比增长：";
-            self.lblHBValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:costHuanbiRate]];
+            self.lblHBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:costHuanbiRate]],@"%"];
         }else if (costHuanbiRate==0){
             self.lblHBText.text = @"同比增长：";
             self.lblHBValue.text = @"---";
         }else if (costHuanbiRate<0){
             self.lblHBText.text = @"同比减少：";
-            self.lblHBValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-costHuanbiRate)]];
+            self.lblHBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-costHuanbiRate)]],@"%"];
         }
     }
 }

@@ -114,9 +114,11 @@
 }
 
 -(void)setRequestParams{
-    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
-    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
+//    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
+//    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
+    [super setRequestParams];
 }
+
 -(void)clear{
     self.topOfView.hidden = YES;
     self.middleView.hidden = YES;

@@ -32,7 +32,7 @@
     [self.view addSubview:self.messageView];
     //默认查询条件
     self.condition = [[SearchCondition alloc] initWithInventoryType:0 timeType:2 lineID:0 productID:0 unitCostType:0];
-    self.timeType = 0;
+//    self.timeType = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -187,7 +187,48 @@
 #pragma mark 自定义VC可选实现的方法
 -(void)clear{}
 
--(void)setRequestParams{}
+-(void)setRequestParams{
+    NSString *startDate,*endDate;
+    NSDate *date = [NSDate date];
+    NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow: -(60.0f*60.0f*24.0f)];
+    
+    NSCalendar *gregorian = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+    NSInteger day = [dateComponents day];
+    NSInteger month = [dateComponents month];
+    NSInteger year = [dateComponents year];
+    
+    NSRange range;
+    NSUInteger numberOfDaysInMonth;
+    switch (self.timeType) {
+        case 0:
+            startDate = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
+            endDate = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
+            break;
+        case 1:
+            dateComponents = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:yesterday];
+            day = [dateComponents day];
+            month = [dateComponents month];
+            year = [dateComponents year];
+            startDate = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
+            endDate = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
+            break;
+        case 2:
+            range = [gregorian rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+            numberOfDaysInMonth = range.length;
+            startDate = [NSString stringWithFormat:@"%d-%d-1",year,month];
+            endDate = [NSString stringWithFormat:@"%d-%d-%d",year,month,numberOfDaysInMonth];
+            break;
+        case 3:
+            startDate = [NSString stringWithFormat:@"%d-1-1",year];
+            endDate = [NSString stringWithFormat:@"%d-12-31",year];
+            break;
+        default:
+            break;
+    }
+    [self.request setPostValue:startDate forKey:@"startTime"];
+    [self.request setPostValue:endDate forKey:@"endTime"];
+}
 
 -(void)setPanels{}
 
