@@ -177,7 +177,7 @@
 #define kCostDetail [kServerURL stringByAppendingString:@"cost/detail"]
 
 #pragma mark 能源监控
-#define kEnergyMonitoring [kServerURL stringByAppendingString:@"energy/overview"]
+#define kEnergyMonitoring [kServerURL stringByAppendingString:@"energy/index"]
 
 //行业数据
 #define kIndustryStandardAdd [kServerURL stringByAppendingString:@"industryStandard/add"]

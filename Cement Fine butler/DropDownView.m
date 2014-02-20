@@ -29,7 +29,7 @@
     CGRect btnRect = btn.superview.frame;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
-    self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
+    self.frame = CGRectMake(btnRect.origin.x, btn.superview.superview.frame.origin.y+ btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
     self.tableview.frame = CGRectMake(0, 0, btnRect.size.width, 0);
     [UIView commitAnimations];
 }
@@ -42,7 +42,7 @@
     if (self) {
         CGRect btnRect = btn.superview.frame;
         
-        self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
+        self.frame = CGRectMake(btnRect.origin.x, btn.superview.superview.frame.origin.y+ btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
         self.list = [NSArray arrayWithArray:newList];
         self.layer.masksToBounds = NO;
 //        self.layer.cornerRadius = 8;
@@ -62,7 +62,7 @@
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
-        self.frame = CGRectMake(btnRect.origin.x, btnRect.origin.y+btnRect.size.height, btnRect.size.width, height);
+        self.frame = CGRectMake(btnRect.origin.x, btn.superview.superview.frame.origin.y+ btnRect.origin.y+btnRect.size.height, btnRect.size.width, height);
         self.tableview.frame = CGRectMake(0, 0, btnRect.size.width, height);
         [UIView commitAnimations];
         

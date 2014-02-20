@@ -136,23 +136,23 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(元)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb5-M1-WT9">
-                            <rect key="frame" x="107" y="155" width="22" height="17"/>
+                            <rect key="frame" x="107" y="151" width="22" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power_consumption_icon_new" translatesAutoresizingMaskIntoConstraints="NO" id="PHI-b7-6sQ">
-                            <rect key="frame" x="49" y="51" width="52" height="52"/>
+                            <rect key="frame" x="48" y="49" width="54" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.49411767721176147" blue="0.5215686559677124" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
-                        <constraint firstItem="fb5-M1-WT9" firstAttribute="baseline" secondItem="AEF-iz-Pht" secondAttribute="baseline" id="9LG-vL-A1w"/>
                         <constraint firstAttribute="centerX" secondItem="AEF-iz-Pht" secondAttribute="centerX" id="AUv-MY-cgp"/>
                         <constraint firstAttribute="centerX" secondItem="PHI-b7-6sQ" secondAttribute="centerX" id="GAY-Zw-PgO"/>
                         <constraint firstAttribute="trailing" secondItem="UUY-f0-BOE" secondAttribute="trailing" constant="10" id="Ka1-iE-bfU"/>
+                        <constraint firstItem="fb5-M1-WT9" firstAttribute="centerY" secondItem="AEF-iz-Pht" secondAttribute="centerY" id="LpJ-AP-vNF"/>
                         <constraint firstAttribute="centerX" secondItem="CZk-Cm-RId" secondAttribute="centerX" id="TG0-X6-Zdz"/>
                         <constraint firstItem="fb5-M1-WT9" firstAttribute="leading" secondItem="AEF-iz-Pht" secondAttribute="trailing" constant="2" id="a4f-uh-HKb"/>
                         <constraint firstItem="AEF-iz-Pht" firstAttribute="top" secondItem="CZk-Cm-RId" secondAttribute="bottom" constant="8" id="bP8-3J-Q1e"/>
@@ -181,6 +181,7 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="imgViewType" destination="PHI-b7-6sQ" id="6mJ-Xi-duO"/>
                 <outlet property="lblBenchmarkingText" destination="PyZ-xr-ABb" id="uha-yc-XEu"/>
                 <outlet property="lblBenchmarkingValue" destination="JuO-e3-xqN" id="WVN-f8-3ua"/>
                 <outlet property="lblRealText" destination="3K5-8A-DyV" id="pHW-FA-T9v"/>
@@ -195,7 +196,7 @@
         </view>
     </objects>
     <resources>
-        <image name="power_consumption_icon_new" width="52" height="52"/>
+        <image name="power_consumption_icon_new" width="54" height="54"/>
         <image name="smalltriangle_icon" width="8" height="8"/>
     </resources>
 </document>

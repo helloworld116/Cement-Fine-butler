@@ -47,12 +47,10 @@
     if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
-    self.titleView = [[TitleView alloc] init];
-    self.titleView.lblTitle.text = @"损耗总览";
-    self.navigationItem.titleView = self.titleView;
+    self.navigationItem.title = @"损耗总览";
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearch:)];
     
     self.headerView = [[[NSBundle mainBundle] loadNibNamed:@"LossCell" owner:self options:nil] objectAtIndex:1];
     [self.view addSubview:self.headerView];
@@ -60,14 +58,15 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     CGRect tableViewFrame = CGRectMake(0, self.headerView.frame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.headerView.frame.size.height-kTabBarHeight);
     self.tableView.frame = tableViewFrame;
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
-    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
-    self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
-    self.rightVC.currentSelectDict = @{kCondition_Time:@2};
+//    self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
+//    self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
+//    self.rightVC.currentSelectDict = @{kCondition_Time:@2};
     self.URL = kLoss;
     [self sendRequest];
 }

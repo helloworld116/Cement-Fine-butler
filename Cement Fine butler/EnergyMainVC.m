@@ -45,8 +45,8 @@
     self.bottomScrollView.bounces = NO;
     self.bottomScrollView.delegate = self;
     [self setupTopView];
-    [self setupMiddleView];
-    [self setupBottomView];
+    self.URL = kEnergyMonitoring;
+    [self sendRequest];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +57,9 @@
 
 -(void)setupTopView{
     self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 7, kScreenWidth-14, 38) items:@[@{@"text":@"煤耗"},                                                                          @{@"text":@"电耗"}] iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
-             self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
+            self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
+            self.type = segmentIndex;
+            [self setupMiddleView];
          }];
     self.segmented.color=[UIColor whiteColor];
     self.segmented.borderWidth=1;
@@ -67,22 +69,36 @@
                                     NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.topView addSubview:self.segmented];
-    self.topView.hidden = NO;
 }
     
 -(void)setupMiddleView{
     if (self.type==0) {
         //煤耗
-        double coalAmount = [Tool doubleValue:[self.data objectForKey:@"coalAmount"]];
-        double coalLossAmount = [Tool doubleValue:[self.data objectForKey:@"coalLossAmount"]];
-        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@公斤    损失%@公斤",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
+        NSDictionary *coal = [self.data objectForKey:@"coal"];
+        double coalAmount = [Tool doubleValue:[coal objectForKey:@"coalAmount"]];
+        double coalLossAmount = [Tool doubleValue:[coal objectForKey:@"coalLossAmount"]];
+        NSString *status;
+        if (coalLossAmount>=0) {
+            status = @"损失";
+        }else{
+            coalLossAmount = -coalLossAmount;
+            status = @"节约";
+        }
+        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@公斤    %@%@公斤",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
     }else if(self.type==1){
         //电耗
-        double coalAmount = [Tool doubleValue:[self.data objectForKey:@"coalAmount"]];
-        double coalLossAmount = [Tool doubleValue:[self.data objectForKey:@"coalLossAmount"]];
-        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    损失%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
+        NSDictionary *elec = [self.data objectForKey:@"elec"];
+        double elecAmount = [Tool doubleValue:[elec objectForKey:@"elecAmount"]];
+        double elecLossAmount = [Tool doubleValue:[elec objectForKey:@"elecLossAmount"]];
+        NSString *status;
+        if (elecLossAmount>=0) {
+            status = @"损失";
+        }else{
+            elecLossAmount = -elecLossAmount;
+            status = @"节约";
+        }
+        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    %@%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecLossAmount]]];
     }
-    self.topView.hidden = NO;
 }
     
 -(void)setupBottomView{
@@ -93,10 +109,12 @@
     //煤耗
     energyView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
     energyView.frame = CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height);
+    [energyView setupValue:[self.data objectForKey:@"coal"] withType:0];
     [self.bottomScrollView addSubview:energyView];
     //电耗
     energyView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
     energyView.frame = CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height);
+    [energyView setupValue:[self.data objectForKey:@"elec"] withType:1];
     [self.bottomScrollView addSubview:energyView];
     self.bottomScrollView.hidden = NO;
 }
@@ -141,7 +159,6 @@
 
 #pragma mark 自定义公共VC
 -(void)responseCode0WithData{
-    [self setupTopView];
     [self setupMiddleView];
     [self setupBottomView];
 }
@@ -151,12 +168,10 @@
 }
 
 -(void)setRequestParams{
-    [self.request setPostValue:@"2013-12-1" forKey:@"startTime"];
-    [self.request setPostValue:@"2013-12-30" forKey:@"endTime"];
+    [super setRequestParams];
 }
 
 -(void)clear{
-    self.middleView.hidden = YES;
     self.bottomScrollView.hidden  = YES;
 }
 @end
