@@ -7,6 +7,7 @@
 //
 
 #import "EnergyView.h"
+#import "EnergyMainVC.h"
 @interface EnergyView()
 @property (nonatomic,retain) NSDictionary *data;
 
@@ -24,6 +25,8 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblStatus;
 @property (nonatomic,strong) IBOutlet UILabel *lblValue;
 @property (nonatomic,strong) IBOutlet UILabel *lblSuggestion;
+
+-(IBAction)showPopupView:(id)sender;
 @end
 
 @implementation EnergyView
@@ -93,4 +96,14 @@
     }
 }
 
+-(IBAction)showPopupView:(id)sender{
+    EnergyMainVC *viewController;
+    for (UIView *next = [self superview]; next; next = [next superview]) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[EnergyMainVC class]]) {
+            viewController = (EnergyMainVC *)nextResponder;
+        }
+    }
+    [viewController showPopupView:sender];
+}
 @end

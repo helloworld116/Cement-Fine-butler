@@ -34,7 +34,6 @@
 //底部控件
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScorllView;
 
-@property (nonatomic,strong) CostPopupVC *costPopupVC;
 -(IBAction)changeDate:(id)sender;
 -(IBAction)showDetail:(id)sender;
 
@@ -175,8 +174,10 @@
 }
 
 -(void)showPopupView:(id)sender{
-    self.costPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostPopupVC"];
-    [self presentPopupViewController:self.costPopupVC animationType:MJPopupViewAnimationFade];
+    CostPopupVC *costPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostPopupVC"];
+    NSDictionary *currentSelectProduct = [[self.data objectForKey:@"products"] objectAtIndex:self.selectIndex];
+    costPopupVC.defaultValue = [Tool doubleValue:[currentSelectProduct objectForKey:@"customCost"]];
+    [self presentPopupViewController:costPopupVC animationType:MJPopupViewAnimationFade];
 }
 
 -(void)setCustomUnitCost:(NSNotification*) notification{
@@ -184,21 +185,58 @@
     NSNumber *value = [notification object];
     if ([value doubleValue]) {
         //1更新本地
-        NSMutableDictionary *newData =  [NSMutableDictionary dictionaryWithDictionary:self.data];
+        NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
+        NSMutableArray *newProducts = [NSMutableArray arrayWithArray:[self.data objectForKey:@"products"]];
         NSMutableDictionary *product = [NSMutableDictionary dictionaryWithDictionary:[[newData objectForKey:@"products"] objectAtIndex:self.selectIndex]];
-        double allTotalLoss = [[[self.data objectForKey:@"overview"] objectForKey:@"totalLoss"] doubleValue];
-        double diff = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-([Tool doubleValue:[product objectForKey:@"compareCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]]);
-        [newData setValue:[NSNumber numberWithDouble:allTotalLoss-diff] forKeyPath:@"overview.totalLoss"];
-        double newTotalLoss = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]];
-        [product setValue:[NSNumber numberWithDouble:newTotalLoss] forKey:@"totalLoss"];
+        
+        double newProductTotalLoss = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]];
+        [product setValue:[NSNumber numberWithDouble:newProductTotalLoss] forKey:@"totalLoss"];
         [product setValue:value forKey:@"customCost"];
         [product setValue:value forKey:@"compareCost"];
+        [newProducts replaceObjectAtIndex:self.selectIndex withObject:product];
+        [newData setValue:newProducts forKey:@"products"];
+        double newAllProductTotalLoss = 0;
+        for (NSDictionary *dict in newProducts) {
+            newAllProductTotalLoss+=[Tool doubleValue:[dict objectForKey:@"totalLoss"]];
+        }
+        [newData setValue:@{@"totalLoss":[NSNumber numberWithDouble:newAllProductTotalLoss]} forKey:@"overview"];
         ProductDirectMaterialCosts *productDirectMaterialCosts = [[self.bottomScorllView subviews] objectAtIndex:self.selectIndex];
         [productDirectMaterialCosts updateValue:product];
         self.data = newData;
         //必须在修改self.data后执行setupTopView
         [self setupTopView];
         //2保存自定义数据
+        long productId = [Tool longValue:[product objectForKey:@"id"]];
+        DDLogCInfo(@"******  Request URL is:%@  ******",kCustomCostUpdate);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomCostUpdate]];
+        request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+        [request setUseCookiePersistence:YES];
+        [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+        [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+        [request setPostValue:[NSNumber numberWithLong:productId] forKey:@"productId"];
+        [request setPostValue:value forKey:@"customUnitCost"];
+        [request setDelegate:self];
+        [request setDidFailSelector:@selector(updateRequestFailed:)];
+        [request setDidFinishSelector:@selector(updateRequestSuccess:)];
+        [request startAsynchronous];
+    }
+}
+
+#pragma mark 网络请求
+-(void) updateRequestFailed:(ASIHTTPRequest *)request{
+    
+}
+
+-(void)updateRequestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==kErrorCode0) {
+       
+    }else if(errorCode==kErrorCodeExpired){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
     }
 }
     

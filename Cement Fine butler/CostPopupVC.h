@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CostPopupVC : UIViewController
-@property (nonatomic) double value;
+@property (nonatomic) double defaultValue;
 @end

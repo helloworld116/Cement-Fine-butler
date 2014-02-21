@@ -175,6 +175,9 @@
 		472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332E17CC3D48007E567B /* CoreLocation.framework */; };
 		472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */; };
 		4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */; };
+		473FBA6518B7B7D8007BC3CF /* ElecPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473FBA6418B7B7D8007BC3CF /* ElecPopupView.xib */; };
+		473FBA6818B7B86B007BC3CF /* ElecPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473FBA6718B7B86B007BC3CF /* ElecPopupView.m */; };
+		473FBA6B18B7B96A007BC3CF /* ElecPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 473FBA6A18B7B96A007BC3CF /* ElecPopupVC.m */; };
 		4741D7C4188197F9005D3625 /* UICountingLabel+Counting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4741D7C3188197F9005D3625 /* UICountingLabel+Counting.m */; };
 		474F913A1814445400D94A85 /* TimeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F91391814445400D94A85 /* TimeTableView.m */; };
 		474F913D1814446C00D94A85 /* LineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F913C1814446C00D94A85 /* LineTableView.m */; };
@@ -519,6 +522,11 @@
 		472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectrcityOperateViewController.m; sourceTree = "<group>"; };
 		4734FC7D18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ButtonWithoutBorder.h"; sourceTree = "<group>"; };
 		4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ButtonWithoutBorder.m"; sourceTree = "<group>"; };
+		473FBA6418B7B7D8007BC3CF /* ElecPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ElecPopupView.xib; sourceTree = "<group>"; };
+		473FBA6618B7B86B007BC3CF /* ElecPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElecPopupView.h; sourceTree = "<group>"; };
+		473FBA6718B7B86B007BC3CF /* ElecPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElecPopupView.m; sourceTree = "<group>"; };
+		473FBA6918B7B96A007BC3CF /* ElecPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElecPopupVC.h; sourceTree = "<group>"; };
+		473FBA6A18B7B96A007BC3CF /* ElecPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElecPopupVC.m; sourceTree = "<group>"; };
 		4741D7C2188197F9005D3625 /* UICountingLabel+Counting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICountingLabel+Counting.h"; sourceTree = "<group>"; };
 		4741D7C3188197F9005D3625 /* UICountingLabel+Counting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICountingLabel+Counting.m"; sourceTree = "<group>"; };
 		474F91381814445400D94A85 /* TimeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableView.h; sourceTree = "<group>"; };
@@ -593,6 +601,11 @@
 				0E41837B18AF61B700596E40 /* EnergyView.xib */,
 				0EBDEB4A18B1A50A00C0B3B4 /* EnergyMainVC.h */,
 				0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */,
+				473FBA6418B7B7D8007BC3CF /* ElecPopupView.xib */,
+				473FBA6618B7B86B007BC3CF /* ElecPopupView.h */,
+				473FBA6718B7B86B007BC3CF /* ElecPopupView.m */,
+				473FBA6918B7B96A007BC3CF /* ElecPopupVC.h */,
+				473FBA6A18B7B96A007BC3CF /* ElecPopupVC.m */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -1337,6 +1350,7 @@
 				0EA125B318AC9ACE00700544 /* CostStoryboard.storyboard in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
+				473FBA6518B7B7D8007BC3CF /* ElecPopupView.xib in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 				0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */,
 				0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */,
@@ -1437,12 +1451,14 @@
 				0EF727AC181E60910059EC59 /* InventorySettingListViewController.m in Sources */,
 				0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */,
 				0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */,
+				473FBA6B18B7B96A007BC3CF /* ElecPopupVC.m in Sources */,
 				0EA5CF1A182389230028BE8B /* MaterialWeighCell.m in Sources */,
 				0E43ED6718278A8B006E3A66 /* LocalNotifactionServices.m in Sources */,
 				0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */,
 				0E0907C818517F4000905166 /* RealTimeReportLeftController.m in Sources */,
 				0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */,
 				0EA5CF311823AE860028BE8B /* ProductWeighViewController.m in Sources */,
+				473FBA6818B7B86B007BC3CF /* ElecPopupView.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
@@ -1650,7 +1666,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1674,7 +1690,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

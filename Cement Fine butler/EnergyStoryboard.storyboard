@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fPn-yK-FWw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fPn-yK-FWw">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
+        <!--Elec PopupVC-->
+        <scene sceneID="Glh-nR-aIS">
+            <objects>
+                <viewController storyboardIdentifier="ElecPopupVC" id="ihJ-2B-jmt" customClass="ElecPopupVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pl3-hR-3rO"/>
+                        <viewControllerLayoutGuide type="bottom" id="zAB-NJ-45T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3NO-9z-iQE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dwf-XC-ctr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="526" y="-41"/>
+        </scene>
         <!--Energy MainVC-->
         <scene sceneID="x0r-zR-FpF">
             <objects>
@@ -98,7 +116,7 @@
                         <outlet property="imgViewTime" destination="cQ2-T6-imd" id="81m-aC-yym"/>
                         <outlet property="lblDetailLoss" destination="xT9-lP-z6U" id="Cnp-pE-3zP"/>
                         <outlet property="middleView" destination="ab1-jq-E1K" id="sj0-WQ-yDK"/>
-                        <outlet property="topView" destination="PZ6-a4-0sp" id="g7c-oE-Sl4"/>
+                        <outlet property="topOfView" destination="PZ6-a4-0sp" id="6oM-6H-oWj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYL-Ex-Z21" userLabel="First Responder" sceneMemberID="firstResponder"/>

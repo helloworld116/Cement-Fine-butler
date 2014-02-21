@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EnergyMainVC : CommonViewController
-
+-(void)showPopupView:(id)sender;
 @end

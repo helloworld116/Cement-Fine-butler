@@ -9,9 +9,10 @@
 #import "EnergyMainVC.h"
 #import "EnergyView.h"
 #import "DropDownView.h"
+#import "ElecPopupVC.h"
 
 @interface EnergyMainVC ()<UIScrollViewDelegate,DropDownViewDeletegate>
-@property (nonatomic,strong) IBOutlet UIView *topView;
+@property (nonatomic,strong) IBOutlet UIView *topOfView;
 @property (nonatomic,strong) PPiFlatSegmentedControl *segmented;
     
 @property (nonatomic,strong) IBOutlet UIView *middleView;
@@ -69,7 +70,7 @@
     self.segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
                                     NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
-    [self.topView addSubview:self.segmented];
+    [self.topOfView addSubview:self.segmented];
 }
     
 -(void)setupMiddleView{
@@ -104,7 +105,7 @@
     
 -(void)setupBottomView{
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
-    CGFloat contentHeight = kScreenHeight-self.topView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
+    CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*2, contentHeight);
     EnergyView *energyView;
     //煤耗
@@ -152,11 +153,22 @@
     CGFloat pageWidth = scrollView.frame.size.width;
     NSInteger page = scrollView.contentOffset.x / pageWidth;
     [self.segmented setEnabled:YES forSegmentAtIndex:page];
+    self.type = page;
+    [self setupMiddleView];
 }
     
 -(void)showPopupView:(id)sender{
-    [self presentPopupViewController:nil animationType:MJPopupViewAnimationFade];
+    if (self.type==0) {
+        //煤耗
+    }else if (self.type==1){
+        //电耗
+        ElecPopupVC *elecPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ElecPopupVC"];
+        double customElecUnitAmount = [Tool doubleValue:[[self.data objectForKey:@"elec"] objectForKey:@"customElecUnitAmount  "]];
+        elecPopupVC.defaultValue = customElecUnitAmount;
+        [self presentPopupViewController:elecPopupVC animationType:MJPopupViewAnimationFade];
+    }
 }
+
 
 #pragma mark 自定义公共VC
 -(void)responseCode0WithData{
