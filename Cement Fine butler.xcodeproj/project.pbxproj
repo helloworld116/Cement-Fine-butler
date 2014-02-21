@@ -133,6 +133,7 @@
 		0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */; };
 		0ECA4A6918AB1F3A005C998A /* ProductDirectMaterialCosts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */; };
 		0ECA4AAE18AB6869005C998A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA4AAD18AB6869005C998A /* View.xib */; };
+		0ECE017218B6EA1D00669587 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE017118B6EA1D00669587 /* AboutVC.m */; };
 		0ED59D3418AA2BE200C2A703 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED59D3318AA2BE200C2A703 /* DropDownView.m */; };
 		0EDC72031811319F00895931 /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC72021811319F00895931 /* NODataView.m */; };
 		0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDFFBF717E1B045009B4671 /* ConditionCell.m */; };
@@ -416,6 +417,8 @@
 		0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyOfProductViewController.xib; sourceTree = "<group>"; };
 		0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDirectMaterialCosts.xib; sourceTree = "<group>"; };
 		0ECA4AAD18AB6869005C998A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		0ECE017018B6EA1D00669587 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		0ECE017118B6EA1D00669587 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		0ED59D3218AA2BE200C2A703 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		0ED59D3318AA2BE200C2A703 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
 		0EDC72011811319F00895931 /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
@@ -968,6 +971,8 @@
 				0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */,
 				0E6B0288186D106400B63321 /* MoreNavigationController.h */,
 				0E6B0289186D106400B63321 /* MoreNavigationController.m */,
+				0ECE017018B6EA1D00669587 /* AboutVC.h */,
+				0ECE017118B6EA1D00669587 /* AboutVC.m */,
 			);
 			name = "更多";
 			sourceTree = "<group>";
@@ -1424,6 +1429,7 @@
 				0EF4CD3C184D6B480050A63A /* IndustryStandardOperationViewController.m in Sources */,
 				0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */,
 				0E9F2DC2186287F700F0F0E2 /* LossDescCell.m in Sources */,
+				0ECE017218B6EA1D00669587 /* AboutVC.m in Sources */,
 				0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */,
 				0E6322B0184F485800D5F4B7 /* CommonViewController.m in Sources */,
 				0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */,

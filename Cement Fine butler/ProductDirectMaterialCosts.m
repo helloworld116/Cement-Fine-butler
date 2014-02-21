@@ -70,4 +70,23 @@
     }
     self.lblSuggestion.text = suggestion;
 }
+
+-(void)updateValue:(NSDictionary *)product{
+    double compareCost = [[product objectForKey:@"compareCost"] doubleValue];//对标成本
+    double totalActualCost = [[product objectForKey:@"totalActualCost"] doubleValue];//实际总成本（财务总成本）
+    double usedQuantity = [[product objectForKey:@"usedQuantity"] doubleValue];//使用量
+    double value = totalActualCost-compareCost*usedQuantity;
+    self.lblBenchmarkingPrice.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:compareCost]];
+    if (value>=0) {
+        //损失
+        self.viewStatus.backgroundColor = [Tool hexStringToColor:@"#f58383"];
+        self.lblStatus.text = @"损失";
+        self.lblStatusValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:value]];
+    }else{
+        //节约
+        self.viewStatus.backgroundColor = [Tool hexStringToColor:@"#70dea9"];
+        self.lblStatus.text = @"节约";
+        self.lblStatusValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-value)]];
+    }
+}
 @end

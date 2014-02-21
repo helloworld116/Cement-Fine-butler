@@ -25,7 +25,8 @@
     [[Harpy sharedInstance] setAppID:@"730834744"];
     
     // (Optional) Set the App Name for your app
-    [[Harpy sharedInstance] setAppName:@"成本计量云"];
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    [[Harpy sharedInstance] setAppName:appName];
     
     /* (Optional) Set the Alert Type for your app
      By default, the Singleton is initialized to HarpyAlertTypeOption */

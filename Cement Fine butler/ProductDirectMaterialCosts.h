@@ -10,4 +10,6 @@
 
 @interface ProductDirectMaterialCosts : UIView
 -(void)setupValue:(NSDictionary *)product;
+
+-(void)updateValue:(NSDictionary *)product;
 @end

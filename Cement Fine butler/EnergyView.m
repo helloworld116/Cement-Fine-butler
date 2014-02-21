@@ -52,6 +52,8 @@
         double coalUnitAmount = [Tool doubleValue:[data objectForKey:@"coalUnitAmount"]];
         double compareUnitAmount = [Tool doubleValue:[data objectForKey:@"compareUnitAmount"]];
         double lossCost = [Tool doubleValue:[data objectForKey:@"lossCost"]];
+        NSString *suggestion = [Tool stringToString:[data objectForKey:@"suggestion"]];
+        
         self.lblRealText.text=@"煤耗（公斤/吨）";
         self.lblRealValue.text=[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalUnitAmount]];
         self.lblBenchmarkingText.text=@"对标煤耗（公斤/吨）";
@@ -66,12 +68,13 @@
             self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:-lossCost]];
         }
         self.imgViewType.image = [UIImage imageNamed:@"coal_consumption_icon_new"];
-        self.lblSuggestion.text = @"";
+        self.lblSuggestion.text = suggestion;
     }else if (type==1){
         //电耗
         double elecUnitAmount = [Tool doubleValue:[data objectForKey:@"elecUnitAmount"]];
         double compareUnitAmount = [Tool doubleValue:[data objectForKey:@"compareUnitAmount"]];
         double lossCost = [Tool doubleValue:[data objectForKey:@"lossCost"]];
+        NSString *suggestion = [Tool stringToString:[data objectForKey:@"suggestion"]];
         self.lblRealText.text=@"电耗（度/吨）";
         self.lblRealValue.text=[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecUnitAmount]];
         self.lblBenchmarkingText.text=@"对标电耗（度/吨）";
@@ -86,7 +89,7 @@
             self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:-lossCost]];
         }
         self.imgViewType.image = [UIImage imageNamed:@"power_consumption_icon_new"];
-        self.lblSuggestion.text = @"";
+        self.lblSuggestion.text = suggestion;
     }
 }
 

@@ -28,7 +28,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    CostPopupView *popupView = [[[NSBundle mainBundle] loadNibNamed:@"CostPopupView" owner:self options:nil] objectAtIndex:0];
+//    CostPopupView *popupView = [[[NSBundle mainBundle] loadNibNamed:@"CostPopupView" owner:self options:nil] objectAtIndex:0];
+    CostPopupView *popupView = [[CostPopupView alloc] init];
     self.view.frame = popupView.frame;
     self.view.layer.cornerRadius = 5;
     [self.view addSubview:popupView];
@@ -40,7 +41,4 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    NSLog(@"......");
-}
 @end

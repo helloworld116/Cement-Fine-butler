@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CostPopupView : UIView
-
+@property (nonatomic) double value;
 @end

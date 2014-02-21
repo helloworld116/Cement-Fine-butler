@@ -13,6 +13,7 @@
 #import "ChoiceFactoryViewController.h"
 #import "ProductColumnViewController.h"
 #import "REMenuReportVC.h"
+#import "AboutVC.h"
 
 @interface MoreViewController ()<PassValueDelegate>
 @property (nonatomic,retain) NSArray *options;
@@ -65,11 +66,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 7;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
         return 1;
     }else if(section==1){
@@ -80,9 +80,11 @@
         return self.options.count;
     }else if(section==4){
         return 1;
-    }else{
+    }else if(section==5){
         //账号与安全
-        return 2;
+        return 1;
+    }else{
+        return 1;
     }
 }
 
@@ -97,8 +99,10 @@
         return @"数据录入";
     }else if (section==4) {
         return @"消息";
-    }else{
+    }else if(section==5){
         return @"账号与安全";
+    }else{
+        return @"关于";
     }
 }
 
@@ -137,6 +141,9 @@
             cell.textLabel.text = @"退出当前账号";
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
+    }else if(indexPath.section==6){
+        cell.textLabel.text = @"关于";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }
@@ -184,6 +191,10 @@
             [alertView show];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
+    }else if (indexPath.section==6){
+        UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutVC"];
+        nextViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:nextViewController animated:YES];
     }
 }
 

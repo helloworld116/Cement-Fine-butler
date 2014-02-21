@@ -45,6 +45,7 @@
     self.bottomScrollView.bounces = NO;
     self.bottomScrollView.delegate = self;
     [self setupTopView];
+    self.lblDetailLoss.text = @"使用0.00公斤    损失0.00公斤";
     self.URL = kEnergyMonitoring;
     [self sendRequest];
 }

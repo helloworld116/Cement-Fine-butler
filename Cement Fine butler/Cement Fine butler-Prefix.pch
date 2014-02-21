@@ -77,6 +77,7 @@
     #define kRelativelyColor [UIColor whiteColor]
 
     //接口地址
+    #define kAPPURL @"http://itunes.apple.com/lookup?id=730834744"
 //    #define kServerURL @"http://192.168.1.9:8080/mobile/"
     #define kServerURL @"http://121.199.6.98/mobile/"
 //    #define kServerURL @"http://121.199.6.98/mobile/"
@@ -175,9 +176,16 @@
 #pragma mark 原材料成本损失
 #define kRawMaterialLoss [kServerURL stringByAppendingString:@"cost/overview"]
 #define kCostDetail [kServerURL stringByAppendingString:@"cost/detail"]
+#define kCustomCostUpdate [kServerURL stringByAppendingString:@"cost/custom/add"]
+//http://www.fengboyun.com/mobile/cost/custom/add?accessToken=80caf5e2ee81fb42b7fb8eb3164d923e&factoryId=153&productId=1&customUnitCost=168
 
 #pragma mark 能源监控
 #define kEnergyMonitoring [kServerURL stringByAppendingString:@"energy/index"]
+#define kCustomCoalUpdate [kServerURL stringByAppendingString:@"/energy/coal/custom/add"]
+//http://www.fengboyun.com/mobile/energy/coal/custom/add?accessToken=dec569515084ddfb0e8e954af8708b8e&factoryId=153&customUnitOutput=123
+#define kCustomElecUpdate [kServerURL stringByAppendingString:@"/energy/elec/custom/add"]
+//http://www.fengboyun.com/mobile/energy/elec/custom/add?accessToken=dec569515084ddfb0e8e954af8708b8e&factoryId=153&customUnitOutput=123
+
 
 //行业数据
 #define kIndustryStandardAdd [kServerURL stringByAppendingString:@"industryStandard/add"]

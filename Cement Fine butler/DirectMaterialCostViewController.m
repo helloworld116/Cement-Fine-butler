@@ -11,6 +11,7 @@
 #import "ProductDirectMaterialCosts.h"
 #import "CostPopupVC.h"
 #import "CostDetailVC.h"
+#import "CostPopupView.h"
 
 @interface DirectMaterialCostViewController ()<DropDownViewDeletegate,UIScrollViewDelegate>
 //顶部控件
@@ -37,6 +38,7 @@
 -(IBAction)changeDate:(id)sender;
 -(IBAction)showDetail:(id)sender;
 
+@property (nonatomic) NSInteger selectIndex;
 @end
 
 @implementation DirectMaterialCostViewController
@@ -60,6 +62,7 @@
     self.bottomScorllView.bounces = NO;
     self.bottomScorllView.delegate = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomUnitCost:) name:@"customUnitCost" object:nil];
     self.URL = kRawMaterialLoss;
     [self sendRequest];
 }
@@ -91,6 +94,7 @@
         [items addObject:@{@"text":[product objectForKey:@"name"]}];
     }
     self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 7, kScreenWidth-14, 38) items:items iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
+            self.selectIndex = segmentIndex;
             self.bottomScorllView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
         }];
     self.segmented.color=[UIColor whiteColor];
@@ -130,14 +134,7 @@
     if (self.dropDownView) {
         [self.dropDownView hideDropDown:sender];
         self.dropDownView = nil;
-//        float rotateAngle = -M_PI;
-//        CGAffineTransform transform = CGAffineTransformMakeRotation(rotateAngle);
-//        self.imgViewTime.transform = transform;
     }else{
-//        [CATransaction begin];
-//        [CATransaction setAnimationDuration:0.1];
-//        self.imgViewTime.transform = CATransform3DMakeRotation((M_PI/180.0)*180.0f, 0.0f, 0.0f, 1.0f);
-//        [CATransaction commit];
         self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:90.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
         self.dropDownView.delegate = self;
     }
@@ -173,25 +170,36 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat pageWidth = scrollView.frame.size.width;
     NSInteger page = scrollView.contentOffset.x / pageWidth;
+    self.selectIndex = page;
     [self.segmented setEnabled:YES forSegmentAtIndex:page];
 }
 
 -(void)showPopupView:(id)sender{
     self.costPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostPopupVC"];
     [self presentPopupViewController:self.costPopupVC animationType:MJPopupViewAnimationFade];
-   
-    
-//    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
-//	[self.view addSubview:HUD];
-//	HUD.customView = [[[NSBundle mainBundle] loadNibNamed:@"CostPopupView" owner:self options:nil] objectAtIndex:0];
-//	
-//	// Set custom view mode
-//	HUD.mode = MBProgressHUDModeCustomView;
-//	
-//	HUD.delegate = self;
-//	HUD.labelText = @"Completed";
-//	
-//	[HUD show:YES];
+}
+
+-(void)setCustomUnitCost:(NSNotification*) notification{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    NSNumber *value = [notification object];
+    if ([value doubleValue]) {
+        //1更新本地
+        NSMutableDictionary *newData =  [NSMutableDictionary dictionaryWithDictionary:self.data];
+        NSMutableDictionary *product = [NSMutableDictionary dictionaryWithDictionary:[[newData objectForKey:@"products"] objectAtIndex:self.selectIndex]];
+        double allTotalLoss = [[[self.data objectForKey:@"overview"] objectForKey:@"totalLoss"] doubleValue];
+        double diff = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-([Tool doubleValue:[product objectForKey:@"compareCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]]);
+        [newData setValue:[NSNumber numberWithDouble:allTotalLoss-diff] forKeyPath:@"overview.totalLoss"];
+        double newTotalLoss = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]];
+        [product setValue:[NSNumber numberWithDouble:newTotalLoss] forKey:@"totalLoss"];
+        [product setValue:value forKey:@"customCost"];
+        [product setValue:value forKey:@"compareCost"];
+        ProductDirectMaterialCosts *productDirectMaterialCosts = [[self.bottomScorllView subviews] objectAtIndex:self.selectIndex];
+        [productDirectMaterialCosts updateValue:product];
+        self.data = newData;
+        //必须在修改self.data后执行setupTopView
+        [self setupTopView];
+        //2保存自定义数据
+    }
 }
     
 #pragma mark 自定义公共VC
@@ -214,6 +222,10 @@
     self.topOfView.hidden = YES;
     self.middleView.hidden = YES;
     self.bottomScorllView.hidden  = YES;
+    self.selectIndex = 0;
+    for (UIView *view in [self.bottomScorllView subviews]) {
+        [view removeFromSuperview];
+    }
 }
 
 @end

@@ -28,10 +28,10 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对标成本（元/吨）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as8-ne-knL">
-                                    <rect key="frame" x="14" y="44" width="83" height="13"/>
+                                    <rect key="frame" x="14" y="44" width="101" height="13"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="83" id="7ct-6j-U5C"/>
+                                        <constraint firstAttribute="width" constant="101" id="7ct-6j-U5C"/>
                                         <constraint firstAttribute="height" constant="13" id="tde-KJ-Pot"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -197,11 +197,11 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行情成本（元/吨）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4R-Hc-5Oz">
-                                    <rect key="frame" x="14" y="48" width="83" height="13"/>
+                                    <rect key="frame" x="14" y="48" width="101" height="13"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="13" id="FlL-zw-J5s"/>
-                                        <constraint firstAttribute="width" constant="83" id="eew-RU-jvi"/>
+                                        <constraint firstAttribute="width" constant="101" id="eew-RU-jvi"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -252,10 +252,10 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际成本（元/吨）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5l-GE-QKI">
-                                    <rect key="frame" x="14" y="48" width="83" height="13"/>
+                                    <rect key="frame" x="14" y="48" width="101" height="13"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="83" id="2DA-X0-Gmx"/>
+                                        <constraint firstAttribute="width" constant="101" id="2DA-X0-Gmx"/>
                                         <constraint firstAttribute="height" constant="13" id="JBf-V3-P5e"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
