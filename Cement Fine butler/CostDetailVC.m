@@ -21,6 +21,7 @@
 
 //底部控件
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
+@property (nonatomic,retain) NSMutableArray *costDetailViews;
 @end
 
 @implementation CostDetailVC
@@ -46,6 +47,7 @@
     self.bottomScrollView.delegate = self;
     self.URL = kCostDetail;
     [self sendRequest];
+    self.costDetailViews = [@[] mutableCopy];
 }
 
 -(void)setupTopView{
@@ -79,16 +81,28 @@
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
-    CostDetailView *costDetailView;
+//    costDetailView;
     for (int i=0; i<products.count; i++) {
         NSDictionary *product = products[i];
-        costDetailView = [[[NSBundle mainBundle] loadNibNamed:@"CostDetailView" owner:self options:nil] objectAtIndex:0];
-        [costDetailView setupValue:product withDate:self.date];
+        CostDetailView *costDetailView = [[[NSBundle mainBundle] loadNibNamed:@"CostDetailView" owner:self options:nil] objectAtIndex:0];
+//        [costDetailView setupValue:product withDate:self.date];
         costDetailView.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
         [self.bottomScrollView addSubview:costDetailView];
+        //解决多个webview同时一个html文件出错
+        [self.costDetailViews addObject:costDetailView];
+        NSDictionary *dict = @{@"index":@(i),@"product":product};
+        [NSTimer scheduledTimerWithTimeInterval:3*i target:self selector:@selector(refresh:) userInfo:dict repeats:NO];
     }
 }
-    
+
+-(void)refresh:(NSTimer*)timer{
+    NSDictionary *dict = timer.userInfo;
+    NSInteger index = [[dict objectForKey:@"index"] integerValue];
+    NSDictionary *product = [dict objectForKey:@"product"];
+    CostDetailView *costDetailView = [self.costDetailViews objectAtIndex:index];
+    [costDetailView setupValue:product withDate:self.date];
+}
+
 #pragma mark - UIScrollViewDelegate
     
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

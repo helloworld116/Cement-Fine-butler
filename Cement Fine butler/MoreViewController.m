@@ -102,7 +102,7 @@
     }else if(section==5){
         return @"账号与安全";
     }else{
-        return @"关于";
+        return @"";
     }
 }
 

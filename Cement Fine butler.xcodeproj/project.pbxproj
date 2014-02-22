@@ -129,6 +129,9 @@
 		0EC05B1F181F896C001BF5B7 /* MessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B11181F896C001BF5B7 /* MessageInterceptor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC05B13181F896C001BF5B7 /* PullTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */; };
+		0EC691DB18B83E210018E718 /* ElecPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC691DA18B83E210018E718 /* ElecPopupView.xib */; };
+		0EC691DE18B8427C0018E718 /* CoalPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC691DD18B8427C0018E718 /* CoalPopupView.m */; };
+		0EC691E118B84CFB0018E718 /* CoalPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC691E018B84CFB0018E718 /* CoalPopupVC.m */; };
 		0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */; };
 		0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */; };
 		0ECA4A6918AB1F3A005C998A /* ProductDirectMaterialCosts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA4A6818AB1F3A005C998A /* ProductDirectMaterialCosts.xib */; };
@@ -175,7 +178,7 @@
 		472F332F17CC3D48007E567B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472F332E17CC3D48007E567B /* CoreLocation.framework */; };
 		472F6277181B5C5A00A61252 /* ElectrcityOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */; };
 		4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */; };
-		473FBA6518B7B7D8007BC3CF /* ElecPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473FBA6418B7B7D8007BC3CF /* ElecPopupView.xib */; };
+		473FBA6518B7B7D8007BC3CF /* CoalPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473FBA6418B7B7D8007BC3CF /* CoalPopupView.xib */; };
 		473FBA6818B7B86B007BC3CF /* ElecPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473FBA6718B7B86B007BC3CF /* ElecPopupView.m */; };
 		473FBA6B18B7B96A007BC3CF /* ElecPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 473FBA6A18B7B96A007BC3CF /* ElecPopupVC.m */; };
 		4741D7C4188197F9005D3625 /* UICountingLabel+Counting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4741D7C3188197F9005D3625 /* UICountingLabel+Counting.m */; };
@@ -415,6 +418,11 @@
 		0EC05B13181F896C001BF5B7 /* PullTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullTableView.m; sourceTree = "<group>"; };
 		0EC5CDF4182B6B9F00E63DCA /* ChoiceFactoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceFactoryViewController.h; sourceTree = "<group>"; };
 		0EC5CDF5182B6B9F00E63DCA /* ChoiceFactoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceFactoryViewController.m; sourceTree = "<group>"; };
+		0EC691DA18B83E210018E718 /* ElecPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ElecPopupView.xib; sourceTree = "<group>"; };
+		0EC691DC18B8427C0018E718 /* CoalPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoalPopupView.h; sourceTree = "<group>"; };
+		0EC691DD18B8427C0018E718 /* CoalPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoalPopupView.m; sourceTree = "<group>"; };
+		0EC691DF18B84CFA0018E718 /* CoalPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoalPopupVC.h; sourceTree = "<group>"; };
+		0EC691E018B84CFB0018E718 /* CoalPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoalPopupVC.m; sourceTree = "<group>"; };
 		0EC7940D184C764400DBD1AD /* EnergyOfProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyOfProductViewController.h; sourceTree = "<group>"; };
 		0EC7940E184C764400DBD1AD /* EnergyOfProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyOfProductViewController.m; sourceTree = "<group>"; };
 		0EC7940F184C764400DBD1AD /* EnergyOfProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyOfProductViewController.xib; sourceTree = "<group>"; };
@@ -522,7 +530,7 @@
 		472F6276181B5C5A00A61252 /* ElectrcityOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectrcityOperateViewController.m; sourceTree = "<group>"; };
 		4734FC7D18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ButtonWithoutBorder.h"; sourceTree = "<group>"; };
 		4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ButtonWithoutBorder.m"; sourceTree = "<group>"; };
-		473FBA6418B7B7D8007BC3CF /* ElecPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ElecPopupView.xib; sourceTree = "<group>"; };
+		473FBA6418B7B7D8007BC3CF /* CoalPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoalPopupView.xib; sourceTree = "<group>"; };
 		473FBA6618B7B86B007BC3CF /* ElecPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElecPopupView.h; sourceTree = "<group>"; };
 		473FBA6718B7B86B007BC3CF /* ElecPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElecPopupView.m; sourceTree = "<group>"; };
 		473FBA6918B7B96A007BC3CF /* ElecPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElecPopupVC.h; sourceTree = "<group>"; };
@@ -601,11 +609,16 @@
 				0E41837B18AF61B700596E40 /* EnergyView.xib */,
 				0EBDEB4A18B1A50A00C0B3B4 /* EnergyMainVC.h */,
 				0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */,
-				473FBA6418B7B7D8007BC3CF /* ElecPopupView.xib */,
+				0EC691DA18B83E210018E718 /* ElecPopupView.xib */,
 				473FBA6618B7B86B007BC3CF /* ElecPopupView.h */,
 				473FBA6718B7B86B007BC3CF /* ElecPopupView.m */,
 				473FBA6918B7B96A007BC3CF /* ElecPopupVC.h */,
 				473FBA6A18B7B96A007BC3CF /* ElecPopupVC.m */,
+				473FBA6418B7B7D8007BC3CF /* CoalPopupView.xib */,
+				0EC691DC18B8427C0018E718 /* CoalPopupView.h */,
+				0EC691DD18B8427C0018E718 /* CoalPopupView.m */,
+				0EC691DF18B84CFA0018E718 /* CoalPopupVC.h */,
+				0EC691E018B84CFB0018E718 /* CoalPopupVC.m */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -1323,6 +1336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EC691DB18B83E210018E718 /* ElecPopupView.xib in Resources */,
 				0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */,
 				0E12584018471C2D00959EC1 /* RawMaterialCostViewController.xib in Resources */,
 				0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */,
@@ -1350,7 +1364,7 @@
 				0EA125B318AC9ACE00700544 /* CostStoryboard.storyboard in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
-				473FBA6518B7B7D8007BC3CF /* ElecPopupView.xib in Resources */,
+				473FBA6518B7B7D8007BC3CF /* CoalPopupView.xib in Resources */,
 				0EDFFBFA17E1B055009B4671 /* ConditionCell.xib in Resources */,
 				0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */,
 				0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */,
@@ -1460,6 +1474,7 @@
 				0EA5CF311823AE860028BE8B /* ProductWeighViewController.m in Sources */,
 				473FBA6818B7B86B007BC3CF /* ElecPopupView.m in Sources */,
 				0EDFFBF817E1B045009B4671 /* ConditionCell.m in Sources */,
+				0EC691E118B84CFB0018E718 /* CoalPopupVC.m in Sources */,
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
 				471B5B131846582F002D6BDC /* ECViewController.m in Sources */,
@@ -1513,6 +1528,7 @@
 				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
 				0E6B027E18682DD700B63321 /* REMenuReportVC.m in Sources */,
 				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
+				0EC691DE18B8427C0018E718 /* CoalPopupView.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
 				0E12584418473A8300959EC1 /* ProductViewController.m in Sources */,
@@ -1666,7 +1682,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1690,7 +1706,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F3F1B961-84F3-466A-9F64-472035D32910";
+				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

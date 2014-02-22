@@ -10,6 +10,7 @@
 #import "EnergyView.h"
 #import "DropDownView.h"
 #import "ElecPopupVC.h"
+#import "CoalPopupVC.h"
 
 @interface EnergyMainVC ()<UIScrollViewDelegate,DropDownViewDeletegate>
 @property (nonatomic,strong) IBOutlet UIView *topOfView;
@@ -23,6 +24,9 @@
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
 
 @property (nonatomic) int type;//0表示煤耗，1表示电耗
+@property (nonatomic,strong) EnergyView *coalView,*elecView;
+@property (nonatomic,strong) CoalPopupVC *coalPopupVC;
+@property (nonatomic,strong) ElecPopupVC *elecPopupVC;
 @end
 
 @implementation EnergyMainVC
@@ -49,6 +53,8 @@
     self.lblDetailLoss.text = @"使用0.00公斤    损失0.00公斤";
     self.URL = kEnergyMonitoring;
     [self sendRequest];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setElecCustomUnitCost:) name:@"elecCustomUnitCost" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCoalCustomUnitCost:) name:@"coalCustomUnitCost" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,17 +113,20 @@
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*2, contentHeight);
-    EnergyView *energyView;
     //煤耗
-    energyView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
-    energyView.frame = CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height);
-    [energyView setupValue:[self.data objectForKey:@"coal"] withType:0];
-    [self.bottomScrollView addSubview:energyView];
+    if (!self.coalView) {
+        self.coalView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
+        self.coalView.frame = CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height);
+        [self.bottomScrollView addSubview:self.coalView];
+    }
+    [self.coalView setupValue:[self.data objectForKey:@"coal"] withType:0];
     //电耗
-    energyView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
-    energyView.frame = CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height);
-    [energyView setupValue:[self.data objectForKey:@"elec"] withType:1];
-    [self.bottomScrollView addSubview:energyView];
+    if (!self.elecView) {
+        self.elecView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
+        self.elecView.frame = CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height);
+        [self.bottomScrollView addSubview:self.elecView];
+    }
+    [self.elecView setupValue:[self.data objectForKey:@"elec"] withType:1];
     self.bottomScrollView.hidden = NO;
 }
 
@@ -160,12 +169,19 @@
 -(void)showPopupView:(id)sender{
     if (self.type==0) {
         //煤耗
+        if (!self.coalPopupVC) {
+            self.coalPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoalPopupVC"];
+        }
+        self.coalPopupVC.coal = [self.data objectForKey:@"coal"];
+        [self presentPopupViewController:self.coalPopupVC animationType:MJPopupViewAnimationFade];
     }else if (self.type==1){
         //电耗
-        ElecPopupVC *elecPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ElecPopupVC"];
-        double customElecUnitAmount = [Tool doubleValue:[[self.data objectForKey:@"elec"] objectForKey:@"customElecUnitAmount  "]];
-        elecPopupVC.defaultValue = customElecUnitAmount;
-        [self presentPopupViewController:elecPopupVC animationType:MJPopupViewAnimationFade];
+        if (!self.elecPopupVC) {
+            self.elecPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ElecPopupVC"];
+        }
+        double customElecUnitAmount = [Tool doubleValue:[[self.data objectForKey:@"elec"] objectForKey:@"customElecUnitAmount"]];
+        self.elecPopupVC.defaultValue = customElecUnitAmount;
+        [self presentPopupViewController:self.elecPopupVC animationType:MJPopupViewAnimationFade];
     }
 }
 
@@ -186,5 +202,109 @@
 
 -(void)clear{
     self.bottomScrollView.hidden  = YES;
+}
+
+-(void)setElecCustomUnitCost:(NSNotification*) notification{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    NSNumber *value = [notification object];
+    //对标成本设置为空或者没有修改的情况下不提交修改
+    if ([value doubleValue]&&[value doubleValue]!=[Tool doubleValue: [[self.data objectForKey:@"elec"] objectForKey:@"customElecUnitAmount"]]) {
+        NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
+        NSDictionary *elec = [self.data objectForKey:@"elec"];
+        double elecAmount = [Tool doubleValue:[elec objectForKey:@"elecAmount"]];
+        double usedQuantity = [Tool doubleValue:[elec objectForKey:@"usedQuantity"]];
+        double currPrice = [Tool doubleValue:[elec objectForKey:@"currPrice"]];
+        
+        NSMutableDictionary *newElec = [NSMutableDictionary dictionaryWithDictionary:[self.data objectForKey:@"elec"]];
+        [newElec setObject:value forKey:@"compareUnitAmount"];
+        [newElec setObject:value forKey:@"customElecUnitAmount"];
+//        电损失数量（elecLossAmount）= 电使用量(elecAmount)  -  产品的产量(usedQuantity) * 对标电耗(compareUnitAmount)
+        //必须在设置修改后查询
+        double compareUnitAmount = [Tool doubleValue:[newElec objectForKey:@"compareUnitAmount"]];
+        double elecLossAmount = elecAmount - usedQuantity*compareUnitAmount;
+        [newElec setObject:[NSNumber numberWithDouble:elecLossAmount] forKey:@"elecLossAmount"];
+//        损失(lossCost) =电损失数量（elecLossAmount）* 电的当前价格(currPrice)
+        double lossCost = elecLossAmount*currPrice;
+        [newElec setObject:[NSNumber numberWithDouble:lossCost] forKey:@"lossCost"];
+        [newData setObject:newElec forKey:@"elec"];
+        self.data = newData;
+        [self setupMiddleView];
+        [self setupBottomView];
+        //2保存自定义数据
+        DDLogCInfo(@"******  Request URL is:%@  ******",kCustomElecUpdate);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomElecUpdate]];
+        request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+        [request setUseCookiePersistence:YES];
+        [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+        [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+        [request setPostValue:value forKey:@"customUnitOutput"];
+        [request setDelegate:self];
+        [request setDidFailSelector:@selector(updateRequestFailed:)];
+        [request setDidFinishSelector:@selector(updateRequestSuccess:)];
+        [request startAsynchronous];
+    }
+}
+
+-(void)setCoalCustomUnitCost:(NSNotification*) notification{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    NSDictionary *noficationData = [notification object];
+    NSNumber *value = [noficationData objectForKey:@"value"];
+    if ([value doubleValue]) {
+        NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
+        NSDictionary *coal = [self.data objectForKey:@"coal"];
+        double coalAmount = [Tool doubleValue:[coal objectForKey:@"coalAmount"]];
+        double usedQuantity = [Tool doubleValue:[coal objectForKey:@"usedQuantity"]];
+        double currPrice = [Tool doubleValue:[coal objectForKey:@"currPrice"]];
+        NSMutableDictionary *newCoal = [NSMutableDictionary dictionaryWithDictionary:[self.data objectForKey:@"coal"]];
+        [newCoal setObject:value forKey:@"compareUnitAmount"];
+        int coalSelectIndex = [[noficationData objectForKey:@"selectedIndex"] intValue];
+        if (coalSelectIndex==3) {
+            [newCoal setObject:value forKey:@"customElecUnitAmount"];
+            if ([Tool doubleValue:[coal objectForKey:@"customElecUnitAmount"]]!=[value doubleValue]) {
+                //2保存自定义数据
+                DDLogCInfo(@"******  Request URL is:%@  ******",kCustomCoalUpdate);
+                ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomCoalUpdate]];
+                request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+                [request setUseCookiePersistence:YES];
+                [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+                [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+                [request setPostValue:value forKey:@"customUnitOutput"];
+                [request setDelegate:self];
+                [request setDidFailSelector:@selector(updateRequestFailed:)];
+                [request setDidFinishSelector:@selector(updateRequestSuccess:)];
+                [request startAsynchronous];
+            }
+        }
+        //必须在设置修改后查询
+        double compareUnitAmount = [Tool doubleValue:[newCoal objectForKey:@"compareUnitAmount"]];
+        //    煤损失数量（coalLossAmount）= 煤使用量(coalAmount)-产品的产量(usedQuantity) * 对标煤耗(compareUnitAmount)
+        double coalLossAmount = coalAmount - usedQuantity*compareUnitAmount;
+        [newCoal setObject:[NSNumber numberWithDouble:coalLossAmount] forKey:@"coalLossAmount"];
+        //    损失(lossCost) =煤损失数量（coalLossAmount）*  煤的当前价格(currPrice)
+        double lossCost = coalLossAmount * currPrice;
+        [newCoal setObject:[NSNumber numberWithDouble:lossCost] forKey:@"lossCost"];
+        [newData setObject:newCoal forKey:@"coal"];
+        self.data = newData;
+        [self setupMiddleView];
+        [self setupBottomView];
+    }
+}
+
+#pragma mark 网络请求
+-(void) updateRequestFailed:(ASIHTTPRequest *)request{
+    
+}
+
+-(void)updateRequestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==kErrorCode0) {
+        
+    }else if(errorCode==kErrorCodeExpired){
+        LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
+    }
 }
 @end

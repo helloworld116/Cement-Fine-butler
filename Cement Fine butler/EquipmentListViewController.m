@@ -141,12 +141,18 @@
     NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
     NSString *imgName = [NSString stringWithFormat:@"%@%@",@"equipment_",[Tool stringToString:[equipmentInfo objectForKey:@"code"]]];
     cell.imgView.image = [UIImage imageNamed:imgName];
-    cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@ （%@）",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]],[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+    if ([@"990" isEqualToString:[Tool stringToString:[equipmentInfo objectForKey:@"code"]]]) {
+        cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]]];
+        cell.lblInstantFlowRate.text = @"瞬时流量：---";
+        cell.lblTotalOutput.text = @"总累积量：---";
+    }else{
+        cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@ （%@）",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]],[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
+        cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
+        cell.lblTotalOutput.text = [NSString stringWithFormat:@"总累积量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
+    }
     cell.lblSN.text = [NSString stringWithFormat:@"%@%@",@"SN：",[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
     cell.lblStatus.text = [Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]];
     cell.lblLineName.text = [NSString stringWithFormat:@"%@%@",@"产线：",[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
-    cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
-    cell.lblTotalOutput.text = [NSString stringWithFormat:@"总累积量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
     int status = [Tool intValue:[equipmentInfo objectForKey:@"status"]];
     [self colorByEquipmentStatus:status equipmentCell:cell];
     return cell;

@@ -59,14 +59,18 @@
     self.bottomScorllView.pagingEnabled = YES;
     self.bottomScorllView.showsHorizontalScrollIndicator = NO;
     self.bottomScorllView.bounces = NO;
+    self.bottomScorllView.scrollEnabled = YES;
     self.bottomScorllView.delegate = self;
-    
+    CGSize scrollViewSize = self.bottomScorllView.frame.size;
+    CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
+    self.bottomScorllView.contentSize = CGSizeMake(scrollViewSize.width*2, contentHeight);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomUnitCost:) name:@"customUnitCost" object:nil];
     self.URL = kRawMaterialLoss;
     [self sendRequest];
 }
     
 -(void)setupTopView{
+    self.topOfView.hidden = NO;
     double totalLoss = [[[self.data objectForKey:@"overview"] objectForKey:@"totalLoss"] doubleValue];
     if (totalLoss>=0) {
         //损失
@@ -84,10 +88,10 @@
         self.lblStatus.text = @"总节约";
         self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-totalLoss)]];
     }
-    self.topOfView.hidden = NO;
 }
 
 - (void)setupMiddleView:(NSArray *)products{
+    self.middleView.hidden = NO;
     NSMutableArray *items = [@[] mutableCopy];
     for (NSDictionary *product in products) {
         [items addObject:@{@"text":[product objectForKey:@"name"]}];
@@ -105,10 +109,10 @@
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
                                        NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.middleView addSubview:self.segmented];
-    self.middleView.hidden = NO;
 }
 
 -(void)setupBottomView:(NSArray *)products{
+    self.bottomScorllView.hidden = NO;
     CGSize scrollViewSize = self.bottomScorllView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
     self.bottomScorllView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
@@ -120,7 +124,6 @@
         productDirectMaterialCosts.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
         [self.bottomScorllView addSubview:productDirectMaterialCosts];
     }
-    self.bottomScorllView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -183,7 +186,8 @@
 -(void)setCustomUnitCost:(NSNotification*) notification{
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     NSNumber *value = [notification object];
-    if ([value doubleValue]) {
+    //对标成本设置为空或者没有修改的情况下不提交修改
+    if ([value doubleValue]&&[value doubleValue]!=[Tool doubleValue:[[[self.data objectForKey:@"products"] objectAtIndex:self.selectIndex] objectForKey:@"customCost"]]) {
         //1更新本地
         NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
         NSMutableArray *newProducts = [NSMutableArray arrayWithArray:[self.data objectForKey:@"products"]];
