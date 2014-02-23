@@ -45,19 +45,19 @@
         self.frame = CGRectMake(btnRect.origin.x, btn.superview.superview.frame.origin.y+ btnRect.origin.y+btnRect.size.height, btnRect.size.width, 0);
         self.list = [NSArray arrayWithArray:newList];
         self.layer.masksToBounds = NO;
-//        self.layer.cornerRadius = 8;
+        //        self.layer.cornerRadius = 8;
         self.layer.shadowOffset = CGSizeMake(0, 0);
-//        self.layer.shadowRadius = 5;
+        //        self.layer.shadowRadius = 5;
         self.layer.shadowOpacity = 0.5;
         
         self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, btnRect.size.width, 0)];
         self.tableview.bounces = NO;
         self.tableview.delegate = self;
         self.tableview.dataSource = self;
-//        self.tableview.layer.cornerRadius = 5;
+        //        self.tableview.layer.cornerRadius = 5;
         self.tableview.backgroundColor = [Tool hexStringToColor:@"#93baeb"];
-//        self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//        self.tableview.separatorColor = [UIColor whiteColor];
+        //        self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        //        self.tableview.separatorColor = [UIColor whiteColor];
         self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         [UIView beginAnimations:nil context:nil];
@@ -90,17 +90,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    DropDownTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell = [[DropDownTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
     separatorLineView.backgroundColor = [UIColor whiteColor]; // set color as you want.
     [cell.contentView addSubview:separatorLineView];
-    cell.textLabel.text =[self.list objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.lblText.text =[self.list objectAtIndex:indexPath.row];
     
     UIView * v = [[UIView alloc] init];
     v.backgroundColor = [UIColor grayColor];
@@ -111,8 +108,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self hideDropDown:self.btnSender];
-    UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
-    NSString *title = c.textLabel.text;
+    DropDownTableViewCell *c = (DropDownTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    NSString *title = c.lblText.text;
     [self.btnSender setTitle:title forState:UIControlStateNormal];
     if ([title isEqualToString:@"今天"]) {
         self.timeType = 0;
@@ -129,4 +126,24 @@
 - (void) myDelegate {
     [self.delegate dropDownDelegateMethod:self];
 }
+@end
+
+@implementation DropDownTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        self.backgroundColor = [UIColor clearColor];
+        self.lblText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 52, 30)];
+        self.lblText.textAlignment = UITextAlignmentCenter;
+        self.lblText.backgroundColor = [Tool hexStringToColor:@"#93baeb"];
+        self.lblText.font = [UIFont systemFontOfSize:14.f];
+        self.lblText.textColor = [UIColor whiteColor];
+        [self.contentView addSubview:self.lblText];
+    }
+    return self;
+}
+
 @end

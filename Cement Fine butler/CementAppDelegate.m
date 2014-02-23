@@ -169,6 +169,7 @@
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_bar"]];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
     [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab_bar_click"]];
     
@@ -179,10 +180,11 @@
     moreNC.tabBarItem = [moreNC.tabBarItem initWithTitle:@"更多" image:[UIImage imageNamed:@"more_icon"] tag:kViewTag+5];
     
     tabBarController.viewControllers = @[rawMaterialCostLossNC,energyMonitoringOverViewNC,lossOverViewNC,equipmentNC,moreNC];
-    
-    JASidePanelController *sideController = [[JASidePanelController alloc] init];
-    [sideController setCenterPanel:tabBarController];
-    return sideController;
+//去除左右滑动
+//    JASidePanelController *sideController = [[JASidePanelController alloc] init];
+//    [sideController setCenterPanel:tabBarController];
+//    return sideController;
+    return tabBarController;
 }
 //-(UITabBarController *) showViewControllers{
 //    NSArray *lines = [kSharedApp.factory objectForKey:@"lines"];

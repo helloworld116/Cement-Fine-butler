@@ -28,6 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {//使变短的分割线延伸
+//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+//    }
+    if (IS_IOS7) {
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, 10.f)];
+    }
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_2.png"]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];

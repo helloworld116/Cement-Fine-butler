@@ -55,15 +55,18 @@
 
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchCondition:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearchCondition:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"] highlightedImage:[UIImage imageNamed:@"search_click"] target:self action:@selector(showSearchCondition:)];
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(toggleMenu)];
+    CGRect webviewFrame = self.bottomWebiew.frame;
+    webviewFrame.size.height = kScreenHeight-kStatusBarHeight-kNavBarHeight;
+    self.bottomWebiew.frame = webviewFrame;
     [(UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0] setBounces:NO];//禁用上下拖拽
     self.bottomWebiew.delegate = self;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
     [self.bottomWebiew loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
     UIScrollView *sc = (UIScrollView *)[[self.bottomWebiew subviews] objectAtIndex:0];
-    sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, self.bottomWebiew.frame.size.height);
+    sc.contentSize = CGSizeMake(self.bottomWebiew.frame.size.width, kScreenHeight-kStatusBarHeight-kNavBarHeight);
     sc.showsHorizontalScrollIndicator = NO;
     
     self.rightVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"rightViewController"];
@@ -172,7 +175,7 @@
         double max = [[sortedNumbers objectAtIndex:0] doubleValue];
         int newMax = [Tool max:max];
 //        NSString *title = [self.reportTitlePre stringByAppendingString:@"产量报表"];
-        NSDictionary *configDict = @{@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.height],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithInt:0],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:newMax/5]};
+        NSDictionary *configDict = @{@"tagName":@"产量(吨)",@"height":[NSNumber numberWithFloat:kScreenHeight-kStatusBarHeight-kNavBarHeight],@"width":[NSNumber numberWithFloat:self.bottomWebiew.frame.size.width],@"start_scale":[NSNumber numberWithInt:0],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:newMax/5]};
         NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
         DDLogCVerbose(@"js is %@",js);
         [webView stringByEvaluatingJavaScriptFromString:js];

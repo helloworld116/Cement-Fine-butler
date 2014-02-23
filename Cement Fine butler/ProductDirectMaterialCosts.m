@@ -60,12 +60,12 @@
     if (value>=0) {
         //损失
         self.viewStatus.backgroundColor = [Tool hexStringToColor:@"#f58383"];
-        self.lblStatus.text = @"损失";
+        self.lblStatus.text = @"损失 (元)";
         self.lblStatusValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:value]];
     }else{
         //节约
         self.viewStatus.backgroundColor = [Tool hexStringToColor:@"#70dea9"];
-        self.lblStatus.text = @"节约";
+        self.lblStatus.text = @"节约 (元)";
         self.lblStatusValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-value)]];
     }
     self.lblSuggestion.text = suggestion;

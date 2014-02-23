@@ -21,3 +21,7 @@
 -(void)hideDropDown:(UIButton *)btn;
 -(id)initWithDropDown:(UIButton *)btn height:(CGFloat)height list:(NSArray *)list;
 @end
+
+@interface DropDownTableViewCell : UITableViewCell
+@property (nonatomic,strong) UILabel *lblText;
+@end

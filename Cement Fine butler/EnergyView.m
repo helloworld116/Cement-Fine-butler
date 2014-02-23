@@ -62,11 +62,11 @@
         self.lblBenchmarkingText.text=@"对标煤耗（公斤/吨）";
         self.lblBenchmarkingValue.text=[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:compareUnitAmount]];
         if (lossCost>=0) {
-            self.lblStatus.text =@"损失";
+            self.lblStatus.text =@"损失 (元)";
             self.rightView.backgroundColor = [Tool hexStringToColor:@"#f58383"];
             self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:lossCost]];
         }else{
-            self.lblStatus.text =@"节约";
+            self.lblStatus.text =@"节约 (元)";
             self.rightView.backgroundColor = [Tool hexStringToColor:@"#70dea9"];
             self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:-lossCost]];
         }
@@ -83,11 +83,11 @@
         self.lblBenchmarkingText.text=@"对标电耗（度/吨）";
         self.lblBenchmarkingValue.text=[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:compareUnitAmount]];
         if (lossCost>=0) {
-            self.lblStatus.text =@"损失";
+            self.lblStatus.text =@"损失 (元)";
             self.rightView.backgroundColor = [Tool hexStringToColor:@"#f58383"];
             self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:lossCost]];
         }else{
-            self.lblStatus.text =@"节约";
+            self.lblStatus.text =@"节约 (元)";
             self.rightView.backgroundColor = [Tool hexStringToColor:@"#70dea9"];
             self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:-lossCost]];
         }

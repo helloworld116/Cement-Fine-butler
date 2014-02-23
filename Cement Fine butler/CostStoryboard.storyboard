@@ -71,10 +71,10 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itB-Kc-p2K">
-                                        <rect key="frame" x="270" y="0.0" width="50" height="60"/>
+                                        <rect key="frame" x="260" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="p0v-bV-Fzd"/>
+                                            <constraint firstAttribute="width" constant="60" id="p0v-bV-Fzd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal">

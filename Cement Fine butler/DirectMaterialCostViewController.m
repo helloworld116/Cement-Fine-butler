@@ -112,6 +112,7 @@
 }
 
 -(void)setupBottomView:(NSArray *)products{
+    NSLog(@".................bottomView is build");
     self.bottomScorllView.hidden = NO;
     CGSize scrollViewSize = self.bottomScorllView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
@@ -265,6 +266,7 @@
     self.middleView.hidden = YES;
     self.bottomScorllView.hidden  = YES;
     self.selectIndex = 0;
+    [self.segmented removeFromSuperview];
     for (UIView *view in [self.bottomScorllView subviews]) {
         [view removeFromSuperview];
     }
