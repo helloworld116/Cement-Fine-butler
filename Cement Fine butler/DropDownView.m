@@ -79,7 +79,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 30;
+    return 40;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -136,10 +136,10 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
-        self.lblText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 52, 30)];
+        self.lblText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
         self.lblText.textAlignment = UITextAlignmentCenter;
         self.lblText.backgroundColor = [Tool hexStringToColor:@"#93baeb"];
-        self.lblText.font = [UIFont systemFontOfSize:14.f];
+        self.lblText.font = [UIFont systemFontOfSize:16.f];
         self.lblText.textColor = [UIColor whiteColor];
         [self.contentView addSubview:self.lblText];
     }

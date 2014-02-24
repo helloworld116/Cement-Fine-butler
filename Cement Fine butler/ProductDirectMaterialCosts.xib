@@ -20,11 +20,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="benchmarking_costs_icon" translatesAutoresizingMaskIntoConstraints="NO" id="0kG-wN-cQ9">
-                                    <rect key="frame" x="14" y="0.0" width="34" height="34"/>
+                                    <rect key="frame" x="14" y="0.0" width="36" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="34" id="6VB-Vc-WZG"/>
-                                        <constraint firstAttribute="width" constant="34" id="aa7-f7-T8y"/>
+                                        <constraint firstAttribute="height" constant="36" id="6VB-Vc-WZG"/>
+                                        <constraint firstAttribute="width" constant="36" id="aa7-f7-T8y"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对标成本（元/吨）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as8-ne-knL">
@@ -39,7 +39,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="105.33" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLM-Rk-O0P">
-                                    <rect key="frame" x="54" y="0.0" width="73" height="34"/>
+                                    <rect key="frame" x="54" y="0.0" width="73" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -86,13 +86,13 @@
                                 <constraint firstItem="WLM-Rk-O0P" firstAttribute="top" secondItem="cTO-Ez-j8k" secondAttribute="top" id="1ck-aR-bD4"/>
                                 <constraint firstAttribute="bottom" secondItem="q5h-NJ-dOm" secondAttribute="bottom" constant="1" id="1hc-ur-b29"/>
                                 <constraint firstItem="as8-ne-knL" firstAttribute="leading" secondItem="cTO-Ez-j8k" secondAttribute="leading" constant="14" id="5Tk-uP-yRd"/>
-                                <constraint firstItem="WLM-Rk-O0P" firstAttribute="leading" secondItem="0kG-wN-cQ9" secondAttribute="trailing" constant="6" id="7Qj-4z-rEX"/>
+                                <constraint firstItem="WLM-Rk-O0P" firstAttribute="leading" secondItem="0kG-wN-cQ9" secondAttribute="trailing" constant="4" id="7Qj-4z-rEX"/>
                                 <constraint firstItem="0kG-wN-cQ9" firstAttribute="top" secondItem="cTO-Ez-j8k" secondAttribute="top" id="E1O-hT-qXd"/>
                                 <constraint firstAttribute="trailing" secondItem="0HK-cI-jOM" secondAttribute="trailing" constant="8" id="NKG-C1-arh"/>
                                 <constraint firstAttribute="trailing" secondItem="Fza-g6-as9" secondAttribute="trailing" id="NpY-Te-Ptx"/>
                                 <constraint firstItem="Fza-g6-as9" firstAttribute="top" secondItem="cTO-Ez-j8k" secondAttribute="top" id="QDd-CY-9hi"/>
                                 <constraint firstItem="0HK-cI-jOM" firstAttribute="trailing" secondItem="q5h-NJ-dOm" secondAttribute="trailing" id="R82-DE-sg9"/>
-                                <constraint firstItem="as8-ne-knL" firstAttribute="top" secondItem="WLM-Rk-O0P" secondAttribute="bottom" constant="10" id="SIj-JQ-Fff"/>
+                                <constraint firstItem="as8-ne-knL" firstAttribute="top" secondItem="WLM-Rk-O0P" secondAttribute="bottom" constant="8" id="SIj-JQ-Fff"/>
                                 <constraint firstItem="0HK-cI-jOM" firstAttribute="baseline" secondItem="as8-ne-knL" secondAttribute="baseline" id="U8A-q6-Eau"/>
                                 <constraint firstItem="Fza-g6-as9" firstAttribute="leading" secondItem="cTO-Ez-j8k" secondAttribute="leading" id="UGz-BE-4LT"/>
                                 <constraint firstAttribute="bottom" secondItem="Fza-g6-as9" secondAttribute="bottom" id="eiV-XP-6BC"/>
@@ -181,11 +181,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Quotes_costs_icon" translatesAutoresizingMaskIntoConstraints="NO" id="efQ-HY-Peq">
-                                    <rect key="frame" x="14" y="0.0" width="34" height="34"/>
+                                    <rect key="frame" x="14" y="0.0" width="36" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="34" id="2HU-gU-Rv1"/>
-                                        <constraint firstAttribute="width" constant="34" id="MgP-LM-3Aq"/>
+                                        <constraint firstAttribute="height" constant="36" id="2HU-gU-Rv1"/>
+                                        <constraint firstAttribute="width" constant="36" id="MgP-LM-3Aq"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行情成本（元/吨）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4R-Hc-5Oz">
@@ -200,7 +200,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="105.33" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEl-dI-QfS">
-                                    <rect key="frame" x="54" y="0.0" width="73" height="34"/>
+                                    <rect key="frame" x="54" y="0.0" width="73" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -211,12 +211,12 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="c4R-Hc-5Oz" secondAttribute="bottom" id="68G-pg-Dcd"/>
                                 <constraint firstItem="c4R-Hc-5Oz" firstAttribute="leading" secondItem="DH0-AC-Tvj" secondAttribute="leading" constant="14" id="7gs-5r-oE0"/>
-                                <constraint firstItem="JEl-dI-QfS" firstAttribute="leading" secondItem="efQ-HY-Peq" secondAttribute="trailing" constant="6" id="KX9-mV-GyS"/>
+                                <constraint firstItem="JEl-dI-QfS" firstAttribute="leading" secondItem="efQ-HY-Peq" secondAttribute="trailing" constant="4" id="KX9-mV-GyS"/>
                                 <constraint firstAttribute="height" constant="61" id="Pgg-ND-ThI"/>
                                 <constraint firstItem="efQ-HY-Peq" firstAttribute="leading" secondItem="DH0-AC-Tvj" secondAttribute="leading" constant="14" id="gGF-Wm-2eJ"/>
                                 <constraint firstItem="efQ-HY-Peq" firstAttribute="top" secondItem="DH0-AC-Tvj" secondAttribute="top" id="gmn-3x-3R6"/>
                                 <constraint firstItem="JEl-dI-QfS" firstAttribute="top" secondItem="DH0-AC-Tvj" secondAttribute="top" id="jNp-pk-Ux2"/>
-                                <constraint firstItem="c4R-Hc-5Oz" firstAttribute="top" secondItem="JEl-dI-QfS" secondAttribute="bottom" constant="14" id="zfj-Rr-Ph1"/>
+                                <constraint firstItem="c4R-Hc-5Oz" firstAttribute="top" secondItem="JEl-dI-QfS" secondAttribute="bottom" constant="12" id="zfj-Rr-Ph1"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -236,11 +236,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="actual_costs_icon" translatesAutoresizingMaskIntoConstraints="NO" id="yDX-2X-W5s">
-                                    <rect key="frame" x="14" y="0.0" width="34" height="34"/>
+                                    <rect key="frame" x="14" y="0.0" width="36" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="34" id="2mE-Cq-oWg"/>
-                                        <constraint firstAttribute="width" constant="34" id="B6F-PK-UiK"/>
+                                        <constraint firstAttribute="height" constant="36" id="2mE-Cq-oWg"/>
+                                        <constraint firstAttribute="width" constant="36" id="B6F-PK-UiK"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际成本（元/吨）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5l-GE-QKI">
@@ -255,7 +255,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="105.33" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTJ-F9-id3">
-                                    <rect key="frame" x="54" y="0.0" width="73" height="34"/>
+                                    <rect key="frame" x="54" y="0.0" width="73" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -267,8 +267,8 @@
                                 <constraint firstAttribute="height" constant="61" id="2c0-SA-ffa"/>
                                 <constraint firstItem="NTJ-F9-id3" firstAttribute="top" secondItem="qnc-cu-L1E" secondAttribute="top" id="3Xd-BZ-niT"/>
                                 <constraint firstItem="yDX-2X-W5s" firstAttribute="leading" secondItem="qnc-cu-L1E" secondAttribute="leading" constant="14" id="JrC-p9-2Z8"/>
-                                <constraint firstItem="s5l-GE-QKI" firstAttribute="top" secondItem="NTJ-F9-id3" secondAttribute="bottom" constant="14" id="Myd-vU-z00"/>
-                                <constraint firstItem="NTJ-F9-id3" firstAttribute="leading" secondItem="yDX-2X-W5s" secondAttribute="trailing" constant="6" id="UES-e7-iiB"/>
+                                <constraint firstItem="s5l-GE-QKI" firstAttribute="top" secondItem="NTJ-F9-id3" secondAttribute="bottom" constant="12" id="Myd-vU-z00"/>
+                                <constraint firstItem="NTJ-F9-id3" firstAttribute="leading" secondItem="yDX-2X-W5s" secondAttribute="trailing" constant="4" id="UES-e7-iiB"/>
                                 <constraint firstAttribute="bottom" secondItem="s5l-GE-QKI" secondAttribute="bottom" id="eON-dt-Uke"/>
                                 <constraint firstItem="yDX-2X-W5s" firstAttribute="top" secondItem="qnc-cu-L1E" secondAttribute="top" id="tP0-93-0VC"/>
                                 <constraint firstItem="s5l-GE-QKI" firstAttribute="leading" secondItem="qnc-cu-L1E" secondAttribute="leading" constant="14" id="xWk-s1-6T0"/>
@@ -316,9 +316,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Quotes_costs_icon" width="34" height="34"/>
-        <image name="actual_costs_icon" width="34" height="34"/>
-        <image name="benchmarking_costs_icon" width="34" height="34"/>
+        <image name="Quotes_costs_icon" width="36" height="36"/>
+        <image name="actual_costs_icon" width="36" height="36"/>
+        <image name="benchmarking_costs_icon" width="36" height="36"/>
         <image name="save_icon" width="60" height="48"/>
         <image name="smalltriangle_icon" width="8" height="8"/>
     </resources>

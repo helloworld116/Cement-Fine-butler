@@ -156,7 +156,7 @@
         [self.dropDownView hideDropDown:sender];
         self.dropDownView = nil;
     }else{
-        self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:90.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
+        self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:120.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
         self.dropDownView.delegate = self;
     }
     //旋转代码
