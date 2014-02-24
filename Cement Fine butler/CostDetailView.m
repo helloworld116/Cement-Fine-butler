@@ -99,13 +99,13 @@
             self.lblTBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-costTongbiRate)]],@"%"];
         }
         if (costHuanbiRate>0) {
-            self.lblHBText.text = @"同比增长：";
+            self.lblHBText.text = @"环比增长：";
             self.lblHBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:costHuanbiRate]],@"%"];
         }else if (costHuanbiRate==0){
-            self.lblHBText.text = @"同比增长：";
+            self.lblHBText.text = @"环比增长：";
             self.lblHBValue.text = @"---";
         }else if (costHuanbiRate<0){
-            self.lblHBText.text = @"同比减少：";
+            self.lblHBText.text = @"环比减少：";
             self.lblHBValue.text = [NSString stringWithFormat:@"%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:(-costHuanbiRate)]],@"%"];
         }
     }
