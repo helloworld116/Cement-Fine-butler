@@ -185,7 +185,9 @@
 }
 
 #pragma mark 自定义VC可选实现的方法
--(void)clear{}
+-(void)clear{
+    self.data = nil;
+}
 
 -(void)setRequestParams{
     NSString *startDate,*endDate;

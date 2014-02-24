@@ -32,7 +32,7 @@
 @property (nonatomic,strong) PPiFlatSegmentedControl *segmented;
 
 //底部控件
-@property (nonatomic,strong) IBOutlet UIScrollView *bottomScorllView;
+@property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
 
 -(IBAction)changeDate:(id)sender;
 -(IBAction)showDetail:(id)sender;
@@ -56,19 +56,36 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"直接材料成本";
-    self.bottomScorllView.pagingEnabled = YES;
-    self.bottomScorllView.showsHorizontalScrollIndicator = NO;
-    self.bottomScorllView.bounces = NO;
-    self.bottomScorllView.scrollEnabled = YES;
-    self.bottomScorllView.delegate = self;
-    CGSize scrollViewSize = self.bottomScorllView.frame.size;
+    self.bottomScrollView.pagingEnabled = YES;
+    self.bottomScrollView.showsHorizontalScrollIndicator = NO;
+    self.bottomScrollView.bounces = NO;
+    self.bottomScrollView.scrollEnabled = YES;
+    self.bottomScrollView.delegate = self;
+    CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
-    self.bottomScorllView.contentSize = CGSizeMake(scrollViewSize.width*2, contentHeight);
+    self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*2, contentHeight);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomUnitCost:) name:@"customUnitCost" object:nil];
     self.URL = kRawMaterialLoss;
     [self sendRequest];
-}
     
+    [self.bottomScrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"contentSize"]) {
+        NSLog(@"old is %@",[change objectForKey:@"old"]);
+        NSLog(@"new is %@",[change objectForKey:@"new"]);
+    }
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"self.bottomScrollView.contentOffset is %@",NSStringFromCGPoint(self.bottomScrollView.contentOffset));
+    NSLog(@"self.bottomScrollView.contentSize is %@",NSStringFromCGSize(self.bottomScrollView.contentSize));
+    
+}
+
 -(void)setupTopView{
     self.topOfView.hidden = NO;
     double totalLoss = [[[self.data objectForKey:@"overview"] objectForKey:@"totalLoss"] doubleValue];
@@ -98,32 +115,33 @@
     }
     self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 7, kScreenWidth-14, 38) items:items iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
             self.selectIndex = segmentIndex;
-            self.bottomScorllView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
+            self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
         }];
     self.segmented.color=[UIColor whiteColor];
     self.segmented.borderWidth=1;
     self.segmented.borderColor=[Tool hexStringToColor:@"#e0d7c6"];
     self.segmented.selectedColor=[Tool hexStringToColor:@"#e8e5df"];
-    self.segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
-                               NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
-    self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
-                                       NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
+    self.segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
+    self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.middleView addSubview:self.segmented];
 }
 
 -(void)setupBottomView:(NSArray *)products{
-    NSLog(@".................bottomView is build");
-    self.bottomScorllView.hidden = NO;
-    CGSize scrollViewSize = self.bottomScorllView.frame.size;
+    NSLog(@".................bottomView is build and products is %@",products);
+    self.bottomScrollView.hidden = NO;
+    CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
-    self.bottomScorllView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
+    self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
+    NSLog(@"self.bottomScrollView.contentSize is %@",NSStringFromCGSize(self.bottomScrollView.contentSize));
     ProductDirectMaterialCosts *productDirectMaterialCosts;
     for (int i=0; i<products.count; i++) {
-        productDirectMaterialCosts = [[[NSBundle mainBundle] loadNibNamed:@"ProductDirectMaterialCosts" owner:self options:nil] objectAtIndex:0];
+//        productDirectMaterialCosts = [[[NSBundle mainBundle] loadNibNamed:@"ProductDirectMaterialCosts" owner:self options:nil] objectAtIndex:0];
+//
+//        productDirectMaterialCosts.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
+        productDirectMaterialCosts = [[ProductDirectMaterialCosts alloc] initWithFrame:CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height)];
         NSDictionary *product = products[i];
         [productDirectMaterialCosts setupValue:product];
-        productDirectMaterialCosts.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
-        [self.bottomScorllView addSubview:productDirectMaterialCosts];
+        [self.bottomScrollView addSubview:productDirectMaterialCosts];
     }
 }
 
@@ -205,7 +223,7 @@
             newAllProductTotalLoss+=[Tool doubleValue:[dict objectForKey:@"totalLoss"]];
         }
         [newData setValue:@{@"totalLoss":[NSNumber numberWithDouble:newAllProductTotalLoss]} forKey:@"overview"];
-        ProductDirectMaterialCosts *productDirectMaterialCosts = [[self.bottomScorllView subviews] objectAtIndex:self.selectIndex];
+        ProductDirectMaterialCosts *productDirectMaterialCosts = [[self.bottomScrollView subviews] objectAtIndex:self.selectIndex];
         [productDirectMaterialCosts updateValue:product];
         self.data = newData;
         //必须在修改self.data后执行setupTopView
@@ -262,12 +280,13 @@
 }
 
 -(void)clear{
+    [super clear];
     self.topOfView.hidden = YES;
     self.middleView.hidden = YES;
-    self.bottomScorllView.hidden  = YES;
+    self.bottomScrollView.hidden  = YES;
     self.selectIndex = 0;
     [self.segmented removeFromSuperview];
-    for (UIView *view in [self.bottomScorllView subviews]) {
+    for (UIView *view in [self.bottomScrollView subviews]) {
         [view removeFromSuperview];
     }
 }

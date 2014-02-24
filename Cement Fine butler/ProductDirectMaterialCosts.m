@@ -24,9 +24,10 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"ProductDirectMaterialCosts" owner:self options:nil] objectAtIndex:0];
     if (self) {
         // Initialization code
+        self.frame = frame;
     }
     return self;
 }
