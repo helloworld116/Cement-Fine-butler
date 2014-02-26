@@ -10,6 +10,8 @@
 
 @interface LossHeaderView : UIView
 @property (strong, nonatomic) IBOutlet UICountingLabel *lblTotalLoss;
-@property (weak, nonatomic) IBOutlet UILabel *lblUnit;//单位
+@property (strong, nonatomic) IBOutlet UILabel *lblUnit;//单位
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewPullDown;
+@property (strong, nonatomic) IBOutlet UIButton *btnChangeDate;
 
 @end

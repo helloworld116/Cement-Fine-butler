@@ -66,4 +66,6 @@
 +(UIColor *) hexStringToColor: (NSString *) stringToConvert;
 
 +(NSString *)numberToStringWithFormatter:(NSNumber *)number;
+
++(NSString *)numberToStringWithFormatterWithNODecimal:(NSNumber *)number;
 @end

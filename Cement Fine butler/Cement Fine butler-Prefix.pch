@@ -94,7 +94,7 @@
     #define kProductOverview [kServerURL stringByAppendingString:@"overview"]
     #define kProductDetail [kServerURL stringByAppendingString:@"product/detail"]
     //损耗定位
-    #define kLoss [kServerURL stringByAppendingString:@"loss"]
+    #define kLoss [kServerURL stringByAppendingString:@"loss/overview"]
     //原材料成本计算器
     #define kCalculator [kServerURL stringByAppendingString:@"material/calculator"]
     //电力价格列表

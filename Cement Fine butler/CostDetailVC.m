@@ -91,7 +91,7 @@
         //解决多个webview同时一个html文件出错
         [self.costDetailViews addObject:costDetailView];
         NSDictionary *dict = @{@"index":@(i),@"product":product};
-        [NSTimer scheduledTimerWithTimeInterval:3*i target:self selector:@selector(refresh:) userInfo:dict repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:4*i target:self selector:@selector(refresh:) userInfo:dict repeats:NO];
     }
 }
 

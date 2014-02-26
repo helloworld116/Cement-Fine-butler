@@ -16,7 +16,7 @@
 
 @interface DropDownView : UIView<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic) int timeType;
-
+@property (nonatomic,strong) UIButton *hiddenBtn;
 @property (nonatomic,assign) id<DropDownViewDeletegate> delegate;
 -(void)hideDropDown:(UIButton *)btn;
 -(id)initWithDropDown:(UIButton *)btn height:(CGFloat)height list:(NSArray *)list;

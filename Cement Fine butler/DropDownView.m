@@ -67,6 +67,9 @@
         [UIView commitAnimations];
         
         [btn.superview.superview.superview addSubview:self];
+//        self.hiddenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.hiddenBtn.frame = self.tableview.frame;
+//        [self addSubview:self.btnSender];
         [self addSubview:self.tableview];
     }
     return self;

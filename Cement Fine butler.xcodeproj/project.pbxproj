@@ -89,6 +89,7 @@
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
 		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
 		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
+		0E8BC0A218BC8B570009AA49 /* Bar2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E8BC0A118BC8B570009AA49 /* Bar2D.html */; };
 		0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182A18222E57001B0372 /* FixcostsViewController.m */; };
 		0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182F18223198001B0372 /* FixcostSubjectChoiceViewController.m */; };
 		0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931832182233DB001B0372 /* FixCostOperateViewController.m */; };
@@ -344,6 +345,7 @@
 		0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ichart.1.2.1.src.js; sourceTree = "<group>"; };
 		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
 		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
+		0E8BC0A118BC8B570009AA49 /* Bar2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Bar2D.html; sourceTree = "<group>"; };
 		0E93182918222E57001B0372 /* FixcostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostsViewController.h; sourceTree = "<group>"; };
 		0E93182A18222E57001B0372 /* FixcostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostsViewController.m; sourceTree = "<group>"; };
 		0E93182D1822313C001B0372 /* PassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassValueDelegate.h; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 				471B5B0D1846582F002D6BDC /* ExtensiveCell */,
 				0EC05B0A181F896C001BF5B7 /* EGOTableViewPullRefresh */,
 				0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */,
+				0E8BC0A118BC8B570009AA49 /* Bar2D.html */,
 				0E96910B1890F1F600D2501D /* Donut2D_2.html */,
 				0EEDBFD0180D67D80010961D /* Calculate.html */,
 				0E693ABD1807EA040061A3F8 /* Donut2D.html */,
@@ -1356,6 +1359,7 @@
 				0E9F2DD11862A10D00F0F0E2 /* images.xcassets in Resources */,
 				0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */,
 				0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */,
+				0E8BC0A218BC8B570009AA49 /* Bar2D.html in Resources */,
 				0E439F59185550750008C0D8 /* MainStoryboard_iPad.storyboard in Resources */,
 				0EBDEB5118B1E6DE00C0B3B4 /* CostPopupView.xib in Resources */,
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,

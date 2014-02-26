@@ -131,13 +131,12 @@
     self.bottomScrollView.hidden = NO;
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
+//    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, scrollViewSize.width*products.count, contentHeight)];
+//    [self.bottomScrollView addSubview:contentView];
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
     NSLog(@"self.bottomScrollView.contentSize is %@",NSStringFromCGSize(self.bottomScrollView.contentSize));
     ProductDirectMaterialCosts *productDirectMaterialCosts;
     for (int i=0; i<products.count; i++) {
-//        productDirectMaterialCosts = [[[NSBundle mainBundle] loadNibNamed:@"ProductDirectMaterialCosts" owner:self options:nil] objectAtIndex:0];
-//
-//        productDirectMaterialCosts.frame = CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height);
         productDirectMaterialCosts = [[ProductDirectMaterialCosts alloc] initWithFrame:CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height)];
         NSDictionary *product = products[i];
         [productDirectMaterialCosts setupValue:product];
@@ -151,12 +150,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)hideDropDownOut:(id)sender{
+    NSLog(@"....................");
+}
+
 -(IBAction)changeDate:(id)sender {
     if (self.dropDownView) {
         [self.dropDownView hideDropDown:sender];
         self.dropDownView = nil;
     }else{
         self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:120.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
+//        [self.dropDownView.hiddenBtn addTarget:self action:@selector(hideDropDownOut:) forControlEvents:UIControlEventTouchUpOutside];
         self.dropDownView.delegate = self;
     }
     //旋转代码

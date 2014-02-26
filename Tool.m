@@ -535,4 +535,11 @@
     [numberFormatter setPositiveFormat:@"###,##0.00"];
     return [numberFormatter stringFromNumber:number];
 }
+
++(NSString *)numberToStringWithFormatterWithNODecimal:(NSNumber *)number{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setPositiveFormat:@"###,##0"];
+    return [numberFormatter stringFromNumber:number];
+}
 @end

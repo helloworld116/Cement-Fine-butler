@@ -37,37 +37,39 @@
     if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
-    self.titleView = [[TitleView alloc] initWithArrow:YES];
-    self.titleView.lblTimeInfo.text = self.dateDesc;
-    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.titleView = self.titleView;
-    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
-    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+
+//    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
+//    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+//    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
+//    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+//    
+//    switch (self.type) {
+//        case 0:
+//            self.titleView.lblTitle.text = @"物流损耗";
+//            self.dataArray = [self.data objectForKey:@"logistics"];
+//            break;
+//        case 1:
+//            self.titleView.lblTitle.text = @"原材料损耗";
+//            self.dataArray = [self.data objectForKey:@"rawMaterials"];
+//            break;
+//        case 2:
+//            self.titleView.lblTitle.text = @"半成品损耗";
+//            self.dataArray = [self.data objectForKey:@"semifinishedProduct"];
+//            break;
+//        case 3:
+//            self.titleView.lblTitle.text = @"成品损耗";
+//            self.dataArray = [self.data objectForKey:@"endProduct"];
+//            break;
+//        default:
+//            break;
+//    }
     
-    switch (self.type) {
-        case 0:
-            self.titleView.lblTitle.text = @"物流损耗";
-            self.dataArray = [self.data objectForKey:@"logistics"];
-            break;
-        case 1:
-            self.titleView.lblTitle.text = @"原材料损耗";
-            self.dataArray = [self.data objectForKey:@"rawMaterials"];
-            break;
-        case 2:
-            self.titleView.lblTitle.text = @"半成品损耗";
-            self.dataArray = [self.data objectForKey:@"semifinishedProduct"];
-            break;
-        case 3:
-            self.titleView.lblTitle.text = @"成品损耗";
-            self.dataArray = [self.data objectForKey:@"endProduct"];
-            break;
-        default:
-            break;
-    }
+    //新接口
+    self.navigationItem.title = [self.data objectForKey:@"aliaName"];
+    self.navigationItem.leftBarButtonItem =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
+    self.dataArray = [self.data objectForKey:@"detail"];
     
     CGRect webViewRect = CGRectMake(0, 0, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight);
     self.webView = [[UIWebView alloc] initWithFrame:webViewRect];
@@ -77,7 +79,7 @@
     sc.showsHorizontalScrollIndicator = NO;
     sc.showsVerticalScrollIndicator = NO;
     sc.bounces = NO;//禁用上下拖拽
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Column2D" ofType:@"html"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Bar2D" ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
 //    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.webView];
@@ -124,8 +126,8 @@
             int newMax = [Tool max:max];
             double min = [Tool doubleValue:[sortedNumbers objectAtIndex:sortedNumbers.count-1]];
             int newMin = [Tool min:min];
-            NSDictionary *configDict = @{@"tagName":@"损耗量(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithInt:newMin],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:(newMax-newMin)/5]};
-            NSString *js = [NSString stringWithFormat:@"drawColumn('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
+            NSDictionary *configDict = @{@"tagName":@"损耗(吨)",@"height":[NSNumber numberWithFloat:self.webView.frame.size.height],@"width":[NSNumber numberWithFloat:self.webView.frame.size.width],@"start_scale":[NSNumber numberWithInt:newMin],@"end_scale":[NSNumber numberWithInt:newMax],@"scale_space":[NSNumber numberWithInt:(newMax-newMin)/5]};
+            NSString *js = [NSString stringWithFormat:@"drawBar2D('%@','%@')",[Tool objectToString:products],[Tool objectToString:configDict]];
             DDLogCVerbose(@"js is %@",js);
             [webView stringByEvaluatingJavaScriptFromString:js];
         }else{
