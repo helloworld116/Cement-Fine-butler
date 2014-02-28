@@ -165,15 +165,21 @@
     UINavigationController *equipmentNC = [[UINavigationController alloc] initWithRootViewController:mapController];
     //更多
 //    UINavigationController *moreNC = [self.storyboard instantiateViewControllerWithIdentifier:@"moreNavigationViewController"];
-    MoreNavigationController *moreNC = [[MoreNavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"moreViewController"]];
+//    MoreNavigationController *moreNC = [[MoreNavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"moreViewController"]];
+    UINavigationController *moreNC = [[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MoreVC"]];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_bar"]];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor:[Tool hexStringToColor:@"#8899a6"]];
+    //文字未选中和选中时的颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#8899a6"], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#ffffff"], UITextAttributeTextColor, nil] forState:UIControlStateHighlighted];
+    //图片
     [tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
     [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab_bar_click"]];
     
     rawMaterialCostLossNC.tabBarItem = [rawMaterialCostLossNC.tabBarItem initWithTitle:@"成本" image:[UIImage imageNamed:@"cost_icon"] tag:kViewTag+1];
+//    [rawMaterialCostLossNC.tabBarItem setSelectedImage:[UIImage imageNamed:@"cost_click_icon"]];
     energyMonitoringOverViewNC.tabBarItem = [energyMonitoringOverViewNC.tabBarItem initWithTitle:@"能源" image:[UIImage imageNamed:@"energy_icon"] tag:kViewTag+2];
     lossOverViewNC.tabBarItem = [lossOverViewNC.tabBarItem initWithTitle:@"损耗" image:[UIImage imageNamed:@"loss_icon"] tag:kViewTag+3];
     equipmentNC.tabBarItem = [equipmentNC.tabBarItem initWithTitle:@"设备" image:[UIImage imageNamed:@"equipment_icon"] tag:kViewTag+4];

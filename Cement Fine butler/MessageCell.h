@@ -13,5 +13,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblContent;
 
--(void)setlblTitleText:(NSString *)title;
+//-(void)setlblTitleText:(NSString *)title;
 @end

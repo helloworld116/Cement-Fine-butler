@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E01B9E518BF53B500A77905 /* CalculateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E01B9E418BF53B500A77905 /* CalculateCell.xib */; };
+		0E01B9E818BF5D8B00A77905 /* CalculateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01B9E718BF5D8B00A77905 /* CalculateVC.m */; };
 		0E0907C818517F4000905166 /* RealTimeReportLeftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0907C718517F4000905166 /* RealTimeReportLeftController.m */; };
 		0E0907CB1851A3C400905166 /* RawMaterialLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0907CA1851A3C400905166 /* RawMaterialLeftViewController.m */; };
 		0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AB77317EFD27F00A3255E /* SearchCondition.m */; };
@@ -90,6 +92,8 @@
 		0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E87BAE51808FB52008F1E13 /* ichart.1.2.1.src.js */; };
 		0E87BAEA180926AD008F1E13 /* LossReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E87BAE9180926AD008F1E13 /* LossReportViewController.m */; };
 		0E8BC0A218BC8B570009AA49 /* Bar2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E8BC0A118BC8B570009AA49 /* Bar2D.html */; };
+		0E8DD0AB18BECE4E0022D626 /* MoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DD0AA18BECE4E0022D626 /* MoreVC.m */; };
+		0E8DD0AD18BED9A00022D626 /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E8DD0AC18BED9A00022D626 /* MoreCell.xib */; };
 		0E93182B18222E57001B0372 /* FixcostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182A18222E57001B0372 /* FixcostsViewController.m */; };
 		0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E93182F18223198001B0372 /* FixcostSubjectChoiceViewController.m */; };
 		0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931832182233DB001B0372 /* FixCostOperateViewController.m */; };
@@ -201,6 +205,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E01B9E418BF53B500A77905 /* CalculateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculateCell.xib; sourceTree = "<group>"; };
+		0E01B9E618BF5D8B00A77905 /* CalculateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculateVC.h; sourceTree = "<group>"; };
+		0E01B9E718BF5D8B00A77905 /* CalculateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculateVC.m; sourceTree = "<group>"; };
 		0E0907C618517F4000905166 /* RealTimeReportLeftController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealTimeReportLeftController.h; sourceTree = "<group>"; };
 		0E0907C718517F4000905166 /* RealTimeReportLeftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealTimeReportLeftController.m; sourceTree = "<group>"; };
 		0E0907C91851A3C400905166 /* RawMaterialLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawMaterialLeftViewController.h; sourceTree = "<group>"; };
@@ -346,6 +353,9 @@
 		0E87BAE8180926AD008F1E13 /* LossReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossReportViewController.h; sourceTree = "<group>"; };
 		0E87BAE9180926AD008F1E13 /* LossReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossReportViewController.m; sourceTree = "<group>"; };
 		0E8BC0A118BC8B570009AA49 /* Bar2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Bar2D.html; sourceTree = "<group>"; };
+		0E8DD0A918BECE4E0022D626 /* MoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreVC.h; sourceTree = "<group>"; };
+		0E8DD0AA18BECE4E0022D626 /* MoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreVC.m; sourceTree = "<group>"; };
+		0E8DD0AC18BED9A00022D626 /* MoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
 		0E93182918222E57001B0372 /* FixcostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostsViewController.h; sourceTree = "<group>"; };
 		0E93182A18222E57001B0372 /* FixcostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostsViewController.m; sourceTree = "<group>"; };
 		0E93182D1822313C001B0372 /* PassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassValueDelegate.h; sourceTree = "<group>"; };
@@ -750,6 +760,9 @@
 				0E5FB50D18121C5300117B99 /* CostReductionViewController.m */,
 				0E5FB50F18121CB700117B99 /* CostComparisonViewController.h */,
 				0E5FB51018121CB700117B99 /* CostComparisonViewController.m */,
+				0E01B9E418BF53B500A77905 /* CalculateCell.xib */,
+				0E01B9E618BF5D8B00A77905 /* CalculateVC.h */,
+				0E01B9E718BF5D8B00A77905 /* CalculateVC.m */,
 			);
 			name = "原材料成本";
 			sourceTree = "<group>";
@@ -1001,6 +1014,9 @@
 				0E6B0289186D106400B63321 /* MoreNavigationController.m */,
 				0ECE017018B6EA1D00669587 /* AboutVC.h */,
 				0ECE017118B6EA1D00669587 /* AboutVC.m */,
+				0E8DD0A918BECE4E0022D626 /* MoreVC.h */,
+				0E8DD0AA18BECE4E0022D626 /* MoreVC.m */,
+				0E8DD0AC18BED9A00022D626 /* MoreCell.xib */,
 			);
 			name = "更多";
 			sourceTree = "<group>";
@@ -1310,11 +1326,6 @@
 				CLASSPREFIX = Cement;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "河南丰博自动化有限公司";
-				TargetAttributes = {
-					472F32DB17CC3C05007E567B = {
-						DevelopmentTeam = TQ28XDLG3L;
-					};
-				};
 			};
 			buildConfigurationList = 472F32D717CC3C05007E567B /* Build configuration list for PBXProject "Cement Fine butler" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1347,6 +1358,7 @@
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
 				0E6E430E182245E000016B93 /* YearAndMonthDatePickerView.xib in Resources */,
 				0ECA4A6918AB1F3A005C998A /* ProductDirectMaterialCosts.xib in Resources */,
+				0E8DD0AD18BED9A00022D626 /* MoreCell.xib in Resources */,
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
 				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
 				0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */,
@@ -1361,6 +1373,7 @@
 				0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */,
 				0E8BC0A218BC8B570009AA49 /* Bar2D.html in Resources */,
 				0E439F59185550750008C0D8 /* MainStoryboard_iPad.storyboard in Resources */,
+				0E01B9E518BF53B500A77905 /* CalculateCell.xib in Resources */,
 				0EBDEB5118B1E6DE00C0B3B4 /* CostPopupView.xib in Resources */,
 				0EA5CF2B1823A8830028BE8B /* PullTableViewLan.strings in Resources */,
 				0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */,
@@ -1429,6 +1442,7 @@
 				472F32F017CC3C05007E567B /* CementAppDelegate.m in Sources */,
 				0E12583F18471C2D00959EC1 /* RawMaterialCostViewController.m in Sources */,
 				0E6B0281186BC95C00B63321 /* NavigationController.m in Sources */,
+				0E01B9E818BF5D8B00A77905 /* CalculateVC.m in Sources */,
 				0EC79410184C764400DBD1AD /* EnergyOfProductViewController.m in Sources */,
 				0EBDEB5418B1EAE800C0B3B4 /* CostPopupView.m in Sources */,
 				0EBDEB5718B1EB5400C0B3B4 /* CostPopupVC.m in Sources */,
@@ -1508,6 +1522,7 @@
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
 				0E6322AD184F469E00D5F4B7 /* Factory.m in Sources */,
 				0EF727BD181E8E2A0059EC59 /* ProductHistoryCell.m in Sources */,
+				0E8DD0AB18BECE4E0022D626 /* MoreVC.m in Sources */,
 				0EA5CF1D182399100028BE8B /* WeighViewController.m in Sources */,
 				0E693AC11807FA290061A3F8 /* LossOverViewViewController.m in Sources */,
 				0EF72799181E12B10059EC59 /* InventoryViewController.m in Sources */,
@@ -1675,7 +1690,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
@@ -1686,7 +1701,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "31FF133B-1F1D-4254-8A49-23FF744376C5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1699,7 +1714,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
@@ -1710,7 +1725,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A1526ED-43C9-45B1-BB71-0D2C5DC9400F";
+				PROVISIONING_PROFILE = "31FF133B-1F1D-4254-8A49-23FF744376C5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

@@ -23,12 +23,6 @@
 @property (nonatomic,retain) UITableView *tableView;
 
 //data
-@property (nonatomic,retain) NSDictionary *overview;
-@property (nonatomic,retain) NSArray *rawMaterials;
-@property (nonatomic,retain) NSArray *semifinishedProduct;
-@property (nonatomic,retain) NSArray *endProduct;
-@property (nonatomic,retain) NSArray *logistics;
-
 @property (nonatomic) double totalLoss;
 @property (nonatomic,strong) NSArray *sortLossData;
 @property (nonatomic,strong) DropDownView *dropDownView;
@@ -208,32 +202,22 @@
 
 #pragma mark 自定义公共VC
 -(void)responseCode0WithData{
-    self.overview = [self.data objectForKey:@"overview"];
-    if (self.overview&&[Tool doubleValue:[self.overview objectForKey:@"totalLoss"]]!=0) {
-        self.tableView.hidden = NO;
-        self.headerView.hidden = NO;
-        self.totalLoss = [Tool doubleValue:[self.overview objectForKey:@"totalLoss"]];
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setPositiveFormat:@"###,##0.00"];
-        NSString *lossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:self.totalLoss]];
-        CGSize valueSize = [lossStr sizeWithFont:self.headerView.lblTotalLoss.font constrainedToSize:CGSizeMake(1000, self.headerView.lblTotalLoss.frame.size.height) lineBreakMode:NSLineBreakByWordWrapping];
-        CGRect valueFrame = self.headerView.lblTotalLoss.frame;
-        CGRect unitFrame = self.headerView.lblUnit.frame;
-        valueFrame.size.width = valueSize.width;
-        unitFrame.origin.x = valueFrame.origin.x+valueFrame.size.width+15;
-//        unitFrame.origin.x = 100;
-        self.headerView.lblTotalLoss.frame = valueFrame;
-        self.headerView.lblUnit.frame = unitFrame;
+    NSDictionary *overview = [self.data objectForKey:@"overview"];
+    NSArray *lossData = [self.data objectForKey:@"lossData"];
+    if (overview&&lossData) {
+        self.totalLoss = [Tool doubleValue:[overview objectForKey:@"totalLoss"]];
+//        NSString *lossStr = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:self.totalLoss]];
         [self.headerView.lblTotalLoss startFrom:0 end:self.totalLoss];
-        
-        //对损失过程数据排序，以便按正确流程显示损失过程
-        NSArray *lossData = [self.data objectForKey:@"lossData"];
-        self.sortLossData = [lossData sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-            int first = [Tool intValue:[(NSDictionary *)a objectForKey:@"order"]];
-            int second = [Tool intValue:[(NSDictionary *)b objectForKey:@"order"]];
-            return first-second;
-        }];
-        [self.tableView reloadData];
+        if ([lossData count]) {
+           self.tableView.hidden = NO;
+            //对损失过程数据排序，以便按正确流程显示损失过程
+            self.sortLossData = [lossData sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                int first = [Tool intValue:[(NSDictionary *)a objectForKey:@"order"]];
+                int second = [Tool intValue:[(NSDictionary *)b objectForKey:@"order"]];
+                return first-second;
+            }];
+            [self.tableView reloadData];
+        }
     }else{
         self.messageView.hidden = NO;
         self.messageView.labelMsg.text = @"没有满足条件的数据！！！";
@@ -256,7 +240,6 @@
 }
 
 -(void)clear{
-    self.headerView.hidden = YES;
     self.tableView.hidden = YES;
 }
 

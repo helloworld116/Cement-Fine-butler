@@ -37,6 +37,34 @@
             </objects>
             <point key="canvasLocation" x="-165" y="-375"/>
         </scene>
+        <!--MoreVC-->
+        <scene sceneID="3KU-Dx-3zW">
+            <objects>
+                <tableViewController storyboardIdentifier="MoreVC" id="bnX-TQ-dm9" customClass="MoreVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SUX-Z8-edv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mzo-9B-YHD">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mzo-9B-YHD" id="awr-BH-iI8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bnX-TQ-dm9" id="UFu-Wn-rL6"/>
+                            <outlet property="delegate" destination="bnX-TQ-dm9" id="Deb-hq-zPC"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="emm-Yd-TRu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1489" y="232"/>
+        </scene>
         <!--关于-->
         <scene sceneID="LxV-Vr-B8X">
             <objects>
@@ -82,6 +110,18 @@
                                 <state key="normal" title="退出当前账号">
                                     <color key="titleColor" red="1" green="0.015686274510000001" blue="0.015686274510000001" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="exit:" destination="2G5-zh-GkW" eventType="touchUpInside" id="jE5-36-l3E"/>
                                 </connections>
@@ -93,6 +133,18 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0iT-QA-VKo"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.792156862745098" green="0.79607843137254897" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="checkVersion:" destination="2G5-zh-GkW" eventType="touchUpInside" id="Ovt-o9-X5N"/>
                                 </connections>
@@ -113,7 +165,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.92941176470588238" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ws5-Zh-nJO" secondAttribute="bottom" constant="149" id="3td-fj-cxN"/>
                             <constraint firstItem="HWm-r7-Tm8" firstAttribute="top" secondItem="VgB-Of-Rdn" secondAttribute="bottom" constant="26" id="6Ww-a4-D1l"/>

@@ -204,10 +204,10 @@
     #define kUnitCostType_BudgetedUnitCost @"计划单位成本"
     #define kCondition_Time_Array @[@{@"_id":[NSNumber numberWithInt:0],@"name":@"本年"},@{@"_id":[NSNumber numberWithInt:1],@"name":@"本季度"},@{@"_id":[NSNumber numberWithInt:2],@"name":@"本月"},@{@"_id":[NSNumber numberWithInt:3],@"name":@"今天"},@{@"_id":[NSNumber numberWithInt:4],@"name":@"自定义"}]
 
-#define kMessageType0 @"[设备消息]"
-#define kMessageType1 @"[盒子网络断开]"
-#define kMessageType2 @"[库存消息]"
-#define kMessageType3 @"[盒子位置变更]"
+#define kMessageType0 @"设备消息"
+#define kMessageType1 @"盒子网络断开"
+#define kMessageType2 @"库存消息"
+#define kMessageType3 @"盒子位置变更"
 
 #define kErrorCode0 0
 #define kErrorCodeNegative999 -999

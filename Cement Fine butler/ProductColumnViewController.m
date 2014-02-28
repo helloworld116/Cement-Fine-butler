@@ -40,12 +40,14 @@
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
     
-    self.titleView = [[TitleView alloc] initWithArrow:YES];
-    self.titleView.lblTitle.text = @"产量报表";
-    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.titleView = self.titleView;
+//    self.titleView = [[TitleView alloc] initWithArrow:YES];
+//    self.titleView.lblTitle.text = @"产量报表";
+//    [self.titleView.bgBtn addTarget:self.navigationController action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.titleView = self.titleView;
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showNav:)];
+    self.navigationItem.title = @"产量报表";
+    
     UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
     [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];

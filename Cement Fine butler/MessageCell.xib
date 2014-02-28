@@ -1,45 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1" customClass="MessageCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3">
-                    <rect key="frame" x="5" y="0.0" width="190" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7">
-                    <rect key="frame" x="194" y="0.0" width="121" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8">
-                    <rect key="frame" x="5" y="20" width="310" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="c7U-fb-0du" customClass="MessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c7U-fb-0du" id="Pbq-Ry-ed0">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dO-pv-nju">
+                        <rect key="frame" x="18" y="14" width="8" height="8"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.28627450980392155" green="0.73333333333333328" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="8bL-vR-HFN"/>
+                            <constraint firstAttribute="width" constant="8" id="oXR-9c-RkE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhe-ND-sly">
+                        <rect key="frame" x="34" y="9" width="56" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-09-12 18:45:56" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypg-W2-oQq">
+                        <rect key="frame" x="203" y="12" width="99" height="12"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sn设备sn设备sn设备sn设备sn设备sn设备s设备s设备s" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="284" translatesAutoresizingMaskIntoConstraints="NO" id="LZW-zp-wHH">
+                        <rect key="frame" x="18" y="32" width="284" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.24705882352941178" green="0.29019607843137257" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Mhe-ND-sly" firstAttribute="top" secondItem="Pbq-Ry-ed0" secondAttribute="top" constant="9" id="Qw0-cL-ek0"/>
+                    <constraint firstItem="Mhe-ND-sly" firstAttribute="leading" secondItem="8dO-pv-nju" secondAttribute="trailing" constant="8" id="Yiv-rQ-I6f"/>
+                    <constraint firstItem="8dO-pv-nju" firstAttribute="top" secondItem="Pbq-Ry-ed0" secondAttribute="top" constant="14" id="dFt-Nc-h4i"/>
+                    <constraint firstItem="8dO-pv-nju" firstAttribute="leading" secondItem="Pbq-Ry-ed0" secondAttribute="leading" constant="18" id="e3Z-3e-dFL"/>
+                    <constraint firstItem="ypg-W2-oQq" firstAttribute="top" secondItem="Pbq-Ry-ed0" secondAttribute="top" constant="12" id="eUn-CX-Vmy"/>
+                    <constraint firstItem="LZW-zp-wHH" firstAttribute="top" secondItem="Mhe-ND-sly" secondAttribute="bottom" constant="6" id="fTO-Px-uzO"/>
+                    <constraint firstAttribute="trailing" secondItem="ypg-W2-oQq" secondAttribute="trailing" constant="18" id="ff4-Fc-qur"/>
+                    <constraint firstAttribute="trailing" secondItem="LZW-zp-wHH" secondAttribute="trailing" constant="18" id="hM9-SW-Bn0"/>
+                    <constraint firstItem="LZW-zp-wHH" firstAttribute="leading" secondItem="Pbq-Ry-ed0" secondAttribute="leading" constant="18" id="pXy-dF-wjf"/>
+                </constraints>
+            </tableViewCellContentView>
             <connections>
-                <outlet property="lblContent" destination="8" id="11"/>
-                <outlet property="lblTime" destination="7" id="10"/>
-                <outlet property="lblTitle" destination="3" id="9"/>
+                <outlet property="lblContent" destination="LZW-zp-wHH" id="EOH-Rh-Ias"/>
+                <outlet property="lblTime" destination="ypg-W2-oQq" id="PAq-Ss-YsE"/>
+                <outlet property="lblTitle" destination="Mhe-ND-sly" id="eE1-jx-l4r"/>
             </connections>
-        </view>
+        </tableViewCell>
     </objects>
 </document>
