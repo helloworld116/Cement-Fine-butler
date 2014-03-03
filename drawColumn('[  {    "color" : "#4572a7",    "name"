@@ -1,3 +1,0 @@
-drawColumn('[  {    "color" : "#4572a7",    "name" : "熟料粉",    "value" : 12280  },  {    "color" : "#aa4643",    "name" : "P.O52.5",    "value" : 5100  },  {    "color" : "#89a54e",    "name" : "P.O42.5",    "value" : 5960  },  {    "color" : "#80699b",    "name" : "P.C32.5",    "value" : 5800  }]','{  "tagName" : "产量(吨)",  "scale_space" : 2600,  "end_scale" : 13000,  "width" : 320,  "height" : 368,  "start_scale" : 0,  "title" : "2013\345\271\2649月份产量报表"}')
-
-drawColumn('[{"color":"#4572a7","name":"熟料","value":100},{"color":"#aa4643","name":"石膏","value":200}]','{"tagName":"损耗量(吨)","scale_space":40,"end_scale":200,"width":320,"height":460,"start_scale":0,"title":""}')

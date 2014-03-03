@@ -1326,6 +1326,11 @@
 				CLASSPREFIX = Cement;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "河南丰博自动化有限公司";
+				TargetAttributes = {
+					472F32DB17CC3C05007E567B = {
+						DevelopmentTeam = TQ28XDLG3L;
+					};
+				};
 			};
 			buildConfigurationList = 472F32D717CC3C05007E567B /* Build configuration list for PBXProject "Cement Fine butler" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1690,8 +1695,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1701,7 +1706,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31FF133B-1F1D-4254-8A49-23FF744376C5";
+				PROVISIONING_PROFILE = "D47D4BF0-B613-42D7-B8BE-9416C5358021";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";
@@ -1714,8 +1719,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1725,7 +1730,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31FF133B-1F1D-4254-8A49-23FF744376C5";
+				PROVISIONING_PROFILE = "D47D4BF0-B613-42D7-B8BE-9416C5358021";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 				dis = "";

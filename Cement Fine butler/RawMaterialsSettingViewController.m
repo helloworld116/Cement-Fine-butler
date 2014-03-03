@@ -152,13 +152,8 @@
                     //分摊为空则其余的平摊
                     k++;
                     if (j==k) {
-//                        newRate = defaultRate+diff-otherValues;
-//                        newRate = 100-endRate-((100-otherTotalRate)+diff)/j*(j-1);
                         newRate = 100 - endRate - otherValues;
                     }else{
-//                        newRate = defaultRate+(100-sureApporitionRate)/100*(diff/j);
-//                        newRate = [[NSString stringWithFormat:@"%.2f",round(newRate*100)/100] doubleValue];
-//                        otherValues += [[NSString stringWithFormat:@"%.2f",round(((100-sureApporitionRate)/100*(diff/j))*100)/100] doubleValue];
                         if (otherTotalRate) {
                             newRate = defaultRate+(100-sureApporitionRate)/100*diff/j;
                         }else{

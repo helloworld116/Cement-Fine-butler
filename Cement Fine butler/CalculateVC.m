@@ -8,22 +8,19 @@
 
 #import "CalculateVC.h"
 
-@interface CalculateVC ()<MBProgressHUDDelegate>
+@interface CalculateVC ()<MBProgressHUDDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) MBProgressHUD *progressHUD;
 @property (retain, nonatomic) ASIFormDataRequest *request;
 @property (nonatomic,retain) NSArray *data;
+
+@property (nonatomic,retain) NSMutableArray *cells;
+
+@property (nonatomic,retain) UITableView *tableView;
+@property (nonatomic,retain) CalculateHeaderView *headerView;
 @end
 
 @implementation CalculateVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -34,7 +31,21 @@
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     self.navigationItem.title = @"原材料成本计算器";
+    
+    self.headerView = [[[NSBundle mainBundle] loadNibNamed:@"CalculateCell" owner:self options:nil] objectAtIndex:1];
+    [self.view addSubview:self.headerView];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    CGRect tableViewFrame = CGRectMake(0, self.headerView.frame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.headerView.frame.size.height);
+    self.tableView.frame = tableViewFrame;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.rowHeight = 130.f;
+    [self.view addSubview:self.tableView];
     [self sendRequest];
+    self.cells = [@[] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,76 +70,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     static NSString *CellIdentifier = @"CalculateCell";
     CalculateCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"CalculateCell" owner:self options:nil] objectAtIndex:0];
-        [tableView registerNib:[UINib nibWithNibName:@"CalculateCell" bundle:nil] forCellReuseIdentifier:@"CalculateCell"];
     }
     [cell setDefaultStyle];
     NSDictionary *data = [self.data objectAtIndex:indexPath.row];
     [cell setValueWithData:data];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //添加到缓存池
+//    [self.cells addObject:cell];
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130.f;
-}
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 #pragma mark 发送网络请求
 -(void) sendRequest{
@@ -179,6 +140,26 @@
 	self.progressHUD = nil;
 }
 
+-(void)setHeaderViewValue{
+    double unitPrice=0,unitPlanPrice=0;
+    for (int i=0; i<self.data.count; i++) {
+        NSDictionary *dict = [self.data objectAtIndex:i];
+        double rate = [[dict objectForKey:@"rate"] doubleValue];
+        double financePrice = [[dict objectForKey:@"financePrice"] doubleValue];
+        double planPrice = [[dict objectForKey:@"planPrice"] doubleValue];
+        unitPrice+=(financePrice*rate)/100;
+        unitPlanPrice+=(planPrice*rate)/100;
+    }
+    NSString *unitPriceString = [NSString stringWithFormat:@"%.2f",round(unitPrice*100)/100];
+    NSString *unitPlanPriceString = [NSString stringWithFormat:@"%.2f",round(unitPlanPrice*100)/100];
+    self.headerView.lblUnitPrice.text = unitPriceString;
+    self.headerView.lblPlanUnitPrice.text = unitPlanPriceString;
+}
+@end
+
+@implementation CalculateHeaderView
+
+
 
 @end
 
@@ -212,28 +193,136 @@
 }
 
 -(void)setValueWithData:(NSDictionary *)data{
+    self.slider.value = [Tool floatValue:[data objectForKey:@"rate"]];
     self.lblMaterialName.text = [Tool stringToString:[data objectForKey:@"name"]];
-    self.lblRatio.text = [NSString stringWithFormat:@"%.1f%@",[Tool doubleValue:[data objectForKey:@"rate"]],@"%"];
+    self.lblRatio.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"rate"]],@"%"];
     self.lblFinancePrice.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"financePrice"]],@"元"];
     self.lblPlanPrice.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"planPrice"]],@"元"];
+    if ([[data objectForKey:@"locked"] boolValue]) {
+        self.isLocked = YES;
+        [self.btnLock setTitle:@"解锁" forState:UIControlStateNormal];
+    }else{
+        self.isLocked = NO;
+        [self.btnLock setTitle:@"锁定" forState:UIControlStateNormal];
+    }
+    
+    //设置滑竿下的文字
+    UIImageView *imageView = [self.slider.subviews objectAtIndex:2];
+    
+    CGRect theRect = [self convertRect:imageView.frame fromView:imageView.superview];
+    
+    [self.lblValue setFrame:CGRectMake(theRect.origin.x+3, theRect.origin.y+30, self.lblValue.frame.size.width, self.lblValue.frame.size.height)];
+    self.lblValue.text = [NSString stringWithFormat:@"%.2f%@",self.slider.value,@"%"];
 }
 
 -(void)sliderValueChanged:(UISlider *)slider{
-    CGRect lblValueFrame = self.lblValue.frame;
-    self.lblValue.frame = CGRectMake(self.slider.frame.origin.x, lblValueFrame.origin.y, lblValueFrame.size.width, lblValueFrame.size.height);
-    self.lblValue.text = [NSString stringWithFormat:@"%.1f%@",slider.value,@"%"];
+    UIImageView *imageView = [self.slider.subviews objectAtIndex:2];
+    
+    CGRect theRect = [self convertRect:imageView.frame fromView:imageView.superview];
+    
+    [self.lblValue setFrame:CGRectMake(theRect.origin.x+3, theRect.origin.y+30, self.lblValue.frame.size.width, self.lblValue.frame.size.height)];
+    self.lblValue.text = [NSString stringWithFormat:@"%.2f%@",slider.value,@"%"];
+    
+    [self updateDataSource];
 }
 
 -(void)sliderDragUp:(UISlider *)slider{
-    self.lblRatio.text = [NSString stringWithFormat:@"%.1f%@",slider.value,@"%"];
+    self.lblRatio.text = [NSString stringWithFormat:@"%.2f%@",slider.value,@"%"];
+//    [self updateDataSource];
 }
 
 -(IBAction)lockStateChange:(id)sender{
-    
+    UIButton *btn = (UIButton *)sender;
+    if ([btn.titleLabel.text isEqualToString:@"锁定"]) {
+        self.isLocked = YES;
+        [btn setTitle:@"解锁" forState:UIControlStateNormal];
+    }else{
+        self.isLocked = NO;
+        [btn setTitle:@"锁定" forState:UIControlStateNormal];
+    }
+    [self updateDataSource];
 }
 
 
 -(IBAction)showUpdateView:(id)sender{
 
+}
+
+-(void)updateDataSource{
+    UITableView *tableView = (UITableView *)[self superview];
+    CalculateVC *calculateVC = (CalculateVC *) tableView.dataSource;
+    NSIndexPath *indexPath = [tableView indexPathForCell:self];
+    NSInteger index = indexPath.row;
+    NSArray *data = calculateVC.data;
+    float rate = self.slider.value;
+    NSDictionary *updateData = @{@"name":self.lblMaterialName.text,@"rate":[NSNumber numberWithFloat:rate],@"financePrice":[NSNumber numberWithDouble:[self.lblFinancePrice.text doubleValue]],@"planPrice":[NSNumber numberWithDouble:[self.lblPlanPrice.text doubleValue]],@"apportionRate":[NSNumber numberWithDouble:[self.lblAssessmentRate.text doubleValue]],@"locked":[NSNumber numberWithBool:self.isLocked]};
+    NSMutableArray *newData = [NSMutableArray array];
+    //
+    double beginRate = [[[data objectAtIndex:index] objectForKey:@"rate"] doubleValue];
+    double endRate = rate;
+    double diff = beginRate-endRate;
+    int j=0;//没有锁定并未设置分摊比率的个数
+    double sureApporitionRate=0;//已经确定的
+    double otherTotalRate = 0;//外部已经占有的比率
+    for (int i=0; i<data.count; i++) {
+        if (i!=index) {
+            NSDictionary *rawMaterialsInfo = [data objectAtIndex:i];
+            BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
+            if (!locked) {
+                double apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
+                otherTotalRate += [Tool doubleValue:[rawMaterialsInfo objectForKey:@"rate"]];
+                if (apportionRate==0) {//分摊比不为0，则按改比率添加
+                    j++;
+                }else{
+                    sureApporitionRate += apportionRate;
+                }
+            }
+        }
+    }
+    int k=0;
+    double otherValues=0;//已经分配了的
+    for (int i=0; i<data.count; i++) {
+        if (i!=index) {
+            NSDictionary *rawMaterialsInfo = [data objectAtIndex:i];
+            BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
+            if (locked) {
+                //锁定了不修改直接添加
+                [newData addObject:rawMaterialsInfo];
+            }else{
+                NSMutableDictionary *newRawMaterialsInfo = [rawMaterialsInfo mutableCopy];
+                double _apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
+                double defaultRate = [[rawMaterialsInfo objectForKey:@"rate"] doubleValue];
+                double newRate = 0;
+                if (_apportionRate!=0) {//分摊比不为0，则按改比率添加
+                    newRate = defaultRate+_apportionRate/100*diff;
+                    //                    otherValues += (_apportionRate/100*diff);
+                    newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
+                    otherValues += newRate;
+                }else{
+                    //分摊为空则其余的平摊
+                    k++;
+                    if (j==k) {
+                        newRate = 100 - endRate - otherValues;
+                    }else{
+                        if (otherTotalRate) {
+                            newRate = defaultRate+(100-sureApporitionRate)/100*diff/j;
+                        }else{
+                            newRate = defaultRate+((100-otherTotalRate)+diff)/j;
+                        }
+                        newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
+                        otherValues += newRate;
+                        
+                    }
+                }
+                [newRawMaterialsInfo setObject:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%.2f",newRate] doubleValue]] forKey:@"rate"];
+                [newData addObject:newRawMaterialsInfo];
+            }
+        }else{
+            [newData addObject:updateData];
+        }
+    }
+    calculateVC.data = newData;
+    [calculateVC setHeaderViewValue];
+    [tableView reloadData];
 }
 @end
