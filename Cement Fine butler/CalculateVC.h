@@ -20,12 +20,13 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblPlanPrice;//计划价格
 
 @property (nonatomic) BOOL isLocked;
+@property (nonatomic,strong) NSDictionary *data;
 
 -(IBAction)lockStateChange:(id)sender;
 -(IBAction)showUpdateView:(id)sender;
 
 -(void)setDefaultStyle;
--(void)setValueWithData:(NSDictionary *)data;
+-(void)setValueWithData:(NSDictionary *)data withSliderMaxValue:(double)maxValue;
 @end
 
 @interface CalculateHeaderView : UIView

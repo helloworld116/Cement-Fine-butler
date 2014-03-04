@@ -112,8 +112,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgViewArrow" destination="f2b-Qz-iSJ" id="x7j-39-hya"/>
                 <outlet property="imgViewCarOr" destination="ETM-fV-2dm" id="h75-VZ-2Jq"/>
                 <outlet property="imgViewPostion" destination="brs-4C-IQw" id="v5g-3M-4z1"/>
+                <outlet property="lblArrow" destination="WN1-cl-RfM" id="k5i-SH-l1V"/>
                 <outlet property="lblLossAmount" destination="x58-IB-nRm" id="PET-0c-7po"/>
                 <outlet property="lblLossType" destination="CyA-gp-OMb" id="sYO-4Y-jJd"/>
                 <outlet property="lblLossUnit" destination="Z20-ap-yZK" id="3jY-sY-8XW"/>

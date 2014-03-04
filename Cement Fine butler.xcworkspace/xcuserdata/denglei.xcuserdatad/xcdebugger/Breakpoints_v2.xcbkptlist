@@ -52,43 +52,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cement Fine butler/CalculateVC.m"
-            timestampString = "415523137.702263"
+            timestampString = "415618068.716354"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-setValueWithData:withSliderMaxValue:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cement Fine butler/CalculateVC.m"
+            timestampString = "415619055.084637"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "-updateDataSource"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CalculateCell updateDataSource]"
-                  moduleName = "Cement Fine butler"
-                  urlString = "file:///Users/denglei/iosworkspace/Cement-Fine-butler/Cement%20Fine%20butler/CalculateVC.m"
-                  timestampString = "415520630.025373"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "256">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CalculateCell updateDataSource]"
-                  moduleName = "Cement Fine butler"
-                  urlString = "file:///Users/denglei/iosworkspace/Cement-Fine-butler/Cement%20Fine%20butler/CalculateVC.m"
-                  timestampString = "415520630.025862"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "382">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

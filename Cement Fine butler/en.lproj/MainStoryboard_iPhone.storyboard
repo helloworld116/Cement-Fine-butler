@@ -116,10 +116,7 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -140,9 +137,6 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                        <color key="value" red="0.792156862745098" green="0.79607843137254897" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -188,6 +182,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnExit" destination="IEI-ZJ-reV" id="Ahh-EQ-lwJ"/>
+                        <outlet property="btnUpdate" destination="RDF-s4-ZzC" id="OVj-gl-9e2"/>
                         <outlet property="imgViewIcon" destination="CYc-ub-tbP" id="o4N-7n-tdK"/>
                         <outlet property="lblBuildVersion" destination="Jzm-WY-N0X" id="AiF-42-Ls7"/>
                         <outlet property="lblVersion" destination="8cd-DZ-7MW" id="9To-Lq-IUe"/>

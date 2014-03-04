@@ -99,6 +99,8 @@
 		0E931833182233DB001B0372 /* FixCostOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931832182233DB001B0372 /* FixCostOperateViewController.m */; };
 		0E931836182239D7001B0372 /* FixcostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E931835182239D7001B0372 /* FixcostCell.m */; };
 		0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E96910B1890F1F600D2501D /* Donut2D_2.html */; };
+		0E99319818C5653A007C41CC /* CalculatePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E99319718C5653A007C41CC /* CalculatePopupView.xib */; };
+		0E99319B18C56958007C41CC /* CalculatePopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E99319A18C56958007C41CC /* CalculatePopupVC.m */; };
 		0E9C4CD618497D9700B82F13 /* UIView+NavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */; };
 		0E9C4CD91849D92B00B82F13 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C4CD81849D92B00B82F13 /* TitleView.m */; };
 		0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EF1BA1814BDCD007557AE /* ConditionTableView.m */; };
@@ -366,6 +368,9 @@
 		0E931834182239D7001B0372 /* FixcostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixcostCell.h; sourceTree = "<group>"; };
 		0E931835182239D7001B0372 /* FixcostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixcostCell.m; sourceTree = "<group>"; };
 		0E96910B1890F1F600D2501D /* Donut2D_2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Donut2D_2.html; sourceTree = "<group>"; };
+		0E99319718C5653A007C41CC /* CalculatePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatePopupView.xib; sourceTree = "<group>"; };
+		0E99319918C56958007C41CC /* CalculatePopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatePopupVC.h; sourceTree = "<group>"; };
+		0E99319A18C56958007C41CC /* CalculatePopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatePopupVC.m; sourceTree = "<group>"; };
 		0E9C4CD418497D9700B82F13 /* UIView+NavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NavigationItem.h"; sourceTree = "<group>"; };
 		0E9C4CD518497D9700B82F13 /* UIView+NavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NavigationItem.m"; sourceTree = "<group>"; };
 		0E9C4CD71849D92A00B82F13 /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
@@ -763,6 +768,9 @@
 				0E01B9E418BF53B500A77905 /* CalculateCell.xib */,
 				0E01B9E618BF5D8B00A77905 /* CalculateVC.h */,
 				0E01B9E718BF5D8B00A77905 /* CalculateVC.m */,
+				0E99319718C5653A007C41CC /* CalculatePopupView.xib */,
+				0E99319918C56958007C41CC /* CalculatePopupVC.h */,
+				0E99319A18C56958007C41CC /* CalculatePopupVC.m */,
 			);
 			name = "原材料成本";
 			sourceTree = "<group>";
@@ -1365,6 +1373,7 @@
 				0ECA4A6918AB1F3A005C998A /* ProductDirectMaterialCosts.xib in Resources */,
 				0E8DD0AD18BED9A00022D626 /* MoreCell.xib in Resources */,
 				476FC87117CC41F200EA5251 /* Cell.xib in Resources */,
+				0E99319818C5653A007C41CC /* CalculatePopupView.xib in Resources */,
 				0EF727AE181E63250059EC59 /* InventorySettingListCell.xib in Resources */,
 				0EA5CF17182389040028BE8B /* MaterialWeighCell.xib in Resources */,
 				0EBDEB5918B20A4000C0B3B4 /* CostDetailView.xib in Resources */,
@@ -1501,6 +1510,7 @@
 				0E62CC521820F83200281A73 /* InventoryChoiceViewController.m in Sources */,
 				0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */,
 				471B5B131846582F002D6BDC /* ECViewController.m in Sources */,
+				0E99319B18C56958007C41CC /* CalculatePopupVC.m in Sources */,
 				0E43339817E8337D0047A438 /* RawMaterialsCostManagerViewController.m in Sources */,
 				0EA3496218332A8200F25706 /* ElectricitySevices.m in Sources */,
 				0EF4CD42184DBDFB0050A63A /* EquipmentAnnotationView.m in Sources */,

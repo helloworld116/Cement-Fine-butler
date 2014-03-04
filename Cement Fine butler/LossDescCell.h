@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblLossUnit;//单位
 @property (strong, nonatomic) IBOutlet UILabel *lblLossType;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblArrow;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewArrow;
 @end

@@ -129,33 +129,6 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     double loss=0;
-//    switch (indexPath.row) {
-//        case 0:
-//            loss = [Tool doubleValue:[self.overview objectForKey:@"logisticsLoss"]];
-//            cell.lblLossType.text = @"物流损耗";
-//            cell.lblSide.text = @"供应方";
-//            cell.imgViewPostion.image = [UIImage imageNamed:@"warehouse_icon"];
-//            cell.imgViewCarOr.image = [UIImage imageNamed:@"car_icon"];
-//            break;
-//        case 1:
-//            loss = [Tool doubleValue:[self.overview objectForKey:@"rawMaterialsLoss"]];
-//            cell.lblLossType.text = @"原材料损耗";
-//            cell.lblSide.text = @"原材料仓";
-//            cell.imgViewPostion.image = [UIImage imageNamed:@"warehouse_icon"];
-//            break;
-//        case 2:
-//            loss = [Tool doubleValue:[self.overview objectForKey:@"semifinishedProductLoss"]];
-//            cell.lblLossType.text = @"半成品损耗";
-//            cell.lblSide.text = @"半成品仓";
-//            cell.imgViewPostion.image = [UIImage imageNamed:@"warehouse_icon"];
-//            break;
-//        case 3:
-//            loss = [Tool doubleValue:[self.overview objectForKey:@"endProductLoss"]];
-//            cell.lblLossType.text = @"成品损耗";
-//            cell.lblSide.text = @"成品仓";
-//            cell.imgViewPostion.image = [UIImage imageNamed:@"warehouse_icon"];
-//            break;
-//    }
     //新接口
     NSDictionary *lossData = [self.sortLossData objectAtIndex:indexPath.row];
     if ([[lossData objectForKey:@"type"] isEqualToString:@"logistics"]) {
@@ -178,6 +151,10 @@
     CGRect unitFrame = cell.lblLossUnit.frame;
     unitFrame.origin.x = lblLossAmountFrame.origin.x+lblLossAmountFrame.size.width+5;
     cell.lblLossUnit.frame = unitFrame;
+    if ([self.sortLossData count]-1==indexPath.row) {
+        cell.lblArrow.hidden = YES;
+        cell.imgViewArrow.hidden = YES;
+    }
     return cell;
 }
 

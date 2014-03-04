@@ -7,6 +7,7 @@
 //
 
 #import "CalculateVC.h"
+#import "CalculatePopupVC.h"
 
 @interface CalculateVC ()<MBProgressHUDDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) MBProgressHUD *progressHUD;
@@ -17,6 +18,7 @@
 
 @property (nonatomic,retain) UITableView *tableView;
 @property (nonatomic,retain) CalculateHeaderView *headerView;
+@property (nonatomic) double sliderMaxValue;
 @end
 
 @implementation CalculateVC
@@ -65,6 +67,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    double total = 0;
+    for (NSDictionary *dict in self.data) {
+        if ([[dict objectForKey:@"locked"] boolValue]) {
+            total += [[dict objectForKey:@"rate"] doubleValue];
+        }
+    }
+    self.sliderMaxValue = 100.f-total;
     return [self.data count];
 }
 
@@ -78,7 +87,9 @@
     }
     [cell setDefaultStyle];
     NSDictionary *data = [self.data objectAtIndex:indexPath.row];
-    [cell setValueWithData:data];
+//    NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:data];
+//    [newData setValue:[NSNumber numberWithFloat:40.f] forKey:@"rate"];
+    [cell setValueWithData:data withSliderMaxValue:self.sliderMaxValue];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //添加到缓存池
 //    [self.cells addObject:cell];
@@ -165,18 +176,6 @@
 
 @implementation CalculateCell
 
-//-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-//    self = [[[NSBundle mainBundle] loadNibNamed:@"CalculateCell" owner:self options:nil] objectAtIndex:0];
-//    if (self) {
-//
-//    }
-//    return self;
-//}
-
-//-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"ItemCell"];
-//}
 
 -(void)setDefaultStyle{
     [self.slider setMinimumTrackImage:[[UIImage imageNamed:@"yellowbars"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)] forState:UIControlStateNormal];
@@ -192,37 +191,32 @@
     [self.slider addTarget:self action:@selector(sliderDragUp:) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)setValueWithData:(NSDictionary *)data{
+-(void)setValueWithData:(NSDictionary *)data withSliderMaxValue:(double)maxValue{
+    self.data = data;
+    
     self.slider.value = [Tool floatValue:[data objectForKey:@"rate"]];
+    self.slider.maximumValue = maxValue;
+    self.slider.minimumValue = 0.f;
     self.lblMaterialName.text = [Tool stringToString:[data objectForKey:@"name"]];
     self.lblRatio.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"rate"]],@"%"];
     self.lblFinancePrice.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"financePrice"]],@"元"];
     self.lblPlanPrice.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"planPrice"]],@"元"];
-    if ([[data objectForKey:@"locked"] boolValue]) {
-        self.isLocked = YES;
-        [self.btnLock setTitle:@"解锁" forState:UIControlStateNormal];
-    }else{
-        self.isLocked = NO;
-        [self.btnLock setTitle:@"锁定" forState:UIControlStateNormal];
-    }
-    
+    [self setViewState:[[data objectForKey:@"locked"] boolValue]];
     //设置滑竿下的文字
-    UIImageView *imageView = [self.slider.subviews objectAtIndex:2];
-    
-    CGRect theRect = [self convertRect:imageView.frame fromView:imageView.superview];
-    
-    [self.lblValue setFrame:CGRectMake(theRect.origin.x+3, theRect.origin.y+30, self.lblValue.frame.size.width, self.lblValue.frame.size.height)];
+//    UIImageView *imageView = [self.slider.subviews objectAtIndex:2];
+//    
+//    CGRect theRect = [self convertRect:imageView.frame fromView:imageView.superview];
+//    
+//    [self.lblValue setFrame:CGRectMake(theRect.origin.x+3, theRect.origin.y+30, self.lblValue.frame.size.width, self.lblValue.frame.size.height)];
     self.lblValue.text = [NSString stringWithFormat:@"%.2f%@",self.slider.value,@"%"];
 }
 
 -(void)sliderValueChanged:(UISlider *)slider{
     UIImageView *imageView = [self.slider.subviews objectAtIndex:2];
-    
     CGRect theRect = [self convertRect:imageView.frame fromView:imageView.superview];
     
     [self.lblValue setFrame:CGRectMake(theRect.origin.x+3, theRect.origin.y+30, self.lblValue.frame.size.width, self.lblValue.frame.size.height)];
     self.lblValue.text = [NSString stringWithFormat:@"%.2f%@",slider.value,@"%"];
-    
     [self updateDataSource];
 }
 
@@ -233,19 +227,29 @@
 
 -(IBAction)lockStateChange:(id)sender{
     UIButton *btn = (UIButton *)sender;
-    if ([btn.titleLabel.text isEqualToString:@"锁定"]) {
+    [self setViewState:[btn.titleLabel.text isEqualToString:@"锁定"]];
+    [self updateDataSource];
+}
+
+-(void)setViewState:(BOOL)isLocked{
+    if (isLocked) {
         self.isLocked = YES;
-        [btn setTitle:@"解锁" forState:UIControlStateNormal];
+        [self.btnLock setTitle:@"解锁" forState:UIControlStateNormal];
+        self.slider.enabled = NO;
     }else{
         self.isLocked = NO;
-        [btn setTitle:@"锁定" forState:UIControlStateNormal];
+        [self.btnLock setTitle:@"锁定" forState:UIControlStateNormal];
+        self.slider.enabled = YES;
     }
-    [self updateDataSource];
 }
 
 
 -(IBAction)showUpdateView:(id)sender{
-
+    CalculatePopupVC *popupVC = [[CalculatePopupVC alloc] init];
+    popupVC.defaultValue = self.data;
+    UITableView *tableView = (UITableView *)[self superview];
+    CalculateVC *calculateVC = (CalculateVC *) tableView.dataSource;
+    [calculateVC presentPopupViewController:popupVC animationType:MJPopupViewAnimationFade];
 }
 
 -(void)updateDataSource{
@@ -256,6 +260,7 @@
     NSArray *data = calculateVC.data;
     float rate = self.slider.value;
     NSDictionary *updateData = @{@"name":self.lblMaterialName.text,@"rate":[NSNumber numberWithFloat:rate],@"financePrice":[NSNumber numberWithDouble:[self.lblFinancePrice.text doubleValue]],@"planPrice":[NSNumber numberWithDouble:[self.lblPlanPrice.text doubleValue]],@"apportionRate":[NSNumber numberWithDouble:[self.lblAssessmentRate.text doubleValue]],@"locked":[NSNumber numberWithBool:self.isLocked]};
+    self.data = updateData;
     NSMutableArray *newData = [NSMutableArray array];
     //
     double beginRate = [[[data objectAtIndex:index] objectForKey:@"rate"] doubleValue];

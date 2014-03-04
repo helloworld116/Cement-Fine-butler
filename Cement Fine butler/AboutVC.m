@@ -13,6 +13,9 @@
 @property (nonatomic,retain) IBOutlet UIImageView *imgViewIcon;
 @property (nonatomic,retain) IBOutlet UILabel *lblVersion;
 @property (nonatomic,retain) IBOutlet UILabel *lblBuildVersion;
+@property (nonatomic,retain) IBOutlet UIButton *btnUpdate;
+@property (nonatomic,retain) IBOutlet UIButton *btnExit;
+
 
 @property (nonatomic,copy) NSString *trackViewURL;
 @property (nonatomic,copy) NSString *appVersionShortString;
@@ -39,6 +42,8 @@
 	// Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     self.navigationItem.title = @"关于";
+    self.btnUpdate.layer.borderColor = [[Tool hexStringToColor:@"#cacbd0"] CGColor];
+    self.btnExit.layer.borderColor = [[Tool hexStringToColor:@"#cacbd0"] CGColor];
     
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     self.appVersionShortString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
