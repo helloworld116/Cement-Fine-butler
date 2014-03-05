@@ -33,6 +33,7 @@
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     self.navigationItem.title = @"原材料成本计算器";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTableView:) name:@"CalculateData" object:nil];
     
     self.headerView = [[[NSBundle mainBundle] loadNibNamed:@"CalculateCell" owner:self options:nil] objectAtIndex:1];
     [self.view addSubview:self.headerView];
@@ -99,6 +100,108 @@
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark notificationcenter
+/**
+ *  <#Description#>
+ *
+ *  @param notification <#notification description#>
+ */
+-(void)updateTableView:(NSNotification*) notification{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    NSDictionary *postData = [notification object];
+    int index = [Tool intValue:[postData objectForKey:@"index"]];
+    NSDictionary *data = [postData objectForKey:@"data"];
+    self.data = [self updateData:data atIndex:index withArrary:self.data];
+    [self.tableView reloadData];
+    [self setHeaderViewValue];
+}
+
+
+-(NSArray *)updateData:(NSDictionary *)data atIndex:(NSInteger)index withArrary:(NSArray *)array{
+    NSMutableArray *newArray = [NSMutableArray array];
+    //
+    double beginRate = [[[array objectAtIndex:index] objectForKey:@"rate"] doubleValue];
+    double endRate = [Tool doubleValue:[data objectForKey:@"rate"]];
+    double diff = beginRate-endRate;
+    int j=0;//没有锁定并未设置分摊比率的个数
+    double sureApporitionRate=0;//已经确定的分摊比率
+    double otherTotalRate = 0;//外部已经占有的比率
+    //array2用于修改比率小于0的数据
+    NSMutableArray *array2 = [NSMutableArray arrayWithArray:array];
+    for (int i=0; i<array2.count; i++) {
+        if (i!=index) {
+            NSDictionary *rawMaterialsInfo = [array2 objectAtIndex:i];
+            
+            BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
+            if (!locked) {
+                double apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
+                if (apportionRate==0) {//分摊比不为0，则按改比率添加
+                    j++;
+                }else{
+                    sureApporitionRate += apportionRate;
+                }
+            }
+            double rate = [Tool doubleValue:[rawMaterialsInfo objectForKey:@"rate"]];
+            if (rate<0) {
+                NSMutableDictionary *newRawMaterialsInfo = [NSMutableDictionary dictionaryWithDictionary:rawMaterialsInfo];
+                [newRawMaterialsInfo setObject:[NSNumber numberWithDouble:0.0] forKey:@"rate"];
+                [array2 replaceObjectAtIndex:i withObject:newRawMaterialsInfo];
+                rate = 0.0f;
+            }
+            otherTotalRate += rate;
+        }
+    }
+    array = array2;
+    int k=0;
+    double otherValues=0;//已经分配了的
+    for (int i=0; i<array.count; i++) {
+        if (i!=index) {
+            NSDictionary *rawMaterialsInfo = [array objectAtIndex:i];
+            //比率不为0的情况下
+            if ([[rawMaterialsInfo objectForKey:@"rate"] doubleValue]>=0) {
+                BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
+                if (locked) {
+                    //锁定了不修改直接添加
+                    [newArray addObject:rawMaterialsInfo];
+                    double rate = [[rawMaterialsInfo objectForKey:@"rate"] doubleValue];
+                    rate = [[NSString stringWithFormat:@"%.2f",rate] doubleValue];
+                    otherValues += rate;
+                }else{
+                    NSMutableDictionary *newRawMaterialsInfo = [rawMaterialsInfo mutableCopy];
+                    double _apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
+                    double defaultRate = [[rawMaterialsInfo objectForKey:@"rate"] doubleValue];
+                    double newRate = 0;
+                    if (_apportionRate!=0) {//分摊比不为0，则按改比率添加
+                        newRate = defaultRate+_apportionRate/100*diff;
+                    }else{
+                        //分摊为空则其余的平摊
+                        k++;
+                        if (j==k) {
+                            newRate = 100 - endRate - otherValues;
+                        }else{
+                            if (otherTotalRate) {
+                                newRate = defaultRate+(100-sureApporitionRate)/100*diff/j;
+                            }else{
+                                newRate = defaultRate+((100-otherTotalRate)+diff)/j;
+                            }
+                        }
+                    }
+                    newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
+                    otherValues += newRate;
+                    [newRawMaterialsInfo setObject:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%.2f",newRate] doubleValue]] forKey:@"rate"];
+                    [newArray addObject:newRawMaterialsInfo];
+                }
+            }else{
+                [newArray addObject:rawMaterialsInfo];
+                j--;
+            }
+        }else{
+            [newArray addObject:data];
+        }
+    }
+    return newArray;
 }
 
 
@@ -196,7 +299,7 @@
     
     self.slider.value = [Tool floatValue:[data objectForKey:@"rate"]];
     self.slider.maximumValue = maxValue;
-    self.slider.minimumValue = 0.f;
+    self.slider.minimumValue = 0.0f;
     self.lblMaterialName.text = [Tool stringToString:[data objectForKey:@"name"]];
     self.lblRatio.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"rate"]],@"%"];
     self.lblFinancePrice.text = [NSString stringWithFormat:@"%.2f%@",[Tool doubleValue:[data objectForKey:@"financePrice"]],@"元"];
@@ -245,10 +348,13 @@
 
 
 -(IBAction)showUpdateView:(id)sender{
-    CalculatePopupVC *popupVC = [[CalculatePopupVC alloc] init];
-    popupVC.defaultValue = self.data;
     UITableView *tableView = (UITableView *)[self superview];
     CalculateVC *calculateVC = (CalculateVC *) tableView.dataSource;
+    NSIndexPath *indexPath = [tableView indexPathForCell:self];
+    NSInteger index = indexPath.row;
+    CalculatePopupVC *popupVC = [[CalculatePopupVC alloc] init];
+    popupVC.defaultValue = self.data;
+    popupVC.index = index;
     [calculateVC presentPopupViewController:popupVC animationType:MJPopupViewAnimationFade];
 }
 
@@ -261,71 +367,7 @@
     float rate = self.slider.value;
     NSDictionary *updateData = @{@"name":self.lblMaterialName.text,@"rate":[NSNumber numberWithFloat:rate],@"financePrice":[NSNumber numberWithDouble:[self.lblFinancePrice.text doubleValue]],@"planPrice":[NSNumber numberWithDouble:[self.lblPlanPrice.text doubleValue]],@"apportionRate":[NSNumber numberWithDouble:[self.lblAssessmentRate.text doubleValue]],@"locked":[NSNumber numberWithBool:self.isLocked]};
     self.data = updateData;
-    NSMutableArray *newData = [NSMutableArray array];
-    //
-    double beginRate = [[[data objectAtIndex:index] objectForKey:@"rate"] doubleValue];
-    double endRate = rate;
-    double diff = beginRate-endRate;
-    int j=0;//没有锁定并未设置分摊比率的个数
-    double sureApporitionRate=0;//已经确定的
-    double otherTotalRate = 0;//外部已经占有的比率
-    for (int i=0; i<data.count; i++) {
-        if (i!=index) {
-            NSDictionary *rawMaterialsInfo = [data objectAtIndex:i];
-            BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
-            if (!locked) {
-                double apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
-                otherTotalRate += [Tool doubleValue:[rawMaterialsInfo objectForKey:@"rate"]];
-                if (apportionRate==0) {//分摊比不为0，则按改比率添加
-                    j++;
-                }else{
-                    sureApporitionRate += apportionRate;
-                }
-            }
-        }
-    }
-    int k=0;
-    double otherValues=0;//已经分配了的
-    for (int i=0; i<data.count; i++) {
-        if (i!=index) {
-            NSDictionary *rawMaterialsInfo = [data objectAtIndex:i];
-            BOOL locked = [[rawMaterialsInfo objectForKey:@"locked"] boolValue];
-            if (locked) {
-                //锁定了不修改直接添加
-                [newData addObject:rawMaterialsInfo];
-            }else{
-                NSMutableDictionary *newRawMaterialsInfo = [rawMaterialsInfo mutableCopy];
-                double _apportionRate = [[rawMaterialsInfo objectForKey:@"apportionRate"] doubleValue];
-                double defaultRate = [[rawMaterialsInfo objectForKey:@"rate"] doubleValue];
-                double newRate = 0;
-                if (_apportionRate!=0) {//分摊比不为0，则按改比率添加
-                    newRate = defaultRate+_apportionRate/100*diff;
-                    //                    otherValues += (_apportionRate/100*diff);
-                    newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
-                    otherValues += newRate;
-                }else{
-                    //分摊为空则其余的平摊
-                    k++;
-                    if (j==k) {
-                        newRate = 100 - endRate - otherValues;
-                    }else{
-                        if (otherTotalRate) {
-                            newRate = defaultRate+(100-sureApporitionRate)/100*diff/j;
-                        }else{
-                            newRate = defaultRate+((100-otherTotalRate)+diff)/j;
-                        }
-                        newRate = [[NSString stringWithFormat:@"%.2f",newRate] doubleValue];
-                        otherValues += newRate;
-                        
-                    }
-                }
-                [newRawMaterialsInfo setObject:[NSNumber numberWithDouble:[[NSString stringWithFormat:@"%.2f",newRate] doubleValue]] forKey:@"rate"];
-                [newData addObject:newRawMaterialsInfo];
-            }
-        }else{
-            [newData addObject:updateData];
-        }
-    }
+    NSArray *newData = [calculateVC updateData:updateData atIndex:index withArrary:data];
     calculateVC.data = newData;
     [calculateVC setHeaderViewValue];
     [tableView reloadData];

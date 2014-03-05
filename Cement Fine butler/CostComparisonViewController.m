@@ -172,6 +172,7 @@
     
 }
 
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     if (self.data&&(NSNull *)self.data!=[NSNull null]) {
         NSMutableArray *dataArray = [[NSMutableArray alloc] init];
@@ -225,6 +226,7 @@
 -(void)responseWithOtherCode{
     [super responseWithOtherCode];
 }
+
 
 -(void)setRequestParams{
     NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];

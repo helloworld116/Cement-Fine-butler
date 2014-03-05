@@ -133,23 +133,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"EquipmentListCell";
-    EquipmentListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
-    }
+    PublicEquipmentCell *cell;
     NSDictionary *equipmentInfo = [self.list objectAtIndex:indexPath.row];
     NSString *imgName = [NSString stringWithFormat:@"%@%@",@"equipment_",[Tool stringToString:[equipmentInfo objectForKey:@"code"]]];
-    cell.imgView.image = [UIImage imageNamed:imgName];
     if ([@"990" isEqualToString:[Tool stringToString:[equipmentInfo objectForKey:@"code"]]]) {
+        static NSString *CellIdentifier = @"EleCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"EquipmentListCell" owner:self options:nil] objectAtIndex:1];
+        }
         cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]]];
-        cell.lblInstantFlowRate.text = @"瞬时流量：---";
-        cell.lblTotalOutput.text = @"总累积量：---";
+        cell.lblTotalOutput.text = [NSString stringWithFormat:@"度数：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"度"];
     }else{
+        static NSString *CellIdentifier = @"EquipmentListCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
+        }
         cell.lblEquipmentName.text = [NSString stringWithFormat:@"%@ （%@）",[Tool stringToString:[equipmentInfo objectForKey:@"typename"]],[Tool stringToString:[equipmentInfo objectForKey:@"materialName"]]];
-        cell.lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
+        ((EquipmentListCell *)cell).lblInstantFlowRate.text = [NSString stringWithFormat:@"瞬时流量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"instantFlowRate"]]]],@"吨/时"];
         cell.lblTotalOutput.text = [NSString stringWithFormat:@"总累积量：%@%@",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[equipmentInfo objectForKey:@"totalOutput"]]]],@"吨"];
     }
+    cell.imgView.image = [UIImage imageNamed:imgName];
     cell.lblSN.text = [NSString stringWithFormat:@"%@%@",@"SN：",[Tool stringToString:[equipmentInfo objectForKey:@"sn"]]];
     cell.lblStatus.text = [Tool stringToString:[equipmentInfo objectForKey:@"statusLabel"]];
     cell.lblLineName.text = [NSString stringWithFormat:@"%@%@",@"产线：",[Tool stringToString:[equipmentInfo objectForKey:@"linename"]]];
@@ -168,7 +173,7 @@
 //    }
 //}
 
--(void)colorByEquipmentStatus:(int)status equipmentCell:(EquipmentListCell*)cell{
+-(void)colorByEquipmentStatus:(int)status equipmentCell:(PublicEquipmentCell*)cell{
     switch (status) {
         case 0:
             cell.lblStatusColor.backgroundColor = [Tool hexStringToColor:@"#30bee1"];

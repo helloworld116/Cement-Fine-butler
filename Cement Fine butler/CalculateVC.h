@@ -36,4 +36,5 @@
 
 @interface CalculateVC : UIViewController
 -(void)setHeaderViewValue;
+-(NSArray *)updateData:(NSDictionary *)data atIndex:(NSInteger)index withArrary:(NSArray *)array;
 @end

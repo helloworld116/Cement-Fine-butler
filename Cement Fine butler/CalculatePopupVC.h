@@ -10,6 +10,7 @@
 
 @interface CalculatePopupVC : UIViewController
 @property (nonatomic,strong) NSDictionary *defaultValue;
+@property (nonatomic) NSInteger index;
 @end
 
 
@@ -26,5 +27,8 @@
 @property (nonatomic,strong) IBOutlet UIView *view4;
 -(IBAction)save:(id)sender;
 
--(id)initWithDefaultValue:(NSDictionary *)defaultValue;
+@property (nonatomic,strong) NSDictionary *defaultValue;
+@property (nonatomic) NSInteger index;
+
+-(id)initWithDefaultValue:(NSDictionary *)defaultValue withIndex:(NSInteger)index;
 @end

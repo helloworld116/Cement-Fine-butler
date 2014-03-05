@@ -9,9 +9,11 @@
 #import "CalculatePopupVC.h"
 @implementation CalculatePopupView
 
--(id)initWithDefaultValue:(NSDictionary *)defaultValue{
+-(id)initWithDefaultValue:(NSDictionary *)defaultValue withIndex:(NSInteger)index{
     self = [super init];
     if (self) {
+        self.index = index;
+        self.defaultValue = defaultValue;
         self = [[[NSBundle mainBundle] loadNibNamed:@"CalculatePopupView" owner:self options:nil] objectAtIndex:0];
         self.view1.layer.borderColor = [[Tool hexStringToColor:@"#49bbed"] CGColor];
         self.view1.layer.borderWidth = 1.0f;
@@ -58,8 +60,9 @@
         apportionRate = @"";
     }
     
-    NSDictionary *updateData = @{@"name":self.lblName.text,@"rate":[NSNumber numberWithDouble:[Tool doubleValue:rate]],@"financePrice":[NSNumber numberWithDouble:[Tool doubleValue:financePrice]],@"planPrice":[NSNumber numberWithDouble:[Tool doubleValue:planPrice]],@"apportionRate":[NSNumber numberWithDouble:[Tool doubleValue:apportionRate]]};
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalculateData" object:nil];
+    NSDictionary *updateData = @{@"name":self.lblName.text,@"rate":[NSNumber numberWithDouble:[Tool doubleValue:rate]],@"financePrice":[NSNumber numberWithDouble:[Tool doubleValue:financePrice]],@"planPrice":[NSNumber numberWithDouble:[Tool doubleValue:planPrice]],@"apportionRate":[NSNumber numberWithDouble:[Tool doubleValue:apportionRate]],@"locked":[NSNumber numberWithInt:[Tool intValue:[self.defaultValue objectForKey:@"locked"]]]};
+    NSDictionary *postData = @{@"index":[NSNumber numberWithInt:self.index],@"data":updateData};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalculateData" object:postData];
 }
 
 
@@ -117,7 +120,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    CalculatePopupView *popupView = [[CalculatePopupView alloc] initWithDefaultValue:self.defaultValue];
+    CalculatePopupView *popupView = [[CalculatePopupView alloc] initWithDefaultValue:self.defaultValue withIndex:self.index];
     self.view.frame = popupView.frame;
     self.view.layer.cornerRadius = 5;
     [self.view addSubview:popupView];

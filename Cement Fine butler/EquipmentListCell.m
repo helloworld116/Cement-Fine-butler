@@ -27,3 +27,11 @@
 }
 
 @end
+
+@implementation PublicEquipmentCell
+
+@end
+
+@implementation EleCell
+
+@end
