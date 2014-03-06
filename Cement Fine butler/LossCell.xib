@@ -116,6 +116,7 @@
                 <outlet property="imgViewCarOr" destination="ETM-fV-2dm" id="h75-VZ-2Jq"/>
                 <outlet property="imgViewPostion" destination="brs-4C-IQw" id="v5g-3M-4z1"/>
                 <outlet property="lblArrow" destination="WN1-cl-RfM" id="k5i-SH-l1V"/>
+                <outlet property="lblLine" destination="zt8-o6-hhZ" id="9g1-qF-bTA"/>
                 <outlet property="lblLossAmount" destination="x58-IB-nRm" id="PET-0c-7po"/>
                 <outlet property="lblLossType" destination="CyA-gp-OMb" id="sYO-4Y-jJd"/>
                 <outlet property="lblLossUnit" destination="Z20-ap-yZK" id="3jY-sY-8XW"/>

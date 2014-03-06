@@ -51,6 +51,8 @@
 		0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E491BFC180E7E0C00901D3D /* EquipmentListCell.xib */; };
 		0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E491BFF180E7E4600901D3D /* EquipmentListCell.m */; };
 		0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */; };
+		0E4B109118C856A700126703 /* ElecDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B109018C856A700126703 /* ElecDetailViewController.m */; };
+		0E4B109418C85F6500126703 /* BusinessInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B109318C85F6500126703 /* BusinessInfoVC.m */; };
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
 		0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E511B39183106F20077CA4C /* PromptMessageView.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
@@ -283,6 +285,10 @@
 		0E491BFF180E7E4600901D3D /* EquipmentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentListCell.m; sourceTree = "<group>"; };
 		0E493C3917E70BFC00D0AD0D /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		0E4B108F18C856A700126703 /* ElecDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ElecDetailViewController.h; path = ../ElecDetailViewController.h; sourceTree = "<group>"; };
+		0E4B109018C856A700126703 /* ElecDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ElecDetailViewController.m; path = ../ElecDetailViewController.m; sourceTree = "<group>"; };
+		0E4B109218C85F6500126703 /* BusinessInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessInfoVC.h; sourceTree = "<group>"; };
+		0E4B109318C85F6500126703 /* BusinessInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessInfoVC.m; sourceTree = "<group>"; };
 		0E5008ED1805301B00198B9B /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		0E5008EE1805301B00198B9B /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		0E511B38183106F20077CA4C /* PromptMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptMessageView.h; sourceTree = "<group>"; };
@@ -735,10 +741,14 @@
 				0E491BFF180E7E4600901D3D /* EquipmentListCell.m */,
 				0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */,
 				0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */,
+				0E4B108F18C856A700126703 /* ElecDetailViewController.h */,
+				0E4B109018C856A700126703 /* ElecDetailViewController.m */,
 				47FB1FFA184CF06B00BF3BF8 /* EquipmentPointAnnotation.h */,
 				47FB1FFB184CF06B00BF3BF8 /* EquipmentPointAnnotation.m */,
 				0EF4CD40184DBDFB0050A63A /* EquipmentAnnotationView.h */,
 				0EF4CD41184DBDFB0050A63A /* EquipmentAnnotationView.m */,
+				0E4B109218C85F6500126703 /* BusinessInfoVC.h */,
+				0E4B109318C85F6500126703 /* BusinessInfoVC.m */,
 			);
 			name = "设备";
 			sourceTree = "<group>";
@@ -1464,6 +1474,7 @@
 				4734FC7F18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m in Sources */,
 				476FC86F17CC41F200EA5251 /* CalloutMapAnnotation.m in Sources */,
 				4741D7C4188197F9005D3625 /* UICountingLabel+Counting.m in Sources */,
+				0E4B109418C85F6500126703 /* BusinessInfoVC.m in Sources */,
 				0E2F041318813F7A004119AE /* VersionService.m in Sources */,
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
 				0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */,
@@ -1562,6 +1573,7 @@
 				0E491C00180E7E4600901D3D /* EquipmentListCell.m in Sources */,
 				0E6B027E18682DD700B63321 /* REMenuReportVC.m in Sources */,
 				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
+				0E4B109118C856A700126703 /* ElecDetailViewController.m in Sources */,
 				0EC691DE18B8427C0018E718 /* CoalPopupView.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,

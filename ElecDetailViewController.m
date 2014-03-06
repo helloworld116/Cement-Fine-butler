@@ -1,15 +1,15 @@
 //
-//  EquipmentDetailsViewController.m
+//  ElecDetailViewController.m
 //  Cement Fine butler
 //
-//  Created by 文正光 on 13-10-16.
-//  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
+//  Created by 文正光 on 14-3-6.
+//  Copyright (c) 2014年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "EquipmentDetailsViewController.h"
+#import "ElecDetailViewController.h"
 #import "BusinessInfoVC.h"
 
-@interface EquipmentDetailsViewController ()
+@interface ElecDetailViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewOfEquipment;
 @property (strong, nonatomic) IBOutlet UILabel *lblBoxSN;
 @property (strong, nonatomic) IBOutlet UILabel *lblSN;
@@ -17,27 +17,18 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lblEquipmentType;
 @property (strong, nonatomic) IBOutlet UILabel *lblLineName;
-@property (strong, nonatomic) IBOutlet UILabel *lblMaterialName;
 
-@property (strong, nonatomic) IBOutlet UILabel *lblSettingFlowRate;
-@property (strong, nonatomic) IBOutlet UILabel *lblInstantFlowRate;
+
 @property (strong, nonatomic) IBOutlet UILabel *lblTotalOutput;
-@property (strong, nonatomic) IBOutlet UILabel *lblPartialOutput;
-
 @property (strong, nonatomic) IBOutlet UILabel *lblCreatedTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblUploadTime;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnStopRecords;
-
-- (IBAction)stopRecords:(id)sender;
-
 @end
 
-@implementation EquipmentDetailsViewController
+@implementation ElecDetailViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -47,7 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.showsVerticalScrollIndicator = NO;
+    
     UIView *bview = [[UIView alloc] init];
     bview.backgroundColor = [Tool hexStringToColor:@"#f3f3f3"];
     self.tableView.backgroundView = bview;
@@ -57,6 +48,7 @@
     UIButton *imgButton = [UIButton buttonWithType:UIButtonTypeCustom];
     imgButton.frame = rightBarItemView.frame;
     [imgButton addTarget:self action:@selector(showContactInfo:) forControlEvents:UIControlEventTouchUpInside];
+    [imgButton setBackgroundColor:[Tool hexStringToColor:@"#27ace7"] forUIControlState:UIControlStateHighlighted];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, 8, 18, 18)];
     imageView.image = [UIImage imageNamed:@"contract_icon"];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 26, 40, 18)];
@@ -78,12 +70,7 @@
     self.lblStatus.text = [Tool stringToString:[self.data objectForKey:@"statusLabel"]];
     self.lblEquipmentType.text = [Tool stringToString:[self.data objectForKey:@"typename"]];
     self.lblLineName.text = [Tool stringToString:[self.data objectForKey:@"linename"]];
-    self.lblMaterialName.text = [Tool stringToString:[self.data objectForKey:@"materialName"]];
-    self.lblSettingFlowRate.text = [NSString stringWithFormat:@"%@吨/时",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[self.data objectForKey:@"settingFlowRate"]]]]];
-    self.lblInstantFlowRate.text = [NSString stringWithFormat:@"%@吨/时",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[self.data objectForKey:@"instantFlowRate"]]]]];
-    
-    self.lblTotalOutput.text = [NSString stringWithFormat:@"%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[self.data objectForKey:@"totalOutput"]]]]];
-    self.lblPartialOutput.text = [NSString stringWithFormat:@"%@吨",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[self.data objectForKey:@"partOutput"]]]]];
+    self.lblTotalOutput.text = [NSString stringWithFormat:@"%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:[Tool doubleValue:[self.data objectForKey:@"totalOutput"]]]]];
     NSDateFormatter *objDateFormatter = [[NSDateFormatter alloc] init];
     [objDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *createdTime = [NSDate dateWithTimeIntervalSince1970:[Tool doubleValue:[self.data objectForKey:@"createdtime"]]/1000];
@@ -98,30 +85,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
-    [self setLblSN:nil];
-    [self setLblStatus:nil];
-    [self setLblSettingFlowRate:nil];
-    [self setLblInstantFlowRate:nil];
-    [self setLblTotalOutput:nil];
-    [self setLblPartialOutput:nil];
-//    [self setLblStopCountMonthly:nil];
-//    [self setLblStopDurationMonthly:nil];
-//    [self setLblRunDuration:nil];
-    [self setBtnStopRecords:nil];
-    [super viewDidUnload];
+-(void)showContactInfo:(id)sender{
+    BusinessInfoVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BusinessInfoVC"];
+    [self.navigationController pushViewController:nextVC animated:YES];
 }
 
 -(void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)showContactInfo:(id)sender{
-    BusinessInfoVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BusinessInfoVC"];
-    [self.navigationController pushViewController:nextVC animated:YES];
-}
-
-- (IBAction)stopRecords:(id)sender {
-    
-}
 @end

@@ -10,6 +10,7 @@
 #import "EquipmentListCell.h"
 #import "EquipmentMapViewController.h"
 #import "EquipmentDetailsViewController.h"
+#import "ElecDetailViewController.h"
 
 @interface EquipmentListViewController ()<MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
@@ -63,6 +64,8 @@
 //    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 5, 0, 0)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     self.tableView.separatorColor = [Tool hexStringToColor:@"#e3e3e3"];
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:0];
+    self.tableView.rowHeight = view.frame.size.height;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -74,7 +77,7 @@
         [self sendRequest:self.currentPage withProgress:YES];
     }
     NSDictionary *info = @{@"page":[NSNumber numberWithInt:self.currentPage],@"isProgress":@NO};
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:info repeats:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -114,10 +117,6 @@
 //    return view.frame.size.height;
 //}
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:0];
-    return view.frame.size.height;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -212,10 +211,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *equipmentDetails = [self.list objectAtIndex:indexPath.row];
-    EquipmentDetailsViewController *detailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentDetailsViewController"];
-    detailsViewController.data = equipmentDetails;
-    detailsViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailsViewController animated:YES];
+    if ([@"990" isEqualToString:[Tool stringToString:[equipmentDetails objectForKey:@"code"]]]){
+        ElecDetailViewController *detailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ElecDetailViewController"];
+        detailsViewController.data = equipmentDetails;
+        detailsViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailsViewController animated:YES];
+    }else{
+        EquipmentDetailsViewController *detailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"equipmentDetailsViewController"];
+        detailsViewController.data = equipmentDetails;
+        detailsViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailsViewController animated:YES];
+    }
 }
 
 

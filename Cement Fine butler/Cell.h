@@ -17,5 +17,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblBox;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UILabel *lblStatus;
-
+@property (strong, nonatomic) IBOutlet UIButton *detailBtn;
 @end

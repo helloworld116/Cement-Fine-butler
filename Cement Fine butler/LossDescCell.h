@@ -18,4 +18,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lblArrow;
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewArrow;
+@property (strong, nonatomic) IBOutlet UILabel *lblLine;
 @end

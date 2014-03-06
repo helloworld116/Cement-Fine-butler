@@ -154,6 +154,7 @@
     if ([self.sortLossData count]-1==indexPath.row) {
         cell.lblArrow.hidden = YES;
         cell.imgViewArrow.hidden = YES;
+        cell.lblLine.hidden = YES;
     }
     return cell;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
@@ -72,7 +72,20 @@
                     <color key="backgroundColor" red="0.0078431377187371254" green="0.79215693473815918" blue="0.91764712333679199" alpha="1" colorSpace="deviceRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="41g-xa-D8F">
-                    <rect key="frame" x="199" y="85" width="70" height="70"/>
+                    <rect key="frame" x="199" y="74" width="70" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zkD-Or-QDe">
+                    <rect key="frame" x="199" y="143" width="70" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="详细信息">
+                        <color key="titleColor" red="0.28627450980000002" green="0.73333333329999995" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cost_arrow_icon" id="c9J-ni-Ta0">
+                    <rect key="frame" x="260" y="151" width="6" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -80,6 +93,7 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="detailBtn" destination="zkD-Or-QDe" id="ylS-gZ-iFB"/>
                 <outlet property="imgView" destination="41g-xa-D8F" id="7fx-YM-VQQ"/>
                 <outlet property="lblBox" destination="pgX-E6-dDu" id="on5-k4-IEE"/>
                 <outlet property="lblCompany" destination="11" id="ShN-Y2-mhW"/>
@@ -92,6 +106,7 @@
         </view>
     </objects>
     <resources>
+        <image name="cost_arrow_icon" width="6" height="12"/>
         <image name="map-frame" width="279" height="180"/>
     </resources>
 </document>

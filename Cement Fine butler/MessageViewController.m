@@ -58,7 +58,7 @@
 //        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 ////        [[UIApplication sharedApplication] presentLocalNotificationNow:notification2];
 //    }
-    self.title = @"消息历史";
+    self.navigationItem.title = @"消息";
     UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
     [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
