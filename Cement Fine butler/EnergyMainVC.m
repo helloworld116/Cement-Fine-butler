@@ -11,20 +11,19 @@
 #import "DropDownView.h"
 #import "ElecPopupVC.h"
 #import "CoalPopupVC.h"
+#import <HMSegmentedControl.h>
+#import "CoalView.h"
+#import "ElecView.h"
 
 @interface EnergyMainVC ()<UIScrollViewDelegate,DropDownViewDeletegate>
 @property (nonatomic,strong) IBOutlet UIView *topOfView;
-@property (nonatomic,strong) PPiFlatSegmentedControl *segmented;
-    
-@property (nonatomic,strong) IBOutlet UIView *middleView;
-@property (nonatomic,strong) DropDownView *dropDownView;
-@property (nonatomic,strong) IBOutlet UIImageView *imgViewTime;//指示时间可以下拉的
-@property (nonatomic,strong) IBOutlet UILabel *lblDetailLoss;
-    
+@property (nonatomic,strong) HMSegmentedControl *segmented;
+
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
 
 @property (nonatomic) int type;//0表示煤耗，1表示电耗
-@property (nonatomic,strong) EnergyView *coalView,*elecView;
+@property (nonatomic,strong) CoalView *coalView;
+@property (nonatomic,strong) ElecView *elecView;
 @property (nonatomic,strong) CoalPopupVC *coalPopupVC;
 @property (nonatomic,strong) ElecPopupVC *elecPopupVC;
 @end
@@ -50,7 +49,7 @@
     self.bottomScrollView.bounces = NO;
     self.bottomScrollView.delegate = self;
     [self setupTopView];
-    self.lblDetailLoss.text = @"使用0.00公斤    损失0.00公斤";
+//    self.lblDetailLoss.text = @"使用0.00公斤    损失0.00公斤";
     self.URL = kEnergyMonitoring;
     [self sendRequest];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setElecCustomUnitCost:) name:@"elecCustomUnitCost" object:nil];
@@ -64,106 +63,137 @@
 }
 
 -(void)setupTopView{
-    self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 7, kScreenWidth-14, 38) items:@[@{@"text":@"煤耗"},                                                                          @{@"text":@"电耗"}] iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
-            self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
-            self.type = segmentIndex;
-            [self setupMiddleView];
-         }];
-    self.segmented.color=[UIColor whiteColor];
-    self.segmented.borderWidth=1;
-    self.segmented.borderColor=[Tool hexStringToColor:@"#e0d7c6"];
-    self.segmented.selectedColor=[Tool hexStringToColor:@"#e8e5df"];
-    self.segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
-                                    NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
-    self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
+//    self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 7, kScreenWidth-14, 38) items:@[@{@"text":@"煤耗"},                                                                          @{@"text":@"电耗"}] iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
+//            self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
+//            self.type = segmentIndex;
+//            [self setupMiddleView];
+//         }];
+//    self.segmented.color=[UIColor whiteColor];
+//    self.segmented.borderWidth=1;
+//    self.segmented.borderColor=[Tool hexStringToColor:@"#e0d7c6"];
+//    self.segmented.selectedColor=[Tool hexStringToColor:@"#e8e5df"];
+//    self.segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
+//                                    NSForegroundColorAttributeName:[Tool hexStringToColor:@"#c3c6c9"]};
+//    self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
+//    [self.topOfView addSubview:self.segmented];
+    
+    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.topOfView.frame.size.height)];
+    [self.segmented setScrollEnabled:YES];
+    //    [self.segmented setBackgroundColor:kGeneralColor];
+    //    [self.segmented setTextColor:[UIColor darkTextColor]];
+    //    [self.segmented setSelectedTextColor:kRelativelyColor];
+    //    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+    //    [self.segmented setSelectionIndicatorHeight:3];
+    //    [self.segmented setSelectionIndicatorColor:[UIColor yellowColor]];//kRelativelyColor
+    //    [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+    [self.segmented setBackgroundColor:[Tool hexStringToColor:@"#f3f3f3"]];
+    [self.segmented setTextColor:[Tool hexStringToColor:@"#3f4a58"]];
+    [self.segmented setSelectedTextColor:[Tool hexStringToColor:@"#49bbed"]];
+    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+//    [self.segmented setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+    [self.segmented setSelectionIndicatorHeight:2];
+    [self.segmented setSelectionIndicatorColor:kGeneralColor];
+    [self.segmented setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+    [self.segmented addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    self.segmented.sectionTitles = @[@"煤耗",@"电耗"];
     [self.topOfView addSubview:self.segmented];
 }
     
 -(void)setupMiddleView{
     if (self.type==0) {
         //煤耗
-        NSDictionary *coal = [self.data objectForKey:@"coal"];
-        double coalAmount = [Tool doubleValue:[coal objectForKey:@"coalAmount"]];
-        double coalLossAmount = [Tool doubleValue:[coal objectForKey:@"coalLossAmount"]];
-        NSString *status;
-        if (coalLossAmount>=0) {
-            status = @"损失";
-        }else{
-            coalLossAmount = -coalLossAmount;
-            status = @"节约";
-        }
-        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@公斤    %@%@公斤",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
+//        NSDictionary *coal = [self.data objectForKey:@"coal"];
+//        double coalAmount = [Tool doubleValue:[coal objectForKey:@"coalAmount"]];
+//        double coalLossAmount = [Tool doubleValue:[coal objectForKey:@"coalLossAmount"]];
+//        NSString *status;
+//        if (coalLossAmount>=0) {
+//            status = @"损失";
+//        }else{
+//            coalLossAmount = -coalLossAmount;
+//            status = @"节约";
+//        }
+//        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@公斤    %@%@公斤",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:coalLossAmount]]];
     }else if(self.type==1){
         //电耗
-        NSDictionary *elec = [self.data objectForKey:@"elec"];
-        double elecAmount = [Tool doubleValue:[elec objectForKey:@"elecAmount"]];
-        double elecLossAmount = [Tool doubleValue:[elec objectForKey:@"elecLossAmount"]];
-        NSString *status;
-        if (elecLossAmount>=0) {
-            status = @"损失";
-        }else{
-            elecLossAmount = -elecLossAmount;
-            status = @"节约";
-        }
-        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    %@%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecLossAmount]]];
+//        NSDictionary *elec = [self.data objectForKey:@"elec"];
+//        double elecAmount = [Tool doubleValue:[elec objectForKey:@"elecAmount"]];
+//        double elecLossAmount = [Tool doubleValue:[elec objectForKey:@"elecLossAmount"]];
+//        NSString *status;
+//        if (elecLossAmount>=0) {
+//            status = @"损失";
+//        }else{
+//            elecLossAmount = -elecLossAmount;
+//            status = @"节约";
+//        }
+//        self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    %@%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecLossAmount]]];
     }
 }
     
 -(void)setupBottomView{
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
-    CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
+    CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*2, contentHeight);
     //煤耗
     if (!self.coalView) {
-        self.coalView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
-        self.coalView.frame = CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height);
+//        self.coalView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
+//        self.coalView.frame = CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height);
+        self.coalView = [[CoalView alloc] initWithFrame:CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height) withData:[self.data objectForKey:@"coal"]];
         [self.bottomScrollView addSubview:self.coalView];
     }
-    [self.coalView setupValue:[self.data objectForKey:@"coal"] withType:0];
-    //电耗
-    if (!self.elecView) {
-        self.elecView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
-        self.elecView.frame = CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height);
-        [self.bottomScrollView addSubview:self.elecView];
-    }
-    [self.elecView setupValue:[self.data objectForKey:@"elec"] withType:1];
+//    //电耗
+//    if (!self.elecView) {
+//        self.elecView = [[[NSBundle mainBundle] loadNibNamed:@"EnergyView" owner:self options:nil] objectAtIndex:0];
+//        self.elecView.frame = CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height);
+//        [self.bottomScrollView addSubview:self.elecView];
+//    }
+//    [self.elecView setupValue:[self.data objectForKey:@"elec"] withType:1];
+    
+    NSArray *elecData = @[
+      @{@"productName":@"PC32.5",@"lossCost":@(586365.960000),@"elecUnitAmount":@(2475.34),@"compareUnitAmount":@(120.00),@"elecAmount":@(770300.25),@"elecLossAmount":@(732957.4500),@"usedQuantity":@(311.19),@"suggestion":@"暂无建议",@"customElecUnitAmount":@(120.00),@"currPrice":@(0.80),@"standElecUnitAmount":@(0)},@{@"productName":@"PC42.5",@"lossCost":@(586365.960000),@"elecUnitAmount":@(2475.34),@"compareUnitAmount":@(120.00),@"elecAmount":@(770300.25),@"elecLossAmount":@(732957.4500),@"usedQuantity":@(311.19),@"suggestion":@"暂无建议",@"customElecUnitAmount":@(120.00),@"currPrice":@(0.80),@"standElecUnitAmount":@(0)}
+        ];
+    self.elecView = [[ElecView alloc] initWithFrame:CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height) withData:elecData];
+    [self.bottomScrollView addSubview:self.elecView];
     self.bottomScrollView.hidden = NO;
 }
 
--(IBAction)changeDate:(id)sender {
-    if (self.dropDownView) {
-        [self.dropDownView hideDropDown:sender];
-        self.dropDownView = nil;
-    }else{
-        self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:120.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
-        self.dropDownView.delegate = self;
-    }
-    //旋转代码
-    CGAffineTransform transform = self.imgViewTime.transform;
-    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
-    self.imgViewTime.transform = transform;
+//-(IBAction)changeDate:(id)sender {
+//    if (self.dropDownView) {
+//        [self.dropDownView hideDropDown:sender];
+//        self.dropDownView = nil;
+//    }else{
+//        self.dropDownView = [[DropDownView alloc] initWithDropDown:sender height:120.f list:@[@"今天",@"昨天",@"本月",@"本年"]];
+//        self.dropDownView.delegate = self;
+//    }
+//    //旋转代码
+//    CGAffineTransform transform = self.imgViewTime.transform;
+//    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
+//    self.imgViewTime.transform = transform;
+//}
+//
+//-(void)dropDownDelegateMethod:(DropDownView *)sender{
+//    CGAffineTransform transform = self.imgViewTime.transform;
+//    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
+//    self.imgViewTime.transform = transform;
+//    double delayInSeconds = 0.5;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [self sendRequest];
+//    });
+//    self.dropDownView = nil;
+//}
+
+-(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
+    self.bottomScrollView.contentOffset = CGPointMake(segmentedControl.selectedSegmentIndex*kScreenWidth, 0);
 }
 
--(void)dropDownDelegateMethod:(DropDownView *)sender{
-    CGAffineTransform transform = self.imgViewTime.transform;
-    transform = CGAffineTransformRotate(transform, (M_PI/180.0)*180.0f);
-    self.imgViewTime.transform = transform;
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self sendRequest];
-    });
-    self.dropDownView = nil;
-}
-    
 #pragma mark - UIScrollViewDelegate
     
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat pageWidth = scrollView.frame.size.width;
     NSInteger page = scrollView.contentOffset.x / pageWidth;
-    [self.segmented setEnabled:YES forSegmentAtIndex:page];
+//    [self.segmented setEnabled:YES forSegmentAtIndex:page];
+    [self.segmented setSelectedSegmentIndex:page animated:YES];
     self.type = page;
-    [self setupMiddleView];
 }
     
 -(void)showPopupView:(id)sender{

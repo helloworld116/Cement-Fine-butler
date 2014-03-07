@@ -53,6 +53,8 @@
 		0E493C3B17E70BFC00D0AD0D /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E493C3A17E70BFC00D0AD0D /* MessageViewController.m */; };
 		0E4B109118C856A700126703 /* ElecDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B109018C856A700126703 /* ElecDetailViewController.m */; };
 		0E4B109418C85F6500126703 /* BusinessInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B109318C85F6500126703 /* BusinessInfoVC.m */; };
+		0E4B109718C99B4800126703 /* CoalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B109618C99B4800126703 /* CoalView.m */; };
+		0E4B109A18C99B6400126703 /* ElecView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B109918C99B6400126703 /* ElecView.m */; };
 		0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5008EE1805301B00198B9B /* DatePickerViewController.m */; };
 		0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E511B39183106F20077CA4C /* PromptMessageView.m */; };
 		0E58AFDE17E93A18008A2DF2 /* Pie2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E58AFDD17E93A18008A2DF2 /* Pie2D.html */; };
@@ -289,6 +291,10 @@
 		0E4B109018C856A700126703 /* ElecDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ElecDetailViewController.m; path = ../ElecDetailViewController.m; sourceTree = "<group>"; };
 		0E4B109218C85F6500126703 /* BusinessInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessInfoVC.h; sourceTree = "<group>"; };
 		0E4B109318C85F6500126703 /* BusinessInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessInfoVC.m; sourceTree = "<group>"; };
+		0E4B109518C99B4800126703 /* CoalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoalView.h; sourceTree = "<group>"; };
+		0E4B109618C99B4800126703 /* CoalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoalView.m; sourceTree = "<group>"; };
+		0E4B109818C99B6400126703 /* ElecView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElecView.h; sourceTree = "<group>"; };
+		0E4B109918C99B6400126703 /* ElecView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElecView.m; sourceTree = "<group>"; };
 		0E5008ED1805301B00198B9B /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		0E5008EE1805301B00198B9B /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		0E511B38183106F20077CA4C /* PromptMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptMessageView.h; sourceTree = "<group>"; };
@@ -642,6 +648,10 @@
 				0EC691DD18B8427C0018E718 /* CoalPopupView.m */,
 				0EC691DF18B84CFA0018E718 /* CoalPopupVC.h */,
 				0EC691E018B84CFB0018E718 /* CoalPopupVC.m */,
+				0E4B109518C99B4800126703 /* CoalView.h */,
+				0E4B109618C99B4800126703 /* CoalView.m */,
+				0E4B109818C99B6400126703 /* ElecView.h */,
+				0E4B109918C99B6400126703 /* ElecView.m */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -1546,6 +1556,7 @@
 				0E0AB77417EFD27F00A3255E /* SearchCondition.m in Sources */,
 				0E6A896717F6B11E0065043F /* MessageCell.m in Sources */,
 				0E5008EF1805301B00198B9B /* DatePickerViewController.m in Sources */,
+				0E4B109718C99B4800126703 /* CoalView.m in Sources */,
 				0E6322AD184F469E00D5F4B7 /* Factory.m in Sources */,
 				0EF727BD181E8E2A0059EC59 /* ProductHistoryCell.m in Sources */,
 				0E8DD0AB18BECE4E0022D626 /* MoreVC.m in Sources */,
@@ -1596,6 +1607,7 @@
 				0E6E430C182244C600016B93 /* YearAndMonthDatePickerView.m in Sources */,
 				0E9EF1BB1814BDCD007557AE /* ConditionTableView.m in Sources */,
 				0EC5CDF6182B6B9F00E63DCA /* ChoiceFactoryViewController.m in Sources */,
+				0E4B109A18C99B6400126703 /* ElecView.m in Sources */,
 				0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */,
 				47CB7BA51818131200FE97B6 /* MyKeyboardView.m in Sources */,
 				0EE9F605181A6B99009A4330 /* ElectricityPriceViewController.m in Sources */,
