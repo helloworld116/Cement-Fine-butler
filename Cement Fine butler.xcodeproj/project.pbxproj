@@ -125,6 +125,8 @@
 		0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA5CF351823AF3C0028BE8B /* ProductWeighCell.xib */; };
 		0EA5CF391823CCF20028BE8B /* MaterialWeighDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */; };
 		0EB2D98F1817AA4F00AEE5E8 /* DatePickerViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */; };
+		0EB5157218CD53CF00A025F3 /* EnergyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB5157118CD53CF00A025F3 /* EnergyDetailVC.m */; };
+		0EB5157418CD545E00A025F3 /* EnergyDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB5157318CD545E00A025F3 /* EnergyDetailCell.xib */; };
 		0EBDEB4C18B1A50A00C0B3B4 /* EnergyMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */; };
 		0EBDEB4F18B1A8D200C0B3B4 /* EnergyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDEB4E18B1A8D200C0B3B4 /* EnergyView.m */; };
 		0EBDEB5118B1E6DE00C0B3B4 /* CostPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBDEB5018B1E6DE00C0B3B4 /* CostPopupView.xib */; };
@@ -420,6 +422,9 @@
 		0EA5CF381823CCF20028BE8B /* MaterialWeighDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialWeighDetailViewController.m; sourceTree = "<group>"; };
 		0EB2D98D1817AA4F00AEE5E8 /* DatePickerViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController2.h; sourceTree = "<group>"; };
 		0EB2D98E1817AA4F00AEE5E8 /* DatePickerViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController2.m; sourceTree = "<group>"; };
+		0EB5157018CD53CF00A025F3 /* EnergyDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyDetailVC.h; sourceTree = "<group>"; };
+		0EB5157118CD53CF00A025F3 /* EnergyDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyDetailVC.m; sourceTree = "<group>"; };
+		0EB5157318CD545E00A025F3 /* EnergyDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyDetailCell.xib; sourceTree = "<group>"; };
 		0EBDEB4A18B1A50A00C0B3B4 /* EnergyMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyMainVC.h; sourceTree = "<group>"; };
 		0EBDEB4B18B1A50A00C0B3B4 /* EnergyMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyMainVC.m; sourceTree = "<group>"; };
 		0EBDEB4D18B1A8D200C0B3B4 /* EnergyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyView.h; sourceTree = "<group>"; };
@@ -652,6 +657,9 @@
 				0E4B109618C99B4800126703 /* CoalView.m */,
 				0E4B109818C99B6400126703 /* ElecView.h */,
 				0E4B109918C99B6400126703 /* ElecView.m */,
+				0EB5157018CD53CF00A025F3 /* EnergyDetailVC.h */,
+				0EB5157118CD53CF00A025F3 /* EnergyDetailVC.m */,
+				0EB5157318CD545E00A025F3 /* EnergyDetailCell.xib */,
 			);
 			name = "能源监控";
 			sourceTree = "<group>";
@@ -1401,6 +1409,7 @@
 				0EA5CF361823AF3D0028BE8B /* ProductWeighCell.xib in Resources */,
 				0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */,
 				471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */,
+				0EB5157418CD545E00A025F3 /* EnergyDetailCell.xib in Resources */,
 				0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */,
 				0E9F2DD11862A10D00F0F0E2 /* images.xcassets in Resources */,
 				0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */,
@@ -1489,6 +1498,7 @@
 				0E511B3A183106F20077CA4C /* PromptMessageView.m in Sources */,
 				0EBFCA9A1861A62F004CD92D /* LossPlaceCell.m in Sources */,
 				476FC87017CC41F200EA5251 /* CallOutAnnotationView.m in Sources */,
+				0EB5157218CD53CF00A025F3 /* EnergyDetailVC.m in Sources */,
 				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
 				0EBDEB5F18B2215E00C0B3B4 /* CostDetailView.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,

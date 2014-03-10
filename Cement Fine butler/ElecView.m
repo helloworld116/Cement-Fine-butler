@@ -40,7 +40,7 @@
         self.bottomScrollView.pagingEnabled = YES;
         self.bottomScrollView.delegate = self;
         [self setupTopView];
-        [self setupMiddleView];
+        [self setupMiddleView:0];
         [self setupBottomView];
     }
     return self;
@@ -59,6 +59,7 @@
     self.segmented =[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(7, 10, kScreenWidth-14, 38) items:items iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
         self.selectIndex = segmentIndex;
         self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
+        [self setupMiddleView:segmentIndex];
     }];
     self.segmented.color=[UIColor whiteColor];
     self.segmented.borderWidth=1;
@@ -69,22 +70,24 @@
     [self.topOfView addSubview:self.segmented];
 }
 
--(void)setupMiddleView{
-    double totalElecAmount=0.f,totalElecLossAmount=0.f;
-    for (NSDictionary *product in self.products) {
-        double elecAmount = [Tool doubleValue:[product objectForKey:@"elecAmount"]];
-        double elecLossAmount = [Tool doubleValue:[product objectForKey:@"elecLossAmount"]];
-        totalElecAmount += elecAmount;
-        totalElecLossAmount += elecLossAmount;
-    }
+-(void)setupMiddleView:(NSInteger)index{
+//    double totalElecAmount=0.f,totalElecLossAmount=0.f;
+//    for (NSDictionary *product in self.products) {
+//        
+//        totalElecAmount += elecAmount;
+//        totalElecLossAmount += elecLossAmount;
+//    }
+    NSDictionary *product = [self.products objectAtIndex:index];
+    double elecAmount = [Tool doubleValue:[product objectForKey:@"elecAmount"]];
+    double elecLossAmount = [Tool doubleValue:[product objectForKey:@"elecLossAmount"]];
     NSString *status;
-    if (totalElecLossAmount>=0) {
+    if (elecLossAmount>=0) {
         status = @"损失";
     }else{
-        totalElecLossAmount = -totalElecLossAmount;
+        elecLossAmount = -elecLossAmount;
         status = @"节约";
     }
-    self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    %@%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:totalElecAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:totalElecLossAmount]]];
+    self.lblDetailLoss.text = [NSString stringWithFormat:@"使用%@度    %@%@度",[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecAmount]],status,[Tool numberToStringWithFormatter:[NSNumber numberWithDouble:elecLossAmount]]];
 }
 
 -(void)setupBottomView{
@@ -132,6 +135,7 @@
     NSInteger page = scrollView.contentOffset.x / pageWidth;
     self.selectIndex = page;
     [self.segmented setEnabled:YES forSegmentAtIndex:page];
+    [self setupMiddleView:page];
 }
 
 @end

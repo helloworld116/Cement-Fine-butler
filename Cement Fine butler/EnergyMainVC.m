@@ -149,7 +149,7 @@
 //    [self.elecView setupValue:[self.data objectForKey:@"elec"] withType:1];
     
     NSArray *elecData = @[
-      @{@"productName":@"PC32.5",@"lossCost":@(586365.960000),@"elecUnitAmount":@(2475.34),@"compareUnitAmount":@(120.00),@"elecAmount":@(770300.25),@"elecLossAmount":@(732957.4500),@"usedQuantity":@(311.19),@"suggestion":@"暂无建议",@"customElecUnitAmount":@(120.00),@"currPrice":@(0.80),@"standElecUnitAmount":@(0)},@{@"productName":@"PC42.5",@"lossCost":@(586365.960000),@"elecUnitAmount":@(2475.34),@"compareUnitAmount":@(120.00),@"elecAmount":@(770300.25),@"elecLossAmount":@(732957.4500),@"usedQuantity":@(311.19),@"suggestion":@"暂无建议",@"customElecUnitAmount":@(120.00),@"currPrice":@(0.80),@"standElecUnitAmount":@(0)}
+      @{@"productName":@"PC32.5",@"lossCost":@(586365.960000),@"elecUnitAmount":@(2475.34),@"compareUnitAmount":@(120.00),@"elecAmount":@(770300.25),@"elecLossAmount":@(732957.4500),@"usedQuantity":@(311.19),@"suggestion":@"暂无建议",@"customElecUnitAmount":@(120.00),@"currPrice":@(0.80),@"standElecUnitAmount":@(0)},@{@"productName":@"PC42.5",@"lossCost":@(12345.960000),@"elecUnitAmount":@(2475.34),@"compareUnitAmount":@(120.00),@"elecAmount":@(535300.25),@"elecLossAmount":@(732957.4500),@"usedQuantity":@(311.19),@"suggestion":@"暂无建议",@"customElecUnitAmount":@(120.00),@"currPrice":@(0.80),@"standElecUnitAmount":@(0)}
         ];
     self.elecView = [[ElecView alloc] initWithFrame:CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height) withData:elecData];
     [self.bottomScrollView addSubview:self.elecView];

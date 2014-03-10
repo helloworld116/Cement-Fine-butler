@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "power_consumption_icon.png"
+      "filename" : "coal_consumption_icon.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "power_consumption_icon@2x.png"
+      "filename" : "coal_consumption_icon@2x.png"
     }
   ],
   "info" : {
