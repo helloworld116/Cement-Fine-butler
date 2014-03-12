@@ -295,4 +295,17 @@
     }
 }
 
+#pragma mark UITouchEvent
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchesBegin");
+}
+
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchesCancelled");
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchesEnded");
+}
+
 @end

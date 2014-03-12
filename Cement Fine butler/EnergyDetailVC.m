@@ -35,6 +35,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellID = @"EnergyDetailCell";
+//    EnergyDetailCell *cell
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.data count] + 1;
+}
+
 @end
 
 @interface EnergyDetailCell()

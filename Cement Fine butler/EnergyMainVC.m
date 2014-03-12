@@ -29,6 +29,7 @@
 @end
 
 @implementation EnergyMainVC
+static int loadTime=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,7 +49,7 @@
     self.bottomScrollView.showsHorizontalScrollIndicator = NO;
     self.bottomScrollView.bounces = NO;
     self.bottomScrollView.delegate = self;
-    [self setupTopView];
+//    [self setupTopView];
 //    self.lblDetailLoss.text = @"使用0.00公斤    损失0.00公斤";
     self.URL = kEnergyMonitoring;
     [self sendRequest];
@@ -218,6 +219,10 @@
 
 #pragma mark 自定义公共VC
 -(void)responseCode0WithData{
+    if (loadTime==0) {
+        [self setupTopView];
+    }
+    loadTime++;
     [self setupMiddleView];
     [self setupBottomView];
 }

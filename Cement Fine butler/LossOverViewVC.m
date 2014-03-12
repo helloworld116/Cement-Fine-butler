@@ -29,6 +29,7 @@
 @end
 
 @implementation LossOverViewVC
+static int loadTimes=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,9 +54,11 @@
     
     self.headerView = [[[NSBundle mainBundle] loadNibNamed:@"LossCell" owner:self options:nil] objectAtIndex:1];
     [self.view addSubview:self.headerView];
+    self.headerView.hidden = YES;
     [self.headerView.btnChangeDate addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    self.tableView.bounces = NO;
     CGRect tableViewFrame = CGRectMake(0, self.headerView.frame.size.height, kScreenWidth, kScreenHeight-kStatusBarHeight-kNavBarHeight-self.headerView.frame.size.height-kTabBarHeight);
     self.tableView.frame = tableViewFrame;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -113,7 +116,10 @@
 
 #pragma mark tableviewdatasource
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 172.f;
+    if (indexPath.row==0) {
+        return 172.f;
+    }
+    return 344.f;
 }
 
 -(int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -122,37 +128,53 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *LossDescCellIdentifier = @"LossDescCell";
-    LossDescCell *cell = [tableView dequeueReusableCellWithIdentifier:LossDescCellIdentifier];
+    static NSString *LossDescCellIdentifier2 = @"LossDescCell2";
+    LossDescCell *cell;
+    if (indexPath.row==0) {
+       cell = [tableView dequeueReusableCellWithIdentifier:LossDescCellIdentifier];
+    }else{
+        cell = [tableView dequeueReusableCellWithIdentifier:LossDescCellIdentifier2];
+    }
     // Configure the cell...
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"LossCell" owner:self options:nil] objectAtIndex:0];
+        if (indexPath.row==0) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"LossCell" owner:self options:nil] objectAtIndex:0];
+        }else{
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"LossCell" owner:self options:nil] objectAtIndex:2];
+        }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     double loss=0;
     //新接口
     NSDictionary *lossData = [self.sortLossData objectAtIndex:indexPath.row];
-    if ([[lossData objectForKey:@"type"] isEqualToString:@"logistics"]) {
-        cell.imgViewCarOr.image = [UIImage imageNamed:@"car_icon"];
-    }
-    cell.imgViewPostion.image = [UIImage imageNamed:[kLossImageDict objectForKey:[lossData objectForKey:@"type"]]];
+    NSString *type = [lossData objectForKey:@"type"];
+    cell.imgViewPostion.image = [UIImage imageNamed:[kLossImageDict objectForKey:type]];
     loss = [Tool doubleValue:[lossData objectForKey:@"totalLoss"]];
     cell.lblLossType.text = [Tool stringToString:[lossData objectForKey:@"aliaName"]];
     cell.lblSide.text = [Tool stringToString:[lossData objectForKey:@"typeName"]];
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.##"];
-    NSString *lossStr = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:loss]];
-    CGSize valueSize = [lossStr sizeWithFont:[UIFont boldSystemFontOfSize:17] constrainedToSize:CGSizeMake(1000, 20) lineBreakMode:NSLineBreakByWordWrapping];
-    CGRect lblLossAmountFrame = cell.lblLossAmount.frame;
-    lblLossAmountFrame.size.width = valueSize.width;
-    cell.lblLossAmount.frame = lblLossAmountFrame;
+    NSString *lossStr = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:loss]];
     cell.lblLossAmount.text = lossStr;
-    
-    CGRect unitFrame = cell.lblLossUnit.frame;
-    unitFrame.origin.x = lblLossAmountFrame.origin.x+lblLossAmountFrame.size.width+5;
-    cell.lblLossUnit.frame = unitFrame;
+    if (indexPath.row!=0) {
+        LossDescCell2 *cell2 = (LossDescCell2 *)cell;
+        if ([type isEqualToString:@"yard"]) {
+            cell2.imgViewPostion2.image = [UIImage imageNamed:@"mill_icon"];
+            cell2.lblLossType2.text = @"磨机";
+        }else if([type isEqualToString:@"product"]){
+            cell2.imgViewPostion2.image = [UIImage imageNamed:@"packaging_icon"];
+            cell2.lblLossType2.text = @"包装机、散装机";
+        }else if([type isEqualToString:@"rawmaterial"]){
+            cell2.imgViewPostion2.image = [UIImage imageNamed:@"kiln_icon"];;
+            cell2.lblLossType2.text = @"回转窑";
+        }else if([type isEqualToString:@"clinker"]){
+            cell2.imgViewPostion2.image = [UIImage imageNamed:@"mill_icon"];
+            cell2.lblLossType2.text = @"磨机";
+        }
+    }
     if ([self.sortLossData count]-1==indexPath.row) {
-        cell.lblArrow.hidden = YES;
+        CGRect frame = cell.lblArrow.frame;
+        frame.size.height +=48;
+        cell.lblArrow.frame = frame;
         cell.imgViewArrow.hidden = YES;
         cell.lblLine.hidden = YES;
     }
@@ -183,8 +205,11 @@
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     NSArray *lossData = [self.data objectForKey:@"lossData"];
     if (overview&&lossData) {
+        if (loadTimes==0) {
+            self.headerView.hidden = NO;
+        }
+        loadTimes++;
         self.totalLoss = [Tool doubleValue:[overview objectForKey:@"totalLoss"]];
-//        NSString *lossStr = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:self.totalLoss]];
         [self.headerView.lblTotalLoss startFrom:0 end:self.totalLoss];
         if ([lossData count]) {
            self.tableView.hidden = NO;
@@ -208,12 +233,6 @@
 }
 
 -(void)setRequestParams{
-//    NSDictionary *timeInfo = [Tool getTimeInfo:self.condition.timeType];
-//    self.timeDesc = [timeInfo objectForKey:@"timeDesc"];
-//    self.titleView.lblTimeInfo.text = [timeInfo objectForKey:@"timeDesc"];
-//    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"startTime"] longLongValue]] forKey:@"startTime"];
-//    [self.request setPostValue:[NSNumber numberWithLongLong:[[timeInfo objectForKey:@"endTime"] longLongValue]] forKey:@"endTime"];
-    //新接口
     [super setRequestParams];
 }
 
