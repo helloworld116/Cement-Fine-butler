@@ -104,6 +104,6 @@
             viewController = (EnergyMainVC *)nextResponder;
         }
     }
-    [viewController showPopupView:sender];
+    [viewController showPopupView:sender withIndex:0];
 }
 @end

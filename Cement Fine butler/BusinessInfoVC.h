@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessInfoVC : UITableViewController
-
+@property (nonatomic,strong) NSDictionary *equipmentInfo;
 @end

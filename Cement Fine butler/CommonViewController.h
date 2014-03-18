@@ -36,4 +36,5 @@
 @property (retain, nonatomic) RightViewController *rightVC;
 @property (retain, nonatomic) LeftViewController *leftVC;
 -(void) sendRequest;
+-(void) sendRequestWithNoProgress;
 @end

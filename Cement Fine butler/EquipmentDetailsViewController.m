@@ -118,6 +118,7 @@
 
 -(void)showContactInfo:(id)sender{
     BusinessInfoVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BusinessInfoVC"];
+    nextVC.equipmentInfo = self.data;
     [self.navigationController pushViewController:nextVC animated:YES];
 }
 

@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ElecView : UIView
+@property (nonatomic) int selectIndex;
 - (id)initWithFrame:(CGRect)frame withData:(NSArray *)data;
+-(void)setupValue:(NSArray *)data;
 @end
 
 

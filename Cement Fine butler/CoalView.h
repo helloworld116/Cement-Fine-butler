@@ -10,4 +10,5 @@
 
 @interface CoalView : UIView
 - (id)initWithFrame:(CGRect)frame withData:(NSDictionary *)data;
+-(void)setupValue:(NSDictionary *)data;
 @end

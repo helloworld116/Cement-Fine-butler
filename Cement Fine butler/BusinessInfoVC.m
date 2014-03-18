@@ -35,6 +35,10 @@
     self.tableView.backgroundView = bview;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     self.navigationItem.title = @"商务信息";
+    self.lblContractNumber.text = [Tool stringToString:self.equipmentInfo[@"contractNo"]];
+    self.lblDateOfContract.text = [Tool stringToString:self.equipmentInfo[@"signedTime"]];
+    self.lblInteractiveDate.text = [Tool stringToString:self.equipmentInfo[@"payTime"]];
+    self.lblWarrantyPeriod.text = [Tool stringToString:self.equipmentInfo[@"qualityPeroid"]];
 }
 
 - (void)didReceiveMemoryWarning

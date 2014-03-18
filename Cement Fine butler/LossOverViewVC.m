@@ -237,6 +237,7 @@ static int loadTimes=0;
 }
 
 -(void)clear{
+    [self.headerView.lblTotalLoss startFrom:0 end:0];
     self.tableView.hidden = YES;
 }
 

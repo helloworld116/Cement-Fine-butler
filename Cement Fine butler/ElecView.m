@@ -21,7 +21,7 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblDetailLoss;
 
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
-@property (nonatomic) int selectIndex;
+
 -(IBAction)changeDate:(id)sender;
 -(IBAction)showDetail:(id)sender;
 
@@ -39,15 +39,28 @@
         self.bottomScrollView.showsHorizontalScrollIndicator= NO;
         self.bottomScrollView.pagingEnabled = YES;
         self.bottomScrollView.delegate = self;
-        [self setupTopView];
-        [self setupMiddleView:0];
-        [self setupBottomView];
+        [self setupValue:data];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setElecCustomUnitCost:) name:@"elecCustomUnitCost" object:nil];
     }
     return self;
 }
 
 -(IBAction)showDetail:(id)sender{
-    
+    EnergyMainVC *viewController;
+    for (UIView *next = [self superview]; next; next = [next superview]) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[EnergyMainVC class]]) {
+            viewController = (EnergyMainVC *)nextResponder;
+        }
+    }
+    [viewController showElecDetail:sender];
+}
+
+-(void)setupValue:(NSArray *)data{
+    self.products = data;
+    [self setupTopView];
+    [self setupMiddleView:0];
+    [self setupBottomView];
 }
 
 -(void)setupTopView{
@@ -71,12 +84,6 @@
 }
 
 -(void)setupMiddleView:(NSInteger)index{
-//    double totalElecAmount=0.f,totalElecLossAmount=0.f;
-//    for (NSDictionary *product in self.products) {
-//        
-//        totalElecAmount += elecAmount;
-//        totalElecLossAmount += elecLossAmount;
-//    }
     NSDictionary *product = [self.products objectAtIndex:index];
     double elecAmount = [Tool doubleValue:[product objectForKey:@"elecAmount"]];
     double elecLossAmount = [Tool doubleValue:[product objectForKey:@"elecLossAmount"]];
@@ -123,7 +130,15 @@
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        //        [self sendRequest];
+        EnergyMainVC *viewController;
+        for (UIView *next = [self superview]; next; next = [next superview]) {
+            UIResponder *nextResponder = [next nextResponder];
+            if ([nextResponder isKindOfClass:[EnergyMainVC class]]) {
+                viewController = (EnergyMainVC *)nextResponder;
+            }
+        }
+        viewController.timeType = sender.timeType;
+        [viewController sendRequest];
     });
     self.dropDownView = nil;
 }
@@ -136,6 +151,73 @@
     self.selectIndex = page;
     [self.segmented setEnabled:YES forSegmentAtIndex:page];
     [self setupMiddleView:page];
+}
+
+-(void)setElecCustomUnitCost:(NSNotification*) notification{
+    EnergyMainVC *viewController;
+    for (UIView *next = [self superview]; next; next = [next superview]) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[EnergyMainVC class]]) {
+            viewController = (EnergyMainVC *)nextResponder;
+        }
+    }
+    [viewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    NSNumber *value = [notification object];
+    //对标成本设置为空或者没有修改的情况下不提交修改
+    if ([value doubleValue]&&[value doubleValue]!=[Tool doubleValue: [self.products[self.selectIndex] objectForKey:@"customElecUnitAmount"]]) {
+        NSMutableArray *newProducts = [NSMutableArray arrayWithArray:self.products];
+        NSDictionary *elec = self.products[self.selectIndex];
+        double elecAmount = [Tool doubleValue:[elec objectForKey:@"elecAmount"]];
+        double usedQuantity = [Tool doubleValue:[elec objectForKey:@"usedQuantity"]];
+        double currPrice = [Tool doubleValue:[elec objectForKey:@"currPrice"]];
+        double productId = [Tool doubleValue:[elec objectForKey:@"productId"]];
+        
+        NSMutableDictionary *newElec = [NSMutableDictionary dictionaryWithDictionary:self.products[self.selectIndex]];
+        [newElec setObject:value forKey:@"compareUnitAmount"];
+        [newElec setObject:value forKey:@"customElecUnitAmount"];
+        //电损失数量（elecLossAmount）= 电使用量(elecAmount)  -  产品的产量(usedQuantity) * 对标电耗(compareUnitAmount)
+        //必须在设置修改后查询
+        double compareUnitAmount = [Tool doubleValue:[newElec objectForKey:@"compareUnitAmount"]];
+        double elecLossAmount = elecAmount - usedQuantity*compareUnitAmount;
+        [newElec setObject:[NSNumber numberWithDouble:elecLossAmount] forKey:@"elecLossAmount"];
+        //        损失(lossCost) =电损失数量（elecLossAmount）* 电的当前价格(currPrice)
+        double lossCost = elecLossAmount*currPrice;
+        [newElec setObject:[NSNumber numberWithDouble:lossCost] forKey:@"lossCost"];
+        [newProducts replaceObjectAtIndex:self.selectIndex withObject:newElec];
+        self.products = newProducts;
+        [self setupBottomView];
+        //2保存自定义数据
+        DDLogCInfo(@"******  Request URL is:%@  ******",kCustomElecUpdate);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomElecUpdate]];
+        request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+        [request setUseCookiePersistence:YES];
+        [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+        [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+        [request setPostValue:[NSNumber numberWithLong:productId] forKey:@"productId"];
+        [request setPostValue:value forKey:@"customUnitOutput"];
+        [request setDelegate:self];
+        [request setDidFailSelector:@selector(updateRequestFailed:)];
+        [request setDidFinishSelector:@selector(updateRequestSuccess:)];
+        [request startAsynchronous];
+    }
+}
+
+#pragma mark 网络请求
+-(void) updateRequestFailed:(ASIHTTPRequest *)request{
+    
+}
+
+-(void)updateRequestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==kErrorCode0) {
+        
+    }else if(errorCode==kErrorCodeExpired){
+        LoginViewController *loginViewController = (LoginViewController *)[kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
+    }
 }
 
 @end
@@ -178,7 +260,7 @@
             viewController = (EnergyMainVC *)nextResponder;
         }
     }
-    [viewController showPopupView:sender];
+    [viewController showPopupView:sender withIndex:((ElecView *)[[self superview] superview]).selectIndex];
 }
 
 -(void)setupValue:(NSDictionary *)data{

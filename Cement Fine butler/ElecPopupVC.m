@@ -10,7 +10,7 @@
 #import "ElecPopupView.h"
 
 @interface ElecPopupVC ()
-
+@property (nonatomic,strong) ElecPopupView *popupView;
 @end
 
 @implementation ElecPopupVC
@@ -28,10 +28,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    ElecPopupView *popupView = [[ElecPopupView alloc] initWithDefaultValue:self.defaultValue];
-    self.view.frame = popupView.frame;
+    self.popupView = [[ElecPopupView alloc] initWithDefaultValue:self.defaultValue];
+    self.view.frame = self.popupView.frame;
     self.view.layer.cornerRadius = 5;
-    [self.view addSubview:popupView];
+    [self.view addSubview:self.popupView];
+}
+
+-(void)setDefaultValue:(double)defaultValue{
+    self.popupView.defaultValue = defaultValue;
 }
 
 - (void)didReceiveMemoryWarning

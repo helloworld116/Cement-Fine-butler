@@ -117,6 +117,25 @@
     [self.request startAsynchronous];
 }
 
+-(void)sendRequestWithNoProgress{
+    //清除数据及处理界面
+    self.responseData = nil;
+    self.data = nil;
+    self.messageView.hidden = YES;
+    //自定义清除
+    [self clear];
+    DDLogCInfo(@"******  Request URL is:%@  ******",self.URL);
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:self.URL]];
+    self.request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+    [self.request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+    [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+    [self setRequestParams];
+    [self.request setDelegate:self];
+    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFinishSelector:@selector(requestSuccess:)];
+    [self.request startAsynchronous];
+}
+
 #pragma mark 网络请求
 -(void) requestFailed:(ASIHTTPRequest *)request{
     [self.progressHUD hide:YES];
@@ -149,7 +168,7 @@
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            LoginViewController *loginViewController = (LoginViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+            LoginViewController *loginViewController = (LoginViewController *)[kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
             kSharedApp.window.rootViewController = loginViewController;
         });
     }else{

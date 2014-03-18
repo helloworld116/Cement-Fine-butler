@@ -35,6 +35,10 @@
     return self;
 }
 
+-(void)setDefaultValue:(double)defaultVale{
+    self.textValue.text = [NSString stringWithFormat:@"%.2f",defaultVale];
+}
+
 //- (id)
 
 /*

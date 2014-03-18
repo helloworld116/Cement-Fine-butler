@@ -349,6 +349,10 @@
 
 -(IBAction)showUpdateView:(id)sender{
     UITableView *tableView = (UITableView *)[self superview];
+    if (![tableView isKindOfClass:[UITableView class]])
+    {
+        tableView = (UITableView *)tableView.superview;
+    }
     CalculateVC *calculateVC = (CalculateVC *) tableView.dataSource;
     NSIndexPath *indexPath = [tableView indexPathForCell:self];
     NSInteger index = indexPath.row;
@@ -360,6 +364,16 @@
 
 -(void)updateDataSource{
     UITableView *tableView = (UITableView *)[self superview];
+//    for (UIView *next = [self superview]; next; next = [next superview]) {
+//        UIResponder *nextResponder = [next nextResponder];
+//        if ([nextResponder isKindOfClass:[UITableView class]]) {
+//            tableView = (UITableView *)[self superview];
+//        }
+//    }
+    if (![tableView isKindOfClass:[UITableView class]])
+    {
+        tableView = (UITableView *)tableView.superview;
+    }
     CalculateVC *calculateVC = (CalculateVC *) tableView.dataSource;
     NSIndexPath *indexPath = [tableView indexPathForCell:self];
     NSInteger index = indexPath.row;

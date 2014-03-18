@@ -92,11 +92,11 @@
 	[[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setBackgroundImage:highlightedBarButton forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
-        [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
-        [UIColor colorWithWhite:0.0f alpha:0.2f], UITextAttributeTextShadowColor,
-        [NSValue valueWithUIOffset:UIOffsetMake(0.0f, -1.0f)], UITextAttributeTextShadowOffset,
-        [UIColor whiteColor], UITextAttributeTextColor,
-        nil]];
+      [UIFont fontWithName:@"Avenir-Heavy" size:0], UITextAttributeFont,
+      [UIColor whiteColor], UITextAttributeTextShadowColor,
+      [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 0.0f)], UITextAttributeTextShadowOffset,
+      [UIColor whiteColor], UITextAttributeTextColor,
+      nil]];
     //预警消息
     self.notifactionServices = [[LocalNotifactionServices alloc] init];
     //设置启动界面

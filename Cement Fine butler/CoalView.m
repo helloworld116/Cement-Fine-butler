@@ -49,6 +49,7 @@
         self.frame = frame;
         [self setupValue:data];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCoalCustomUnitCost:) name:@"coalCustomUnitCost" object:nil];
     return self;
 }
 
@@ -110,7 +111,15 @@
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [self sendRequest];
+        EnergyMainVC *viewController;
+        for (UIView *next = [self superview]; next; next = [next superview]) {
+            UIResponder *nextResponder = [next nextResponder];
+            if ([nextResponder isKindOfClass:[EnergyMainVC class]]) {
+                viewController = (EnergyMainVC *)nextResponder;
+            }
+        }
+        viewController.timeType = sender.timeType;
+        [viewController sendRequest];
     });
     self.dropDownView = nil;
 }
@@ -123,6 +132,74 @@
             viewController = (EnergyMainVC *)nextResponder;
         }
     }
-    [viewController showPopupView:sender];
+    [viewController showPopupView:sender withIndex:0];
 }
+
+-(void)setCoalCustomUnitCost:(NSNotification*) notification{
+    EnergyMainVC *viewController;
+    for (UIView *next = [self superview]; next; next = [next superview]) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[EnergyMainVC class]]) {
+            viewController = (EnergyMainVC *)nextResponder;
+        }
+    }
+    [viewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    NSDictionary *noficationData = [notification object];
+    NSNumber *value = [noficationData objectForKey:@"value"];
+    if ([value doubleValue]) {
+        NSDictionary *coal = self.data;
+        double coalAmount = [Tool doubleValue:[coal objectForKey:@"coalAmount"]];
+        double usedQuantity = [Tool doubleValue:[coal objectForKey:@"usedQuantity"]];
+        double currPrice = [Tool doubleValue:[coal objectForKey:@"currPrice"]];
+        NSMutableDictionary *newCoal = [NSMutableDictionary dictionaryWithDictionary:self.data];
+        [newCoal setObject:value forKey:@"compareUnitAmount"];
+        int coalSelectIndex = [[noficationData objectForKey:@"selectedIndex"] intValue];
+        if (coalSelectIndex==3) {
+            [newCoal setObject:value forKey:@"customElecUnitAmount"];
+            if ([Tool doubleValue:[coal objectForKey:@"customElecUnitAmount"]]!=[value doubleValue]) {
+                //2保存自定义数据
+                DDLogCInfo(@"******  Request URL is:%@  ******",kCustomCoalUpdate);
+                ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomCoalUpdate]];
+                request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+                [request setUseCookiePersistence:YES];
+                [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+                [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+                [request setPostValue:value forKey:@"customUnitOutput"];
+                [request setDelegate:self];
+                [request setDidFailSelector:@selector(updateRequestFailed:)];
+                [request setDidFinishSelector:@selector(updateRequestSuccess:)];
+                [request startAsynchronous];
+            }
+        }
+        //必须在设置修改后查询
+        double compareUnitAmount = [Tool doubleValue:[newCoal objectForKey:@"compareUnitAmount"]];
+        //煤损失数量（coalLossAmount）= 煤使用量(coalAmount)-产品的产量(usedQuantity) * 对标煤耗(compareUnitAmount)
+        double coalLossAmount = coalAmount - usedQuantity*compareUnitAmount;
+        [newCoal setObject:[NSNumber numberWithDouble:coalLossAmount] forKey:@"coalLossAmount"];
+        //    损失(lossCost) =煤损失数量（coalLossAmount）*  煤的当前价格(currPrice)
+        double lossCost = coalLossAmount * currPrice;
+        [newCoal setObject:[NSNumber numberWithDouble:lossCost] forKey:@"lossCost"];
+        self.data = newCoal;
+        [self setupValue:self.data];
+    }
+}
+
+#pragma mark 网络请求
+-(void) updateRequestFailed:(ASIHTTPRequest *)request{
+    
+}
+
+-(void)updateRequestSuccess:(ASIHTTPRequest *)request{
+    NSDictionary *dict = [Tool stringToDictionary:request.responseString];
+    int errorCode = [[dict objectForKey:@"error"] intValue];
+    if (errorCode==kErrorCode0) {
+        
+    }else if(errorCode==kErrorCodeExpired){
+        LoginViewController *loginViewController = (LoginViewController *)[kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        kSharedApp.window.rootViewController = loginViewController;
+    }else{
+        
+    }
+}
+
 @end

@@ -38,6 +38,8 @@
 -(IBAction)showDetail:(id)sender;
 
 @property (nonatomic) NSInteger selectIndex;
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic) int loadTimes;//第几次加载页面
 @end
 
 @implementation DirectMaterialCostViewController
@@ -56,6 +58,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"直接材料成本";
+    self.topOfView.hidden = YES;
     self.bottomScrollView.pagingEnabled = YES;
     self.bottomScrollView.showsHorizontalScrollIndicator = NO;
     self.bottomScrollView.bounces = NO;
@@ -68,23 +71,24 @@
     self.URL = kRawMaterialLoss;
     [self sendRequest];
     
-    [self.bottomScrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+//    [self.bottomScrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"contentSize"]) {
-        NSLog(@"old is %@",[change objectForKey:@"old"]);
-        NSLog(@"new is %@",[change objectForKey:@"new"]);
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    [self.request clearDelegatesAndCancel];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.loadTimes!=0) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
     }
+    _loadTimes++;
 }
 
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    NSLog(@"self.bottomScrollView.contentOffset is %@",NSStringFromCGPoint(self.bottomScrollView.contentOffset));
-    NSLog(@"self.bottomScrollView.contentSize is %@",NSStringFromCGSize(self.bottomScrollView.contentSize));
-    
-}
 
 -(void)setupTopView{
     self.topOfView.hidden = NO;
@@ -108,6 +112,7 @@
 }
 
 - (void)setupMiddleView:(NSArray *)products{
+    [self.segmented removeFromSuperview];
     self.middleView.hidden = NO;
     NSMutableArray *items = [@[] mutableCopy];
     for (NSDictionary *product in products) {
@@ -127,14 +132,13 @@
 }
 
 -(void)setupBottomView:(NSArray *)products{
-    NSLog(@".................bottomView is build and products is %@",products);
+    for (UIView *view in [self.bottomScrollView subviews]) {
+        [view removeFromSuperview];
+    }
     self.bottomScrollView.hidden = NO;
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
     CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
-//    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, scrollViewSize.width*products.count, contentHeight)];
-//    [self.bottomScrollView addSubview:contentView];
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
-    NSLog(@"self.bottomScrollView.contentSize is %@",NSStringFromCGSize(self.bottomScrollView.contentSize));
     ProductDirectMaterialCosts *productDirectMaterialCosts;
     for (int i=0; i<products.count; i++) {
         productDirectMaterialCosts = [[ProductDirectMaterialCosts alloc] initWithFrame:CGRectMake(scrollViewSize.width*i, 0, scrollViewSize.width, scrollViewSize.height)];
@@ -151,7 +155,7 @@
 }
 
 -(void)hideDropDownOut:(id)sender{
-    NSLog(@"....................");
+//    NSLog(@"....................");
 }
 
 -(IBAction)changeDate:(id)sender {
@@ -273,39 +277,54 @@
     [self setupTopView];
     [self setupMiddleView:products];
     [self setupBottomView:products];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
 }
     
 -(void)responseWithOtherCode{
     [super responseWithOtherCode];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
 }
-    
+
+//响应码为0,但是数据为空，data is null
+-(void)responseCode0WithNOData{
+    [super responseCode0WithNOData];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
+}
+
 -(void)setRequestParams{
     [super setRequestParams];
 }
 
 -(void)clear{
     [super clear];
-    self.topOfView.hidden = YES;
-    self.middleView.hidden = YES;
-    self.bottomScrollView.hidden  = YES;
-    self.selectIndex = 0;
-    [self.segmented removeFromSuperview];
-    for (UIView *view in [self.bottomScrollView subviews]) {
-        [view removeFromSuperview];
-    }
+//    self.topOfView.hidden = YES;
+//    self.middleView.hidden = YES;
+//    self.bottomScrollView.hidden  = YES;
+//    self.selectIndex = 0;
+//    [self.segmented removeFromSuperview];
+//    for (UIView *view in [self.bottomScrollView subviews]) {
+//        [view removeFromSuperview];
+//    }
+    [self.timer invalidate];
 }
 
 #pragma mark UITouchEvent
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touchesBegin");
-}
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    NSLog(@"touchesBegin");
+//}
+//
+//-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+//    NSLog(@"touchesCancelled");
+//}
+//
+//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+//    NSLog(@"touchesEnded");
+//}
 
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touchesCancelled");
-}
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touchesEnded");
+#pragma mark - timer
+-(void)onTimer:(id)sender{
+    [self sendRequestWithNoProgress];
 }
-
 @end

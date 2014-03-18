@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ElecPopupView : UIView
+@property (nonatomic) double defaultValue;
 -(id)initWithDefaultValue:(double)defaultValue;
 @end
