@@ -1,6 +1,6 @@
 platform :ios,'6.1'
 pod 'JASidePanels'
-pod 'ASIHTTPRequest'
+pod 'ASIHTTPRequest', :git => 'https://github.com/OpenFibers/asi-http-request'
 pod 'MBProgressHUD'
 #pod 'EGOTableViewPullRefresh'
 #pod 'LoadMoreTableFooterView', :git => 'https://github.com/sishen/LoadMoreTableFooterView.git'
