@@ -11,7 +11,6 @@
 
 @interface PPiFlatSegmentedControl()
 @property (nonatomic,strong) NSMutableArray *segments;
-@property (nonatomic) NSUInteger currentSelected;
 @property (nonatomic,strong) NSMutableArray *separators;
 @property (nonatomic,copy) selectionBlock selBlock;
 @end
@@ -37,7 +36,7 @@
         self.backgroundColor=[UIColor clearColor];
         
         //Generating segments
-        float buttonWith=frame.size.width/items.count;
+        float buttonWith=round(frame.size.width / items.count);
         int i=0;
         for(NSDictionary *item in items){
             NSString *text=item[@"text"];
@@ -171,7 +170,7 @@
         if([title isKindOfClass:[NSString class]]){
             [segment setButtonText:title];
         }else if ([title isKindOfClass:[NSAttributedString class]]){
-            [segment setButtonText:title];
+            [segment setAttributedTitle:title forState:UIControlStateNormal];
         }
     }
 }

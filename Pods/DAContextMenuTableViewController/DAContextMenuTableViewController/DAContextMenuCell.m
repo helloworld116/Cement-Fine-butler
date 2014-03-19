@@ -47,8 +47,8 @@
     self.contextMenuHidden = self.contextMenuView.hidden = YES;
     self.shouldDisplayContextMenuView = NO;
     self.editable = YES;
-    self.moreOptionsButtonTitle = @"修改";
-    self.deleteButtonTitle = @"删除";
+    self.moreOptionsButtonTitle = @"More";
+    self.deleteButtonTitle = @"Delete";
     self.menuOptionButtonTitlePadding = 25.;
     self.menuOptionsAnimationDuration = 0.3;
     self.bounceValue = 30.;

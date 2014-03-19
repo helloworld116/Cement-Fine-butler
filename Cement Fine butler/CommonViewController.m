@@ -131,9 +131,18 @@
     [self.request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
     [self setRequestParams];
     [self.request setDelegate:self];
-    [self.request setDidFailSelector:@selector(requestFailed:)];
+    [self.request setDidFailSelector:@selector(requestFailedWithNoProgressHUDrequest:)];
     [self.request setDidFinishSelector:@selector(requestSuccess:)];
     [self.request startAsynchronous];
+}
+
+/**
+ *  连续请求时出错处理
+ *
+ *  @param request <#request description#>
+ */
+-(void)requestFailedWithNoProgressHUDrequest:(ASIHTTPRequest *)request{
+    
 }
 
 #pragma mark 网络请求

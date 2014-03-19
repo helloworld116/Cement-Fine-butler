@@ -18,31 +18,35 @@ To start using PPiFlatSC you have to import the class wherever you want to use:
 
 And then instantiate it in your view:
 ```
-PPiFlatSegmentedControl *segmented=[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(20, 20, 250, 30) andItems:@[
-                                        [NSString stringWithFormat:@"%@ %@",@"Face",[NSString awesomeIcon:AwesomeIconFacebook]],
-                                        [NSString stringWithFormat:@"%@ %@",@"LInkedin",[NSString awesomeIcon:AwesomeIconLinkedin]],
-                                        [NSString stringWithFormat:@"%@ %@",@"Twitter",[NSString awesomeIcon:AwesomeIconTwitter]],
-                                        ] andSelectionBlock:^(NSUInteger segmentIndex) {
+PPiFlatSegmentedControl *segmented=[[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(20, 20, 250, 30) items:@[               @{@"text":@"Face",@"icon":@"icon-facebook"},
+                                        @{@"text":@"Linkedin",@"icon":@"icon-linkedin"},
+                                        @{@"text":@"Twitter",@"icon":@"icon-twitter"}
+                                        ]
+                                        iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
+                                            
                                         }];
-    segmented.textFont=[UIFont fontWithName:@"FontAwesome" size:12];
-    segmented.textColor=[UIColor whiteColor];
-    segmented.selectedTextColor=[UIColor whiteColor];
     segmented.color=[UIColor colorWithRed:88.0f/255.0 green:88.0f/255.0 blue:88.0f/255.0 alpha:1];
     segmented.borderWidth=0.5;
     segmented.borderColor=[UIColor darkGrayColor];
     segmented.selectedColor=[UIColor colorWithRed:0.0f/255.0 green:141.0f/255.0 blue:147.0f/255.0 alpha:1];
+    segmented.textAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:13],
+                               NSForegroundColorAttributeName:[UIColor whiteColor]};
+    segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:13],
+                               NSForegroundColorAttributeName:[UIColor whiteColor]};
     [self.view addSubview:segmented];
 
 ```
 ### Properties
 The parameters you are able to modify are the following:
-* **textFont**: Font of text inside segments
-* **textColor**: Color of text inside segments
-* **selectedTextColor**: Color of text inside segments ( selected state )
 * **color**: Background color of full segmentControl
 * **selectedColor**: Background color for segment in selected state
 * **borderWith**: Width of the border line around segments and control
 * **borderColor**: Color "" ""
+* **textAttributes**: Text attributes for non selected state
+* **selectedTextAttributes**: Text attributes for selected state 
+
+( If you have doubts you should consult more information in Apple Documentation or https://github.com/pepibumur/PPiAwesomeButton )
+
 
 *Note: When you initialize the control you have to pass a Block with the behaviour when any segment has been selected*
 
@@ -55,10 +59,15 @@ The examples shown use FontAwesome library, you can add to your project using it
                         <string>fontawesome-webfont.ttf</string>
                     </array>
  
-From know you can use a NSString category to get symbols:
-```[NSString awesomeIcon:AwesomeIconFacebook]```
+
 ## Screenshots
 ![image](http://img202.imageshack.us/img202/5927/faws.png)
+
+## Changelogs 1.3.3
+* **Important** : Initialize method has changed, please review the example before to see how FlatSegmented is now initialized
+* PPiAwesomeButton: Now the control is linked with PPiAwesomeButton for more features
+* IconPosition: Set Icon position respect the text
+
 
 ## License
 PPiFlatSegmentedControl is available under the MIT license. See the LICENSE file for more info.

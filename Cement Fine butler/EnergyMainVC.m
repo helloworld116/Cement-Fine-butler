@@ -28,6 +28,7 @@
 @property (nonatomic,strong) CoalPopupVC *coalPopupVC;
 @property (nonatomic,strong) ElecPopupVC *elecPopupVC;
 @property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,strong) NSDictionary *oldData;//保存临时数据，避免实时刷新时至详情页时数据为空的问题
 @end
 
 @implementation EnergyMainVC
@@ -159,6 +160,7 @@ static int loadTime=0;
     }
     loadTime++;
     [self setupBottomView];
+    self.oldData = self.data;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
 }
 
@@ -169,7 +171,6 @@ static int loadTime=0;
 
 -(void)setRequestParams{
     [super setRequestParams];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
 }
 
 -(void)clear{
@@ -179,7 +180,7 @@ static int loadTime=0;
 
 -(void)showElecDetail:(id)sender{
     EnergyDetailVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EnergyDetailVC"];
-    nextVC.data = [self.data objectForKey:@"elec"];
+    nextVC.data = [self.oldData objectForKey:@"elec"];
     nextVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:nextVC animated:YES];
 }

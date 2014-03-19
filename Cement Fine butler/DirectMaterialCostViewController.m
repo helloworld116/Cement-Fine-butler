@@ -122,6 +122,7 @@
             self.selectIndex = segmentIndex;
             self.bottomScrollView.contentOffset=CGPointMake(segmentIndex*kScreenWidth, 0);
         }];
+    self.segmented.currentSelected = self.selectIndex;
     self.segmented.color=[UIColor whiteColor];
     self.segmented.borderWidth=1;
     self.segmented.borderColor=[Tool hexStringToColor:@"#e0d7c6"];

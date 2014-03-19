@@ -28,16 +28,25 @@
 ![Skipped Update](https://github.com/ArtSabintsev/Harpy/blob/master/samplePictures/picSkippedUpdate.png?raw=true "Optional Update")
 
 ### Installation Instructions
-**Note: Harpy utilizes ARC. Add the *-fobjc-arc* compiler flag in the build phases tab if your project doesn't use ARC**.
 
-1. Copy the 'Harpy' folder into your Xcode project.
+#### CocoaPods Installation
+```
+pod 'Harpy'
+```
+
+#### Manual Installation
+
+Copy the 'Harpy' folder into your Xcode project. It contains the Harpy.h and Harpy.m files.
+
+### Setup Instructions	
 1. Import **Harpy.h** into your AppDelegate or Pre-Compiler Header (.pch)
 1. In your `AppDelegate`, set the **appID**, and optionally, you can set the **alertType**.
 1. In your `AppDelegate`, call **only one** of the `checkVersion` methods, as all three perform a check on your application's first launch. Use either:
     - `checkVersion` in `application:didFinishLaunchingWithOptions:`
     - `checkVersionDaily` in `applicationDidBecomeActive:`.
     - `checkVersionWeekly` in `applicationDidBecomeActive:`.
-	
+
+
 ``` obj-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

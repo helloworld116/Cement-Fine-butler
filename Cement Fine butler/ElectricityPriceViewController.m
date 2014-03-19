@@ -94,8 +94,8 @@
     if (cell == nil) {
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
         if (!kSharedApp.multiGroup) {
-            [rightUtilityButtons addUtilityButtonWithColor:[UIColor lightGrayColor] title:@"修改"];
-            [rightUtilityButtons addUtilityButtonWithColor:[UIColor colorWithRed:251./255. green:34./255. blue:38./255. alpha:1.] title:@"删除"];
+//            [rightUtilityButtons addUtilityButtonWithColor:[UIColor lightGrayColor] title:@"修改"];
+//            [rightUtilityButtons addUtilityButtonWithColor:[UIColor colorWithRed:251./255. green:34./255. blue:38./255. alpha:1.] title:@"删除"];
         }
         cell = [[ElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:cellIdentifier

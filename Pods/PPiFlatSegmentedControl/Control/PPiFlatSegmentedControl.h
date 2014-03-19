@@ -21,7 +21,7 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
  * selectedTextColor: Color of text inside segments ( selected state )
  * color: Background color of full segmentControl
  * selectedColor: Background color for segment in selected state
- * borderWith: Width of the border line around segments and control
+ * borderWidth: Width of the border line around segments and control
  * borderColor: Color "" ""
  */
 
@@ -33,11 +33,13 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSDictionary *selectedTextAttributes;
 @property (nonatomic) IconPosition iconPosition;
+@property (nonatomic) NSUInteger currentSelected;
 
 - (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block;
 -(void)setEnabled:(BOOL)enabled forSegmentAtIndex:(NSUInteger)segment;
 -(BOOL)isEnabledForSegmentAtIndex:(NSUInteger)index;
 -(void)setTitle:(id)title forSegmentAtIndex:(NSUInteger)index;
+-(void)setSelectedTextAttributes:(NSDictionary*)attributes;
 
 
 @end

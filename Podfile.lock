@@ -1,23 +1,29 @@
 PODS:
-  - ASIHTTPRequest (1.8.1):
+  - ASIHTTPRequest (1.8.2):
     - ASIHTTPRequest/ASIWebPageRequest
     - ASIHTTPRequest/CloudFiles
+    - ASIHTTPRequest/Core
     - ASIHTTPRequest/S3
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
     - Reachability
-  - ASIHTTPRequest/ASIWebPageRequest (1.8.1):
-    - Reachability
-  - ASIHTTPRequest/CloudFiles (1.8.1):
-    - Reachability
-  - ASIHTTPRequest/S3 (1.8.1):
-    - Reachability
-  - CocoaLumberjack (1.6.2)
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
+  - CocoaLumberjack (1.8.1):
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.8.1)
+  - CocoaLumberjack/Extensions (1.8.1):
+    - CocoaLumberjack/Core
   - DAContextMenuTableViewController (1.0.2)
   - FontAwesome+iOS (0.1.1)
   - Harpy (2.5.2)
   - HMSegmentedControl (1.3.0)
   - JASidePanels (1.3.2)
   - KxMenu (1)
-  - MBProgressHUD (0.7)
+  - MBProgressHUD (0.8)
   - MJPopupViewController (0.4)
   - PPiAwesomeButton (1.2.9):
     - FontAwesome+iOS
@@ -26,8 +32,8 @@ PODS:
   - Reachability (3.1.1)
   - REMenu (1.7.1)
   - RTLabel (1.0)
-  - SVProgressHUD (0.9)
-  - SWTableViewCell (0.0.8)
+  - SVProgressHUD (1.0)
+  - SWTableViewCell (0.2.4)
   - UICountingLabel (1.0.0)
 
 DEPENDENCIES:
@@ -40,31 +46,35 @@ DEPENDENCIES:
   - KxMenu
   - MBProgressHUD
   - MJPopupViewController
-  - PPiFlatSegmentedControl
+  - PPiFlatSegmentedControl (from `https://github.com/helloworld116/PPiFlatSegmentedControl.git`)
   - REMenu (~> 1.7.1)
   - RTLabel
   - SVProgressHUD
   - SWTableViewCell
   - UICountingLabel
 
+EXTERNAL SOURCES:
+  PPiFlatSegmentedControl:
+    :git: https://github.com/helloworld116/PPiFlatSegmentedControl.git
+
 SPEC CHECKSUMS:
-  ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
-  CocoaLumberjack: 19dceba2d0360ed383cba983bc3ef0dd089c42a1
+  ASIHTTPRequest: 4bd3ed65bf8a726292c5fa79ea5c0a2e02c97241
+  CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
   DAContextMenuTableViewController: 0151e9de219c3236257c2cc970968c77f7464a73
   FontAwesome+iOS: 243c5309e90d5788909b0f859f75ecff4a20f88f
   Harpy: b992e16082d1ae123f4a135eacfd07a6c6e1feb7
   HMSegmentedControl: 3a58d4fc011e40c93c5299b9e8283e89c32f4c64
   JASidePanels: c0e642a7311ec9cc9adfa616fa4a795e4e169f20
   KxMenu: 99db7f9b685c3c8325d152df3fe5b7fdc8b8343e
-  MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   MJPopupViewController: 4cd0badf3dae541017e0e16e2d2c7578d9224052
   PPiAwesomeButton: 8d8bc4cf62d8c848e433a1f405e019deee2821dc
-  PPiFlatSegmentedControl: 32d42c7f50cd2db1c40ee17a94d78da6f69d9813
+  PPiFlatSegmentedControl: fbdc5f0544c46c2b809b519e15a88bb20b297b94
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   REMenu: 4c85fa951c74b41b1eb7f9a31ebed2da8ae3f7d7
   RTLabel: 124420c05d7897bf7f14b75a26f54f2932ac4ca5
-  SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
-  SWTableViewCell: 279c48862af0bc14dba592b6a76f73da70f74ba5
+  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
+  SWTableViewCell: accb2c45e44bcb528ec69f83c2113cf567061824
   UICountingLabel: bb976960c0130785a600aac592954c23eb395096
 
-COCOAPODS: 0.23.0
+COCOAPODS: 0.29.0

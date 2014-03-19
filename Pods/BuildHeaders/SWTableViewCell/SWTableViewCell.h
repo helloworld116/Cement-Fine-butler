@@ -1,1 +1,1 @@
-../../SWTableViewCell/SWTableViewCell/SWTableViewCell.h
+../../SWTableViewCell/SWTableViewCell/PodFiles/SWTableViewCell.h

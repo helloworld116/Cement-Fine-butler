@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5581E3FC6F64AAEBAADF79C"
+               BlueprintIdentifier = "421B956EA3424A91932B6866"
                BuildableName = "libPods-PPiFlatSegmentedControl.a"
                BlueprintName = "Pods-PPiFlatSegmentedControl"
                ReferencedContainer = "container:Pods.xcodeproj">

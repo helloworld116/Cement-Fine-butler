@@ -31,6 +31,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     self.tableView.backgroundColor = [Tool hexStringToColor:@"#eeeeee"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    NSLog(@"data is %@",self.data);
 }
 
 - (void)didReceiveMemoryWarning
