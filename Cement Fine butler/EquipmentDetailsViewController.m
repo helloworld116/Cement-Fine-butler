@@ -64,7 +64,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor whiteColor];
     label.font = [UIFont systemFontOfSize:10.f];
-    label.text = @"合同信息";
+    label.text = @"商务信息";
     [rightBarItemView addSubview:imgButton];
     [rightBarItemView addSubview:imageView];
     [rightBarItemView addSubview:label];

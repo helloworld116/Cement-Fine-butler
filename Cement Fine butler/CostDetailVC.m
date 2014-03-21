@@ -53,6 +53,7 @@
 -(void)setupTopView{
     double totalCost = [[[self.data objectForKey:@"overview"] objectForKey:@"totalCost"] doubleValue];
     self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:totalCost]];
+    self.topOfView.backgroundColor = [Tool hexStringToColor:@"#f3f3f3"];
     self.topOfView.hidden = NO;
 }
 
@@ -74,6 +75,7 @@
     self.segmented.selectedTextAttributes=@{NSFontAttributeName:[UIFont systemFontOfSize:18],
                                             NSForegroundColorAttributeName:[Tool hexStringToColor:@"#3f4a58"]};
     [self.middleView addSubview:self.segmented];
+    self.middleView.backgroundColor = [Tool hexStringToColor:@"#f3f3f3"];
     self.middleView.hidden = NO;
 }
     

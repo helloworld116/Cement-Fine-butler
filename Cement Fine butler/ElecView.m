@@ -59,7 +59,7 @@
 -(void)setupValue:(NSArray *)data{
     self.products = data;
     [self setupTopView];
-    [self setupMiddleView:0];
+    [self setupMiddleView:self.selectIndex];
     [self setupBottomView];
 }
 

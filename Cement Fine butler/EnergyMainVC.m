@@ -76,7 +76,11 @@ static int loadTime=0;
 }
 
 -(void)setupTopView{
-    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.topOfView.frame.size.height)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topOfView.frame.size.height-1, kScreenWidth, 1)];
+    lineView.backgroundColor = [Tool hexStringToColor:@"#c2c2c2"];
+    [self.topOfView addSubview:lineView];
+    
+    self.segmented = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.topOfView.frame.size.height-1)];
     [self.segmented setScrollEnabled:YES];
     __weak EnergyMainVC *weakSelf = self;
     [self.segmented setIndexChangeBlock:^(NSInteger index) {
@@ -138,14 +142,14 @@ static int loadTime=0;
         if (!self.coalPopupVC) {
             self.coalPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoalPopupVC"];
         }
-        self.coalPopupVC.coal = [self.data objectForKey:@"coal"];
+        self.coalPopupVC.coal = [self.oldData objectForKey:@"coal"];
         [self presentPopupViewController:self.coalPopupVC animationType:MJPopupViewAnimationFade];
     }else if (self.type==1){
         //电耗
         if (!self.elecPopupVC) {
             self.elecPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ElecPopupVC"];
         }
-        NSDictionary *elec = [[self.data objectForKey:@"elec"] objectAtIndex:index];
+        NSDictionary *elec = [[self.oldData objectForKey:@"elec"] objectAtIndex:index];
         double customElecUnitAmount = [Tool doubleValue:elec[@"customElecUnitAmount"]];
         self.elecPopupVC.defaultValue = customElecUnitAmount;
         [self presentPopupViewController:self.elecPopupVC animationType:MJPopupViewAnimationFade];

@@ -40,6 +40,7 @@
 @property (nonatomic) NSInteger selectIndex;
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic) int loadTimes;//第几次加载页面
+@property (nonatomic,strong) NSDictionary *oldData;//保存临时数据，避免实时刷新时数据为空的问题
 @end
 
 @implementation DirectMaterialCostViewController
@@ -206,7 +207,7 @@
 
 -(void)showPopupView:(id)sender{
     CostPopupVC *costPopupVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostPopupVC"];
-    NSDictionary *currentSelectProduct = [[self.data objectForKey:@"products"] objectAtIndex:self.selectIndex];
+    NSDictionary *currentSelectProduct = [[self.oldData objectForKey:@"products"] objectAtIndex:self.selectIndex];
     costPopupVC.defaultValue = [Tool doubleValue:[currentSelectProduct objectForKey:@"customCost"]];
     [self presentPopupViewController:costPopupVC animationType:MJPopupViewAnimationFade];
 }
@@ -275,6 +276,7 @@
 #pragma mark 自定义公共VC
 -(void)responseCode0WithData{
     NSArray *products = [self.data objectForKey:@"products"];
+    self.oldData = self.data;
     [self setupTopView];
     [self setupMiddleView:products];
     [self setupBottomView:products];
