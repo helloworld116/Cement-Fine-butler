@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zZy-hF-BIJ">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Real Time ReportVC-->
+        <scene sceneID="82k-3y-Y7h">
+            <objects>
+                <viewController storyboardIdentifier="RealTimeReportVC" id="zZy-hF-BIJ" customClass="RealTimeReportVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tcx-28-MfB"/>
+                        <viewControllerLayoutGuide type="bottom" id="QkP-Dq-xff"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1IN-bQ-yRM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRW-GS-ipT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="ud2-ht-Oq0"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCE-gI-0jN">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <inset key="scrollIndicatorInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QkP-Dq-xff" firstAttribute="top" secondItem="gCE-gI-0jN" secondAttribute="bottom" id="61h-Aw-JUW"/>
+                            <constraint firstAttribute="trailing" secondItem="gCE-gI-0jN" secondAttribute="trailing" id="8cA-2D-deP"/>
+                            <constraint firstItem="ZRW-GS-ipT" firstAttribute="top" secondItem="1IN-bQ-yRM" secondAttribute="top" id="L51-gJ-Lb7"/>
+                            <constraint firstAttribute="trailing" secondItem="ZRW-GS-ipT" secondAttribute="trailing" id="Qzp-4c-MOV"/>
+                            <constraint firstItem="gCE-gI-0jN" firstAttribute="leading" secondItem="1IN-bQ-yRM" secondAttribute="leading" id="f4i-vk-Yig"/>
+                            <constraint firstItem="ZRW-GS-ipT" firstAttribute="leading" secondItem="1IN-bQ-yRM" secondAttribute="leading" id="ufe-kF-lmo"/>
+                            <constraint firstItem="gCE-gI-0jN" firstAttribute="top" secondItem="tcx-28-MfB" secondAttribute="bottom" constant="44" id="wub-Rf-52g"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomScrollView" destination="gCE-gI-0jN" id="kEW-h8-jpf"/>
+                        <outlet property="topOfView" destination="ZRW-GS-ipT" id="VdK-as-ShG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ret-O7-Tga" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="83" y="-58"/>
+        </scene>
+    </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

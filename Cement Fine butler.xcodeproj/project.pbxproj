@@ -37,6 +37,10 @@
 		0E3841FA17D47830004B3C87 /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841F917D47830004B3C87 /* SidePanelViewController.m */; };
 		0E3843261821F0D600D58433 /* UITextField+DisableCopyPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3843251821F0D600D58433 /* UITextField+DisableCopyPaste.m */; };
 		0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */; };
+		0E3E64F018E50C7F007A177E /* RealTimeReport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E3E64EF18E50C7F007A177E /* RealTimeReport.storyboard */; };
+		0E3E64F318E54E39007A177E /* RealTimeReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E64F218E54E39007A177E /* RealTimeReportVC.m */; };
+		0E3E64F518E54FDA007A177E /* ProductionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E3E64F418E54FDA007A177E /* ProductionView.xib */; };
+		0E3E64F818E55183007A177E /* ProductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E64F718E55183007A177E /* ProductionView.m */; };
 		0E41837A18AF619400596E40 /* EnergyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E41837918AF619400596E40 /* EnergyStoryboard.storyboard */; };
 		0E41837C18AF61B700596E40 /* EnergyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E41837B18AF61B700596E40 /* EnergyView.xib */; };
 		0E4291EA17EC51F50031ECB6 /* LineBasic2D.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4291E917EC51F50031ECB6 /* LineBasic2D.html */; };
@@ -267,6 +271,12 @@
 		0E3843281821F37700D58433 /* InventoryPassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryPassValueDelegate.h; sourceTree = "<group>"; };
 		0E393E98180E99D30001CB66 /* EquipmentDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentDetailsViewController.h; sourceTree = "<group>"; };
 		0E393E99180E99D30001CB66 /* EquipmentDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentDetailsViewController.m; sourceTree = "<group>"; };
+		0E3E64EF18E50C7F007A177E /* RealTimeReport.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RealTimeReport.storyboard; sourceTree = "<group>"; };
+		0E3E64F118E54E39007A177E /* RealTimeReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealTimeReportVC.h; sourceTree = "<group>"; };
+		0E3E64F218E54E39007A177E /* RealTimeReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealTimeReportVC.m; sourceTree = "<group>"; };
+		0E3E64F418E54FDA007A177E /* ProductionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductionView.xib; sourceTree = "<group>"; };
+		0E3E64F618E55183007A177E /* ProductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionView.h; sourceTree = "<group>"; };
+		0E3E64F718E55183007A177E /* ProductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionView.m; sourceTree = "<group>"; };
 		0E41837918AF619400596E40 /* EnergyStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EnergyStoryboard.storyboard; sourceTree = "<group>"; };
 		0E41837B18AF61B700596E40 /* EnergyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnergyView.xib; sourceTree = "<group>"; };
 		0E4291E917EC51F50031ECB6 /* LineBasic2D.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LineBasic2D.html; sourceTree = "<group>"; };
@@ -742,6 +752,12 @@
 				0E0907C718517F4000905166 /* RealTimeReportLeftController.m */,
 				0E6B027C18682DD700B63321 /* REMenuReportVC.h */,
 				0E6B027D18682DD700B63321 /* REMenuReportVC.m */,
+				0E3E64EF18E50C7F007A177E /* RealTimeReport.storyboard */,
+				0E3E64F118E54E39007A177E /* RealTimeReportVC.h */,
+				0E3E64F218E54E39007A177E /* RealTimeReportVC.m */,
+				0E3E64F418E54FDA007A177E /* ProductionView.xib */,
+				0E3E64F618E55183007A177E /* ProductionView.h */,
+				0E3E64F718E55183007A177E /* ProductionView.m */,
 			);
 			name = "实时报表";
 			sourceTree = "<group>";
@@ -1394,6 +1410,7 @@
 				0EC691DB18B83E210018E718 /* ElecPopupView.xib in Resources */,
 				0E87BAE71808FB8E008F1E13 /* ichart.1.2.1.src.js in Resources */,
 				0E12584018471C2D00959EC1 /* RawMaterialCostViewController.xib in Resources */,
+				0E3E64F518E54FDA007A177E /* ProductionView.xib in Resources */,
 				0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */,
 				472F32EA17CC3C05007E567B /* InfoPlist.strings in Resources */,
 				472F332617CC3CF8007E567B /* mapapi.bundle in Resources */,
@@ -1422,6 +1439,7 @@
 				0EC79411184C764400DBD1AD /* EnergyOfProductViewController.xib in Resources */,
 				0ECA4AAE18AB6869005C998A /* View.xib in Resources */,
 				0EA125B318AC9ACE00700544 /* CostStoryboard.storyboard in Resources */,
+				0E3E64F018E50C7F007A177E /* RealTimeReport.storyboard in Resources */,
 				0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */,
 				0E22B15E17D8191F009695FF /* Column2D.html in Resources */,
 				473FBA6518B7B7D8007BC3CF /* CoalPopupView.xib in Resources */,
@@ -1501,6 +1519,7 @@
 				0EB5157218CD53CF00A025F3 /* EnergyDetailVC.m in Sources */,
 				0E93183018223198001B0372 /* FixcostSubjectChoiceViewController.m in Sources */,
 				0EBDEB5F18B2215E00C0B3B4 /* CostDetailView.m in Sources */,
+				0E3E64F818E55183007A177E /* ProductionView.m in Sources */,
 				476FC87217CC41F200EA5251 /* Cell.m in Sources */,
 				0E6B028A186D106400B63321 /* MoreNavigationController.m in Sources */,
 				0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */,
@@ -1626,6 +1645,7 @@
 				0EE9F609181A6DA3009A4330 /* MoreViewController.m in Sources */,
 				0EC05B20181F896C001BF5B7 /* PullTableView.m in Sources */,
 				0EA5CF341823AEFD0028BE8B /* ProductWeighCell.m in Sources */,
+				0E3E64F318E54E39007A177E /* RealTimeReportVC.m in Sources */,
 				0EBDEB4F18B1A8D200C0B3B4 /* EnergyView.m in Sources */,
 				0E6DA965181A878A007A5B45 /* ElectricityCell.m in Sources */,
 			);

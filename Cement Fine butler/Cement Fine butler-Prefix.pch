@@ -17,9 +17,12 @@
     #import <CocoaLumberjack/DDTTYLogger.h>
     #import <JASidePanels/JASidePanelController.h>
     #import <JASidePanels/UIViewController+JASidePanel.h>
-    #import <ASIHTTPRequest/ASIHTTPRequest.h>
-    #import <ASIHTTPRequest/ASIFormDataRequest.h>
-    #import <ASIHTTPRequest/ASIDownloadCache.h>
+//    #import <ASIHTTPRequest/ASIHTTPRequest.h>
+//    #import <ASIHTTPRequest/ASIFormDataRequest.h>
+//    #import <ASIHTTPRequest/ASIDownloadCache.h>
+    #import <ASIHTTPRequest.h>
+    #import <ASIFormDataRequest.h>
+    #import <ASIDownloadCache.h>
     #import <MBProgressHUD/MBProgressHUD.h>
 //    #import <RMSwipeTableViewCell/RMSwipeTableViewCell.h>
 //    #import <SVProgressHUD/SVProgressHUD.h>

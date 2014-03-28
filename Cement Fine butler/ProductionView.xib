@@ -1,17 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProductionView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVS-Pi-N5e">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzG-PN-C1o">
+                            <rect key="frame" x="24" y="10" width="54" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="今天">
+                                <color key="titleColor" red="0.57647058823529407" green="0.72941176470588232" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showToday:" destination="iN0-l3-epB" eventType="touchUpInside" id="hdY-iO-gFd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apd-X5-OzD">
+                            <rect key="frame" x="97" y="10" width="54" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="昨天">
+                                <color key="titleColor" red="0.57647058819999997" green="0.72941176470000002" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showYesterday:" destination="iN0-l3-epB" eventType="touchUpInside" id="rhk-Ek-jKH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCf-Gq-KoP">
+                            <rect key="frame" x="169" y="10" width="54" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="本月">
+                                <color key="titleColor" red="0.57647058819999997" green="0.72941176470000002" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showCurrentMonth:" destination="iN0-l3-epB" eventType="touchUpInside" id="SPr-oj-zGu"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ln4-ss-QTr">
+                            <rect key="frame" x="241" y="10" width="54" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="本年">
+                                <color key="titleColor" red="0.57647058819999997" green="0.72941176470000002" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showCurrentYear:" destination="iN0-l3-epB" eventType="touchUpInside" id="HPj-pt-wIf"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="W7e-zK-tiR"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbR-eJ-fbS">
+                    <rect key="frame" x="0.0" y="45" width="320" height="523"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </scrollView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="iVS-Pi-N5e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3DN-2M-oZX"/>
+                <constraint firstAttribute="bottom" secondItem="WbR-eJ-fbS" secondAttribute="bottom" id="DKe-xr-3fK"/>
+                <constraint firstItem="iVS-Pi-N5e" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ENy-dL-Rbe"/>
+                <constraint firstAttribute="trailing" secondItem="iVS-Pi-N5e" secondAttribute="trailing" id="FFF-m8-Qoo"/>
+                <constraint firstItem="WbR-eJ-fbS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HNh-xX-cve"/>
+                <constraint firstAttribute="trailing" secondItem="WbR-eJ-fbS" secondAttribute="trailing" id="gEJ-cK-gbP"/>
+                <constraint firstItem="WbR-eJ-fbS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="45" id="sDg-tZ-20H"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="btnCurrentMonth" destination="eCf-Gq-KoP" id="zJ4-UW-Ogt"/>
+                <outlet property="btnCurrentYear" destination="ln4-ss-QTr" id="NHz-MJ-dnT"/>
+                <outlet property="btnToday" destination="EzG-PN-C1o" id="YeG-8Z-nq9"/>
+                <outlet property="btnYestaday" destination="Apd-X5-OzD" id="Wkw-wK-pRZ"/>
+                <outlet property="scrollVBttom" destination="WbR-eJ-fbS" id="yec-vh-8BV"/>
+                <outlet property="viewTop" destination="iVS-Pi-N5e" id="0XI-k2-DQB"/>
+            </connections>
         </view>
     </objects>
 </document>

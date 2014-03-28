@@ -29,10 +29,10 @@
 @property (nonatomic,strong) ElecPopupVC *elecPopupVC;
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) NSDictionary *oldData;//保存临时数据，避免实时刷新时至详情页时数据为空的问题
+@property (nonatomic) int loadTime;
 @end
 
 @implementation EnergyMainVC
-static int loadTime=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,7 +64,7 @@ static int loadTime=0;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if (loadTime!=0) {
+    if (self.loadTime!=0) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];
     }
 }
@@ -159,10 +159,10 @@ static int loadTime=0;
 
 #pragma mark 自定义公共VC
 -(void)responseCode0WithData{
-    if (loadTime==0) {
+    if (self.loadTime==0) {
         [self setupTopView];
     }
-    loadTime++;
+    self.loadTime++;
     [self setupBottomView];
     self.oldData = self.data;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(onTimer:) userInfo:nil repeats:NO];

@@ -9,6 +9,7 @@
 #import "MoreVC.h"
 #import "AboutVC.h"
 #import "CalculateVC.h"
+#import "RealTimeReportVC.h"
 
 @implementation MoreCell
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -97,7 +98,11 @@
     UIViewController *nextViewController;
     switch (indexPath.row) {
         case 0:
-            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+//            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+            {
+                UIStoryboard *realTimeReportStoryboard = [UIStoryboard storyboardWithName:@"RealTimeReport" bundle:nil];
+                nextViewController = [realTimeReportStoryboard instantiateViewControllerWithIdentifier:@"RealTimeReportVC"];
+            }
             break;
         case 1:
 //            nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rawMaterialsCalViewController"];
