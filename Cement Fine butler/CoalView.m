@@ -80,11 +80,11 @@
     if (lossCost>=0) {
         self.lblStatus.text =@"损失 (元)";
         self.rightView.backgroundColor = [Tool hexStringToColor:@"#f58383"];
-        self.lblValue.text = [Tool numberToStringWithFormatterWithNODecimal:[NSNumber numberWithDouble:lossCost]];
+        self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:lossCost]];
     }else{
         self.lblStatus.text =@"节约 (元)";
         self.rightView.backgroundColor = [Tool hexStringToColor:@"#70dea9"];
-        self.lblValue.text = [Tool numberToStringWithFormatterWithNODecimal:[NSNumber numberWithDouble:-lossCost]];
+        self.lblValue.text = [Tool numberToStringWithFormatter:[NSNumber numberWithDouble:-lossCost]];
     }
     self.imgViewType.image = [UIImage imageNamed:@"coal_consumption_icon_new"];
     self.lblSuggestion.text = suggestion;

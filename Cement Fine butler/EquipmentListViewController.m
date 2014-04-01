@@ -49,19 +49,16 @@
         self.edgesForExtendedLayout=UIRectEdgeNone;
     }
     self.navigationItem.title = @"设备列表";
-//    self.rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地图" style:UIBarButtonItemStyleBordered target:self action:@selector(showMapViewController:)];
-    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setFrame:CGRectMake(0, 0, 40, 30)];
-    [backBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"return_click_icon"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
 
     self.currentPage=1;
 //    self.list = [NSMutableArray array];
 //    [self sendRequest:self.currentPage withProgress:YES];
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 5, 0, 0)];
+    if([UITableViewController instancesRespondToSelector:@selector(setSeparatorInset:)]){
+        self.tableView.separatorInset = UIEdgeInsetsZero;
+    }
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     self.tableView.separatorColor = [Tool hexStringToColor:@"#e3e3e3"];
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([EquipmentListCell class]) owner:self options:nil] objectAtIndex:0];

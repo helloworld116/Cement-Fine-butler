@@ -27,6 +27,8 @@
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
 		0E2F040F18812273004119AE /* LossHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F040E18812273004119AE /* LossHeaderView.m */; };
 		0E2F041318813F7A004119AE /* VersionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F041218813F7A004119AE /* VersionService.m */; };
+		0E31E87F18E93E2900729E82 /* InventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E31E87E18E93E2900729E82 /* InventoryView.m */; };
+		0E31E88118E93E5300729E82 /* InventoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E31E88018E93E5300729E82 /* InventoryView.xib */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
 		0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0D17DAB97300C20BF1 /* LoadingView.m */; };
 		0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E38416317D41D3E004B3C87 /* equipment.jpg */; };
@@ -251,6 +253,9 @@
 		0E2F040E18812273004119AE /* LossHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossHeaderView.m; sourceTree = "<group>"; };
 		0E2F041118813F7A004119AE /* VersionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionService.h; sourceTree = "<group>"; };
 		0E2F041218813F7A004119AE /* VersionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionService.m; sourceTree = "<group>"; };
+		0E31E87D18E93E2900729E82 /* InventoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryView.h; sourceTree = "<group>"; };
+		0E31E87E18E93E2900729E82 /* InventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryView.m; sourceTree = "<group>"; };
+		0E31E88018E93E5300729E82 /* InventoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryView.xib; sourceTree = "<group>"; };
 		0E346F0917DAB4E900C20BF1 /* InventoryColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryColumnViewController.h; sourceTree = "<group>"; };
 		0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryColumnViewController.m; sourceTree = "<group>"; };
 		0E346F0C17DAB97300C20BF1 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
@@ -758,6 +763,9 @@
 				0E3E64F418E54FDA007A177E /* ProductionView.xib */,
 				0E3E64F618E55183007A177E /* ProductionView.h */,
 				0E3E64F718E55183007A177E /* ProductionView.m */,
+				0E31E87D18E93E2900729E82 /* InventoryView.h */,
+				0E31E87E18E93E2900729E82 /* InventoryView.m */,
+				0E31E88018E93E5300729E82 /* InventoryView.xib */,
 			);
 			name = "实时报表";
 			sourceTree = "<group>";
@@ -1453,6 +1461,7 @@
 				0EEDBFD1180D67D90010961D /* Calculate.html in Resources */,
 				0E439F5C185550840008C0D8 /* MainStoryboard_iPhone.storyboard in Resources */,
 				0E41837A18AF619400596E40 /* EnergyStoryboard.storyboard in Resources */,
+				0E31E88118E93E5300729E82 /* InventoryView.xib in Resources */,
 				0EBFCA9C1861A6A9004CD92D /* LossCell.xib in Resources */,
 				0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */,
 				0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */,
@@ -1598,6 +1607,7 @@
 				0E5C5059180BF315000B4904 /* RawMaterialsCalCell.m in Sources */,
 				0E931836182239D7001B0372 /* FixcostCell.m in Sources */,
 				0E43ED6118274341006E3A66 /* ProductWeighDetailViewController.m in Sources */,
+				0E31E87F18E93E2900729E82 /* InventoryView.m in Sources */,
 				0E2F040F18812273004119AE /* LossHeaderView.m in Sources */,
 				0EC05B1D181F896C001BF5B7 /* EGORefreshTableHeaderView.m in Sources */,
 				0E5C505C180BF345000B4904 /* RawMaterialsCalViewController.m in Sources */,

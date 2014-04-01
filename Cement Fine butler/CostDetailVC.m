@@ -81,7 +81,7 @@
     
 -(void)setupBottomView:(NSArray *)products{
     CGSize scrollViewSize = self.bottomScrollView.frame.size;
-    CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kTabBarHeight-kStatusBarHeight;
+    CGFloat contentHeight = kScreenHeight-self.topOfView.frame.size.height-self.middleView.frame.size.height-kNavBarHeight-kStatusBarHeight;
     self.bottomScrollView.contentSize = CGSizeMake(scrollViewSize.width*products.count, contentHeight);
 //    costDetailView;
     for (int i=0; i<products.count; i++) {

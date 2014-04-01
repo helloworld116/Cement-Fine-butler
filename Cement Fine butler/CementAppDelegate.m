@@ -170,10 +170,13 @@
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_bar"]];
-    [[UITabBar appearance] setTintColor:[Tool hexStringToColor:@"#8899a6"]];
+//    [[UITabBar appearance] setTintColor:[Tool hexStringToColor:@"#8899a6"]];
     //文字未选中和选中时的颜色
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#8899a6"], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#ffffff"], UITextAttributeTextColor, nil] forState:UIControlStateHighlighted];
+//    8899a6
+//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#ffffff"], UITextAttributeTextColor, nil] forState:UIControlStateHighlighted];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#ffffff"], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    
     //图片
     [tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
     [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab_bar_click"]];

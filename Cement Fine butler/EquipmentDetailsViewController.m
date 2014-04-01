@@ -51,6 +51,9 @@
     UIView *bview = [[UIView alloc] init];
     bview.backgroundColor = [Tool hexStringToColor:@"#f3f3f3"];
     self.tableView.backgroundView = bview;
+    if([UITableViewController instancesRespondToSelector:@selector(setSeparatorInset:)]){
+        self.tableView.separatorInset = UIEdgeInsetsZero;
+    }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_icon"] highlightedImage:[UIImage imageNamed:@"return_click_icon"] target:self action:@selector(pop:)];
     
     UIView *rightBarItemView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 44)];

@@ -178,6 +178,7 @@
 
 -(IBAction)showDetail:(id)sender {
     CostDetailVC *nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CostDetailVC"];
+    nextVC.hidesBottomBarWhenPushed = YES;
     nextVC.date = self.btnDate.currentTitle;
     nextVC.timeType = self.timeType;
     [self.navigationController pushViewController:nextVC animated:YES];
@@ -219,7 +220,7 @@
     if ([value doubleValue]&&[value doubleValue]!=[Tool doubleValue:[[[self.data objectForKey:@"products"] objectAtIndex:self.selectIndex] objectForKey:@"customCost"]]) {
         //1更新本地
         NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
-        NSMutableArray *newProducts = [NSMutableArray arrayWithArray:[self.data objectForKey:@"products"]];
+        NSMutableArray *newProducts = [NSMutableArray arrayWithArray:[self.oldData objectForKey:@"products"]];
         NSMutableDictionary *product = [NSMutableDictionary dictionaryWithDictionary:[[newData objectForKey:@"products"] objectAtIndex:self.selectIndex]];
         
         double newProductTotalLoss = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]];

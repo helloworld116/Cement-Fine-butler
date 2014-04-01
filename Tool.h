@@ -67,5 +67,5 @@
 
 +(NSString *)numberToStringWithFormatter:(NSNumber *)number;
 
-+(NSString *)numberToStringWithFormatterWithNODecimal:(NSNumber *)number;
+//+(NSString *)numberToStringWithFnumberToStringWithFormatterormatterWithNODecimal:(NSNumber *)number;
 @end

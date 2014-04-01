@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="InventoryView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDe-hw-XAX">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWk-lr-ahm">
+                            <rect key="frame" x="40" y="12" width="8" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="report_left">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="goLeft:" destination="iN0-l3-epB" eventType="touchUpInside" id="YiN-X7-5lL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTZ-pU-Wap">
+                            <rect key="frame" x="272" y="12" width="8" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="report_right">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="goRight:" destination="iN0-l3-epB" eventType="touchUpInside" id="P6J-r5-l7O"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yz-Ld-byO">
+                            <rect key="frame" x="140" y="13" width="40" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.28627450980392155" green="0.73333333333333328" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="bWk-lr-ahm" firstAttribute="leading" secondItem="CDe-hw-XAX" secondAttribute="leading" constant="40" id="4Zx-6C-RCr"/>
+                        <constraint firstItem="bWk-lr-ahm" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="12" id="BnT-7u-oyr"/>
+                        <constraint firstItem="vTZ-pU-Wap" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="12" id="DJ8-PK-W0x"/>
+                        <constraint firstAttribute="bottom" secondItem="vTZ-pU-Wap" secondAttribute="bottom" constant="12" id="DYs-Mj-Tun"/>
+                        <constraint firstAttribute="bottom" secondItem="bWk-lr-ahm" secondAttribute="bottom" constant="12" id="IZS-bq-zri"/>
+                        <constraint firstAttribute="bottom" secondItem="0Yz-Ld-byO" secondAttribute="bottom" constant="13" id="VKw-0j-Rgh"/>
+                        <constraint firstItem="0Yz-Ld-byO" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="13" id="r7f-wq-Syb"/>
+                        <constraint firstAttribute="trailing" secondItem="vTZ-pU-Wap" secondAttribute="trailing" constant="40" id="sgU-nI-xuv"/>
+                        <constraint firstAttribute="centerX" secondItem="0Yz-Ld-byO" secondAttribute="centerX" id="uxd-Wr-oQG"/>
+                        <constraint firstAttribute="height" constant="46" id="xUs-5j-wNw"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bo7-nN-Ozw">
+                    <rect key="frame" x="0.0" y="46" width="320" height="522"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="CDe-hw-XAX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ewp-6I-Gsl"/>
+                <constraint firstItem="bo7-nN-Ozw" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="bottom" id="Ffm-o7-TWC"/>
+                <constraint firstAttribute="bottom" secondItem="bo7-nN-Ozw" secondAttribute="bottom" id="MHB-Q9-Em5"/>
+                <constraint firstAttribute="trailing" secondItem="CDe-hw-XAX" secondAttribute="trailing" id="Tzm-2i-G4Q"/>
+                <constraint firstItem="bo7-nN-Ozw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fqs-qw-NtV"/>
+                <constraint firstAttribute="trailing" secondItem="bo7-nN-Ozw" secondAttribute="trailing" id="vUf-ML-YrH"/>
+                <constraint firstItem="CDe-hw-XAX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zuB-hG-6pc"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="btnLeft" destination="bWk-lr-ahm" id="yXN-6M-YPj"/>
+                <outlet property="btnRight" destination="vTZ-pU-Wap" id="qLk-0F-bZx"/>
+                <outlet property="lblTypeName" destination="0Yz-Ld-byO" id="GR2-ug-324"/>
+                <outlet property="scrollVBttom" destination="bo7-nN-Ozw" id="PjD-UX-WF5"/>
+                <outlet property="viewTop" destination="CDe-hw-XAX" id="hnc-oN-PD2"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="report_left" width="8" height="16"/>
+        <image name="report_right" width="8" height="16"/>
+    </resources>
+</document>

@@ -37,13 +37,14 @@
                     showpercent:false,
                     decimalsnum:0,
                     bar_height:30,
+//                     background_color : '#000000',
                     width : config.width,
                     height : config.height,
                     label:{color:'#969696'},
                     coordinate:{
-                        height:'90%',
+                        height:'98%',
                         width:'75%',
-                        offsety:10,
+                        offsety:15,
                         offsetx:10,
                         axis:{
                             width:[1,0,0,1],
@@ -83,7 +84,7 @@
                     chart.target.textAlign('start')
                     .textBaseline('middle')
                     .textFont('10px Verdana')
-                    .fillText('(吨)',x-25,y-5,false,'#969696',false,10);
+                    .fillText('(吨)',x-25,y,false,'#969696',false,10);
                   }
                 }));
                 chart.draw();

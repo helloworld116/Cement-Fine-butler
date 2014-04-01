@@ -9,12 +9,14 @@
 #import "RealTimeReportVC.h"
 #import <HMSegmentedControl.h>
 #import "ProductionView.h"
+#import "InventoryView.h"
 
 @interface RealTimeReportVC ()<UIScrollViewDelegate>
 @property (nonatomic,strong) IBOutlet UIView *topOfView;
 @property (nonatomic,strong) HMSegmentedControl *segmented;
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
 @property (nonatomic,strong) ProductionView *productView;
+@property (nonatomic,strong) InventoryView *inventoryView;
 @end
 
 @implementation RealTimeReportVC
@@ -40,7 +42,10 @@
     CGFloat topViewHeight = CGRectGetHeight(self.topOfView.frame);
     CGFloat scrollViewHeight = kScreenHeight-kStatusBarHeight-kNavBarHeight-topViewHeight;
     CGFloat viewWidth = CGRectGetWidth(self.view.frame);
+    self.bottomScrollView.delegate = self;
+    self.bottomScrollView.frame = CGRectMake(0, topViewHeight, kScreenWidth, scrollViewHeight);
     self.bottomScrollView.contentSize = CGSizeMake(viewWidth*2, scrollViewHeight);
+    self.bottomScrollView.bounces = NO;
     
     //setView
     [self setupTopView];
@@ -76,26 +81,33 @@
     [self.topOfView addSubview:self.segmented];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 -(void)setupBottomView{
-    if (!_productView) {
-        _productView = [[ProductionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.bottomScrollView.contentSize.height)];
-        [self.bottomScrollView addSubview:_productView];
+    if (CGPointEqualToPoint(self.bottomScrollView.contentOffset, CGPointMake(0, 0))) {
+        if (!_productView) {
+            _productView = [[ProductionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.bottomScrollView.contentSize.height)];
+            [self.bottomScrollView addSubview:_productView];
+        }
+    }else{
+        if (!_inventoryView) {
+            _inventoryView = [[InventoryView alloc] initWithFrame:CGRectMake(kScreenWidth, 0, kScreenWidth, self.bottomScrollView.contentSize.height)];
+            [self.bottomScrollView addSubview:_inventoryView];
+        }
     }
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat pageWidth = scrollView.frame.size.width;
+    NSInteger page = scrollView.contentOffset.x / pageWidth;
+    self.bottomScrollView.contentOffset = CGPointMake(page*kScreenWidth, 0);
+    [self.segmented setSelectedSegmentIndex:page animated:YES];
+    [self setupBottomView];
+}
 
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
     self.bottomScrollView.contentOffset = CGPointMake(segmentedControl.selectedSegmentIndex*kScreenWidth, 0);
+    [self setupBottomView];
 }
 
 -(void)pop:(id)sender{

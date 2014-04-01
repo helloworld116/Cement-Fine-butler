@@ -42,6 +42,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"更多";
+    if([UITableViewController instancesRespondToSelector:@selector(setSeparatorInset:)]){
+        self.tableView.separatorInset = UIEdgeInsetsZero;
+    }
     self.tableView.separatorColor = [Tool hexStringToColor:@"#d3d5d7"];
     
 }
@@ -124,6 +127,11 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
+    view.backgroundColor = [Tool hexStringToColor:@"#d3d5d7"];
     return view;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 1.0f;
 }
 @end
