@@ -41,25 +41,25 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITabBarController *tabbarController = (UITabBarController *)[self.sidePanelController centerPanel];
-    NSArray *viewControllers = tabbarController.viewControllers;
-    NSMutableArray *newViewControllers = [NSMutableArray arrayWithArray:viewControllers];
-    UIViewController *viewController = [viewControllers objectAtIndex:2];
-    if (indexPath.row==0) {
-        ProductColumnViewController *productColumnVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
-        UINavigationController *productColumnNC = [[UINavigationController alloc] initWithRootViewController:productColumnVC];
-        productColumnNC.tabBarItem.image = viewController.tabBarItem.image;
-        productColumnNC.tabBarItem.title = viewController.tabBarItem.title;
-        [newViewControllers replaceObjectAtIndex:2 withObject:productColumnNC];
-    }else if (indexPath.row==1){
-        InventoryColumnViewController *inventoryColumnVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
-        UINavigationController *inventoryColumnNC = [[UINavigationController alloc] initWithRootViewController:inventoryColumnVC];
-        inventoryColumnNC.tabBarItem.image = viewController.tabBarItem.image;
-        inventoryColumnNC.tabBarItem.title = viewController.tabBarItem.title;
-        [newViewControllers replaceObjectAtIndex:2 withObject:inventoryColumnNC];
-    }
-    [tabbarController setViewControllers:newViewControllers];
-    [self.sidePanelController showCenterPanelAnimated:YES];
+//    UITabBarController *tabbarController = (UITabBarController *)[self.sidePanelController centerPanel];
+//    NSArray *viewControllers = tabbarController.viewControllers;
+//    NSMutableArray *newViewControllers = [NSMutableArray arrayWithArray:viewControllers];
+//    UIViewController *viewController = [viewControllers objectAtIndex:2];
+//    if (indexPath.row==0) {
+//        ProductColumnViewController *productColumnVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"productColumnViewController"];
+//        UINavigationController *productColumnNC = [[UINavigationController alloc] initWithRootViewController:productColumnVC];
+//        productColumnNC.tabBarItem.image = viewController.tabBarItem.image;
+//        productColumnNC.tabBarItem.title = viewController.tabBarItem.title;
+//        [newViewControllers replaceObjectAtIndex:2 withObject:productColumnNC];
+//    }else if (indexPath.row==1){
+//        InventoryColumnViewController *inventoryColumnVC = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"inventoryColumnViewController"];
+//        UINavigationController *inventoryColumnNC = [[UINavigationController alloc] initWithRootViewController:inventoryColumnVC];
+//        inventoryColumnNC.tabBarItem.image = viewController.tabBarItem.image;
+//        inventoryColumnNC.tabBarItem.title = viewController.tabBarItem.title;
+//        [newViewControllers replaceObjectAtIndex:2 withObject:inventoryColumnNC];
+//    }
+//    [tabbarController setViewControllers:newViewControllers];
+//    [self.sidePanelController showCenterPanelAnimated:YES];
 }
 
 @end

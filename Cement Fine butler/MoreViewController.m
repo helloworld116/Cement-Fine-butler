@@ -53,8 +53,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.sidePanelController setRightPanel:nil];
-    [self.sidePanelController setLeftPanel:nil];
+//    [self.sidePanelController setRightPanel:nil];
+//    [self.sidePanelController setLeftPanel:nil];
 }
 
 - (void)didReceiveMemoryWarning

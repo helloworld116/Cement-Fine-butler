@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4AC204B65A6C443C93C2ED34"
+               BlueprintIdentifier = "6AAE81A943944179A5FCC1E1"
                BuildableName = "libPods-KxMenu.a"
                BlueprintName = "Pods-KxMenu"
                ReferencedContainer = "container:Pods.xcodeproj">

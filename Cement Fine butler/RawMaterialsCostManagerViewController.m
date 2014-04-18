@@ -305,7 +305,7 @@
 #pragma mark end webviewDelegate
 
 - (void)showSearch:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 - (void)moreAction:(id)sender {

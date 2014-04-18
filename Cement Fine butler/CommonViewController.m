@@ -42,9 +42,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.sidePanelController setRightPanel:self.rightVC];
-    [self.sidePanelController setLeftPanel:self.leftVC];
-    [self.sidePanelController setLeftFixedWidth:140.f];
+//    [self.sidePanelController setRightPanel:self.rightVC];
+//    [self.sidePanelController setLeftPanel:self.leftVC];
+//    [self.sidePanelController setLeftFixedWidth:140.f];
     //观察查询条件修改
     if (self.rightVC) {
         [self.rightVC addObserver:self forKeyPath:@"searchCondition" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
@@ -62,19 +62,19 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     //移除观察条件
-    if (self.rightVC) {
-        [self.rightVC removeObserver:self forKeyPath:@"searchCondition"];
-        TimeTableView *timeTableView = self.rightVC.timeTableView;
-        if (timeTableView) {
-            int timeSelectIndex = [timeTableView indexPathForSelectedRow].row;
-            if (timeSelectIndex!=4) {
-                [self.sidePanelController setRightPanel:nil];
-            }
-        }else{
-            [self.sidePanelController setRightPanel:nil];
-        }
-    }
-    [self.sidePanelController setLeftPanel:nil];
+//    if (self.rightVC) {
+//        [self.rightVC removeObserver:self forKeyPath:@"searchCondition"];
+//        TimeTableView *timeTableView = self.rightVC.timeTableView;
+//        if (timeTableView) {
+//            int timeSelectIndex = [timeTableView indexPathForSelectedRow].row;
+//            if (timeSelectIndex!=4) {
+//                [self.sidePanelController setRightPanel:nil];
+//            }
+//        }else{
+//            [self.sidePanelController setRightPanel:nil];
+//        }
+//    }
+//    [self.sidePanelController setLeftPanel:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

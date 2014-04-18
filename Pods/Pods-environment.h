@@ -76,13 +76,7 @@
 #define COCOAPODS_POD_AVAILABLE_Harpy
 #define COCOAPODS_VERSION_MAJOR_Harpy 2
 #define COCOAPODS_VERSION_MINOR_Harpy 5
-#define COCOAPODS_VERSION_PATCH_Harpy 2
-
-// JASidePanels
-#define COCOAPODS_POD_AVAILABLE_JASidePanels
-#define COCOAPODS_VERSION_MAJOR_JASidePanels 1
-#define COCOAPODS_VERSION_MINOR_JASidePanels 3
-#define COCOAPODS_VERSION_PATCH_JASidePanels 2
+#define COCOAPODS_VERSION_PATCH_Harpy 4
 
 // KxMenu
 #define COCOAPODS_POD_AVAILABLE_KxMenu
@@ -102,11 +96,17 @@
 #define COCOAPODS_VERSION_MINOR_MJPopupViewController 4
 #define COCOAPODS_VERSION_PATCH_MJPopupViewController 0
 
+// MYBlurIntroductionView
+#define COCOAPODS_POD_AVAILABLE_MYBlurIntroductionView
+#define COCOAPODS_VERSION_MAJOR_MYBlurIntroductionView 1
+#define COCOAPODS_VERSION_MINOR_MYBlurIntroductionView 0
+#define COCOAPODS_VERSION_PATCH_MYBlurIntroductionView 3
+
 // PPiAwesomeButton
 #define COCOAPODS_POD_AVAILABLE_PPiAwesomeButton
 #define COCOAPODS_VERSION_MAJOR_PPiAwesomeButton 1
-#define COCOAPODS_VERSION_MINOR_PPiAwesomeButton 2
-#define COCOAPODS_VERSION_PATCH_PPiAwesomeButton 9
+#define COCOAPODS_VERSION_MINOR_PPiAwesomeButton 4
+#define COCOAPODS_VERSION_PATCH_PPiAwesomeButton 1
 
 // PPiFlatSegmentedControl
 #define COCOAPODS_POD_AVAILABLE_PPiFlatSegmentedControl
@@ -132,21 +132,21 @@
 #define COCOAPODS_VERSION_MINOR_Reachability 1
 #define COCOAPODS_VERSION_PATCH_Reachability 1
 
-// SVProgressHUD
-#define COCOAPODS_POD_AVAILABLE_SVProgressHUD
-#define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
-#define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
-#define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
-
 // SWTableViewCell
 #define COCOAPODS_POD_AVAILABLE_SWTableViewCell
 #define COCOAPODS_VERSION_MAJOR_SWTableViewCell 0
 #define COCOAPODS_VERSION_MINOR_SWTableViewCell 2
-#define COCOAPODS_VERSION_PATCH_SWTableViewCell 4
+#define COCOAPODS_VERSION_PATCH_SWTableViewCell 7
 
 // UICountingLabel
 #define COCOAPODS_POD_AVAILABLE_UICountingLabel
 #define COCOAPODS_VERSION_MAJOR_UICountingLabel 1
-#define COCOAPODS_VERSION_MINOR_UICountingLabel 0
+#define COCOAPODS_VERSION_MINOR_UICountingLabel 1
 #define COCOAPODS_VERSION_PATCH_UICountingLabel 0
+
+// UIDevice-SupportedDevices
+#define COCOAPODS_POD_AVAILABLE_UIDevice_SupportedDevices
+#define COCOAPODS_VERSION_MAJOR_UIDevice_SupportedDevices 1
+#define COCOAPODS_VERSION_MINOR_UIDevice_SupportedDevices 0
+#define COCOAPODS_VERSION_PATCH_UIDevice_SupportedDevices 1
 

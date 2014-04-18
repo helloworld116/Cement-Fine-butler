@@ -8,6 +8,7 @@
 
 #import "CostDetailVC.h"
 #import "CostDetailView.h"
+#import "UIWebView+Clean.h"
 
 @interface CostDetailVC ()<UIScrollViewDelegate>
 //顶部控件
@@ -48,6 +49,15 @@
     self.URL = kCostDetail;
     [self sendRequest];
     self.costDetailViews = [@[] mutableCopy];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    for (CostDetailView *detailView in self.costDetailViews ) {
+        [detailView.webView cleanForDealloc];
+        detailView.webView = nil;
+    }
+    [self.costDetailViews removeAllObjects];
 }
 
 -(void)setupTopView{

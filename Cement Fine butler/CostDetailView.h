@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CostDetailView : UIView
+@property (nonatomic,strong) IBOutlet UIWebView *webView;
 -(void)setupValue:(NSDictionary *)product withDate:(NSString *)date;
 @end

@@ -5,8 +5,8 @@
 ### About
 **Harpy** is a utility that checks a user's currently installed version of your iOS application against the version that is currently available in the App Store. If a new version is available, an instance of UIAlertView is presented to the user informing them of the newer version, and giving them the option to update the application.
 
-### Changelog (v2.5.2)
-- Updated Slovenian Localization
+### Changelog (v2.5.4)
+- Minor code change
 
 ### Features
 - Cocoapods Support
@@ -21,7 +21,7 @@
 - The **left picture** forces the user to update the app.
 - The **center picture** gives the user the option to update the app.
 - The **right picture** gives the user the option to skip the current update.
-- These options are controlled by the `HarpyAlertType` struct that is found in `Harpy.h`.
+- These options are controlled by the `HarpyAlertType` typede that is found in `Harpy.h`.
  
 ![Forced Update](https://github.com/ArtSabintsev/Harpy/blob/master/samplePictures/picForcedUpdate.png?raw=true "Forced Update") 
 ![Optional Update](https://github.com/ArtSabintsev/Harpy/blob/master/samplePictures/picOptionalUpdate.png?raw=true "Optional Update")
@@ -36,7 +36,7 @@ pod 'Harpy'
 
 #### Manual Installation
 
-Copy the 'Harpy' folder into your Xcode project. It contains the Harpy.h and Harpy.m files.
+Copy the 'Harpy' folder into your Xcode project. It contains the Harpy.h and Harpy.m files. Also, there's a dependency on [UIDevice+SupportedDevices](https://github.com/ArtSabintsev/UIDevice-SupportedDevices), so you'll need to download that library as well, if you don't use Cocoapods.
 
 ### Setup Instructions	
 1. Import **Harpy.h** into your AppDelegate or Pre-Compiler Header (.pch)
@@ -132,52 +132,7 @@ Every new release of iOS deprecates support for one or more older device models.
 A new helper utility, [UIDevice+SupportedDevices](https://github.com/ArtSabintsev/UIDevice-SupportedDevices), came out of this discussion and is included with Harpy.
 
 ### Important Note on App Store Submissions
-- The App Store reviewer will **not** see the alert. 
-
-### Project Contributors
-- **v1.0.1**
-	- [Pius Uzamere](https://github.com/pius)
-- **v1.5.0**
-	- [Aaron Brager](http://www.github.com/getaaron)
-- **v2.0.0**
-	- [Claas Lange](https://github.com/claaslange)
-	- [Josh T. Brown](https://github.com/joshuatbrown)
-- **v2.3.0**
-	- [David Keegan](https://github.com/kgn)
-- **v2.3.1**
-	- [Rui Perese](https://github.com/RuiAAPeres)
-- **v2.3.2**
-	- [Mark Rickert](https://github.com/markrickert)
-- **v2.3.3**
-	- [Erick](https://github.com/dexcell0)
-- **v2.3.4**
-	- [Ercillagorka](https://github.com/ercillagorka)
-- **v2.3.5**
-	- [TrentW](https://github.com/trentw)
-- **v2.3.6**
-	- [Jamie Ly](http://github,com/jamiely)
-- **v2.3.8**
-	- [Thomas Hempel](https://github.com/thomashempel)
-- **v2.4.0**
-	- [Aaron Brager](http://www.github.com/getaaron)
-	- [Borut Tomažin](https://github.com/borut-t)
-- **v2.5.0**
-	- [Borut Tomažin](https://github.com/borut-t)
-- **v2.5.1**
-	- [Bertie Liu](https://github.com/https://github.com/aceisScope)
-- **v2.5.2**
-	- [Borut Tomažin](https://github.com/borut-t)
-	
+The App Store reviewer will **not** see the alert. 
 
 ### Created and maintained by
-- [Arthur Ariel Sabintsev](http://www.sabintsev.com/) 
-
-### License
-The MIT License (MIT)
-Copyright (c) 2012-2014 Arthur Ariel Sabintsev
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+[Arthur Ariel Sabintsev](http://www.sabintsev.com/) 

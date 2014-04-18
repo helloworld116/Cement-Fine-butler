@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LastIntroductionPanel : UIView
-
+@interface LastIntroductionPanel : MYIntroductionPanel
+@property (nonatomic,strong) IBOutlet UIButton *btn;
+- (IBAction)didPressEnable:(id)sender;
 @end

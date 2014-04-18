@@ -1,5 +1,8 @@
 #import "UICountingLabel.h"
 
+#if !__has_feature(objc_arc)
+#error UICountingLabel is ARC only. Either turn on ARC for the project or use -fobjc-arc flag
+#endif
 
 #pragma mark - UILabelCounter
 
@@ -91,7 +94,7 @@
 @property NSTimeInterval totalTime;
 @property float easingRate;
 
-@property (nonatomic, retain) UILabelCounter* counter;
+@property (nonatomic, strong) UILabelCounter* counter;
 
 @end
 
@@ -104,6 +107,12 @@
 
 -(void)countFrom:(float)startValue to:(float)endValue withDuration:(NSTimeInterval)duration
 {
+    if(duration == 0.0){
+        // No animation
+        [self setTextValue:endValue];
+        [self runCompletionBlock];
+        return;
+    }
     
     self.easingRate = 3.0f;
     self.startingValue = startValue;
@@ -134,7 +143,7 @@
     self.counter.rate = 3.0f;
     
     NSTimer* timer = [NSTimer timerWithTimeInterval:(1.0f/30.0f) target:self selector:@selector(updateValue:) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 -(void)updateValue:(NSTimer*)timer
@@ -155,7 +164,20 @@
     float value =  self.startingValue +  (updateVal * (self.destinationValue - self.startingValue));
     
     
-    if(self.formatBlock != nil)
+    [self setTextValue:value];
+    
+    if(self.progress == self.totalTime)
+    {
+        [self runCompletionBlock];
+    }
+}
+
+- (void)setTextValue:(float)value
+{
+    if (self.attributedFormatBlock != nil) {
+        self.attributedText = self.attributedFormatBlock(value);
+    }
+    else if(self.formatBlock != nil)
     {
         self.text = self.formatBlock(value);
     }
@@ -171,8 +193,11 @@
             self.text = [NSString stringWithFormat:self.format,value];
         }
     }
+}
 
-	if(self.progress == self.totalTime && self.completionBlock != nil)
+- (void)runCompletionBlock
+{
+	if(self.completionBlock != nil)
 	{
 		self.completionBlock();
 		self.completionBlock = nil;

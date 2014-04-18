@@ -8,7 +8,7 @@
 
 #import "CostDetailView.h"
 @interface CostDetailView()<UIWebViewDelegate>
-@property (nonatomic,strong) IBOutlet UIWebView *webView;
+
 @property (nonatomic,strong) IBOutlet UILabel *lblFinancialPrice;
 @property (nonatomic,strong) IBOutlet UILabel *lblCurrentPrice;
 @property (nonatomic,strong) IBOutlet UILabel *lblPlanPrice;

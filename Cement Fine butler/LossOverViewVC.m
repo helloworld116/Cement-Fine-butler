@@ -26,10 +26,12 @@
 @property (nonatomic) double totalLoss;
 @property (nonatomic,strong) NSArray *sortLossData;
 @property (nonatomic,strong) DropDownView *dropDownView;
+
+//加载次数
+@property (nonatomic) int loadTimes;
 @end
 
 @implementation LossOverViewVC
-static int loadTimes=0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,6 +73,7 @@ static int loadTimes=0;
 //    self.rightVC.conditions = @[@{kCondition_Time:kCondition_Time_Array}];
 //    self.rightVC.currentSelectDict = @{kCondition_Time:@2};
     self.URL = kLoss;
+    self.loadTimes=0;
     [self sendRequest];
 }
 
@@ -205,10 +208,10 @@ static int loadTimes=0;
     NSDictionary *overview = [self.data objectForKey:@"overview"];
     NSArray *lossData = [self.data objectForKey:@"lossData"];
     if (overview&&lossData) {
-        if (loadTimes==0) {
+        if (self.loadTimes==0) {
             self.headerView.hidden = NO;
         }
-        loadTimes++;
+        self.loadTimes++;
         self.totalLoss = [Tool doubleValue:[overview objectForKey:@"totalLoss"]];
         [self.headerView.lblTotalLoss startFrom:0 end:self.totalLoss];
         if ([lossData count]) {
@@ -243,7 +246,7 @@ static int loadTimes=0;
 
 #pragma mark
 -(void)showSearch:(id)sender{
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 #pragma mark 查询条件发生更改

@@ -6,8 +6,7 @@
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "JASidePanelController.h"
-
-@interface SidePanelViewController : JASidePanelController
-
+//#import "JASidePanelController.h"
+//@interface SidePanelViewController : JASidePanelController
+@interface SidePanelViewController
 @end

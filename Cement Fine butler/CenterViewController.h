@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 河南丰博自动化有限公司. All rights reserved.
 //
 
-#import "JASidePanelController.h"
+//#import "JASidePanelController.h"
 
 @interface CenterViewController : UIViewController
 

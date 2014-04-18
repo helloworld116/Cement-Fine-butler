@@ -48,7 +48,7 @@ static char separationKey;
     self=[super initWithFrame:frame];
     if(self){
         [self setIsAwesome:YES];
-        
+
         [self setButtonText:text];
         [self setButtonIconString:iconString];
         [self setTextAttributes:attributes forUIControlState:UIControlStateNormal];
@@ -64,7 +64,7 @@ static char separationKey;
     [button setTextAttributes:attributes forUIControlState:UIControlStateNormal];
     [button setIconPosition:position];
     [button setIsAwesome:YES];
-    
+
     return button;
 
 }
@@ -73,12 +73,12 @@ static char separationKey;
     if([self isAwesome]){
         //Mutable String to set to the button
         NSMutableAttributedString *mutableString=[[NSMutableAttributedString alloc] init];
-        
+
         //Mutable String of text
         NSMutableAttributedString *mutableStringText=[[NSMutableAttributedString alloc] initWithString:@""];
         if([self buttonText])
             [mutableStringText appendAttributedString:[[NSAttributedString alloc] initWithString:[self buttonText]]];
-        
+
         //Mutable String of icon
         NSMutableAttributedString *mutableStringIcon=[[NSMutableAttributedString alloc] initWithString:@""];
         if([self buttonIconString]){
@@ -87,16 +87,16 @@ static char separationKey;
         else if([self buttonIcon]){
             [mutableStringIcon appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString fontAwesomeIconStringForIconIdentifier:[self buttonIcon]]]];
         }
-    
+
         //Setting color
         UIColor *color=[self backgroundColors][@(state)];
         if(!color)
             color=[self backgroundColors][@(UIControlStateNormal)];
-        
+
         if(color){
             [self setBackgroundColor:color];
         }
-        
+
         //Setting attributes
         NSMutableDictionary *textAttributes=[[self textAttributes][@(state)] mutableCopy];
         if(!textAttributes)
@@ -104,7 +104,7 @@ static char separationKey;
         if(textAttributes){
             //Setting attributes to text
             [mutableStringText setAttributes:textAttributes range:NSMakeRange(0, [[self buttonText] length])];
-            
+
             //Setting attributes to icon
             if([self buttonIcon] || [self buttonIconString]){
                 UIFont *textFont=(UIFont*)textAttributes[NSFontAttributeName];
@@ -114,31 +114,10 @@ static char separationKey;
                 }else{
                     iconAttributes[NSFontAttributeName]=[UIFont fontWithName:@"fontawesome" size:textFont.pointSize];
                 }
-                //Calculating offset
-                CGFloat textHeight = [[self buttonText] sizeWithAttributes:textAttributes].height;
-                CGFloat iconHeight = 0.0f;
-                if([self buttonIconString]){
-                    iconHeight = [[self buttonIconString]sizeWithAttributes:iconAttributes].height;
-                }
-                else if([self buttonIcon]){
-                    iconHeight = [[NSString fontAwesomeIconStringForIconIdentifier:[self buttonIcon]] sizeWithAttributes:iconAttributes].height;
-
-                }
-                if(iconHeight>textHeight){
-                    textAttributes[NSBaselineOffsetAttributeName]=@((iconHeight-textHeight)/4);
-                    [mutableStringText setAttributes:textAttributes range:NSMakeRange(0, [[self buttonText] length])];
-                    iconAttributes[NSBaselineOffsetAttributeName]=@(0);
-
-                }else{
-                    textAttributes[NSBaselineOffsetAttributeName]=@(0);
-                    [mutableStringText setAttributes:textAttributes range:NSMakeRange(0, [[self buttonText] length])];
-                    iconAttributes[NSBaselineOffsetAttributeName]=@((textHeight-iconHeight)/4);
-                }
-                
                 [mutableStringIcon setAttributes:iconAttributes range:NSMakeRange(0, [mutableStringIcon length])];
             }
         }
-        
+
         //Separation
         NSMutableString *separationString=[NSMutableString stringWithFormat:@""];
         if([self separation]){
@@ -147,7 +126,7 @@ static char separationKey;
                 [separationString appendString:@" "];
             }
         }
-        
+
         //Concatenating
         if([self iconPosition]==IconPositionLeft){
             [mutableString appendAttributedString:mutableStringIcon];
@@ -160,8 +139,8 @@ static char separationKey;
             [mutableString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:separationString]];
             [mutableString appendAttributedString:mutableStringIcon];
         }
-        
-        
+
+
         //Setting to the button
         [self setAttributedTitle:mutableString forState:UIControlStateNormal];
     }
@@ -200,11 +179,11 @@ static char separationKey;
         textAttributes=[[NSMutableDictionary alloc] init];
         objc_setAssociatedObject(self, &textAttributesKey,textAttributes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    
+
     //Setting attributes
     if(attributes)
         textAttributes[@(state)]=attributes;
-    
+
     [self updateButtonFormatForUIControlState:UIControlStateNormal];
 }
 - (NSMutableDictionary*) textAttributes {
@@ -217,11 +196,11 @@ static char separationKey;
         backgroundColors=[[NSMutableDictionary alloc] init];
         objc_setAssociatedObject(self, &backgroundColorsKey,backgroundColors, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    
+
     //Setting attributes
     if(color)
         backgroundColors[@(state)]=color;
-    
+
     [self updateButtonFormatForUIControlState:UIControlStateNormal];
 }
 - (NSMutableDictionary*) backgroundColors {
@@ -273,5 +252,15 @@ static char separationKey;
 }
 - (BOOL) isAwesome {
     return objc_getAssociatedObject(self, &isAwesomeKey)?YES:NO;
+}
+
+// override enabled
+-(void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    if (enabled) {
+        [self updateButtonFormatForUIControlState:UIControlStateNormal];
+    } else {
+        [self updateButtonFormatForUIControlState:UIControlStateDisabled];
+    }
 }
 @end

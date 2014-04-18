@@ -31,13 +31,13 @@
 }
 
 - (void)setBackground{
-    self.backgroundImgView.image = [UIImage imageNamed:@"Basemap"];
+    self.backgroundImgView.image = [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Basemap" ofType:@".png"]];
     self.continerView.backgroundColor = [UIColor clearColor];
-    self.titleImgView.image = [UIImage imageNamed:@"icon_03"];
-    self.username.background = [UIImage imageNamed:@"username_box"];
-    self.password.background = [UIImage imageNamed:@"key_box"];
-    [self.btnLogin setBackgroundImage:[UIImage imageNamed:@"login_box"] forState:UIControlStateNormal];
-    [self.btnLogin setBackgroundImage:[UIImage imageNamed:@"login_click_box"] forState:UIControlStateHighlighted];
+    self.titleImgView.image = [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_03" ofType:@".png"]];
+    self.username.background = [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"username_box" ofType:@".png"]];
+    self.password.background = [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"key_box" ofType:@".png"]];
+    [self.btnLogin setBackgroundImage:[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"login_box" ofType:@".png"]] forState:UIControlStateNormal];
+    [self.btnLogin setBackgroundImage:[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"login_click_box" ofType:@".png"]] forState:UIControlStateHighlighted];
     [self.username setValue:[UIColor colorWithRed:205.0/255.0 green:229.0/255.0 blue:250.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
     [self.password setValue:[UIColor colorWithRed:205.0/255.0 green:229.0/255.0 blue:250.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
 }

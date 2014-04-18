@@ -13,13 +13,16 @@
     #import <Foundation/Foundation.h>
     #import <QuartzCore/QuartzCore.h>
     #import "BMapKit.h"
-    #import <CocoaLumberjack/DDLog.h>
+//    #import <CocoaLumberjack/DDLog.h>
     #import <CocoaLumberjack/DDTTYLogger.h>
-    #import <JASidePanels/JASidePanelController.h>
-    #import <JASidePanels/UIViewController+JASidePanel.h>
+//    #import <JASidePanels/JASidePanelController.h>
+//    #import <JASidePanels/UIViewController+JASidePanel.h>
 //    #import <ASIHTTPRequest/ASIHTTPRequest.h>
 //    #import <ASIHTTPRequest/ASIFormDataRequest.h>
 //    #import <ASIHTTPRequest/ASIDownloadCache.h>
+    #import <MYIntroductionPanel.h>
+    #import <MYBlurIntroductionView.h>
+    #import <DDLog.h>
     #import <ASIHTTPRequest.h>
     #import <ASIFormDataRequest.h>
     #import <ASIDownloadCache.h>

@@ -163,7 +163,7 @@
 }
 
 - (void)showSearchCondition:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 - (void)showNav:(id)sender{
@@ -205,7 +205,7 @@
 ////    UINavigationController *datePickerViewController = [kSharedApp.storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController2"];
 ////    [self presentModalViewController:datePickerViewController animated:YES];
     
-    [self.sidePanelController showLeftPanelAnimated:YES];
+//    [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
 #pragma mark observe

@@ -144,6 +144,9 @@
         }
     }
     [viewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+//    if ([[self.btnDate currentTitle] isEqualToString:@"今天"]||[[self.btnDate currentTitle] isEqualToString:@"昨天"]) {
+//    
+//    }
     NSDictionary *noficationData = [notification object];
     NSNumber *value = [noficationData objectForKey:@"value"];
     if ([value doubleValue]) {

@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.title = @"能源监控";
+    self.navigationItem.title = @"能耗监控";
     self.bottomScrollView.pagingEnabled = YES;
     self.bottomScrollView.showsHorizontalScrollIndicator = NO;
     self.bottomScrollView.bounces = NO;

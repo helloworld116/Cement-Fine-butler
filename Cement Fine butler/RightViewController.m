@@ -360,7 +360,7 @@
         }
     }
     self.searchCondition = [[SearchCondition alloc] initWithInventoryType:stockCell.cellID timeType:timeType lineID:lineCell.cellID productID:productCell.cellID unitCostType:unitCostCell.cellID];
-    [self.sidePanelController showCenterPanelAnimated:YES];
+//    [self.sidePanelController showCenterPanelAnimated:YES];
 }
 
 //-(void)setCurrentSelectDict:(NSDictionary *)currentSelectDict{

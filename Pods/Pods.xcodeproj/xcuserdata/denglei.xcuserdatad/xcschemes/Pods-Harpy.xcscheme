@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3827EC931A6845B6B4D950BD"
+               BlueprintIdentifier = "7ED3E62CA1734ABCA978539A"
                BuildableName = "libPods-Harpy.a"
                BlueprintName = "Pods-Harpy"
                ReferencedContainer = "container:Pods.xcodeproj">

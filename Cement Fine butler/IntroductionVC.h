@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IntroductionVC : UIViewController
+@interface IntroductionVC : UIViewController<MYIntroductionDelegate>
 
 @end

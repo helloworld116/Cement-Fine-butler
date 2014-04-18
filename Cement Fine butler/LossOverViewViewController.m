@@ -190,7 +190,7 @@
 }
 
 -(void)showSearch:(id)sender{
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 #pragma mark 自定义公共VC

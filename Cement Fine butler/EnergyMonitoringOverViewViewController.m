@@ -156,7 +156,7 @@
 }
 
 - (void)showSearchCondition:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 //#pragma mark observe

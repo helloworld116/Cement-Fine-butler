@@ -143,7 +143,7 @@
 #pragma mark end webviewDelegate
 
 - (void)showNav:(id)sender {
-    [self.sidePanelController showLeftPanelAnimated:YES];
+//    [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
 -(void)pop:(id)sender{
@@ -151,7 +151,7 @@
 }
 
 - (void)showSearchCondition:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 //#pragma mark 观察条件变化

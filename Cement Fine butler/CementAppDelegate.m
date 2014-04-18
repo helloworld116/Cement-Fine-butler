@@ -25,6 +25,7 @@
 #import "MoreNavigationController.h"
 #import "DirectMaterialCostViewController.h"
 #import "EnergyMainVC.h"
+#import "IntroductionVC.h"
 
 //service
 #import "VersionService.h"
@@ -102,31 +103,29 @@
     //设置启动界面
     self.storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    if([Tool isNullOrNil:username]||[Tool isNullOrNil:password]){
-        self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
+        IntroductionVC *intrVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroductionVC"];
+        self.window.rootViewController = intrVC;
     }else{
-        LoginAction *loginAction = [[LoginAction alloc] init];
-        if ([loginAction backstageLoginWithSync:YES]) {
-            //自动登录成功
-            self.window.rootViewController = [self showViewControllers];
-            //预警消息
-            [self.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
-            self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:kGetMessageSeconds target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
-        }else{
-            //自动登录失败
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alertView show];
+        if([Tool isNullOrNil:username]||[Tool isNullOrNil:password]){
             self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        }else{
+            LoginAction *loginAction = [[LoginAction alloc] init];
+            if ([loginAction backstageLoginWithSync:YES]) {
+                //自动登录成功
+                self.window.rootViewController = [self showViewControllers];
+                //预警消息
+                [self.notifactionServices performSelector:@selector(getNotifactions) withObject:nil afterDelay:10];
+                self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:kGetMessageSeconds target:self.notifactionServices selector:@selector(getNotifactions) userInfo:nil repeats:YES];
+            }else{
+                //自动登录失败
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误消息" message:@"登录失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alertView show];
+                self.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+            }
         }
     }
-//    //自定义缓存
-//    ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
-//    self.myCache = cache;
-//    //设置缓存路径
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentDirectory = [paths objectAtIndex:0];
-//    [self.myCache setStoragePath:[documentDirectory stringByAppendingPathComponent:@"resource"]];
-//    [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
+    
     application.applicationIconBadgeNumber = 0;
     [self.window makeKeyAndVisible];
     [[VersionService sharedInstance] checkVersion];
@@ -171,6 +170,7 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_bar"]];
 //    [[UITabBar appearance] setTintColor:[Tool hexStringToColor:@"#8899a6"]];
+//    [[UITabBar appearance] setTintColor:[UIColor redColor]];
     //文字未选中和选中时的颜色
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[Tool hexStringToColor:@"#8899a6"], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
 //    8899a6

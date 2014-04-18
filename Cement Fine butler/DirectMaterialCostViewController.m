@@ -215,44 +215,46 @@
 
 -(void)setCustomUnitCost:(NSNotification*) notification{
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
-    NSNumber *value = [notification object];
-    //对标成本设置为空或者没有修改的情况下不提交修改
-    if ([value doubleValue]&&[value doubleValue]!=[Tool doubleValue:[[[self.data objectForKey:@"products"] objectAtIndex:self.selectIndex] objectForKey:@"customCost"]]) {
-        //1更新本地
-        NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
-        NSMutableArray *newProducts = [NSMutableArray arrayWithArray:[self.oldData objectForKey:@"products"]];
-        NSMutableDictionary *product = [NSMutableDictionary dictionaryWithDictionary:[[newData objectForKey:@"products"] objectAtIndex:self.selectIndex]];
-        
-        double newProductTotalLoss = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]];
-        [product setValue:[NSNumber numberWithDouble:newProductTotalLoss] forKey:@"totalLoss"];
-        [product setValue:value forKey:@"customCost"];
-        [product setValue:value forKey:@"compareCost"];
-        [newProducts replaceObjectAtIndex:self.selectIndex withObject:product];
-        [newData setValue:newProducts forKey:@"products"];
-        double newAllProductTotalLoss = 0;
-        for (NSDictionary *dict in newProducts) {
-            newAllProductTotalLoss+=[Tool doubleValue:[dict objectForKey:@"totalLoss"]];
+    if ([[self.btnDate currentTitle] isEqualToString:@"今天"]||[[self.btnDate currentTitle] isEqualToString:@"昨天"]) {
+        NSNumber *value = [notification object];
+        //对标成本设置为空或者没有修改的情况下不提交修改
+        if ([value doubleValue]&&[value doubleValue]!=[Tool doubleValue:[[[self.data objectForKey:@"products"] objectAtIndex:self.selectIndex] objectForKey:@"customCost"]]) {
+            //1更新本地
+            NSMutableDictionary *newData = [NSMutableDictionary dictionaryWithDictionary:self.data];
+            NSMutableArray *newProducts = [NSMutableArray arrayWithArray:[self.oldData objectForKey:@"products"]];
+            NSMutableDictionary *product = [NSMutableDictionary dictionaryWithDictionary:[[newData objectForKey:@"products"] objectAtIndex:self.selectIndex]];
+            
+            double newProductTotalLoss = [Tool doubleValue:[product objectForKey:@"totalActualCost"]]-[value doubleValue]*[Tool doubleValue:[product objectForKey:@"usedQuantity"]];
+            [product setValue:[NSNumber numberWithDouble:newProductTotalLoss] forKey:@"totalLoss"];
+            [product setValue:value forKey:@"customCost"];
+            [product setValue:value forKey:@"compareCost"];
+            [newProducts replaceObjectAtIndex:self.selectIndex withObject:product];
+            [newData setValue:newProducts forKey:@"products"];
+            double newAllProductTotalLoss = 0;
+            for (NSDictionary *dict in newProducts) {
+                newAllProductTotalLoss+=[Tool doubleValue:[dict objectForKey:@"totalLoss"]];
+            }
+            [newData setValue:@{@"totalLoss":[NSNumber numberWithDouble:newAllProductTotalLoss]} forKey:@"overview"];
+            ProductDirectMaterialCosts *productDirectMaterialCosts = [[self.bottomScrollView subviews] objectAtIndex:self.selectIndex];
+            [productDirectMaterialCosts updateValue:product];
+            self.data = newData;
+            //必须在修改self.data后执行setupTopView
+            [self setupTopView];
+            //2保存自定义数据
+            long productId = [Tool longValue:[product objectForKey:@"id"]];
+            DDLogCInfo(@"******  Request URL is:%@  ******",kCustomCostUpdate);
+            ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomCostUpdate]];
+            request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
+            [request setUseCookiePersistence:YES];
+            [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
+            [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
+            [request setPostValue:[NSNumber numberWithLong:productId] forKey:@"productId"];
+            [request setPostValue:value forKey:@"customUnitCost"];
+            [request setDelegate:self];
+            [request setDidFailSelector:@selector(updateRequestFailed:)];
+            [request setDidFinishSelector:@selector(updateRequestSuccess:)];
+            [request startAsynchronous];
         }
-        [newData setValue:@{@"totalLoss":[NSNumber numberWithDouble:newAllProductTotalLoss]} forKey:@"overview"];
-        ProductDirectMaterialCosts *productDirectMaterialCosts = [[self.bottomScrollView subviews] objectAtIndex:self.selectIndex];
-        [productDirectMaterialCosts updateValue:product];
-        self.data = newData;
-        //必须在修改self.data后执行setupTopView
-        [self setupTopView];
-        //2保存自定义数据
-        long productId = [Tool longValue:[product objectForKey:@"id"]];
-        DDLogCInfo(@"******  Request URL is:%@  ******",kCustomCostUpdate);
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:kCustomCostUpdate]];
-        request.timeOutSeconds = kASIHttpRequestTimeoutSeconds;
-        [request setUseCookiePersistence:YES];
-        [request setPostValue:kSharedApp.accessToken forKey:@"accessToken"];
-        [request setPostValue:[NSNumber numberWithInt:kSharedApp.finalFactoryId] forKey:@"factoryId"];
-        [request setPostValue:[NSNumber numberWithLong:productId] forKey:@"productId"];
-        [request setPostValue:value forKey:@"customUnitCost"];
-        [request setDelegate:self];
-        [request setDidFailSelector:@selector(updateRequestFailed:)];
-        [request setDidFinishSelector:@selector(updateRequestSuccess:)];
-        [request startAsynchronous];
     }
 }
 
@@ -298,6 +300,17 @@
 
 -(void)setRequestParams{
     [super setRequestParams];
+    NSString *dataType = nil;
+    if ([[self.btnDate currentTitle] isEqualToString:@"今天"]) {
+        dataType = @"today";
+    }else if ([[self.btnDate currentTitle] isEqualToString:@"昨天"]){
+        dataType = @"yesterday";
+    }else if ([[self.btnDate currentTitle] isEqualToString:@"本月"]){
+        dataType = @"currMonth";
+    }else if ([[self.btnDate currentTitle] isEqualToString:@"本年"]){
+        dataType = @"currYear";
+    }
+    [self.request setPostValue:dataType forKey:@"dateType"];
 }
 
 -(void)clear{

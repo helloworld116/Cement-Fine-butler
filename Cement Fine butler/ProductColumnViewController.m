@@ -92,24 +92,24 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (kSharedApp.startFactoryId!=kSharedApp.finalFactoryId) {
-        RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
-        for (NSDictionary *factory in kSharedApp.factorys) {
-            if ([[factory objectForKey:@"id"] intValue]==[[kSharedApp.user objectForKey:@"factoryid"] intValue]) {
-                //选中的是集团
-                [rightViewController resetConditions:@[@{kCondition_Time:kCondition_Time_Array}]];
-            }else{
-                //选中的是集团下的子工厂
-                if (kSharedApp.finalFactoryId==[[factory objectForKey:@"id"] intValue]) {
-                    NSArray *lineArray = [Factory allLines];
-                    NSArray *productArray = [Factory allProducts];
-                    NSArray *newCondition = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
-                    [rightViewController resetConditions:newCondition];
-                    break;
-                }
-            }
-        }
-    }
+//    if (kSharedApp.startFactoryId!=kSharedApp.finalFactoryId) {
+//        RightViewController *rightViewController = (RightViewController *)self.sidePanelController.rightPanel;
+//        for (NSDictionary *factory in kSharedApp.factorys) {
+//            if ([[factory objectForKey:@"id"] intValue]==[[kSharedApp.user objectForKey:@"factoryid"] intValue]) {
+//                //选中的是集团
+//                [rightViewController resetConditions:@[@{kCondition_Time:kCondition_Time_Array}]];
+//            }else{
+//                //选中的是集团下的子工厂
+//                if (kSharedApp.finalFactoryId==[[factory objectForKey:@"id"] intValue]) {
+//                    NSArray *lineArray = [Factory allLines];
+//                    NSArray *productArray = [Factory allProducts];
+//                    NSArray *newCondition = @[@{kCondition_Time:kCondition_Time_Array},@{kCondition_Lines:lineArray},@{kCondition_Products:productArray}];
+//                    [rightViewController resetConditions:newCondition];
+//                    break;
+//                }
+//            }
+//        }
+//    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -200,7 +200,7 @@
 //}
 
 - (void)showNav:(id)sender {
-    [self.sidePanelController showLeftPanelAnimated:YES];
+//    [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
 -(void)pop:(id)sender{
@@ -208,7 +208,7 @@
 }
 
 - (void)showSearchCondition:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
+//    [self.sidePanelController showRightPanelAnimated:YES];
 }
 
 #pragma mark 自定义公共VC

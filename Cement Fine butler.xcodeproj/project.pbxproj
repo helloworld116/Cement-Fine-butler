@@ -27,11 +27,13 @@
 		0E2786E417ED8CC900385E59 /* HistroyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2786E317ED8CC900385E59 /* HistroyTrendsViewController.m */; };
 		0E2F040F18812273004119AE /* LossHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F040E18812273004119AE /* LossHeaderView.m */; };
 		0E2F041318813F7A004119AE /* VersionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F041218813F7A004119AE /* VersionService.m */; };
+		0E30ABBA18FB732C0031DFA1 /* IntroductionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E30ABB918FB732C0031DFA1 /* IntroductionVC.m */; };
+		0E30ABBD18FB7DC50031DFA1 /* LastIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E30ABBC18FB7DC50031DFA1 /* LastIntroductionPanel.m */; };
+		0E30ABBF18FB7E560031DFA1 /* LastIntroductionPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30ABBE18FB7E560031DFA1 /* LastIntroductionPanel.xib */; };
 		0E31E87F18E93E2900729E82 /* InventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E31E87E18E93E2900729E82 /* InventoryView.m */; };
 		0E31E88118E93E5300729E82 /* InventoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E31E88018E93E5300729E82 /* InventoryView.xib */; };
 		0E346F0B17DAB4E900C20BF1 /* InventoryColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0A17DAB4E900C20BF1 /* InventoryColumnViewController.m */; };
 		0E346F0E17DAB97300C20BF1 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E346F0D17DAB97300C20BF1 /* LoadingView.m */; };
-		0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E38416317D41D3E004B3C87 /* equipment.jpg */; };
 		0E3841E817D41D71004B3C87 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841E517D41D71004B3C87 /* LoginViewController.m */; };
 		0E3841ED17D41DDD004B3C87 /* InsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841EC17D41DDD004B3C87 /* InsetsTextField.m */; };
 		0E3841F017D41FDE004B3C87 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3841EF17D41FDE004B3C87 /* Tool.m */; };
@@ -96,6 +98,7 @@
 		0E72472D17CD9CFC0048DFFB /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E72472C17CD9CFC0048DFFB /* LeftViewController.m */; };
 		0E72473017CD9D080048DFFB /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E72472F17CD9D080048DFFB /* RightViewController.m */; };
 		0E72473317CD9D160048DFFB /* CenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E72473217CD9D160048DFFB /* CenterViewController.m */; };
+		0E7A15B91900C88100329681 /* UIWebView+Clean.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A15B81900C88100329681 /* UIWebView+Clean.m */; };
 		0E7D6A6317D57C3200B0B1AA /* ProductColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */; };
 		0E7D6A6617D57E0A00B0B1AA /* ProductColumn.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */; };
 		0E7D6A6817D57E2400B0B1AA /* ichart.1.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */; };
@@ -253,6 +256,11 @@
 		0E2F040E18812273004119AE /* LossHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossHeaderView.m; sourceTree = "<group>"; };
 		0E2F041118813F7A004119AE /* VersionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionService.h; sourceTree = "<group>"; };
 		0E2F041218813F7A004119AE /* VersionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionService.m; sourceTree = "<group>"; };
+		0E30ABB818FB732C0031DFA1 /* IntroductionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVC.h; sourceTree = "<group>"; };
+		0E30ABB918FB732C0031DFA1 /* IntroductionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVC.m; sourceTree = "<group>"; };
+		0E30ABBB18FB7DC50031DFA1 /* LastIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastIntroductionPanel.h; sourceTree = "<group>"; };
+		0E30ABBC18FB7DC50031DFA1 /* LastIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastIntroductionPanel.m; sourceTree = "<group>"; };
+		0E30ABBE18FB7E560031DFA1 /* LastIntroductionPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastIntroductionPanel.xib; sourceTree = "<group>"; };
 		0E31E87D18E93E2900729E82 /* InventoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryView.h; sourceTree = "<group>"; };
 		0E31E87E18E93E2900729E82 /* InventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryView.m; sourceTree = "<group>"; };
 		0E31E88018E93E5300729E82 /* InventoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryView.xib; sourceTree = "<group>"; };
@@ -376,6 +384,8 @@
 		0E72472F17CD9D080048DFFB /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
 		0E72473117CD9D160048DFFB /* CenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterViewController.h; sourceTree = "<group>"; };
 		0E72473217CD9D160048DFFB /* CenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterViewController.m; sourceTree = "<group>"; };
+		0E7A15B71900C88100329681 /* UIWebView+Clean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Clean.h"; sourceTree = "<group>"; };
+		0E7A15B81900C88100329681 /* UIWebView+Clean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Clean.m"; sourceTree = "<group>"; };
 		0E7D6A6117D57C3200B0B1AA /* ProductColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductColumnViewController.h; sourceTree = "<group>"; };
 		0E7D6A6217D57C3200B0B1AA /* ProductColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductColumnViewController.m; sourceTree = "<group>"; };
 		0E7D6A6417D57E0A00B0B1AA /* ProductColumn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProductColumn.html; sourceTree = "<group>"; };
@@ -703,6 +713,19 @@
 				0E2F041218813F7A004119AE /* VersionService.m */,
 			);
 			name = Service;
+			sourceTree = "<group>";
+		};
+		0E30ABB718FB71D20031DFA1 /* 引导 */ = {
+			isa = PBXGroup;
+			children = (
+				0E30ABB818FB732C0031DFA1 /* IntroductionVC.h */,
+				0E30ABB918FB732C0031DFA1 /* IntroductionVC.m */,
+				0E30ABBB18FB7DC50031DFA1 /* LastIntroductionPanel.h */,
+				0E30ABBC18FB7DC50031DFA1 /* LastIntroductionPanel.m */,
+				0E30ABBE18FB7E560031DFA1 /* LastIntroductionPanel.xib */,
+			);
+			name = "引导";
+			path = "Cement Fine butler";
 			sourceTree = "<group>";
 		};
 		0E3841E317D41D63004B3C87 /* User */ = {
@@ -1171,6 +1194,7 @@
 				0E7D6A6517D57E0A00B0B1AA /* ichart.1.1.min.js */,
 				0E3841F117D4200B004B3C87 /* SearchDate.h */,
 				0E3841F217D4200B004B3C87 /* SearchDate.m */,
+				0E30ABB718FB71D20031DFA1 /* 引导 */,
 				472F332717CC3D02007E567B /* BaiduMap */,
 				472F32E517CC3C05007E567B /* Cement Fine butler */,
 				472F32DE17CC3C05007E567B /* Frameworks */,
@@ -1301,6 +1325,8 @@
 		4734FC7C18771038000206DB /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				0E7A15B71900C88100329681 /* UIWebView+Clean.h */,
+				0E7A15B81900C88100329681 /* UIWebView+Clean.m */,
 				4734FC7D18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.h */,
 				4734FC7E18771087000206DB /* UIBarButtonItem+ButtonWithoutBorder.m */,
 				4741D7C2188197F9005D3625 /* UICountingLabel+Counting.h */,
@@ -1435,7 +1461,6 @@
 				0E12581D18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.xib in Resources */,
 				471B5B151846582F002D6BDC /* ExtensiveCellContainer.xib in Resources */,
 				0EB5157418CD545E00A025F3 /* EnergyDetailCell.xib in Resources */,
-				0E3841B817D41D3E004B3C87 /* equipment.jpg in Resources */,
 				0E9F2DD11862A10D00F0F0E2 /* images.xcassets in Resources */,
 				0E96910C1890F1F600D2501D /* Donut2D_2.html in Resources */,
 				0EF727BA181E8BAA0059EC59 /* ProductHistoryCell.xib in Resources */,
@@ -1462,6 +1487,7 @@
 				0E439F5C185550840008C0D8 /* MainStoryboard_iPhone.storyboard in Resources */,
 				0E41837A18AF619400596E40 /* EnergyStoryboard.storyboard in Resources */,
 				0E31E88118E93E5300729E82 /* InventoryView.xib in Resources */,
+				0E30ABBF18FB7E560031DFA1 /* LastIntroductionPanel.xib in Resources */,
 				0EBFCA9C1861A6A9004CD92D /* LossCell.xib in Resources */,
 				0E491BFD180E7E0C00901D3D /* EquipmentListCell.xib in Resources */,
 				0E1258221844988000959EC1 /* EnergyMonitoringListViewController.xib in Resources */,
@@ -1588,6 +1614,7 @@
 				0E6638EA1824D5D800FB381F /* AllMaterialsViewController.m in Sources */,
 				0E12581C18442CDF00959EC1 /* EnergyMonitoringOverViewViewController.m in Sources */,
 				0EBDEB4C18B1A50A00C0B3B4 /* EnergyMainVC.m in Sources */,
+				0E30ABBD18FB7DC50031DFA1 /* LastIntroductionPanel.m in Sources */,
 				4759C36417EEDB08008B8128 /* Line.m in Sources */,
 				4759C36717EEDCA2008B8128 /* Product.m in Sources */,
 				0EF4CD39184D67D00050A63A /* IndustryStandardViewController.m in Sources */,
@@ -1625,6 +1652,8 @@
 				0E6E43121822800000016B93 /* LineChoiceViewController.m in Sources */,
 				0E4B109118C856A700126703 /* ElecDetailViewController.m in Sources */,
 				0EC691DE18B8427C0018E718 /* CoalPopupView.m in Sources */,
+				0E7A15B91900C88100329681 /* UIWebView+Clean.m in Sources */,
+				0E30ABBA18FB732C0031DFA1 /* IntroductionVC.m in Sources */,
 				0E393E9A180E99D30001CB66 /* EquipmentDetailsViewController.m in Sources */,
 				0EDC72031811319F00895931 /* NODataView.m in Sources */,
 				0E12584418473A8300959EC1 /* ProductViewController.m in Sources */,
@@ -1767,14 +1796,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: lei deng (GL997P4Y62)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1785,8 +1811,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B0A60EC7-68DF-4BBD-97EB-A8621A3217B4";
+				PROVISIONING_PROFILE = "F8B79A17-AEA0-4D5D-8689-2C992AD9D42E";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7,armv7s,arm64";
 				WRAPPER_EXTENSION = app;
 				dis = "";
 			};
@@ -1796,14 +1823,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EE0A7152E64BF8A14AF965 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: lei deng (GL997P4Y62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: lei deng (GL997P4Y62)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Henan FengBo Automation Co., LTD. (TQ28XDLG3L)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cement Fine butler/Cement Fine butler-Prefix.pch";
 				INFOPLIST_FILE = "Cement Fine butler/Cement Fine butler-Info.plist";
@@ -1814,8 +1838,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B0A60EC7-68DF-4BBD-97EB-A8621A3217B4";
+				PROVISIONING_PROFILE = "F8B79A17-AEA0-4D5D-8689-2C992AD9D42E";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7,armv7s,arm64";
 				WRAPPER_EXTENSION = app;
 				dis = "";
 			};
