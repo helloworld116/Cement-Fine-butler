@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface InventoryView : UIView
-
+/**
+ *  取消网络请求
+ */
+-(void)cancelRequest;
 @end

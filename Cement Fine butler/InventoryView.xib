@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -16,8 +16,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWk-lr-ahm">
-                            <rect key="frame" x="40" y="12" width="8" height="22"/>
+                            <rect key="frame" x="29" y="5" width="30" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="eIm-nY-sud"/>
+                            </constraints>
                             <state key="normal" image="report_left">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -26,8 +29,11 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTZ-pU-Wap">
-                            <rect key="frame" x="272" y="12" width="8" height="22"/>
+                            <rect key="frame" x="272" y="5" width="30" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="e4I-rD-Lb2"/>
+                            </constraints>
                             <state key="normal" image="report_right">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -45,14 +51,14 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="bWk-lr-ahm" firstAttribute="leading" secondItem="CDe-hw-XAX" secondAttribute="leading" constant="40" id="4Zx-6C-RCr"/>
-                        <constraint firstItem="bWk-lr-ahm" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="12" id="BnT-7u-oyr"/>
-                        <constraint firstItem="vTZ-pU-Wap" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="12" id="DJ8-PK-W0x"/>
-                        <constraint firstAttribute="bottom" secondItem="vTZ-pU-Wap" secondAttribute="bottom" constant="12" id="DYs-Mj-Tun"/>
-                        <constraint firstAttribute="bottom" secondItem="bWk-lr-ahm" secondAttribute="bottom" constant="12" id="IZS-bq-zri"/>
+                        <constraint firstItem="bWk-lr-ahm" firstAttribute="leading" secondItem="CDe-hw-XAX" secondAttribute="leading" constant="29" id="4Zx-6C-RCr"/>
+                        <constraint firstItem="bWk-lr-ahm" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="5" id="BnT-7u-oyr"/>
+                        <constraint firstItem="vTZ-pU-Wap" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="5" id="DJ8-PK-W0x"/>
+                        <constraint firstAttribute="bottom" secondItem="vTZ-pU-Wap" secondAttribute="bottom" constant="5" id="DYs-Mj-Tun"/>
+                        <constraint firstAttribute="bottom" secondItem="bWk-lr-ahm" secondAttribute="bottom" constant="5" id="IZS-bq-zri"/>
                         <constraint firstAttribute="bottom" secondItem="0Yz-Ld-byO" secondAttribute="bottom" constant="13" id="VKw-0j-Rgh"/>
                         <constraint firstItem="0Yz-Ld-byO" firstAttribute="top" secondItem="CDe-hw-XAX" secondAttribute="top" constant="13" id="r7f-wq-Syb"/>
-                        <constraint firstAttribute="trailing" secondItem="vTZ-pU-Wap" secondAttribute="trailing" constant="40" id="sgU-nI-xuv"/>
+                        <constraint firstAttribute="trailing" secondItem="vTZ-pU-Wap" secondAttribute="trailing" constant="18" id="sgU-nI-xuv"/>
                         <constraint firstAttribute="centerX" secondItem="0Yz-Ld-byO" secondAttribute="centerX" id="uxd-Wr-oQG"/>
                         <constraint firstAttribute="height" constant="46" id="xUs-5j-wNw"/>
                     </constraints>

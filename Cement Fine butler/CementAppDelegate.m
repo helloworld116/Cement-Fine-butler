@@ -54,17 +54,6 @@
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    //网络状况检查
-    [self netWorkChecker];
-    [self addNetWorkChangeNotification];
-    //设置日志记录器
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    //设置初始化百度地图
-    self.mapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [self.mapManager start:@"D021080d90470be3572b734a2b974a60" generalDelegate:nil];
-    if (!ret) {
-        DDLogError(@"baidu map manager start failed!");
-    }
     //从用户默认数据中获取用户登录信息
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
@@ -98,8 +87,6 @@
       [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 0.0f)], UITextAttributeTextShadowOffset,
       [UIColor whiteColor], UITextAttributeTextColor,
       nil]];
-    //预警消息
-    self.notifactionServices = [[LocalNotifactionServices alloc] init];
     //设置启动界面
     self.storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -128,7 +115,23 @@
     
     application.applicationIconBadgeNumber = 0;
     [self.window makeKeyAndVisible];
-    [[VersionService sharedInstance] checkVersion];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //网络状况检查
+        [self netWorkChecker];
+        [self addNetWorkChangeNotification];
+        //设置日志记录器
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        //设置初始化百度地图
+        self.mapManager = [[BMKMapManager alloc] init];
+        BOOL ret = [self.mapManager start:@"D021080d90470be3572b734a2b974a60" generalDelegate:nil];
+        if (!ret) {
+            DDLogError(@"baidu map manager start failed!");
+        }
+        //预警消息
+        self.notifactionServices = [[LocalNotifactionServices alloc] init];
+        
+        [[VersionService sharedInstance] checkVersion];
+    });
     return YES;
 }
 

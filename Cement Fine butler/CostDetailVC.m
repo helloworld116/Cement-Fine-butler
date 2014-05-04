@@ -23,6 +23,8 @@
 //底部控件
 @property (nonatomic,strong) IBOutlet UIScrollView *bottomScrollView;
 @property (nonatomic,retain) NSMutableArray *costDetailViews;
+
+@property (nonatomic,retain) NSTimer *timer;
 @end
 
 @implementation CostDetailVC
@@ -53,6 +55,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    [self.timer invalidate];
     for (CostDetailView *detailView in self.costDetailViews ) {
         [detailView.webView cleanForDealloc];
         detailView.webView = nil;
@@ -103,7 +106,7 @@
         //解决多个webview同时一个html文件出错
         [self.costDetailViews addObject:costDetailView];
         NSDictionary *dict = @{@"index":@(i),@"product":product};
-        [NSTimer scheduledTimerWithTimeInterval:4*i target:self selector:@selector(refresh:) userInfo:dict repeats:NO];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:4*i target:self selector:@selector(refresh:) userInfo:dict repeats:NO];
     }
 }
 

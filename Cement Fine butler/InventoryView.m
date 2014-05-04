@@ -46,22 +46,28 @@
     return self;
 }
 
+
 -(void)showSelectedIndx:(NSInteger)selectedIndex{
     self.selectIndex = selectedIndex;
     if (selectedIndex==0) {
+        self.btnRight.enabled=YES;
         self.btnRight.enabled=YES;
         self.btnLeft.enabled=NO;
         self.lblTypeName.text = @"原材料库存";
     }else if(selectedIndex==1){
         self.btnRight.enabled=NO;
         self.btnLeft.enabled=YES;
-        self.lblTypeName.text = @"成本库存";
+        self.lblTypeName.text = @"成品库存";
     }
     if ([self.loadedStatus[selectedIndex][@"status"] intValue]==0) {
         [self sendRequest];
         [self.loadedStatus replaceObjectAtIndex:selectedIndex withObject:@{@"status":@1}];
     }
     self.scrollVBttom.contentOffset = CGPointMake(self.selectIndex*kScreenWidth, 0);
+}
+
+-(void)cancelRequest{
+    [self.request clearDelegatesAndCancel];
 }
 
 -(IBAction)goLeft:(id)sender{

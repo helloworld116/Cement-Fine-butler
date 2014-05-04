@@ -43,6 +43,10 @@
     return self;
 }
 
+-(void)cancelRequest{
+    [self.request clearDelegatesAndCancel];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

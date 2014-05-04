@@ -119,6 +119,59 @@
 
 -(void)onCheckVersion:(NSString *)currentVersion
 {
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_async(queue, ^{
+//        //费时操作
+//        NSString *URL = kAPPURL;
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//        [request setURL:[NSURL URLWithString:URL]];
+//        [request setHTTPMethod:@"POST"];
+//        NSHTTPURLResponse *urlResponse = nil;
+//        NSError *error = nil;
+//        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+//        NSString *results = [[NSString alloc] initWithBytes:[recervedData bytes] length:[recervedData length] encoding:NSUTF8StringEncoding];
+//        NSDictionary *dic = [Tool stringToDictionary:results];
+//        //更新界面
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (dic) {
+//                NSArray *infoArray = [dic objectForKey:@"results"];
+//                if ([infoArray count]) {
+//                    NSDictionary *releaseInfo = [infoArray objectAtIndex:0];
+//                    NSString *lastVersion = [releaseInfo objectForKey:@"version"];
+//                    
+//                    if (![lastVersion isEqualToString:currentVersion]) {
+//                        self.trackViewURL = [releaseInfo objectForKey:@"trackViewUrl"];
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"更新" message:@"有新的版本更新，是否前往更新？" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"更新",nil];
+//                        alert.tag = 778900;
+//                        [alert show];
+//                    } else{
+//                        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+//                        [self.navigationController.view addSubview:HUD];
+//                        CGRect rect = HUD.frame;
+//                        rect.size = CGSizeMake(96, 96);
+//                        HUD.frame = rect;
+//                        HUD.color = [Tool hexStringToColor:@"#2f3843"];
+//                        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+//                        
+//                        // Set custom view mode
+//                        HUD.mode = MBProgressHUDModeCustomView;
+//                        
+//                        HUD.delegate = self;
+//                        HUD.labelText = @"已是最新版本";
+//                        HUD.labelFont = [UIFont systemFontOfSize:12];
+//                        
+//                        
+//                        [HUD show:YES];
+//                        [HUD hide:YES afterDelay:3];
+//                    }
+//                }
+//            }else{
+//                NSLog(@"...................");
+//            }
+//        });
+//    });
+//    NSURLConnection sendAsynchronousRequest:<#(NSURLRequest *)#> queue:<#(NSOperationQueue *)#> completionHandler:<#^(NSURLResponse *response, NSData *data, NSError *connectionError)handler#>
+    
     NSString *URL = kAPPURL;
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:URL]];

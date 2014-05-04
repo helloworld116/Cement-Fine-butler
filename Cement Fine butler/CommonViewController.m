@@ -75,6 +75,7 @@
 //        }
 //    }
 //    [self.sidePanelController setLeftPanel:nil];
+    [self.request clearDelegatesAndCancel];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

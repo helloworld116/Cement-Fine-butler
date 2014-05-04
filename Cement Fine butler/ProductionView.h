@@ -23,4 +23,9 @@
  *  @param index 0表示今天，1表示昨天，2表示本月，3是本年
  */
 -(void)showSelectedIndx:(NSInteger)selectedIndex;
+
+/**
+ *  取消网络请求
+ */
+-(void)cancelRequest;
 @end

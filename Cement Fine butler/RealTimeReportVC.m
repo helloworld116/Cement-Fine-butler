@@ -58,6 +58,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (self.productView) {
+        [self.productView cancelRequest];
+    }
+    if (self.inventoryView) {
+        [self.inventoryView cancelRequest];
+    }
+}
+
 -(void)setupTopView{
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topOfView.frame.size.height-1, kScreenWidth, 1)];
     lineView.backgroundColor = [Tool hexStringToColor:@"#c2c2c2"];
